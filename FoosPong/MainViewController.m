@@ -8,8 +8,11 @@
 
 #import "MainViewController.h"
 #import "PingPongViewController.h"
+#import "HistoryViewController.h"
 
 @interface MainViewController ()
+
+@property (nonatomic, strong) UITabBarController *tabBarController;
 
 @end
 
@@ -17,6 +20,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tabBarController = [UITabBarController new];
+    PingPongViewController *ppvc = [PingPongViewController new];
+    ppvc.tabBarItem.title = @"Main";
+    HistoryViewController *hvc = [HistoryViewController new];
+    hvc.tabBarItem.title = @"History";
+    self.tabBarController.viewControllers = @[ppvc, hvc];
     // Do any additional setup after loading the view.
 }
 
@@ -25,8 +35,8 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)pingPongPressed:(id)sender {
-    PingPongViewController * pingPongController = [PingPongViewController new];
-    [self.navigationController pushViewController:pingPongController animated:YES];
+    //PingPongViewController * pingPongController = [PingPongViewController new];
+    [self.navigationController pushViewController:self.tabBarController animated:YES];
 }
 - (IBAction)foosBallPressed:(id)sender {
 }

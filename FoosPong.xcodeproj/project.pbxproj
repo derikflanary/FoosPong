@@ -15,6 +15,8 @@
 		EE7A6CEA1A868402000447D2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7A6CE81A868402000447D2 /* LaunchScreen.xib */; };
 		EE7A6CF61A868402000447D2 /* FoosPongTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6CF51A868402000447D2 /* FoosPongTests.m */; };
 		EE7A6D041A869169000447D2 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D031A869169000447D2 /* MainViewController.m */; };
+		EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */; };
+		EE7A6D0A1A869CD4000447D2 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D091A869CD4000447D2 /* HistoryViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,10 @@
 		EE7A6CF51A868402000447D2 /* FoosPongTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoosPongTests.m; sourceTree = "<group>"; };
 		EE7A6D021A869169000447D2 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		EE7A6D031A869169000447D2 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		EE7A6D051A869970000447D2 /* NewGameCustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewGameCustomTableViewCell.h; sourceTree = "<group>"; };
+		EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGameCustomTableViewCell.m; sourceTree = "<group>"; };
+		EE7A6D081A869CD4000447D2 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
+		EE7A6D091A869CD4000447D2 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +96,10 @@
 				EE7A6D031A869169000447D2 /* MainViewController.m */,
 				302E41C21A86958E005F1184 /* PingPongViewController.h */,
 				302E41C31A86958E005F1184 /* PingPongViewController.m */,
+				EE7A6D081A869CD4000447D2 /* HistoryViewController.h */,
+				EE7A6D091A869CD4000447D2 /* HistoryViewController.m */,
+				EE7A6D051A869970000447D2 /* NewGameCustomTableViewCell.h */,
+				EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */,
 				EE7A6CE31A868402000447D2 /* Main.storyboard */,
 				EE7A6CE61A868402000447D2 /* Images.xcassets */,
 				EE7A6CE81A868402000447D2 /* LaunchScreen.xib */,
@@ -224,10 +234,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */,
 				302E41C41A86958E005F1184 /* PingPongViewController.m in Sources */,
 				EE7A6CDF1A868402000447D2 /* AppDelegate.m in Sources */,
 				EE7A6D041A869169000447D2 /* MainViewController.m in Sources */,
 				EE7A6CDC1A868402000447D2 /* main.m in Sources */,
+				EE7A6D0A1A869CD4000447D2 /* HistoryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

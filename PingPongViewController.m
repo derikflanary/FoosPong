@@ -7,10 +7,12 @@
 //
 
 #import "PingPongViewController.h"
+#import "HistoryViewController.h"
 
 @interface PingPongViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *pingPongTableView;
+
 
 @end
 
@@ -21,12 +23,44 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    
     self.pingPongTableView = [[UITableView alloc] initWithFrame:self.view.frame];
     self.pingPongTableView.dataSource = self;
     self.pingPongTableView.delegate = self;
+    [self.view addSubview:self.pingPongTableView];
+    self.pingPongTableView.scrollEnabled = NO;
     
+    //[self.pingPongTableView registerClass:[UITableView class] forCellWithReuseIdentifier:@"cell"];
     // Do any additional setup after loading the view.
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return  2;
+    //return [self.projects count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0){
+        return 400;
+    }else{
+        return 200;
+    }
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell One"];
+    if (!cell){
+        cell = [UITableViewCell new];
+    }
+    
+    cell.textLabel.text = @"New Game";
+    return cell;
+    
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
