@@ -1,34 +1,29 @@
 //
-//  MainViewController.m
+//  PingPongViewController.m
 //  FoosPong
 //
-//  Created by Derik Flanary on 2/7/15.
+//  Created by Daniel Bladh on 2/7/15.
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "MainViewController.h"
 #import "PingPongViewController.h"
 
-@interface MainViewController ()
+@interface PingPongViewController ()
 
 @end
 
-@implementation MainViewController
+@implementation PingPongViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-- (IBAction)pingPongPressed:(id)sender {
-    PingPongViewController * pingPongController = [PingPongViewController new];
-    [self.navigationController pushViewController:pingPongController animated:YES];
-}
-- (IBAction)foosBallPressed:(id)sender {
 }
 
 /*
