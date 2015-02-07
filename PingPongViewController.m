@@ -40,7 +40,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  4;
+    return  2;
     //return [self.projects count];
 }
 
@@ -67,11 +67,11 @@
     }
 }
 
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    NewGameViewController * newGameViewController = [NewGameViewController new];
-//    if (indexPath.row == 1) {
-//        [self.navigationController pushViewController:newGameViewController animated:YES];
-//    }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NewGameViewController * newGameViewController = [NewGameViewController new];
+    if (indexPath.row == 0) {
+        [self.navigationController pushViewController:newGameViewController animated:YES];
+    }
     NSLog(@"%ld", (long)indexPath.row);
 }
 

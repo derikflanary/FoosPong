@@ -6,16 +6,24 @@
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
+
 #import "NewGameViewController.h"
+#import "NewGameCustomTableViewCell.h"
 
-@interface NewGameViewController ()
-
+@interface NewGameViewController ()<UITableViewDelegate, UITableViewDataSource>
+//@property (nonatomic,strong)ChoosePlayerDatasource *dataSource;
+@property (nonatomic, strong)UITableView *tableView;
 @end
 
 @implementation NewGameViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+        [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.tableView = [[UITableView alloc]initWithFrame:self.view.frame];
+    [self.view addSubview:self.tableView];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
     // Do any additional setup after loading the view.
 }
 
@@ -23,6 +31,35 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+//- (void)registerTableView:(UITableView *)tableView {
+//    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
+//}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return  5;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NewGameCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewGameCell" ];
+    if (!cell){
+        cell = [NewGameCustomTableViewCell new];
+    }
+    cell.textLabel.text = @"New Game";
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSLog(@"%ld", (long)indexPath.row);
+    
+}
+
+
+
 
 /*
 #pragma mark - Navigation
