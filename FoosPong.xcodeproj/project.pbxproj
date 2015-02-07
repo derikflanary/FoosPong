@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		EE7A6CDC1A868402000447D2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6CDB1A868402000447D2 /* main.m */; };
 		EE7A6CDF1A868402000447D2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6CDE1A868402000447D2 /* AppDelegate.m */; };
-		EE7A6CE21A868402000447D2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6CE11A868402000447D2 /* ViewController.m */; };
 		EE7A6CE51A868402000447D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE7A6CE31A868402000447D2 /* Main.storyboard */; };
 		EE7A6CE71A868402000447D2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE7A6CE61A868402000447D2 /* Images.xcassets */; };
 		EE7A6CEA1A868402000447D2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7A6CE81A868402000447D2 /* LaunchScreen.xib */; };
 		EE7A6CF61A868402000447D2 /* FoosPongTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6CF51A868402000447D2 /* FoosPongTests.m */; };
+		EE7A6D041A869169000447D2 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D031A869169000447D2 /* MainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +32,14 @@
 		EE7A6CDB1A868402000447D2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EE7A6CDD1A868402000447D2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EE7A6CDE1A868402000447D2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		EE7A6CE01A868402000447D2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		EE7A6CE11A868402000447D2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		EE7A6CE41A868402000447D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EE7A6CE61A868402000447D2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EE7A6CE91A868402000447D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EE7A6CEF1A868402000447D2 /* FoosPongTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoosPongTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE7A6CF41A868402000447D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE7A6CF51A868402000447D2 /* FoosPongTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoosPongTests.m; sourceTree = "<group>"; };
+		EE7A6D021A869169000447D2 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		EE7A6D031A869169000447D2 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +83,8 @@
 			children = (
 				EE7A6CDD1A868402000447D2 /* AppDelegate.h */,
 				EE7A6CDE1A868402000447D2 /* AppDelegate.m */,
-				EE7A6CE01A868402000447D2 /* ViewController.h */,
-				EE7A6CE11A868402000447D2 /* ViewController.m */,
+				EE7A6D021A869169000447D2 /* MainViewController.h */,
+				EE7A6D031A869169000447D2 /* MainViewController.m */,
 				EE7A6CE31A868402000447D2 /* Main.storyboard */,
 				EE7A6CE61A868402000447D2 /* Images.xcassets */,
 				EE7A6CE81A868402000447D2 /* LaunchScreen.xib */,
@@ -219,8 +219,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE7A6CE21A868402000447D2 /* ViewController.m in Sources */,
 				EE7A6CDF1A868402000447D2 /* AppDelegate.m in Sources */,
+				EE7A6D041A869169000447D2 /* MainViewController.m in Sources */,
 				EE7A6CDC1A868402000447D2 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
