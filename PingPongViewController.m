@@ -8,7 +8,9 @@
 
 #import "PingPongViewController.h"
 
-@interface PingPongViewController ()
+@interface PingPongViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) UITableView *pingPongTableView;
 
 @end
 
@@ -18,6 +20,11 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.pingPongTableView = [[UITableView alloc] initWithFrame:self.view.frame];
+    self.pingPongTableView.dataSource = self;
+    self.pingPongTableView.delegate = self;
+    
     // Do any additional setup after loading the view.
 }
 
