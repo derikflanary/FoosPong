@@ -1,25 +1,22 @@
 //
-//  HistoryViewController.m
+//  NewGameViewController.m
 //  FoosPong
 //
-//  Created by Derik Flanary on 2/7/15.
+//  Created by Daniel Bladh on 2/7/15.
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "HistoryViewController.h"
+#import "NewGameViewController.h"
 
-@interface HistoryViewController ()
+@interface NewGameViewController ()
 
 @end
 
-@implementation HistoryViewController
+@implementation NewGameViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-
 }
 
 - (void)didReceiveMemoryWarning {

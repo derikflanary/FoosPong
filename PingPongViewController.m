@@ -8,6 +8,8 @@
 
 #import "PingPongViewController.h"
 #import "HistoryViewController.h"
+#import "NewGameViewController.h"
+#import "NewGameCustomTableViewCell.h"
 
 @interface PingPongViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -28,16 +30,33 @@
     self.pingPongTableView.dataSource = self;
     self.pingPongTableView.delegate = self;
     [self.view addSubview:self.pingPongTableView];
-    self.pingPongTableView.scrollEnabled = NO;
+    self.pingPongTableView.scrollEnabled = YES;
     
     //[self.pingPongTableView registerClass:[UITableView class] forCellWithReuseIdentifier:@"cell"];
     // Do any additional setup after loading the view.
 }
+#pragma mark - TableView Datasource
+
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  2;
+    return  4;
     //return [self.projects count];
 }
+
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NewGameCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewGameCell" ];
+    if (!cell){
+        cell = [NewGameCustomTableViewCell new];
+    }
+       cell.textLabel.text = @"New Game";
+    return cell;
+    
+}
+
+#pragma mark - TableView Delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -48,18 +67,13 @@
     }
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell One"];
-    if (!cell){
-        cell = [UITableViewCell new];
-    }
-    
-    cell.textLabel.text = @"New Game";
-    return cell;
-    
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    NewGameViewController * newGameViewController = [NewGameViewController new];
+//    if (indexPath.row == 1) {
+//        [self.navigationController pushViewController:newGameViewController animated:YES];
+//    }
+    NSLog(@"%ld", (long)indexPath.row);
 }
-
 
 
 - (void)didReceiveMemoryWarning {
