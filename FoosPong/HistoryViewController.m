@@ -6,9 +6,12 @@
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
+#import "NewGameCustomTableViewCell.h"
 #import "HistoryViewController.h"
 
-@interface HistoryViewController ()
+@interface HistoryViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -16,9 +19,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    self.tableView = [[UITableView alloc]initWithFrame:self.view.frame];
+    [self.view addSubview:self.tableView];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
 
 }
 
@@ -26,6 +31,25 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - TableView Datasource
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return  5;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NewGameCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewGameCell" ];
+    if (!cell){
+        cell = [NewGameCustomTableViewCell new];
+    }
+    cell.textLabel.text = @"Old Game";
+    return cell;
+}
+
 
 /*
 #pragma mark - Navigation

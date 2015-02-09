@@ -27,30 +27,40 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="g7K-z7-PcK"/>
                                 </items>
                             </toolbar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aRp-sP-Zht">
-                                <rect key="frame" x="-5" y="64" width="355" height="220"/>
-                                <state key="normal" title="Button" image="PingPongButton">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="pingPongPressed:" destination="IDJ-bu-6nS" eventType="touchUpInside" id="5lS-ng-HRX"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ng4-7w-Vxj">
-                                <rect key="frame" x="0.0" y="292" width="355" height="220"/>
-                                <state key="normal" title="Button" image="FoosBallButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ng4-7w-Vxj">
+                                <rect key="frame" x="16" y="304" width="288" height="220"/>
+                                <state key="normal" image="FoosBallButton">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="foosBallPressed:" destination="IDJ-bu-6nS" eventType="touchUpInside" id="kS8-mf-YRC"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aRp-sP-Zht">
+                                <rect key="frame" x="16" y="64" width="288" height="220"/>
+                                <state key="normal" image="PingPongButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pingPongPressed:" destination="IDJ-bu-6nS" eventType="touchUpInside" id="5lS-ng-HRX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="tPg-1a-Zay" secondAttribute="trailing" constant="-16" id="6XS-dc-xhq"/>
+                            <constraint firstItem="pqa-BO-b7B" firstAttribute="top" secondItem="ng4-7w-Vxj" secondAttribute="bottom" constant="44" id="8RJ-tG-Wb5"/>
+                            <constraint firstItem="aRp-sP-Zht" firstAttribute="trailing" secondItem="ysS-Bx-Hq3" secondAttribute="trailingMargin" id="8h6-eI-9WG"/>
+                            <constraint firstItem="ng4-7w-Vxj" firstAttribute="height" secondItem="aRp-sP-Zht" secondAttribute="height" id="Dyq-ko-t9f"/>
+                            <constraint firstItem="ng4-7w-Vxj" firstAttribute="height" secondItem="aRp-sP-Zht" secondAttribute="height" id="J5J-cY-AIJ"/>
+                            <constraint firstItem="aRp-sP-Zht" firstAttribute="top" secondItem="L1P-vW-raM" secondAttribute="bottom" id="NIl-Nl-sUt"/>
+                            <constraint firstAttribute="centerX" secondItem="ng4-7w-Vxj" secondAttribute="centerX" id="Nki-vZ-pPh"/>
                             <constraint firstItem="tPg-1a-Zay" firstAttribute="leading" secondItem="ysS-Bx-Hq3" secondAttribute="leadingMargin" constant="-16" id="QmM-lA-UUB"/>
+                            <constraint firstItem="ng4-7w-Vxj" firstAttribute="leading" secondItem="ysS-Bx-Hq3" secondAttribute="leadingMargin" id="dD3-NM-Fxb"/>
                             <constraint firstItem="pqa-BO-b7B" firstAttribute="top" secondItem="tPg-1a-Zay" secondAttribute="bottom" id="fSJ-W2-CFR"/>
+                            <constraint firstItem="aRp-sP-Zht" firstAttribute="leading" secondItem="ysS-Bx-Hq3" secondAttribute="leadingMargin" id="jm3-3P-X1d"/>
+                            <constraint firstItem="ng4-7w-Vxj" firstAttribute="trailing" secondItem="ysS-Bx-Hq3" secondAttribute="trailingMargin" id="uQ0-mO-na3"/>
+                            <constraint firstAttribute="centerX" secondItem="aRp-sP-Zht" secondAttribute="centerX" id="vGJ-7e-E1e"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Dzj-Ef-vgh"/>
