@@ -8,7 +8,7 @@
 
 #import "PingPongViewController.h"
 #import "HistoryViewController.h"
-#import "NewGameViewController.h"
+#import "ChoosePlayersViewController.h"
 #import "NewGameCustomTableViewCell.h"
 
 @interface PingPongViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -68,7 +68,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NewGameViewController * newGameViewController = [NewGameViewController new];
+    ChoosePlayersViewController * newGameViewController = [ChoosePlayersViewController new];
     if (indexPath.row == 0) {
         [self.navigationController pushViewController:newGameViewController animated:YES];
     }

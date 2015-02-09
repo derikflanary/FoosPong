@@ -7,15 +7,15 @@
 //
 
 
-#import "NewGameViewController.h"
+#import "ChoosePlayersViewController.h"
 #import "NewGameCustomTableViewCell.h"
 
-@interface NewGameViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface ChoosePlayersViewController ()<UITableViewDelegate, UITableViewDataSource>
 //@property (nonatomic,strong)ChoosePlayerDatasource *dataSource;
 @property (nonatomic, strong)UITableView *tableView;
 @end
 
-@implementation NewGameViewController
+@implementation ChoosePlayersViewController
 
 - (void)viewDidLoad {
         [super viewDidLoad];
@@ -36,9 +36,27 @@
 //- (void)registerTableView:(UITableView *)tableView {
 //    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
 //}
+#pragma mark - TableView Datasource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if (section == 0){
+        return @"current players";
+    }else {
+        return @"other players";
+    }
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return  5;
+    if (section == 0) {
+        return 2;
+    }else{
+        return 5;
+    }
+    
 }
 
 
@@ -48,13 +66,13 @@
     if (!cell){
         cell = [NewGameCustomTableViewCell new];
     }
-    cell.textLabel.text = @"New Game";
+    cell.textLabel.text = @"Player Name";
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSLog(@"%ld", (long)indexPath.row);
+    
     
 }
 

@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "PingPongViewController.h"
 #import "HistoryViewController.h"
+#import "ProfileViewController.h"
 
 @interface MainViewController ()
 
@@ -26,7 +27,9 @@
     ppvc.tabBarItem.title = @"Main";
     HistoryViewController *hvc = [HistoryViewController new];
     hvc.tabBarItem.title = @"History";
-    self.tabBarController.viewControllers = @[ppvc, hvc];
+    ProfileViewController *pvc = [ProfileViewController new];
+    pvc.tabBarItem.title = @"Profile";
+    self.tabBarController.viewControllers = @[ppvc, hvc, pvc];
     // Do any additional setup after loading the view.
 }
 
