@@ -12,6 +12,7 @@
 
 @interface ChoosePlayersViewController ()<UITableViewDelegate, UITableViewDataSource>
 //@property (nonatomic,strong)ChoosePlayerDatasource *dataSource;
+//@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong)UITableView *tableView;
 @end
 
@@ -33,9 +34,6 @@
 }
 
 
-//- (void)registerTableView:(UITableView *)tableView {
-//    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
-//}
 #pragma mark - TableView Datasource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
