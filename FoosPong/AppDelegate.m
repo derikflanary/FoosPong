@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import <Parse/Parse.h>
 
 
 @interface AppDelegate ()
@@ -18,6 +19,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [Parse enableLocalDatastore];
+    
+    [Parse setApplicationId:@"mqjgxXFS9TPQoSswF9CrWmElMXu7D1tPkBR3H4rC"
+                  clientKey:@"XaBMEuMLhsBaWQyCgpAjL7jKsU11zXBrcLt0CzZ6"];
+    
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     // Override point for customization after application launch.
 //    MainViewController * mainViewController = [MainViewController new];
 //    UINavigationController *mainNavController = [[UINavigationController alloc] initWithRootViewController:mainViewController];

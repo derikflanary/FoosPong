@@ -10,6 +10,7 @@
 #import "PingPongViewController.h"
 #import "HistoryViewController.h"
 #import "ProfileViewController.h"
+#import <Parse/Parse.h>
 
 @interface MainViewController ()
 
@@ -31,6 +32,10 @@
     pvc.tabBarItem.title = @"Profile";
     self.tabBarController.viewControllers = @[ppvc, hvc, pvc];
     // Do any additional setup after loading the view.
+    
+    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
+    testObject[@"foo"] = @"bar";
+    [testObject saveInBackground];
 }
 
 - (void)didReceiveMemoryWarning {
