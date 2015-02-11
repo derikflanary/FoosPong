@@ -9,6 +9,7 @@
 
 #import "ChoosePlayersViewController.h"
 #import "NewGameCustomTableViewCell.h"
+#import "GameViewController.h"
 
 @interface ChoosePlayersViewController ()<UITableViewDelegate, UITableViewDataSource>
 //@property (nonatomic,strong)ChoosePlayerDatasource *dataSource;
@@ -25,7 +26,17 @@
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    UIBarButtonItem * startGameButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Game" style:UIBarButtonItemStylePlain target:self action:@selector(startGame:)];
+    self.navigationItem.rightBarButtonItem = startGameButton;
+    
+    
+    
+    
     // Do any additional setup after loading the view.
+}
+-(void)startGame:(id)sender{
+    [self.navigationController pushViewController:[GameViewController new] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

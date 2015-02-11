@@ -7,6 +7,7 @@
 //
 
 #import "GameViewController.h"
+#import <PKYStepper/PKYStepper.h>
 
 @interface GameViewController ()
 
@@ -17,6 +18,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    PKYStepper * playerOneStepper = [[PKYStepper alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 100)];
+    playerOneStepper.valueChangedCallback = ^(PKYStepper *stepper, float count) {
+        stepper.countLabel.text = [NSString stringWithFormat:@"Points: %@", @(count)];
+    };
+    [playerOneStepper setup];
+    [self.view addSubview:playerOneStepper];
     // Do any additional setup after loading the view.
 }
 
@@ -24,6 +32,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 - (void)viewWillDisappear:(BOOL)animated{
     
