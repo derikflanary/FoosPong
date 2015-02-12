@@ -13,8 +13,6 @@
 @interface GameViewController ()
 
 @property (nonatomic, assign) float scoreToWin;
-@property (nonatomic, strong) NSString *playerOneName;
-@property (nonatomic, strong) NSString *playerTwoName;
 @property (nonatomic, strong) PKYStepper *playerOneStepper;
 @property (nonatomic, strong) PKYStepper *playerTwoStepper;
 
@@ -26,12 +24,11 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.scoreToWin = 11;
-    self.playerOneName = @"Derik";
-    self.playerTwoName = @"Danny";
+    
     
     self.playerOneStepper = [[PKYStepper alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 100)];
     self.playerOneStepper.valueChangedCallback = ^(PKYStepper *stepper, float count) {
-        stepper.countLabel.text = [NSString stringWithFormat:@"%@", @(count)];
+        stepper.countLabel.text = [NSString stringWithFormat:@"%@: %@",self.playerOneName, @(count)];
     };
     [self.playerOneStepper setup];
     self.playerOneStepper.maximum = self.scoreToWin;
@@ -39,7 +36,7 @@
     
     self.playerTwoStepper = [[PKYStepper alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 100)];
     self.playerTwoStepper.valueChangedCallback = ^(PKYStepper *stepper, float count) {
-        stepper.countLabel.text = [NSString stringWithFormat:@"%@", @(count)];
+        stepper.countLabel.text = [NSString stringWithFormat:@"%@: %@",self.playerTwoName, @(count)];
     };
         [self.playerTwoStepper setup];
     self.playerTwoStepper.maximum = self.scoreToWin;
@@ -56,7 +53,7 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     NSLog(@"label changed");
     
-    if ([self.playerOneStepper.countLabel.text isEqualToString:@"11"]) {
+    if (self.playerOneStepper.value == 11) {
     UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", self.playerOneName] message:@"" preferredStyle:UIAlertControllerStyleAlert];
     [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         [self.navigationController popViewControllerAnimated:YES];

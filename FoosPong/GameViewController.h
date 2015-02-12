@@ -10,4 +10,7 @@
 
 @interface GameViewController : UIViewController
 
+@property (nonatomic, strong) NSString *playerOneName;
+@property (nonatomic, strong) NSString *playerTwoName;
+
 @end

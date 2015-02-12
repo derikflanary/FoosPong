@@ -36,6 +36,9 @@
     
     PFUser *currentUser = [PFUser currentUser];
     self.currentUser = currentUser.username;
+    self.players = [NSMutableArray array];
+    [self.players insertObject:currentUser atIndex:0];
+    //[self.players insertObject:@"" atIndex:1];
     
     
     UIBarButtonItem * startGameButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Game" style:UIBarButtonItemStylePlain target:self action:@selector(startGame:)];
@@ -52,6 +55,7 @@
                 
             }
             self.users = objects;
+            [self.players addObjectsFromArray:self.users];
             [self.tableView reloadData];
         } else {
             // Log details of the failure
@@ -62,7 +66,15 @@
     // Do any additional setup after loading the view.
 }
 -(void)startGame:(id)sender{
-    [self.navigationController pushViewController:[GameViewController new] animated:YES];
+    
+    
+    
+    GameViewController *gvc = [GameViewController new];
+    NSDictionary *playerOneDict = [self.players objectAtIndex:0];
+    NSDictionary *playerTwoDict = [self.players objectAtIndex:1];
+    gvc.playerOneName = [NSString stringWithFormat:@"%@", playerOneDict[@"username"]];
+    gvc.playerTwoName = [NSString stringWithFormat:@"%@", playerTwoDict[@"username"]];
+    [self.navigationController pushViewController:gvc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,7 +99,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 2;
+        return 1;
     }else{
         return [self.users count];
     }
@@ -101,15 +113,26 @@
     if (!cell){
         cell = [NewGameCustomTableViewCell new];
     }
-    if (indexPath.row == 0 && indexPath.section == 0){
-        if (!self.currentUser) {
-            cell.textLabel.text = @"Guest";
-        }
-        cell.textLabel.text = self.currentUser;
-    }else if(indexPath.section == 1){
-        NSDictionary *userDict = [self.users objectAtIndex:indexPath.row];
-        cell.textLabel.text = [NSString stringWithFormat:@"%@", userDict[@"username"]];
+    if (indexPath.section == 0 && indexPath.row == 0){
+        NSDictionary *playerDict = [self.players objectAtIndex:indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", playerDict[@"username"]];
     }
+//    if (indexPath.section == 0 && indexPath.row == 1){
+//        cell.textLabel.text = @"";
+//    }
+    if (indexPath.section == 1) {
+        NSDictionary *playerDict = [self.players objectAtIndex:indexPath.row + 1];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", playerDict[@"username"]];
+    }
+//    if (indexPath.row == 0 && indexPath.section == 0){
+//        if (!self.currentUser) {
+//            cell.textLabel.text = @"Guest";
+//        }
+//        cell.textLabel.text = self.currentUser;
+//    }else if(indexPath.section == 1){
+//        NSDictionary *userDict = [self.users objectAtIndex:indexPath.row];
+//        cell.textLabel.text = [NSString stringWithFormat:@"%@", userDict[@"username"]];
+//    }
     
     return cell;
 }
@@ -126,12 +149,17 @@
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    NSInteger rows = [tableView numberOfRowsInSection:0];
-    
+   
+    id dataObject = [self.players objectAtIndex:sourceIndexPath.row];
+    [self.players removeObjectAtIndex:sourceIndexPath.row];
+    [self.players insertObject:dataObject atIndex:destinationIndexPath.row];
+    NSLog(@"%@", self.players);
+
 //    NSString *stringToMove = [self.reorderingRows objectAtIndex:sourceIndexPath.row];
 //    [self.reorderingRows removeObjectAtIndex:sourceIndexPath.row];
 //    [self.reorderingRows insertObject:stringToMove atIndex:destinationIndexPath.row];
 }
+
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
     return UITableViewCellEditingStyleNone;
