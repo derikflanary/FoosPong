@@ -1,0 +1,18 @@
+//
+//  FoosPong-Prefix.pch
+//  FoosPong
+//
+//  Created by Derik Flanary on 2/11/15.
+//  Copyright (c) 2015 Vibe. All rights reserved.
+//
+
+#ifndef FoosPong_FoosPong_Prefix_pch
+#define FoosPong_FoosPong_Prefix_pch
+
+#import <ParseUI/ParseUI.h>
+#import <Parse/Parse.h>
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif

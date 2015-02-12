@@ -25,12 +25,7 @@
                   clientKey:@"XaBMEuMLhsBaWQyCgpAjL7jKsU11zXBrcLt0CzZ6"];
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-    // Override point for customization after application launch.
-//    MainViewController * mainViewController = [MainViewController new];
-//    UINavigationController *mainNavController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-//    self.window.rootViewController = mainNavController;
-//    
-//    self.window.backgroundColor = [UIColor redColor];
+    
     
     return YES;
 }

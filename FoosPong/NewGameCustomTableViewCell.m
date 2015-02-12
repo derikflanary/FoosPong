@@ -14,7 +14,7 @@
     
     
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NewGameCell"];
-    self.textLabel.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:10];
+    self.textLabel.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:26];
     self.detailTextLabel.font = [UIFont boldSystemFontOfSize:11];
     
     return self;

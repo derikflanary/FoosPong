@@ -11,13 +11,18 @@
 #import "NewGameCustomTableViewCell.h"
 #import "GameViewController.h"
 
+
 @interface ChoosePlayersViewController ()<UITableViewDelegate, UITableViewDataSource>
 //@property (nonatomic,strong)ChoosePlayerDatasource *dataSource;
 //@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong)NSString *currentUser;
 @property (nonatomic, strong)UITableView *tableView;
+@property (nonatomic, strong)NSArray *users;
 @end
 
 @implementation ChoosePlayersViewController
+
+
 
 - (void)viewDidLoad {
         [super viewDidLoad];
@@ -27,12 +32,31 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    PFUser *currentUser = [PFUser currentUser];
+    self.currentUser = currentUser.username;
+    
+    
     UIBarButtonItem * startGameButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Game" style:UIBarButtonItemStylePlain target:self action:@selector(startGame:)];
     self.navigationItem.rightBarButtonItem = startGameButton;
     
     
-    
-    
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"username" notEqualTo:self.currentUser];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            
+            for (PFUser *object in objects) {
+                NSLog(@"%@", object.username);
+                
+            }
+            self.users = objects;
+            [self.tableView reloadData];
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+    //self.users = query;
     // Do any additional setup after loading the view.
 }
 -(void)startGame:(id)sender{
@@ -53,9 +77,9 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if (section == 0){
-        return @"current players";
+        return @"Current Players";
     }else {
-        return @"other players";
+        return @"Available Players";
     }
 }
 
@@ -63,7 +87,7 @@
     if (section == 0) {
         return 2;
     }else{
-        return 5;
+        return [self.users count];
     }
     
 }
@@ -75,7 +99,12 @@
     if (!cell){
         cell = [NewGameCustomTableViewCell new];
     }
-    cell.textLabel.text = @"Player Name";
+    if (indexPath.row == 0 && indexPath.section == 0){
+        cell.textLabel.text = self.currentUser;
+    }else if(indexPath.section == 1){
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", [self.users objectAtIndex:indexPath.row]];
+    }
+    
     return cell;
 }
 

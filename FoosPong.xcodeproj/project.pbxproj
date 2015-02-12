@@ -10,6 +10,7 @@
 		302E41C41A86958E005F1184 /* PingPongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302E41C31A86958E005F1184 /* PingPongViewController.m */; };
 		302E41C71A86A195005F1184 /* ChoosePlayersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302E41C61A86A195005F1184 /* ChoosePlayersViewController.m */; };
 		7F7C9D7F76CC544EEC3A87D2 /* libPods-FoosPong.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B77DFF6D64A66AF6288C73B1 /* libPods-FoosPong.a */; };
+		EE0DC00B1A8C4604000235B3 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE0DC00A1A8C4604000235B3 /* ParseUI.framework */; };
 		EE3356EE1A895F0600B83EC0 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */; };
 		EE3356F11A89610B00B83EC0 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3356F01A89610B00B83EC0 /* GameViewController.m */; };
 		EE33572A1A8C1C2A00B83EC0 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357291A8C1C2A00B83EC0 /* Bolts.framework */; };
@@ -56,6 +57,8 @@
 		6775E9090F7D5300C9E7454A /* Pods-FoosPong.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoosPong.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FoosPong/Pods-FoosPong.debug.xcconfig"; sourceTree = "<group>"; };
 		B77DFF6D64A66AF6288C73B1 /* libPods-FoosPong.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FoosPong.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5F931099152F99036552F2B /* Pods-FoosPong.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoosPong.release.xcconfig"; path = "Pods/Target Support Files/Pods-FoosPong/Pods-FoosPong.release.xcconfig"; sourceTree = "<group>"; };
+		EE0DC00A1A8C4604000235B3 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		EE0DC00C1A8C53A1000235B3 /* FoosPong-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FoosPong-Prefix.pch"; sourceTree = "<group>"; };
 		EE3356EC1A895F0600B83EC0 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		EE3356EF1A89610B00B83EC0 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
@@ -108,6 +111,7 @@
 				EE33573A1A8C1CF100B83EC0 /* Security.framework in Frameworks */,
 				EE3357381A8C1CE600B83EC0 /* QuartzCore.framework in Frameworks */,
 				EE3357361A8C1CDB00B83EC0 /* MobileCoreServices.framework in Frameworks */,
+				EE0DC00B1A8C4604000235B3 /* ParseUI.framework in Frameworks */,
 				EE3357341A8C1CD100B83EC0 /* CoreLocation.framework in Frameworks */,
 				EE3357321A8C1CC900B83EC0 /* CoreGraphics.framework in Frameworks */,
 				EE3357301A8C1CAD00B83EC0 /* CFNetwork.framework in Frameworks */,
@@ -140,6 +144,7 @@
 		AED8EE843DD92B7D2CCC995D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EE0DC00A1A8C4604000235B3 /* ParseUI.framework */,
 				EE3357451A8C202600B83EC0 /* Accounts.framework */,
 				EE3357431A8C200F00B83EC0 /* Social.framework */,
 				EE3357411A8C1D2D00B83EC0 /* libsqlite3.dylib */,
@@ -193,6 +198,7 @@
 				EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */,
 				302E41C51A86A195005F1184 /* ChoosePlayersViewController.h */,
 				302E41C61A86A195005F1184 /* ChoosePlayersViewController.m */,
+				EE0DC00C1A8C53A1000235B3 /* FoosPong-Prefix.pch */,
 				EE3356EC1A895F0600B83EC0 /* ProfileViewController.h */,
 				EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */,
 				EE3356EF1A89610B00B83EC0 /* GameViewController.h */,
@@ -503,7 +509,9 @@
 					"$(inherited)",
 					"/Users/derikflanary/Downloads/parse-library-1.6.2",
 					"$(PROJECT_DIR)/FoosPong",
+					"$(PROJECT_DIR)",
 				);
+				GCC_PREFIX_HEADER = "FoosPong/FoosPong-Prefix.pch";
 				INFOPLIST_FILE = FoosPong/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -519,7 +527,9 @@
 					"$(inherited)",
 					"/Users/derikflanary/Downloads/parse-library-1.6.2",
 					"$(PROJECT_DIR)/FoosPong",
+					"$(PROJECT_DIR)",
 				);
+				GCC_PREFIX_HEADER = "FoosPong/FoosPong-Prefix.pch";
 				INFOPLIST_FILE = FoosPong/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

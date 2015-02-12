@@ -11,8 +11,9 @@
 #import "HistoryViewController.h"
 #import "ProfileViewController.h"
 #import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
 
-@interface MainViewController ()
+@interface MainViewController ()<PFLogInViewControllerDelegate>
 
 @property (nonatomic, strong) UITabBarController *tabBarController;
 
@@ -20,8 +21,23 @@
 
 @implementation MainViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    PFUser *currentUser = [PFUser currentUser];
+    self.title = currentUser.username;
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIBarButtonItem * logInButton = [[UIBarButtonItem alloc] initWithTitle:@"Log In" style:UIBarButtonItemStylePlain target:self action:@selector(logInPressed:)];
+    self.navigationItem.rightBarButtonItem = logInButton;
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:self action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
+    
+    PFUser *currentUser = [PFUser currentUser];
+    self.title = currentUser.username;
     
     self.tabBarController = [UITabBarController new];
     PingPongViewController *ppvc = [PingPongViewController new];
@@ -33,10 +49,23 @@
     self.tabBarController.viewControllers = @[ppvc, hvc, pvc];
     // Do any additional setup after loading the view.
     
-    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-    testObject[@"foo"] = @"bar";
-    [testObject saveInBackground];
+//    PFObject *testObject = [PFObject objectWithClassName:@"Game"];
+//    testObject[@"Score"] = @"11";
+//    [testObject saveInBackground];
 }
+
+-(void)logInPressed:(id)selector{
+    PFLogInViewController *logInController = [[PFLogInViewController alloc] init];
+    logInController.delegate = self;
+    [self presentViewController:logInController animated:YES completion:nil];
+}
+
+- (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user{
+    [logInController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
