@@ -18,6 +18,7 @@
 @property (nonatomic, strong)NSString *currentUser;
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSArray *users;
+@property (nonatomic, strong)NSMutableArray *players;
 @end
 
 @implementation ChoosePlayersViewController
@@ -31,6 +32,7 @@
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.editing = YES;
     
     PFUser *currentUser = [PFUser currentUser];
     self.currentUser = currentUser.username;
@@ -100,9 +102,13 @@
         cell = [NewGameCustomTableViewCell new];
     }
     if (indexPath.row == 0 && indexPath.section == 0){
+        if (!self.currentUser) {
+            cell.textLabel.text = @"Guest";
+        }
         cell.textLabel.text = self.currentUser;
     }else if(indexPath.section == 1){
-        cell.textLabel.text = [NSString stringWithFormat:@"%@", [self.users objectAtIndex:indexPath.row]];
+        NSDictionary *userDict = [self.users objectAtIndex:indexPath.row];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", userDict[@"username"]];
     }
     
     return cell;
@@ -114,7 +120,30 @@
     
 }
 
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return YES;
+}
 
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    NSInteger rows = [tableView numberOfRowsInSection:0];
+    
+//    NSString *stringToMove = [self.reorderingRows objectAtIndex:sourceIndexPath.row];
+//    [self.reorderingRows removeObjectAtIndex:sourceIndexPath.row];
+//    [self.reorderingRows insertObject:stringToMove atIndex:destinationIndexPath.row];
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleNone;
+}
+
+- (BOOL)tableView:(UITableView *)tableview shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//}
 
 
 /*
