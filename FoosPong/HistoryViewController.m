@@ -8,10 +8,14 @@
 
 #import "NewGameCustomTableViewCell.h"
 #import "HistoryViewController.h"
+#import "GameController.h"
+#import "UserController.h"
 
 @interface HistoryViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSArray *games;
+
 
 @end
 
@@ -24,7 +28,11 @@
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-
+    
+    PFUser *currentUser = [UserController sharedInstance].theCurrentUser;
+    [[GameController sharedInstance] updateGamesForUser:currentUser];
+    self.games = [NSArray array];
+    self.games = [GameController sharedInstance].games;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,7 +44,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return  5;
+    return  self.games.count;
 }
 
 
@@ -46,7 +54,8 @@
     if (!cell){
         cell = [NewGameCustomTableViewCell new];
     }
-    cell.textLabel.text = @"Old Game";
+    PFObject *game = [self.games objectAtIndex:indexPath.row];
+    cell.textLabel.text = game[@"parent"];
     return cell;
 }
 

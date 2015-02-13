@@ -28,8 +28,9 @@
 }
 
 
--(void)addGameWithDictionary:(NSDictionary*)dictionary{
+-(void)addGameWithDictionary:(NSDictionary*)dictionary andUser:(PFUser*)user{
     PFObject *finishedGame = [PFObject objectWithClassName:@"Game" dictionary:dictionary];
+    finishedGame[@"parent"] = user;
     [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"saved");
@@ -41,8 +42,14 @@
 
 
 -(void)updateGamesForUser:(PFUser*)user{
-    
-}
+    PFQuery *query = [PFQuery queryWithClassName:@"Game"];
+    [query getObjectInBackgroundWithId:user.objectId block:^(PFObject *object, NSError *error) {
+        NSMutableArray *array = [NSMutableArray array];
+        [array addObject:object];
+        self.games = array;
+
+    }];
+    }
 
 
 

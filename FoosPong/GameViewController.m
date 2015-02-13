@@ -104,7 +104,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 //        NSMutableDictionary *mutableStats = self.gameStats.mutableCopy;
 //        mutableStats [playerOneWinKey] = [NSNumber numberWithBool: self.playerOneWin];
 //        self.gameStats = mutableStats;
-        [[GameController sharedInstance]addGameWithDictionary:self.gameStats];
+        [[GameController sharedInstance]addGameWithDictionary:self.gameStats andUser:self.playerOne];
         [self.navigationController popViewControllerAnimated:YES];
         
     }]];
@@ -117,10 +117,8 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
             
             self.playerTwoWin = YES;
-            NSMutableDictionary *mutableStats = self.gameStats.mutableCopy;
-            mutableStats [playerTwoWinKey] = [NSNumber numberWithBool: self.playerTwoWin];
-            self.gameStats = mutableStats;
-            [[GameController sharedInstance]addGameWithDictionary:self.gameStats];
+           
+            //[[GameController sharedInstance]addGameWithDictionary:self.gameStats];
             [self.navigationController popViewControllerAnimated:YES];
             
         }]];
