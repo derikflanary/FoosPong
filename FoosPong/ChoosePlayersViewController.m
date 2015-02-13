@@ -1,4 +1,4 @@
-short//
+//
 //  NewGameViewController.m
 //  FoosPong
 //
@@ -74,6 +74,8 @@ short//
 
 #pragma mark - TableView Datasource
 
+#define NUMBER_OF_STATIC_CELLS  2
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
 }
@@ -123,24 +125,44 @@ short//
     return YES;
 }
 
+- (NSIndexPath *)tableView:(UITableView *)tableView
+targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
+       toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath{
+    
+    if (proposedDestinationIndexPath.section == 0 && self.currentPlayers.count == 2) {
+        return sourceIndexPath;
+    }else{
+    
+        return proposedDestinationIndexPath;
+    }
+}
+    
+
+
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     
-    if (sourceIndexPath.section == 1) {
+    if (sourceIndexPath.section == 1 && destinationIndexPath.section == 0) {
         PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
         [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
         [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
     }
-   
+    if (sourceIndexPath.section == 1 && destinationIndexPath.section == 1) {
+        PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
+        [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
+        [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
+    }
+    if (sourceIndexPath.section == 0 && destinationIndexPath.section == 0) {
+        PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
+        [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
+        [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
+    }
+    if (sourceIndexPath.section == 0 && destinationIndexPath.section == 1) {
+        PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
+        [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
+        [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
+    }
     
-//    [self.players removeObjectAtIndex:sourceIndexPath.row];
-//    [self.players insertObject:user atIndex:destinationIndexPath.row];
-//    NSLog(@"%@", self.players);
-
-//    NSString *stringToMove = [self.reorderingRows objectAtIndex:sourceIndexPath.row];
-//    [self.reorderingRows removeObjectAtIndex:sourceIndexPath.row];
-//    [self.reorderingRows insertObject:stringToMove atIndex:destinationIndexPath.row];
 }
-
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
     return UITableViewCellEditingStyleNone;

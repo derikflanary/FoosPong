@@ -72,7 +72,7 @@
     if (indexPath.row == 0) {
         [self.navigationController pushViewController:newGameViewController animated:YES];
     }
-    NSLog(@"%ld", (long)indexPath.row);
+    
 }
 
 
