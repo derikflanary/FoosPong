@@ -11,6 +11,8 @@
 		302E41C71A86A195005F1184 /* ChoosePlayersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302E41C61A86A195005F1184 /* ChoosePlayersViewController.m */; };
 		7F7C9D7F76CC544EEC3A87D2 /* libPods-FoosPong.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B77DFF6D64A66AF6288C73B1 /* libPods-FoosPong.a */; };
 		EE0DC00B1A8C4604000235B3 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE0DC00A1A8C4604000235B3 /* ParseUI.framework */; };
+		EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC00E1A8D9456000235B3 /* UserController.m */; };
+		EE0DC0121A8D96D8000235B3 /* GameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC0111A8D96D8000235B3 /* GameController.m */; };
 		EE3356EE1A895F0600B83EC0 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */; };
 		EE3356F11A89610B00B83EC0 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3356F01A89610B00B83EC0 /* GameViewController.m */; };
 		EE33572A1A8C1C2A00B83EC0 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357291A8C1C2A00B83EC0 /* Bolts.framework */; };
@@ -59,6 +61,10 @@
 		E5F931099152F99036552F2B /* Pods-FoosPong.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoosPong.release.xcconfig"; path = "Pods/Target Support Files/Pods-FoosPong/Pods-FoosPong.release.xcconfig"; sourceTree = "<group>"; };
 		EE0DC00A1A8C4604000235B3 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		EE0DC00C1A8C53A1000235B3 /* FoosPong-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FoosPong-Prefix.pch"; sourceTree = "<group>"; };
+		EE0DC00D1A8D9456000235B3 /* UserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserController.h; sourceTree = "<group>"; };
+		EE0DC00E1A8D9456000235B3 /* UserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserController.m; sourceTree = "<group>"; };
+		EE0DC0101A8D96D8000235B3 /* GameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameController.h; sourceTree = "<group>"; };
+		EE0DC0111A8D96D8000235B3 /* GameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameController.m; sourceTree = "<group>"; };
 		EE3356EC1A895F0600B83EC0 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		EE3356EF1A89610B00B83EC0 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
@@ -200,6 +206,10 @@
 				EE3356F01A89610B00B83EC0 /* GameViewController.m */,
 				EE3356EC1A895F0600B83EC0 /* ProfileViewController.h */,
 				EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */,
+				EE0DC00D1A8D9456000235B3 /* UserController.h */,
+				EE0DC00E1A8D9456000235B3 /* UserController.m */,
+				EE0DC0101A8D96D8000235B3 /* GameController.h */,
+				EE0DC0111A8D96D8000235B3 /* GameController.m */,
 				EE7A6D051A869970000447D2 /* NewGameCustomTableViewCell.h */,
 				EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */,
 				EE0DC00C1A8C53A1000235B3 /* FoosPong-Prefix.pch */,
@@ -376,7 +386,9 @@
 			files = (
 				EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */,
 				302E41C41A86958E005F1184 /* PingPongViewController.m in Sources */,
+				EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */,
 				EE3356EE1A895F0600B83EC0 /* ProfileViewController.m in Sources */,
+				EE0DC0121A8D96D8000235B3 /* GameController.m in Sources */,
 				EE7A6CDF1A868402000447D2 /* AppDelegate.m in Sources */,
 				EE3356F11A89610B00B83EC0 /* GameViewController.m in Sources */,
 				EE7A6D041A869169000447D2 /* MainViewController.m in Sources */,

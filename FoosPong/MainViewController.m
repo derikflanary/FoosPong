@@ -10,6 +10,7 @@
 #import "PingPongViewController.h"
 #import "HistoryViewController.h"
 #import "ProfileViewController.h"
+#import "UserController.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 
@@ -23,8 +24,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    PFUser *currentUser = [PFUser currentUser];
-    self.title = currentUser.username;
+    
+    self.title = [UserController sharedInstance].theCurrentUser.username;
     
 }
 
