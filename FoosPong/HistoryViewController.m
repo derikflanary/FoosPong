@@ -29,10 +29,15 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    PFUser *currentUser = [UserController sharedInstance].theCurrentUser;
-    [[GameController sharedInstance] updateGamesForUser:currentUser];
-    self.games = [NSArray array];
-    self.games = [GameController sharedInstance].games;
+    PFQuery *query = [PFQuery queryWithClassName:@"Game"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        self.games = objects;
+    }];
+    
+//    PFUser *currentUser = [UserController sharedInstance].theCurrentUser;
+//    [[GameController sharedInstance] updateGamesForUser:currentUser];
+//    self.games = [NSArray array];
+//    self.games = [GameController sharedInstance].games;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -100,10 +100,6 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         
     [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         
-        
-//        NSMutableDictionary *mutableStats = self.gameStats.mutableCopy;
-//        mutableStats [playerOneWinKey] = [NSNumber numberWithBool: self.playerOneWin];
-//        self.gameStats = mutableStats;
         [[GameController sharedInstance]addGameWithDictionary:self.gameStats andUser:self.playerOne];
         [self.navigationController popViewControllerAnimated:YES];
         

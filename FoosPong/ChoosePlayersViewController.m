@@ -43,7 +43,6 @@
     UIBarButtonItem * startGameButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Game" style:UIBarButtonItemStylePlain target:self action:@selector(startGame:)];
     self.navigationItem.rightBarButtonItem = startGameButton;
     
-    
     self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
     
 }
