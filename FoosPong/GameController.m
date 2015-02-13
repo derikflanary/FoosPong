@@ -29,8 +29,16 @@
 
 
 -(void)addGameWithDictionary:(NSDictionary*)dictionary{
-    
+    PFObject *finishedGame = [PFObject objectWithClassName:@"Game" dictionary:dictionary];
+    [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"saved");
+        }else{
+            NSLog(@"%@", error);
+        }
+    }];
 }
+
 
 -(void)updateGamesForUser:(PFUser*)user{
     

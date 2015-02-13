@@ -85,26 +85,44 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     self.playerOneScore = [NSNumber numberWithFloat:self.playerOneStepper.value];
     self.playerTwoScore = [NSNumber numberWithFloat:self.playerTwoStepper.value];
+    
+
     if (self.playerOneStepper.value == 11) {
-        
-        self.gameStats = @{playerOneKey:self.playerOne,
-                           playerTwoKey:self.playerTwo,
+        self.playerOneWin = YES;
+        self.gameStats = @{playerOneKey:self.playerOneName,
+                           playerTwoKey:self.playerTwoName,
                            playerOneScoreKey:self.playerOneScore,
                            playerTwoScoreKey:self.playerTwoScore,
                            playerOneWinKey:[NSNumber numberWithBool:self.playerOneWin],
                            playerTwoWinKey:[NSNumber numberWithBool:self.playerTwoWin]};
         
     UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", self.playerOneName] message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        
     [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+        
+//        NSMutableDictionary *mutableStats = self.gameStats.mutableCopy;
+//        mutableStats [playerOneWinKey] = [NSNumber numberWithBool: self.playerOneWin];
+//        self.gameStats = mutableStats;
+        [[GameController sharedInstance]addGameWithDictionary:self.gameStats];
         [self.navigationController popViewControllerAnimated:YES];
+        
     }]];
     [self presentViewController:setTitleAlert animated:YES completion:nil];
     }
     
     if (self.playerTwoStepper.value == 11){
         UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", self.playerTwoName] message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        
         [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            
+            self.playerTwoWin = YES;
+            NSMutableDictionary *mutableStats = self.gameStats.mutableCopy;
+            mutableStats [playerTwoWinKey] = [NSNumber numberWithBool: self.playerTwoWin];
+            self.gameStats = mutableStats;
+            [[GameController sharedInstance]addGameWithDictionary:self.gameStats];
             [self.navigationController popViewControllerAnimated:YES];
+            
         }]];
         [self presentViewController:setTitleAlert animated:YES completion:nil];
     }// Do any additional setup after loading the view.

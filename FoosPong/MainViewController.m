@@ -50,8 +50,7 @@
     self.tabBarController.viewControllers = @[ppvc, hvc, pvc];
     // Do any additional setup after loading the view.
     
-//    PFObject *testObject = [PFObject objectWithClassName:@"Game"];
-//    testObject[@"Score"] = @"11";
+    //    testObject[@"Score"] = @"11";
 //    [testObject saveInBackground];
 }
 
