@@ -28,14 +28,15 @@
 }
 
 
--(void)addGame{
+-(void)addGameWithDictionary:(NSDictionary*)dictionary{
     
 }
 
--(NSArray*)games{
-    NSArray *array = [NSArray array];
-    return array;
+-(void)updateGamesForUser:(PFUser*)user{
+    
 }
+
+
 
 -(void)removeGame:(PFObject*)game{
     

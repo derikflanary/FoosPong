@@ -62,6 +62,8 @@
     NSDictionary *playerTwoDict = [self.currentPlayers objectAtIndex:1];
     gvc.playerOneName = [NSString stringWithFormat:@"%@", playerOneDict[@"username"]];
     gvc.playerTwoName = [NSString stringWithFormat:@"%@", playerTwoDict[@"username"]];
+    gvc.playerOne = [self.currentPlayers objectAtIndex:0];
+    gvc.playerTwo = [self.currentPlayers objectAtIndex:1];
     [self.navigationController pushViewController:gvc animated:YES];
     }
 }

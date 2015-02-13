@@ -9,12 +9,25 @@
 #import "GameViewController.h"
 #import <PKYStepper/PKYStepper.h>
 #import "ChoosePlayersViewController.h"
+#import "GameController.h"
+
+static NSString * const playerOneKey = @"playerOneKey";
+static NSString * const playerTwoKey = @"playerTwoKey";
+static NSString * const playerOneScoreKey = @"playerOneScoreKey";
+static NSString * const playerTwoScoreKey = @"playerTwoScoreKey";
+static NSString * const playerOneWinKey = @"playerOneWinKey";
+static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 
 @interface GameViewController ()
 
 @property (nonatomic, assign) float scoreToWin;
 @property (nonatomic, strong) PKYStepper *playerOneStepper;
 @property (nonatomic, strong) PKYStepper *playerTwoStepper;
+@property (nonatomic, assign) NSNumber *playerOneScore;
+@property (nonatomic, assign) NSNumber *playerTwoScore;
+@property (nonatomic, assign) BOOL playerOneWin;
+@property (nonatomic, assign) BOOL playerTwoWin;
+@property (nonatomic, strong) NSDictionary *gameStats;
 
 @end
 
@@ -24,7 +37,12 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.scoreToWin = 11;
+    self.playerOneWin = NO;
+    self.playerTwoWin = NO;
     
+    UIBarButtonItem * saveGameButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveGamePressed:)];
+    self.navigationItem.rightBarButtonItem = saveGameButton;
+
     
     self.playerOneStepper = [[PKYStepper alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 100)];
     self.playerOneStepper.valueChangedCallback = ^(PKYStepper *stepper, float count) {
@@ -49,10 +67,33 @@
     
        }
 
+-(void)saveGamePressed:(id)sender{
+    UIAlertController *saveAlert = [UIAlertController alertControllerWithTitle:@"Save Game" message:@"Would you like to save this game for later?" preferredStyle:UIAlertControllerStyleAlert];
+    [saveAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }]];
+    [saveAlert addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    }]];
+    
+    [self presentViewController:saveAlert animated:YES completion:nil];
+
+    
+
+}
+
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    
+    self.playerOneScore = [NSNumber numberWithFloat:self.playerOneStepper.value];
+    self.playerTwoScore = [NSNumber numberWithFloat:self.playerTwoStepper.value];
     if (self.playerOneStepper.value == 11) {
+        
+        self.gameStats = @{playerOneKey:self.playerOne,
+                           playerTwoKey:self.playerTwo,
+                           playerOneScoreKey:self.playerOneScore,
+                           playerTwoScoreKey:self.playerTwoScore,
+                           playerOneWinKey:[NSNumber numberWithBool:self.playerOneWin],
+                           playerTwoWinKey:[NSNumber numberWithBool:self.playerTwoWin]};
+        
     UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", self.playerOneName] message:@"" preferredStyle:UIAlertControllerStyleAlert];
     [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         [self.navigationController popViewControllerAnimated:YES];

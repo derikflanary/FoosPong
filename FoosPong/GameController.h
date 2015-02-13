@@ -10,9 +10,9 @@
 
 @interface GameController : NSObject
 + (GameController *)sharedInstance;
--(void)addGame;
--(NSArray*)games;
+-(void)addGameWithDictionary:(NSDictionary*)dictionary;
 -(void)removeGame:(PFObject*)game;
 -(void)saveGames;
+-(void)updateGamesForUser:(PFUser*)user;
 
 @end

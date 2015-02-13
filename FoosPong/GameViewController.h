@@ -12,5 +12,7 @@
 
 @property (nonatomic, strong) NSString *playerOneName;
 @property (nonatomic, strong) NSString *playerTwoName;
+@property (nonatomic, strong) PFUser *playerOne;
+@property (nonatomic, strong) PFUser *playerTwo;
 
 @end
