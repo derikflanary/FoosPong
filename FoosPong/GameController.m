@@ -56,13 +56,18 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 
 -(void)updateGamesForUser:(PFUser*)user{
     PFQuery *query = [PFQuery queryWithClassName:@"Game"];
-    [query getObjectInBackgroundWithId:user.objectId block:^(PFObject *object, NSError *error) {
-        NSMutableArray *array = [NSMutableArray array];
-        [array addObject:object];
-        self.games = array;
-
+    [query whereKey:@"playerOne" equalTo:[NSString stringWithFormat:@"%@", user[playerOneKey]]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            
+            self.games = objects;
+            
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
     }];
-    }
+}
 
 
 

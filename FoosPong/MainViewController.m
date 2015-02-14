@@ -27,6 +27,7 @@
     [[UserController sharedInstance] findCurrentUser];
     self.title = [UserController sharedInstance].theCurrentUser.username;
     
+    
 }
 
 - (void)viewDidLoad {
@@ -48,10 +49,7 @@
     ProfileViewController *pvc = [ProfileViewController new];
     pvc.tabBarItem.title = @"Profile";
     self.tabBarController.viewControllers = @[ppvc, hvc, pvc];
-    // Do any additional setup after loading the view.
     
-    //    testObject[@"Score"] = @"11";
-//    [testObject saveInBackground];
 }
 
 -(void)logInPressed:(id)selector{
@@ -63,6 +61,8 @@
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user{
     [logInController dismissViewControllerAnimated:YES completion:^{
         
+        [[UserController sharedInstance] updateUsers];
+
     }];
 }
 
@@ -72,6 +72,8 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)pingPongPressed:(id)sender {
+    
+    
     //PingPongViewController * pingPongController = [PingPongViewController new];
     [self.navigationController pushViewController:self.tabBarController animated:YES];
 }

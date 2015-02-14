@@ -29,16 +29,30 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Game"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        self.games = objects;
-    }];
-    
-//    PFUser *currentUser = [UserController sharedInstance].theCurrentUser;
+    PFUser *currentUser = [UserController sharedInstance].theCurrentUser;
 //    [[GameController sharedInstance] updateGamesForUser:currentUser];
-//    self.games = [NSArray array];
-//    self.games = [GameController sharedInstance].games;
+
+    PFQuery *query = [PFQuery queryWithClassName:@"Game"];
+    [query whereKey:@"playerOne" equalTo:[NSString stringWithFormat:@"%@", currentUser.username]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            
+            self.games = objects;
+            [self.tableView reloadData];
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+
+
+    
+    
 }
+
+    
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -49,7 +63,8 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return  self.games.count;
+    return [self.games count];
+    //return  [[GameController sharedInstance].games count];
 }
 
 
@@ -59,8 +74,9 @@
     if (!cell){
         cell = [NewGameCustomTableViewCell new];
     }
+    //PFObject *game = [[GameController sharedInstance].games objectAtIndex:indexPath.row];
     PFObject *game = [self.games objectAtIndex:indexPath.row];
-    cell.textLabel.text = game[@"parent"];
+    cell.textLabel.text = game[@"playerOne"];
     return cell;
 }
 

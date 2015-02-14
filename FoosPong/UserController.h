@@ -18,6 +18,8 @@
 
 -(void)removeUser:(PFUser *)user;
 
+-(void)updateUsers;
+
 -(NSArray*)usersWithoutCurrentUser:(PFUser*)currentUser;
     
 @property (nonatomic, strong, readonly)NSArray *users;
