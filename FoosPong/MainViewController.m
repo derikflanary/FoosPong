@@ -24,7 +24,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [[UserController sharedInstance] findCurrentUser];
     self.title = [UserController sharedInstance].theCurrentUser.username;
     
 }

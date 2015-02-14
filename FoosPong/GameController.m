@@ -8,6 +8,13 @@
 
 #import "GameController.h"
 
+static NSString * const playerOneKey = @"playerOneKey";
+static NSString * const playerTwoKey = @"playerTwoKey";
+static NSString * const playerOneScoreKey = @"playerOneScoreKey";
+static NSString * const playerTwoScoreKey = @"playerTwoScoreKey";
+static NSString * const playerOneWinKey = @"playerOneWinKey";
+static NSString * const playerTwoWinKey = @"playerTwoWinKey";
+
 @interface GameController()
 
 @property(nonatomic, strong)NSArray *games;
@@ -27,10 +34,16 @@
     return sharedInstance;
 }
 
-
 -(void)addGameWithDictionary:(NSDictionary*)dictionary andUser:(PFUser*)user{
-    PFObject *finishedGame = [PFObject objectWithClassName:@"Game" dictionary:dictionary];
-    finishedGame[@"parent"] = user;
+    PFObject *finishedGame = [PFObject objectWithClassName:@"Game"];
+    //finishedGame[@"parent"] = user;
+    finishedGame[@"playerOne"] = dictionary[playerOneKey];
+    finishedGame[@"playerOneScore"] = dictionary[playerOneScoreKey];
+    finishedGame[@"playerOneWin"] = dictionary[playerOneWinKey];
+    finishedGame[@"playerTwo"] = dictionary[playerTwoKey];
+    finishedGame[@"playerTwoScore"] = dictionary[playerTwoScoreKey];
+    finishedGame[@"playerTwoWin"] = dictionary[playerTwoWinKey];
+    
     [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"saved");

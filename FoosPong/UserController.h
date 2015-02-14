@@ -14,7 +14,7 @@
     
 -(void)addUser;
 
--(NSArray*)users;
+-(void)findCurrentUser;
 
 -(void)removeUser:(PFUser *)user;
 

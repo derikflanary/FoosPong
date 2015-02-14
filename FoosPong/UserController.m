@@ -62,8 +62,8 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
-
 }
+
 
 -(NSArray*)usersWithoutCurrentUser:(PFUser*)currentUser{
 PFQuery *query = [PFUser query];
