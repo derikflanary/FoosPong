@@ -46,6 +46,7 @@
 //    }];
 
     [self getTheGames:^{
+        self.games = [GameController sharedInstance].games;
         [self.tableView reloadData];
     }];
 }
@@ -55,7 +56,7 @@
         
         PFUser *currentUser = [UserController sharedInstance].theCurrentUser;
         [[GameController sharedInstance] updateGamesForUser:currentUser];
-
+        
     });
     
 }

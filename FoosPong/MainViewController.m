@@ -13,8 +13,10 @@
 #import "UserController.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
+#import "MySignUpViewController.h"
+#import "LoginController4.h"
 
-@interface MainViewController ()<PFLogInViewControllerDelegate>
+@interface MainViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
 @property (nonatomic, strong) UITabBarController *tabBarController;
 
@@ -24,16 +26,19 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[UserController sharedInstance] findCurrentUser];
-    self.title = [UserController sharedInstance].theCurrentUser.username;
+//    [[UserController sharedInstance] findCurrentUser];
+//    self.title = [UserController sharedInstance].theCurrentUser.username;
     
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIBarButtonItem * logInButton = [[UIBarButtonItem alloc] initWithTitle:@"Log In" style:UIBarButtonItemStylePlain target:self action:@selector(logInPressed:)];
-    self.navigationItem.rightBarButtonItem = logInButton;
+//    UIBarButtonItem * logInButton = [[UIBarButtonItem alloc] initWithTitle:@"Log In" style:UIBarButtonItemStylePlain target:self action:@selector(logInPressed:)];
+//    self.navigationItem.rightBarButtonItem = logInButton;
+    
+    UIBarButtonItem *otherLogIn = [[UIBarButtonItem alloc] initWithTitle:@"Sign Up" style:UIBarButtonItemStylePlain target:self action:@selector(openLogIn:)];
+    self.navigationItem.rightBarButtonItem = otherLogIn;
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:self action:nil];
     self.navigationItem.backBarButtonItem = backButton;
@@ -52,11 +57,33 @@
     
 }
 
+-(void)openLogIn:(id)selector{
+    LoginController4 *signInController = [LoginController4 new];
+    [self presentViewController:signInController animated:YES completion:nil];
+    //[self.navigationController pushViewController:signInController animated:YES];
+}
+
+
 -(void)logInPressed:(id)selector{
+    
+        MySignUpViewController *signUpController = [[MySignUpViewController alloc] init];
+        signUpController.delegate = self;
+        signUpController.fields = (PFSignUpFieldsAdditional
+                                   | PFSignUpFieldsSignUpButton
+                                   | PFSignUpFieldsAdditional
+                                   | PFSignUpFieldsUsernameAndPassword
+                                   | PFSignUpFieldsDismissButton);
+        [self presentViewController:signUpController animated:YES completion:nil];
+   
+    
     PFLogInViewController *logInController = [[PFLogInViewController alloc] init];
     logInController.delegate = self;
-    [self presentViewController:logInController animated:YES completion:nil];
+    logInController.signUpController = signUpController;
+    //[self presentViewController:logInController animated:YES completion:nil];
+    
 }
+
+
 
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user{
     [logInController dismissViewControllerAnimated:YES completion:^{

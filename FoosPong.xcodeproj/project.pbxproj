@@ -13,6 +13,10 @@
 		EE0DC00B1A8C4604000235B3 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE0DC00A1A8C4604000235B3 /* ParseUI.framework */; };
 		EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC00E1A8D9456000235B3 /* UserController.m */; };
 		EE0DC0121A8D96D8000235B3 /* GameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC0111A8D96D8000235B3 /* GameController.m */; };
+		EE2C57D61A93DFC600DA9835 /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57D51A93DFC600DA9835 /* UIImageView+Letters.m */; };
+		EE2C57D91A93E50D00DA9835 /* MySignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57D81A93E50D00DA9835 /* MySignUpViewController.m */; };
+		EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57DE1A93ECD200DA9835 /* BaseLoginController.m */; };
+		EE2C57E21A93F12300DA9835 /* LoginController4.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57E11A93F12300DA9835 /* LoginController4.m */; };
 		EE3356EE1A895F0600B83EC0 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */; };
 		EE3356F11A89610B00B83EC0 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3356F01A89610B00B83EC0 /* GameViewController.m */; };
 		EE33572A1A8C1C2A00B83EC0 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357291A8C1C2A00B83EC0 /* Bolts.framework */; };
@@ -65,6 +69,14 @@
 		EE0DC00E1A8D9456000235B3 /* UserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserController.m; sourceTree = "<group>"; };
 		EE0DC0101A8D96D8000235B3 /* GameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameController.h; sourceTree = "<group>"; };
 		EE0DC0111A8D96D8000235B3 /* GameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameController.m; sourceTree = "<group>"; };
+		EE2C57D41A93DFC600DA9835 /* UIImageView+Letters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Letters.h"; sourceTree = "<group>"; };
+		EE2C57D51A93DFC600DA9835 /* UIImageView+Letters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Letters.m"; sourceTree = "<group>"; };
+		EE2C57D71A93E50D00DA9835 /* MySignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySignUpViewController.h; sourceTree = "<group>"; };
+		EE2C57D81A93E50D00DA9835 /* MySignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySignUpViewController.m; sourceTree = "<group>"; };
+		EE2C57DD1A93ECD200DA9835 /* BaseLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseLoginController.h; sourceTree = "<group>"; };
+		EE2C57DE1A93ECD200DA9835 /* BaseLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseLoginController.m; sourceTree = "<group>"; };
+		EE2C57E01A93F12300DA9835 /* LoginController4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController4.h; sourceTree = "<group>"; };
+		EE2C57E11A93F12300DA9835 /* LoginController4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController4.m; sourceTree = "<group>"; };
 		EE3356EC1A895F0600B83EC0 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		EE3356EF1A89610B00B83EC0 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
@@ -169,6 +181,37 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EE2C57E31A93F2BF00DA9835 /* Flat Templates */ = {
+			isa = PBXGroup;
+			children = (
+				EE2C57DD1A93ECD200DA9835 /* BaseLoginController.h */,
+				EE2C57DE1A93ECD200DA9835 /* BaseLoginController.m */,
+				EE2C57E01A93F12300DA9835 /* LoginController4.h */,
+				EE2C57E11A93F12300DA9835 /* LoginController4.m */,
+			);
+			name = "Flat Templates";
+			sourceTree = "<group>";
+		};
+		EE2C57E41A93F51300DA9835 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EE0DC00D1A8D9456000235B3 /* UserController.h */,
+				EE0DC00E1A8D9456000235B3 /* UserController.m */,
+				EE0DC0101A8D96D8000235B3 /* GameController.h */,
+				EE0DC0111A8D96D8000235B3 /* GameController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		EE2C57E51A93F52400DA9835 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				EE7A6D051A869970000447D2 /* NewGameCustomTableViewCell.h */,
+				EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */,
+			);
+			name = CustomCells;
+			sourceTree = "<group>";
+		};
 		EE7A6CCD1A868401000447D2 = {
 			isa = PBXGroup;
 			children = (
@@ -192,10 +235,13 @@
 		EE7A6CD81A868401000447D2 /* FoosPong */ = {
 			isa = PBXGroup;
 			children = (
+				EE2C57E31A93F2BF00DA9835 /* Flat Templates */,
 				EE7A6CDD1A868402000447D2 /* AppDelegate.h */,
 				EE7A6CDE1A868402000447D2 /* AppDelegate.m */,
 				EE7A6D021A869169000447D2 /* MainViewController.h */,
 				EE7A6D031A869169000447D2 /* MainViewController.m */,
+				EE2C57D71A93E50D00DA9835 /* MySignUpViewController.h */,
+				EE2C57D81A93E50D00DA9835 /* MySignUpViewController.m */,
 				302E41C21A86958E005F1184 /* PingPongViewController.h */,
 				302E41C31A86958E005F1184 /* PingPongViewController.m */,
 				302E41C51A86A195005F1184 /* ChoosePlayersViewController.h */,
@@ -206,12 +252,10 @@
 				EE7A6D091A869CD4000447D2 /* HistoryViewController.m */,
 				EE3356EC1A895F0600B83EC0 /* ProfileViewController.h */,
 				EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */,
-				EE0DC00D1A8D9456000235B3 /* UserController.h */,
-				EE0DC00E1A8D9456000235B3 /* UserController.m */,
-				EE0DC0101A8D96D8000235B3 /* GameController.h */,
-				EE0DC0111A8D96D8000235B3 /* GameController.m */,
-				EE7A6D051A869970000447D2 /* NewGameCustomTableViewCell.h */,
-				EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */,
+				EE2C57E41A93F51300DA9835 /* Controllers */,
+				EE2C57E51A93F52400DA9835 /* CustomCells */,
+				EE2C57D41A93DFC600DA9835 /* UIImageView+Letters.h */,
+				EE2C57D51A93DFC600DA9835 /* UIImageView+Letters.m */,
 				EE0DC00C1A8C53A1000235B3 /* FoosPong-Prefix.pch */,
 				EE7A6CE31A868402000447D2 /* Main.storyboard */,
 				EE33572B1A8C1C4700B83EC0 /* Parse.framework */,
@@ -393,8 +437,12 @@
 				EE3356F11A89610B00B83EC0 /* GameViewController.m in Sources */,
 				EE7A6D041A869169000447D2 /* MainViewController.m in Sources */,
 				EE7A6CDC1A868402000447D2 /* main.m in Sources */,
+				EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */,
 				302E41C71A86A195005F1184 /* ChoosePlayersViewController.m in Sources */,
+				EE2C57D61A93DFC600DA9835 /* UIImageView+Letters.m in Sources */,
+				EE2C57D91A93E50D00DA9835 /* MySignUpViewController.m in Sources */,
 				EE7A6D0A1A869CD4000447D2 /* HistoryViewController.m in Sources */,
+				EE2C57E21A93F12300DA9835 /* LoginController4.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

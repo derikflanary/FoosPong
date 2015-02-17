@@ -1,28 +1,23 @@
 //
-//  ProfileViewController.m
+//  MySignUpViewController.m
 //  FoosPong
 //
-//  Created by Derik Flanary on 2/9/15.
+//  Created by Derik Flanary on 2/17/15.
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "ProfileViewController.h"
-#import "UIImageView+Letters.h"
-#import "UserController.h"
+#import "MySignUpViewController.h"
 
-@interface ProfileViewController ()
+@interface MySignUpViewController ()
 
 @end
 
-@implementation ProfileViewController
+@implementation MySignUpViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    NSString *name = [UserController sharedInstance].theCurrentUser.username;
     
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 50, 50)];
-    [imageView setImageWithString:name];
+    self.signUpView.additionalField.placeholder = @"Last Name";
     // Do any additional setup after loading the view.
 }
 
