@@ -39,6 +39,8 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.scoreToWin = 11;
     self.playerOneWin = NO;
     self.playerTwoWin = NO;
+    self.playerOneName = self.playerOne.username;
+    self.playerTwoName = self.playerTwo.username;
     
     UIBarButtonItem * saveGameButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveGamePressed:)];
     self.navigationItem.rightBarButtonItem = saveGameButton;

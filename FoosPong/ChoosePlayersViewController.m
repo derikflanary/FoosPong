@@ -68,10 +68,6 @@
     }else{
     
     GameViewController *gvc = [GameViewController new];
-    NSDictionary *playerOneDict = [self.currentPlayers objectAtIndex:0];
-    NSDictionary *playerTwoDict = [self.currentPlayers objectAtIndex:1];
-    gvc.playerOneName = [NSString stringWithFormat:@"%@", playerOneDict[@"username"]];
-    gvc.playerTwoName = [NSString stringWithFormat:@"%@", playerTwoDict[@"username"]];
     gvc.playerOne = [self.currentPlayers objectAtIndex:0];
     gvc.playerTwo = [self.currentPlayers objectAtIndex:1];
     [self.navigationController pushViewController:gvc animated:YES];
@@ -191,28 +187,31 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     if ([searchText isEqualToString:@""]) {
         
         self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
+        for (PFUser *user in self.currentPlayers) {
+            if ([self.availablePlayers containsObject:user]) {
+                [self.availablePlayers removeObject:user];
+            }
+        }
         [self.tableView reloadData];
         return;
     }else{
-        
-        
-        self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
+        //self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
         //self.filteredPlayers = [NSMutableArray array];
         NSPredicate *pred = [NSPredicate predicateWithFormat:@"self.username CONTAINS[CD] %@", searchText];
         self.filteredPlayers = [self.availablePlayers filteredArrayUsingPredicate:pred].mutableCopy;
-//        for (PFUser *user in self.availablePlayers) {
-//            if ([user.username containsString:searchText]){
-//                
-//                [self.filteredPlayers addObject:user];
-//            }
-//        }
     }
     self.availablePlayers = self.filteredPlayers;
     [self.tableView reloadData];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    
     self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
+    for (PFUser *user in self.currentPlayers) {
+        if ([self.availablePlayers containsObject:user]) {
+            [self.availablePlayers removeObject:user];
+        }
+    }
     [self.tableView reloadData];
 }
 
