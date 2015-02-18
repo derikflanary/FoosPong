@@ -13,12 +13,15 @@
 #import "UserController.h"
 
 
-@interface ChoosePlayersViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface ChoosePlayersViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
 
 @property (nonatomic, strong)PFUser *currentUser;
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSMutableArray *availablePlayers;
 @property (nonatomic, strong)NSMutableArray *currentPlayers;
+@property (nonatomic, strong)UISearchController *searchController;
+@property (nonatomic, strong)NSMutableArray *filteredPlayers;
+
 @end
 
 @implementation ChoosePlayersViewController
@@ -44,6 +47,14 @@
     self.navigationItem.rightBarButtonItem = startGameButton;
     
     self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
+    
+    self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
+    [self.searchController.searchBar sizeToFit];
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.delegate = self;
+    self.searchController.searchBar.delegate = self;
+    self.searchController.dimsBackgroundDuringPresentation = NO;
     
 }
 -(void)startGame:(id)sender{
@@ -92,12 +103,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return [self.currentPlayers count];
-    }else{
-        return [self.availablePlayers count];
     }
     
+        return [self.availablePlayers count];
+    
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -172,6 +182,40 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 - (BOOL)tableView:(UITableView *)tableview shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
 }
+
+#pragma mark - SearchController
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    
+    NSString *searchText = searchController.searchBar.text;
+    if ([searchText isEqualToString:@""]) {
+        
+        self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
+        [self.tableView reloadData];
+        return;
+    }else{
+        
+        
+        self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
+        //self.filteredPlayers = [NSMutableArray array];
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"self.username CONTAINS[CD] %@", searchText];
+        self.filteredPlayers = [self.availablePlayers filteredArrayUsingPredicate:pred].mutableCopy;
+//        for (PFUser *user in self.availablePlayers) {
+//            if ([user.username containsString:searchText]){
+//                
+//                [self.filteredPlayers addObject:user];
+//            }
+//        }
+    }
+    self.availablePlayers = self.filteredPlayers;
+    [self.tableView reloadData];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
+    [self.tableView reloadData];
+}
+
 
 //- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 //    

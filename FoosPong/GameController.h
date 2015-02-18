@@ -13,7 +13,7 @@
 -(void)addGameWithDictionary:(NSDictionary*)dictionary andUser:(PFUser*)user;
 -(void)removeGame:(PFObject*)game;
 -(void)saveGames;
--(void)updateGamesForUser:(PFUser*)user;
+-(void)updateGamesForUser:(PFUser*)user callback:(void (^)(NSArray *))callback;
 @property (nonatomic, strong, readonly)NSArray *games;
 
 @end

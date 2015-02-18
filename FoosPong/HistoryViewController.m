@@ -29,36 +29,13 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-//    PFUser *currentUser = [UserController sharedInstance].theCurrentUser;
-////    [[GameController sharedInstance] updateGamesForUser:currentUser];
-//
-//    PFQuery *query = [PFQuery queryWithClassName:@"Game"];
-//    [query whereKey:@"playerOne" equalTo:[NSString stringWithFormat:@"%@", currentUser.username]];
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//        if (!error) {
-//            
-//            self.games = objects;
-//            [self.tableView reloadData];
-//        } else {
-//            // Log details of the failure
-//            NSLog(@"Error: %@ %@", error, [error userInfo]);
-//        }
-//    }];
 
-    [self getTheGames:^{
-        self.games = [GameController sharedInstance].games;
-        [self.tableView reloadData];
-    }];
-}
-
--(void)getTheGames:(dispatch_block_t)block{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        PFUser *currentUser = [UserController sharedInstance].theCurrentUser;
-        [[GameController sharedInstance] updateGamesForUser:currentUser];
-        
-    });
-    
+     PFUser *currentUser = [UserController sharedInstance].theCurrentUser;
+[[GameController sharedInstance] updateGamesForUser:currentUser callback:^(NSArray * games){
+    self.games = games;
+    [self.tableView reloadData];
+}];
+ 
 }
 
 - (void)didReceiveMemoryWarning {

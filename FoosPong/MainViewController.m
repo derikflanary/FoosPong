@@ -26,25 +26,26 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    [[UserController sharedInstance] findCurrentUser];
-//    self.title = [UserController sharedInstance].theCurrentUser.username;
-    
+    if (![UserController sharedInstance].theCurrentUser) {
+        return;
+    }else{
+    [[UserController sharedInstance] findCurrentUser];
+    self.title = [UserController sharedInstance].theCurrentUser.username;
+    }
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    UIBarButtonItem * logInButton = [[UIBarButtonItem alloc] initWithTitle:@"Log In" style:UIBarButtonItemStylePlain target:self action:@selector(logInPressed:)];
-//    self.navigationItem.rightBarButtonItem = logInButton;
+    UIBarButtonItem * logInButton = [[UIBarButtonItem alloc] initWithTitle:@"Log In" style:UIBarButtonItemStylePlain target:self action:@selector(logInPressed:)];
+    self.navigationItem.rightBarButtonItem = logInButton;
     
-    UIBarButtonItem *otherLogIn = [[UIBarButtonItem alloc] initWithTitle:@"Sign Up" style:UIBarButtonItemStylePlain target:self action:@selector(openLogIn:)];
-    self.navigationItem.rightBarButtonItem = otherLogIn;
+//    UIBarButtonItem *otherLogIn = [[UIBarButtonItem alloc] initWithTitle:@"Sign Up" style:UIBarButtonItemStylePlain target:self action:@selector(openLogIn:)];
+//    self.navigationItem.rightBarButtonItem = otherLogIn;
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:self action:nil];
     self.navigationItem.backBarButtonItem = backButton;
     
-    PFUser *currentUser = [PFUser currentUser];
-    self.title = currentUser.username;
     
     self.tabBarController = [UITabBarController new];
     PingPongViewController *ppvc = [PingPongViewController new];
@@ -60,7 +61,7 @@
 -(void)openLogIn:(id)selector{
     LoginController4 *signInController = [LoginController4 new];
     [self presentViewController:signInController animated:YES completion:nil];
-    //[self.navigationController pushViewController:signInController animated:YES];
+    [self.navigationController pushViewController:signInController animated:YES];
 }
 
 
@@ -73,13 +74,13 @@
                                    | PFSignUpFieldsAdditional
                                    | PFSignUpFieldsUsernameAndPassword
                                    | PFSignUpFieldsDismissButton);
-        [self presentViewController:signUpController animated:YES completion:nil];
+        //[self presentViewController:signUpController animated:YES completion:nil];
    
     
     PFLogInViewController *logInController = [[PFLogInViewController alloc] init];
     logInController.delegate = self;
     logInController.signUpController = signUpController;
-    //[self presentViewController:logInController animated:YES completion:nil];
+    [self presentViewController:logInController animated:YES completion:nil];
     
 }
 

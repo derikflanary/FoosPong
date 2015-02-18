@@ -36,7 +36,8 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 
 -(void)addGameWithDictionary:(NSDictionary*)dictionary andUser:(PFUser*)user{
     PFObject *finishedGame = [PFObject objectWithClassName:@"Game"];
-    //finishedGame[@"parent"] = user;
+    
+    //finishedGame[@"P1" ] = user;
     finishedGame[@"playerOne"] = dictionary[playerOneKey];
     finishedGame[@"playerOneScore"] = dictionary[playerOneScoreKey];
     finishedGame[@"playerOneWin"] = dictionary[playerOneWinKey];
@@ -54,13 +55,14 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 }
 
 
--(void)updateGamesForUser:(PFUser*)user{
+-(void)updateGamesForUser:(PFUser*)user callback:(void (^)(NSArray *))callback{
     PFQuery *query = [PFQuery queryWithClassName:@"Game"];
     [query whereKey:@"playerOne" equalTo:[NSString stringWithFormat:@"%@", user.username]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             
             self.games = objects;
+            callback(objects);
             
         } else {
             // Log details of the failure
