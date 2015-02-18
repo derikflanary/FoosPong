@@ -34,14 +34,15 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     return sharedInstance;
 }
 
--(void)addGameWithDictionary:(NSDictionary*)dictionary andUser:(PFUser*)user{
+-(void)addGameWithDictionary:(NSDictionary*)dictionary andUser:(PFUser*)user andOtherUser:(PFUser*)user2{
     PFObject *finishedGame = [PFObject objectWithClassName:@"Game"];
     
-    //finishedGame[@"P1" ] = user;
-    finishedGame[@"playerOne"] = dictionary[playerOneKey];
+    finishedGame[@"P1"] = user;
+    finishedGame[@"P2"] = user2;
+    finishedGame[@"playerOneName"] = dictionary[playerOneKey];
     finishedGame[@"playerOneScore"] = dictionary[playerOneScoreKey];
     finishedGame[@"playerOneWin"] = dictionary[playerOneWinKey];
-    finishedGame[@"playerTwo"] = dictionary[playerTwoKey];
+    finishedGame[@"playerTwoName"] = dictionary[playerTwoKey];
     finishedGame[@"playerTwoScore"] = dictionary[playerTwoScoreKey];
     finishedGame[@"playerTwoWin"] = dictionary[playerTwoWinKey];
     
@@ -57,8 +58,11 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 
 -(void)updateGamesForUser:(PFUser*)user callback:(void (^)(NSArray *))callback{
     PFQuery *query = [PFQuery queryWithClassName:@"Game"];
-    [query whereKey:@"playerOne" equalTo:[NSString stringWithFormat:@"%@", user.username]];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    [query whereKey:@"P1" equalTo:user];
+    PFQuery *query2 = [PFQuery queryWithClassName:@"Game"];
+    [query2 whereKey:@"P2" equalTo:user];
+    PFQuery *theQuery = [PFQuery orQueryWithSubqueries:@[query, query2]];
+    [theQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             
             self.games = objects;

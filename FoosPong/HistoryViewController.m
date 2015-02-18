@@ -16,7 +16,6 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *games;
 
-
 @end
 
 @implementation HistoryViewController
@@ -60,7 +59,7 @@
     }
     //PFObject *game = [[GameController sharedInstance].games objectAtIndex:indexPath.row];
     PFObject *game = [self.games objectAtIndex:indexPath.row];
-    cell.textLabel.text = game[@"playerOne"];
+    cell.textLabel.text = game[@"playerOneName"];
     return cell;
 }
 

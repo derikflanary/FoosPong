@@ -106,7 +106,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         
     [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         
-        [[GameController sharedInstance]addGameWithDictionary:gameStats andUser:self.playerOne];
+        [[GameController sharedInstance]addGameWithDictionary:gameStats andUser:self.playerOne andOtherUser:self.playerTwo];
         [self.navigationController popViewControllerAnimated:YES];
         
     }]];
@@ -126,7 +126,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         
         [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
             
-            [[GameController sharedInstance]addGameWithDictionary:gameStats andUser:self.playerOne];
+            [[GameController sharedInstance]addGameWithDictionary:gameStats andUser:self.playerOne andOtherUser:self.playerTwo];
             [self.navigationController popViewControllerAnimated:YES];
             
         }]];
