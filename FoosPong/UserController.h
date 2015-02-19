@@ -21,6 +21,8 @@
 -(void)updateUsers;
 
 -(NSArray*)usersWithoutCurrentUser:(PFUser*)currentUser;
+
+-(void)loginUser:(NSDictionary*)dictionary;
     
 @property (nonatomic, strong, readonly)NSArray *users;
 @property (nonatomic, strong, readonly)NSArray *usersWithoutCurrentUser;

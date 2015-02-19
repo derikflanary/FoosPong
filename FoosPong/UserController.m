@@ -49,14 +49,19 @@
         }
     }];
     
-//    [PFUser logInWithUsernameInBackground:dictionary[@"username"] password:dictionary[@"password"]
-//                                    block:^(PFUser *user, NSError *error) {
-//                                        if (user) {
-//                                            
-//                                        } else {
-//                                            NSLog(@"%@", error);// The login failed. Check error to see why.
-//                                        }
-//                                    }];
+}
+
+-(void)loginUser:(NSDictionary*)dictionary{
+    
+        [PFUser logInWithUsernameInBackground:dictionary[@"username"] password:dictionary[@"password"]
+                                        block:^(PFUser *user, NSError *error) {
+                                            if (user) {
+    
+                                            } else {
+                                                NSLog(@"%@", error);// The login failed. Check error to see why.
+                                            }
+                                        }];
+ 
 }
 
 -(void)updateUsers{

@@ -15,6 +15,7 @@
 #import <ParseUI/ParseUI.h>
 #import "MySignUpViewController.h"
 #import "LoginController4.h"
+#import "LogViewController.h"
 
 @interface MainViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
@@ -27,19 +28,18 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-//    [[UserController sharedInstance] findCurrentUser];
     PFUser *user = [PFUser currentUser];
     self.title = user[@"firstName"];
-    
+    //[[UserController sharedInstance] updateUsers];
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIBarButtonItem * logInButton = [[UIBarButtonItem alloc] initWithTitle:@"Log In" style:UIBarButtonItemStylePlain target:self action:@selector(logInPressed:)];
-    self.navigationItem.rightBarButtonItem = logInButton;
+//    UIBarButtonItem * logInButton = [[UIBarButtonItem alloc] initWithTitle:@"Log In" style:UIBarButtonItemStylePlain target:self action:@selector(logInPressed:)];
+//    self.navigationItem.rightBarButtonItem = logInButton;
     
-    UIBarButtonItem *otherLogIn = [[UIBarButtonItem alloc] initWithTitle:@"Sign Up" style:UIBarButtonItemStylePlain target:self action:@selector(openLogIn:)];
+    UIBarButtonItem *otherLogIn = [[UIBarButtonItem alloc] initWithTitle:@"Log In" style:UIBarButtonItemStylePlain target:self action:@selector(openLogIn:)];
     self.navigationItem.rightBarButtonItem = otherLogIn;
     
 //    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:self action:nil];
@@ -57,9 +57,10 @@
 }
 
 -(void)openLogIn:(id)selector{
-    LoginController4 *signInController = [LoginController4 new];
-    //[self presentViewController:signInController animated:YES completion:nil];
-    [self.navigationController pushViewController:signInController animated:YES];
+    
+    //LoginController4 *signInController = [LoginController4 new];
+    LogViewController *logViewController = [LogViewController new];
+    [self.navigationController pushViewController:logViewController animated:YES];
 }
 
 

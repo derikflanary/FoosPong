@@ -34,6 +34,8 @@
 		EE3357421A8C1D2D00B83EC0 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357411A8C1D2D00B83EC0 /* libsqlite3.dylib */; };
 		EE3357441A8C200F00B83EC0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357431A8C200F00B83EC0 /* Social.framework */; };
 		EE3357461A8C202600B83EC0 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357451A8C202600B83EC0 /* Accounts.framework */; };
+		EE5027C21A9654A30079DFFC /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5027C11A9654A30079DFFC /* LogViewController.m */; };
+		EE5027C81A965F1F0079DFFC /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5027C71A965F1F0079DFFC /* NSString+Extensions.m */; };
 		EE7A6CDC1A868402000447D2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6CDB1A868402000447D2 /* main.m */; };
 		EE7A6CDF1A868402000447D2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6CDE1A868402000447D2 /* AppDelegate.m */; };
 		EE7A6CE51A868402000447D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE7A6CE31A868402000447D2 /* Main.storyboard */; };
@@ -96,6 +98,10 @@
 		EE3357411A8C1D2D00B83EC0 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		EE3357431A8C200F00B83EC0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		EE3357451A8C202600B83EC0 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		EE5027C01A9654A30079DFFC /* LogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
+		EE5027C11A9654A30079DFFC /* LogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
+		EE5027C61A965F1F0079DFFC /* NSString+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extensions.h"; sourceTree = "<group>"; };
+		EE5027C71A965F1F0079DFFC /* NSString+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extensions.m"; sourceTree = "<group>"; };
 		EE7A6CD61A868401000447D2 /* FoosPong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoosPong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE7A6CDA1A868402000447D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE7A6CDB1A868402000447D2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -188,6 +194,8 @@
 				EE2C57DE1A93ECD200DA9835 /* BaseLoginController.m */,
 				EE2C57E01A93F12300DA9835 /* LoginController4.h */,
 				EE2C57E11A93F12300DA9835 /* LoginController4.m */,
+				EE5027C01A9654A30079DFFC /* LogViewController.h */,
+				EE5027C11A9654A30079DFFC /* LogViewController.m */,
 			);
 			name = "Flat Templates";
 			sourceTree = "<group>";
@@ -256,6 +264,8 @@
 				EE2C57E51A93F52400DA9835 /* CustomCells */,
 				EE2C57D41A93DFC600DA9835 /* UIImageView+Letters.h */,
 				EE2C57D51A93DFC600DA9835 /* UIImageView+Letters.m */,
+				EE5027C61A965F1F0079DFFC /* NSString+Extensions.h */,
+				EE5027C71A965F1F0079DFFC /* NSString+Extensions.m */,
 				EE0DC00C1A8C53A1000235B3 /* FoosPong-Prefix.pch */,
 				EE7A6CE31A868402000447D2 /* Main.storyboard */,
 				EE33572B1A8C1C4700B83EC0 /* Parse.framework */,
@@ -441,8 +451,10 @@
 				302E41C71A86A195005F1184 /* ChoosePlayersViewController.m in Sources */,
 				EE2C57D61A93DFC600DA9835 /* UIImageView+Letters.m in Sources */,
 				EE2C57D91A93E50D00DA9835 /* MySignUpViewController.m in Sources */,
+				EE5027C81A965F1F0079DFFC /* NSString+Extensions.m in Sources */,
 				EE7A6D0A1A869CD4000447D2 /* HistoryViewController.m in Sources */,
 				EE2C57E21A93F12300DA9835 /* LoginController4.m in Sources */,
+				EE5027C21A9654A30079DFFC /* LogViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
