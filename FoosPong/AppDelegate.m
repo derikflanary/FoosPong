@@ -26,6 +26,7 @@
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
+    [PFUser enableAutomaticUser];
     
     return YES;
 }

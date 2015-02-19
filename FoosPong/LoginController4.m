@@ -8,6 +8,7 @@
 
 #import "LoginController4.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UserController.h"
 
 @interface LoginController4 ()
 
@@ -34,6 +35,9 @@
     NSString* fontName = @"Avenir-Book";
     NSString* boldFontName = @"Avenir-Black";
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
+    [self.view addGestureRecognizer:tap];
+    
     self.view.backgroundColor = mainColor;
     
     self.firstNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 220, 320, 41)];
@@ -49,7 +53,7 @@
     
     self.lastNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 260, 320, 41)];
     self.lastNameField.backgroundColor = [UIColor whiteColor];
-    self.lastNameField.placeholder = @"First Name";
+    self.lastNameField.placeholder = @"Last Name";
     self.lastNameField.font = [UIFont fontWithName:fontName size:16.0f];
     self.lastNameField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.lastNameField.layer.borderWidth = 1.0f;
@@ -89,6 +93,7 @@
     [self.loginButton setTitle:@"SIGN UP HERE" forState:UIControlStateNormal];
     [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.loginButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.loginButton addTarget:self action:@selector(loginPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     self.forgotButton.backgroundColor = [UIColor clearColor];
     self.forgotButton.titleLabel.font = [UIFont fontWithName:fontName size:12.0f];
@@ -124,6 +129,33 @@
     [self.view addSubview:self.loginButton];
     [self.view addSubview:self.overlayView];
     
+}
+
+-(void)loginPressed:(id)sender{
+    
+    if (!self.firstNameField.text || !self.lastNameField.text || !self.usernameField.text || !self.passwordField.text) {
+        UIAlertController *missingTextAlert = [UIAlertController alertControllerWithTitle:@"Missing Information" message:@"Please fill out every section" preferredStyle:UIAlertControllerStyleAlert];
+        [missingTextAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            return;
+        }]];
+
+    }
+    
+    NSDictionary *dictionary = @{@"firstName": self.firstNameField.text,
+                                 @"lastName": self.lastNameField.text,
+                                 @"username": self.usernameField.text,
+                                 @"password": self.passwordField.text,};
+    
+    [[UserController sharedInstance] addUserwithDictionary:dictionary];
+    [[UserController sharedInstance] updateUsers];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+-(void)dismissKeyboard:(id)sender{
+    [self.firstNameField resignFirstResponder];
+    [self.lastNameField resignFirstResponder];
+    [self.usernameField resignFirstResponder];
+    [self.passwordField resignFirstResponder];
 }
 
 -(IBAction)toggleNav:(id)sender{

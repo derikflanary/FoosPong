@@ -39,8 +39,6 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     
     finishedGame[@"P1"] = user;
     finishedGame[@"P2"] = user2;
-    finishedGame[@"playerOneName"] = dictionary[playerOneKey];
-    finishedGame[@"playerOneScore"] = dictionary[playerOneScoreKey];
     finishedGame[@"playerOneWin"] = dictionary[playerOneWinKey];
     finishedGame[@"playerTwoName"] = dictionary[playerTwoKey];
     finishedGame[@"playerTwoScore"] = dictionary[playerTwoScoreKey];
@@ -57,10 +55,13 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 
 
 -(void)updateGamesForUser:(PFUser*)user callback:(void (^)(NSArray *))callback{
+    
     PFQuery *query = [PFQuery queryWithClassName:@"Game"];
     [query whereKey:@"P1" equalTo:user];
+    
     PFQuery *query2 = [PFQuery queryWithClassName:@"Game"];
     [query2 whereKey:@"P2" equalTo:user];
+    
     PFQuery *theQuery = [PFQuery orQueryWithSubqueries:@[query, query2]];
     [theQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -69,7 +70,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
             callback(objects);
             
         } else {
-            // Log details of the failure
+    
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];

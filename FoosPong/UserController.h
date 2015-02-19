@@ -12,7 +12,7 @@
 
 + (UserController *)sharedInstance;
     
--(void)addUser;
+-(void)addUserwithDictionary:(NSDictionary*)dictionary;
 
 -(void)findCurrentUser;
 

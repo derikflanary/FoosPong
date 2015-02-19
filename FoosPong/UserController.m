@@ -29,15 +29,38 @@
 }
 
 -(void)findCurrentUser{
+    
     PFUser *currentUser = [PFUser currentUser];
     self.theCurrentUser = currentUser;
 }
 
--(void)addUser{
+-(void)addUserwithDictionary:(NSDictionary*)dictionary{
     
+    PFUser *user = [PFUser user];
+    user.username = dictionary[@"username"];
+    user.password = dictionary[@"password"];
+    user[@"firstName"] = dictionary[@"firstName"];
+    user[@"lastName"] = dictionary[@"lastName"];
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            
+        }else{
+            NSLog(@"%@", error);
+        }
+    }];
+    
+//    [PFUser logInWithUsernameInBackground:dictionary[@"username"] password:dictionary[@"password"]
+//                                    block:^(PFUser *user, NSError *error) {
+//                                        if (user) {
+//                                            
+//                                        } else {
+//                                            NSLog(@"%@", error);// The login failed. Check error to see why.
+//                                        }
+//                                    }];
 }
 
 -(void)updateUsers{
+    
     PFQuery *query = [PFUser query];
     //[query whereKey:@"username" notEqualTo:self.currentUser];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {

@@ -24,6 +24,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.tableView = [[UITableView alloc]initWithFrame:self.view.frame];
+    self.navigationController.navigationBar.translucent = NO;
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -47,7 +48,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.games count];
-    //return  [[GameController sharedInstance].games count];
 }
 
 
@@ -59,7 +59,7 @@
     }
     //PFObject *game = [[GameController sharedInstance].games objectAtIndex:indexPath.row];
     PFObject *game = [self.games objectAtIndex:indexPath.row];
-    cell.textLabel.text = game[@"playerOneName"];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@:%@ vs %@:%@", game[@"playerOneName"],game[@"playerOneScore"], game[@"playerTwoName"], game[@"playerTwoScore"]];
     return cell;
 }
 

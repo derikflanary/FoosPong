@@ -79,15 +79,10 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     
     [self presentViewController:saveAlert animated:YES completion:nil];
 
-    
-
 }
 
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-//    self.playerOneScore = [NSNumber numberWithFloat:self.playerOneStepper.value];
-//    self.playerTwoScore = [NSNumber numberWithFloat:self.playerTwoStepper.value];
-    
 
     if (self.playerOneStepper.value == 11) {
         
