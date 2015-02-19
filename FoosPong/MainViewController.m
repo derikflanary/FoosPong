@@ -30,7 +30,7 @@
 
     PFUser *user = [PFUser currentUser];
     self.title = user[@"firstName"];
-    //[[UserController sharedInstance] updateUsers];
+    [[UserController sharedInstance] updateUsers];
     
 }
 

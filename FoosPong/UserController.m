@@ -43,7 +43,7 @@
     user[@"lastName"] = dictionary[@"lastName"];
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
-            
+            [self updateUsers];
         }else{
             NSLog(@"%@", error);
         }
@@ -56,12 +56,13 @@
         [PFUser logInWithUsernameInBackground:dictionary[@"username"] password:dictionary[@"password"]
                                         block:^(PFUser *user, NSError *error) {
                                             if (user) {
-    
+                                                [self findCurrentUser];
+                                                [self updateUsers];
+                                                
                                             } else {
                                                 NSLog(@"%@", error);// The login failed. Check error to see why.
                                             }
                                         }];
- 
 }
 
 -(void)updateUsers{

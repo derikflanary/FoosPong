@@ -42,9 +42,11 @@
     self.currentPlayers = [NSMutableArray array];
     [self.currentPlayers insertObject:self.currentUser atIndex:0];
     
+    UIBarButtonItem *addGuestButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Player" style:UIBarButtonItemStylePlain target:self action:@selector(addGuestPressed:)];
+    
     
     UIBarButtonItem * startGameButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Game" style:UIBarButtonItemStylePlain target:self action:@selector(startGame:)];
-    self.navigationItem.rightBarButtonItem = startGameButton;
+    self.navigationItem.rightBarButtonItems= @[startGameButton, addGuestButton];
     
     self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
     
@@ -73,6 +75,41 @@
     [self.navigationController pushViewController:gvc animated:YES];
     }
 }
+
+-(void)addGuestPressed:(id)sender{
+    
+    UIAlertController *addGuestAlert = [UIAlertController alertControllerWithTitle:@"Add A Guest Player" message:@"Please give the guest player a name" preferredStyle:UIAlertControllerStyleAlert];
+    [addGuestAlert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = NSLocalizedString(@"Guest's Name", @"Guest");
+        
+    }];
+    [addGuestAlert addAction:[UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UITextField *theguestName = addGuestAlert.textFields.firstObject;
+        NSString *guestName = [NSString string];
+        guestName = theguestName.text;
+        if ([guestName isEqualToString:@""]) {
+            [guestName isEqualToString:@"Guest"];
+        }
+        if ([self.currentPlayers count] < 2) {
+            PFUser *guest = [PFUser new];
+            guest.username = guestName;
+            [self.currentPlayers addObject:guest];
+            [self.tableView reloadData];
+        }else if ([self.currentPlayers count] == 2){
+            PFUser *guest = [PFUser new];
+            guest.username = guestName;
+            [self.availablePlayers insertObject:guest atIndex:0];
+            [self.tableView reloadData];
+        }
+
+    }]];
+    
+    [addGuestAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        return ;
+    }]];
+    [self presentViewController:addGuestAlert animated:YES completion:nil];
+    
+    }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -111,7 +148,7 @@
     if (!cell){
         cell = [NewGameCustomTableViewCell new];
     }
-    if (indexPath.section == 0 && indexPath.row == 0){
+    if (indexPath.section == 0){
         NSDictionary *playerDict = [self.currentPlayers objectAtIndex:indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%@", playerDict[@"username"]];
     }
@@ -131,6 +168,8 @@
     
     return YES;
 }
+
+
 
 - (NSIndexPath *)tableView:(UITableView *)tableView
 targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
@@ -172,7 +211,9 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     return UITableViewCellEditingStyleNone;
+    
 }
 
 - (BOOL)tableView:(UITableView *)tableview shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {

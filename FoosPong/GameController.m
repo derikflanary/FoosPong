@@ -39,8 +39,8 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     
     finishedGame[@"P1"] = user;
     finishedGame[@"P2"] = user2;
+    finishedGame[@"playerOneScore"] = dictionary[playerOneScoreKey];
     finishedGame[@"playerOneWin"] = dictionary[playerOneWinKey];
-    finishedGame[@"playerTwoName"] = dictionary[playerTwoKey];
     finishedGame[@"playerTwoScore"] = dictionary[playerTwoScoreKey];
     finishedGame[@"playerTwoWin"] = dictionary[playerTwoWinKey];
     
