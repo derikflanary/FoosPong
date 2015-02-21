@@ -6,15 +6,15 @@
 //  Copyright (c) 2013 App Design Vault. All rights reserved.
 //
 
-#import "LoginController4.h"
+#import "SignUpViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UserController.h"
 
-@interface LoginController4 ()
+@interface SignUpViewController ()
 
 @end
 
-@implementation LoginController4
+@implementation SignUpViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -147,7 +147,7 @@
                                  @"password": self.passwordField.text,};
     
     [[UserController sharedInstance] addUserwithDictionary:dictionary];
-    [[UserController sharedInstance] updateUsers];
+    //[[UserController sharedInstance] updateUsers];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

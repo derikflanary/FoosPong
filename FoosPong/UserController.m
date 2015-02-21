@@ -66,31 +66,32 @@
 }
 
 -(void)updateUsers{
-    
-    PFQuery *query = [PFUser query];
-    //[query whereKey:@"username" notEqualTo:self.currentUser];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            
-            self.users = objects;
-        } else {
-            
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-            
-        }
-    }];
-    
-    PFQuery *nextQuery = [PFUser query];
-    [nextQuery whereKey:@"username" notEqualTo:[PFUser currentUser].username];
-    [nextQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            
-            self.usersWithoutCurrentUser = objects;
+    if ([PFUser currentUser]) {
+        PFQuery *query = [PFUser query];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                
+                self.users = objects;
             } else {
-
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
+                
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+                
+            }
+        }];
+        
+        PFQuery *nextQuery = [PFUser query];
+        [nextQuery whereKey:@"username" notEqualTo:[PFUser currentUser].username];
+        [nextQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                
+                self.usersWithoutCurrentUser = objects;
+            } else {
+                
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
+ 
+    }
 }
 
 

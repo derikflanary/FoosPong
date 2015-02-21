@@ -72,7 +72,7 @@
     GameViewController *gvc = [GameViewController new];
     gvc.playerOne = [self.currentPlayers objectAtIndex:0];
     gvc.playerTwo = [self.currentPlayers objectAtIndex:1];
-    [self.navigationController presentViewController:gvc animated:YES completion:nil];
+    [self.navigationController pushViewController:gvc animated:YES];
     }
 }
 

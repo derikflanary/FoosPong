@@ -9,7 +9,7 @@
 #import "LogViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UserController.h"
-#import "LoginController4.h"
+#import "SignUpViewController.h"
 
 @interface LogViewController ()
 
@@ -119,7 +119,7 @@
 }
 
 -(void)openSignUp:(id)sender{
-    LoginController4 *lvc = [LoginController4 new];
+    SignUpViewController *lvc = [SignUpViewController new];
     [self.navigationController pushViewController:lvc animated:YES];
 }
 

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseLoginController.h"
 
-@interface LoginController4 : BaseLoginController
+@interface SignUpViewController : BaseLoginController
 
 @property (nonatomic, strong) UITextField * usernameField;
 
