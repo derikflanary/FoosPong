@@ -60,7 +60,7 @@
     
     //LoginController4 *signInController = [LoginController4 new];
     LogViewController *logViewController = [LogViewController new];
-    [self.navigationController pushViewController:logViewController animated:YES];
+    [self.navigationController presentViewController:logViewController animated:YES completion:nil];
 }
 
 

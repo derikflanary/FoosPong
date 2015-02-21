@@ -10,7 +10,7 @@
 
 @implementation NSString (Extensions)
 
--(NSString*)combineNames:(NSString*)firstName and:(NSString*)lastName{
++ (NSString*)combineNames:(NSString*)firstName and:(NSString*)lastName{
     
     NSString *fullName = [NSString stringWithFormat:@"%@ %@", firstName,lastName];
     return fullName;

@@ -10,6 +10,6 @@
 
 @interface NSString (Extensions)
 
--(NSString*)combineNames:(NSString*)firstName and:(NSString*)lastName;
++ (NSString*)combineNames:(NSString*)firstName and:(NSString*)lastName;
 
 @end

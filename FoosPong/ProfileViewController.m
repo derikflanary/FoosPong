@@ -10,6 +10,7 @@
 #import "UIImageView+Letters.h"
 #import "UserController.h"
 #import "NSString+Extensions.h"
+#import "UIColor+ExtraColorTools.h"
 
 @interface ProfileViewController ()
 
@@ -20,10 +21,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    //NSString *name = [UserController sharedInstance].theCurrentUser.username;
+    
     PFUser *currentUser = [PFUser currentUser];
-    NSString *fullName =  [NSString new];
-    [fullName combineNames:currentUser[@"firstName"] and:currentUser[@"lastName"]];
+    
+    NSString *fullName = [NSString combineNames:currentUser[@"firstName"] and:currentUser[@"lastName"]];
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 50, 50)];
     [imageView setImageWithString:fullName];
     // Do any additional setup after loading the view.

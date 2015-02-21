@@ -36,6 +36,7 @@
 		EE3357461A8C202600B83EC0 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357451A8C202600B83EC0 /* Accounts.framework */; };
 		EE5027C21A9654A30079DFFC /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5027C11A9654A30079DFFC /* LogViewController.m */; };
 		EE5027C81A965F1F0079DFFC /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5027C71A965F1F0079DFFC /* NSString+Extensions.m */; };
+		EE5027CB1A98ED310079DFFC /* UIColor+ExtraColorTools.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5027CA1A98ED310079DFFC /* UIColor+ExtraColorTools.m */; };
 		EE7A6CDC1A868402000447D2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6CDB1A868402000447D2 /* main.m */; };
 		EE7A6CDF1A868402000447D2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6CDE1A868402000447D2 /* AppDelegate.m */; };
 		EE7A6CE51A868402000447D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE7A6CE31A868402000447D2 /* Main.storyboard */; };
@@ -102,6 +103,8 @@
 		EE5027C11A9654A30079DFFC /* LogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
 		EE5027C61A965F1F0079DFFC /* NSString+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extensions.h"; sourceTree = "<group>"; };
 		EE5027C71A965F1F0079DFFC /* NSString+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extensions.m"; sourceTree = "<group>"; };
+		EE5027C91A98ED310079DFFC /* UIColor+ExtraColorTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ExtraColorTools.h"; sourceTree = "<group>"; };
+		EE5027CA1A98ED310079DFFC /* UIColor+ExtraColorTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ExtraColorTools.m"; sourceTree = "<group>"; };
 		EE7A6CD61A868401000447D2 /* FoosPong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoosPong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE7A6CDA1A868402000447D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE7A6CDB1A868402000447D2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -220,6 +223,21 @@
 			name = CustomCells;
 			sourceTree = "<group>";
 		};
+		EE5027CC1A98F1180079DFFC /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				EE2C57D51A93DFC600DA9835 /* UIImageView+Letters.m */,
+				EE5027C61A965F1F0079DFFC /* NSString+Extensions.h */,
+				EE5027C71A965F1F0079DFFC /* NSString+Extensions.m */,
+				EE5027C91A98ED310079DFFC /* UIColor+ExtraColorTools.h */,
+				EE5027CA1A98ED310079DFFC /* UIColor+ExtraColorTools.m */,
+				EE0DC00C1A8C53A1000235B3 /* FoosPong-Prefix.pch */,
+				EE7A6CE31A868402000447D2 /* Main.storyboard */,
+				EE2C57D41A93DFC600DA9835 /* UIImageView+Letters.h */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
 		EE7A6CCD1A868401000447D2 = {
 			isa = PBXGroup;
 			children = (
@@ -262,12 +280,7 @@
 				EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */,
 				EE2C57E41A93F51300DA9835 /* Controllers */,
 				EE2C57E51A93F52400DA9835 /* CustomCells */,
-				EE2C57D41A93DFC600DA9835 /* UIImageView+Letters.h */,
-				EE2C57D51A93DFC600DA9835 /* UIImageView+Letters.m */,
-				EE5027C61A965F1F0079DFFC /* NSString+Extensions.h */,
-				EE5027C71A965F1F0079DFFC /* NSString+Extensions.m */,
-				EE0DC00C1A8C53A1000235B3 /* FoosPong-Prefix.pch */,
-				EE7A6CE31A868402000447D2 /* Main.storyboard */,
+				EE5027CC1A98F1180079DFFC /* Other */,
 				EE33572B1A8C1C4700B83EC0 /* Parse.framework */,
 				EE3357291A8C1C2A00B83EC0 /* Bolts.framework */,
 				EE7A6CE61A868402000447D2 /* Images.xcassets */,
@@ -454,6 +467,7 @@
 				EE5027C81A965F1F0079DFFC /* NSString+Extensions.m in Sources */,
 				EE7A6D0A1A869CD4000447D2 /* HistoryViewController.m in Sources */,
 				EE2C57E21A93F12300DA9835 /* LoginController4.m in Sources */,
+				EE5027CB1A98ED310079DFFC /* UIColor+ExtraColorTools.m in Sources */,
 				EE5027C21A9654A30079DFFC /* LogViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
