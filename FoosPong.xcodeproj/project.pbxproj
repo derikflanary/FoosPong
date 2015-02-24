@@ -16,6 +16,7 @@
 		EE1A557E1A9CFB3000E6981E /* GroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A557D1A9CFB3000E6981E /* GroupsViewController.m */; };
 		EE1A55811A9CFB4A00E6981E /* CurrentGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A55801A9CFB4A00E6981E /* CurrentGroupViewController.m */; };
 		EE1A55851A9CFBB500E6981E /* GroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A55841A9CFBB500E6981E /* GroupController.m */; };
+		EE1A55881A9D217700E6981E /* PersonalNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A55871A9D217700E6981E /* PersonalNotificationsViewController.m */; };
 		EE2C57D61A93DFC600DA9835 /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57D51A93DFC600DA9835 /* UIImageView+Letters.m */; };
 		EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57DE1A93ECD200DA9835 /* BaseLoginController.m */; };
 		EE2C57E21A93F12300DA9835 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57E11A93F12300DA9835 /* SignUpViewController.m */; };
@@ -80,6 +81,8 @@
 		EE1A55801A9CFB4A00E6981E /* CurrentGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentGroupViewController.m; sourceTree = "<group>"; };
 		EE1A55831A9CFBB500E6981E /* GroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupController.h; sourceTree = "<group>"; };
 		EE1A55841A9CFBB500E6981E /* GroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupController.m; sourceTree = "<group>"; };
+		EE1A55861A9D217700E6981E /* PersonalNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalNotificationsViewController.h; sourceTree = "<group>"; };
+		EE1A55871A9D217700E6981E /* PersonalNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalNotificationsViewController.m; sourceTree = "<group>"; };
 		EE2C57D41A93DFC600DA9835 /* UIImageView+Letters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Letters.h"; sourceTree = "<group>"; };
 		EE2C57D51A93DFC600DA9835 /* UIImageView+Letters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Letters.m"; sourceTree = "<group>"; };
 		EE2C57DD1A93ECD200DA9835 /* BaseLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseLoginController.h; sourceTree = "<group>"; };
@@ -203,6 +206,8 @@
 				EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */,
 				EE7A6D081A869CD4000447D2 /* HistoryViewController.h */,
 				EE7A6D091A869CD4000447D2 /* HistoryViewController.m */,
+				EE1A55861A9D217700E6981E /* PersonalNotificationsViewController.h */,
+				EE1A55871A9D217700E6981E /* PersonalNotificationsViewController.m */,
 			);
 			name = "Personal Profile";
 			sourceTree = "<group>";
@@ -486,6 +491,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */,
+				EE1A55881A9D217700E6981E /* PersonalNotificationsViewController.m in Sources */,
 				EE1A55851A9CFBB500E6981E /* GroupController.m in Sources */,
 				302E41C41A86958E005F1184 /* HomeViewController.m in Sources */,
 				EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */,

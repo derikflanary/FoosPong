@@ -28,13 +28,23 @@
     return sharedInstance;
 }
 
--(void)findCurrentUser{
+- (void)findCurrentUser{
     
     PFUser *currentUser = [PFUser currentUser];
     self.theCurrentUser = currentUser;
 }
 
--(void)addUserwithDictionary:(NSDictionary*)dictionary{
+- (void)addGuestUser{
+    [PFAnonymousUtils logInWithBlock:^(PFUser *user, NSError *error) {
+        if (error) {
+            NSLog(@"Anonymous login failed.");
+        } else {
+            NSLog(@"Anonymous user logged in.");
+        }
+    }];
+}
+
+- (void)addUserwithDictionary:(NSDictionary*)dictionary{
     
     PFUser *user = [PFUser user];
     user.username = dictionary[@"username"];
@@ -51,7 +61,7 @@
     
 }
 
--(void)loginUser:(NSDictionary*)dictionary{
+- (void)loginUser:(NSDictionary*)dictionary{
     
         [PFUser logInWithUsernameInBackground:dictionary[@"username"] password:dictionary[@"password"]
                                         block:^(PFUser *user, NSError *error) {
@@ -65,7 +75,7 @@
                                         }];
 }
 
--(void)updateUsers{
+- (void)updateUsers{
     if ([PFUser currentUser]) {
         PFQuery *query = [PFUser query];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -95,7 +105,7 @@
 }
 
 
--(NSArray*)usersWithoutCurrentUser:(PFUser*)currentUser{
+- (NSArray*)usersWithoutCurrentUser:(PFUser*)currentUser{
 PFQuery *query = [PFUser query];
 [query whereKey:@"username" notEqualTo:currentUser.username];
 [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -118,12 +128,12 @@ PFQuery *query = [PFUser query];
     return self.usersWithoutCurrentUser;
 }
 
--(void)removeUser:(PFUser *)user{
+- (void)removeUser:(PFUser *)user{
     
     
 }
 
--(void)saveUsers{
+- (void)saveUsers{
     
 }
 

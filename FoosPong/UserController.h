@@ -12,17 +12,19 @@
 
 + (UserController *)sharedInstance;
     
--(void)addUserwithDictionary:(NSDictionary*)dictionary;
+- (void)addUserwithDictionary:(NSDictionary*)dictionary;
 
--(void)findCurrentUser;
+- (void)findCurrentUser;
 
--(void)removeUser:(PFUser *)user;
+- (void)removeUser:(PFUser *)user;
 
--(void)updateUsers;
+- (void)updateUsers;
 
--(NSArray*)usersWithoutCurrentUser:(PFUser*)currentUser;
+- (NSArray*)usersWithoutCurrentUser:(PFUser*)currentUser;
 
--(void)loginUser:(NSDictionary*)dictionary;
+- (void)loginUser:(NSDictionary*)dictionary;
+
+- (void)addGuestUser;
     
 @property (nonatomic, strong, readonly)NSArray *users;
 @property (nonatomic, strong, readonly)NSArray *usersWithoutCurrentUser;

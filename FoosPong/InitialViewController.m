@@ -20,6 +20,9 @@
 
 @property (nonatomic, strong) UITabBarController *tabBarController;
 @property (nonatomic, strong) UIButton *loginButton;
+@property (nonatomic, strong) UIButton *guestButton;
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) HomeViewController *hvc;
 
 @end
 
@@ -27,11 +30,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
-    PFUser *user = [PFUser currentUser];
-    self.title = user[@"firstName"];
-   //[[UserController sharedInstance] updateUsers];
-    
 }
 
 - (void)viewDidLoad {
@@ -43,43 +41,48 @@
     UIColor* darkColor = [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:1.0f];
     NSString* fontName = @"Avenir-Book";
     NSString* boldFontName = @"Avenir-Black";
-//    
-//    UIBarButtonItem *otherLogIn = [[UIBarButtonItem alloc] initWithTitle:@"Log In" style:UIBarButtonItemStylePlain target:self action:@selector(openLogIn:)];
-//    self.navigationItem.rightBarButtonItem = otherLogIn;
-//    
-//    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:self action:nil];
-//    self.navigationItem.backBarButtonItem = backButton;
+    
+    self.imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"FoosBallButton"]];
+    self.imageView.frame = self.view.frame;
+    [self.view addSubview:self.imageView];
+
     self.loginButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 383, 320, 62)];
     self.loginButton.backgroundColor = darkColor;
     self.loginButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
-    [self.loginButton setTitle:@"LOG IN" forState:UIControlStateNormal];
+    [self.loginButton setTitle:@"Log In" forState:UIControlStateNormal];
     [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.loginButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.loginButton addTarget:self action:@selector(loginPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.loginButton];
     
+    self.guestButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 300, 320, 62)];
+    self.guestButton.backgroundColor = mainColor;
+    self.guestButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
+    [self.guestButton setTitle:@"Play As Guest" forState:UIControlStateNormal];
+    [self.guestButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.guestButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.guestButton addTarget:self action:@selector(guestPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.guestButton];
+    
     self.tabBarController = [UITabBarController new];
-    HomeViewController *ppvc = [HomeViewController new];
-    ppvc.tabBarItem.title = @"Main";
+    self.hvc = [HomeViewController new];
+    self.hvc.tabBarItem.title = @"Main";
     GroupsViewController *gvc = [GroupsViewController new];
     gvc.tabBarItem.title = @"Group";
     ProfileViewController *pvc = [ProfileViewController new];
     pvc.tabBarItem.title = @"Profile";
-    self.tabBarController.viewControllers = @[ppvc, gvc, pvc];
-    
-}
+    self.tabBarController.viewControllers = @[self.hvc, gvc, pvc];
 
--(void)openLogIn:(id)selector{
-    
-    //LoginController4 *signInController = [LoginController4 new];
-    LogViewController *logViewController = [LogViewController new];
-    [self.navigationController pushViewController:logViewController animated:YES];
 }
+//-(void)openLogIn:(id)selector{
+//    
+//    //LoginController4 *signInController = [LoginController4 new];
+//    LogViewController *logViewController = [LogViewController new];
+//    [self.navigationController pushViewController:logViewController animated:YES];
+//}
 
 
 -(void)loginPressed:(id)selector{
-    
-    
     
     PFLogInViewController *logInController = [[PFLogInViewController alloc] init];
     logInController.delegate = self;
@@ -95,7 +98,17 @@
         [[UserController sharedInstance] updateUsers];
 
     }];
-    [self.navigationController presentViewController:self.tabBarController animated:YES completion:nil];
+    [self.navigationController showViewController:self.tabBarController sender:self];
+}
+
+-(void)guestPressed:(id)sender{
+    [[UserController sharedInstance] addGuestUser];
+
+    self.hvc.isGuest = YES;
+    [self.navigationController pushViewController:self.tabBarController animated:YES];
+       
+    
+    
 }
 
 

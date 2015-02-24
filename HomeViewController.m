@@ -10,6 +10,7 @@
 #import "HistoryViewController.h"
 #import "ChoosePlayersViewController.h"
 #import "NewGameCustomTableViewCell.h"
+#import "UserController.h"
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -19,6 +20,17 @@
 @end
 
 @implementation HomeViewController
+
+-(void)viewWillAppear:(BOOL)animated{
+    if (self.isGuest) {
+        self.title = @"Guest";
+        
+    }else{
+        PFUser *user = [PFUser currentUser];
+        self.title = user[@"firstName"];
+        [[UserController sharedInstance] updateUsers];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -67,7 +79,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-        return 200;
+        return 150;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
