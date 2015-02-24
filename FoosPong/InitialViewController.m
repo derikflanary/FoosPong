@@ -19,6 +19,7 @@
 @interface InitialViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
 @property (nonatomic, strong) UITabBarController *tabBarController;
+@property (nonatomic, strong) UIButton *loginButton;
 
 @end
 
@@ -29,21 +30,33 @@
 
     PFUser *user = [PFUser currentUser];
     self.title = user[@"firstName"];
-   [[UserController sharedInstance] updateUsers];
+   //[[UserController sharedInstance] updateUsers];
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIBarButtonItem * logInButton = [[UIBarButtonItem alloc] initWithTitle:@"Log In" style:UIBarButtonItemStylePlain target:self action:@selector(logInPressed:)];
-    self.navigationItem.rightBarButtonItem = logInButton;
+//    UIBarButtonItem * logInButton = [[UIBarButtonItem alloc] initWithTitle:@"Log In" style:UIBarButtonItemStylePlain target:self action:@selector(logInPressed:)];
+//    self.navigationItem.rightBarButtonItem = logInButton;
+    
+    UIColor* mainColor = [UIColor colorWithRed:189.0/255 green:242.0/255 blue:139.0/255 alpha:1.0f];
+    UIColor* darkColor = [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:1.0f];
+    NSString* fontName = @"Avenir-Book";
+    NSString* boldFontName = @"Avenir-Black";
 //    
 //    UIBarButtonItem *otherLogIn = [[UIBarButtonItem alloc] initWithTitle:@"Log In" style:UIBarButtonItemStylePlain target:self action:@selector(openLogIn:)];
 //    self.navigationItem.rightBarButtonItem = otherLogIn;
 //    
 //    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:self action:nil];
 //    self.navigationItem.backBarButtonItem = backButton;
-    
+    self.loginButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 383, 320, 62)];
+    self.loginButton.backgroundColor = darkColor;
+    self.loginButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
+    [self.loginButton setTitle:@"LOG IN" forState:UIControlStateNormal];
+    [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.loginButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.loginButton addTarget:self action:@selector(loginPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.loginButton];
     
     self.tabBarController = [UITabBarController new];
     HomeViewController *ppvc = [HomeViewController new];
@@ -64,7 +77,7 @@
 }
 
 
--(void)logInPressed:(id)selector{
+-(void)loginPressed:(id)selector{
     
     
     
@@ -82,6 +95,7 @@
         [[UserController sharedInstance] updateUsers];
 
     }];
+    [self.navigationController presentViewController:self.tabBarController animated:YES completion:nil];
 }
 
 
@@ -89,15 +103,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)pingPongPressed:(id)sender {
-    
-    
-    //PingPongViewController * pingPongController = [PingPongViewController new];
-    [self.navigationController pushViewController:self.tabBarController animated:YES];
-}
-- (IBAction)foosBallPressed:(id)sender {
-}
-
 /*
 #pragma mark - Navigation
 
