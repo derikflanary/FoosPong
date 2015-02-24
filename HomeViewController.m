@@ -6,19 +6,19 @@
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "PingPongViewController.h"
+#import "HomeViewController.h"
 #import "HistoryViewController.h"
 #import "ChoosePlayersViewController.h"
 #import "NewGameCustomTableViewCell.h"
 
-@interface PingPongViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *pingPongTableView;
 
 
 @end
 
-@implementation PingPongViewController
+@implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,7 +40,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  2;
+    return  3;
     //return [self.projects count];
 }
 
@@ -51,20 +51,23 @@
     if (!cell){
         cell = [NewGameCustomTableViewCell new];
     }
-       cell.textLabel.text = @"New Game";
+    if (indexPath.row == 0) {
+        cell.textLabel.text = @"Create A New Game";
+    }else if (indexPath.row == 1){
+        cell.textLabel.text = @"Add A Game";
+    }else{
+        cell.textLabel.text = @"Continue Saved Game";
+    }
+
     return cell;
     
 }
 
 #pragma mark - TableView Delegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 0){
-        return 400;
-    }else{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
         return 200;
-    }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

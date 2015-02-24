@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "MainViewController.h"
-#import "PingPongViewController.h"
-#import "HistoryViewController.h"
+#import "InitialViewController.h"
+#import "HomeViewController.h"
+#import "GroupsViewController.h"
 #import "ProfileViewController.h"
 #import "UserController.h"
 #import <Parse/Parse.h>
@@ -16,13 +16,13 @@
 #import "SignUpViewController.h"
 #import "LogViewController.h"
 
-@interface MainViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface InitialViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
 @property (nonatomic, strong) UITabBarController *tabBarController;
 
 @end
 
-@implementation MainViewController
+@implementation InitialViewController
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -44,14 +44,15 @@
 //    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:self action:nil];
 //    self.navigationItem.backBarButtonItem = backButton;
     
+    
     self.tabBarController = [UITabBarController new];
-    PingPongViewController *ppvc = [PingPongViewController new];
+    HomeViewController *ppvc = [HomeViewController new];
     ppvc.tabBarItem.title = @"Main";
-    HistoryViewController *hvc = [HistoryViewController new];
-    hvc.tabBarItem.title = @"History";
+    GroupsViewController *gvc = [GroupsViewController new];
+    gvc.tabBarItem.title = @"Group";
     ProfileViewController *pvc = [ProfileViewController new];
     pvc.tabBarItem.title = @"Profile";
-    self.tabBarController.viewControllers = @[ppvc, hvc, pvc];
+    self.tabBarController.viewControllers = @[ppvc, gvc, pvc];
     
 }
 

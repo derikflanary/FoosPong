@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "MainViewController.h"
+#import "InitialViewController.h"
 #import <Parse/Parse.h>
 
 

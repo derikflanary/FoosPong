@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PingPongViewController : UIViewController
+@interface HomeViewController : UIViewController
 
 @end

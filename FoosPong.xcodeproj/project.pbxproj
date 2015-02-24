@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		302E41C41A86958E005F1184 /* PingPongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302E41C31A86958E005F1184 /* PingPongViewController.m */; };
+		302E41C41A86958E005F1184 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302E41C31A86958E005F1184 /* HomeViewController.m */; };
 		302E41C71A86A195005F1184 /* ChoosePlayersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302E41C61A86A195005F1184 /* ChoosePlayersViewController.m */; };
 		7F7C9D7F76CC544EEC3A87D2 /* libPods-FoosPong.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B77DFF6D64A66AF6288C73B1 /* libPods-FoosPong.a */; };
 		EE0DC00B1A8C4604000235B3 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE0DC00A1A8C4604000235B3 /* ParseUI.framework */; };
 		EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC00E1A8D9456000235B3 /* UserController.m */; };
 		EE0DC0121A8D96D8000235B3 /* GameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC0111A8D96D8000235B3 /* GameController.m */; };
+		EE1A557E1A9CFB3000E6981E /* GroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A557D1A9CFB3000E6981E /* GroupsViewController.m */; };
+		EE1A55811A9CFB4A00E6981E /* CurrentGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A55801A9CFB4A00E6981E /* CurrentGroupViewController.m */; };
+		EE1A55851A9CFBB500E6981E /* GroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A55841A9CFBB500E6981E /* GroupController.m */; };
 		EE2C57D61A93DFC600DA9835 /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57D51A93DFC600DA9835 /* UIImageView+Letters.m */; };
 		EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57DE1A93ECD200DA9835 /* BaseLoginController.m */; };
 		EE2C57E21A93F12300DA9835 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57E11A93F12300DA9835 /* SignUpViewController.m */; };
@@ -42,7 +45,7 @@
 		EE7A6CE71A868402000447D2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE7A6CE61A868402000447D2 /* Images.xcassets */; };
 		EE7A6CEA1A868402000447D2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE7A6CE81A868402000447D2 /* LaunchScreen.xib */; };
 		EE7A6CF61A868402000447D2 /* FoosPongTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6CF51A868402000447D2 /* FoosPongTests.m */; };
-		EE7A6D041A869169000447D2 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D031A869169000447D2 /* MainViewController.m */; };
+		EE7A6D041A869169000447D2 /* InitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D031A869169000447D2 /* InitialViewController.m */; };
 		EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */; };
 		EE7A6D0A1A869CD4000447D2 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D091A869CD4000447D2 /* HistoryViewController.m */; };
 /* End PBXBuildFile section */
@@ -58,8 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		302E41C21A86958E005F1184 /* PingPongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PingPongViewController.h; path = ../PingPongViewController.h; sourceTree = "<group>"; };
-		302E41C31A86958E005F1184 /* PingPongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PingPongViewController.m; path = ../PingPongViewController.m; sourceTree = "<group>"; };
+		302E41C21A86958E005F1184 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = ../HomeViewController.h; sourceTree = "<group>"; };
+		302E41C31A86958E005F1184 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = ../HomeViewController.m; sourceTree = "<group>"; };
 		302E41C51A86A195005F1184 /* ChoosePlayersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePlayersViewController.h; sourceTree = "<group>"; };
 		302E41C61A86A195005F1184 /* ChoosePlayersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePlayersViewController.m; sourceTree = "<group>"; };
 		6775E9090F7D5300C9E7454A /* Pods-FoosPong.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoosPong.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FoosPong/Pods-FoosPong.debug.xcconfig"; sourceTree = "<group>"; };
@@ -71,6 +74,12 @@
 		EE0DC00E1A8D9456000235B3 /* UserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserController.m; sourceTree = "<group>"; };
 		EE0DC0101A8D96D8000235B3 /* GameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameController.h; sourceTree = "<group>"; };
 		EE0DC0111A8D96D8000235B3 /* GameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameController.m; sourceTree = "<group>"; };
+		EE1A557C1A9CFB3000E6981E /* GroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupsViewController.h; sourceTree = "<group>"; };
+		EE1A557D1A9CFB3000E6981E /* GroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupsViewController.m; sourceTree = "<group>"; };
+		EE1A557F1A9CFB4A00E6981E /* CurrentGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentGroupViewController.h; sourceTree = "<group>"; };
+		EE1A55801A9CFB4A00E6981E /* CurrentGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentGroupViewController.m; sourceTree = "<group>"; };
+		EE1A55831A9CFBB500E6981E /* GroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupController.h; sourceTree = "<group>"; };
+		EE1A55841A9CFBB500E6981E /* GroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupController.m; sourceTree = "<group>"; };
 		EE2C57D41A93DFC600DA9835 /* UIImageView+Letters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Letters.h"; sourceTree = "<group>"; };
 		EE2C57D51A93DFC600DA9835 /* UIImageView+Letters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Letters.m"; sourceTree = "<group>"; };
 		EE2C57DD1A93ECD200DA9835 /* BaseLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseLoginController.h; sourceTree = "<group>"; };
@@ -113,8 +122,8 @@
 		EE7A6CEF1A868402000447D2 /* FoosPongTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoosPongTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE7A6CF41A868402000447D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE7A6CF51A868402000447D2 /* FoosPongTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoosPongTests.m; sourceTree = "<group>"; };
-		EE7A6D021A869169000447D2 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		EE7A6D031A869169000447D2 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		EE7A6D021A869169000447D2 /* InitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialViewController.h; sourceTree = "<group>"; };
+		EE7A6D031A869169000447D2 /* InitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialViewController.m; sourceTree = "<group>"; };
 		EE7A6D051A869970000447D2 /* NewGameCustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewGameCustomTableViewCell.h; sourceTree = "<group>"; };
 		EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGameCustomTableViewCell.m; sourceTree = "<group>"; };
 		EE7A6D081A869CD4000447D2 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
@@ -187,7 +196,42 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EE2C57E31A93F2BF00DA9835 /* Flat Templates */ = {
+		EE1A557A1A9CFA3E00E6981E /* Personal Profile */ = {
+			isa = PBXGroup;
+			children = (
+				EE3356EC1A895F0600B83EC0 /* ProfileViewController.h */,
+				EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */,
+				EE7A6D081A869CD4000447D2 /* HistoryViewController.h */,
+				EE7A6D091A869CD4000447D2 /* HistoryViewController.m */,
+			);
+			name = "Personal Profile";
+			sourceTree = "<group>";
+		};
+		EE1A557B1A9CFAE000E6981E /* Scorekeeping */ = {
+			isa = PBXGroup;
+			children = (
+				302E41C21A86958E005F1184 /* HomeViewController.h */,
+				302E41C31A86958E005F1184 /* HomeViewController.m */,
+				302E41C51A86A195005F1184 /* ChoosePlayersViewController.h */,
+				302E41C61A86A195005F1184 /* ChoosePlayersViewController.m */,
+				EE3356EF1A89610B00B83EC0 /* GameViewController.h */,
+				EE3356F01A89610B00B83EC0 /* GameViewController.m */,
+			);
+			name = Scorekeeping;
+			sourceTree = "<group>";
+		};
+		EE1A55821A9CFB9000E6981E /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				EE1A557C1A9CFB3000E6981E /* GroupsViewController.h */,
+				EE1A557D1A9CFB3000E6981E /* GroupsViewController.m */,
+				EE1A557F1A9CFB4A00E6981E /* CurrentGroupViewController.h */,
+				EE1A55801A9CFB4A00E6981E /* CurrentGroupViewController.m */,
+			);
+			name = Groups;
+			sourceTree = "<group>";
+		};
+		EE2C57E31A93F2BF00DA9835 /* Logging in */ = {
 			isa = PBXGroup;
 			children = (
 				EE2C57DD1A93ECD200DA9835 /* BaseLoginController.h */,
@@ -197,7 +241,7 @@
 				EE5027C01A9654A30079DFFC /* LogViewController.h */,
 				EE5027C11A9654A30079DFFC /* LogViewController.m */,
 			);
-			name = "Flat Templates";
+			name = "Logging in";
 			sourceTree = "<group>";
 		};
 		EE2C57E41A93F51300DA9835 /* Controllers */ = {
@@ -207,6 +251,8 @@
 				EE0DC00E1A8D9456000235B3 /* UserController.m */,
 				EE0DC0101A8D96D8000235B3 /* GameController.h */,
 				EE0DC0111A8D96D8000235B3 /* GameController.m */,
+				EE1A55831A9CFBB500E6981E /* GroupController.h */,
+				EE1A55841A9CFBB500E6981E /* GroupController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -258,21 +304,14 @@
 		EE7A6CD81A868401000447D2 /* FoosPong */ = {
 			isa = PBXGroup;
 			children = (
-				EE2C57E31A93F2BF00DA9835 /* Flat Templates */,
+				EE2C57E31A93F2BF00DA9835 /* Logging in */,
 				EE7A6CDD1A868402000447D2 /* AppDelegate.h */,
 				EE7A6CDE1A868402000447D2 /* AppDelegate.m */,
-				EE7A6D021A869169000447D2 /* MainViewController.h */,
-				EE7A6D031A869169000447D2 /* MainViewController.m */,
-				302E41C21A86958E005F1184 /* PingPongViewController.h */,
-				302E41C31A86958E005F1184 /* PingPongViewController.m */,
-				302E41C51A86A195005F1184 /* ChoosePlayersViewController.h */,
-				302E41C61A86A195005F1184 /* ChoosePlayersViewController.m */,
-				EE3356EF1A89610B00B83EC0 /* GameViewController.h */,
-				EE3356F01A89610B00B83EC0 /* GameViewController.m */,
-				EE7A6D081A869CD4000447D2 /* HistoryViewController.h */,
-				EE7A6D091A869CD4000447D2 /* HistoryViewController.m */,
-				EE3356EC1A895F0600B83EC0 /* ProfileViewController.h */,
-				EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */,
+				EE7A6D021A869169000447D2 /* InitialViewController.h */,
+				EE7A6D031A869169000447D2 /* InitialViewController.m */,
+				EE1A557B1A9CFAE000E6981E /* Scorekeeping */,
+				EE1A557A1A9CFA3E00E6981E /* Personal Profile */,
+				EE1A55821A9CFB9000E6981E /* Groups */,
 				EE2C57E41A93F51300DA9835 /* Controllers */,
 				EE2C57E51A93F52400DA9835 /* CustomCells */,
 				EE5027CC1A98F1180079DFFC /* Other */,
@@ -447,13 +486,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */,
-				302E41C41A86958E005F1184 /* PingPongViewController.m in Sources */,
+				EE1A55851A9CFBB500E6981E /* GroupController.m in Sources */,
+				302E41C41A86958E005F1184 /* HomeViewController.m in Sources */,
 				EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */,
 				EE3356EE1A895F0600B83EC0 /* ProfileViewController.m in Sources */,
+				EE1A557E1A9CFB3000E6981E /* GroupsViewController.m in Sources */,
 				EE0DC0121A8D96D8000235B3 /* GameController.m in Sources */,
 				EE7A6CDF1A868402000447D2 /* AppDelegate.m in Sources */,
 				EE3356F11A89610B00B83EC0 /* GameViewController.m in Sources */,
-				EE7A6D041A869169000447D2 /* MainViewController.m in Sources */,
+				EE7A6D041A869169000447D2 /* InitialViewController.m in Sources */,
 				EE7A6CDC1A868402000447D2 /* main.m in Sources */,
 				EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */,
 				302E41C71A86A195005F1184 /* ChoosePlayersViewController.m in Sources */,
@@ -462,6 +503,7 @@
 				EE7A6D0A1A869CD4000447D2 /* HistoryViewController.m in Sources */,
 				EE2C57E21A93F12300DA9835 /* SignUpViewController.m in Sources */,
 				EE5027CB1A98ED310079DFFC /* UIColor+ExtraColorTools.m in Sources */,
+				EE1A55811A9CFB4A00E6981E /* CurrentGroupViewController.m in Sources */,
 				EE5027C21A9654A30079DFFC /* LogViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
