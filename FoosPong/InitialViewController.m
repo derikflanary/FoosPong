@@ -40,7 +40,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIBarButtonItem * sideBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"17"] style:UIBarButtonItemStylePlain target:self action:@selector(sideBarButtonPressed:)];
-    self.navigationItem.leftBarButtonItem = sideBarButton;
+    self.navigationItem.rightBarButtonItem = sideBarButton;
+    self.navigationItem.hidesBackButton = YES;
+    
+    UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipedLeft:)];
+    leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:leftSwipe];
+    
     
     UIColor* mainColor = [UIColor colorWithRed:189.0/255 green:242.0/255 blue:139.0/255 alpha:1.0f];
     UIColor* darkColor = [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:1.0f];
@@ -69,32 +75,40 @@
     [self.guestButton addTarget:self action:@selector(guestPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.guestButton];
     
-    //self.tabBarController = [UITabBarController new];
-    self.hvc = [HomeViewController new];
-    //self.hvc.tabBarItem.title = @"Main";
-    self.gvc = [GroupsViewController new];
-    //gvc.tabBarItem.title = @"Group";
-    self.pvc = [ProfileViewController new];
-    //self.pvc.tabBarItem.title = @"Profile";
-    //self.tabBarController.viewControllers = @[self.hvc, gvc, self.pvc];
+//    //self.tabBarController = [UITabBarController new];
+//    self.hvc = [HomeViewController new];
+//    //self.hvc.tabBarItem.title = @"Main";
+//    self.gvc = [GroupsViewController new];
+//    //gvc.tabBarItem.title = @"Group";
+//    self.pvc = [ProfileViewController new];
+//    //self.pvc.tabBarItem.title = @"Profile";
+//    //self.tabBarController.viewControllers = @[self.hvc, gvc, self.pvc];
     
-    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
+    
     
 }
 
+#pragma mark - SideBar
+
 - (void)sideBarButtonPressed:(id)sender{
+    
+    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:0];
+    
     NSArray *barImages = @[ [UIImage imageNamed:@"68"],
                             [UIImage imageNamed:@"85"],
                             [UIImage imageNamed:@"74"],
                             [UIImage imageNamed:@"70"],
                             [UIImage imageNamed:@"101"]];
     NSArray *colors = @[
-                        [UIColor colorWithRed:240/255.f green:159/255.f blue:254/255.f alpha:1],
-                        [UIColor colorWithRed:255/255.f green:137/255.f blue:167/255.f alpha:1],
-                        [UIColor colorWithRed:126/255.f green:242/255.f blue:195/255.f alpha:1],
-                        [UIColor colorWithRed:119/255.f green:152/255.f blue:255/255.f alpha:1],
-                        [UIColor colorWithRed:240/255.f green:159/255.f blue:254/255.f alpha:1]];
-   
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f]];
+
+    self.hvc = [HomeViewController new];
+    self.gvc = [GroupsViewController new];
+    self.pvc = [ProfileViewController new];
     
     self.sideBar = [[RNFrostedSidebar alloc] initWithImages:barImages selectedIndices:self.optionIndices borderColors:colors];
      self.sideBar.delegate = self;
@@ -129,16 +143,33 @@
             }
         }];
     }
-
-
 }
-//-(void)openLogIn:(id)selector{
-//    
-//    //LoginController4 *signInController = [LoginController4 new];
-//    LogViewController *logViewController = [LogViewController new];
-//    [self.navigationController pushViewController:logViewController animated:YES];
-//}
 
+- (void)swipedLeft:(id)sender{
+    NSArray *barImages = @[ [UIImage imageNamed:@"68"],
+                            [UIImage imageNamed:@"85"],
+                            [UIImage imageNamed:@"74"],
+                            [UIImage imageNamed:@"70"],
+                            [UIImage imageNamed:@"101"]];
+    NSArray *colors = @[
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f]];
+    
+    self.hvc = [HomeViewController new];
+    self.gvc = [GroupsViewController new];
+    self.pvc = [ProfileViewController new];
+    
+    self.sideBar = [[RNFrostedSidebar alloc] initWithImages:barImages selectedIndices:self.optionIndices borderColors:colors];
+    self.sideBar.delegate = self;
+    [self.sideBar showAnimated:YES];
+    [self.sideBar showAnimated:YES];
+}
+
+
+#pragma mark - Login Buttons
 
 -(void)loginPressed:(id)selector{
     
@@ -161,9 +192,7 @@
     [[UserController sharedInstance] addGuestUser];
 
     self.hvc.isGuest = YES;
-    [self.navigationController pushViewController:self.tabBarController animated:YES];
-       
-    
+    [self.navigationController pushViewController:self.hvc animated:YES];
     
 }
 

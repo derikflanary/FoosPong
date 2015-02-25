@@ -267,14 +267,14 @@ static RNFrostedSidebar *rn_frostedMenu;
         _contentView.showsHorizontalScrollIndicator = NO;
         _contentView.showsVerticalScrollIndicator = NO;
         
-        _width = 150;
+        _width = 125;
         _animationDuration = 0.25f;
         _itemSize = CGSizeMake(_width/2, _width/2);
         _itemViews = [NSMutableArray array];
-        _tintColor = [UIColor colorWithWhite:0.2 alpha:0.73];
+        _tintColor = [UIColor colorWithWhite:.5 alpha:.7];
         _borderWidth = 2;
-        _itemBackgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.25];
-        
+        _itemBackgroundColor = [UIColor colorWithRed:189.0/255 green:242.0/255 blue:139.0/255 alpha:.7f];
+        _showFromRight = YES;
         if (colors) {
             NSAssert([colors count] == [images count], @"Border color count must match images count. If you want a blank border, use [UIColor clearColor].");
         }
