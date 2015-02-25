@@ -24,6 +24,8 @@
 @property (nonatomic, strong) UIButton *guestButton;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) HomeViewController *hvc;
+@property (nonatomic, strong) ProfileViewController *pvc;
+@property (nonatomic, strong) GroupsViewController *gvc;
 @property (nonatomic, strong) RNFrostedSidebar *sideBar;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
@@ -67,19 +69,17 @@
     [self.guestButton addTarget:self action:@selector(guestPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.guestButton];
     
-    self.tabBarController = [UITabBarController new];
+    //self.tabBarController = [UITabBarController new];
     self.hvc = [HomeViewController new];
-    self.hvc.tabBarItem.title = @"Main";
-    GroupsViewController *gvc = [GroupsViewController new];
-    gvc.tabBarItem.title = @"Group";
-    ProfileViewController *pvc = [ProfileViewController new];
-    pvc.tabBarItem.title = @"Profile";
-    self.tabBarController.viewControllers = @[self.hvc, gvc, pvc];
+    //self.hvc.tabBarItem.title = @"Main";
+    self.gvc = [GroupsViewController new];
+    //gvc.tabBarItem.title = @"Group";
+    self.pvc = [ProfileViewController new];
+    //self.pvc.tabBarItem.title = @"Profile";
+    //self.tabBarController.viewControllers = @[self.hvc, gvc, self.pvc];
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
     
-    
-
 }
 
 - (void)sideBarButtonPressed:(id)sender{
@@ -94,22 +94,43 @@
                         [UIColor colorWithRed:126/255.f green:242/255.f blue:195/255.f alpha:1],
                         [UIColor colorWithRed:119/255.f green:152/255.f blue:255/255.f alpha:1],
                         [UIColor colorWithRed:240/255.f green:159/255.f blue:254/255.f alpha:1]];
+   
     
     self.sideBar = [[RNFrostedSidebar alloc] initWithImages:barImages selectedIndices:self.optionIndices borderColors:colors];
+     self.sideBar.delegate = self;
     [self.sideBar showAnimated:YES];
     
 }
 
 - (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index{
+   
     if (index == 1) {
-        
+        [sidebar dismissAnimated:YES];
         [sidebar dismissAnimated:YES completion:^(BOOL finished) {
             if (finished) {
-                [self.navigationController pushViewController:self.tabBarController animated:YES];
+                [self.navigationController pushViewController:self.hvc animated:YES];
             }
-            
         }];
     }
+    
+    if (index == 2) {
+        [sidebar dismissAnimated:YES];
+        [sidebar dismissAnimated:YES completion:^(BOOL finished) {
+            if (finished) {
+                [self.navigationController pushViewController:self.pvc animated:YES];
+            }
+        }];
+    }
+    if (index == 3) {
+        [sidebar dismissAnimated:YES];
+        [sidebar dismissAnimated:YES completion:^(BOOL finished) {
+            if (finished) {
+                [self.navigationController pushViewController:self.gvc animated:YES];
+            }
+        }];
+    }
+
+
 }
 //-(void)openLogIn:(id)selector{
 //    
@@ -127,15 +148,13 @@
     
 }
 
-
-
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user{
     [logInController dismissViewControllerAnimated:YES completion:^{
         [[UserController sharedInstance] findCurrentUser];
         [[UserController sharedInstance] updateUsers];
 
     }];
-    [self.navigationController showViewController:self.tabBarController sender:self];
+    //[self.navigationController showViewController:self.tabBarController sender:self];
 }
 
 -(void)guestPressed:(id)sender{
