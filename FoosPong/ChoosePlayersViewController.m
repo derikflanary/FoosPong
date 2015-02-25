@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
         [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.tableView = [[UITableView alloc]initWithFrame:self.view.frame];
+    self.tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStyleGrouped];
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -56,8 +56,10 @@
     self.searchController.searchResultsUpdater = self;
     self.searchController.delegate = self;
     self.searchController.searchBar.delegate = self;
+    self.searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
     self.searchController.dimsBackgroundDuringPresentation = NO;
     
+    //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 -(void)startGame:(id)sender{
     

@@ -240,7 +240,7 @@
 
 @property (nonatomic, strong) UIScrollView *contentView;
 @property (nonatomic, strong) UIImageView *blurView;
-@property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
+@property (nonatomic, strong) UISwipeGestureRecognizer *tapGesture;
 @property (nonatomic, strong) NSArray *images;
 @property (nonatomic, strong) NSArray *borderColors;
 @property (nonatomic, strong) NSMutableArray *itemViews;
@@ -258,22 +258,22 @@ static RNFrostedSidebar *rn_frostedMenu;
 
 - (instancetype)initWithImages:(NSArray *)images selectedIndices:(NSIndexSet *)selectedIndices borderColors:(NSArray *)colors {
     if (self = [super init]) {
-        _isSingleSelect = NO;
+        _isSingleSelect = YES;
         _contentView = [[UIScrollView alloc] init];
         _contentView.alwaysBounceHorizontal = NO;
         _contentView.alwaysBounceVertical = YES;
-        _contentView.bounces = YES;
+        _contentView.bounces = NO;
         _contentView.clipsToBounds = NO;
         _contentView.showsHorizontalScrollIndicator = NO;
         _contentView.showsVerticalScrollIndicator = NO;
         
-        _width = 125;
+        _width = 100;
         _animationDuration = 0.25f;
         _itemSize = CGSizeMake(_width/2, _width/2);
         _itemViews = [NSMutableArray array];
-        _tintColor = [UIColor colorWithWhite:.5 alpha:.7];
+        _tintColor = [UIColor colorWithWhite:.5 alpha:.25];
         _borderWidth = 2;
-        _itemBackgroundColor = [UIColor colorWithRed:189.0/255 green:242.0/255 blue:139.0/255 alpha:.7f];
+        _itemBackgroundColor = [UIColor colorWithRed:189.0/255 green:242.0/255 blue:139.0/255 alpha:.8f];
         _showFromRight = YES;
         if (colors) {
             NSAssert([colors count] == [images count], @"Border color count must match images count. If you want a blank border, use [UIColor clearColor].");
@@ -321,8 +321,11 @@ static RNFrostedSidebar *rn_frostedMenu;
     [super loadView];
     self.view.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.contentView];
-    self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    self.tapGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    self.tapGesture.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:self.tapGesture];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap:)];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (BOOL)shouldAutorotate {
