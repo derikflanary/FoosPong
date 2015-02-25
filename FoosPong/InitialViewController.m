@@ -12,12 +12,23 @@
 #import "ProfileViewController.h"
 #import "HistoryViewController.h"
 #import "PersonalNotificationsViewController.h"
+#import "CurrentGroupViewController.h"
+
 #import "UserController.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import "SignUpViewController.h"
 #import "LogViewController.h"
 #import "RNFrostedSidebar.h"
+
+typedef NS_ENUM(NSInteger, SideBarSection) {
+    SideBarSectionLogin,
+    SideBarSectionMain,
+    SideBarSectionPersonal,
+    SideBarSectionGroups,
+    SideBarSectionSettings,
+};
+
 
 @interface InitialViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, RNFrostedSidebarDelegate>
 
@@ -41,7 +52,7 @@
     [super viewDidLoad];
     UIBarButtonItem * sideBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"17"] style:UIBarButtonItemStylePlain target:self action:@selector(sideBarButtonPressed:)];
     self.navigationItem.rightBarButtonItem = sideBarButton;
-    self.navigationItem.hidesBackButton = YES;
+   
     
     UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipedLeft:)];
     leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -75,17 +86,6 @@
     [self.guestButton addTarget:self action:@selector(guestPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.guestButton];
     
-//    //self.tabBarController = [UITabBarController new];
-//    self.hvc = [HomeViewController new];
-//    //self.hvc.tabBarItem.title = @"Main";
-//    self.gvc = [GroupsViewController new];
-//    //gvc.tabBarItem.title = @"Group";
-//    self.pvc = [ProfileViewController new];
-//    //self.pvc.tabBarItem.title = @"Profile";
-//    //self.tabBarController.viewControllers = @[self.hvc, gvc, self.pvc];
-    
-    
-    
 }
 
 #pragma mark - SideBar
@@ -118,40 +118,62 @@
 - (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index{
    
     HomeViewController *hvc = [HomeViewController new];
-    ProfileViewController *pvc = [ProfileViewController new];
+
     UITabBarController *profileTabBar = [UITabBarController new];
-    GroupsViewController *gvc = [GroupsViewController new];
     HistoryViewController *historyVC = [HistoryViewController new];
     PersonalNotificationsViewController *pnvc = [PersonalNotificationsViewController new];
+    ProfileViewController *pvc = [ProfileViewController new];
     pvc.tabBarItem.title = @"Profile";
     historyVC.tabBarItem.title = @"History";
     pnvc.tabBarItem.title = @"Notifications";
     profileTabBar.viewControllers = @[pvc, historyVC, pnvc];
     
-    if (index == 1) {
-        
-        [sidebar dismissAnimated:YES completion:^(BOOL finished) {
-            if (finished) {
-                [self.navigationController pushViewController:hvc animated:YES];
-            }
-        }];
-    }
+    UITabBarController *groupTabBar = [UITabBarController new];
+    GroupsViewController *gvc = [GroupsViewController new];
+    gvc.tabBarItem.title = @"Groups";
+    CurrentGroupViewController *cgvc = [CurrentGroupViewController new];
+    cgvc.tabBarItem.title = @"Current Group";
+    groupTabBar.viewControllers = @[gvc, cgvc];
     
-    if (index == 2) {
-        
+    SideBarSection section = index;
+    
+    switch (section) {
+        case SideBarSectionLogin:{
+            break;
+        }
+            
+        case SideBarSectionMain:{
+            
+            [sidebar dismissAnimated:YES completion:^(BOOL finished) {
+                if (finished) {
+                    [self.navigationController pushViewController:hvc animated:YES];
+                    }
+                }];
+            break;
+        }
+            
+        case SideBarSectionPersonal:{
+   
         [sidebar dismissAnimated:YES completion:^(BOOL finished) {
-            if (finished) {
-                [self.navigationController pushViewController:profileTabBar animated:YES];
-            }
-        }];
-    }
-    if (index == 3) {
+                if (finished) {
+                    [self.navigationController pushViewController:profileTabBar animated:YES];
+                }
+            }];
+            break;
+        }
+            
+        case SideBarSectionGroups:{
         
-        [sidebar dismissAnimated:YES completion:^(BOOL finished) {
-            if (finished) {
-                [self.navigationController pushViewController:gvc animated:YES];
-            }
-        }];
+            [sidebar dismissAnimated:YES completion:^(BOOL finished) {
+                if (finished) {
+                    [self.navigationController pushViewController:groupTabBar animated:YES];
+                }
+            }];
+            break;
+        }
+        case SideBarSectionSettings:{
+            break;
+        }
     }
 }
 

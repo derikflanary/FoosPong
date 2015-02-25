@@ -12,6 +12,11 @@
 #import "GameViewController.h"
 #import "UserController.h"
 
+typedef NS_ENUM(NSInteger, TableViewSection) {
+    TableViewSectionCurrent,
+    TableViewSectionAvailable
+};
+
 
 @interface ChoosePlayersViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
 
@@ -124,24 +129,36 @@
 #define NUMBER_OF_STATIC_CELLS  2
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return TableViewSectionAvailable + 1;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    if (section == 0){
-        return @"Current Players";
-    }else {
-        return @"Available Players";
+    
+    TableViewSection tableViewSection = section;
+    switch (tableViewSection) {
+        case TableViewSectionCurrent:{
+            return @"Current Players";
+            break;
+            }
+        case TableViewSectionAvailable:{
+            return @"Available Players";
+        }
     }
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return [self.currentPlayers count];
+    
+    TableViewSection tableViewSection = section;
+    switch (tableViewSection) {
+        case TableViewSectionCurrent:{
+            return [self.currentPlayers count];
+            break;
+        }
+        case TableViewSectionAvailable:{
+           return [self.availablePlayers count];
+        }
     }
-    
-        return [self.availablePlayers count];
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -150,17 +167,20 @@
     if (!cell){
         cell = [NewGameCustomTableViewCell new];
     }
-    if (indexPath.section == 0){
-        NSDictionary *playerDict = [self.currentPlayers objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", playerDict[@"username"]];
+    TableViewSection tableViewSection = indexPath.section;
+    switch (tableViewSection) {
+        case TableViewSectionCurrent:{
+            NSDictionary *playerDict = [self.currentPlayers objectAtIndex:indexPath.row];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@", playerDict[@"username"]];
+            return cell;
+            break;
+        }
+        case TableViewSectionAvailable:{
+            NSDictionary *playerDict = [self.availablePlayers objectAtIndex:indexPath.row];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@", playerDict[@"username"]];
+            return cell;
+        }
     }
-
-    if (indexPath.section == 1) {
-        NSDictionary *playerDict = [self.availablePlayers objectAtIndex:indexPath.row];
-        cell.textLabel.text = [NSString stringWithFormat:@"%@", playerDict[@"username"]];
-    }
-    
-    return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -170,8 +190,6 @@
     
     return YES;
 }
-
-
 
 - (NSIndexPath *)tableView:(UITableView *)tableView
 targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
@@ -184,8 +202,6 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
         return proposedDestinationIndexPath;
     }
 }
-    
-
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     

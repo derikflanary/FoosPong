@@ -24,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.tabBarController.navigationItem.hidesBackButton = YES;
+
     
     PFUser *currentUser = [PFUser currentUser];
     NSLog(@"%@", currentUser[@"firstName"]);
