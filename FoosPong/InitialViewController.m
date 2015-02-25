@@ -15,14 +15,17 @@
 #import <ParseUI/ParseUI.h>
 #import "SignUpViewController.h"
 #import "LogViewController.h"
+#import "RNFrostedSidebar.h"
 
-@interface InitialViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface InitialViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, RNFrostedSidebarDelegate>
 
 @property (nonatomic, strong) UITabBarController *tabBarController;
 @property (nonatomic, strong) UIButton *loginButton;
 @property (nonatomic, strong) UIButton *guestButton;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) HomeViewController *hvc;
+@property (nonatomic, strong) RNFrostedSidebar *sideBar;
+@property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
 @end
 
@@ -34,8 +37,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    UIBarButtonItem * logInButton = [[UIBarButtonItem alloc] initWithTitle:@"Log In" style:UIBarButtonItemStylePlain target:self action:@selector(logInPressed:)];
-//    self.navigationItem.rightBarButtonItem = logInButton;
+    UIBarButtonItem * sideBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"17"] style:UIBarButtonItemStylePlain target:self action:@selector(sideBarButtonPressed:)];
+    self.navigationItem.leftBarButtonItem = sideBarButton;
     
     UIColor* mainColor = [UIColor colorWithRed:189.0/255 green:242.0/255 blue:139.0/255 alpha:1.0f];
     UIColor* darkColor = [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:1.0f];
@@ -72,7 +75,41 @@
     ProfileViewController *pvc = [ProfileViewController new];
     pvc.tabBarItem.title = @"Profile";
     self.tabBarController.viewControllers = @[self.hvc, gvc, pvc];
+    
+    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
+    
+    
 
+}
+
+- (void)sideBarButtonPressed:(id)sender{
+    NSArray *barImages = @[ [UIImage imageNamed:@"68"],
+                            [UIImage imageNamed:@"85"],
+                            [UIImage imageNamed:@"74"],
+                            [UIImage imageNamed:@"70"],
+                            [UIImage imageNamed:@"101"]];
+    NSArray *colors = @[
+                        [UIColor colorWithRed:240/255.f green:159/255.f blue:254/255.f alpha:1],
+                        [UIColor colorWithRed:255/255.f green:137/255.f blue:167/255.f alpha:1],
+                        [UIColor colorWithRed:126/255.f green:242/255.f blue:195/255.f alpha:1],
+                        [UIColor colorWithRed:119/255.f green:152/255.f blue:255/255.f alpha:1],
+                        [UIColor colorWithRed:240/255.f green:159/255.f blue:254/255.f alpha:1]];
+    
+    self.sideBar = [[RNFrostedSidebar alloc] initWithImages:barImages selectedIndices:self.optionIndices borderColors:colors];
+    [self.sideBar showAnimated:YES];
+    
+}
+
+- (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index{
+    if (index == 1) {
+        
+        [sidebar dismissAnimated:YES completion:^(BOOL finished) {
+            if (finished) {
+                [self.navigationController pushViewController:self.tabBarController animated:YES];
+            }
+            
+        }];
+    }
 }
 //-(void)openLogIn:(id)selector{
 //    

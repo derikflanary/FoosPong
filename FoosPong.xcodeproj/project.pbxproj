@@ -49,6 +49,8 @@
 		EE7A6D041A869169000447D2 /* InitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D031A869169000447D2 /* InitialViewController.m */; };
 		EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */; };
 		EE7A6D0A1A869CD4000447D2 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D091A869CD4000447D2 /* HistoryViewController.m */; };
+		EE9DAEEB1A9D582200589897 /* RNFrostedSidebar.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */; };
+		EE9DAEED1A9D583500589897 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE9DAEEC1A9D583500589897 /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +133,9 @@
 		EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGameCustomTableViewCell.m; sourceTree = "<group>"; };
 		EE7A6D081A869CD4000447D2 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
 		EE7A6D091A869CD4000447D2 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
+		EE9DAEE91A9D582200589897 /* RNFrostedSidebar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNFrostedSidebar.h; sourceTree = "<group>"; };
+		EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNFrostedSidebar.m; sourceTree = "<group>"; };
+		EE9DAEEC1A9D583500589897 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +143,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE3357381A8C1CE600B83EC0 /* QuartzCore.framework in Frameworks */,
+				EE9DAEED1A9D583500589897 /* Accelerate.framework in Frameworks */,
 				EE3357461A8C202600B83EC0 /* Accounts.framework in Frameworks */,
 				EE3357441A8C200F00B83EC0 /* Social.framework in Frameworks */,
 				EE3357421A8C1D2D00B83EC0 /* libsqlite3.dylib in Frameworks */,
@@ -145,7 +152,6 @@
 				EE33573E1A8C1D0400B83EC0 /* SystemConfiguration.framework in Frameworks */,
 				EE33573C1A8C1CFB00B83EC0 /* StoreKit.framework in Frameworks */,
 				EE33573A1A8C1CF100B83EC0 /* Security.framework in Frameworks */,
-				EE3357381A8C1CE600B83EC0 /* QuartzCore.framework in Frameworks */,
 				EE3357361A8C1CDB00B83EC0 /* MobileCoreServices.framework in Frameworks */,
 				EE0DC00B1A8C4604000235B3 /* ParseUI.framework in Frameworks */,
 				EE3357341A8C1CD100B83EC0 /* CoreLocation.framework in Frameworks */,
@@ -180,6 +186,7 @@
 		AED8EE843DD92B7D2CCC995D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EE9DAEEC1A9D583500589897 /* Accelerate.framework */,
 				EE0DC00A1A8C4604000235B3 /* ParseUI.framework */,
 				EE3357451A8C202600B83EC0 /* Accounts.framework */,
 				EE3357431A8C200F00B83EC0 /* Social.framework */,
@@ -274,14 +281,16 @@
 		EE5027CC1A98F1180079DFFC /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				EE2C57D41A93DFC600DA9835 /* UIImageView+Letters.h */,
 				EE2C57D51A93DFC600DA9835 /* UIImageView+Letters.m */,
 				EE5027C61A965F1F0079DFFC /* NSString+Extensions.h */,
 				EE5027C71A965F1F0079DFFC /* NSString+Extensions.m */,
 				EE5027C91A98ED310079DFFC /* UIColor+ExtraColorTools.h */,
 				EE5027CA1A98ED310079DFFC /* UIColor+ExtraColorTools.m */,
+				EE9DAEE91A9D582200589897 /* RNFrostedSidebar.h */,
+				EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */,
 				EE0DC00C1A8C53A1000235B3 /* FoosPong-Prefix.pch */,
 				EE7A6CE31A868402000447D2 /* Main.storyboard */,
-				EE2C57D41A93DFC600DA9835 /* UIImageView+Letters.h */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -490,6 +499,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE9DAEEB1A9D582200589897 /* RNFrostedSidebar.m in Sources */,
 				EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */,
 				EE1A55881A9D217700E6981E /* PersonalNotificationsViewController.m in Sources */,
 				EE1A55851A9CFBB500E6981E /* GroupController.m in Sources */,
