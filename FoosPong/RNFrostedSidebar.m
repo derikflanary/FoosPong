@@ -267,8 +267,8 @@ static RNFrostedSidebar *rn_frostedMenu;
         _contentView.showsHorizontalScrollIndicator = NO;
         _contentView.showsVerticalScrollIndicator = NO;
         
-        _width = 100;
-        _animationDuration = 0.25f;
+        _width = 120;
+        _animationDuration = 0.3f;
         _itemSize = CGSizeMake(_width/2, _width/2);
         _itemViews = [NSMutableArray array];
         _tintColor = [UIColor colorWithWhite:.5 alpha:.25];
@@ -624,10 +624,20 @@ static RNFrostedSidebar *rn_frostedMenu;
 - (void)layoutItems {
     CGFloat leftPadding = (self.width - self.itemSize.width)/2;
     CGFloat topPadding = leftPadding;
+    __block CGFloat btopPadding = topPadding;
     [self.itemViews enumerateObjectsUsingBlock:^(RNCalloutItemView *view, NSUInteger idx, BOOL *stop) {
-        CGRect frame = CGRectMake(leftPadding, topPadding*idx + self.itemSize.height*idx + topPadding, self.itemSize.width, self.itemSize.height);
+       btopPadding = topPadding * 2;
+        if (idx == 0 ) {
+            
+            CGRect frame = CGRectMake(leftPadding, topPadding*idx + self.itemSize.height*idx + btopPadding, self.itemSize.width, self.itemSize.height);
+            view.frame = frame;
+            view.layer.cornerRadius = frame.size.width/2.f;
+        }else{
+        
+        CGRect frame = CGRectMake(leftPadding, topPadding*(idx-1) + self.itemSize.height*(idx-1) + topPadding +btopPadding + self.itemSize.height, self.itemSize.width, self.itemSize.height);
         view.frame = frame;
         view.layer.cornerRadius = frame.size.width/2.f;
+        }
     }];
     
     NSInteger items = [self.itemViews count];

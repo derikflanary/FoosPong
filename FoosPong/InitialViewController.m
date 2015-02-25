@@ -10,6 +10,8 @@
 #import "HomeViewController.h"
 #import "GroupsViewController.h"
 #import "ProfileViewController.h"
+#import "HistoryViewController.h"
+#import "PersonalNotificationsViewController.h"
 #import "UserController.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
@@ -19,13 +21,11 @@
 
 @interface InitialViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, RNFrostedSidebarDelegate>
 
-@property (nonatomic, strong) UITabBarController *tabBarController;
+@property (nonatomic, strong) UITabBarController *tabBarControllerProfile;
+@property (nonatomic, strong) UITabBarController *tabBarControllerGroup;
 @property (nonatomic, strong) UIButton *loginButton;
 @property (nonatomic, strong) UIButton *guestButton;
 @property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) HomeViewController *hvc;
-@property (nonatomic, strong) ProfileViewController *pvc;
-@property (nonatomic, strong) GroupsViewController *gvc;
 @property (nonatomic, strong) RNFrostedSidebar *sideBar;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
@@ -106,9 +106,8 @@
                         [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
                         [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f]];
 
-    self.hvc = [HomeViewController new];
-    self.gvc = [GroupsViewController new];
-    self.pvc = [ProfileViewController new];
+    
+  
     
     self.sideBar = [[RNFrostedSidebar alloc] initWithImages:barImages selectedIndices:self.optionIndices borderColors:colors];
      self.sideBar.delegate = self;
@@ -118,28 +117,39 @@
 
 - (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index{
    
+    HomeViewController *hvc = [HomeViewController new];
+    ProfileViewController *pvc = [ProfileViewController new];
+    UITabBarController *profileTabBar = [UITabBarController new];
+    GroupsViewController *gvc = [GroupsViewController new];
+    HistoryViewController *historyVC = [HistoryViewController new];
+    PersonalNotificationsViewController *pnvc = [PersonalNotificationsViewController new];
+    pvc.tabBarItem.title = @"Profile";
+    historyVC.tabBarItem.title = @"History";
+    pnvc.tabBarItem.title = @"Notifications";
+    profileTabBar.viewControllers = @[pvc, historyVC, pnvc];
+    
     if (index == 1) {
-        [sidebar dismissAnimated:YES];
+        
         [sidebar dismissAnimated:YES completion:^(BOOL finished) {
             if (finished) {
-                [self.navigationController pushViewController:self.hvc animated:YES];
+                [self.navigationController pushViewController:hvc animated:YES];
             }
         }];
     }
     
     if (index == 2) {
-        [sidebar dismissAnimated:YES];
+        
         [sidebar dismissAnimated:YES completion:^(BOOL finished) {
             if (finished) {
-                [self.navigationController pushViewController:self.pvc animated:YES];
+                [self.navigationController pushViewController:profileTabBar animated:YES];
             }
         }];
     }
     if (index == 3) {
-        [sidebar dismissAnimated:YES];
+        
         [sidebar dismissAnimated:YES completion:^(BOOL finished) {
             if (finished) {
-                [self.navigationController pushViewController:self.gvc animated:YES];
+                [self.navigationController pushViewController:gvc animated:YES];
             }
         }];
     }
@@ -158,14 +168,12 @@
                         [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
                         [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f]];
     
-    self.hvc = [HomeViewController new];
-    self.gvc = [GroupsViewController new];
-    self.pvc = [ProfileViewController new];
+    
     
     self.sideBar = [[RNFrostedSidebar alloc] initWithImages:barImages selectedIndices:self.optionIndices borderColors:colors];
     self.sideBar.delegate = self;
     [self.sideBar showAnimated:YES];
-    [self.sideBar showAnimated:YES];
+    
 }
 
 
@@ -190,9 +198,9 @@
 
 -(void)guestPressed:(id)sender{
     [[UserController sharedInstance] addGuestUser];
-
-    self.hvc.isGuest = YES;
-    [self.navigationController pushViewController:self.hvc animated:YES];
+    HomeViewController *hvc = [HomeViewController new];
+    hvc.isGuest = YES;
+    [self.navigationController pushViewController:hvc animated:YES];
     
 }
 
