@@ -37,6 +37,7 @@
 		EE3357421A8C1D2D00B83EC0 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357411A8C1D2D00B83EC0 /* libsqlite3.dylib */; };
 		EE3357441A8C200F00B83EC0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357431A8C200F00B83EC0 /* Social.framework */; };
 		EE3357461A8C202600B83EC0 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357451A8C202600B83EC0 /* Accounts.framework */; };
+		EE48886A1A9FDD9B00FCCA47 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EE4888691A9FDD9B00FCCA47 /* HMSegmentedControl.m */; };
 		EE5027C21A9654A30079DFFC /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5027C11A9654A30079DFFC /* LogViewController.m */; };
 		EE5027C81A965F1F0079DFFC /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5027C71A965F1F0079DFFC /* NSString+Extensions.m */; };
 		EE5027CB1A98ED310079DFFC /* UIColor+ExtraColorTools.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5027CA1A98ED310079DFFC /* UIColor+ExtraColorTools.m */; };
@@ -115,6 +116,8 @@
 		EE3357411A8C1D2D00B83EC0 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		EE3357431A8C200F00B83EC0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		EE3357451A8C202600B83EC0 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		EE4888681A9FDD9B00FCCA47 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
+		EE4888691A9FDD9B00FCCA47 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		EE5027C01A9654A30079DFFC /* LogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
 		EE5027C11A9654A30079DFFC /* LogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
 		EE5027C61A965F1F0079DFFC /* NSString+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extensions.h"; sourceTree = "<group>"; };
@@ -300,6 +303,8 @@
 		EE5027CC1A98F1180079DFFC /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				EE4888681A9FDD9B00FCCA47 /* HMSegmentedControl.h */,
+				EE4888691A9FDD9B00FCCA47 /* HMSegmentedControl.m */,
 				EE2C57D41A93DFC600DA9835 /* UIImageView+Letters.h */,
 				EE2C57D51A93DFC600DA9835 /* UIImageView+Letters.m */,
 				EE5027C61A965F1F0079DFFC /* NSString+Extensions.h */,
@@ -550,6 +555,7 @@
 				EE9DAEF61A9ECED800589897 /* FindGroupViewController.m in Sources */,
 				EE9DAEF01A9EB91D00589897 /* MasterViewController.m in Sources */,
 				EE808DB01A9FC3E30000F833 /* SettingViewController.m in Sources */,
+				EE48886A1A9FDD9B00FCCA47 /* HMSegmentedControl.m in Sources */,
 				EE7A6CDC1A868402000447D2 /* main.m in Sources */,
 				EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */,
 				302E41C71A86A195005F1184 /* ChoosePlayersViewController.m in Sources */,
