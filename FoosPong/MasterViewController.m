@@ -32,9 +32,6 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
 @property (nonatomic, strong) RNFrostedSidebar *sideBar;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
-
-
-
 @end
 
 @implementation MasterViewController

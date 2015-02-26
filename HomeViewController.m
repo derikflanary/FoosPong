@@ -37,8 +37,8 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    UIBarButtonItem * sideBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"17"] style:UIBarButtonItemStylePlain target:self action:@selector(sideBarButtonPressed:)];
-    self.navigationItem.rightBarButtonItem = sideBarButton;
+//    UIBarButtonItem * sideBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"17"] style:UIBarButtonItemStylePlain target:self action:@selector(sideBarButtonPressed:)];
+//    self.navigationItem.rightBarButtonItem = sideBarButton;
     self.navigationItem.hidesBackButton = YES;
     
     self.pingPongTableView = [[UITableView alloc] initWithFrame:self.view.frame];

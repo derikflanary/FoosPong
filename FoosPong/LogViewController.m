@@ -30,11 +30,10 @@
 {
     [super viewDidLoad];
     
-    UIColor* mainColor = [UIColor colorWithRed:189.0/255 green:242.0/255 blue:139.0/255 alpha:1.0f];
-    UIColor* darkColor = [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:1.0f];
-    
-    NSString* fontName = @"Avenir-Book";
-    NSString* boldFontName = @"Avenir-Black";
+    UIColor* mainColor = [UIColor mainColor];
+    UIColor* darkColor = [UIColor darkColor];
+    NSString* fontName = [NSString mainFont];
+    NSString* boldFontName = [NSString boldFont];
     
     UIBarButtonItem *otherLogIn = [[UIBarButtonItem alloc] initWithTitle:@"Sign Up" style:UIBarButtonItemStylePlain target:self action:@selector(openSignUp:)];
     self.navigationItem.rightBarButtonItem = otherLogIn;

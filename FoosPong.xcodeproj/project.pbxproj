@@ -50,6 +50,7 @@
 		EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */; };
 		EE7A6D0A1A869CD4000447D2 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D091A869CD4000447D2 /* HistoryViewController.m */; };
 		EE808DB01A9FC3E30000F833 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE808DAF1A9FC3E30000F833 /* SettingViewController.m */; };
+		EE808DB71A9FCCB10000F833 /* NSString+Fonts.m in Sources */ = {isa = PBXBuildFile; fileRef = EE808DB61A9FCCB10000F833 /* NSString+Fonts.m */; };
 		EE9DAEEB1A9D582200589897 /* RNFrostedSidebar.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */; };
 		EE9DAEED1A9D583500589897 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE9DAEEC1A9D583500589897 /* Accelerate.framework */; };
 		EE9DAEF01A9EB91D00589897 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEEF1A9EB91D00589897 /* MasterViewController.m */; };
@@ -139,6 +140,8 @@
 		EE7A6D091A869CD4000447D2 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
 		EE808DAE1A9FC3E30000F833 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		EE808DAF1A9FC3E30000F833 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		EE808DB51A9FCCB10000F833 /* NSString+Fonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Fonts.h"; sourceTree = "<group>"; };
+		EE808DB61A9FCCB10000F833 /* NSString+Fonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Fonts.m"; sourceTree = "<group>"; };
 		EE9DAEE91A9D582200589897 /* RNFrostedSidebar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNFrostedSidebar.h; sourceTree = "<group>"; };
 		EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNFrostedSidebar.m; sourceTree = "<group>"; };
 		EE9DAEEC1A9D583500589897 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -303,6 +306,8 @@
 				EE5027C71A965F1F0079DFFC /* NSString+Extensions.m */,
 				EE5027C91A98ED310079DFFC /* UIColor+ExtraColorTools.h */,
 				EE5027CA1A98ED310079DFFC /* UIColor+ExtraColorTools.m */,
+				EE808DB51A9FCCB10000F833 /* NSString+Fonts.h */,
+				EE808DB61A9FCCB10000F833 /* NSString+Fonts.m */,
 				EE9DAEE91A9D582200589897 /* RNFrostedSidebar.h */,
 				EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */,
 				EE0DC00C1A8C53A1000235B3 /* FoosPong-Prefix.pch */,
@@ -540,6 +545,7 @@
 				EE0DC0121A8D96D8000235B3 /* GameController.m in Sources */,
 				EE7A6CDF1A868402000447D2 /* AppDelegate.m in Sources */,
 				EE3356F11A89610B00B83EC0 /* GameViewController.m in Sources */,
+				EE808DB71A9FCCB10000F833 /* NSString+Fonts.m in Sources */,
 				EE7A6D041A869169000447D2 /* InitialViewController.m in Sources */,
 				EE9DAEF61A9ECED800589897 /* FindGroupViewController.m in Sources */,
 				EE9DAEF01A9EB91D00589897 /* MasterViewController.m in Sources */,

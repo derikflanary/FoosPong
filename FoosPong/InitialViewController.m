@@ -60,10 +60,10 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     [self.view addGestureRecognizer:leftSwipe];
     
     
-    UIColor* mainColor = [UIColor colorWithRed:189.0/255 green:242.0/255 blue:139.0/255 alpha:1.0f];
-    UIColor* darkColor = [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:1.0f];
-    NSString* fontName = @"Avenir-Book";
-    NSString* boldFontName = @"Avenir-Black";
+    UIColor* mainColor = [UIColor mainColor];
+    UIColor* darkColor = [UIColor darkColor];
+    NSString* fontName = [NSString mainFont];
+    NSString* boldFontName = [NSString boldFont];
     
     self.imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"FoosBallButton"]];
     self.imageView.frame = self.view.frame;
