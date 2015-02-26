@@ -7,21 +7,16 @@
 //
 
 #import "HomeViewController.h"
-#import "HistoryViewController.h"
 #import "ChoosePlayersViewController.h"
 #import "NewGameCustomTableViewCell.h"
 #import "UserController.h"
-#import "GroupsViewController.h"
-#import "ProfileViewController.h"
 
-@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, RNFrostedSidebarDelegate>
+@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *pingPongTableView;
-@property (nonatomic, strong) RNFrostedSidebar *sideBar;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 @property (nonatomic, strong) HomeViewController *hvc;
-@property (nonatomic, strong) ProfileViewController *pvc;
-@property (nonatomic, strong) GroupsViewController *gvc;
+
 
 @end
 

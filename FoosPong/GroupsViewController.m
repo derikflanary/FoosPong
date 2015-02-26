@@ -21,10 +21,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-<<<<<<< HEAD
+
     self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
-=======
+
     
     
     UIColor* mainColor = [UIColor colorWithRed:189.0/255 green:242.0/255 blue:139.0/255 alpha:1.0f];
@@ -76,7 +76,7 @@
 - (void)joinPressed:(id)sender{
     
     
->>>>>>> 189778141a797e6addc9ac36c361ef3acf94e753
+
 }
 
 - (void)didReceiveMemoryWarning {

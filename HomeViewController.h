@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MasterViewController.h"
 
-@interface HomeViewController : UIViewController
+@interface HomeViewController : MasterViewController
 
 @property (nonatomic, assign) BOOL isGuest;
 

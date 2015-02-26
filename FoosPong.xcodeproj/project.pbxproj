@@ -261,8 +261,6 @@
 			children = (
 				EE2C57DD1A93ECD200DA9835 /* BaseLoginController.h */,
 				EE2C57DE1A93ECD200DA9835 /* BaseLoginController.m */,
-				EE9DAEEE1A9EB91D00589897 /* MasterViewController.h */,
-				EE9DAEEF1A9EB91D00589897 /* MasterViewController.m */,
 				EE2C57E01A93F12300DA9835 /* SignUpViewController.h */,
 				EE2C57E11A93F12300DA9835 /* SignUpViewController.m */,
 				EE5027C01A9654A30079DFFC /* LogViewController.h */,
@@ -336,6 +334,8 @@
 				EE2C57E31A93F2BF00DA9835 /* Logging in */,
 				EE7A6CDD1A868402000447D2 /* AppDelegate.h */,
 				EE7A6CDE1A868402000447D2 /* AppDelegate.m */,
+				EE9DAEEE1A9EB91D00589897 /* MasterViewController.h */,
+				EE9DAEEF1A9EB91D00589897 /* MasterViewController.m */,
 				EE7A6D021A869169000447D2 /* InitialViewController.h */,
 				EE7A6D031A869169000447D2 /* InitialViewController.m */,
 				EE1A557B1A9CFAE000E6981E /* Scorekeeping */,

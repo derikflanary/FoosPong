@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MasterViewController.h"
 
 
-@interface ProfileViewController : UIViewController
+@interface ProfileViewController : MasterViewController
 
 
 @end
