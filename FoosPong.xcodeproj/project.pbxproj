@@ -52,6 +52,8 @@
 		EE9DAEEB1A9D582200589897 /* RNFrostedSidebar.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */; };
 		EE9DAEED1A9D583500589897 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE9DAEEC1A9D583500589897 /* Accelerate.framework */; };
 		EE9DAEF01A9EB91D00589897 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEEF1A9EB91D00589897 /* MasterViewController.m */; };
+		EE9DAEF31A9ECEC600589897 /* AddGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEF21A9ECEC600589897 /* AddGroupViewController.m */; };
+		EE9DAEF61A9ECED800589897 /* FindGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEF51A9ECED800589897 /* FindGroupViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +141,10 @@
 		EE9DAEEC1A9D583500589897 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		EE9DAEEE1A9EB91D00589897 /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		EE9DAEEF1A9EB91D00589897 /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		EE9DAEF11A9ECEC500589897 /* AddGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddGroupViewController.h; sourceTree = "<group>"; };
+		EE9DAEF21A9ECEC600589897 /* AddGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGroupViewController.m; sourceTree = "<group>"; };
+		EE9DAEF41A9ECED800589897 /* FindGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindGroupViewController.h; sourceTree = "<group>"; };
+		EE9DAEF51A9ECED800589897 /* FindGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindGroupViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +248,10 @@
 				EE1A557D1A9CFB3000E6981E /* GroupsViewController.m */,
 				EE1A557F1A9CFB4A00E6981E /* CurrentGroupViewController.h */,
 				EE1A55801A9CFB4A00E6981E /* CurrentGroupViewController.m */,
+				EE9DAEF11A9ECEC500589897 /* AddGroupViewController.h */,
+				EE9DAEF21A9ECEC600589897 /* AddGroupViewController.m */,
+				EE9DAEF41A9ECED800589897 /* FindGroupViewController.h */,
+				EE9DAEF51A9ECED800589897 /* FindGroupViewController.m */,
 			);
 			name = Groups;
 			sourceTree = "<group>";
@@ -504,6 +514,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE9DAEF31A9ECEC600589897 /* AddGroupViewController.m in Sources */,
 				EE9DAEEB1A9D582200589897 /* RNFrostedSidebar.m in Sources */,
 				EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */,
 				EE1A55881A9D217700E6981E /* PersonalNotificationsViewController.m in Sources */,
@@ -516,6 +527,7 @@
 				EE7A6CDF1A868402000447D2 /* AppDelegate.m in Sources */,
 				EE3356F11A89610B00B83EC0 /* GameViewController.m in Sources */,
 				EE7A6D041A869169000447D2 /* InitialViewController.m in Sources */,
+				EE9DAEF61A9ECED800589897 /* FindGroupViewController.m in Sources */,
 				EE9DAEF01A9EB91D00589897 /* MasterViewController.m in Sources */,
 				EE7A6CDC1A868402000447D2 /* main.m in Sources */,
 				EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */,

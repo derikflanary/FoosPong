@@ -1,18 +1,18 @@
 //
-//  CurrentGroupViewController.m
+//  AddGroupViewController.m
 //  FoosPong
 //
-//  Created by Derik Flanary on 2/24/15.
+//  Created by Derik Flanary on 2/25/15.
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "CurrentGroupViewController.h"
+#import "AddGroupViewController.h"
 
-@interface CurrentGroupViewController ()
+@interface AddGroupViewController ()
 
 @end
 
-@implementation CurrentGroupViewController
+@implementation AddGroupViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

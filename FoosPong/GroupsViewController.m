@@ -7,11 +7,13 @@
 //
 
 #import "GroupsViewController.h"
+#import "AddGroupViewController.h"
 
 @interface GroupsViewController ()
 
 @property (nonatomic, strong) UIButton *joinGroupButton;
 @property (nonatomic, strong) UIButton *createGroupButton;
+@property (nonatomic, strong) AddGroupViewController *addGroupViewController;
 
 @end
 
@@ -58,8 +60,14 @@
 
 - (void)createPressed:(id)sender{
     
+    self.addGroupViewController = [AddGroupViewController new];
+    [self presentViewController:self.addGroupViewController animated:YES completion:^{
+        
+    }];
     
 }
+
+
 
 - (void)joinPressed:(id)sender{
     
