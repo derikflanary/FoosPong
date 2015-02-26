@@ -15,7 +15,8 @@
 #import "HistoryViewController.h"
 #import "CurrentGroupViewController.h"
 #import "PersonalNotificationsViewController.h"
-#import "InitialViewController.h"
+#import "SettingViewController.h"
+#import "AppDelegate.h"
 
 typedef NS_ENUM(NSInteger, SideBarSection) {
     SideBarSectionLogin,
@@ -33,6 +34,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
 
 
 
+
 @end
 
 @implementation MasterViewController
@@ -41,8 +43,9 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     [super viewDidLoad];
     UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipedLeft:)];
     leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:leftSwipe];
+    [self.view addGestureRecognizer:leftSwipe];;
 
+    
     // Do any additional setup after loading the view.
 }
 
@@ -93,12 +96,16 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     cgvc.tabBarItem.title = @"Current Group";
     groupTabBar.viewControllers = @[gvc, cgvc];
     
+    SettingViewController *svc = [SettingViewController new];
+    
+   
     SideBarSection section = index;
     
     switch (section) {
         case SideBarSectionLogin:{
             [sidebar dismissAnimated:YES completion:^(BOOL finished) {
-                [self.navigationController pushViewController:ivc animated:YES];
+                self.navigationController.viewControllers = @[ivc];
+                //[self.navigationController pushViewController:ivc animated:YES];
             }];
             break;
         }
@@ -107,7 +114,8 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
             
             [sidebar dismissAnimated:YES completion:^(BOOL finished) {
                 if (finished) {
-                    [self.navigationController pushViewController:hvc animated:YES];
+                    self.navigationController.viewControllers = @[hvc];
+                    //[self.navigationController pushViewController:hvc animated:YES];
                 }
             }];
             break;
@@ -117,7 +125,8 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
             
             [sidebar dismissAnimated:YES completion:^(BOOL finished) {
                 if (finished) {
-                    [self.navigationController pushViewController:profileTabBar animated:YES];
+                    self.navigationController.viewControllers = @[profileTabBar];
+                    //[self.navigationController pushViewController:profileTabBar animated:YES];
                 }
             }];
             break;
@@ -127,12 +136,20 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
             
             [sidebar dismissAnimated:YES completion:^(BOOL finished) {
                 if (finished) {
-                    [self.navigationController pushViewController:groupTabBar animated:YES];
+                    self.navigationController.viewControllers = @[groupTabBar];
+                    //[self.navigationController pushViewController:groupTabBar animated:YES];
                 }
             }];
             break;
         }
         case SideBarSectionSettings:{
+            [sidebar dismissAnimated:YES completion:^(BOOL finished) {
+                if (finished) {
+                    self.navigationController.viewControllers = @[svc];
+                    
+                }
+            }];
+
             break;
         }
     }

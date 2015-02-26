@@ -1,3 +1,4 @@
+
 //
 //  MainViewController.m
 //  FoosPong
@@ -86,6 +87,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     [self.guestButton addTarget:self action:@selector(guestPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.guestButton];
     
+     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:0];
 }
 
 #pragma mark - SideBar

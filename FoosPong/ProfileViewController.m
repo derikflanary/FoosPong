@@ -16,6 +16,7 @@
 @interface ProfileViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIImageView *profileImageView;
+@property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
 @end
 
@@ -41,7 +42,7 @@
     self.profileImageView.userInteractionEnabled = YES;
     [self.profileImageView addGestureRecognizer:tapOnProfilePicture];
     
-    
+    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:2];
     // Do any additional setup after loading the view.
 }
 

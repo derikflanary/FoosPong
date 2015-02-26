@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UIButton *joinGroupButton;
 @property (nonatomic, strong) UIButton *createGroupButton;
 @property (nonatomic, strong) AddGroupViewController *addGroupViewController;
+@property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
 @end
 
@@ -58,7 +59,7 @@
 
     [self.view addSubview:self.createGroupButton];
     [self.view addSubview:self.joinGroupButton];
-    
+    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
     
 }
 
