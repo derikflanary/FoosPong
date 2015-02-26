@@ -1,22 +1,27 @@
 //
-//  CurrentGroupViewController.m
+//  MasterViewController.m
 //  FoosPong
 //
-//  Created by Derik Flanary on 2/24/15.
+//  Created by Derik Flanary on 2/25/15.
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "CurrentGroupViewController.h"
+#import "MasterViewController.h"
+#import "RNFrostedSidebar.h"
+#import "InitialViewController.h"
+#import "HomeViewController.h"
+#import "GroupsViewController.h"
+#import "ProfileViewController.h"
 
-@interface CurrentGroupViewController ()
+
+@interface MasterViewController ()
 
 @end
 
-@implementation CurrentGroupViewController
+@implementation MasterViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
 }
 

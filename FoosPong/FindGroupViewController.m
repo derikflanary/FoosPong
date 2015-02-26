@@ -1,22 +1,23 @@
 //
-//  CurrentGroupViewController.m
+//  FindGroupViewController.m
 //  FoosPong
 //
-//  Created by Derik Flanary on 2/24/15.
+//  Created by Derik Flanary on 2/25/15.
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "CurrentGroupViewController.h"
+#import "FindGroupViewController.h"
 
-@interface CurrentGroupViewController ()
+@interface FindGroupViewController ()
 
 @end
 
-@implementation CurrentGroupViewController
+@implementation FindGroupViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    
+    
     // Do any additional setup after loading the view.
 }
 
