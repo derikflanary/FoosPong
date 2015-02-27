@@ -10,4 +10,6 @@
 
 @interface MasterViewController : UIViewController
 
+extern UIColor *mainColor;
+
 @end

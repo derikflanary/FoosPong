@@ -8,6 +8,12 @@
 
 #import "AppDelegate.h"
 #import "InitialViewController.h"
+//#import "HomeViewController.h"
+//#import "GroupsViewController.h"
+//#import "ProfileViewController.h"
+//#import "HistoryViewController.h"
+//#import "CurrentGroupViewController.h"
+//#import "PersonalNotificationsViewController.h"
 #import <Parse/Parse.h>
 
 
@@ -19,6 +25,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
                                                     UIUserNotificationTypeBadge |
@@ -38,8 +46,36 @@
     
     [PFUser enableAutomaticUser];
     
+    UINavigationController *mainNavController = [[UINavigationController alloc]initWithRootViewController:[InitialViewController new]];
+    self.window.rootViewController = mainNavController;
+    
+//    HomeViewController *hvc = [HomeViewController new];
+//    InitialViewController *ivc = [InitialViewController new];
+//    
+//    UITabBarController *profileTabBar = [UITabBarController new];
+//    HistoryViewController *historyVC = [HistoryViewController new];
+//    PersonalNotificationsViewController *pnvc = [PersonalNotificationsViewController new];
+//    ProfileViewController *pvc = [ProfileViewController new];
+//    pvc.tabBarItem.title = @"Profile";
+//    historyVC.tabBarItem.title = @"History";
+//    pnvc.tabBarItem.title = @"Notifications";
+//    profileTabBar.viewControllers = @[pvc, historyVC, pnvc];
+//    
+//    UITabBarController *groupTabBar = [UITabBarController new];
+//    GroupsViewController *gvc = [GroupsViewController new];
+//    gvc.tabBarItem.title = @"Groups";
+//    CurrentGroupViewController *cgvc = [CurrentGroupViewController new];
+//    cgvc.tabBarItem.title = @"Current Group";
+//    groupTabBar.viewControllers = @[gvc, cgvc];
+    
+    //mainNavController.viewControllers = @[ivc, hvc, profileTabBar, groupTabBar];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
     return YES;
+    
 }
+
+
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     

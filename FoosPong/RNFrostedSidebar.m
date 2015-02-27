@@ -240,7 +240,7 @@
 
 @property (nonatomic, strong) UIScrollView *contentView;
 @property (nonatomic, strong) UIImageView *blurView;
-@property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
+@property (nonatomic, strong) UISwipeGestureRecognizer *tapGesture;
 @property (nonatomic, strong) NSArray *images;
 @property (nonatomic, strong) NSArray *borderColors;
 @property (nonatomic, strong) NSMutableArray *itemViews;
@@ -258,23 +258,23 @@ static RNFrostedSidebar *rn_frostedMenu;
 
 - (instancetype)initWithImages:(NSArray *)images selectedIndices:(NSIndexSet *)selectedIndices borderColors:(NSArray *)colors {
     if (self = [super init]) {
-        _isSingleSelect = NO;
+        _isSingleSelect = YES;
         _contentView = [[UIScrollView alloc] init];
         _contentView.alwaysBounceHorizontal = NO;
         _contentView.alwaysBounceVertical = YES;
-        _contentView.bounces = YES;
+        _contentView.bounces = NO;
         _contentView.clipsToBounds = NO;
         _contentView.showsHorizontalScrollIndicator = NO;
         _contentView.showsVerticalScrollIndicator = NO;
         
-        _width = 150;
-        _animationDuration = 0.25f;
+        _width = 120;
+        _animationDuration = 0.3f;
         _itemSize = CGSizeMake(_width/2, _width/2);
         _itemViews = [NSMutableArray array];
-        _tintColor = [UIColor colorWithWhite:0.2 alpha:0.73];
+        _tintColor = [UIColor colorWithWhite:.5 alpha:.25];
         _borderWidth = 2;
-        _itemBackgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.25];
-        
+        _itemBackgroundColor = [UIColor colorWithRed:189.0/255 green:242.0/255 blue:139.0/255 alpha:.8f];
+        _showFromRight = YES;
         if (colors) {
             NSAssert([colors count] == [images count], @"Border color count must match images count. If you want a blank border, use [UIColor clearColor].");
         }
@@ -321,8 +321,11 @@ static RNFrostedSidebar *rn_frostedMenu;
     [super loadView];
     self.view.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.contentView];
-    self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    self.tapGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    self.tapGesture.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:self.tapGesture];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap:)];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (BOOL)shouldAutorotate {
@@ -621,10 +624,20 @@ static RNFrostedSidebar *rn_frostedMenu;
 - (void)layoutItems {
     CGFloat leftPadding = (self.width - self.itemSize.width)/2;
     CGFloat topPadding = leftPadding;
+    __block CGFloat btopPadding = topPadding;
     [self.itemViews enumerateObjectsUsingBlock:^(RNCalloutItemView *view, NSUInteger idx, BOOL *stop) {
-        CGRect frame = CGRectMake(leftPadding, topPadding*idx + self.itemSize.height*idx + topPadding, self.itemSize.width, self.itemSize.height);
+       btopPadding = topPadding * 2;
+        if (idx == 0 ) {
+            
+            CGRect frame = CGRectMake(leftPadding, topPadding*idx + self.itemSize.height*idx + btopPadding, self.itemSize.width, self.itemSize.height);
+            view.frame = frame;
+            view.layer.cornerRadius = frame.size.width/2.f;
+        }else{
+        
+        CGRect frame = CGRectMake(leftPadding, topPadding*(idx-1) + self.itemSize.height*(idx-1) + topPadding +btopPadding + self.itemSize.height, self.itemSize.width, self.itemSize.height);
         view.frame = frame;
         view.layer.cornerRadius = frame.size.width/2.f;
+        }
     }];
     
     NSInteger items = [self.itemViews count];

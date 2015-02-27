@@ -7,7 +7,6 @@
 //
 
 #import "HomeViewController.h"
-#import "HistoryViewController.h"
 #import "ChoosePlayersViewController.h"
 #import "NewGameCustomTableViewCell.h"
 #import "UserController.h"
@@ -15,6 +14,8 @@
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *pingPongTableView;
+@property (nonatomic, strong) NSMutableIndexSet *optionIndices;
+@property (nonatomic, strong) HomeViewController *hvc;
 
 
 @end
@@ -36,13 +37,17 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
+//    UIBarButtonItem * sideBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"17"] style:UIBarButtonItemStylePlain target:self action:@selector(sideBarButtonPressed:)];
+//    self.navigationItem.rightBarButtonItem = sideBarButton;
+    self.navigationItem.hidesBackButton = YES;
     
     self.pingPongTableView = [[UITableView alloc] initWithFrame:self.view.frame];
     self.pingPongTableView.dataSource = self;
     self.pingPongTableView.delegate = self;
     [self.view addSubview:self.pingPongTableView];
-    self.pingPongTableView.scrollEnabled = YES;
+    self.pingPongTableView.scrollEnabled = NO;
+    
+    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
     
     //[self.pingPongTableView registerClass:[UITableView class] forCellWithReuseIdentifier:@"cell"];
     // Do any additional setup after loading the view.
@@ -95,6 +100,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - SideBar
+
 
 /*
 #pragma mark - Navigation

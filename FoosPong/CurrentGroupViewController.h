@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MasterViewController.h"
 
-@interface CurrentGroupViewController : UIViewController
+@interface CurrentGroupViewController : MasterViewController
 
 @end

@@ -11,10 +11,13 @@
 #import "UserController.h"
 #import "NSString+Extensions.h"
 #import "UIColor+ExtraColorTools.h"
+#import "HMSegmentedControl.h"
+
 
 @interface ProfileViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIImageView *profileImageView;
+@property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
 @end
 
@@ -23,12 +26,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.tabBarController.navigationItem.hidesBackButton = YES;
+    NSArray *images = @[[UIImage imageNamed:@"74"],
+                        [UIImage imageNamed:@"17"],
+                        [UIImage imageNamed:@"167"]];
+    NSArray *titles = @[@"Profile", @"History", @"Messages"];
+
+    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc]initWithSectionImages:images sectionSelectedImages:images];
+    segmentedControl.frame = CGRectMake(10, 60, 300, 60);
+    segmentedControl.selectionIndicatorColor = [UIColor mainColor];
+    segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleBox;
+    segmentedControl.verticalDividerEnabled = YES;
+    segmentedControl.verticalDividerColor = [UIColor darkColor];
+    [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:segmentedControl];
+    
+    
     
     PFUser *currentUser = [PFUser currentUser];
     NSLog(@"%@", currentUser[@"firstName"]);
     
     NSString *fullName = [NSString combineNames:currentUser[@"firstName"] and:currentUser[@"lastName"]];
-    self.profileImageView = [[UIImageView alloc]initWithFrame:CGRectMake(100, 100, 100, 100)];
+    self.profileImageView = [[UIImageView alloc]initWithFrame:CGRectMake(100, 120, 100, 100)];
     [self.profileImageView setImageWithString:fullName color:nil circular:YES];
     self.profileImageView.backgroundColor = [UIColor grayColor];
     [self.view addSubview:self.profileImageView];
@@ -38,8 +57,12 @@
     self.profileImageView.userInteractionEnabled = YES;
     [self.profileImageView addGestureRecognizer:tapOnProfilePicture];
     
-    
+    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:2];
     // Do any additional setup after loading the view.
+}
+
+- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
+    NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
 }
 
 - (void)profilePressed:(id)sender{

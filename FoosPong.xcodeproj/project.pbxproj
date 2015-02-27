@@ -37,6 +37,7 @@
 		EE3357421A8C1D2D00B83EC0 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357411A8C1D2D00B83EC0 /* libsqlite3.dylib */; };
 		EE3357441A8C200F00B83EC0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357431A8C200F00B83EC0 /* Social.framework */; };
 		EE3357461A8C202600B83EC0 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357451A8C202600B83EC0 /* Accounts.framework */; };
+		EE48886A1A9FDD9B00FCCA47 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EE4888691A9FDD9B00FCCA47 /* HMSegmentedControl.m */; };
 		EE5027C21A9654A30079DFFC /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5027C11A9654A30079DFFC /* LogViewController.m */; };
 		EE5027C81A965F1F0079DFFC /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5027C71A965F1F0079DFFC /* NSString+Extensions.m */; };
 		EE5027CB1A98ED310079DFFC /* UIColor+ExtraColorTools.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5027CA1A98ED310079DFFC /* UIColor+ExtraColorTools.m */; };
@@ -49,6 +50,8 @@
 		EE7A6D041A869169000447D2 /* InitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D031A869169000447D2 /* InitialViewController.m */; };
 		EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */; };
 		EE7A6D0A1A869CD4000447D2 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D091A869CD4000447D2 /* HistoryViewController.m */; };
+		EE808DB01A9FC3E30000F833 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE808DAF1A9FC3E30000F833 /* SettingViewController.m */; };
+		EE808DB71A9FCCB10000F833 /* NSString+Fonts.m in Sources */ = {isa = PBXBuildFile; fileRef = EE808DB61A9FCCB10000F833 /* NSString+Fonts.m */; };
 		EE9DAEEB1A9D582200589897 /* RNFrostedSidebar.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */; };
 		EE9DAEED1A9D583500589897 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE9DAEEC1A9D583500589897 /* Accelerate.framework */; };
 		EE9DAEF01A9EB91D00589897 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEEF1A9EB91D00589897 /* MasterViewController.m */; };
@@ -113,6 +116,8 @@
 		EE3357411A8C1D2D00B83EC0 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		EE3357431A8C200F00B83EC0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		EE3357451A8C202600B83EC0 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		EE4888681A9FDD9B00FCCA47 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
+		EE4888691A9FDD9B00FCCA47 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		EE5027C01A9654A30079DFFC /* LogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
 		EE5027C11A9654A30079DFFC /* LogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
 		EE5027C61A965F1F0079DFFC /* NSString+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extensions.h"; sourceTree = "<group>"; };
@@ -136,6 +141,10 @@
 		EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGameCustomTableViewCell.m; sourceTree = "<group>"; };
 		EE7A6D081A869CD4000447D2 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
 		EE7A6D091A869CD4000447D2 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
+		EE808DAE1A9FC3E30000F833 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		EE808DAF1A9FC3E30000F833 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		EE808DB51A9FCCB10000F833 /* NSString+Fonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Fonts.h"; sourceTree = "<group>"; };
+		EE808DB61A9FCCB10000F833 /* NSString+Fonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Fonts.m"; sourceTree = "<group>"; };
 		EE9DAEE91A9D582200589897 /* RNFrostedSidebar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNFrostedSidebar.h; sourceTree = "<group>"; };
 		EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNFrostedSidebar.m; sourceTree = "<group>"; };
 		EE9DAEEC1A9D583500589897 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -261,8 +270,6 @@
 			children = (
 				EE2C57DD1A93ECD200DA9835 /* BaseLoginController.h */,
 				EE2C57DE1A93ECD200DA9835 /* BaseLoginController.m */,
-				EE9DAEEE1A9EB91D00589897 /* MasterViewController.h */,
-				EE9DAEEF1A9EB91D00589897 /* MasterViewController.m */,
 				EE2C57E01A93F12300DA9835 /* SignUpViewController.h */,
 				EE2C57E11A93F12300DA9835 /* SignUpViewController.m */,
 				EE5027C01A9654A30079DFFC /* LogViewController.h */,
@@ -296,12 +303,16 @@
 		EE5027CC1A98F1180079DFFC /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				EE4888681A9FDD9B00FCCA47 /* HMSegmentedControl.h */,
+				EE4888691A9FDD9B00FCCA47 /* HMSegmentedControl.m */,
 				EE2C57D41A93DFC600DA9835 /* UIImageView+Letters.h */,
 				EE2C57D51A93DFC600DA9835 /* UIImageView+Letters.m */,
 				EE5027C61A965F1F0079DFFC /* NSString+Extensions.h */,
 				EE5027C71A965F1F0079DFFC /* NSString+Extensions.m */,
 				EE5027C91A98ED310079DFFC /* UIColor+ExtraColorTools.h */,
 				EE5027CA1A98ED310079DFFC /* UIColor+ExtraColorTools.m */,
+				EE808DB51A9FCCB10000F833 /* NSString+Fonts.h */,
+				EE808DB61A9FCCB10000F833 /* NSString+Fonts.m */,
 				EE9DAEE91A9D582200589897 /* RNFrostedSidebar.h */,
 				EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */,
 				EE0DC00C1A8C53A1000235B3 /* FoosPong-Prefix.pch */,
@@ -336,11 +347,14 @@
 				EE2C57E31A93F2BF00DA9835 /* Logging in */,
 				EE7A6CDD1A868402000447D2 /* AppDelegate.h */,
 				EE7A6CDE1A868402000447D2 /* AppDelegate.m */,
+				EE9DAEEE1A9EB91D00589897 /* MasterViewController.h */,
+				EE9DAEEF1A9EB91D00589897 /* MasterViewController.m */,
 				EE7A6D021A869169000447D2 /* InitialViewController.h */,
 				EE7A6D031A869169000447D2 /* InitialViewController.m */,
 				EE1A557B1A9CFAE000E6981E /* Scorekeeping */,
 				EE1A557A1A9CFA3E00E6981E /* Personal Profile */,
 				EE1A55821A9CFB9000E6981E /* Groups */,
+				EE808DB11A9FC3EA0000F833 /* Settings */,
 				EE2C57E41A93F51300DA9835 /* Controllers */,
 				EE2C57E51A93F52400DA9835 /* CustomCells */,
 				EE5027CC1A98F1180079DFFC /* Other */,
@@ -377,6 +391,15 @@
 				EE7A6CF41A868402000447D2 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EE808DB11A9FC3EA0000F833 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				EE808DAE1A9FC3E30000F833 /* SettingViewController.h */,
+				EE808DAF1A9FC3E30000F833 /* SettingViewController.m */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,6 +453,7 @@
 				TargetAttributes = {
 					EE7A6CD51A868401000447D2 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 92H4P6C5WB;
 					};
 					EE7A6CEE1A868402000447D2 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -526,9 +550,12 @@
 				EE0DC0121A8D96D8000235B3 /* GameController.m in Sources */,
 				EE7A6CDF1A868402000447D2 /* AppDelegate.m in Sources */,
 				EE3356F11A89610B00B83EC0 /* GameViewController.m in Sources */,
+				EE808DB71A9FCCB10000F833 /* NSString+Fonts.m in Sources */,
 				EE7A6D041A869169000447D2 /* InitialViewController.m in Sources */,
 				EE9DAEF61A9ECED800589897 /* FindGroupViewController.m in Sources */,
 				EE9DAEF01A9EB91D00589897 /* MasterViewController.m in Sources */,
+				EE808DB01A9FC3E30000F833 /* SettingViewController.m in Sources */,
+				EE48886A1A9FDD9B00FCCA47 /* HMSegmentedControl.m in Sources */,
 				EE7A6CDC1A868402000447D2 /* main.m in Sources */,
 				EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */,
 				302E41C71A86A195005F1184 /* ChoosePlayersViewController.m in Sources */,

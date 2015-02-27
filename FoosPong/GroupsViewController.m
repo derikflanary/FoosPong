@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UIButton *joinGroupButton;
 @property (nonatomic, strong) UIButton *createGroupButton;
 @property (nonatomic, strong) AddGroupViewController *addGroupViewController;
+@property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
 @end
 
@@ -21,13 +22,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.view.backgroundColor = [UIColor whiteColor];
+    // Do any additional setup after loading the view.
+
     
+    UIColor* mainColor = [UIColor mainColor];
+    UIColor* darkColor = [UIColor darkColor];
+    NSString* fontName = [NSString mainFont];
+    NSString* boldFontName = [NSString boldFont];
     
-    UIColor* mainColor = [UIColor colorWithRed:189.0/255 green:242.0/255 blue:139.0/255 alpha:1.0f];
-    UIColor* darkColor = [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:1.0f];
-    
-    NSString* fontName = @"Avenir-Book";
-    NSString* boldFontName = @"Avenir-Black";
+    UIBarButtonItem *addGroupButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createPressed:)];
+    self.tabBarController.navigationItem.rightBarButtonItem = addGroupButton;
+    self.tabBarController.navigationItem.hidesBackButton = YES;
 
     self.view.backgroundColor = [UIColor whiteColor];
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 80, 300, 100)];
@@ -54,7 +61,7 @@
 
     [self.view addSubview:self.createGroupButton];
     [self.view addSubview:self.joinGroupButton];
-    
+    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
     
 }
 
@@ -67,11 +74,10 @@
     
 }
 
-
-
 - (void)joinPressed:(id)sender{
     
     
+
 }
 
 - (void)didReceiveMemoryWarning {

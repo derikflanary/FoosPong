@@ -1,3 +1,4 @@
+
 //
 //  MainViewController.m
 //  FoosPong
@@ -10,6 +11,10 @@
 #import "HomeViewController.h"
 #import "GroupsViewController.h"
 #import "ProfileViewController.h"
+#import "HistoryViewController.h"
+#import "PersonalNotificationsViewController.h"
+#import "CurrentGroupViewController.h"
+
 #import "UserController.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
@@ -17,15 +22,22 @@
 #import "LogViewController.h"
 #import "RNFrostedSidebar.h"
 
+typedef NS_ENUM(NSInteger, SideBarSection) {
+    SideBarSectionLogin,
+    SideBarSectionMain,
+    SideBarSectionPersonal,
+    SideBarSectionGroups,
+    SideBarSectionSettings,
+};
+
+
 @interface InitialViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, RNFrostedSidebarDelegate>
 
-@property (nonatomic, strong) UITabBarController *tabBarController;
+@property (nonatomic, strong) UITabBarController *tabBarControllerProfile;
+@property (nonatomic, strong) UITabBarController *tabBarControllerGroup;
 @property (nonatomic, strong) UIButton *loginButton;
 @property (nonatomic, strong) UIButton *guestButton;
 @property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) HomeViewController *hvc;
-@property (nonatomic, strong) ProfileViewController *pvc;
-@property (nonatomic, strong) GroupsViewController *gvc;
 @property (nonatomic, strong) RNFrostedSidebar *sideBar;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
@@ -40,12 +52,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIBarButtonItem * sideBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"17"] style:UIBarButtonItemStylePlain target:self action:@selector(sideBarButtonPressed:)];
-    self.navigationItem.leftBarButtonItem = sideBarButton;
+    self.navigationItem.rightBarButtonItem = sideBarButton;
+   
     
-    UIColor* mainColor = [UIColor colorWithRed:189.0/255 green:242.0/255 blue:139.0/255 alpha:1.0f];
-    UIColor* darkColor = [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:1.0f];
-    NSString* fontName = @"Avenir-Book";
-    NSString* boldFontName = @"Avenir-Black";
+    UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipedLeft:)];
+    leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:leftSwipe];
+    
+    
+    UIColor* mainColor = [UIColor mainColor];
+    UIColor* darkColor = [UIColor darkColor];
+    NSString* fontName = [NSString mainFont];
+    NSString* boldFontName = [NSString boldFont];
     
     self.imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"FoosBallButton"]];
     self.imageView.frame = self.view.frame;
@@ -69,32 +87,29 @@
     [self.guestButton addTarget:self action:@selector(guestPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.guestButton];
     
-    //self.tabBarController = [UITabBarController new];
-    self.hvc = [HomeViewController new];
-    //self.hvc.tabBarItem.title = @"Main";
-    self.gvc = [GroupsViewController new];
-    //gvc.tabBarItem.title = @"Group";
-    self.pvc = [ProfileViewController new];
-    //self.pvc.tabBarItem.title = @"Profile";
-    //self.tabBarController.viewControllers = @[self.hvc, gvc, self.pvc];
-    
-    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
-    
+     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:0];
 }
 
+#pragma mark - SideBar
+
 - (void)sideBarButtonPressed:(id)sender{
+    
+    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:0];
+    
     NSArray *barImages = @[ [UIImage imageNamed:@"68"],
                             [UIImage imageNamed:@"85"],
                             [UIImage imageNamed:@"74"],
                             [UIImage imageNamed:@"70"],
                             [UIImage imageNamed:@"101"]];
     NSArray *colors = @[
-                        [UIColor colorWithRed:240/255.f green:159/255.f blue:254/255.f alpha:1],
-                        [UIColor colorWithRed:255/255.f green:137/255.f blue:167/255.f alpha:1],
-                        [UIColor colorWithRed:126/255.f green:242/255.f blue:195/255.f alpha:1],
-                        [UIColor colorWithRed:119/255.f green:152/255.f blue:255/255.f alpha:1],
-                        [UIColor colorWithRed:240/255.f green:159/255.f blue:254/255.f alpha:1]];
-   
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f]];
+
+    
+  
     
     self.sideBar = [[RNFrostedSidebar alloc] initWithImages:barImages selectedIndices:self.optionIndices borderColors:colors];
      self.sideBar.delegate = self;
@@ -104,41 +119,89 @@
 
 - (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index{
    
-    if (index == 1) {
-        [sidebar dismissAnimated:YES];
-        [sidebar dismissAnimated:YES completion:^(BOOL finished) {
-            if (finished) {
-                [self.navigationController pushViewController:self.hvc animated:YES];
-            }
-        }];
-    }
+    HomeViewController *hvc = [HomeViewController new];
+
+    UITabBarController *profileTabBar = [UITabBarController new];
+    HistoryViewController *historyVC = [HistoryViewController new];
+    PersonalNotificationsViewController *pnvc = [PersonalNotificationsViewController new];
+    ProfileViewController *pvc = [ProfileViewController new];
+    pvc.tabBarItem.title = @"Profile";
+    historyVC.tabBarItem.title = @"History";
+    pnvc.tabBarItem.title = @"Notifications";
+    profileTabBar.viewControllers = @[pvc, historyVC, pnvc];
     
-    if (index == 2) {
-        [sidebar dismissAnimated:YES];
+    UITabBarController *groupTabBar = [UITabBarController new];
+    GroupsViewController *gvc = [GroupsViewController new];
+    gvc.tabBarItem.title = @"Groups";
+    CurrentGroupViewController *cgvc = [CurrentGroupViewController new];
+    cgvc.tabBarItem.title = @"Current Group";
+    groupTabBar.viewControllers = @[gvc, cgvc];
+    
+    SideBarSection section = index;
+    
+    switch (section) {
+        case SideBarSectionLogin:{
+            break;
+        }
+            
+        case SideBarSectionMain:{
+            
+            [sidebar dismissAnimated:YES completion:^(BOOL finished) {
+                if (finished) {
+                    [self.navigationController pushViewController:hvc animated:YES];
+                    }
+                }];
+            break;
+        }
+            
+        case SideBarSectionPersonal:{
+   
         [sidebar dismissAnimated:YES completion:^(BOOL finished) {
-            if (finished) {
-                [self.navigationController pushViewController:self.pvc animated:YES];
-            }
-        }];
+                if (finished) {
+                    [self.navigationController pushViewController:profileTabBar animated:YES];
+                }
+            }];
+            break;
+        }
+            
+        case SideBarSectionGroups:{
+        
+            [sidebar dismissAnimated:YES completion:^(BOOL finished) {
+                if (finished) {
+                    [self.navigationController pushViewController:groupTabBar animated:YES];
+                }
+            }];
+            break;
+        }
+        case SideBarSectionSettings:{
+            break;
+        }
     }
-    if (index == 3) {
-        [sidebar dismissAnimated:YES];
-        [sidebar dismissAnimated:YES completion:^(BOOL finished) {
-            if (finished) {
-                [self.navigationController pushViewController:self.gvc animated:YES];
-            }
-        }];
-    }
-
-
 }
-//-(void)openLogIn:(id)selector{
-//    
-//    //LoginController4 *signInController = [LoginController4 new];
-//    LogViewController *logViewController = [LogViewController new];
-//    [self.navigationController pushViewController:logViewController animated:YES];
-//}
 
+- (void)swipedLeft:(id)sender{
+    NSArray *barImages = @[ [UIImage imageNamed:@"68"],
+                            [UIImage imageNamed:@"85"],
+                            [UIImage imageNamed:@"74"],
+                            [UIImage imageNamed:@"70"],
+                            [UIImage imageNamed:@"101"]];
+    NSArray *colors = @[
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
+                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f]];
+    
+    
+    
+    self.sideBar = [[RNFrostedSidebar alloc] initWithImages:barImages selectedIndices:self.optionIndices borderColors:colors];
+    self.sideBar.delegate = self;
+    [self.sideBar showAnimated:YES];
+    
+}
+
+
+#pragma mark - Login Buttons
 
 -(void)loginPressed:(id)selector{
     
@@ -159,11 +222,9 @@
 
 -(void)guestPressed:(id)sender{
     [[UserController sharedInstance] addGuestUser];
-
-    self.hvc.isGuest = YES;
-    [self.navigationController pushViewController:self.tabBarController animated:YES];
-       
-    
+    HomeViewController *hvc = [HomeViewController new];
+    hvc.isGuest = YES;
+    [self.navigationController pushViewController:hvc animated:YES];
     
 }
 

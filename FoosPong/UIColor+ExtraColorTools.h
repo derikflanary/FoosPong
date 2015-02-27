@@ -12,4 +12,8 @@
 
 + (UIColor *)randomColor;
 
++ (UIColor *)mainColor;
+
++ (UIColor *)darkColor;
+
 @end
