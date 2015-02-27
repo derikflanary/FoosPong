@@ -12,6 +12,7 @@
 #import "GameViewController.h"
 #import "UserController.h"
 #import "HMSegmentedControl.h"
+#import "TeamGameViewController.h"
 
 typedef NS_ENUM(NSInteger, TableViewSection) {
     TableViewSectionCurrent,
@@ -128,22 +129,21 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
             [self.navigationController pushViewController:gvc animated:YES];
         }
 
-    }else{
-        if ([self.currentPlayers count] < 2 && [self.teamTwoPlayers count] < 2) {
-            UIAlertController *notEnoughPlayersAlert = [UIAlertController alertControllerWithTitle:@"Only One Player" message:@"You must have two players on each team to play." preferredStyle:UIAlertControllerStyleAlert];
+    }else if(self.segmentedControl.selectedSegmentIndex == 1){
+        if ([self.currentPlayers count] < 2 || [self.teamTwoPlayers count] < 2) {
+            UIAlertController *notEnoughPlayersAlert = [UIAlertController alertControllerWithTitle:@"Not Enough Players" message:@"You must have two players on each team to play." preferredStyle:UIAlertControllerStyleAlert];
             [notEnoughPlayersAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
                 return;
             }]];
             [self presentViewController:notEnoughPlayersAlert animated:YES completion:nil];
         }else{
             
-            GameViewController *gvc = [GameViewController new];
-            gvc.playerOne = [self.currentPlayers objectAtIndex:0];
-            gvc.playerTwo = [self.currentPlayers objectAtIndex:1];
-            [self.navigationController pushViewController:gvc animated:YES];
+            TeamGameViewController *tgvc = [TeamGameViewController new];
+            
+            [self.navigationController pushViewController:tgvc animated:YES];
         }
 
-        }
+    }
 }
 
 
