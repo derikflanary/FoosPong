@@ -102,7 +102,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
         case SideBarSectionLogin:{
             [sidebar dismissAnimated:YES completion:^(BOOL finished) {
                 self.navigationController.viewControllers = @[ivc];
-                //[self.navigationController pushViewController:ivc animated:YES];
+//                [self.navigationController pushViewController:ivc animated:YES];
             }];
             break;
         }
@@ -112,7 +112,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
             [sidebar dismissAnimated:YES completion:^(BOOL finished) {
                 if (finished) {
                     self.navigationController.viewControllers = @[hvc];
-                    //[self.navigationController pushViewController:hvc animated:YES];
+//                    [self.navigationController pushViewController:hvc animated:YES];
                 }
             }];
             break;
@@ -123,7 +123,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
             [sidebar dismissAnimated:YES completion:^(BOOL finished) {
                 if (finished) {
                     self.navigationController.viewControllers = @[profileTabBar];
-                    //[self.navigationController pushViewController:profileTabBar animated:YES];
+//                    [self.navigationController pushViewController:profileTabBar animated:YES];
                 }
             }];
             break;

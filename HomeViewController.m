@@ -89,9 +89,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ChoosePlayersViewController * newGameViewController = [ChoosePlayersViewController new];
-    if (indexPath.row == 0) {
-        [self.navigationController pushViewController:newGameViewController animated:YES];
-    }
+    
+    [self.navigationController pushViewController:newGameViewController animated:YES];
+//    if (indexPath.row == 0) {
+//        [self.navigationController presentViewController:newGameViewController animated:YES completion:^{
+//            
+//        }];
+//    }
     
 }
 

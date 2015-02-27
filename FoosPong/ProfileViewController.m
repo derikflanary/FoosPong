@@ -40,7 +40,7 @@
     segmentedControl.verticalDividerColor = [UIColor darkColor];
     [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:segmentedControl];
-    
+    //[self.tabBarController.navigationController.navigationItem.titleView addSubview:segmentedControl];
     
     
     PFUser *currentUser = [PFUser currentUser];

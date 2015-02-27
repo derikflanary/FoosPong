@@ -22,6 +22,7 @@
 #import "LogViewController.h"
 #import "RNFrostedSidebar.h"
 
+
 typedef NS_ENUM(NSInteger, SideBarSection) {
     SideBarSectionLogin,
     SideBarSectionMain,

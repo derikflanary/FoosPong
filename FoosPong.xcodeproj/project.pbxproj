@@ -13,6 +13,9 @@
 		EE0DC00B1A8C4604000235B3 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE0DC00A1A8C4604000235B3 /* ParseUI.framework */; };
 		EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC00E1A8D9456000235B3 /* UserController.m */; };
 		EE0DC0121A8D96D8000235B3 /* GameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC0111A8D96D8000235B3 /* GameController.m */; };
+		EE10807E1AA0069500D760AC /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE10807C1AA0069500D760AC /* Crashlytics.framework */; };
+		EE10807F1AA0069500D760AC /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE10807D1AA0069500D760AC /* Fabric.framework */; };
+		EE1080821AA00D1800D760AC /* DSNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1080811AA00D1800D760AC /* DSNavigationBar.m */; };
 		EE1A557E1A9CFB3000E6981E /* GroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A557D1A9CFB3000E6981E /* GroupsViewController.m */; };
 		EE1A55811A9CFB4A00E6981E /* CurrentGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A55801A9CFB4A00E6981E /* CurrentGroupViewController.m */; };
 		EE1A55851A9CFBB500E6981E /* GroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A55841A9CFBB500E6981E /* GroupController.m */; };
@@ -83,6 +86,10 @@
 		EE0DC00E1A8D9456000235B3 /* UserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserController.m; sourceTree = "<group>"; };
 		EE0DC0101A8D96D8000235B3 /* GameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameController.h; sourceTree = "<group>"; };
 		EE0DC0111A8D96D8000235B3 /* GameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameController.m; sourceTree = "<group>"; };
+		EE10807C1AA0069500D760AC /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		EE10807D1AA0069500D760AC /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		EE1080801AA00D1800D760AC /* DSNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSNavigationBar.h; path = "../../../../Downloads/DSTransparentNavigationBar-master/DSNavigationBar/DSNavigationBar.h"; sourceTree = "<group>"; };
+		EE1080811AA00D1800D760AC /* DSNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSNavigationBar.m; path = "../../../../Downloads/DSTransparentNavigationBar-master/DSNavigationBar/DSNavigationBar.m"; sourceTree = "<group>"; };
 		EE1A557C1A9CFB3000E6981E /* GroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupsViewController.h; sourceTree = "<group>"; };
 		EE1A557D1A9CFB3000E6981E /* GroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupsViewController.m; sourceTree = "<group>"; };
 		EE1A557F1A9CFB4A00E6981E /* CurrentGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentGroupViewController.h; sourceTree = "<group>"; };
@@ -163,6 +170,7 @@
 			files = (
 				EE3357381A8C1CE600B83EC0 /* QuartzCore.framework in Frameworks */,
 				EE9DAEED1A9D583500589897 /* Accelerate.framework in Frameworks */,
+				EE10807E1AA0069500D760AC /* Crashlytics.framework in Frameworks */,
 				EE3357461A8C202600B83EC0 /* Accounts.framework in Frameworks */,
 				EE3357441A8C200F00B83EC0 /* Social.framework in Frameworks */,
 				EE3357421A8C1D2D00B83EC0 /* libsqlite3.dylib in Frameworks */,
@@ -171,6 +179,7 @@
 				EE33573C1A8C1CFB00B83EC0 /* StoreKit.framework in Frameworks */,
 				EE33573A1A8C1CF100B83EC0 /* Security.framework in Frameworks */,
 				EE3357361A8C1CDB00B83EC0 /* MobileCoreServices.framework in Frameworks */,
+				EE10807F1AA0069500D760AC /* Fabric.framework in Frameworks */,
 				EE0DC00B1A8C4604000235B3 /* ParseUI.framework in Frameworks */,
 				EE3357341A8C1CD100B83EC0 /* CoreLocation.framework in Frameworks */,
 				EE3357321A8C1CC900B83EC0 /* CoreGraphics.framework in Frameworks */,
@@ -204,6 +213,8 @@
 		AED8EE843DD92B7D2CCC995D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EE10807C1AA0069500D760AC /* Crashlytics.framework */,
+				EE10807D1AA0069500D760AC /* Fabric.framework */,
 				EE9DAEEC1A9D583500589897 /* Accelerate.framework */,
 				EE0DC00A1A8C4604000235B3 /* ParseUI.framework */,
 				EE3357451A8C202600B83EC0 /* Accounts.framework */,
@@ -303,6 +314,8 @@
 		EE5027CC1A98F1180079DFFC /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				EE1080801AA00D1800D760AC /* DSNavigationBar.h */,
+				EE1080811AA00D1800D760AC /* DSNavigationBar.m */,
 				EE4888681A9FDD9B00FCCA47 /* HMSegmentedControl.h */,
 				EE4888691A9FDD9B00FCCA47 /* HMSegmentedControl.m */,
 				EE2C57D41A93DFC600DA9835 /* UIImageView+Letters.h */,
@@ -414,6 +427,7 @@
 				EE7A6CD31A868401000447D2 /* Frameworks */,
 				EE7A6CD41A868401000447D2 /* Resources */,
 				92310D5901CFDBFE94C2D717 /* Copy Pods Resources */,
+				EE10807B1AA0061700D760AC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -531,6 +545,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		EE10807B1AA0061700D760AC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run c9541433c5e713982968e55e36e018d8a5a9e7a8 cd626cccc3c7f65515208d4e7c39df59501edd5a3e9f961b6e2269fe87d98721";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -561,6 +588,7 @@
 				302E41C71A86A195005F1184 /* ChoosePlayersViewController.m in Sources */,
 				EE2C57D61A93DFC600DA9835 /* UIImageView+Letters.m in Sources */,
 				EE5027C81A965F1F0079DFFC /* NSString+Extensions.m in Sources */,
+				EE1080821AA00D1800D760AC /* DSNavigationBar.m in Sources */,
 				EE7A6D0A1A869CD4000447D2 /* HistoryViewController.m in Sources */,
 				EE2C57E21A93F12300DA9835 /* SignUpViewController.m in Sources */,
 				EE5027CB1A98ED310079DFFC /* UIColor+ExtraColorTools.m in Sources */,

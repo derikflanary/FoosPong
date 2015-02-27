@@ -15,6 +15,9 @@
 //#import "CurrentGroupViewController.h"
 //#import "PersonalNotificationsViewController.h"
 #import <Parse/Parse.h>
+#import <Analytics.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 
 @interface AppDelegate ()
@@ -46,7 +49,22 @@
     
     [PFUser enableAutomaticUser];
     
+    [SEGAnalytics setupWithConfiguration:[SEGAnalyticsConfiguration configurationWithWriteKey:@"osIWhCUd5Y50pBl1YrHV1Grj4nHrL0eI"]];
+    
+    
+//    [[SEGAnalytics sharedAnalytics] identify:@"f4ca124298"
+//                                      traits:@{ @"name": @"Michael Bluth",
+//                                                @"email": @"mbluth@bluthhomes.com" }];
+//    [[SEGAnalytics sharedAnalytics] track:@"Signed Up"
+//                               properties:@{ @"plan": @"Enterprise" }];
+    
+    [Fabric with:@[CrashlyticsKit]];
+    
+    //InitialViewController *ivc = [InitialViewController new];
+    
+    
     UINavigationController *mainNavController = [[UINavigationController alloc]initWithRootViewController:[InitialViewController new]];
+    
     self.window.rootViewController = mainNavController;
     
 //    HomeViewController *hvc = [HomeViewController new];
@@ -67,7 +85,8 @@
 //    CurrentGroupViewController *cgvc = [CurrentGroupViewController new];
 //    cgvc.tabBarItem.title = @"Current Group";
 //    groupTabBar.viewControllers = @[gvc, cgvc];
-    
+//    
+//    [mainNavController setViewControllers:@[hvc, profileTabBar, groupTabBar, ivc]];
     //mainNavController.viewControllers = @[ivc, hvc, profileTabBar, groupTabBar];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

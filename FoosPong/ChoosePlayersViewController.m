@@ -11,10 +11,12 @@
 #import "NewGameCustomTableViewCell.h"
 #import "GameViewController.h"
 #import "UserController.h"
+#import "HMSegmentedControl.h"
 
 typedef NS_ENUM(NSInteger, TableViewSection) {
     TableViewSectionCurrent,
-    TableViewSectionAvailable
+    TableViewSectionAvailable,
+    TableViewSectionTeamTwo
 };
 
 
@@ -26,6 +28,7 @@ typedef NS_ENUM(NSInteger, TableViewSection) {
 @property (nonatomic, strong)NSMutableArray *currentPlayers;
 @property (nonatomic, strong)UISearchController *searchController;
 @property (nonatomic, strong)NSMutableArray *filteredPlayers;
+@property (nonatomic, strong)HMSegmentedControl *segmentedControl;
 
 @end
 
@@ -36,6 +39,28 @@ typedef NS_ENUM(NSInteger, TableViewSection) {
 - (void)viewDidLoad {
         [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.navigationController.toolbarHidden = NO;
+//    UIBarButtonItem *addGuestButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Player" style:UIBarButtonItemStylePlain target:self action:@selector(addGuestPressed:)];
+//    
+    UIBarButtonItem * startGameButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Game" style:UIBarButtonItemStylePlain target:self action:@selector(startGame:)];
+    
+//    self.navigationItem.rightBarButtonItems= @[startGameButton, addGuestButton];
+
+    
+    self.segmentedControl = [[HMSegmentedControl alloc]initWithSectionTitles:@[@"1v1", @"2v2"]];
+
+    self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleBox;
+    self.segmentedControl.frame = CGRectMake(160, 0, 100, 44);
+    self.segmentedControl.selectionIndicatorColor = [UIColor darkColor];
+    self.segmentedControl.verticalDividerEnabled = YES;
+    [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+    [self.segmentedControl sizeToFit];
+    
+    UIBarButtonItem *seg = [[UIBarButtonItem alloc]initWithCustomView:self.segmentedControl];
+    [self setToolbarItems:@[startGameButton, seg]];
+    
+    
     self.tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStyleGrouped];
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
@@ -47,11 +72,6 @@ typedef NS_ENUM(NSInteger, TableViewSection) {
     self.currentPlayers = [NSMutableArray array];
     [self.currentPlayers insertObject:self.currentUser atIndex:0];
     
-    UIBarButtonItem *addGuestButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Player" style:UIBarButtonItemStylePlain target:self action:@selector(addGuestPressed:)];
-    
-    
-    UIBarButtonItem * startGameButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Game" style:UIBarButtonItemStylePlain target:self action:@selector(startGame:)];
-    self.navigationItem.rightBarButtonItems= @[startGameButton, addGuestButton];
     
     self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
     
@@ -66,6 +86,10 @@ typedef NS_ENUM(NSInteger, TableViewSection) {
     
     //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
+- (void)segmentedControlChangedValue:(id)sender{
+    [self.tableView reloadData];
+}
+
 -(void)startGame:(id)sender{
     
     if ([self.currentPlayers count] == 1) {
@@ -129,22 +153,35 @@ typedef NS_ENUM(NSInteger, TableViewSection) {
 #define NUMBER_OF_STATIC_CELLS  2
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    if (self.segmentedControl.selectedSegmentIndex == 1) {
+        return TableViewSectionTeamTwo + 1;
+    }else{
+    
     return TableViewSectionAvailable + 1;
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     
     TableViewSection tableViewSection = section;
-    switch (tableViewSection) {
-        case TableViewSectionCurrent:{
-            return @"Current Players";
-            break;
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        switch (tableViewSection) {
+            case TableViewSectionCurrent:{
+                return @"Team One Players";
+                break;
             }
-        case TableViewSectionAvailable:{
-            return @"Available Players";
-        }
+            case TableViewSectionAvailable:{
+                return @"Available Players";
+                break;
+            }
+            case TableViewSectionTeamTwo:{
+                return @"Team Two Players";
+                break;
+            }
+
     }
-    
+
+    }return @"Section";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -157,6 +194,9 @@ typedef NS_ENUM(NSInteger, TableViewSection) {
         }
         case TableViewSectionAvailable:{
            return [self.availablePlayers count];
+        }
+        case TableViewSectionTeamTwo:{
+            return [self.currentPlayers count];
         }
     }
 }
@@ -178,6 +218,9 @@ typedef NS_ENUM(NSInteger, TableViewSection) {
         case TableViewSectionAvailable:{
             NSDictionary *playerDict = [self.availablePlayers objectAtIndex:indexPath.row];
             cell.textLabel.text = [NSString stringWithFormat:@"%@", playerDict[@"username"]];
+            return cell;
+        }
+        case TableViewSectionTeamTwo:{
             return cell;
         }
     }
