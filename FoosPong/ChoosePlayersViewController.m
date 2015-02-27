@@ -35,6 +35,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 @property (nonatomic, strong)UISearchController *searchController;
 @property (nonatomic, strong)NSMutableArray *filteredPlayers;
 @property (nonatomic, strong)HMSegmentedControl *segmentedControl;
+@property (nonatomic, assign)BOOL isTwoPlayer;
 
 @end
 
@@ -89,6 +90,12 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     self.searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
     self.searchController.dimsBackgroundDuringPresentation = NO;
     
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        self.isTwoPlayer = NO;
+    }else{
+        self.isTwoPlayer = YES;
+    }
+    
     //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 - (void)segmentedControlChangedValue:(id)sender{
@@ -96,25 +103,49 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
         [self.availablePlayers addObjectsFromArray:self.teamTwoPlayers];
         [self.teamTwoPlayers removeAllObjects];
     }
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        self.isTwoPlayer = NO;
+    }else{
+        self.isTwoPlayer = YES;
+    }
     [self.tableView reloadData];
 }
 
 -(void)startGame:(id)sender{
     
-    if ([self.currentPlayers count] == 1) {
-        UIAlertController *notEnoughPlayersAlert = [UIAlertController alertControllerWithTitle:@"Only One Player" message:@"You must have two players to play." preferredStyle:UIAlertControllerStyleAlert];
-        [notEnoughPlayersAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-            return;
-        }]];
-        [self presentViewController:notEnoughPlayersAlert animated:YES completion:nil];
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        if ([self.currentPlayers count] == 1) {
+            UIAlertController *notEnoughPlayersAlert = [UIAlertController alertControllerWithTitle:@"Only One Player" message:@"You must have two players to play." preferredStyle:UIAlertControllerStyleAlert];
+            [notEnoughPlayersAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                return;
+            }]];
+            [self presentViewController:notEnoughPlayersAlert animated:YES completion:nil];
+        }else{
+            
+            GameViewController *gvc = [GameViewController new];
+            gvc.playerOne = [self.currentPlayers objectAtIndex:0];
+            gvc.playerTwo = [self.currentPlayers objectAtIndex:1];
+            [self.navigationController pushViewController:gvc animated:YES];
+        }
+
     }else{
-    
-    GameViewController *gvc = [GameViewController new];
-    gvc.playerOne = [self.currentPlayers objectAtIndex:0];
-    gvc.playerTwo = [self.currentPlayers objectAtIndex:1];
-    [self.navigationController pushViewController:gvc animated:YES];
-    }
+        if ([self.currentPlayers count] < 2 && [self.teamTwoPlayers count] < 2) {
+            UIAlertController *notEnoughPlayersAlert = [UIAlertController alertControllerWithTitle:@"Only One Player" message:@"You must have two players on each team to play." preferredStyle:UIAlertControllerStyleAlert];
+            [notEnoughPlayersAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                return;
+            }]];
+            [self presentViewController:notEnoughPlayersAlert animated:YES completion:nil];
+        }else{
+            
+            GameViewController *gvc = [GameViewController new];
+            gvc.playerOne = [self.currentPlayers objectAtIndex:0];
+            gvc.playerTwo = [self.currentPlayers objectAtIndex:1];
+            [self.navigationController pushViewController:gvc animated:YES];
+        }
+
+        }
 }
+
 
 -(void)addGuestPressed:(id)sender{
     
@@ -418,6 +449,11 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
                 [self.availablePlayers removeObject:user];
             }
         }
+        for (PFUser *user in self.teamTwoPlayers) {
+            if ([self.availablePlayers containsObject:user]) {
+                [self.availablePlayers removeObject:user];
+            }
+        }
         [self.tableView reloadData];
         return;
     }else{
@@ -434,6 +470,11 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     
     self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
     for (PFUser *user in self.currentPlayers) {
+        if ([self.availablePlayers containsObject:user]) {
+            [self.availablePlayers removeObject:user];
+        }
+    }
+    for (PFUser *user in self.teamTwoPlayers) {
         if ([self.availablePlayers containsObject:user]) {
             [self.availablePlayers removeObject:user];
         }
