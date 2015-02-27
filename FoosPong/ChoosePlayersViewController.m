@@ -16,7 +16,12 @@
 typedef NS_ENUM(NSInteger, TableViewSection) {
     TableViewSectionCurrent,
     TableViewSectionAvailable,
-    TableViewSectionTeamTwo
+};
+
+typedef NS_ENUM(NSInteger, TableView2TeamSection) {
+    TableView2TeamSectionTeam1,
+    TableView2TeamSectionTeam2,
+    TableView2TeamSectionAvailable
 };
 
 
@@ -26,6 +31,7 @@ typedef NS_ENUM(NSInteger, TableViewSection) {
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSMutableArray *availablePlayers;
 @property (nonatomic, strong)NSMutableArray *currentPlayers;
+@property (nonatomic, strong)NSMutableArray *teamTwoPlayers;
 @property (nonatomic, strong)UISearchController *searchController;
 @property (nonatomic, strong)NSMutableArray *filteredPlayers;
 @property (nonatomic, strong)HMSegmentedControl *segmentedControl;
@@ -41,12 +47,11 @@ typedef NS_ENUM(NSInteger, TableViewSection) {
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.navigationController.toolbarHidden = NO;
-//    UIBarButtonItem *addGuestButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Player" style:UIBarButtonItemStylePlain target:self action:@selector(addGuestPressed:)];
-//    
+    UIBarButtonItem *addGuestButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Player" style:UIBarButtonItemStylePlain target:self action:@selector(addGuestPressed:)];
+//
     UIBarButtonItem * startGameButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Game" style:UIBarButtonItemStylePlain target:self action:@selector(startGame:)];
     
 //    self.navigationItem.rightBarButtonItems= @[startGameButton, addGuestButton];
-
     
     self.segmentedControl = [[HMSegmentedControl alloc]initWithSectionTitles:@[@"1v1", @"2v2"]];
 
@@ -55,13 +60,13 @@ typedef NS_ENUM(NSInteger, TableViewSection) {
     self.segmentedControl.selectionIndicatorColor = [UIColor darkColor];
     self.segmentedControl.verticalDividerEnabled = YES;
     [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-    [self.segmentedControl sizeToFit];
+//    [self.segmentedControl sizeToFit];
     
     UIBarButtonItem *seg = [[UIBarButtonItem alloc]initWithCustomView:self.segmentedControl];
-    [self setToolbarItems:@[startGameButton, seg]];
+    [self setToolbarItems:@[addGuestButton, seg, startGameButton]];
     
     
-    self.tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStylePlain];
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -72,8 +77,8 @@ typedef NS_ENUM(NSInteger, TableViewSection) {
     self.currentPlayers = [NSMutableArray array];
     [self.currentPlayers insertObject:self.currentUser atIndex:0];
     
-    
     self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
+    self.teamTwoPlayers = [NSMutableArray array];
     
     self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
     [self.searchController.searchBar sizeToFit];
@@ -87,6 +92,10 @@ typedef NS_ENUM(NSInteger, TableViewSection) {
     //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 - (void)segmentedControlChangedValue:(id)sender{
+    if (self.teamTwoPlayers.count > 0) {
+        [self.availablePlayers addObjectsFromArray:self.teamTwoPlayers];
+        [self.teamTwoPlayers removeAllObjects];
+    }
     [self.tableView reloadData];
 }
 
@@ -153,51 +162,81 @@ typedef NS_ENUM(NSInteger, TableViewSection) {
 #define NUMBER_OF_STATIC_CELLS  2
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (self.segmentedControl.selectedSegmentIndex == 1) {
-        return TableViewSectionTeamTwo + 1;
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        return TableViewSectionAvailable + 1;
     }else{
     
-    return TableViewSectionAvailable + 1;
+    return TableView2TeamSectionAvailable + 1;
     }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     
-    TableViewSection tableViewSection = section;
+    
     if (self.segmentedControl.selectedSegmentIndex == 0) {
+        TableViewSection tableViewSection = section;
         switch (tableViewSection) {
             case TableViewSectionCurrent:{
-                return @"Team One Players";
+                return @"Current Players";
                 break;
             }
             case TableViewSectionAvailable:{
                 return @"Available Players";
-                break;
             }
-            case TableViewSectionTeamTwo:{
-                return @"Team Two Players";
-                break;
-            }
+        }
 
+    }else{
+        TableView2TeamSection tableView2TeamSection = section;
+        switch (tableView2TeamSection) {
+            case TableView2TeamSectionTeam1:{
+                return @"Team One";
+                break;
+            }
+            case TableView2TeamSectionTeam2:{
+                return @"Team Two";
+                break;
+            }
+            case TableView2TeamSectionAvailable:{
+                return @"Available Players";
+                break;
+            }
+                
+        }
     }
-
-    }return @"Section";
 }
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
     TableViewSection tableViewSection = section;
-    switch (tableViewSection) {
-        case TableViewSectionCurrent:{
-            return [self.currentPlayers count];
-            break;
+        switch (tableViewSection) {
+            case TableViewSectionCurrent:{
+                return [self.currentPlayers count];
+                break;
+            }
+            case TableViewSectionAvailable:{
+                return [self.availablePlayers count];
+            }
         }
-        case TableViewSectionAvailable:{
-           return [self.availablePlayers count];
+    }else{
+        TableView2TeamSection tableView2TeamSection = section;
+        switch (tableView2TeamSection) {
+            case TableView2TeamSectionTeam1:{
+                return [self.currentPlayers count];
+                break;
+            }
+            case TableView2TeamSectionTeam2:{
+                return [self.teamTwoPlayers count];
+                break;
+            }
+            case TableView2TeamSectionAvailable:{
+                return [self.availablePlayers count];
+                break;
+            }
+                
         }
-        case TableViewSectionTeamTwo:{
-            return [self.currentPlayers count];
-        }
+
     }
 }
 
@@ -207,21 +246,45 @@ typedef NS_ENUM(NSInteger, TableViewSection) {
     if (!cell){
         cell = [NewGameCustomTableViewCell new];
     }
-    TableViewSection tableViewSection = indexPath.section;
-    switch (tableViewSection) {
-        case TableViewSectionCurrent:{
-            NSDictionary *playerDict = [self.currentPlayers objectAtIndex:indexPath.row];
-            cell.textLabel.text = [NSString stringWithFormat:@"%@", playerDict[@"username"]];
-            return cell;
-            break;
+    
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        TableViewSection tableViewSection = indexPath.section;
+        switch (tableViewSection) {
+            case TableViewSectionCurrent:{
+                NSDictionary *playerDict = [self.currentPlayers objectAtIndex:indexPath.row];
+                cell.textLabel.text = [NSString stringWithFormat:@"%@", playerDict[@"username"]];
+                return cell;
+                break;
+            }
+            case TableViewSectionAvailable:{
+                NSDictionary *playerDict = [self.availablePlayers objectAtIndex:indexPath.row];
+                cell.textLabel.text = [NSString stringWithFormat:@"%@", playerDict[@"username"]];
+                return cell;
+            }
         }
-        case TableViewSectionAvailable:{
-            NSDictionary *playerDict = [self.availablePlayers objectAtIndex:indexPath.row];
-            cell.textLabel.text = [NSString stringWithFormat:@"%@", playerDict[@"username"]];
-            return cell;
-        }
-        case TableViewSectionTeamTwo:{
-            return cell;
+    }else{
+        TableView2TeamSection tableView2TeamSection = indexPath.section;
+        switch (tableView2TeamSection) {
+            case TableView2TeamSectionTeam1:{
+                NSDictionary *playerDict = [self.currentPlayers objectAtIndex:indexPath.row];
+                cell.textLabel.text = [NSString stringWithFormat:@"%@", playerDict[@"username"]];
+                return cell;
+                break;
+
+            }
+            case TableView2TeamSectionTeam2:{
+                NSDictionary *playerDict = [self.teamTwoPlayers objectAtIndex:indexPath.row];
+                cell.textLabel.text = [NSString stringWithFormat:@"%@", playerDict[@"username"]];
+                return cell;
+                break;
+
+            }
+            case TableView2TeamSectionAvailable:{
+                NSDictionary *playerDict = [self.availablePlayers objectAtIndex:indexPath.row];
+                cell.textLabel.text = [NSString stringWithFormat:@"%@", playerDict[@"username"]];
+                return cell;
+
+            }
         }
     }
 }
@@ -237,38 +300,95 @@ typedef NS_ENUM(NSInteger, TableViewSection) {
 - (NSIndexPath *)tableView:(UITableView *)tableView
 targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
        toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath{
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        if (proposedDestinationIndexPath.section == 0 && self.currentPlayers.count == 2) {
+            return sourceIndexPath;
+        }else{
     
-    if (proposedDestinationIndexPath.section == 0 && self.currentPlayers.count == 2) {
-        return sourceIndexPath;
+            return proposedDestinationIndexPath;
+        }
     }else{
-    
-        return proposedDestinationIndexPath;
+        if (proposedDestinationIndexPath.section == 0 && self.currentPlayers.count == 2) {
+            return sourceIndexPath;
+        }else if(proposedDestinationIndexPath.section == 1 && self.teamTwoPlayers.count ==2){
+            return sourceIndexPath;
+        }else{
+            return proposedDestinationIndexPath;
+        }
     }
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     
-    if (sourceIndexPath.section == 1 && destinationIndexPath.section == 0) {
-        PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
-        [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
-        [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
+    if (self.segmentedControl.selectedSegmentIndex == 0){
+        if (sourceIndexPath.section == 1 && destinationIndexPath.section == 0) {
+            PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
+            [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
+            [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
+        }
+        if (sourceIndexPath.section == 1 && destinationIndexPath.section == 1) {
+            PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
+            [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
+            [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
+        }
+        if (sourceIndexPath.section == 0 && destinationIndexPath.section == 0) {
+            PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
+            [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
+            [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
+        }
+        if (sourceIndexPath.section == 0 && destinationIndexPath.section == 1) {
+            PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
+            [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
+            [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
+        }
+    }else{
+        if (sourceIndexPath.section == 1 && destinationIndexPath.section == 0) {
+            PFUser *user = [self.teamTwoPlayers objectAtIndex:sourceIndexPath.row];
+            [self.teamTwoPlayers removeObjectAtIndex:sourceIndexPath.row];
+            [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
+        }
+        if (sourceIndexPath.section == 0 && destinationIndexPath.section == 1) {
+            PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
+            [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
+            [self.teamTwoPlayers insertObject:user atIndex:destinationIndexPath.row];
+        }
+        if (sourceIndexPath.section == 2 && destinationIndexPath.section == 0) {
+            PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
+            [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
+            [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
+        }
+        if (sourceIndexPath.section == 0 && destinationIndexPath.section == 2) {
+            PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
+            [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
+            [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
+        }
+        if (sourceIndexPath.section == 2 && destinationIndexPath.section == 1) {
+            PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
+            [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
+            [self.teamTwoPlayers insertObject:user atIndex:destinationIndexPath.row];
+        }
+        if (sourceIndexPath.section == 1 && destinationIndexPath.section == 2) {
+            PFUser *user = [self.teamTwoPlayers objectAtIndex:sourceIndexPath.row];
+            [self.teamTwoPlayers removeObjectAtIndex:sourceIndexPath.row];
+            [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
+        }
+        if (sourceIndexPath.section == 1 && destinationIndexPath.section == 1) {
+            PFUser *user = [self.teamTwoPlayers objectAtIndex:sourceIndexPath.row];
+            [self.teamTwoPlayers removeObjectAtIndex:sourceIndexPath.row];
+            [self.teamTwoPlayers insertObject:user atIndex:destinationIndexPath.row];
+        }
+        if (sourceIndexPath.section == 0 && destinationIndexPath.section == 0) {
+            PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
+            [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
+            [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
+        }
+        if (sourceIndexPath.section == 2 && destinationIndexPath.section == 2) {
+            PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
+            [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
+            [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
+        }
     }
-    if (sourceIndexPath.section == 1 && destinationIndexPath.section == 1) {
-        PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
-        [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
-        [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
-    }
-    if (sourceIndexPath.section == 0 && destinationIndexPath.section == 0) {
-        PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
-        [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
-        [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
-    }
-    if (sourceIndexPath.section == 0 && destinationIndexPath.section == 1) {
-        PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
-        [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
-        [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
-    }
-    
+    NSLog(@"%lu", self.teamTwoPlayers.count);
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -279,6 +399,10 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 
 - (BOOL)tableView:(UITableView *)tableview shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 44;
 }
 
 #pragma mark - SearchController

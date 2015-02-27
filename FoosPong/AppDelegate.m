@@ -16,8 +16,8 @@
 //#import "PersonalNotificationsViewController.h"
 #import <Parse/Parse.h>
 #import <Analytics.h>
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
+//#import <Fabric/Fabric.h>
+//#import <Crashlytics/Crashlytics.h>
 
 
 @interface AppDelegate ()
@@ -58,7 +58,7 @@
 //    [[SEGAnalytics sharedAnalytics] track:@"Signed Up"
 //                               properties:@{ @"plan": @"Enterprise" }];
     
-    [Fabric with:@[CrashlyticsKit]];
+//    [Fabric with:@[CrashlyticsKit]];
     
     //InitialViewController *ivc = [InitialViewController new];
     
