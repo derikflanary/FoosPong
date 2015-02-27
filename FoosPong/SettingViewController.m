@@ -10,6 +10,8 @@
 
 @interface SettingViewController ()
 
+@property (nonatomic, strong) NSMutableIndexSet *optionIndices;
+
 @end
 
 @implementation SettingViewController
@@ -17,6 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:4];
     // Do any additional setup after loading the view.
 }
 

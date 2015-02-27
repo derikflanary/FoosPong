@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MasterViewController.h"
 
-@interface InitialViewController : UIViewController
+@interface InitialViewController : MasterViewController
 
 @end

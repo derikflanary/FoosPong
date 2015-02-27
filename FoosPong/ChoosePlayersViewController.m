@@ -139,8 +139,11 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
         }else{
             
             TeamGameViewController *tgvc = [TeamGameViewController new];
+            UINavigationController *teamGameNavController = [[UINavigationController alloc]initWithRootViewController:tgvc];
             
-            [self.navigationController pushViewController:tgvc animated:YES];
+            [self.navigationController presentViewController:teamGameNavController animated:YES completion:^{
+                
+            }];
         }
 
     }

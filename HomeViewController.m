@@ -14,9 +14,8 @@
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *pingPongTableView;
-@property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 @property (nonatomic, strong) HomeViewController *hvc;
-
+@property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
 @end
 
@@ -46,11 +45,8 @@
     self.pingPongTableView.delegate = self;
     [self.view addSubview:self.pingPongTableView];
     self.pingPongTableView.scrollEnabled = NO;
-    
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
     
-    //[self.pingPongTableView registerClass:[UITableView class] forCellWithReuseIdentifier:@"cell"];
-    // Do any additional setup after loading the view.
 }
 #pragma mark - TableView Datasource
 

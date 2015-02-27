@@ -27,13 +27,13 @@
     // Do any additional setup after loading the view.
 
     
-    UIColor* mainColor = [UIColor mainColor];
+//    UIColor* mainColor = [UIColor mainColor];
     UIColor* darkColor = [UIColor darkColor];
-    NSString* fontName = [NSString mainFont];
+//    NSString* fontName = [NSString mainFont];
     NSString* boldFontName = [NSString boldFont];
     
-    UIBarButtonItem *addGroupButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createPressed:)];
-    self.tabBarController.navigationItem.rightBarButtonItem = addGroupButton;
+//    UIBarButtonItem *addGroupButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createPressed:)];
+//    self.tabBarController.navigationItem.rightBarButtonItem = addGroupButton;
     self.tabBarController.navigationItem.hidesBackButton = YES;
 
     self.view.backgroundColor = [UIColor whiteColor];
@@ -68,7 +68,8 @@
 - (void)createPressed:(id)sender{
     
     self.addGroupViewController = [AddGroupViewController new];
-    [self presentViewController:self.addGroupViewController animated:YES completion:^{
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:self.addGroupViewController];
+    [self presentViewController:navController animated:YES completion:^{
         
     }];
     

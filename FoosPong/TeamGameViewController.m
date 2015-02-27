@@ -21,7 +21,7 @@
 @property (nonatomic, assign)BOOL *teamTwoWin;
 @property (nonatomic, assign)NSNumber *teamOneScore;
 @property (nonatomic, assign)NSNumber *teamTwoScore;
-
+@property (nonatomic, assign)float scoreToWin;
 @end
 
 @implementation TeamGameViewController
@@ -29,7 +29,52 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.scoreToWin = 10;
+    
+    
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
     // Do any additional setup after loading the view.
+    
+    //Stepper 1
+    //__block TeamGameViewController *bSelf = self;
+    self.stepperTeamOne = [[PKYStepper alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 100)];
+    self.stepperTeamOne.valueChangedCallback = ^(PKYStepper *stepper, float count) {
+        stepper.countLabel.text = [NSString stringWithFormat:@"%@: %@",@"Team One", @(count)];
+    };
+    [self.stepperTeamOne setup];
+    self.stepperTeamOne.maximum = self.scoreToWin;
+    [self.view addSubview:self.stepperTeamOne];
+    
+    //Stepper 2
+    self.stepperTeamTwo = [[PKYStepper alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 100)];
+    self.stepperTeamTwo.valueChangedCallback = ^(PKYStepper *stepper, float count) {
+        stepper.countLabel.text = [NSString stringWithFormat:@"%@: %@",@"Team Two", @(count)];
+    };
+    [self.stepperTeamTwo setup];
+    self.stepperTeamTwo.maximum = self.scoreToWin;
+    [self.view addSubview:self.stepperTeamTwo];
+    
+    [self.stepperTeamOne.countLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
+    
+    [self.stepperTeamTwo.countLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
+
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+}
+
+- (void)dealloc {
+    
+    [self.stepperTeamOne.countLabel removeObserver:self forKeyPath:@"text"];
+    [self.stepperTeamTwo.countLabel removeObserver:self forKeyPath:@"text"];
+    //[super dealloc];
+}
+
+- (void)cancelPressed:(id)sender{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

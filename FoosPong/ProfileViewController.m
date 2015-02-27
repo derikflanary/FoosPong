@@ -30,7 +30,7 @@
     NSArray *images = @[[UIImage imageNamed:@"74"],
                         [UIImage imageNamed:@"17"],
                         [UIImage imageNamed:@"167"]];
-    NSArray *titles = @[@"Profile", @"History", @"Messages"];
+//    NSArray *titles = @[@"Profile", @"History", @"Messages"];
 
     HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc]initWithSectionImages:images sectionSelectedImages:images];
     segmentedControl.frame = CGRectMake(10, 60, 300, 60);

@@ -38,18 +38,22 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipedLeft:)];
+    UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(sideBarButtonPressed:)];
     leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:leftSwipe];;
-
     
+    UIBarButtonItem * sideBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"17"] style:UIBarButtonItemStylePlain target:self action:@selector(sideBarButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = sideBarButton;
+
+    self.tabBarController.navigationItem.rightBarButtonItem = sideBarButton;
+     
     // Do any additional setup after loading the view.
 }
 
 
 - (void)sideBarButtonPressed:(id)sender{
     
-    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:0];
+   
     
     NSArray *barImages = @[ [UIImage imageNamed:@"68"],
                             [UIImage imageNamed:@"85"],
@@ -101,29 +105,30 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     switch (section) {
         case SideBarSectionLogin:{
             [sidebar dismissAnimated:YES completion:^(BOOL finished) {
+               
                 self.navigationController.viewControllers = @[ivc];
-//                [self.navigationController pushViewController:ivc animated:YES];
+                
             }];
             break;
         }
-            
         case SideBarSectionMain:{
             
             [sidebar dismissAnimated:YES completion:^(BOOL finished) {
                 if (finished) {
+               
                     self.navigationController.viewControllers = @[hvc];
-//                    [self.navigationController pushViewController:hvc animated:YES];
+                    
                 }
             }];
             break;
         }
-            
         case SideBarSectionPersonal:{
             
             [sidebar dismissAnimated:YES completion:^(BOOL finished) {
                 if (finished) {
+               
                     self.navigationController.viewControllers = @[profileTabBar];
-//                    [self.navigationController pushViewController:profileTabBar animated:YES];
+                    
                 }
             }];
             break;
@@ -133,8 +138,9 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
             
             [sidebar dismissAnimated:YES completion:^(BOOL finished) {
                 if (finished) {
+
                     self.navigationController.viewControllers = @[groupTabBar];
-                    //[self.navigationController pushViewController:groupTabBar animated:YES];
+
                 }
             }];
             break;
@@ -142,6 +148,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
         case SideBarSectionSettings:{
             [sidebar dismissAnimated:YES completion:^(BOOL finished) {
                 if (finished) {
+                    
                     self.navigationController.viewControllers = @[svc];
                     
                 }
@@ -150,27 +157,6 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
             break;
         }
     }
-}
-
-- (void)swipedLeft:(id)sender{
-    NSArray *barImages = @[ [UIImage imageNamed:@"68"],
-                            [UIImage imageNamed:@"85"],
-                            [UIImage imageNamed:@"74"],
-                            [UIImage imageNamed:@"70"],
-                            [UIImage imageNamed:@"101"]];
-    NSArray *colors = @[
-                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
-                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
-                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
-                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
-                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f]];
-    
-    
-    
-    self.sideBar = [[RNFrostedSidebar alloc] initWithImages:barImages selectedIndices:self.optionIndices borderColors:colors];
-    self.sideBar.delegate = self;
-    [self.sideBar showAnimated:YES];
-    
 }
 
 
