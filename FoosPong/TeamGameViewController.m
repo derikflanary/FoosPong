@@ -13,15 +13,17 @@
 
 @interface TeamGameViewController ()
 
-@property (nonatomic, strong)NSArray *teamOne;
-@property (nonatomic, strong)NSArray *teamTwo;
 @property (nonatomic, strong)PKYStepper *stepperTeamOne;
 @property (nonatomic, strong)PKYStepper *stepperTeamTwo;
-@property (nonatomic, assign)BOOL *teamOneWin;
-@property (nonatomic, assign)BOOL *teamTwoWin;
+@property (nonatomic, assign)BOOL teamOneWin;
 @property (nonatomic, assign)NSNumber *teamOneScore;
 @property (nonatomic, assign)NSNumber *teamTwoScore;
 @property (nonatomic, assign)float scoreToWin;
+@property (nonatomic, strong)NSString *t1p1;
+@property (nonatomic, strong)NSString *t1p2;
+@property (nonatomic, strong)NSString *t2p1;
+@property (nonatomic, strong)NSString *t2p2;
+
 @end
 
 @implementation TeamGameViewController
@@ -33,14 +35,22 @@
     
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
+    
     self.navigationItem.leftBarButtonItem = cancelButton;
-    // Do any additional setup after loading the view.
+    PFUser *player = [self.teamOne objectAtIndex:0];
+    self.t1p1 = player.username;
+    player = [self.teamOne objectAtIndex:1];
+    self.t1p2 = player.username;
+    player = [self.teamTwo objectAtIndex:0];
+    self.t2p1 = player.username;
+    player = [self.teamTwo objectAtIndex:1];
+    self.t2p2 = player.username;
     
     //Stepper 1
-    //__block TeamGameViewController *bSelf = self;
+    __block TeamGameViewController *bSelf = self;
     self.stepperTeamOne = [[PKYStepper alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 100)];
     self.stepperTeamOne.valueChangedCallback = ^(PKYStepper *stepper, float count) {
-        stepper.countLabel.text = [NSString stringWithFormat:@"%@: %@",@"Team One", @(count)];
+        stepper.countLabel.text = [NSString stringWithFormat:@"%@: %@",[NSString stringWithFormat:@"%@ & %@",bSelf.t1p1, bSelf.t1p2], @(count)];
     };
     [self.stepperTeamOne setup];
     self.stepperTeamOne.maximum = self.scoreToWin;
@@ -49,19 +59,71 @@
     //Stepper 2
     self.stepperTeamTwo = [[PKYStepper alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 100)];
     self.stepperTeamTwo.valueChangedCallback = ^(PKYStepper *stepper, float count) {
-        stepper.countLabel.text = [NSString stringWithFormat:@"%@: %@",@"Team Two", @(count)];
+        stepper.countLabel.text = [NSString stringWithFormat:@"%@: %@",[NSString stringWithFormat:@"%@ & %@",bSelf.t2p1, bSelf.t2p2], @(count)];
     };
     [self.stepperTeamTwo setup];
     self.stepperTeamTwo.maximum = self.scoreToWin;
     [self.view addSubview:self.stepperTeamTwo];
     
+
     [self.stepperTeamOne.countLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
     
     [self.stepperTeamTwo.countLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
 
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if (self.stepperTeamOne.value == self.scoreToWin) {
+        
+        self.teamOneWin = YES;
+        self.teamOneScore = [NSNumber numberWithFloat:self.stepperTeamOne.value];
+        self.teamTwoScore = [NSNumber numberWithFloat:self.stepperTeamTwo.value];
+        NSDictionary *gameStats = [NSDictionary dictionary];
+        gameStats = @{@"TeamOnePlayerOne": self.t1p1,
+                      @"TeamOnePlayerTwo": self.t1p2,
+                      @"TeamTwoPlayerOne": self.t2p1,
+                      @"TeamTwoPlayerTwo": self.t2p2,
+                      @"TeamOneScore": self.teamOneScore,
+                      @"TeamTwoScore": self.teamTwoScore,
+                      @"TeamOneWin": [NSNumber numberWithBool:self.teamOneWin]};
+        
+        
+        UIAlertController *winnerAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Team One Wins!"] message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        
+        [winnerAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            
+//            [[GameController sharedInstance]addGameWithDictionary:gameStats andUser:self.playerOne andOtherUser:self.playerTwo];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+        }]];
+        [self presentViewController:winnerAlert animated:YES completion:nil];
+        
+    }else if (self.stepperTeamTwo.value == self.scoreToWin){
+        
+        self.teamOneWin = NO;
+        NSDictionary *gameStats = [NSDictionary dictionary];
+        gameStats = @{@"TeamOnePlayerOne": self.t1p1,
+                      @"TeamOnePlayerTwo": self.t1p2,
+                      @"TeamTwoPlayerOne": self.t2p1,
+                      @"TeamTwoPlayerTwo": self.t2p2,
+                      @"TeamOneScore": self.teamOneScore,
+                      @"TeamTwoScore": self.teamTwoScore,
+                      @"TeamOneWin": [NSNumber numberWithBool:self.teamOneWin]};
+        
+        
+        UIAlertController *winnerAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Team Two Wins!"] message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        
+        [winnerAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            
+//            [[GameController sharedInstance]addGameWithDictionary:gameStats andUser:self.playerOne andOtherUser:self.playerTwo];
+            [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                
+            }];
+            
+        }]];
+        [self presentViewController:winnerAlert animated:YES completion:nil];
+    }
+
 }
 
 - (void)dealloc {

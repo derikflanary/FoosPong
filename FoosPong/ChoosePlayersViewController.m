@@ -9,7 +9,7 @@
 
 #import "ChoosePlayersViewController.h"
 #import "NewGameCustomTableViewCell.h"
-#import "GameViewController.h"
+#import "SingleGameViewController.h"
 #import "UserController.h"
 #import "HMSegmentedControl.h"
 #import "TeamGameViewController.h"
@@ -123,7 +123,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
             [self presentViewController:notEnoughPlayersAlert animated:YES completion:nil];
         }else{
             
-            GameViewController *gvc = [GameViewController new];
+            SingleGameViewController *gvc = [SingleGameViewController new];
             gvc.playerOne = [self.currentPlayers objectAtIndex:0];
             gvc.playerTwo = [self.currentPlayers objectAtIndex:1];
             [self.navigationController pushViewController:gvc animated:YES];
@@ -140,6 +140,9 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
             
             TeamGameViewController *tgvc = [TeamGameViewController new];
             UINavigationController *teamGameNavController = [[UINavigationController alloc]initWithRootViewController:tgvc];
+            
+            tgvc.teamOne = [NSArray arrayWithArray:self.currentPlayers];
+            tgvc.teamTwo = [NSArray arrayWithArray:self.teamTwoPlayers];
             
             [self.navigationController presentViewController:teamGameNavController animated:YES completion:^{
                 

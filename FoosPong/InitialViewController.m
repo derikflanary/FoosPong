@@ -26,7 +26,6 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     SideBarSectionSettings,
 };
 
-
 @interface InitialViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
 @property (nonatomic, strong) UITabBarController *tabBarControllerProfile;
@@ -54,6 +53,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     
     self.imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"FoosBallButton"]];
     self.imageView.frame = self.view.frame;
+    self.imageView.alpha = .2;
     [self.view addSubview:self.imageView];
 
     self.loginButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 383, 320, 62)];
@@ -103,7 +103,6 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     self.navigationController.viewControllers = @[hvc];
     
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GameViewController : UIViewController
+@interface SingleGameViewController : UIViewController
 
 @property (nonatomic, strong) NSString *playerOneName;
 @property (nonatomic, strong) NSString *playerTwoName;

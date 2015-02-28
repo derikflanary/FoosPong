@@ -21,7 +21,7 @@
 		EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57DE1A93ECD200DA9835 /* BaseLoginController.m */; };
 		EE2C57E21A93F12300DA9835 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57E11A93F12300DA9835 /* SignUpViewController.m */; };
 		EE3356EE1A895F0600B83EC0 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */; };
-		EE3356F11A89610B00B83EC0 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3356F01A89610B00B83EC0 /* GameViewController.m */; };
+		EE3356F11A89610B00B83EC0 /* SingleGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3356F01A89610B00B83EC0 /* SingleGameViewController.m */; };
 		EE33572A1A8C1C2A00B83EC0 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357291A8C1C2A00B83EC0 /* Bolts.framework */; };
 		EE33572C1A8C1C4700B83EC0 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE33572B1A8C1C4700B83EC0 /* Parse.framework */; };
 		EE33572E1A8C1C9B00B83EC0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE33572D1A8C1C9B00B83EC0 /* AudioToolbox.framework */; };
@@ -100,8 +100,8 @@
 		EE2C57E11A93F12300DA9835 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		EE3356EC1A895F0600B83EC0 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		EE3356EF1A89610B00B83EC0 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
-		EE3356F01A89610B00B83EC0 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		EE3356EF1A89610B00B83EC0 /* SingleGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleGameViewController.h; sourceTree = "<group>"; };
+		EE3356F01A89610B00B83EC0 /* SingleGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleGameViewController.m; sourceTree = "<group>"; };
 		EE3357291A8C1C2A00B83EC0 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		EE33572B1A8C1C4700B83EC0 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		EE33572D1A8C1C9B00B83EC0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -247,8 +247,8 @@
 				302E41C31A86958E005F1184 /* HomeViewController.m */,
 				302E41C51A86A195005F1184 /* ChoosePlayersViewController.h */,
 				302E41C61A86A195005F1184 /* ChoosePlayersViewController.m */,
-				EE3356EF1A89610B00B83EC0 /* GameViewController.h */,
-				EE3356F01A89610B00B83EC0 /* GameViewController.m */,
+				EE3356EF1A89610B00B83EC0 /* SingleGameViewController.h */,
+				EE3356F01A89610B00B83EC0 /* SingleGameViewController.m */,
 				EE48886E1AA0FC6D00FCCA47 /* TeamGameViewController.h */,
 				EE48886F1AA0FC6D00FCCA47 /* TeamGameViewController.m */,
 			);
@@ -273,6 +273,8 @@
 		EE2C57E31A93F2BF00DA9835 /* Logging in */ = {
 			isa = PBXGroup;
 			children = (
+				EE7A6D021A869169000447D2 /* InitialViewController.h */,
+				EE7A6D031A869169000447D2 /* InitialViewController.m */,
 				EE2C57DD1A93ECD200DA9835 /* BaseLoginController.h */,
 				EE2C57DE1A93ECD200DA9835 /* BaseLoginController.m */,
 				EE2C57E01A93F12300DA9835 /* SignUpViewController.h */,
@@ -349,13 +351,11 @@
 		EE7A6CD81A868401000447D2 /* FoosPong */ = {
 			isa = PBXGroup;
 			children = (
-				EE2C57E31A93F2BF00DA9835 /* Logging in */,
 				EE7A6CDD1A868402000447D2 /* AppDelegate.h */,
 				EE7A6CDE1A868402000447D2 /* AppDelegate.m */,
 				EE9DAEEE1A9EB91D00589897 /* MasterViewController.h */,
 				EE9DAEEF1A9EB91D00589897 /* MasterViewController.m */,
-				EE7A6D021A869169000447D2 /* InitialViewController.h */,
-				EE7A6D031A869169000447D2 /* InitialViewController.m */,
+				EE2C57E31A93F2BF00DA9835 /* Logging in */,
 				EE1A557B1A9CFAE000E6981E /* Scorekeeping */,
 				EE1A557A1A9CFA3E00E6981E /* Personal Profile */,
 				EE1A55821A9CFB9000E6981E /* Groups */,
@@ -568,7 +568,7 @@
 				EE1A557E1A9CFB3000E6981E /* GroupsViewController.m in Sources */,
 				EE0DC0121A8D96D8000235B3 /* GameController.m in Sources */,
 				EE7A6CDF1A868402000447D2 /* AppDelegate.m in Sources */,
-				EE3356F11A89610B00B83EC0 /* GameViewController.m in Sources */,
+				EE3356F11A89610B00B83EC0 /* SingleGameViewController.m in Sources */,
 				EE808DB71A9FCCB10000F833 /* NSString+Fonts.m in Sources */,
 				EE7A6D041A869169000447D2 /* InitialViewController.m in Sources */,
 				EE9DAEF61A9ECED800589897 /* FindGroupViewController.m in Sources */,

@@ -10,4 +10,7 @@
 
 @interface TeamGameViewController : UIViewController
 
+@property (nonatomic, strong)NSArray *teamOne;
+@property (nonatomic, strong)NSArray *teamTwo;
+
 @end

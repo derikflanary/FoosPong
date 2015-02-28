@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "GameViewController.h"
+#import "SingleGameViewController.h"
 #import <PKYStepper/PKYStepper.h>
 #import "ChoosePlayersViewController.h"
 #import "GameController.h"
@@ -18,7 +18,7 @@ static NSString * const playerTwoScoreKey = @"playerTwoScoreKey";
 static NSString * const playerOneWinKey = @"playerOneWinKey";
 static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 
-@interface GameViewController ()
+@interface SingleGameViewController ()
 
 @property (nonatomic, assign) float scoreToWin;
 @property (nonatomic, strong) PKYStepper *playerOneStepper;
@@ -31,12 +31,12 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 
 @end
 
-@implementation GameViewController
+@implementation SingleGameViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.scoreToWin = 11;
+    self.scoreToWin = 10;
     self.playerOneWin = NO;
     self.playerTwoWin = NO;
     self.playerOneName = self.playerOne.username;
@@ -45,7 +45,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     UIBarButtonItem * saveGameButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveGamePressed:)];
     self.navigationItem.rightBarButtonItem = saveGameButton;
     
-    __block GameViewController *bSelf = self;
+    __block SingleGameViewController *bSelf = self;
     self.playerOneStepper = [[PKYStepper alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 100)];
     self.playerOneStepper.valueChangedCallback = ^(PKYStepper *stepper, float count) {
         stepper.countLabel.text = [NSString stringWithFormat:@"%@: %@",bSelf.playerOneName, @(count)];
@@ -84,7 +84,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 
-    if (self.playerOneStepper.value == 11) {
+    if (self.playerOneStepper.value == self.scoreToWin) {
         
         self.playerOneWin = YES;
         self.playerOneScore = [NSNumber numberWithFloat:self.playerOneStepper.value];
@@ -106,7 +106,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         
     }]];
     [self presentViewController:setTitleAlert animated:YES completion:nil];
-    }else if (self.playerTwoStepper.value == 11){
+    }else if (self.playerTwoStepper.value == self.scoreToWin){
         
         self.playerTwoWin = YES;
         NSDictionary *gameStats = [NSDictionary dictionary];
