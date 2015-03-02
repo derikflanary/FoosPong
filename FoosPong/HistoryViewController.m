@@ -10,11 +10,13 @@
 #import "HistoryViewController.h"
 #import "SingleGameController.h"
 #import "UserController.h"
+#import "TeamGameController.h"
 
 @interface HistoryViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray *games;
+@property (nonatomic, strong) NSArray *singleGames;
+@property (nonatomic, strong) NSArray *teamGames;
 
 @end
 
@@ -31,10 +33,16 @@
     
 
      PFUser *currentUser = [UserController sharedInstance].theCurrentUser;
-[[SingleGameController sharedInstance] updateGamesForUser:currentUser callback:^(NSArray * games){
-    self.games = games;
-    [self.tableView reloadData];
-}];
+    [[SingleGameController sharedInstance] updateGamesForUser:currentUser callback:^(NSArray * games){
+        self.singleGames = games;
+        [self.tableView reloadData];
+    }];
+
+    [[TeamGameController sharedInstance] updateGamesForUser:currentUser callback:^(NSArray * teamGames) {
+        self.teamGames = teamGames;
+        [self.tableView reloadData];
+    }];
+
  
 }
 
@@ -44,10 +52,28 @@
 }
 
 #pragma mark - TableView Datasource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.games count];
+    
+    if (section == 0) {
+        return [self.singleGames count];
+    }else{
+        return [self.teamGames count];
+    }
+    
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+ 
+    if (section == 0) {
+        return @"Single Games";
+    }else{
+        return @"Team Games";
+    }
 }
 
 
@@ -57,9 +83,13 @@
     if (!cell){
         cell = [NewGameCustomTableViewCell new];
     }
-    //PFObject *game = [[GameController sharedInstance].games objectAtIndex:indexPath.row];
-    PFObject *game = [self.games objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@:%@ vs %@:%@", game[@"playerOneName"],game[@"playerOneScore"], game[@"playerTwoName"], game[@"playerTwoScore"]];
+   
+    PFObject *game = [self.singleGames objectAtIndex:indexPath.row];
+    PFUser *p1 = game[@"P1"];
+    NSString *p1Name = p1[@"firstName"];
+    PFUser *p2 = game[@"P2"];
+    NSString *p2Name = p2[@"firstName"];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@:%@ vs %@:%@", p1Name, game[@"playerOneScore"], p2Name, game[@"playerTwoScore"]];
     return cell;
 }
 

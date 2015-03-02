@@ -80,6 +80,7 @@
     if (self.stepperTeamOne.value == self.scoreToWin) {
         
         self.teamOneWin = YES;
+        [self updateTeamGameStats];
         
         UIAlertController *winnerAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Team One Wins!"] message:@"" preferredStyle:UIAlertControllerStyleAlert];
         
@@ -87,7 +88,9 @@
             
             [[TeamGameController sharedInstance] addGameWithSingleGameStats:self.gameStats];
             
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                
+            }];
             
         }]];
         [self presentViewController:winnerAlert animated:YES completion:nil];
@@ -95,6 +98,7 @@
     }else if (self.stepperTeamTwo.value == self.scoreToWin){
         
         self.teamOneWin = NO;
+        [self updateTeamGameStats];
         
         UIAlertController *winnerAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Team Two Wins!"] message:@"" preferredStyle:UIAlertControllerStyleAlert];
         

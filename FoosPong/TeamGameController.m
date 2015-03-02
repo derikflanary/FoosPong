@@ -8,6 +8,13 @@
 
 #import "TeamGameController.h"
 
+@interface TeamGameController()
+
+@property(nonatomic, strong)NSArray *teamGames;
+
+@end
+
+
 @implementation TeamGameController
 
 
@@ -40,6 +47,35 @@
             NSLog(@"%@", error);
     }];
 }
+
+-(void)updateGamesForUser:(PFUser*)user callback:(void (^)(NSArray *))callback{
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"TeamGame"];
+    [query whereKey:@"teamOnePlayerOne" equalTo:user];
+    
+    PFQuery *query2 = [PFQuery queryWithClassName:@"TeamGame"];
+    [query2 whereKey:@"teamOnePlayerTwo" equalTo:user];
+    
+    PFQuery *query3 = [PFQuery queryWithClassName:@"TeamGame"];
+    [query2 whereKey:@"teamTwoPlayerOne" equalTo:user];
+    
+    PFQuery *query4 = [PFQuery queryWithClassName:@"TeamGame"];
+    [query2 whereKey:@"teamTwoPlayerTwo" equalTo:user];
+    
+    PFQuery *theQuery = [PFQuery orQueryWithSubqueries:@[query, query2, query3, query4]];
+    [theQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            
+            self.teamGames = objects;
+            callback(objects);
+            
+        } else {
+            
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+}
+
 
 -(void)removeGame:(PFObject*)game{
     
