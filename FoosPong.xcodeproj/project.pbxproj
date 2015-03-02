@@ -12,7 +12,7 @@
 		7F7C9D7F76CC544EEC3A87D2 /* libPods-FoosPong.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B77DFF6D64A66AF6288C73B1 /* libPods-FoosPong.a */; };
 		EE0DC00B1A8C4604000235B3 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE0DC00A1A8C4604000235B3 /* ParseUI.framework */; };
 		EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC00E1A8D9456000235B3 /* UserController.m */; };
-		EE0DC0121A8D96D8000235B3 /* GameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC0111A8D96D8000235B3 /* GameController.m */; };
+		EE0DC0121A8D96D8000235B3 /* SingleGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC0111A8D96D8000235B3 /* SingleGameController.m */; };
 		EE1A557E1A9CFB3000E6981E /* GroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A557D1A9CFB3000E6981E /* GroupsViewController.m */; };
 		EE1A55811A9CFB4A00E6981E /* CurrentGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A55801A9CFB4A00E6981E /* CurrentGroupViewController.m */; };
 		EE1A55851A9CFBB500E6981E /* GroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A55841A9CFBB500E6981E /* GroupController.m */; };
@@ -20,6 +20,9 @@
 		EE2C57D61A93DFC600DA9835 /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57D51A93DFC600DA9835 /* UIImageView+Letters.m */; };
 		EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57DE1A93ECD200DA9835 /* BaseLoginController.m */; };
 		EE2C57E21A93F12300DA9835 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57E11A93F12300DA9835 /* SignUpViewController.m */; };
+		EE2EF8101AA4EF2200DE09E7 /* SingleGameStats.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2EF80F1AA4EF2200DE09E7 /* SingleGameStats.m */; };
+		EE2EF8131AA4EF3400DE09E7 /* TeamGameStats.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2EF8121AA4EF3400DE09E7 /* TeamGameStats.m */; };
+		EE2EF8161AA4F88900DE09E7 /* TeamGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2EF8151AA4F88900DE09E7 /* TeamGameController.m */; };
 		EE3356EE1A895F0600B83EC0 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */; };
 		EE3356F11A89610B00B83EC0 /* SingleGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3356F01A89610B00B83EC0 /* SingleGameViewController.m */; };
 		EE33572A1A8C1C2A00B83EC0 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357291A8C1C2A00B83EC0 /* Bolts.framework */; };
@@ -82,8 +85,8 @@
 		EE0DC00C1A8C53A1000235B3 /* FoosPong-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FoosPong-Prefix.pch"; sourceTree = "<group>"; };
 		EE0DC00D1A8D9456000235B3 /* UserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserController.h; sourceTree = "<group>"; };
 		EE0DC00E1A8D9456000235B3 /* UserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserController.m; sourceTree = "<group>"; };
-		EE0DC0101A8D96D8000235B3 /* GameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameController.h; sourceTree = "<group>"; };
-		EE0DC0111A8D96D8000235B3 /* GameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameController.m; sourceTree = "<group>"; };
+		EE0DC0101A8D96D8000235B3 /* SingleGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleGameController.h; sourceTree = "<group>"; };
+		EE0DC0111A8D96D8000235B3 /* SingleGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleGameController.m; sourceTree = "<group>"; };
 		EE1A557C1A9CFB3000E6981E /* GroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupsViewController.h; sourceTree = "<group>"; };
 		EE1A557D1A9CFB3000E6981E /* GroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupsViewController.m; sourceTree = "<group>"; };
 		EE1A557F1A9CFB4A00E6981E /* CurrentGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentGroupViewController.h; sourceTree = "<group>"; };
@@ -98,6 +101,12 @@
 		EE2C57DE1A93ECD200DA9835 /* BaseLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseLoginController.m; sourceTree = "<group>"; };
 		EE2C57E01A93F12300DA9835 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		EE2C57E11A93F12300DA9835 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		EE2EF80E1AA4EF2200DE09E7 /* SingleGameStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleGameStats.h; sourceTree = "<group>"; };
+		EE2EF80F1AA4EF2200DE09E7 /* SingleGameStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleGameStats.m; sourceTree = "<group>"; };
+		EE2EF8111AA4EF3400DE09E7 /* TeamGameStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamGameStats.h; sourceTree = "<group>"; };
+		EE2EF8121AA4EF3400DE09E7 /* TeamGameStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamGameStats.m; sourceTree = "<group>"; };
+		EE2EF8141AA4F88900DE09E7 /* TeamGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamGameController.h; sourceTree = "<group>"; };
+		EE2EF8151AA4F88900DE09E7 /* TeamGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamGameController.m; sourceTree = "<group>"; };
 		EE3356EC1A895F0600B83EC0 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		EE3356EF1A89610B00B83EC0 /* SingleGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleGameViewController.h; sourceTree = "<group>"; };
@@ -290,8 +299,10 @@
 			children = (
 				EE0DC00D1A8D9456000235B3 /* UserController.h */,
 				EE0DC00E1A8D9456000235B3 /* UserController.m */,
-				EE0DC0101A8D96D8000235B3 /* GameController.h */,
-				EE0DC0111A8D96D8000235B3 /* GameController.m */,
+				EE0DC0101A8D96D8000235B3 /* SingleGameController.h */,
+				EE0DC0111A8D96D8000235B3 /* SingleGameController.m */,
+				EE2EF8141AA4F88900DE09E7 /* TeamGameController.h */,
+				EE2EF8151AA4F88900DE09E7 /* TeamGameController.m */,
 				EE1A55831A9CFBB500E6981E /* GroupController.h */,
 				EE1A55841A9CFBB500E6981E /* GroupController.m */,
 			);
@@ -305,6 +316,17 @@
 				EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */,
 			);
 			name = CustomCells;
+			sourceTree = "<group>";
+		};
+		EE2EF80D1AA4EEF100DE09E7 /* Model Objects */ = {
+			isa = PBXGroup;
+			children = (
+				EE2EF80E1AA4EF2200DE09E7 /* SingleGameStats.h */,
+				EE2EF80F1AA4EF2200DE09E7 /* SingleGameStats.m */,
+				EE2EF8111AA4EF3400DE09E7 /* TeamGameStats.h */,
+				EE2EF8121AA4EF3400DE09E7 /* TeamGameStats.m */,
+			);
+			name = "Model Objects";
 			sourceTree = "<group>";
 		};
 		EE5027CC1A98F1180079DFFC /* Other */ = {
@@ -361,8 +383,9 @@
 				EE1A55821A9CFB9000E6981E /* Groups */,
 				EE808DB11A9FC3EA0000F833 /* Settings */,
 				EE2C57E41A93F51300DA9835 /* Controllers */,
-				EE2C57E51A93F52400DA9835 /* CustomCells */,
+				EE2EF80D1AA4EEF100DE09E7 /* Model Objects */,
 				EE5027CC1A98F1180079DFFC /* Other */,
+				EE2C57E51A93F52400DA9835 /* CustomCells */,
 				EE33572B1A8C1C4700B83EC0 /* Parse.framework */,
 				EE3357291A8C1C2A00B83EC0 /* Bolts.framework */,
 				EE7A6CE61A868402000447D2 /* Images.xcassets */,
@@ -562,11 +585,13 @@
 				EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */,
 				EE1A55881A9D217700E6981E /* PersonalNotificationsViewController.m in Sources */,
 				EE1A55851A9CFBB500E6981E /* GroupController.m in Sources */,
+				EE2EF8131AA4EF3400DE09E7 /* TeamGameStats.m in Sources */,
 				302E41C41A86958E005F1184 /* HomeViewController.m in Sources */,
 				EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */,
+				EE2EF8101AA4EF2200DE09E7 /* SingleGameStats.m in Sources */,
 				EE3356EE1A895F0600B83EC0 /* ProfileViewController.m in Sources */,
 				EE1A557E1A9CFB3000E6981E /* GroupsViewController.m in Sources */,
-				EE0DC0121A8D96D8000235B3 /* GameController.m in Sources */,
+				EE0DC0121A8D96D8000235B3 /* SingleGameController.m in Sources */,
 				EE7A6CDF1A868402000447D2 /* AppDelegate.m in Sources */,
 				EE3356F11A89610B00B83EC0 /* SingleGameViewController.m in Sources */,
 				EE808DB71A9FCCB10000F833 /* NSString+Fonts.m in Sources */,
@@ -575,6 +600,7 @@
 				EE9DAEF01A9EB91D00589897 /* MasterViewController.m in Sources */,
 				EE808DB01A9FC3E30000F833 /* SettingViewController.m in Sources */,
 				EE48886A1A9FDD9B00FCCA47 /* HMSegmentedControl.m in Sources */,
+				EE2EF8161AA4F88900DE09E7 /* TeamGameController.m in Sources */,
 				EE7A6CDC1A868402000447D2 /* main.m in Sources */,
 				EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */,
 				302E41C71A86A195005F1184 /* ChoosePlayersViewController.m in Sources */,

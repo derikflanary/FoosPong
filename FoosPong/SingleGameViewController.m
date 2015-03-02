@@ -9,7 +9,8 @@
 #import "SingleGameViewController.h"
 #import <PKYStepper/PKYStepper.h>
 #import "ChoosePlayersViewController.h"
-#import "GameController.h"
+#import "SingleGameController.h"
+#import "SingleGameStats.h"
 
 static NSString * const playerOneKey = @"playerOneKey";
 static NSString * const playerTwoKey = @"playerTwoKey";
@@ -27,7 +28,8 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 @property (nonatomic, assign) NSNumber *playerTwoScore;
 @property (nonatomic, assign) BOOL playerOneWin;
 @property (nonatomic, assign) BOOL playerTwoWin;
-@property (nonatomic, strong) NSDictionary *gameStats;
+@property (nonatomic, strong) SingleGameStats *gameStats;
+//@property (nonatomic, strong) NSDictionary *gameStats;
 
 @end
 
@@ -87,46 +89,67 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     if (self.playerOneStepper.value == self.scoreToWin) {
         
         self.playerOneWin = YES;
-        self.playerOneScore = [NSNumber numberWithFloat:self.playerOneStepper.value];
-        self.playerTwoScore = [NSNumber numberWithFloat:self.playerTwoStepper.value];
-        NSDictionary *gameStats = [NSDictionary dictionary];
-        gameStats = @{playerOneKey : self.playerOneName,
-                           playerTwoKey : self.playerTwoName,
-                           playerOneScoreKey : [NSNumber numberWithFloat:self.playerOneStepper.value],
-                           playerTwoScoreKey : [NSNumber numberWithFloat:self.playerTwoStepper.value],
-                           playerOneWinKey:[NSNumber numberWithBool:self.playerOneWin],
-                           playerTwoWinKey:[NSNumber numberWithBool:self.playerTwoWin]};
         
-    UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", self.playerOneName] message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        [self updateGameStats];
         
-    [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+//        NSDictionary *gameStats = [NSDictionary dictionary];
+//        gameStats = @{playerOneKey : self.playerOneName,
+//                           playerTwoKey : self.playerTwoName,
+//                           playerOneScoreKey : [NSNumber numberWithFloat:self.playerOneStepper.value],
+//                           playerTwoScoreKey : [NSNumber numberWithFloat:self.playerTwoStepper.value],
+//                           playerOneWinKey:[NSNumber numberWithBool:self.playerOneWin],
+//                           playerTwoWinKey:[NSNumber numberWithBool:self.playerTwoWin]};
+//        
+        UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", self.playerOneName] message:@"" preferredStyle:UIAlertControllerStyleAlert];
         
-        [[GameController sharedInstance]addGameWithDictionary:gameStats andUser:self.playerOne andOtherUser:self.playerTwo];
-        [self.navigationController popViewControllerAnimated:YES];
+        [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         
-    }]];
-    [self presentViewController:setTitleAlert animated:YES completion:nil];
+            [[SingleGameController sharedInstance] addGameWithSingleGameStats:self.gameStats];
+        
+            [self.navigationController popViewControllerAnimated:YES];
+        
+        }]];
+        [self presentViewController:setTitleAlert animated:YES completion:nil];
+        
     }else if (self.playerTwoStepper.value == self.scoreToWin){
         
         self.playerTwoWin = YES;
-        NSDictionary *gameStats = [NSDictionary dictionary];
-        gameStats = @{playerOneKey : self.playerOneName,
-                      playerTwoKey : self.playerTwoName,
-                      playerOneScoreKey : [NSNumber numberWithFloat:self.playerOneStepper.value],
-                      playerTwoScoreKey : [NSNumber numberWithFloat:self.playerTwoStepper.value],
-                      playerOneWinKey:[NSNumber numberWithBool:self.playerOneWin],
-                      playerTwoWinKey:[NSNumber numberWithBool:self.playerTwoWin]};
+        
+        [self updateGameStats];
+        
+//        NSDictionary *gameStats = [NSDictionary dictionary];
+//        gameStats = @{playerOneKey : self.playerOneName,
+//                      playerTwoKey : self.playerTwoName,
+//                      playerOneScoreKey : [NSNumber numberWithFloat:self.playerOneStepper.value],
+//                      playerTwoScoreKey : [NSNumber numberWithFloat:self.playerTwoStepper.value],
+//                      playerOneWinKey:[NSNumber numberWithBool:self.playerOneWin],
+//                      playerTwoWinKey:[NSNumber numberWithBool:self.playerTwoWin]};
         
         UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", self.playerTwoName] message:@"" preferredStyle:UIAlertControllerStyleAlert];
         
         [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
             
-            [[GameController sharedInstance]addGameWithDictionary:gameStats andUser:self.playerOne andOtherUser:self.playerTwo];
+            [[SingleGameController sharedInstance] addGameWithSingleGameStats:self.gameStats];
+            
             [self.navigationController popViewControllerAnimated:YES];
             
         }]];
         [self presentViewController:setTitleAlert animated:YES completion:nil];
     }
+}
+
+- (void)updateGameStats{
+    
+    self.playerOneScore = [NSNumber numberWithFloat:self.playerOneStepper.value];
+    self.playerTwoScore = [NSNumber numberWithFloat:self.playerTwoStepper.value];
+    
+    self.gameStats = [SingleGameStats new];
+    self.gameStats.playerOne = self.playerOne;
+    self.gameStats.playerTwo = self.playerTwo;
+    self.gameStats.playerOneScore = [NSNumber numberWithFloat:self.playerOneStepper.value];
+    self.gameStats.playerTwoScore = [NSNumber numberWithFloat:self.playerTwoStepper.value];
+    self.gameStats.playerOneWin = [NSNumber numberWithBool:self.playerTwoWin];
+
 }
 
 - (void)dealloc {

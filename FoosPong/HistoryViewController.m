@@ -8,7 +8,7 @@
 
 #import "NewGameCustomTableViewCell.h"
 #import "HistoryViewController.h"
-#import "GameController.h"
+#import "SingleGameController.h"
 #import "UserController.h"
 
 @interface HistoryViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -31,7 +31,7 @@
     
 
      PFUser *currentUser = [UserController sharedInstance].theCurrentUser;
-[[GameController sharedInstance] updateGamesForUser:currentUser callback:^(NSArray * games){
+[[SingleGameController sharedInstance] updateGamesForUser:currentUser callback:^(NSArray * games){
     self.games = games;
     [self.tableView reloadData];
 }];

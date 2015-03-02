@@ -7,13 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SingleGameStats.h"
 
-@interface GameController : NSObject
-+ (GameController *)sharedInstance;
--(void)addGameWithDictionary:(NSDictionary*)dictionary andUser:(PFUser*)user andOtherUser:(PFUser*)user2;
+@interface SingleGameController : NSObject
+
++ (SingleGameController *)sharedInstance;
+//-(void)addGameWithDictionary:(NSDictionary*)dictionary andUser:(PFUser*)user andOtherUser:(PFUser*)user2;
 -(void)removeGame:(PFObject*)game;
 -(void)saveGames;
 -(void)updateGamesForUser:(PFUser*)user callback:(void (^)(NSArray *))callback;
+-(void)addGameWithSingleGameStats:(SingleGameStats*)gameStats;
 @property (nonatomic, strong, readonly)NSArray *games;
 
 @end
