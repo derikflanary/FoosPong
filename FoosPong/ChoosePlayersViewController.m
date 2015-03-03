@@ -37,6 +37,8 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 @property (nonatomic, strong)NSMutableArray *filteredPlayers;
 @property (nonatomic, strong)HMSegmentedControl *segmentedControl;
 @property (nonatomic, assign)BOOL isTwoPlayer;
+@property (nonatomic, assign)BOOL cellSelected;
+@property (nonatomic, strong)NSIndexPath *selectedPath;
 
 @end
 
@@ -73,6 +75,8 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.editing = YES;
+    //self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    self.tableView.allowsSelectionDuringEditing = YES;
     
     self.currentUser = [UserController sharedInstance].theCurrentUser;
     
@@ -97,6 +101,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
         self.isTwoPlayer = YES;
     }
     
+    self.cellSelected = NO;
     //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 - (void)segmentedControlChangedValue:(id)sender{
@@ -271,9 +276,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 return [self.availablePlayers count];
                 break;
             }
-                
         }
-
     }
 }
 
@@ -282,7 +285,9 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     NewGameCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewGameCell" ];
     if (!cell){
         cell = [NewGameCustomTableViewCell new];
+      
     }
+    //cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     if (self.segmentedControl.selectedSegmentIndex == 0) {
         TableViewSection tableViewSection = indexPath.section;
@@ -326,10 +331,27 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     }
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+#pragma mark - tableview delegate methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.cellSelected == NO) {
+        self.cellSelected = YES;
+        self.selectedPath = indexPath;
+        
+    }else{
+        NSIndexPath *path = tableView.indexPathForSelectedRow;
+        
+        [tableView beginUpdates];
+        [tableView cellForRowAtIndexPath:indexPath].selected = NO;
+        [tableView cellForRowAtIndexPath:path].selected = NO;
+        [tableView moveRowAtIndexPath:self.selectedPath toIndexPath: indexPath];
+        [tableView moveRowAtIndexPath:indexPath toIndexPath:self.selectedPath];
+        self.cellSelected = NO;
+        [tableView endUpdates];
+    }
 }
 
--(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
     
     return YES;
 }
@@ -442,9 +464,14 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     return 44;
 }
 
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+    
+}
+
 #pragma mark - SearchController
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    
     
     NSString *searchText = searchController.searchBar.text;
     if ([searchText isEqualToString:@""]) {
