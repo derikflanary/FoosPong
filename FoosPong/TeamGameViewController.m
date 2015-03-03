@@ -82,11 +82,11 @@
         self.teamOneWin = YES;
         [self updateTeamGameStats];
         
-        UIAlertController *winnerAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Team One Wins!"] message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *winnerAlert = [UIAlertController alertControllerWithTitle:@"Team One Wins!" message:@"" preferredStyle:UIAlertControllerStyleAlert];
         
         [winnerAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
             
-            [[TeamGameController sharedInstance] addGameWithSingleGameStats:self.gameStats];
+            [[TeamGameController sharedInstance] addGameWithTeamGameStats:self.gameStats];
             
             [self.navigationController dismissViewControllerAnimated:YES completion:^{
                 
@@ -104,7 +104,7 @@
         
         [winnerAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
             
-            [[TeamGameController sharedInstance] addGameWithSingleGameStats:self.gameStats];
+            [[TeamGameController sharedInstance] addGameWithTeamGameStats:self.gameStats];
             
             [self.navigationController dismissViewControllerAnimated:YES completion:^{
                 

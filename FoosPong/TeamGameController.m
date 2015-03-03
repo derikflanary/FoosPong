@@ -29,7 +29,7 @@
 }
 
 
--(void)addGameWithSingleGameStats:(TeamGameStats*)gameStats{
+-(void)addGameWithTeamGameStats:(TeamGameStats*)gameStats{
     PFObject *finishedGame = [PFObject objectWithClassName:@"TeamGame"];
     
     finishedGame[@"teamOnePlayerOne"] = gameStats.teamOnePlayerOne;
