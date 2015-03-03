@@ -119,16 +119,16 @@
 
 - (void)updateTeamGameStats{
     
-    self.teamOneScore = [NSNumber numberWithFloat:self.stepperTeamOne.value];
-    self.teamTwoScore = [NSNumber numberWithFloat:self.stepperTeamTwo.value];
+    //self.teamOneScore = [NSNumber numberWithFloat:self.stepperTeamOne.value];
+    //self.teamTwoScore = [NSNumber numberWithFloat:self.stepperTeamTwo.value];
     
     self.gameStats = [TeamGameStats new];
     self.gameStats.teamOnePlayerOne = [self.teamOne objectAtIndex:0];
     self.gameStats.teamOnePlayerTwo = [self.teamOne objectAtIndex:1];
     self.gameStats.teamTwoPlayerOne = [self.teamTwo objectAtIndex:0];
     self.gameStats.teamTwoPlayerTwo = [self.teamTwo objectAtIndex:1];
-    self.gameStats.teamOneScore = self.teamOneScore;
-    self.gameStats.teamTwoScore = self.teamTwoScore;
+    self.gameStats.teamOneScore =  [NSNumber numberWithFloat:self.stepperTeamOne.value];
+    self.gameStats.teamTwoScore =  [NSNumber numberWithFloat:self.stepperTeamTwo.value];
     self.gameStats.teamOneWin = [NSNumber numberWithBool:self.teamOneWin];
 }
 

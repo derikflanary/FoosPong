@@ -14,7 +14,6 @@
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *pingPongTableView;
-@property (nonatomic, strong) HomeViewController *hvc;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
 @end

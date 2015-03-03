@@ -92,14 +92,6 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         
         [self updateGameStats];
         
-//        NSDictionary *gameStats = [NSDictionary dictionary];
-//        gameStats = @{playerOneKey : self.playerOneName,
-//                           playerTwoKey : self.playerTwoName,
-//                           playerOneScoreKey : [NSNumber numberWithFloat:self.playerOneStepper.value],
-//                           playerTwoScoreKey : [NSNumber numberWithFloat:self.playerTwoStepper.value],
-//                           playerOneWinKey:[NSNumber numberWithBool:self.playerOneWin],
-//                           playerTwoWinKey:[NSNumber numberWithBool:self.playerTwoWin]};
-//        
         UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", self.playerOneName] message:@"" preferredStyle:UIAlertControllerStyleAlert];
         
         [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
@@ -117,14 +109,6 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         
         [self updateGameStats];
         
-//        NSDictionary *gameStats = [NSDictionary dictionary];
-//        gameStats = @{playerOneKey : self.playerOneName,
-//                      playerTwoKey : self.playerTwoName,
-//                      playerOneScoreKey : [NSNumber numberWithFloat:self.playerOneStepper.value],
-//                      playerTwoScoreKey : [NSNumber numberWithFloat:self.playerTwoStepper.value],
-//                      playerOneWinKey:[NSNumber numberWithBool:self.playerOneWin],
-//                      playerTwoWinKey:[NSNumber numberWithBool:self.playerTwoWin]};
-        
         UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", self.playerTwoName] message:@"" preferredStyle:UIAlertControllerStyleAlert];
         
         [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
@@ -139,9 +123,6 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 }
 
 - (void)updateGameStats{
-    
-    self.playerOneScore = [NSNumber numberWithFloat:self.playerOneStepper.value];
-    self.playerTwoScore = [NSNumber numberWithFloat:self.playerTwoStepper.value];
     
     self.gameStats = [SingleGameStats new];
     self.gameStats.playerOne = self.playerOne;

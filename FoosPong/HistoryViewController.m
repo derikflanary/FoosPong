@@ -83,14 +83,29 @@
     if (!cell){
         cell = [NewGameCustomTableViewCell new];
     }
+    if (indexPath.section == 0) {
+        
+        PFObject *game = [self.singleGames objectAtIndex:indexPath.row];
+        PFUser *p1 = game[@"P1"];
+        NSString *p1Name = p1[@"firstName"];
+        PFUser *p2 = game[@"P2"];
+        NSString *p2Name = p2[@"firstName"];
+        
+        cell.textLabel.text = [NSString stringWithFormat:@"%@:%@ vs %@:%@", p1Name, game[@"playerOneScore"], p2Name, game[@"playerTwoScore"]];
+        return cell;
+
+    }else{
+        
+        PFObject *teamGame = [self.teamGames objectAtIndex:indexPath.row];
+        PFUser *t1p1 = teamGame[@"teamOnePlayerOne"];
+        NSString *t1p1Name = t1p1[@"firstName"];
+        PFUser *t1p2 = teamGame[@"teamOnePlayerTwo"];
+        NSString *t1p2Name = t1p2[@"firstName"];
+        
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ and %@", t1p1Name, t1p2Name];
+        return cell;
+    }
    
-    PFObject *game = [self.singleGames objectAtIndex:indexPath.row];
-    PFUser *p1 = game[@"P1"];
-    NSString *p1Name = p1[@"firstName"];
-    PFUser *p2 = game[@"P2"];
-    NSString *p2Name = p2[@"firstName"];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@:%@ vs %@:%@", p1Name, game[@"playerOneScore"], p2Name, game[@"playerTwoScore"]];
-    return cell;
 }
 
 
