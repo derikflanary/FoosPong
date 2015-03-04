@@ -45,12 +45,19 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 @implementation ChoosePlayersViewController
 
 
+-(void)viewDidDisappear:(BOOL)animated{
+    self.navigationController.toolbarHidden = YES;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    self.navigationController.toolbarHidden = NO;
+}
 
 - (void)viewDidLoad {
         [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.navigationController.toolbarHidden = NO;
+    //self.navigationController.toolbarHidden = NO;
     UIBarButtonItem *addGuestButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Player" style:UIBarButtonItemStylePlain target:self action:@selector(addGuestPressed:)];
 //
     UIBarButtonItem * startGameButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Game" style:UIBarButtonItemStylePlain target:self action:@selector(startGame:)];
@@ -372,7 +379,6 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 [self.availablePlayers replaceObjectAtIndex:indexPath.row withObject:fromUser];
                 [self.currentPlayers replaceObjectAtIndex:self.selectedPath.row withObject:toUser];
             }
-
             
         }else{
             

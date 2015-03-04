@@ -42,6 +42,8 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:leftSwipe];;
     
+    self.navigationController.toolbarHidden = YES;
+    
     UIBarButtonItem * sideBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"17"] style:UIBarButtonItemStylePlain target:self action:@selector(sideBarButtonPressed:)];
     self.navigationItem.rightBarButtonItem = sideBarButton;
 

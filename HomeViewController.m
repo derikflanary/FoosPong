@@ -29,6 +29,7 @@
         self.title = user[@"firstName"];
         [[UserController sharedInstance] updateUsers];
     }
+    self.navigationController.toolbarHidden = YES;
 }
 
 - (void)viewDidLoad {
