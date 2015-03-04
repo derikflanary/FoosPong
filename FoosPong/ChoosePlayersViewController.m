@@ -76,7 +76,6 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     UIBarButtonItem *seg = [[UIBarButtonItem alloc]initWithCustomView:self.segmentedControl];
     [self setToolbarItems:@[addGuestButton, seg, startGameButton]];
     
-    
     self.tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStylePlain];
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;

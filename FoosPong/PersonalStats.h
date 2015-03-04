@@ -10,11 +10,11 @@
 
 @interface PersonalStats : NSObject
 
-@property (nonatomic, assign) NSNumber *wins;
-@property (nonatomic, assign) NSNumber *loses;
-@property (nonatomic, assign) NSNumber *gamesPlayed;
-@property (nonatomic, assign) NSNumber *teamGamesPlayed;
-@property (nonatomic, assign) NSNumber *teamGameWins;
-@property (nonatomic, assign) NSNumber *singleGameWins;
+@property (nonatomic, assign) NSInteger wins;
+@property (nonatomic, assign) NSInteger loses;
+@property (nonatomic, assign) NSInteger gamesPlayed;
+@property (nonatomic, assign) NSInteger teamGamesPlayed;
+@property (nonatomic, assign) NSInteger teamGameWins;
+@property (nonatomic, assign) NSInteger singleGameWins;
 
 @end

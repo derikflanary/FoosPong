@@ -12,12 +12,19 @@
 #import "NSString+Extensions.h"
 #import "UIColor+ExtraColorTools.h"
 #import "HMSegmentedControl.h"
+#import "SingleGameController.h"
+#import "TeamGameController.h"
+#import "StatsController.h"
+#import "PersonalStats.h"
 
 
 @interface ProfileViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIImageView *profileImageView;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
+@property (nonatomic, strong) NSArray *singleGames;
+@property (nonatomic, strong) NSArray *teamGames;
+@property (nonatomic, strong) PersonalStats *stats;
 
 @end
 
@@ -58,7 +65,18 @@
     [self.profileImageView addGestureRecognizer:tapOnProfilePicture];
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:2];
-    // Do any additional setup after loading the view.
+    
+    [[SingleGameController sharedInstance] updateGamesForUser:currentUser callback:^(NSArray * games){
+        self.singleGames = games;
+    }];
+    
+    [[TeamGameController sharedInstance] updateGamesForUser:currentUser callback:^(NSArray * teamGames) {
+        self.teamGames = teamGames;
+    }];
+    
+    self.stats = [[StatsController sharedInstance] getStatsForUser:currentUser andSingleGames:self.singleGames andTeamGames:self.teamGames];
+    
+    
 }
 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
