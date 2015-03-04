@@ -36,8 +36,8 @@
     finishedGame[@"teamOnePlayerTwo"] = gameStats.teamOnePlayerTwo;
     finishedGame[@"teamTwoPlayerOne"] = gameStats.teamTwoPlayerOne;
     finishedGame[@"teamTwoPlayerTwo"] = gameStats.teamTwoPlayerTwo;
-    finishedGame[@"teamOneScore"] = gameStats.teamOneScore;
-    finishedGame[@"teamTwoScore"] = gameStats.teamTwoScore;
+    finishedGame[@"teamOneScore"] = @(gameStats.teamOneScore);
+    finishedGame[@"teamTwoScore"] = @(gameStats.teamTwoScore);
     finishedGame[@"teamOneWin"] = gameStats.teamOneWin;
     
     [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

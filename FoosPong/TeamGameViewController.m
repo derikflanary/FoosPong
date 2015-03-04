@@ -127,8 +127,8 @@
     self.gameStats.teamOnePlayerTwo = [self.teamOne objectAtIndex:1];
     self.gameStats.teamTwoPlayerOne = [self.teamTwo objectAtIndex:0];
     self.gameStats.teamTwoPlayerTwo = [self.teamTwo objectAtIndex:1];
-    self.gameStats.teamOneScore =  [NSNumber numberWithFloat:self.stepperTeamOne.value];
-    self.gameStats.teamTwoScore =  [NSNumber numberWithFloat:self.stepperTeamTwo.value];
+    self.gameStats.teamOneScore =  (double)self.stepperTeamOne.value;
+    self.gameStats.teamTwoScore =  (double)self.stepperTeamTwo.value;
     self.gameStats.teamOneWin = [NSNumber numberWithBool:self.teamOneWin];
 }
 
