@@ -7,11 +7,13 @@
 //
 
 #import "SingleGameController.h"
+#import "TeamGameController.h"
 #import "Game.h"
 
 @interface SingleGameController()
 
 @property(nonatomic, strong)NSArray *games;
+
 
 @end
 
@@ -74,7 +76,7 @@
 //}
 
 
--(void)updateGamesForUser:(PFUser*)user callback:(void (^)(NSArray *))callback{
+-(void)updateGamesForUser:(PFUser*)user withBool:(BOOL)getTeamGames callback:(void (^)(NSArray *))callback{
     
     PFQuery *query = [PFQuery queryWithClassName:@"Game"];
     [query whereKey:@"P1" equalTo:user];
@@ -94,6 +96,13 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
+    
+    if (getTeamGames == YES) {
+        [[TeamGameController sharedInstance] updateGamesForUser:user callback:^(NSArray * teamGames) {
+            self.teamGames = teamGames;
+        }];
+    }
+    
 }
 
 

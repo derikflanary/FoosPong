@@ -33,10 +33,12 @@
     
 
      PFUser *currentUser = [UserController sharedInstance].theCurrentUser;
-    [[SingleGameController sharedInstance] updateGamesForUser:currentUser callback:^(NSArray * games){
+    [[SingleGameController sharedInstance] updateGamesForUser:currentUser withBool:NO callback:^(NSArray * games) {
         self.singleGames = games;
         [self.tableView reloadData];
+
     }];
+    
 
     [[TeamGameController sharedInstance] updateGamesForUser:currentUser callback:^(NSArray * teamGames) {
         self.teamGames = teamGames;

@@ -15,8 +15,9 @@
 //-(void)addGameWithDictionary:(NSDictionary*)dictionary andUser:(PFUser*)user andOtherUser:(PFUser*)user2;
 -(void)removeGame:(PFObject*)game;
 -(void)saveGames;
--(void)updateGamesForUser:(PFUser*)user callback:(void (^)(NSArray *))callback;
+-(void)updateGamesForUser:(PFUser*)user withBool:(BOOL)getTeamGames callback:(void (^)(NSArray *))callback;
 -(void)addGameWithSingleGameStats:(SingleGameStats*)gameStats;
 @property (nonatomic, strong, readonly)NSArray *games;
+@property(nonatomic, strong)NSArray *teamGames;
 
 @end

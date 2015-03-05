@@ -12,9 +12,10 @@
 
 @property (nonatomic, assign) NSInteger wins;
 @property (nonatomic, assign) NSInteger loses;
-@property (nonatomic, assign) NSInteger gamesPlayed;
+@property (nonatomic, assign) NSInteger singleGamesPlayed;
 @property (nonatomic, assign) NSInteger teamGamesPlayed;
 @property (nonatomic, assign) NSInteger teamGameWins;
 @property (nonatomic, assign) NSInteger singleGameWins;
+@property (nonatomic, assign) NSInteger totalGamesPlayed;
 
 @end

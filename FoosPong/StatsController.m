@@ -27,29 +27,46 @@
 - (PersonalStats *) getStatsForUser:(PFUser*)user andSingleGames:(NSArray*)singleGames andTeamGames:(NSArray*)teamGames{
     
     PersonalStats *stats = [PersonalStats new];
-    stats.gamesPlayed = [singleGames count];
+    stats.singleGamesPlayed = [singleGames count];
     stats.teamGamesPlayed = [teamGames count];
     
     for (Game *singleGame in singleGames) {
-        bool p1Win = singleGame.playerOneWin;
-        if (singleGame.p1 == user && p1Win) {
-            stats.wins = stats.wins + 1;
-            stats.singleGameWins = stats.singleGameWins + 1;
-            
-        }else if (singleGame.p1 == user && !p1Win){
-            stats.loses = stats.loses + 1;
 
-        }else if (singleGame.p2 == user && p1Win){
-            stats.wins = stats.wins + 1;
-            stats.singleGameWins = stats.singleGameWins + 1;
+        if (singleGame.p1 == user && singleGame.playerOneWin) {
+            stats.wins ++;
+            stats.singleGameWins ++;
+            
+        }else if (singleGame.p1 == user && !singleGame.playerOneWin){
+            stats.loses ++;
+
+        }else if (singleGame.p2 == user && !singleGame.playerOneWin){
+            stats.wins ++;
+            stats.singleGameWins ++;
         }else{
-            stats.loses = stats.loses + 1;
+            stats.loses ++;
         }
     }
     
-    for (PFObject *teamGame in teamGames) {
-        bool t1Win = [teamGame[@"teamOneWin"] boolValue];
+    for (TeamGame *teamGame in teamGames) {
+    
+        if (teamGame.teamOnePlayerOne == user || teamGame.teamOnePlayerTwo == user) {
+            if (teamGame.teamOneWin) {
+                stats.wins ++;
+                stats.teamGameWins ++;
+            
+            }else{
+                stats.loses ++;
+                
+            }
         
+        }else if (teamGame.teamTwoPlayerOne == user || teamGame.teamTwoPlayerTwo == user){
+            if (teamGame.teamOneWin) {
+                stats.loses ++;
+            }else{
+                stats.wins ++;
+                stats.teamGameWins ++;
+            }
+        }
     }
     
     return stats;

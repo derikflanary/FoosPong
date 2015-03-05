@@ -66,15 +66,17 @@
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:2];
     
-    [[SingleGameController sharedInstance] updateGamesForUser:currentUser callback:^(NSArray * games){
+    [[SingleGameController sharedInstance] updateGamesForUser:currentUser withBool:YES callback:^(NSArray * games) {
         self.singleGames = games;
+        self.teamGames = [SingleGameController sharedInstance].teamGames;
+        self.stats = [[StatsController sharedInstance] getStatsForUser:currentUser andSingleGames:self.singleGames andTeamGames:self.teamGames];
     }];
     
-    [[TeamGameController sharedInstance] updateGamesForUser:currentUser callback:^(NSArray * teamGames) {
-        self.teamGames = teamGames;
-    }];
+//    [[TeamGameController sharedInstance] updateGamesForUser:currentUser callback:^(NSArray * teamGames) {
+//        self.teamGames = teamGames;
+//    }];
+//    
     
-    self.stats = [[StatsController sharedInstance] getStatsForUser:currentUser andSingleGames:self.singleGames andTeamGames:self.teamGames];
     
     
 }
