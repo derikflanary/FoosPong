@@ -18,13 +18,14 @@
 #import "PersonalStats.h"
 
 
-@interface ProfileViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ProfileViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UIImageView *profileImageView;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 @property (nonatomic, strong) NSArray *singleGames;
 @property (nonatomic, strong) NSArray *teamGames;
 @property (nonatomic, strong) PersonalStats *stats;
+@property (nonatomic, strong) UICollectionView *collectionView;
 
 @end
 
@@ -46,8 +47,8 @@
     segmentedControl.verticalDividerEnabled = YES;
     segmentedControl.verticalDividerColor = [UIColor darkColor];
     [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:segmentedControl];
-    //[self.tabBarController.navigationController.navigationItem.titleView addSubview:segmentedControl];
+    //[self.view addSubview:segmentedControl];
+    
     
     
     PFUser *currentUser = [PFUser currentUser];
@@ -72,18 +73,39 @@
         self.stats = [[StatsController sharedInstance] getStatsForUser:currentUser andSingleGames:self.singleGames andTeamGames:self.teamGames];
     }];
     
-//    [[TeamGameController sharedInstance] updateGamesForUser:currentUser callback:^(NSArray * teamGames) {
-//        self.teamGames = teamGames;
-//    }];
-//    
-    
-    
-    
+ 
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(8, 350, 302, 250) collectionViewLayout:[UICollectionViewFlowLayout new]];
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+    [self.view addSubview:self.collectionView];
 }
+
+#pragma mark - collectionView datasource
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return 6;
+}
+
+// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    if (!cell) {
+        cell = [UICollectionViewCell new];
+    }
+    cell.backgroundColor = [UIColor grayColor];
+    return cell;
+}
+
+
+
+#pragma mark - segmented control
 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
 }
+
+#pragma mark - profile picture
 
 - (void)profilePressed:(id)sender{
     UIImagePickerController *imagePicker = [UIImagePickerController new];
