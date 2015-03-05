@@ -7,6 +7,7 @@
 //
 
 #import "SingleGameController.h"
+#import "Game.h"
 
 @interface SingleGameController()
 
@@ -29,13 +30,20 @@
 
 
 -(void)addGameWithSingleGameStats:(SingleGameStats*)gameStats{
-    PFObject *finishedGame = [PFObject objectWithClassName:@"SingleGame"];
     
-    finishedGame[@"p1"] = gameStats.playerOne;
-    finishedGame[@"p2"] = gameStats.playerTwo;
-    finishedGame[@"playerOneScore"] = gameStats.playerOneScore;
-    finishedGame[@"playerTwoScore"] = gameStats.playerTwoScore;
-    finishedGame[@"playerOneWin"] = gameStats.playerOneWin;
+    Game *finishedGame = [Game object];
+    finishedGame.p1 = gameStats.playerOne;
+    finishedGame.p2 = gameStats.playerTwo;
+    finishedGame.playerOneScore = gameStats.playerOneScore;
+    finishedGame.playerTwoScore = gameStats.playerTwoScore;
+    finishedGame.playerOneWin = gameStats.playerOneWin;
+//    PFObject *finishedGame = [PFObject objectWithClassName:@"SingleGame"];
+//    
+//    finishedGame[@"p1"] = gameStats.playerOne;
+//    finishedGame[@"p2"] = gameStats.playerTwo;
+//    finishedGame[@"playerOneScore"] = gameStats.playerOneScore;
+//    finishedGame[@"playerTwoScore"] = gameStats.playerTwoScore;
+//    finishedGame[@"playerOneWin"] = gameStats.playerOneWin;
     
     [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {

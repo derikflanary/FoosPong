@@ -7,6 +7,8 @@
 //
 
 #import "StatsController.h"
+#import "Game.h"
+#import "TeamGame.h"
 
 
 @implementation StatsController
@@ -28,21 +30,26 @@
     stats.gamesPlayed = [singleGames count];
     stats.teamGamesPlayed = [teamGames count];
     
-    for (PFObject *singleGame in singleGames) {
-        bool p1Win = [singleGame[@"playerOneWin"] boolValue];
-        if (singleGame[@"p1"] == user.username && p1Win) {
+    for (Game *singleGame in singleGames) {
+        bool p1Win = singleGame.playerOneWin;
+        if (singleGame.p1 == user && p1Win) {
             stats.wins = stats.wins + 1;
             stats.singleGameWins = stats.singleGameWins + 1;
             
-        }else if (singleGame[@"p1"] == user.username && !p1Win){
+        }else if (singleGame.p1 == user && !p1Win){
             stats.loses = stats.loses + 1;
 
-        }else if (singleGame[@"p2"] == user.username && p1Win){
+        }else if (singleGame.p2 == user && p1Win){
             stats.wins = stats.wins + 1;
             stats.singleGameWins = stats.singleGameWins + 1;
         }else{
             stats.loses = stats.loses + 1;
         }
+    }
+    
+    for (PFObject *teamGame in teamGames) {
+        bool t1Win = [teamGame[@"teamOneWin"] boolValue];
+        
     }
     
     return stats;

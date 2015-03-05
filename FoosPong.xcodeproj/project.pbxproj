@@ -63,6 +63,8 @@
 		EE9DAEF31A9ECEC600589897 /* AddGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEF21A9ECEC600589897 /* AddGroupViewController.m */; };
 		EE9DAEF61A9ECED800589897 /* FindGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEF51A9ECED800589897 /* FindGroupViewController.m */; };
 		EEFDF3CE1AA6AE7200A0E48F /* StatsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFDF3CD1AA6AE7200A0E48F /* StatsController.m */; };
+		EEFDF3D11AA7FEA600A0E48F /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFDF3D01AA7FEA600A0E48F /* Game.m */; };
+		EEFDF3D41AA809AF00A0E48F /* TeamGame.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFDF3D31AA809AF00A0E48F /* TeamGame.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +174,10 @@
 		EE9DAEF51A9ECED800589897 /* FindGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindGroupViewController.m; sourceTree = "<group>"; };
 		EEFDF3CC1AA6AE7200A0E48F /* StatsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsController.h; sourceTree = "<group>"; };
 		EEFDF3CD1AA6AE7200A0E48F /* StatsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsController.m; sourceTree = "<group>"; };
+		EEFDF3CF1AA7FEA600A0E48F /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		EEFDF3D01AA7FEA600A0E48F /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
+		EEFDF3D21AA809AF00A0E48F /* TeamGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamGame.h; sourceTree = "<group>"; };
+		EEFDF3D31AA809AF00A0E48F /* TeamGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamGame.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -335,6 +341,10 @@
 				EE2EF8121AA4EF3400DE09E7 /* TeamGameStats.m */,
 				EE2EF8171AA6422000DE09E7 /* PersonalStats.h */,
 				EE2EF8181AA6422000DE09E7 /* PersonalStats.m */,
+				EEFDF3CF1AA7FEA600A0E48F /* Game.h */,
+				EEFDF3D01AA7FEA600A0E48F /* Game.m */,
+				EEFDF3D21AA809AF00A0E48F /* TeamGame.h */,
+				EEFDF3D31AA809AF00A0E48F /* TeamGame.m */,
 			);
 			name = "Model Objects";
 			sourceTree = "<group>";
@@ -595,6 +605,7 @@
 				EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */,
 				EE1A55881A9D217700E6981E /* PersonalNotificationsViewController.m in Sources */,
 				EE1A55851A9CFBB500E6981E /* GroupController.m in Sources */,
+				EEFDF3D11AA7FEA600A0E48F /* Game.m in Sources */,
 				EE2EF8131AA4EF3400DE09E7 /* TeamGameStats.m in Sources */,
 				302E41C41A86958E005F1184 /* HomeViewController.m in Sources */,
 				EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */,
@@ -619,6 +630,7 @@
 				EE2C57D61A93DFC600DA9835 /* UIImageView+Letters.m in Sources */,
 				EE5027C81A965F1F0079DFFC /* NSString+Extensions.m in Sources */,
 				EE7A6D0A1A869CD4000447D2 /* HistoryViewController.m in Sources */,
+				EEFDF3D41AA809AF00A0E48F /* TeamGame.m in Sources */,
 				EE2C57E21A93F12300DA9835 /* SignUpViewController.m in Sources */,
 				EE5027CB1A98ED310079DFFC /* UIColor+ExtraColorTools.m in Sources */,
 				EE1A55811A9CFB4A00E6981E /* CurrentGroupViewController.m in Sources */,

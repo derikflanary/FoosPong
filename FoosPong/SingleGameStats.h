@@ -12,9 +12,9 @@
 
 @property(nonatomic, strong)PFUser *playerOne;
 @property(nonatomic, strong)PFUser *playerTwo;
-@property(nonatomic, assign)NSNumber *playerOneScore;
-@property(nonatomic, assign)NSNumber *playerTwoScore;
-@property(nonatomic, assign)NSNumber *playerOneWin;
+@property(nonatomic, assign)double playerOneScore;
+@property(nonatomic, assign)double playerTwoScore;
+@property(nonatomic, assign)bool playerOneWin;
 
 
 @end

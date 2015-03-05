@@ -7,6 +7,7 @@
 //
 
 #import "TeamGameController.h"
+#import "TeamGame.h"
 
 @interface TeamGameController()
 
@@ -30,15 +31,25 @@
 
 
 -(void)addGameWithTeamGameStats:(TeamGameStats*)gameStats{
-    PFObject *finishedGame = [PFObject objectWithClassName:@"TeamGame"];
+//    PFObject *finishedGame = [PFObject objectWithClassName:@"TeamGame"];
+//    
+//    finishedGame[@"teamOnePlayerOne"] = gameStats.teamOnePlayerOne;
+//    finishedGame[@"teamOnePlayerTwo"] = gameStats.teamOnePlayerTwo;
+//    finishedGame[@"teamTwoPlayerOne"] = gameStats.teamTwoPlayerOne;
+//    finishedGame[@"teamTwoPlayerTwo"] = gameStats.teamTwoPlayerTwo;
+//    finishedGame[@"teamOneScore"] = @(gameStats.teamOneScore);
+//    finishedGame[@"teamTwoScore"] = @(gameStats.teamTwoScore);
+//    finishedGame[@"teamOneWin"] = gameStats.teamOneWin;
     
-    finishedGame[@"teamOnePlayerOne"] = gameStats.teamOnePlayerOne;
-    finishedGame[@"teamOnePlayerTwo"] = gameStats.teamOnePlayerTwo;
-    finishedGame[@"teamTwoPlayerOne"] = gameStats.teamTwoPlayerOne;
-    finishedGame[@"teamTwoPlayerTwo"] = gameStats.teamTwoPlayerTwo;
-    finishedGame[@"teamOneScore"] = @(gameStats.teamOneScore);
-    finishedGame[@"teamTwoScore"] = @(gameStats.teamTwoScore);
-    finishedGame[@"teamOneWin"] = gameStats.teamOneWin;
+    TeamGame *finishedGame = [TeamGame object];
+    
+    finishedGame.teamOnePlayerOne = gameStats.teamOnePlayerOne;
+    finishedGame.teamOnePlayerTwo = gameStats.teamOnePlayerTwo;
+    finishedGame.teamTwoPlayerOne = gameStats.teamTwoPlayerOne;
+    finishedGame.teamTwoPlayerTwo = gameStats.teamTwoPlayerTwo;
+    finishedGame.teamOneScore = gameStats.teamOneScore;
+    finishedGame.teamTwoScore = gameStats.teamTwoScore;
+    finishedGame.teamOneWin = gameStats.teamOneWin;
     
     [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {

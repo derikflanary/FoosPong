@@ -127,9 +127,9 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.gameStats = [SingleGameStats new];
     self.gameStats.playerOne = self.playerOne;
     self.gameStats.playerTwo = self.playerTwo;
-    self.gameStats.playerOneScore = [NSNumber numberWithFloat:self.playerOneStepper.value];
-    self.gameStats.playerTwoScore = [NSNumber numberWithFloat:self.playerTwoStepper.value];
-    self.gameStats.playerOneWin = [NSNumber numberWithBool:self.playerTwoWin];
+    self.gameStats.playerOneScore = (double)self.playerOneStepper.value;
+    self.gameStats.playerTwoScore = (double)self.playerTwoStepper.value;
+    self.gameStats.playerOneWin = self.playerOneWin;
 
 }
 
