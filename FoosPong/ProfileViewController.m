@@ -113,7 +113,9 @@
 }
 
 - (void)menuItemSelected:(NSIndexPath *)indexPath{
-    
+    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    [pulldownMenu animateDropDown];
+    NSLog(@"%@", indexPath);
 }
 
 -(void)pullDownAnimated:(BOOL)open{
@@ -135,6 +137,10 @@
     }
     cell.backgroundColor = [UIColor lightGrayColor];
     return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"%@", indexPath);
 }
 
 
