@@ -16,9 +16,11 @@
 #import "TeamGameController.h"
 #import "StatsController.h"
 #import "PersonalStats.h"
+#import "PulldownMenu.h"
 
-
-@interface ProfileViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface ProfileViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, PulldownMenuDelegate, UIScrollViewDelegate> {
+    PulldownMenu *pulldownMenu;
+}
 
 @property (nonatomic, strong) UIImageView *profileImageView;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
@@ -73,13 +75,51 @@
         self.stats = [[StatsController sharedInstance] getStatsForUser:currentUser andSingleGames:self.singleGames andTeamGames:self.teamGames];
     }];
     
- 
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(8, 350, 302, 250) collectionViewLayout:[UICollectionViewFlowLayout new]];
+    UIButton *statsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 230, 320, 50)];
+    [statsButton addTarget:self action:@selector(menuTap:) forControlEvents:UIControlEventTouchUpInside];
+    statsButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+    [statsButton setTitle:@"Stats" forState:UIControlStateNormal];
+    [statsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [statsButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    statsButton.backgroundColor = [UIColor mainColor];
+    [self.view addSubview:statsButton];
+    
+    UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(8, 280, 302, 250) collectionViewLayout:layout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.collectionView];
+    
+    layout.itemSize = CGSizeMake(200, 250);
+    [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    
+    pulldownMenu = [[PulldownMenu alloc] initWithView:self.view];
+    pulldownMenu.topMarginPortrait = 280;
+    [self.view addSubview:pulldownMenu];
+    
+    [pulldownMenu insertButton:@"Wins"];
+    [pulldownMenu insertButton:@"Loses"];
+    [pulldownMenu insertButton:@"Other"];
+    
+    pulldownMenu.delegate = self;
+    
+    [pulldownMenu loadMenu];
 }
+
+- (void)menuTap:(id)sender {
+    [pulldownMenu animateDropDown];
+}
+
+- (void)menuItemSelected:(NSIndexPath *)indexPath{
+    
+}
+
+-(void)pullDownAnimated:(BOOL)open{
+    
+}
+
 
 #pragma mark - collectionView datasource
 
@@ -93,11 +133,14 @@
     if (!cell) {
         cell = [UICollectionViewCell new];
     }
-    cell.backgroundColor = [UIColor grayColor];
+    cell.backgroundColor = [UIColor lightGrayColor];
     return cell;
 }
 
 
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0, 50, 0, 0);
+}
 
 #pragma mark - segmented control
 
