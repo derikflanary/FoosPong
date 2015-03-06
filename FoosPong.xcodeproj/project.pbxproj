@@ -63,6 +63,7 @@
 		EE9DAEF01A9EB91D00589897 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEEF1A9EB91D00589897 /* MasterViewController.m */; };
 		EE9DAEF31A9ECEC600589897 /* AddGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEF21A9ECEC600589897 /* AddGroupViewController.m */; };
 		EE9DAEF61A9ECED800589897 /* FindGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEF51A9ECED800589897 /* FindGroupViewController.m */; };
+		EEFB90DC1AAA753100DEA099 /* StatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFB90DB1AAA753100DEA099 /* StatsViewController.m */; };
 		EEFDF3CE1AA6AE7200A0E48F /* StatsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFDF3CD1AA6AE7200A0E48F /* StatsController.m */; };
 		EEFDF3D11AA7FEA600A0E48F /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFDF3D01AA7FEA600A0E48F /* Game.m */; };
 		EEFDF3D41AA809AF00A0E48F /* TeamGame.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFDF3D31AA809AF00A0E48F /* TeamGame.m */; };
@@ -175,6 +176,8 @@
 		EE9DAEF21A9ECEC600589897 /* AddGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGroupViewController.m; sourceTree = "<group>"; };
 		EE9DAEF41A9ECED800589897 /* FindGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindGroupViewController.h; sourceTree = "<group>"; };
 		EE9DAEF51A9ECED800589897 /* FindGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindGroupViewController.m; sourceTree = "<group>"; };
+		EEFB90DA1AAA753100DEA099 /* StatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsViewController.h; sourceTree = "<group>"; };
+		EEFB90DB1AAA753100DEA099 /* StatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsViewController.m; sourceTree = "<group>"; };
 		EEFDF3CC1AA6AE7200A0E48F /* StatsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsController.h; sourceTree = "<group>"; };
 		EEFDF3CD1AA6AE7200A0E48F /* StatsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsController.m; sourceTree = "<group>"; };
 		EEFDF3CF1AA7FEA600A0E48F /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
@@ -256,6 +259,8 @@
 			children = (
 				EE3356EC1A895F0600B83EC0 /* ProfileViewController.h */,
 				EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */,
+				EEFB90DA1AAA753100DEA099 /* StatsViewController.h */,
+				EEFB90DB1AAA753100DEA099 /* StatsViewController.m */,
 				EE7A6D081A869CD4000447D2 /* HistoryViewController.h */,
 				EE7A6D091A869CD4000447D2 /* HistoryViewController.m */,
 				EE1A55861A9D217700E6981E /* PersonalNotificationsViewController.h */,
@@ -625,6 +630,7 @@
 				EE9DAEF61A9ECED800589897 /* FindGroupViewController.m in Sources */,
 				EE9DAEF01A9EB91D00589897 /* MasterViewController.m in Sources */,
 				EE808DB01A9FC3E30000F833 /* SettingViewController.m in Sources */,
+				EEFB90DC1AAA753100DEA099 /* StatsViewController.m in Sources */,
 				EE48886A1A9FDD9B00FCCA47 /* HMSegmentedControl.m in Sources */,
 				EE2EF8161AA4F88900DE09E7 /* TeamGameController.m in Sources */,
 				EE2EF8191AA6422000DE09E7 /* PersonalStats.m in Sources */,

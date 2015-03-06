@@ -17,5 +17,10 @@
 @property (nonatomic, assign) NSInteger teamGameWins;
 @property (nonatomic, assign) NSInteger singleGameWins;
 @property (nonatomic, assign) NSInteger totalGamesPlayed;
+@property (nonatomic, assign) NSInteger numberOfStats;
+@property (nonatomic, strong) NSArray *statsArray;
+@property (nonatomic, strong) NSArray *statsTitles;
+
+-(id)initWithArrays;
 
 @end

@@ -10,6 +10,10 @@
 #import "Game.h"
 #import "TeamGame.h"
 
+@interface StatsController()
+
+
+@end
 
 @implementation StatsController
 
@@ -24,9 +28,9 @@
     return sharedInstance;
 }
 
-- (PersonalStats *) getStatsForUser:(PFUser*)user andSingleGames:(NSArray*)singleGames andTeamGames:(NSArray*)teamGames{
+- (PersonalStats *) getStatsForUser:(PFUser*)user andSingleGames:(NSArray*)singleGames andTeamGames:(NSArray*)teamGames callback:(void (^)(PersonalStats *))callback{
     
-    PersonalStats *stats = [PersonalStats new];
+    PersonalStats *stats = [[PersonalStats alloc]initWithArrays];
     stats.singleGamesPlayed = [singleGames count];
     stats.teamGamesPlayed = [teamGames count];
     
@@ -68,8 +72,20 @@
             }
         }
     }
+    [self addStatstoArray:stats];
     
+    stats.numberOfStats = 7;
+    callback(stats);
     return stats;
+}
+
+- (void)addStatstoArray:(PersonalStats *)stats{
+   
+    
+    stats.statsArray = @[[NSNumber numberWithInteger:stats.wins] ,[NSNumber numberWithInteger:stats.loses], [NSNumber numberWithInteger:stats.totalGamesPlayed],[NSNumber numberWithInteger:stats.singleGamesPlayed],[NSNumber numberWithInteger:stats.singleGameWins],[NSNumber numberWithInteger:stats.teamGamesPlayed],[NSNumber numberWithInteger:stats.teamGameWins]];
+    
+    stats.statsTitles = @[@"Wins", @"Loses", @"Games Played", @"Single Game", @"Single Wins", @"Team Games", @"Team Wins"];
+    
 }
 
 

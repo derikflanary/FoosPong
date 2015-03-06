@@ -53,9 +53,10 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     
     self.imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"FoosBallButton"]];
     self.imageView.frame = self.view.frame;
-    self.imageView.alpha = .2;
+    self.imageView.alpha = 1;
     [self.view addSubview:self.imageView];
-
+    
+    
     self.loginButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 383, 320, 62)];
     self.loginButton.backgroundColor = darkColor;
     self.loginButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];

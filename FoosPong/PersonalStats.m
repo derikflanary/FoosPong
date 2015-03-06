@@ -10,6 +10,13 @@
 
 @implementation PersonalStats
 
+-(id)initWithArrays{
+
+    self = [super init];
+    self.statsArray = [NSArray array];
+    self.statsTitles = [NSArray array];
+    return self;
+}
 
 
 @end

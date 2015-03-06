@@ -137,7 +137,11 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
             SingleGameViewController *gvc = [SingleGameViewController new];
             gvc.playerOne = [self.currentPlayers objectAtIndex:0];
             gvc.playerTwo = [self.currentPlayers objectAtIndex:1];
-            [self.navigationController pushViewController:gvc animated:YES];
+            
+            [self.navigationController presentViewController:gvc animated:YES completion:^{
+                
+            }];
+
         }
 
     }else if(self.segmentedControl.selectedSegmentIndex == 1){

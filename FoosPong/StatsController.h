@@ -12,6 +12,7 @@
 @interface StatsController : NSObject
 
 + (StatsController *)sharedInstance;
-- (PersonalStats *) getStatsForUser:(PFUser*)user andSingleGames:(NSArray*)singleGames andTeamGames:(NSArray*)teamGames;
+- (PersonalStats *) getStatsForUser:(PFUser*)user andSingleGames:(NSArray*)singleGames andTeamGames:(NSArray*)teamGames callback:(void (^)(PersonalStats *))callback;
+
 
 @end

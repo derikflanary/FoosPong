@@ -30,14 +30,14 @@
     menuItems = [[NSMutableArray alloc] init];
     
     // Setting defaults
-    cellHeight = 60.0f;
+    cellHeight = 50.0f;
     handleHeight = 15.0f;
-    animationDuration = 0.3f;
+    animationDuration = 0.5f;
     topMarginPortrait = 0;
     topMarginLandscape = 0;
-    cellColor = [UIColor grayColor];
-    cellSelectedColor = [UIColor blackColor];
-    cellFont = [UIFont fontWithName:@"GillSans-Bold" size:19.0f];
+    cellColor = [UIColor mainColor];
+    cellSelectedColor = [UIColor mainColor];
+    cellFont = [UIFont fontWithName:[NSString boldFont] size:19.0f];
     cellTextColor = [UIColor whiteColor];
     cellSelectionStyle = UITableViewCellSelectionStyleDefault;
     
