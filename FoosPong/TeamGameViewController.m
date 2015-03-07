@@ -38,8 +38,8 @@
     
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
-    
     self.navigationItem.leftBarButtonItem = cancelButton;
+    
     PFUser *player = [self.teamOne objectAtIndex:0];
     self.t1p1 = player.username;
     player = [self.teamOne objectAtIndex:1];

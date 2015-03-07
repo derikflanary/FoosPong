@@ -10,4 +10,6 @@
 
 @interface StatsViewController : UIViewController
 
+@property (nonatomic, strong) UIImage *copiedImage;
+
 @end

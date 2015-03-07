@@ -16,8 +16,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    
+    self.view.backgroundColor = [UIColor clearColor];
+    
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView *bluredEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    [bluredEffectView setFrame:self.view.bounds];
+    
+    [self.view addSubview:bluredEffectView];
+    
+    // Vibrancy Effect
+    UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
+    UIVisualEffectView *vibrancyEffectView = [[UIVisualEffectView alloc] initWithEffect:vibrancyEffect];
+    [vibrancyEffectView setFrame:self.view.bounds];
+    
+    // Add Vibrancy View to Blur View
+    [bluredEffectView.contentView addSubview:vibrancyEffectView];
+    // Do any additional setup after loading the view.
+
     // Do any additional setup after loading the view.
 }
+
+- (void)cancelPressed:(id)sender{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

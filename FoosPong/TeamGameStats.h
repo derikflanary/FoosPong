@@ -16,7 +16,10 @@
 @property (nonatomic, strong) PFUser *teamTwoPlayerTwo;
 @property (nonatomic, assign) double teamOneScore;
 @property (nonatomic, assign) double teamTwoScore;
-@property (nonatomic, assign) NSNumber *teamOneWin;
+@property (nonatomic, assign) BOOL teamOneWin;
+@property (nonatomic, assign) NSInteger teamGameWins;
+@property (nonatomic, assign) NSInteger teamGameLoses;
+@property (nonatomic, assign) NSInteger teamGamesPlayed;
 
 
 

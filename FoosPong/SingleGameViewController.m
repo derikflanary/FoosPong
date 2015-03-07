@@ -47,6 +47,9 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     UIBarButtonItem * saveGameButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveGamePressed:)];
     self.navigationItem.rightBarButtonItem = saveGameButton;
     
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    
     __block SingleGameViewController *bSelf = self;
     self.playerOneStepper = [[PKYStepper alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 100)];
     self.playerOneStepper.valueChangedCallback = ^(PKYStepper *stepper, float count) {
@@ -144,9 +147,10 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     // Dispose of any resources that can be recreated.
 }
 
-
-- (void)viewWillDisappear:(BOOL)animated{
-    
+- (void)cancelPressed:(id)sender{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 /*

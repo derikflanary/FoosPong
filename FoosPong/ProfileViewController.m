@@ -10,28 +10,23 @@
 #import "UIImageView+Letters.h"
 #import "UserController.h"
 #import "NSString+Extensions.h"
-#import "UIColor+ExtraColorTools.h"
-#import "HMSegmentedControl.h"
 #import "SingleGameController.h"
-#import "TeamGameController.h"
 #import "StatsController.h"
 #import "PersonalStats.h"
-#import "PulldownMenu.h"
+#import "TeamGameStats.h"
 #import "NewGameCustomTableViewCell.h"
 #import "StatsViewController.h"
 
-@interface ProfileViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, PulldownMenuDelegate, UIScrollViewDelegate> {
-    PulldownMenu *pulldownMenu;
-}
-
+@interface ProfileViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate,  UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) UIImageView *profileImageView;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 @property (nonatomic, strong) NSArray *singleGames;
 @property (nonatomic, strong) NSArray *teamGames;
-@property (nonatomic, strong) PersonalStats *stats;
+@property (nonatomic, strong) PersonalStats *persoanlStats;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UIButton *statsButton;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) PFUser *currentUser;
 
 @end
 
@@ -41,26 +36,13 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.tabBarController.navigationItem.hidesBackButton = YES;
-    NSArray *images = @[[UIImage imageNamed:@"74"],
-                        [UIImage imageNamed:@"17"],
-                        [UIImage imageNamed:@"167"]];
-//    NSArray *titles = @[@"Profile", @"History", @"Messages"];
-
-    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc]initWithSectionImages:images sectionSelectedImages:images];
-    segmentedControl.frame = CGRectMake(10, 60, 300, 60);
-    segmentedControl.selectionIndicatorColor = [UIColor mainColor];
-    segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleBox;
-    segmentedControl.verticalDividerEnabled = YES;
-    segmentedControl.verticalDividerColor = [UIColor darkColor];
-    [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-    //[self.view addSubview:segmentedControl];
     
     
     
-    PFUser *currentUser = [PFUser currentUser];
-    NSLog(@"%@", currentUser[@"firstName"]);
+    self.currentUser = [PFUser currentUser];
+    NSLog(@"%@", self.currentUser[@"firstName"]);
     
-    NSString *fullName = [NSString combineNames:currentUser[@"firstName"] and:currentUser[@"lastName"]];
+    NSString *fullName = [NSString combineNames:self.currentUser[@"firstName"] and:self.currentUser[@"lastName"]];
     self.profileImageView = [[UIImageView alloc]initWithFrame:CGRectMake(100, 120, 100, 100)];
     [self.profileImageView setImageWithString:fullName color:nil circular:YES];
     self.profileImageView.backgroundColor = [UIColor grayColor];
@@ -73,26 +55,10 @@
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:2];
     
-    [[SingleGameController sharedInstance] updateGamesForUser:currentUser withBool:YES callback:^(NSArray * games) {
+    [[SingleGameController sharedInstance] updateGamesForUser:self.currentUser withBool:YES callback:^(NSArray * games) {
         self.singleGames = games;
         self.teamGames = [SingleGameController sharedInstance].teamGames;
-        [[StatsController sharedInstance] getStatsForUser:currentUser andSingleGames:self.singleGames andTeamGames:self.teamGames callback:^(PersonalStats *stats) {
-            self.stats = stats;
-            [self setUpPullDownMenu];
-        }];
-        
-        
     }];
-    
-    
-    self.statsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 230, 320, 50)];
-    [self.statsButton addTarget:self action:@selector(menuTap:) forControlEvents:UIControlEventTouchUpInside];
-    self.statsButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-    [self.statsButton setTitle:@"Stats" forState:UIControlStateNormal];
-    [self.statsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.statsButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
-    self.statsButton.backgroundColor = [UIColor mainColor];
-    [self.view addSubview:self.statsButton];
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 280, 320, 250) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
@@ -100,18 +66,6 @@
     self.tableView.scrollEnabled = NO;
     self.tableView.bounces = NO;
     [self.view addSubview:self.tableView];
-    
-    UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(8, 280, 302, 250) collectionViewLayout:layout];
-    self.collectionView.dataSource = self;
-    self.collectionView.delegate = self;
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
-    self.collectionView.backgroundColor = [UIColor whiteColor];
-    //[self.view addSubview:self.collectionView];
-    
-    layout.itemSize = CGSizeMake(200, 250);
-    [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    
    
 }
 
@@ -146,52 +100,39 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   
-    [self.navigationController presentViewController:[StatsViewController new] animated:YES completion:^{
-        
-    }];
-}
-
-
-#pragma mark - drop menu
-
-- (void)setUpPullDownMenu{
-    pulldownMenu = [[PulldownMenu alloc] initWithView:self.view];
-    pulldownMenu.topMarginPortrait = 280;
-    [self.view addSubview:pulldownMenu];
+    StatsViewController *svc = [StatsViewController new];
+    UINavigationController *statsNavController = [[UINavigationController alloc]initWithRootViewController:svc];
     
-    for (NSString *title in self.stats.statsTitles) {
-        [pulldownMenu insertButton:title];
+    statsNavController.transitioningDelegate = self;
+    statsNavController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    svc.transitioningDelegate = self;
+    svc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    svc.view.backgroundColor = [UIColor clearColor];
+    
+    if (indexPath.row == 0) {
+        [[StatsController sharedInstance] retrieveSingleStatsForUser:self.currentUser andSingleGames:self.singleGames callback:^(PersonalStats *stats) {
+            [self.navigationController presentViewController:statsNavController animated:YES completion:^{
+                
+            }];
+        }];
+    }else if (indexPath.row == 1){
+        [[StatsController sharedInstance] retrieveTeamStatsForUser:self.currentUser andTeamGames:self.teamGames callback:^(TeamGameStats *stats) {
+            [self.navigationController presentViewController:statsNavController animated:YES completion:^{
+                
+            }];
+        }];
+    }else{
+        [[StatsController sharedInstance] retrieveOverallStatsForUser:self.currentUser andSingleGames:self.singleGames andTeamGames:self.teamGames callback:^(PersonalStats *stats) {
+            [self.navigationController presentViewController:statsNavController animated:YES completion:^{
+                
+            }];
+        }];
     }
     
-    pulldownMenu.delegate = self;
     
-    [pulldownMenu loadMenu];
-}
-
-- (void)menuTap:(id)sender {
-
-    [pulldownMenu animateDropDown];
     
 }
 
-- (void)menuItemSelected:(NSIndexPath *)indexPath{
-    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-    [self.statsButton setTitle:[self.stats.statsTitles objectAtIndex:indexPath.row] forState:UIControlStateNormal];
-    [pulldownMenu animateDropDown];
-
-}
-
--(void)pullDownAnimated:(BOOL)open{
-    
-}
-
-
-
-#pragma mark - segmented control
-
-- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
-    NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
-}
 
 #pragma mark - profile picture
 
@@ -250,35 +191,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - collectionView datasource
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return [self.stats.statsArray count];;
-}
-
-// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    if (!cell) {
-        cell = [UICollectionViewCell new];
-    }
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, cell.bounds.size.width, 50)];
-    
-    label.text = [NSString stringWithFormat:@"%@", [self.stats.statsArray objectAtIndex:indexPath.row]];
-    label.textAlignment = NSTextAlignmentCenter;
-    [cell.contentView addSubview:label];
-    cell.backgroundColor = [UIColor lightGrayColor];
-    return cell;
-}
-
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%lu", indexPath.row);
-}
-
-
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(0, 50, 0, 0);
-}
 
 /*
 #pragma mark - Navigation

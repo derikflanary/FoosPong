@@ -28,65 +28,110 @@
     return sharedInstance;
 }
 
-- (PersonalStats *) getStatsForUser:(PFUser*)user andSingleGames:(NSArray*)singleGames andTeamGames:(NSArray*)teamGames callback:(void (^)(PersonalStats *))callback{
+- (void) retrieveSingleStatsForUser:(PFUser*)user andSingleGames:(NSArray*)singleGames callback:(void (^)(PersonalStats *))callback{
     
-    PersonalStats *stats = [[PersonalStats alloc]initWithArrays];
+    PersonalStats *stats = [PersonalStats new];
     stats.singleGamesPlayed = [singleGames count];
-    stats.teamGamesPlayed = [teamGames count];
+    
     
     for (Game *singleGame in singleGames) {
 
         if (singleGame.p1 == user && singleGame.playerOneWin) {
-            stats.wins ++;
             stats.singleGameWins ++;
             
         }else if (singleGame.p1 == user && !singleGame.playerOneWin){
-            stats.loses ++;
+            stats.singleGameLoses ++;
 
         }else if (singleGame.p2 == user && !singleGame.playerOneWin){
-            stats.wins ++;
             stats.singleGameWins ++;
+            
         }else{
+            stats.singleGameLoses ++;
+        }
+    }
+    
+    callback(stats);
+    
+}
+
+- (void) retrieveTeamStatsForUser:(PFUser*)user andTeamGames:(NSArray*)teamGames callback:(void (^)(TeamGameStats *))callback{
+    
+    TeamGameStats *stats = [TeamGameStats new];
+    stats.teamGamesPlayed = [teamGames count];
+    
+    for (TeamGame *teamGame in teamGames) {
+        
+        if (teamGame.teamOnePlayerOne == user || teamGame.teamOnePlayerTwo == user) {
+            if (teamGame.teamOneWin) {
+                stats.teamGameWins ++;
+                
+            }else{
+                stats.teamGameLoses ++;
+            }
+            
+        }else if (teamGame.teamTwoPlayerOne == user || teamGame.teamTwoPlayerTwo == user){
+            if (teamGame.teamOneWin) {
+                stats.teamGameLoses ++;
+                
+            }else{
+                stats.teamGameWins ++;
+            }
+        }
+    }
+
+    callback(stats);
+}
+
+- (void) retrieveOverallStatsForUser:(PFUser*)user andSingleGames:(NSArray*)singleGames andTeamGames:(NSArray*)teamGames callback:(void (^)(PersonalStats *))callback{
+    
+    PersonalStats *stats = [PersonalStats new];
+    stats.singleGamesPlayed = [singleGames count];
+    stats.totalGamesPlayed = stats.singleGamesPlayed + [teamGames count];
+    
+    for (Game *singleGame in singleGames) {
+        
+        if (singleGame.p1 == user && singleGame.playerOneWin) {
+            stats.wins ++;
+            
+        }else if (singleGame.p1 == user && !singleGame.playerOneWin){
+            stats.loses ++;
+            
+        }else if (singleGame.p2 == user && !singleGame.playerOneWin){
+            stats.wins ++;
+            
+                    }else{
             stats.loses ++;
         }
     }
     
     for (TeamGame *teamGame in teamGames) {
-    
+        
         if (teamGame.teamOnePlayerOne == user || teamGame.teamOnePlayerTwo == user) {
             if (teamGame.teamOneWin) {
                 stats.wins ++;
-                stats.teamGameWins ++;
-            
+                
             }else{
                 stats.loses ++;
-                
             }
-        
+            
         }else if (teamGame.teamTwoPlayerOne == user || teamGame.teamTwoPlayerTwo == user){
             if (teamGame.teamOneWin) {
                 stats.loses ++;
+                
             }else{
                 stats.wins ++;
-                stats.teamGameWins ++;
             }
         }
     }
-    [self addStatstoArray:stats];
+
     
-    stats.numberOfStats = 7;
     callback(stats);
-    return stats;
+
+
+    
+    
 }
 
-- (void)addStatstoArray:(PersonalStats *)stats{
-   
-    
-    stats.statsArray = @[[NSNumber numberWithInteger:stats.wins] ,[NSNumber numberWithInteger:stats.loses], [NSNumber numberWithInteger:stats.totalGamesPlayed],[NSNumber numberWithInteger:stats.singleGamesPlayed],[NSNumber numberWithInteger:stats.singleGameWins],[NSNumber numberWithInteger:stats.teamGamesPlayed],[NSNumber numberWithInteger:stats.teamGameWins]];
-    
-    stats.statsTitles = @[@"Wins", @"Loses", @"Games Played", @"Single Game", @"Single Wins", @"Team Games", @"Team Wins"];
-    
-}
 
 
 @end

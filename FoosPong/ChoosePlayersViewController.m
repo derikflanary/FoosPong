@@ -135,10 +135,11 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
         }else{
             
             SingleGameViewController *gvc = [SingleGameViewController new];
+            UINavigationController *singleGameNavController = [[UINavigationController alloc]initWithRootViewController:gvc];
             gvc.playerOne = [self.currentPlayers objectAtIndex:0];
             gvc.playerTwo = [self.currentPlayers objectAtIndex:1];
             
-            [self.navigationController presentViewController:gvc animated:YES completion:^{
+            [self.navigationController presentViewController:singleGameNavController animated:YES completion:^{
                 
             }];
 

@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "PersonalStats.h"
+#import "TeamGameStats.h"
 
 @interface StatsController : NSObject
 
 + (StatsController *)sharedInstance;
-- (PersonalStats *) getStatsForUser:(PFUser*)user andSingleGames:(NSArray*)singleGames andTeamGames:(NSArray*)teamGames callback:(void (^)(PersonalStats *))callback;
+- (void) retrieveSingleStatsForUser:(PFUser*)user andSingleGames:(NSArray*)singleGames callback:(void (^)(PersonalStats *))callback;
+- (void) retrieveTeamStatsForUser:(PFUser*)user andTeamGames:(NSArray*)teamGames callback:(void (^)(TeamGameStats *))callback;
+- (void) retrieveOverallStatsForUser:(PFUser*)user andSingleGames:(NSArray*)singleGames andTeamGames:(NSArray*)teamGames callback:(void (^)(PersonalStats *))callback;
 
 
 @end
