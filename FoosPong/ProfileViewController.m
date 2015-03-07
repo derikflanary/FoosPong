@@ -37,6 +37,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.tabBarController.navigationItem.hidesBackButton = YES;
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     
     self.currentUser = [PFUser currentUser];
@@ -47,6 +48,8 @@
     [self.profileImageView setImageWithString:fullName color:nil circular:YES];
     self.profileImageView.backgroundColor = [UIColor grayColor];
     [self.view addSubview:self.profileImageView];
+    self.profileImageView.layer.cornerRadius = 50;
+    self.profileImageView.clipsToBounds = YES;
     
     UITapGestureRecognizer *tapOnProfilePicture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(profilePressed:)];
     tapOnProfilePicture.numberOfTapsRequired = 1;
@@ -105,6 +108,7 @@
     
     statsNavController.transitioningDelegate = self;
     statsNavController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+
     svc.transitioningDelegate = self;
     svc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     svc.view.backgroundColor = [UIColor clearColor];

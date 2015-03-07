@@ -8,7 +8,9 @@
 
 #import "StatsViewController.h"
 
-@interface StatsViewController ()
+@interface StatsViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -17,12 +19,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+        
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
+    
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(10, 50, 300, 300) style:UITableViewStyleGrouped];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.backgroundColor = [UIColor clearColor];
+    //self.tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
+    
     
     self.view.backgroundColor = [UIColor clearColor];
     
-    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     UIVisualEffectView *bluredEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     [bluredEffectView setFrame:self.view.bounds];
     
@@ -33,12 +46,39 @@
     UIVisualEffectView *vibrancyEffectView = [[UIVisualEffectView alloc] initWithEffect:vibrancyEffect];
     [vibrancyEffectView setFrame:self.view.bounds];
     
+    [vibrancyEffectView.contentView addSubview:self.tableView];
+    
     // Add Vibrancy View to Blur View
     [bluredEffectView.contentView addSubview:vibrancyEffectView];
-    // Do any additional setup after loading the view.
-
-    // Do any additional setup after loading the view.
+    
+    
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    return 1;
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" ];
+    if (!cell){
+        cell = [UITableViewCell new];
+    }
+    
+    cell.backgroundColor = [UIColor clearColor];
+    cell.textLabel.text = @"Cool Stats";
+    cell.textLabel.textColor = [UIColor lightTextColor];
+    
+    return cell;
+
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    return @"Stats";
+}
+
+
 
 - (void)cancelPressed:(id)sender{
     [self.navigationController dismissViewControllerAnimated:YES completion:^{

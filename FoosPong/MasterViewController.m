@@ -44,6 +44,12 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     
     self.navigationController.toolbarHidden = YES;
     
+    
+    
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+//    self.navigationController.navigationBar.shadowImage = [UIImage new];
+//    self.navigationController.navigationBar.translucent = YES;
+    
     UIBarButtonItem * sideBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"17"] style:UIBarButtonItemStylePlain target:self action:@selector(sideBarButtonPressed:)];
     self.navigationItem.rightBarButtonItem = sideBarButton;
 
