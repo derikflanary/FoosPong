@@ -14,8 +14,6 @@
     
 - (void)addUserwithDictionary:(NSDictionary*)dictionary;
 
-- (void)findCurrentUser;
-
 - (void)removeUser:(PFUser *)user;
 
 - (void)updateUsers;
