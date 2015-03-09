@@ -84,7 +84,9 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     
     PFLogInViewController *logInController = [[PFLogInViewController alloc] init];
     logInController.delegate = self;
-    [self presentViewController:logInController animated:YES completion:nil];
+    //[self presentViewController:logInController animated:YES completion:nil];
+    SignUpViewController *signUpViewController = [SignUpViewController new];
+    [self presentViewController:signUpViewController animated:YES completion:nil];
     
 }
 

@@ -46,7 +46,7 @@
     self.firstNameField.font = [UIFont fontWithName:fontName size:16.0f];
     self.firstNameField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.firstNameField.layer.borderWidth = 1.0f;
-    
+    self.firstNameField.autocorrectionType = UITextAutocorrectionTypeNo;
     UIView* leftView3 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 20)];
     self.firstNameField.leftViewMode = UITextFieldViewModeAlways;
     self.firstNameField.leftView = leftView3;
@@ -57,7 +57,7 @@
     self.lastNameField.font = [UIFont fontWithName:fontName size:16.0f];
     self.lastNameField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.lastNameField.layer.borderWidth = 1.0f;
-    
+    self.lastNameField.autocorrectionType = UITextAutocorrectionTypeNo;
     UIView* leftView4 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 20)];
     self.lastNameField.leftViewMode = UITextFieldViewModeAlways;
     self.lastNameField.leftView = leftView4;
@@ -69,6 +69,8 @@
     self.usernameField.font = [UIFont fontWithName:fontName size:16.0f];
     self.usernameField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.usernameField.layer.borderWidth = 1.0f;
+    self.usernameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.usernameField.autocorrectionType = UITextAutocorrectionTypeNo;
     //self.usernameField.frame = CGRectMake(0, 220, 320, 41);
     
     UIView* leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 20)];
@@ -81,7 +83,8 @@
     self.passwordField.font = [UIFont fontWithName:fontName size:16.0f];
     self.passwordField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.passwordField.layer.borderWidth = 1.0f;
-    
+    self.passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.passwordField.autocorrectionType = UITextAutocorrectionTypeNo;
     
     UIView* leftView2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 20)];
     self.passwordField.leftViewMode = UITextFieldViewModeAlways;
@@ -145,10 +148,12 @@
                                  @"lastName": self.lastNameField.text,
                                  @"username": self.usernameField.text,
                                  @"password": self.passwordField.text,};
-    
     [[UserController sharedInstance] addUserwithDictionary:dictionary];
+    
     //[[UserController sharedInstance] updateUsers];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 -(void)dismissKeyboard:(id)sender{

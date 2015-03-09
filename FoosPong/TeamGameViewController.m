@@ -129,7 +129,7 @@
     self.gameStats.teamTwoPlayerTwo = [self.teamTwo objectAtIndex:1];
     self.gameStats.teamOneScore =  (double)self.stepperTeamOne.value;
     self.gameStats.teamTwoScore =  (double)self.stepperTeamTwo.value;
-    self.gameStats.teamOneWin = [NSNumber numberWithBool:self.teamOneWin];
+    self.gameStats.teamOneWin = self.teamOneWin;
 }
 
 

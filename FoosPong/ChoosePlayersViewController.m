@@ -641,7 +641,6 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
             [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
         }
     }
-    NSLog(@"%lu", self.teamTwoPlayers.count);
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) UITableView *pingPongTableView;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
+@property (nonatomic, assign) NSIndexPath *selectedIndexPath;
 
 @end
 
@@ -88,6 +89,7 @@
     ChoosePlayersViewController * newGameViewController = [ChoosePlayersViewController new];
     
     [self.navigationController pushViewController:newGameViewController animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 //    if (indexPath.row == 0) {
 //        [self.navigationController presentViewController:newGameViewController animated:YES completion:^{
 //            
@@ -95,6 +97,7 @@
 //    }
     
 }
+
 
 
 - (void)didReceiveMemoryWarning {
