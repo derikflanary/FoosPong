@@ -40,9 +40,10 @@
 //    self.navigationItem.rightBarButtonItem = sideBarButton;
     self.navigationItem.hidesBackButton = YES;
     
-    self.pingPongTableView = [[UITableView alloc] initWithFrame:self.view.frame];
+    self.pingPongTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     self.pingPongTableView.dataSource = self;
     self.pingPongTableView.delegate = self;
+    self.pingPongTableView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:self.pingPongTableView];
     self.pingPongTableView.scrollEnabled = NO;
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
