@@ -70,6 +70,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleBox;
     self.segmentedControl.frame = CGRectMake(160, 0, 100, 44);
     self.segmentedControl.selectionIndicatorColor = [UIColor darkColor];
+    self.segmentedControl.backgroundColor = [UIColor clearColor];
     self.segmentedControl.verticalDividerEnabled = YES;
     [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
 //    [self.segmentedControl sizeToFit];
@@ -81,7 +82,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.editing = YES;
+    self.tableView.editing = NO;
     //self.tableView.allowsMultipleSelectionDuringEditing = YES;
     self.tableView.allowsSelectionDuringEditing = YES;
     
@@ -92,6 +93,9 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     
     self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
     self.teamTwoPlayers = [NSMutableArray array];
+    [self.teamTwoPlayers addObject:[PFUser new]];
+    [self.teamTwoPlayers addObject:[PFUser new]];
+
     
     self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
     [self.searchController.searchBar sizeToFit];
@@ -114,14 +118,19 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
         [self.currentPlayers addObject:[PFUser new]];
     }
     
-    [self.teamTwoPlayers addObject:[PFUser new]];
-    [self.teamTwoPlayers addObject:[PFUser new]];
     
     //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
+
+#pragma mark - segmentedControl
+
 - (void)segmentedControlChangedValue:(id)sender{
     if (self.teamTwoPlayers.count > 0) {
-        [self.availablePlayers addObjectsFromArray:self.teamTwoPlayers];
+        for (PFUser *user in self.teamTwoPlayers) {
+            if (user.username) {
+                [self.availablePlayers addObject:user];
+            }
+        }
         [self.teamTwoPlayers removeAllObjects];
         [self.teamTwoPlayers addObject:[PFUser new]];
         [self.teamTwoPlayers addObject:[PFUser new]];
@@ -137,88 +146,75 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 -(void)startGame:(id)sender{
     
     if (self.segmentedControl.selectedSegmentIndex == 0) {
-        if ([self.currentPlayers count] == 1) {
-            UIAlertController *notEnoughPlayersAlert = [UIAlertController alertControllerWithTitle:@"Only One Player" message:@"You must have two players to play." preferredStyle:UIAlertControllerStyleAlert];
-            [notEnoughPlayersAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-                return;
-            }]];
-            [self presentViewController:notEnoughPlayersAlert animated:YES completion:nil];
+        if ([self.currentPlayers count] == 2 ) {
+            
+            PFUser *player1 = [self.currentPlayers objectAtIndex:0];
+            PFUser *player2 = [self.currentPlayers objectAtIndex:1];
+            
+            if (player1.username && player2.username) {
+                
+                SingleGameViewController *gvc = [SingleGameViewController new];
+                UINavigationController *singleGameNavController = [[UINavigationController alloc]initWithRootViewController:gvc];
+                gvc.playerOne = [self.currentPlayers objectAtIndex:0];
+                gvc.playerTwo = [self.currentPlayers objectAtIndex:1];
+                
+                [self.navigationController presentViewController:singleGameNavController animated:YES completion:^{
+                    
+                }];
+                
+            }else{
+                UIAlertController *notEnoughPlayersAlert = [UIAlertController alertControllerWithTitle:@"Only One Player" message:@"You must have two players to play." preferredStyle:UIAlertControllerStyleAlert];
+                [notEnoughPlayersAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                    return;
+                }]];
+                [self presentViewController:notEnoughPlayersAlert animated:YES completion:nil];
+            }
         }else{
             
-            SingleGameViewController *gvc = [SingleGameViewController new];
-            UINavigationController *singleGameNavController = [[UINavigationController alloc]initWithRootViewController:gvc];
-            gvc.playerOne = [self.currentPlayers objectAtIndex:0];
-            gvc.playerTwo = [self.currentPlayers objectAtIndex:1];
+            UIAlertController *notEnoughPlayersAlert = [UIAlertController alertControllerWithTitle:@"Only One Player" message:@"You must have two players to play." preferredStyle:UIAlertControllerStyleAlert];
+            [notEnoughPlayersAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                            return;
+            }]];
+            [self presentViewController:notEnoughPlayersAlert animated:YES completion:nil];
             
-            [self.navigationController presentViewController:singleGameNavController animated:YES completion:^{
-                
-            }];
-
         }
 
     }else if(self.segmentedControl.selectedSegmentIndex == 1){
-        if ([self.currentPlayers count] < 2 || [self.teamTwoPlayers count] < 2) {
+        if ([self.currentPlayers count] == 2 && [self.teamTwoPlayers count] == 2) {
+            PFUser *p1 = [self.currentPlayers objectAtIndex:0];
+            PFUser *p2 = [self.currentPlayers objectAtIndex:1];
+            PFUser *p3 = [self.teamTwoPlayers objectAtIndex:0];
+            PFUser *p4 = [self.teamTwoPlayers objectAtIndex:1];
+            if (p1.username && p2.username && p3.username && p4.username) {
+                TeamGameViewController *tgvc = [TeamGameViewController new];
+                UINavigationController *teamGameNavController = [[UINavigationController alloc]initWithRootViewController:tgvc];
+                
+                tgvc.teamOne = [NSArray arrayWithArray:self.currentPlayers];
+                tgvc.teamTwo = [NSArray arrayWithArray:self.teamTwoPlayers];
+                
+                [self.navigationController presentViewController:teamGameNavController animated:YES completion:^{
+                    
+                }];
+
+            }else{
+                UIAlertController *notEnoughPlayersAlert = [UIAlertController alertControllerWithTitle:@"Not Enough Players" message:@"You must have two players on each team to play." preferredStyle:UIAlertControllerStyleAlert];
+                [notEnoughPlayersAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                    return;
+                }]];
+                [self presentViewController:notEnoughPlayersAlert animated:YES completion:nil];
+
+            }
+        }else{
             UIAlertController *notEnoughPlayersAlert = [UIAlertController alertControllerWithTitle:@"Not Enough Players" message:@"You must have two players on each team to play." preferredStyle:UIAlertControllerStyleAlert];
             [notEnoughPlayersAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
                 return;
             }]];
             [self presentViewController:notEnoughPlayersAlert animated:YES completion:nil];
-        }else{
-            
-            TeamGameViewController *tgvc = [TeamGameViewController new];
-            UINavigationController *teamGameNavController = [[UINavigationController alloc]initWithRootViewController:tgvc];
-            
-            tgvc.teamOne = [NSArray arrayWithArray:self.currentPlayers];
-            tgvc.teamTwo = [NSArray arrayWithArray:self.teamTwoPlayers];
-            
-            [self.navigationController presentViewController:teamGameNavController animated:YES completion:^{
-                
-            }];
         }
 
     }
 }
 
-
--(void)addGuestPressed:(id)sender{
-    
-    UIAlertController *addGuestAlert = [UIAlertController alertControllerWithTitle:@"Add A Guest Player" message:@"Please give the guest player a name" preferredStyle:UIAlertControllerStyleAlert];
-    [addGuestAlert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        textField.placeholder = NSLocalizedString(@"Guest's Name", @"Guest");
-        
-    }];
-    [addGuestAlert addAction:[UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        UITextField *theguestName = addGuestAlert.textFields.firstObject;
-        NSString *guestName = [NSString string];
-        guestName = theguestName.text;
-        if ([guestName isEqualToString:@""]) {
-            [guestName isEqualToString:@"Guest"];
-        }
-        if ([self.currentPlayers count] < 2) {
-            PFUser *guest = [PFUser new];
-            guest.username = guestName;
-            [self.currentPlayers addObject:guest];
-            [self.tableView reloadData];
-        }else if ([self.currentPlayers count] == 2){
-            PFUser *guest = [PFUser new];
-            guest.username = guestName;
-            [self.availablePlayers insertObject:guest atIndex:0];
-            [self.tableView reloadData];
-        }
-
-    }]];
-    
-    [addGuestAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-        return ;
-    }]];
-    [self presentViewController:addGuestAlert animated:YES completion:nil];
-    
-    }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 #pragma mark - TableView Datasource
@@ -712,6 +708,49 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     }
     [self.tableView reloadData];
 }
+
+#pragma mark - Other
+
+-(void)addGuestPressed:(id)sender{
+    
+    UIAlertController *addGuestAlert = [UIAlertController alertControllerWithTitle:@"Add A Guest Player" message:@"Please give the guest player a name" preferredStyle:UIAlertControllerStyleAlert];
+    [addGuestAlert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = NSLocalizedString(@"Guest's Name", @"Guest");
+        
+    }];
+    [addGuestAlert addAction:[UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UITextField *theguestName = addGuestAlert.textFields.firstObject;
+        NSString *guestName = [NSString string];
+        guestName = theguestName.text;
+        if ([guestName isEqualToString:@""]) {
+            [guestName isEqualToString:@"Guest"];
+        }
+        if ([self.currentPlayers count] < 2) {
+            PFUser *guest = [PFUser new];
+            guest.username = guestName;
+            [self.currentPlayers addObject:guest];
+            [self.tableView reloadData];
+        }else if ([self.currentPlayers count] == 2){
+            PFUser *guest = [PFUser new];
+            guest.username = guestName;
+            [self.availablePlayers insertObject:guest atIndex:0];
+            [self.tableView reloadData];
+        }
+        
+    }]];
+    
+    [addGuestAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        return ;
+    }]];
+    [self presentViewController:addGuestAlert animated:YES completion:nil];
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 
 //- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
