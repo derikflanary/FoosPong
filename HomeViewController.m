@@ -26,15 +26,17 @@
         self.title = @"Guest";
         
     }else{
-        PFUser *user = [PFUser currentUser];
-        self.title = user[@"firstName"];
-        [[UserController sharedInstance] updateUsers];
+        
+        
     }
     self.navigationController.toolbarHidden = YES;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    PFUser *user = [PFUser currentUser];
+    self.title = user[@"firstName"];
     
     self.view.backgroundColor = [UIColor whiteColor];
 //    UIBarButtonItem * sideBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"17"] style:UIBarButtonItemStylePlain target:self action:@selector(sideBarButtonPressed:)];
@@ -90,11 +92,6 @@
     
     [self.navigationController pushViewController:newGameViewController animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    if (indexPath.row == 0) {
-//        [self.navigationController presentViewController:newGameViewController animated:YES completion:^{
-//            
-//        }];
-//    }
     
 }
 

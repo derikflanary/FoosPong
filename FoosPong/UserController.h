@@ -22,7 +22,7 @@
 
 - (NSArray*)usersWithoutCurrentUser:(PFUser*)currentUser;
 
-- (void)loginUser:(NSDictionary*)dictionary;
+- (void)loginUser:(NSDictionary*)dictionary callback:(void (^)(PFUser *))callback;
 
 - (void)addGuestUser;
     

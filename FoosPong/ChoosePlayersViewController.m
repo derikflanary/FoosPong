@@ -86,8 +86,8 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     //self.tableView.allowsMultipleSelectionDuringEditing = YES;
     self.tableView.allowsSelectionDuringEditing = YES;
     
-    self.currentUser = [UserController sharedInstance].theCurrentUser;
     
+    self.currentUser = [PFUser currentUser];
     self.currentPlayers = [NSMutableArray array];
     [self.currentPlayers insertObject:self.currentUser atIndex:0];
     
@@ -117,7 +117,6 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     if ([self.currentPlayers count] <2) {
         [self.currentPlayers addObject:[PFUser new]];
     }
-    
     
     //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }

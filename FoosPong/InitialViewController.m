@@ -41,10 +41,16 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    PFUser *currentUser = [PFUser currentUser];
+    self.title = currentUser[@"firstName"];
+
+    [[UserController sharedInstance] updateUsers];
     
     UIColor* mainColor = [UIColor mainColor];
     UIColor* darkColor = [UIColor darkColor];
@@ -69,10 +75,10 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     self.guestButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 300, 320, 62)];
     self.guestButton.backgroundColor = mainColor;
     self.guestButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
-    [self.guestButton setTitle:@"Play As Guest" forState:UIControlStateNormal];
+    [self.guestButton setTitle:@"Sign Up" forState:UIControlStateNormal];
     [self.guestButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.guestButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
-    [self.guestButton addTarget:self action:@selector(guestPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.guestButton addTarget:self action:@selector(signUpPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.guestButton];
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:0];
@@ -84,19 +90,30 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     
     PFLogInViewController *logInController = [[PFLogInViewController alloc] init];
     logInController.delegate = self;
+    LogViewController *logViewController = [LogViewController new];
+    UINavigationController *logNavController = [[UINavigationController alloc]initWithRootViewController:logViewController];
+    [self presentViewController:logNavController animated:YES completion:^{
+        
+    }];
     //[self presentViewController:logInController animated:YES completion:nil];
-    SignUpViewController *signUpViewController = [SignUpViewController new];
-    [self presentViewController:signUpViewController animated:YES completion:nil];
-    
 }
 
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user{
+    
     [logInController dismissViewControllerAnimated:YES completion:^{
-        [[UserController sharedInstance] findCurrentUser];
+        //[[UserController sharedInstance] findCurrentUser];
         [[UserController sharedInstance] updateUsers];
 
     }];
     //[self.navigationController showViewController:self.tabBarController sender:self];
+}
+
+-(void)signUpPressed:(id)sender{
+    
+    SignUpViewController *signUpViewController = [SignUpViewController new];
+    UINavigationController *signUpNavController = [[UINavigationController alloc]initWithRootViewController:signUpViewController];
+
+    [self presentViewController:signUpNavController animated:YES completion:nil];
 }
 
 -(void)guestPressed:(id)sender{

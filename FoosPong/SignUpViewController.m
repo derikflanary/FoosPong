@@ -28,6 +28,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+
 	
     UIColor* mainColor = [UIColor colorWithRed:189.0/255 green:242.0/255 blue:139.0/255 alpha:1.0f];
     UIColor* darkColor = [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:1.0f];
@@ -131,6 +135,11 @@
     [self.view addSubview:self.titleLabel];
     [self.view addSubview:self.loginButton];
     [self.view addSubview:self.overlayView];
+    
+}
+
+-(void)cancelPressed:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
     
 }
 

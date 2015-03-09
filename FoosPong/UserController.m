@@ -22,17 +22,11 @@
     dispatch_once(&onceToken, ^{
         sharedInstance = [[UserController alloc] init];
         [sharedInstance updateUsers];
-        [sharedInstance findCurrentUser];
         
     });
     return sharedInstance;
 }
 
-- (void)findCurrentUser{
-    
-    PFUser *currentUser = [PFUser currentUser];
-    self.theCurrentUser = currentUser;
-}
 
 - (void)addGuestUser{
     [PFAnonymousUtils logInWithBlock:^(PFUser *user, NSError *error) {
@@ -61,14 +55,13 @@
     
 }
 
-- (void)loginUser:(NSDictionary*)dictionary{
+- (void)loginUser:(NSDictionary*)dictionary callback:(void (^)(PFUser *))callback{
     
         [PFUser logInWithUsernameInBackground:dictionary[@"username"] password:dictionary[@"password"]
                                         block:^(PFUser *user, NSError *error) {
                                             if (user) {
-                                                [self findCurrentUser];
                                                 [self updateUsers];
-                                                
+                                                callback(user);
                                             } else {
                                                 NSLog(@"%@", error);// The login failed. Check error to see why.
                                             }

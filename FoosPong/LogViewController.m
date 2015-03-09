@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UserController.h"
 #import "SignUpViewController.h"
+#import "InitialViewController.h"
 
 @interface LogViewController ()
 
@@ -26,9 +27,14 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+
+
+- (void)viewDidLoad{
     [super viewDidLoad];
+    
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+
     
     UIColor* mainColor = [UIColor mainColor];
     UIColor* darkColor = [UIColor darkColor];
@@ -109,11 +115,20 @@
     
 }
 
+- (void)cancelPressed:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 -(void)loginPressed:(id)sender{
     NSDictionary *dictionary = @{@"username":self.usernameField.text,
                                  @"password":self.passwordField.text};
-    [[UserController sharedInstance] loginUser:dictionary];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+   
+    [self dismissViewControllerAnimated:YES completion:^{
+      [[UserController sharedInstance] loginUser:dictionary callback:^(PFUser *currentUser) {
+          
+      }];
+        
+    }];
 }
 
 -(void)openSignUp:(id)sender{
