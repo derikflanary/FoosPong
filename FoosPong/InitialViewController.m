@@ -47,8 +47,6 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    PFUser *currentUser = [PFUser currentUser];
-    self.title = currentUser[@"firstName"];
 
     [[UserController sharedInstance] updateUsers];
     

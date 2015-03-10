@@ -69,7 +69,7 @@
     self.tableView.scrollEnabled = NO;
     self.tableView.bounces = NO;
     [self.view addSubview:self.tableView];
-   
+    
 }
 
 #pragma mark - tableView

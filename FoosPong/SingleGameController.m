@@ -79,10 +79,10 @@
 -(void)updateGamesForUser:(PFUser*)user withBool:(BOOL)getTeamGames callback:(void (^)(NSArray *))callback{
     
     PFQuery *query = [PFQuery queryWithClassName:@"Game"];
-    [query whereKey:@"P1" equalTo:user];
+    [query whereKey:@"p1" equalTo:user];
     
     PFQuery *query2 = [PFQuery queryWithClassName:@"Game"];
-    [query2 whereKey:@"P2" equalTo:user];
+    [query2 whereKey:@"p2" equalTo:user];
     
     PFQuery *theQuery = [PFQuery orQueryWithSubqueries:@[query, query2]];
     [theQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {

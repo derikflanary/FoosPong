@@ -304,8 +304,6 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
         cell = [NewGameCustomTableViewCell new];
       
     }
-    
-    
     //cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     if (self.segmentedControl.selectedSegmentIndex == 0) {
@@ -315,7 +313,8 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 
                 PFUser *theUser = [self.currentPlayers objectAtIndex:indexPath.row];
                 if (!theUser.username) {
-                    cell.textLabel.text = @"";
+                    cell.textLabel.text = @"Add Player";
+                    cell.textLabel.textColor = [UIColor colorWithWhite:.5 alpha:.7];
                 }else{
                     cell.textLabel.text = theUser.username;                }
                 return cell;

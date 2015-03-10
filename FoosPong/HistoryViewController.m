@@ -32,19 +32,9 @@
     self.tableView.delegate = self;
     
 
-     PFUser *currentUser = [UserController sharedInstance].theCurrentUser;
-    [[SingleGameController sharedInstance] updateGamesForUser:currentUser withBool:NO callback:^(NSArray * games) {
-        self.singleGames = games;
-        [self.tableView reloadData];
-
-    }];
-    
-
-    [[TeamGameController sharedInstance] updateGamesForUser:currentUser callback:^(NSArray * teamGames) {
-        self.teamGames = teamGames;
-        [self.tableView reloadData];
-    }];
-
+    //PFUser *currentUser = [PFUser currentUser];
+    self.singleGames = [SingleGameController sharedInstance].games;
+    self.teamGames = [SingleGameController sharedInstance].teamGames;
  
 }
 
@@ -88,9 +78,9 @@
     if (indexPath.section == 0) {
         
         PFObject *game = [self.singleGames objectAtIndex:indexPath.row];
-        PFUser *p1 = game[@"P1"];
+        PFUser *p1 = game[@"p1"];
         NSString *p1Name = p1[@"firstName"];
-        PFUser *p2 = game[@"P2"];
+        PFUser *p2 = game[@"p2"];
         NSString *p2Name = p2[@"firstName"];
         
         cell.textLabel.text = [NSString stringWithFormat:@"%@:%@ vs %@:%@", p1Name, game[@"playerOneScore"], p2Name, game[@"playerTwoScore"]];
