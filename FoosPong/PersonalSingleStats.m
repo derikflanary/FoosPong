@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "PersonalStats.h"
+#import "PersonalSingleStats.h"
 
-@implementation PersonalStats
+@implementation PersonalSingleStats
 
 
 

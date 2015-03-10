@@ -7,9 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PersonalSingleStats.h"
+#import "PersonalOverallStats.h"
+#import "PersonalTeamStats.h"
+
 
 @interface StatsViewController : UIViewController
 
 @property (nonatomic, strong) UIImage *copiedImage;
+@property (nonatomic, strong) PersonalSingleStats *personalSingleStats;
+@property (nonatomic, strong) PersonalTeamStats *personalTeamStats;
+@property (nonatomic, strong) PersonalOverallStats *overallStats;
+@property (nonatomic, assign) NSInteger buttonSelected;
 
 @end

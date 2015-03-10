@@ -23,7 +23,7 @@
 		EE2EF8101AA4EF2200DE09E7 /* SingleGameStats.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2EF80F1AA4EF2200DE09E7 /* SingleGameStats.m */; };
 		EE2EF8131AA4EF3400DE09E7 /* TeamGameStats.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2EF8121AA4EF3400DE09E7 /* TeamGameStats.m */; };
 		EE2EF8161AA4F88900DE09E7 /* TeamGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2EF8151AA4F88900DE09E7 /* TeamGameController.m */; };
-		EE2EF8191AA6422000DE09E7 /* PersonalStats.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2EF8181AA6422000DE09E7 /* PersonalStats.m */; };
+		EE2EF8191AA6422000DE09E7 /* PersonalSingleStats.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2EF8181AA6422000DE09E7 /* PersonalSingleStats.m */; };
 		EE3356EE1A895F0600B83EC0 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */; };
 		EE3356F11A89610B00B83EC0 /* SingleGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3356F01A89610B00B83EC0 /* SingleGameViewController.m */; };
 		EE33572A1A8C1C2A00B83EC0 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357291A8C1C2A00B83EC0 /* Bolts.framework */; };
@@ -62,6 +62,11 @@
 		EE9DAEF01A9EB91D00589897 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEEF1A9EB91D00589897 /* MasterViewController.m */; };
 		EE9DAEF31A9ECEC600589897 /* AddGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEF21A9ECEC600589897 /* AddGroupViewController.m */; };
 		EE9DAEF61A9ECED800589897 /* FindGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEF51A9ECED800589897 /* FindGroupViewController.m */; };
+		EEE7DDCF1AAE88E60089A488 /* JBBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE7DDCA1AAE88E60089A488 /* JBBarChartView.m */; };
+		EEE7DDD01AAE88E60089A488 /* JBChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE7DDCC1AAE88E60089A488 /* JBChartView.m */; };
+		EEE7DDD11AAE88E60089A488 /* JBLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE7DDCE1AAE88E60089A488 /* JBLineChartView.m */; };
+		EEE7DDD41AAE8E490089A488 /* PersonalTeamStats.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE7DDD31AAE8E490089A488 /* PersonalTeamStats.m */; };
+		EEE7DDD71AAE8E670089A488 /* PersonalOverallStats.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE7DDD61AAE8E670089A488 /* PersonalOverallStats.m */; };
 		EEFB90DC1AAA753100DEA099 /* StatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFB90DB1AAA753100DEA099 /* StatsViewController.m */; };
 		EEFDF3CE1AA6AE7200A0E48F /* StatsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFDF3CD1AA6AE7200A0E48F /* StatsController.m */; };
 		EEFDF3D11AA7FEA600A0E48F /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFDF3D01AA7FEA600A0E48F /* Game.m */; };
@@ -112,8 +117,8 @@
 		EE2EF8121AA4EF3400DE09E7 /* TeamGameStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamGameStats.m; sourceTree = "<group>"; };
 		EE2EF8141AA4F88900DE09E7 /* TeamGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamGameController.h; sourceTree = "<group>"; };
 		EE2EF8151AA4F88900DE09E7 /* TeamGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamGameController.m; sourceTree = "<group>"; };
-		EE2EF8171AA6422000DE09E7 /* PersonalStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalStats.h; sourceTree = "<group>"; };
-		EE2EF8181AA6422000DE09E7 /* PersonalStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalStats.m; sourceTree = "<group>"; };
+		EE2EF8171AA6422000DE09E7 /* PersonalSingleStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalSingleStats.h; sourceTree = "<group>"; };
+		EE2EF8181AA6422000DE09E7 /* PersonalSingleStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalSingleStats.m; sourceTree = "<group>"; };
 		EE3356EC1A895F0600B83EC0 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		EE3356EF1A89610B00B83EC0 /* SingleGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleGameViewController.h; sourceTree = "<group>"; };
@@ -173,6 +178,16 @@
 		EE9DAEF21A9ECEC600589897 /* AddGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGroupViewController.m; sourceTree = "<group>"; };
 		EE9DAEF41A9ECED800589897 /* FindGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindGroupViewController.h; sourceTree = "<group>"; };
 		EE9DAEF51A9ECED800589897 /* FindGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindGroupViewController.m; sourceTree = "<group>"; };
+		EEE7DDC91AAE88E60089A488 /* JBBarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBBarChartView.h; sourceTree = "<group>"; };
+		EEE7DDCA1AAE88E60089A488 /* JBBarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBBarChartView.m; sourceTree = "<group>"; };
+		EEE7DDCB1AAE88E60089A488 /* JBChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBChartView.h; sourceTree = "<group>"; };
+		EEE7DDCC1AAE88E60089A488 /* JBChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBChartView.m; sourceTree = "<group>"; };
+		EEE7DDCD1AAE88E60089A488 /* JBLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBLineChartView.h; sourceTree = "<group>"; };
+		EEE7DDCE1AAE88E60089A488 /* JBLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBLineChartView.m; sourceTree = "<group>"; };
+		EEE7DDD21AAE8E490089A488 /* PersonalTeamStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalTeamStats.h; sourceTree = "<group>"; };
+		EEE7DDD31AAE8E490089A488 /* PersonalTeamStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalTeamStats.m; sourceTree = "<group>"; };
+		EEE7DDD51AAE8E670089A488 /* PersonalOverallStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalOverallStats.h; sourceTree = "<group>"; };
+		EEE7DDD61AAE8E670089A488 /* PersonalOverallStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalOverallStats.m; sourceTree = "<group>"; };
 		EEFB90DA1AAA753100DEA099 /* StatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsViewController.h; sourceTree = "<group>"; };
 		EEFB90DB1AAA753100DEA099 /* StatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsViewController.m; sourceTree = "<group>"; };
 		EEFDF3CC1AA6AE7200A0E48F /* StatsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsController.h; sourceTree = "<group>"; };
@@ -344,8 +359,12 @@
 				EE2EF80F1AA4EF2200DE09E7 /* SingleGameStats.m */,
 				EE2EF8111AA4EF3400DE09E7 /* TeamGameStats.h */,
 				EE2EF8121AA4EF3400DE09E7 /* TeamGameStats.m */,
-				EE2EF8171AA6422000DE09E7 /* PersonalStats.h */,
-				EE2EF8181AA6422000DE09E7 /* PersonalStats.m */,
+				EE2EF8171AA6422000DE09E7 /* PersonalSingleStats.h */,
+				EE2EF8181AA6422000DE09E7 /* PersonalSingleStats.m */,
+				EEE7DDD21AAE8E490089A488 /* PersonalTeamStats.h */,
+				EEE7DDD31AAE8E490089A488 /* PersonalTeamStats.m */,
+				EEE7DDD51AAE8E670089A488 /* PersonalOverallStats.h */,
+				EEE7DDD61AAE8E670089A488 /* PersonalOverallStats.m */,
 				EEFDF3CF1AA7FEA600A0E48F /* Game.h */,
 				EEFDF3D01AA7FEA600A0E48F /* Game.m */,
 				EEFDF3D21AA809AF00A0E48F /* TeamGame.h */,
@@ -357,6 +376,7 @@
 		EE5027CC1A98F1180079DFFC /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				EEE7DDC81AAE88E60089A488 /* Classes */,
 				EE4888681A9FDD9B00FCCA47 /* HMSegmentedControl.h */,
 				EE4888691A9FDD9B00FCCA47 /* HMSegmentedControl.m */,
 				EE2C57D41A93DFC600DA9835 /* UIImageView+Letters.h */,
@@ -453,6 +473,20 @@
 				EE808DAF1A9FC3E30000F833 /* SettingViewController.m */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		EEE7DDC81AAE88E60089A488 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EEE7DDC91AAE88E60089A488 /* JBBarChartView.h */,
+				EEE7DDCA1AAE88E60089A488 /* JBBarChartView.m */,
+				EEE7DDCB1AAE88E60089A488 /* JBChartView.h */,
+				EEE7DDCC1AAE88E60089A488 /* JBChartView.m */,
+				EEE7DDCD1AAE88E60089A488 /* JBLineChartView.h */,
+				EEE7DDCE1AAE88E60089A488 /* JBLineChartView.m */,
+			);
+			name = Classes;
+			path = "../../../../Downloads/JBChartView-master/Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -606,9 +640,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE9DAEF31A9ECEC600589897 /* AddGroupViewController.m in Sources */,
+				EEE7DDCF1AAE88E60089A488 /* JBBarChartView.m in Sources */,
 				EE9DAEEB1A9D582200589897 /* RNFrostedSidebar.m in Sources */,
 				EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */,
 				EE1A55881A9D217700E6981E /* PersonalNotificationsViewController.m in Sources */,
+				EEE7DDD11AAE88E60089A488 /* JBLineChartView.m in Sources */,
 				EE1A55851A9CFBB500E6981E /* GroupController.m in Sources */,
 				EEFDF3D11AA7FEA600A0E48F /* Game.m in Sources */,
 				EE2EF8131AA4EF3400DE09E7 /* TeamGameStats.m in Sources */,
@@ -620,6 +656,7 @@
 				EE0DC0121A8D96D8000235B3 /* SingleGameController.m in Sources */,
 				EE7A6CDF1A868402000447D2 /* AppDelegate.m in Sources */,
 				EE3356F11A89610B00B83EC0 /* SingleGameViewController.m in Sources */,
+				EEE7DDD71AAE8E670089A488 /* PersonalOverallStats.m in Sources */,
 				EE808DB71A9FCCB10000F833 /* NSString+Fonts.m in Sources */,
 				EE7A6D041A869169000447D2 /* InitialViewController.m in Sources */,
 				EE9DAEF61A9ECED800589897 /* FindGroupViewController.m in Sources */,
@@ -628,14 +665,16 @@
 				EEFB90DC1AAA753100DEA099 /* StatsViewController.m in Sources */,
 				EE48886A1A9FDD9B00FCCA47 /* HMSegmentedControl.m in Sources */,
 				EE2EF8161AA4F88900DE09E7 /* TeamGameController.m in Sources */,
-				EE2EF8191AA6422000DE09E7 /* PersonalStats.m in Sources */,
+				EE2EF8191AA6422000DE09E7 /* PersonalSingleStats.m in Sources */,
 				EE7A6CDC1A868402000447D2 /* main.m in Sources */,
 				EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */,
 				302E41C71A86A195005F1184 /* ChoosePlayersViewController.m in Sources */,
 				EEFDF3CE1AA6AE7200A0E48F /* StatsController.m in Sources */,
 				EE2C57D61A93DFC600DA9835 /* UIImageView+Letters.m in Sources */,
 				EE5027C81A965F1F0079DFFC /* NSString+Extensions.m in Sources */,
+				EEE7DDD01AAE88E60089A488 /* JBChartView.m in Sources */,
 				EE7A6D0A1A869CD4000447D2 /* HistoryViewController.m in Sources */,
+				EEE7DDD41AAE8E490089A488 /* PersonalTeamStats.m in Sources */,
 				EEFDF3D41AA809AF00A0E48F /* TeamGame.m in Sources */,
 				EE2C57E21A93F12300DA9835 /* SignUpViewController.m in Sources */,
 				EE5027CB1A98ED310079DFFC /* UIColor+ExtraColorTools.m in Sources */,

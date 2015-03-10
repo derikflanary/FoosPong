@@ -10,6 +10,7 @@
 #import "Game.h"
 #import "TeamGame.h"
 
+
 @interface StatsController()
 
 
@@ -28,9 +29,9 @@
     return sharedInstance;
 }
 
-- (void) retrieveSingleStatsForUser:(PFUser*)user andSingleGames:(NSArray*)singleGames callback:(void (^)(PersonalStats *))callback{
+- (void) retrieveSingleStatsForUser:(PFUser*)user andSingleGames:(NSArray*)singleGames callback:(void (^)(PersonalSingleStats *))callback{
     
-    PersonalStats *stats = [PersonalStats new];
+    PersonalSingleStats *stats = [PersonalSingleStats new];
     stats.singleGamesPlayed = [singleGames count];
     
     
@@ -54,9 +55,9 @@
     
 }
 
-- (void) retrieveTeamStatsForUser:(PFUser*)user andTeamGames:(NSArray*)teamGames callback:(void (^)(TeamGameStats *))callback{
+- (void) retrieveTeamStatsForUser:(PFUser*)user andTeamGames:(NSArray*)teamGames callback:(void (^)(PersonalTeamStats *))callback{
     
-    TeamGameStats *stats = [TeamGameStats new];
+    PersonalTeamStats *stats = [PersonalTeamStats new];
     stats.teamGamesPlayed = [teamGames count];
     
     for (TeamGame *teamGame in teamGames) {
@@ -82,11 +83,11 @@
     callback(stats);
 }
 
-- (void) retrieveOverallStatsForUser:(PFUser*)user andSingleGames:(NSArray*)singleGames andTeamGames:(NSArray*)teamGames callback:(void (^)(PersonalStats *))callback{
+- (void) retrieveOverallStatsForUser:(PFUser*)user andSingleGames:(NSArray*)singleGames andTeamGames:(NSArray*)teamGames callback:(void (^)(PersonalOverallStats *))callback{
     
-    PersonalStats *stats = [PersonalStats new];
-    stats.singleGamesPlayed = [singleGames count];
-    stats.totalGamesPlayed = stats.singleGamesPlayed + [teamGames count];
+    PersonalOverallStats *stats = [PersonalOverallStats new];
+   
+    stats.totalGamesPlayed = [singleGames count] + [teamGames count];
     
     for (Game *singleGame in singleGames) {
         
