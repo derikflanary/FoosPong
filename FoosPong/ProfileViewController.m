@@ -111,7 +111,6 @@
 
     svc.transitioningDelegate = self;
     svc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    svc.view.backgroundColor = [UIColor clearColor];
     
     if (indexPath.row == 0) {
         [[StatsController sharedInstance] retrieveSingleStatsForUser:self.currentUser andSingleGames:self.singleGames callback:^(PersonalSingleStats *stats) {
@@ -135,9 +134,6 @@
             }];
         }];
     }
-    
-    
-    
 }
 
 

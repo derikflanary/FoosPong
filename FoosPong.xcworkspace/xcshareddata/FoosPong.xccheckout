@@ -12,6 +12,8 @@
 	<dict>
 		<key>000BB48D3595385F07EDEBB4F929C6D4AE0E8022</key>
 		<string>https://github.com/derikflanary/FoosPong.git</string>
+		<key>A31C04743691FEA62971CC16ED36133B28095C3F</key>
+		<string>https://github.com/derikflanary/JBChartView.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>FoosPong.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>000BB48D3595385F07EDEBB4F929C6D4AE0E8022</key>
 		<string>..</string>
+		<key>A31C04743691FEA62971CC16ED36133B28095C3F</key>
+		<string>../../JBChartView</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/derikflanary/FoosPong.git</string>
@@ -35,6 +39,14 @@
 			<string>000BB48D3595385F07EDEBB4F929C6D4AE0E8022</string>
 			<key>IDESourceControlWCCName</key>
 			<string>FoosPong</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A31C04743691FEA62971CC16ED36133B28095C3F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>JBChartView</string>
 		</dict>
 	</array>
 </dict>
