@@ -12,7 +12,7 @@
 #import "NSString+Extensions.h"
 #import "SingleGameController.h"
 #import "StatsController.h"
-#import "PersonalStats.h"
+#import "PersonalSingleStats.h"
 #import "TeamGameStats.h"
 #import "NewGameCustomTableViewCell.h"
 #import "StatsViewController.h"
@@ -22,7 +22,7 @@
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 @property (nonatomic, strong) NSArray *singleGames;
 @property (nonatomic, strong) NSArray *teamGames;
-@property (nonatomic, strong) PersonalStats *persoanlStats;
+@property (nonatomic, strong) PersonalSingleStats *persoanlStats;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UIButton *statsButton;
 @property (nonatomic, strong) UITableView *tableView;
@@ -114,21 +114,24 @@
     svc.view.backgroundColor = [UIColor clearColor];
     
     if (indexPath.row == 0) {
-        [[StatsController sharedInstance] retrieveSingleStatsForUser:self.currentUser andSingleGames:self.singleGames callback:^(PersonalStats *stats) {
+        [[StatsController sharedInstance] retrieveSingleStatsForUser:self.currentUser andSingleGames:self.singleGames callback:^(PersonalSingleStats *stats) {
             [self.navigationController presentViewController:statsNavController animated:YES completion:^{
-                
+                svc.personalSingleStats = stats;
+                svc.buttonSelected = 1;
             }];
         }];
     }else if (indexPath.row == 1){
-        [[StatsController sharedInstance] retrieveTeamStatsForUser:self.currentUser andTeamGames:self.teamGames callback:^(TeamGameStats *stats) {
+        [[StatsController sharedInstance] retrieveTeamStatsForUser:self.currentUser andTeamGames:self.teamGames callback:^(PersonalTeamStats *stats) {
             [self.navigationController presentViewController:statsNavController animated:YES completion:^{
-                
+                svc.personalTeamStats = stats;
+                svc.buttonSelected = 2;
             }];
         }];
     }else{
-        [[StatsController sharedInstance] retrieveOverallStatsForUser:self.currentUser andSingleGames:self.singleGames andTeamGames:self.teamGames callback:^(PersonalStats *stats) {
+        [[StatsController sharedInstance] retrieveOverallStatsForUser:self.currentUser andSingleGames:self.singleGames andTeamGames:self.teamGames callback:^(PersonalOverallStats *stats) {
             [self.navigationController presentViewController:statsNavController animated:YES completion:^{
-                
+                svc.overallStats = stats;
+                svc.buttonSelected = 3;
             }];
         }];
     }

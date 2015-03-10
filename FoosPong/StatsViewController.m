@@ -7,10 +7,12 @@
 //
 
 #import "StatsViewController.h"
+#import "JBLineChartView.h"
 
-@interface StatsViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface StatsViewController () <UITableViewDataSource, UITableViewDelegate, JBLineChartViewDataSource, JBLineChartViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) JBLineChartView *lineChart;
 
 @end
 
@@ -26,12 +28,18 @@
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(10, 50, 300, 300) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(10, 50, 300, 100) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.backgroundColor = [UIColor clearColor];
     //self.tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
     
+    self.lineChart = [JBLineChartView new];
+    self.lineChart.dataSource = self;
+    self.lineChart.delegate = self;
+    self.lineChart.backgroundColor = [UIColor darkColor];
+    self.lineChart.frame = CGRectMake(0, 0, 300, 100);
+    [self.lineChart reloadData];
     
     self.view.backgroundColor = [UIColor clearColor];
     
@@ -47,7 +55,8 @@
     [vibrancyEffectView setFrame:self.view.bounds];
     
     [vibrancyEffectView.contentView addSubview:self.tableView];
-    
+    [vibrancyEffectView.contentView addSubview:self.lineChart];
+    //[vibrancyEffectView.contentView addSubview:self.lineChart];
     // Add Vibrancy View to Blur View
     [bluredEffectView.contentView addSubview:vibrancyEffectView];
     
@@ -66,18 +75,37 @@
         cell = [UITableViewCell new];
     }
     
-    cell.backgroundColor = [UIColor clearColor];
-    cell.textLabel.text = @"Cool Stats";
+    cell.backgroundColor = [UIColor whiteColor];
+
+    [cell.contentView addSubview:self.lineChart];
+    [self.lineChart sizeToFit];
     cell.textLabel.textColor = [UIColor lightTextColor];
     
     return cell;
 
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+   return self.lineChart.frame.size.height;
+}
+
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     return @"Stats";
 }
 
+- (CGFloat)lineChartView:(JBLineChartView *)lineChartView verticalValueForHorizontalIndex:(NSUInteger)horizontalIndex atLineIndex:(NSUInteger)lineIndex
+{
+    return 5; // y-position (y-axis) of point at horizontalIndex (x-axis)
+}
+
+- (NSUInteger)numberOfLinesInLineChartView:(JBLineChartView *)lineChartView{
+    
+    return self.overallStats.totalGamesPlayed;
+}
+
+- (NSUInteger)lineChartView:(JBLineChartView *)lineChartView numberOfVerticalValuesAtLineIndex:(NSUInteger)lineIndex{
+    return 1;
+}
 
 
 - (void)cancelPressed:(id)sender{
