@@ -63,7 +63,9 @@
                                                 [self updateUsers];
                                                 callback(user);
                                             } else {
-                                                NSLog(@"%@", error);// The login failed. Check error to see why.
+                                                NSLog(@"%@", error);
+                                                callback(nil);
+                                                // The login failed. Check error to see why.
                                             }
                                         }];
 }

@@ -89,6 +89,7 @@
     self.passwordField.layer.borderWidth = 1.0f;
     self.passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.passwordField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.passwordField.secureTextEntry = YES;
     
     UIView* leftView2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 20)];
     self.passwordField.leftViewMode = UITextFieldViewModeAlways;
@@ -150,7 +151,7 @@
         [missingTextAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
             return;
         }]];
-
+        [self presentViewController:missingTextAlert animated:YES completion:nil];
     }
     
     NSDictionary *dictionary = @{@"firstName": self.firstNameField.text,

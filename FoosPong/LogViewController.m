@@ -55,6 +55,8 @@
     self.usernameField.font = [UIFont fontWithName:fontName size:16.0f];
     self.usernameField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.usernameField.layer.borderWidth = 1.0f;
+    self.usernameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.usernameField.autocorrectionType = UITextAutocorrectionTypeNo;
     //self.usernameField.frame = CGRectMake(0, 220, 320, 41);
     
     UIView* leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 20)];
@@ -67,6 +69,9 @@
     self.passwordField.font = [UIFont fontWithName:fontName size:16.0f];
     self.passwordField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.passwordField.layer.borderWidth = 1.0f;
+    self.passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.passwordField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.passwordField.secureTextEntry = YES;
     
     UIView* leftView2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 20)];
     self.passwordField.leftViewMode = UITextFieldViewModeAlways;
@@ -122,12 +127,18 @@
 -(void)loginPressed:(id)sender{
     NSDictionary *dictionary = @{@"username":self.usernameField.text,
                                  @"password":self.passwordField.text};
-   
-    [self dismissViewControllerAnimated:YES completion:^{
-      [[UserController sharedInstance] loginUser:dictionary callback:^(PFUser *currentUser) {
-          
-      }];
-        
+    [[UserController sharedInstance] loginUser:dictionary callback:^(PFUser *currentUser) {
+        if (!currentUser){
+            UIAlertController *failedLoginAlert = [UIAlertController alertControllerWithTitle:@"Login Failed" message:@"Either your username or password were incorrect. Please try again." preferredStyle:UIAlertControllerStyleAlert];
+            [failedLoginAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                self.passwordField.text = nil;
+                return;
+            }]];
+            [self presentViewController:failedLoginAlert animated:YES completion:nil];
+        }else{
+            [self dismissViewControllerAnimated:YES completion:^{
+            }];
+        }
     }];
 }
 
