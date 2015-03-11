@@ -8,14 +8,10 @@
 
 #import "AppDelegate.h"
 #import "InitialViewController.h"
-//#import "HomeViewController.h"
-//#import "GroupsViewController.h"
-//#import "ProfileViewController.h"
-//#import "HistoryViewController.h"
-//#import "CurrentGroupViewController.h"
-//#import "PersonalNotificationsViewController.h"
 #import <Parse/Parse.h>
 #import <Analytics.h>
+#import "UserController.h"
+#import "HomeViewController.h"
 //#import <Fabric/Fabric.h>
 //#import <Crashlytics/Crashlytics.h>
 
@@ -50,7 +46,18 @@
     
     [PFUser enableAutomaticUser];
     
-    
+    if ([PFUser currentUser].username) {
+        //gone a long-running operation on this. Probably need a block
+        [[UserController sharedInstance] updateUsers];
+        UINavigationController *mainNavController = [[UINavigationController alloc]initWithRootViewController:[HomeViewController new]];
+        self.window.rootViewController = mainNavController;
+        
+    }else{
+        
+    UINavigationController *mainNavController = [[UINavigationController alloc]initWithRootViewController:[InitialViewController new]];
+    self.window.rootViewController = mainNavController;
+        
+    }
     
     [SEGAnalytics setupWithConfiguration:[SEGAnalyticsConfiguration configurationWithWriteKey:@"osIWhCUd5Y50pBl1YrHV1Grj4nHrL0eI"]];
     
@@ -66,9 +73,6 @@
     //InitialViewController *ivc = [InitialViewController new];
     
     
-    UINavigationController *mainNavController = [[UINavigationController alloc]initWithRootViewController:[InitialViewController new]];
-    
-    self.window.rootViewController = mainNavController;
     
 //    HomeViewController *hvc = [HomeViewController new];
 //    InitialViewController *ivc = [InitialViewController new];

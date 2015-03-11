@@ -14,7 +14,7 @@
 
 @property double playerOneScore;
 @property double playerTwoScore;
-@property bool playerOneWin;
+@property NSNumber *playerOneWin;
 @property PFUser *p1;
 @property PFUser *p2;
 

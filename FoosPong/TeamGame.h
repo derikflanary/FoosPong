@@ -18,6 +18,6 @@
 @property PFUser *teamTwoPlayerTwo;
 @property double teamOneScore;
 @property double teamTwoScore;
-@property bool teamOneWin;
+@property NSNumber *teamOneWin;
 
 @end
