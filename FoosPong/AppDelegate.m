@@ -47,7 +47,10 @@
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
+    
     [PFUser enableAutomaticUser];
+    
+    
     
     [SEGAnalytics setupWithConfiguration:[SEGAnalyticsConfiguration configurationWithWriteKey:@"osIWhCUd5Y50pBl1YrHV1Grj4nHrL0eI"]];
     

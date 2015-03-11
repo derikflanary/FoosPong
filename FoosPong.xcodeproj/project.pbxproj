@@ -13,9 +13,6 @@
 		EE0DC00B1A8C4604000235B3 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE0DC00A1A8C4604000235B3 /* ParseUI.framework */; };
 		EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC00E1A8D9456000235B3 /* UserController.m */; };
 		EE0DC0121A8D96D8000235B3 /* SingleGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC0111A8D96D8000235B3 /* SingleGameController.m */; };
-		EE1816FE1AAFCA7D00E608B3 /* JBBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1816F91AAFCA7D00E608B3 /* JBBarChartView.m */; };
-		EE1816FF1AAFCA7D00E608B3 /* JBChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1816FB1AAFCA7D00E608B3 /* JBChartView.m */; };
-		EE1817001AAFCA7D00E608B3 /* JBLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1816FD1AAFCA7D00E608B3 /* JBLineChartView.m */; };
 		EE1A557E1A9CFB3000E6981E /* GroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A557D1A9CFB3000E6981E /* GroupsViewController.m */; };
 		EE1A55811A9CFB4A00E6981E /* CurrentGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A55801A9CFB4A00E6981E /* CurrentGroupViewController.m */; };
 		EE1A55851A9CFBB500E6981E /* GroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A55841A9CFBB500E6981E /* GroupController.m */; };
@@ -49,6 +46,9 @@
 		EE5027C21A9654A30079DFFC /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5027C11A9654A30079DFFC /* LogViewController.m */; };
 		EE5027C81A965F1F0079DFFC /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5027C71A965F1F0079DFFC /* NSString+Extensions.m */; };
 		EE5027CB1A98ED310079DFFC /* UIColor+ExtraColorTools.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5027CA1A98ED310079DFFC /* UIColor+ExtraColorTools.m */; };
+		EE58A3091AB0BDEF00832380 /* JBBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE58A3041AB0BDEF00832380 /* JBBarChartView.m */; };
+		EE58A30A1AB0BDEF00832380 /* JBChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE58A3061AB0BDEF00832380 /* JBChartView.m */; };
+		EE58A30B1AB0BDEF00832380 /* JBLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE58A3081AB0BDEF00832380 /* JBLineChartView.m */; };
 		EE7A6CDC1A868402000447D2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6CDB1A868402000447D2 /* main.m */; };
 		EE7A6CDF1A868402000447D2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6CDE1A868402000447D2 /* AppDelegate.m */; };
 		EE7A6CE51A868402000447D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE7A6CE31A868402000447D2 /* Main.storyboard */; };
@@ -97,12 +97,6 @@
 		EE0DC00E1A8D9456000235B3 /* UserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserController.m; sourceTree = "<group>"; };
 		EE0DC0101A8D96D8000235B3 /* SingleGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleGameController.h; sourceTree = "<group>"; };
 		EE0DC0111A8D96D8000235B3 /* SingleGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleGameController.m; sourceTree = "<group>"; };
-		EE1816F81AAFCA7D00E608B3 /* JBBarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBBarChartView.h; sourceTree = "<group>"; };
-		EE1816F91AAFCA7D00E608B3 /* JBBarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBBarChartView.m; sourceTree = "<group>"; };
-		EE1816FA1AAFCA7D00E608B3 /* JBChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBChartView.h; sourceTree = "<group>"; };
-		EE1816FB1AAFCA7D00E608B3 /* JBChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBChartView.m; sourceTree = "<group>"; };
-		EE1816FC1AAFCA7D00E608B3 /* JBLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBLineChartView.h; sourceTree = "<group>"; };
-		EE1816FD1AAFCA7D00E608B3 /* JBLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBLineChartView.m; sourceTree = "<group>"; };
 		EE1A557C1A9CFB3000E6981E /* GroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupsViewController.h; sourceTree = "<group>"; };
 		EE1A557D1A9CFB3000E6981E /* GroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupsViewController.m; sourceTree = "<group>"; };
 		EE1A557F1A9CFB4A00E6981E /* CurrentGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentGroupViewController.h; sourceTree = "<group>"; };
@@ -154,6 +148,12 @@
 		EE5027C71A965F1F0079DFFC /* NSString+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extensions.m"; sourceTree = "<group>"; };
 		EE5027C91A98ED310079DFFC /* UIColor+ExtraColorTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ExtraColorTools.h"; sourceTree = "<group>"; };
 		EE5027CA1A98ED310079DFFC /* UIColor+ExtraColorTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ExtraColorTools.m"; sourceTree = "<group>"; };
+		EE58A3031AB0BDEF00832380 /* JBBarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBBarChartView.h; sourceTree = "<group>"; };
+		EE58A3041AB0BDEF00832380 /* JBBarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBBarChartView.m; sourceTree = "<group>"; };
+		EE58A3051AB0BDEF00832380 /* JBChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBChartView.h; sourceTree = "<group>"; };
+		EE58A3061AB0BDEF00832380 /* JBChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBChartView.m; sourceTree = "<group>"; };
+		EE58A3071AB0BDEF00832380 /* JBLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBLineChartView.h; sourceTree = "<group>"; };
+		EE58A3081AB0BDEF00832380 /* JBLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBLineChartView.m; sourceTree = "<group>"; };
 		EE7A6CD61A868401000447D2 /* FoosPong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoosPong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE7A6CDA1A868402000447D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE7A6CDB1A868402000447D2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -266,20 +266,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EE1816F71AAFCA7D00E608B3 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				EE1816F81AAFCA7D00E608B3 /* JBBarChartView.h */,
-				EE1816F91AAFCA7D00E608B3 /* JBBarChartView.m */,
-				EE1816FA1AAFCA7D00E608B3 /* JBChartView.h */,
-				EE1816FB1AAFCA7D00E608B3 /* JBChartView.m */,
-				EE1816FC1AAFCA7D00E608B3 /* JBLineChartView.h */,
-				EE1816FD1AAFCA7D00E608B3 /* JBLineChartView.m */,
-			);
-			name = Classes;
-			path = "../../../../Downloads/JBChartView-master/Classes";
-			sourceTree = "<group>";
-		};
 		EE1A557A1A9CFA3E00E6981E /* Personal Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,7 +376,7 @@
 		EE5027CC1A98F1180079DFFC /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				EE1816F71AAFCA7D00E608B3 /* Classes */,
+				EE58A3021AB0BDEF00832380 /* Classes */,
 				EE4888681A9FDD9B00FCCA47 /* HMSegmentedControl.h */,
 				EE4888691A9FDD9B00FCCA47 /* HMSegmentedControl.m */,
 				EE2C57D41A93DFC600DA9835 /* UIImageView+Letters.h */,
@@ -407,6 +393,19 @@
 				EE7A6CE31A868402000447D2 /* Main.storyboard */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		EE58A3021AB0BDEF00832380 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EE58A3031AB0BDEF00832380 /* JBBarChartView.h */,
+				EE58A3041AB0BDEF00832380 /* JBBarChartView.m */,
+				EE58A3051AB0BDEF00832380 /* JBChartView.h */,
+				EE58A3061AB0BDEF00832380 /* JBChartView.m */,
+				EE58A3071AB0BDEF00832380 /* JBLineChartView.h */,
+				EE58A3081AB0BDEF00832380 /* JBLineChartView.m */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		EE7A6CCD1A868401000447D2 = {
@@ -640,6 +639,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE9DAEF31A9ECEC600589897 /* AddGroupViewController.m in Sources */,
+				EE58A3091AB0BDEF00832380 /* JBBarChartView.m in Sources */,
 				EE9DAEEB1A9D582200589897 /* RNFrostedSidebar.m in Sources */,
 				EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */,
 				EE1A55881A9D217700E6981E /* PersonalNotificationsViewController.m in Sources */,
@@ -648,7 +648,6 @@
 				EE2EF8131AA4EF3400DE09E7 /* TeamGameStats.m in Sources */,
 				302E41C41A86958E005F1184 /* HomeViewController.m in Sources */,
 				EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */,
-				EE1817001AAFCA7D00E608B3 /* JBLineChartView.m in Sources */,
 				EE2EF8101AA4EF2200DE09E7 /* SingleGameStats.m in Sources */,
 				EE3356EE1A895F0600B83EC0 /* ProfileViewController.m in Sources */,
 				EE1A557E1A9CFB3000E6981E /* GroupsViewController.m in Sources */,
@@ -670,13 +669,13 @@
 				302E41C71A86A195005F1184 /* ChoosePlayersViewController.m in Sources */,
 				EEFDF3CE1AA6AE7200A0E48F /* StatsController.m in Sources */,
 				EE2C57D61A93DFC600DA9835 /* UIImageView+Letters.m in Sources */,
-				EE1816FE1AAFCA7D00E608B3 /* JBBarChartView.m in Sources */,
+				EE58A30A1AB0BDEF00832380 /* JBChartView.m in Sources */,
 				EE5027C81A965F1F0079DFFC /* NSString+Extensions.m in Sources */,
 				EE7A6D0A1A869CD4000447D2 /* HistoryViewController.m in Sources */,
 				EEE7DDD41AAE8E490089A488 /* PersonalTeamStats.m in Sources */,
-				EE1816FF1AAFCA7D00E608B3 /* JBChartView.m in Sources */,
 				EEFDF3D41AA809AF00A0E48F /* TeamGame.m in Sources */,
 				EE2C57E21A93F12300DA9835 /* SignUpViewController.m in Sources */,
+				EE58A30B1AB0BDEF00832380 /* JBLineChartView.m in Sources */,
 				EE5027CB1A98ED310079DFFC /* UIColor+ExtraColorTools.m in Sources */,
 				EE1A55811A9CFB4A00E6981E /* CurrentGroupViewController.m in Sources */,
 				EE4888701AA0FC6D00FCCA47 /* TeamGameViewController.m in Sources */,

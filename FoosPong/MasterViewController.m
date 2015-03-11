@@ -86,85 +86,97 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
 
 - (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index{
     
-    HomeViewController *hvc = [HomeViewController new];
-    InitialViewController *ivc = [InitialViewController new];
-    
-    UITabBarController *profileTabBar = [UITabBarController new];
-    HistoryViewController *historyVC = [HistoryViewController new];
-    PersonalNotificationsViewController *pnvc = [PersonalNotificationsViewController new];
-    ProfileViewController *pvc = [ProfileViewController new];
-    pvc.tabBarItem.title = @"Profile";
-    historyVC.tabBarItem.title = @"History";
-    pnvc.tabBarItem.title = @"Notifications";
-    profileTabBar.viewControllers = @[pvc, historyVC, pnvc];
-    
-    UITabBarController *groupTabBar = [UITabBarController new];
-    GroupsViewController *gvc = [GroupsViewController new];
-    gvc.tabBarItem.title = @"Groups";
-    CurrentGroupViewController *cgvc = [CurrentGroupViewController new];
-    cgvc.tabBarItem.title = @"Current Group";
-    groupTabBar.viewControllers = @[gvc, cgvc];
-    
-    SettingViewController *svc = [SettingViewController new];
-    
-   
-    SideBarSection section = index;
-    
-    switch (section) {
-        case SideBarSectionLogin:{
-            [sidebar dismissAnimated:YES completion:^(BOOL finished) {
-               
-                self.navigationController.viewControllers = @[ivc];
+    if ([PFUser currentUser].username) {
+        HomeViewController *hvc = [HomeViewController new];
+        InitialViewController *ivc = [InitialViewController new];
+        
+        UITabBarController *profileTabBar = [UITabBarController new];
+        HistoryViewController *historyVC = [HistoryViewController new];
+        PersonalNotificationsViewController *pnvc = [PersonalNotificationsViewController new];
+        ProfileViewController *pvc = [ProfileViewController new];
+        pvc.tabBarItem.title = @"Profile";
+        historyVC.tabBarItem.title = @"History";
+        pnvc.tabBarItem.title = @"Notifications";
+        profileTabBar.viewControllers = @[pvc, historyVC, pnvc];
+        
+        UITabBarController *groupTabBar = [UITabBarController new];
+        GroupsViewController *gvc = [GroupsViewController new];
+        gvc.tabBarItem.title = @"Groups";
+        CurrentGroupViewController *cgvc = [CurrentGroupViewController new];
+        cgvc.tabBarItem.title = @"Current Group";
+        groupTabBar.viewControllers = @[gvc, cgvc];
+        
+        SettingViewController *svc = [SettingViewController new];
+        
+        
+        SideBarSection section = index;
+        
+        switch (section) {
+            case SideBarSectionLogin:{
+                [sidebar dismissAnimated:YES completion:^(BOOL finished) {
+                    
+                    self.navigationController.viewControllers = @[ivc];
+                    
+                }];
+                break;
+            }
+            case SideBarSectionMain:{
                 
-            }];
-            break;
+                [sidebar dismissAnimated:YES completion:^(BOOL finished) {
+                    if (finished) {
+                        
+                        self.navigationController.viewControllers = @[hvc];
+                        
+                    }
+                }];
+                break;
+            }
+            case SideBarSectionPersonal:{
+                
+                [sidebar dismissAnimated:YES completion:^(BOOL finished) {
+                    if (finished) {
+                        
+                        self.navigationController.viewControllers = @[profileTabBar];
+                        
+                    }
+                }];
+                break;
+            }
+                
+            case SideBarSectionGroups:{
+                
+                [sidebar dismissAnimated:YES completion:^(BOOL finished) {
+                    if (finished) {
+                        
+                        self.navigationController.viewControllers = @[groupTabBar];
+                        
+                    }
+                }];
+                break;
+            }
+            case SideBarSectionSettings:{
+                [sidebar dismissAnimated:YES completion:^(BOOL finished) {
+                    if (finished) {
+                        
+                        self.navigationController.viewControllers = @[svc];
+                        
+                    }
+                }];
+                
+                break;
+            }
         }
-        case SideBarSectionMain:{
-            
-            [sidebar dismissAnimated:YES completion:^(BOOL finished) {
-                if (finished) {
-               
-                    self.navigationController.viewControllers = @[hvc];
-                    
-                }
-            }];
-            break;
-        }
-        case SideBarSectionPersonal:{
-            
-            [sidebar dismissAnimated:YES completion:^(BOOL finished) {
-                if (finished) {
-               
-                    self.navigationController.viewControllers = @[profileTabBar];
-                    
-                }
-            }];
-            break;
-        }
-            
-        case SideBarSectionGroups:{
-            
-            [sidebar dismissAnimated:YES completion:^(BOOL finished) {
-                if (finished) {
 
-                    self.navigationController.viewControllers = @[groupTabBar];
-
-                }
-            }];
-            break;
-        }
-        case SideBarSectionSettings:{
-            [sidebar dismissAnimated:YES completion:^(BOOL finished) {
-                if (finished) {
-                    
-                    self.navigationController.viewControllers = @[svc];
-                    
-                }
-            }];
-
-            break;
-        }
+    }else{
+        UIAlertController *mustLoginAlert = [UIAlertController alertControllerWithTitle:@"Not Logged In" message:@"You must login before proceeding" preferredStyle:UIAlertControllerStyleAlert];
+        [mustLoginAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            [sidebar dismissAnimated:YES];
+            return;
+        }]];
+        [self presentViewController:mustLoginAlert animated:YES completion:nil];
+        
     }
+    
 }
 
 
