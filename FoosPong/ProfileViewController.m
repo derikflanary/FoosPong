@@ -114,9 +114,11 @@
     
     if (indexPath.row == 0) {
         [[StatsController sharedInstance] retrieveSingleStatsForUser:self.currentUser andSingleGames:self.singleGames callback:^(PersonalSingleStats *stats) {
+            svc.personalSingleStats = stats;
+            svc.games = self.singleGames;
+            svc.buttonSelected = 1;
             [self.navigationController presentViewController:statsNavController animated:YES completion:^{
-                svc.personalSingleStats = stats;
-                svc.buttonSelected = 1;
+                
             }];
         }];
     }else if (indexPath.row == 1){
@@ -134,6 +136,7 @@
             }];
         }];
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 

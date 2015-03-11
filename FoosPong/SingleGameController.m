@@ -85,6 +85,7 @@
     [query2 whereKey:@"p2" equalTo:user];
     
     PFQuery *theQuery = [PFQuery orQueryWithSubqueries:@[query, query2]];
+    [theQuery orderByAscending:@"createdAt"];
     [theQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             

@@ -101,7 +101,9 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         
             [[SingleGameController sharedInstance] addGameWithSingleGameStats:self.gameStats];
         
-            [self.navigationController popViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:YES completion:^{
+                
+            }];
         
         }]];
         [self presentViewController:setTitleAlert animated:YES completion:nil];
@@ -118,7 +120,9 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
             
             [[SingleGameController sharedInstance] addGameWithSingleGameStats:self.gameStats];
             
-            [self.navigationController popViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:YES completion:^{
+                
+            }];
             
         }]];
         [self presentViewController:setTitleAlert animated:YES completion:nil];

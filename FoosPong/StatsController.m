@@ -33,24 +33,39 @@
     
     PersonalSingleStats *stats = [PersonalSingleStats new];
     stats.singleGamesPlayed = [singleGames count];
-    
+    NSMutableArray *mutableOpponents = [NSMutableArray array];
     
     for (Game *singleGame in singleGames) {
-
+        
+        
         if (singleGame.p1 == user && singleGame.playerOneWin) {
             stats.singleGameWins ++;
+            stats.pointsScored = stats.pointsScored + singleGame.playerOneScore;
+            stats.pointsAllowed = stats.pointsAllowed + singleGame.playerTwoScore;
+            [mutableOpponents addObject:singleGame.p2];
             
         }else if (singleGame.p1 == user && !singleGame.playerOneWin){
             stats.singleGameLoses ++;
-
+            stats.pointsScored = stats.pointsScored + singleGame.playerOneScore;
+            stats.pointsAllowed = stats.pointsAllowed + singleGame.playerTwoScore;
+            [mutableOpponents addObject:singleGame.p2];
+            
         }else if (singleGame.p2 == user && !singleGame.playerOneWin){
             stats.singleGameWins ++;
+            stats.pointsScored = stats.pointsScored + singleGame.playerTwoScore;
+            stats.pointsAllowed = stats.pointsAllowed + singleGame.playerOneScore;
+            [mutableOpponents addObject:singleGame.p1];
             
         }else{
             stats.singleGameLoses ++;
+            stats.pointsScored = stats.pointsScored + singleGame.playerTwoScore;
+            stats.pointsAllowed = stats.pointsAllowed + singleGame.playerOneScore;
+            [mutableOpponents addObject:singleGame.p1];
         }
     }
-    
+    stats.opponents = mutableOpponents;
+    stats.pointsPerGame = (float)stats.pointsScored/(float)stats.singleGamesPlayed;
+    stats.pointsAllowedPerGame = (float)stats.pointsAllowed/(float)stats.singleGamesPlayed;
     callback(stats);
     
 }

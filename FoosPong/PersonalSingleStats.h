@@ -13,6 +13,11 @@
 @property (nonatomic, assign) NSInteger singleGamesPlayed;
 @property (nonatomic, assign) NSInteger singleGameWins;
 @property (nonatomic, assign) NSInteger singleGameLoses;
+@property (nonatomic, assign) float pointsPerGame;
+@property (nonatomic, assign) NSInteger pointsScored;
+@property (nonatomic, assign) NSInteger pointsAllowed;
+@property (nonatomic, assign) float pointsAllowedPerGame;
+@property (nonatomic, strong) NSArray *opponents;
 
 
 @end
