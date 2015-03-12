@@ -131,9 +131,11 @@
             }];
         }else{
             [[StatsController sharedInstance] retrieveOverallStatsForUser:self.currentUser andSingleGames:self.singleGames andTeamGames:self.teamGames callback:^(PersonalOverallStats *stats) {
+                svc.overallStats = stats;
+                svc.buttonSelected = 3;
+                
                 [self.navigationController presentViewController:statsNavController animated:YES completion:^{
-                    svc.overallStats = stats;
-                    svc.buttonSelected = 3;
+                    
                 }];
             }];
         }

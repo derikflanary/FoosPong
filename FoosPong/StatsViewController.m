@@ -70,11 +70,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (self.buttonSelected == 1) {
-        return [[self.personalSingleStats.statArray lastObject] count] + 1;
+        return [self.personalSingleStats.statArray count];
     }else if (self.buttonSelected == 2){
         return [self.personalTeamStats.teamStatsArray count];
     }else{
-        return 1;
+        return [self.overallStats.overallStatsArray count];
     }
 
     
@@ -97,6 +97,8 @@
 
         }else if (self.buttonSelected == 2){
             cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", [self.personalTeamStats.teamStatsArray lastObject][indexPath.row - 1], self.personalTeamStats.teamStatsArray[indexPath.row - 1]];
+        }else{
+            cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", [self.overallStats.overallStatsArray lastObject][indexPath.row - 1], self.overallStats.overallStatsArray[indexPath.row - 1]];
         }
     }
     

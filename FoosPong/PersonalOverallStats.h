@@ -12,6 +12,9 @@
 
 @property (nonatomic, assign) NSInteger wins;
 @property (nonatomic, assign) NSInteger loses;
+@property (nonatomic, assign) NSInteger singleGamesPlayed;
+@property (nonatomic, assign) NSInteger teamGamesPlayed;
 @property (nonatomic, assign) NSInteger totalGamesPlayed;
+@property (nonatomic, strong) NSArray * overallStatsArray;
 
 @end

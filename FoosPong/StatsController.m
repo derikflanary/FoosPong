@@ -110,7 +110,7 @@
     for (TeamGame *teamGame in teamGames) {
         
         if (teamGame.teamOnePlayerOne == user || teamGame.teamOnePlayerTwo == user) {
-            if (teamGame.teamOneWin) {
+            if ([teamGame.teamOneWin boolValue]) {
                 stats.teamGameWins ++;
                 stats.pointsScored = stats.pointsScored + teamGame.teamOneScore;
                 stats.pointsAllowed = stats.pointsAllowed + teamGame.teamTwoScore;
@@ -123,7 +123,7 @@
             }
             
         }else if (teamGame.teamTwoPlayerOne == user || teamGame.teamTwoPlayerTwo == user){
-            if (teamGame.teamOneWin) {
+            if ([teamGame.teamOneWin boolValue]) {
                 stats.teamGameLoses ++;
                 stats.pointsScored = stats.pointsScored + teamGame.teamTwoScore;
                 stats.pointsAllowed = stats.pointsAllowed + teamGame.teamOneScore;
@@ -158,19 +158,21 @@
     PersonalOverallStats *stats = [PersonalOverallStats new];
    
     stats.totalGamesPlayed = [singleGames count] + [teamGames count];
+    stats.singleGamesPlayed = [singleGames count];
+    stats.teamGamesPlayed = [teamGames count];
     
     for (Game *singleGame in singleGames) {
         
-        if (singleGame.p1 == user && singleGame.playerOneWin) {
+        if (singleGame.p1 == user && [singleGame.playerOneWin boolValue]) {
             stats.wins ++;
             
-        }else if (singleGame.p1 == user && !singleGame.playerOneWin){
+        }else if (singleGame.p1 == user && ![singleGame.playerOneWin boolValue]){
             stats.loses ++;
             
-        }else if (singleGame.p2 == user && !singleGame.playerOneWin){
+        }else if (singleGame.p2 == user && ![singleGame.playerOneWin boolValue]){
             stats.wins ++;
             
-                    }else{
+        }else{
             stats.loses ++;
         }
     }
@@ -178,7 +180,7 @@
     for (TeamGame *teamGame in teamGames) {
         
         if (teamGame.teamOnePlayerOne == user || teamGame.teamOnePlayerTwo == user) {
-            if (teamGame.teamOneWin) {
+            if ([teamGame.teamOneWin boolValue]) {
                 stats.wins ++;
                 
             }else{
@@ -186,7 +188,7 @@
             }
             
         }else if (teamGame.teamTwoPlayerOne == user || teamGame.teamTwoPlayerTwo == user){
-            if (teamGame.teamOneWin) {
+            if ([teamGame.teamOneWin boolValue]) {
                 stats.loses ++;
                 
             }else{
@@ -194,7 +196,17 @@
             }
         }
     }
-
+    
+    stats.overallStatsArray = @[[NSNumber numberWithInteger:stats.totalGamesPlayed],
+                                [NSNumber numberWithInteger:stats.wins],
+                                [NSNumber numberWithInteger:stats.loses],
+                                [NSNumber numberWithInteger:stats.singleGamesPlayed],
+                                [NSNumber numberWithInteger:stats.teamGamesPlayed],
+                                @[@"Games Played",
+                                  @"Wins",
+                                  @"Loses",
+                                  @"Single Games Played",
+                                  @"Team Games Played"]];
     
     callback(stats);
 
