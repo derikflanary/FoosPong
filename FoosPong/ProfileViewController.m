@@ -122,9 +122,11 @@
             }];
         }else if (indexPath.row == 1){
             [[StatsController sharedInstance] retrieveTeamStatsForUser:self.currentUser andTeamGames:self.teamGames callback:^(PersonalTeamStats *stats) {
+                svc.personalTeamStats = stats;
+                svc.buttonSelected = 2;
+                svc.games = self.teamGames;
                 [self.navigationController presentViewController:statsNavController animated:YES completion:^{
-                    svc.personalTeamStats = stats;
-                    svc.buttonSelected = 2;
+                    
                 }];
             }];
         }else{

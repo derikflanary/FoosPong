@@ -53,7 +53,7 @@
     
     [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            NSLog(@"Single Game Saved");
+            NSLog(@"Team Game Saved");
         }else
             NSLog(@"%@", error);
     }];

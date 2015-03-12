@@ -9,6 +9,7 @@
 #import "StatsViewController.h"
 #import "JBLineChartView.h"
 #import "Game.h"
+#import "TeamGame.h"
 
 @interface StatsViewController () <UITableViewDataSource, UITableViewDelegate, JBLineChartViewDataSource, JBLineChartViewDelegate>
 
@@ -68,8 +69,14 @@
 #pragma mark - tableview
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
-    return [[self.personalSingleStats.statArray lastObject] count] + 1;
+    if (self.buttonSelected == 1) {
+        return [[self.personalSingleStats.statArray lastObject] count] + 1;
+    }else if (self.buttonSelected == 2){
+        return [self.personalTeamStats.teamStatsArray count];
+    }else{
+        return 1;
+    }
+
     
 }
 
@@ -85,7 +92,12 @@
         [cell.contentView sizeToFit];
 
     }else{
-        cell.textLabel.text = [self.personalSingleStats.statArray lastObject][indexPath.row - 1] ;
+        if (self.buttonSelected == 1) {
+            cell.textLabel.text = [NSString stringWithFormat:@"%@: %@",[self.personalSingleStats.statArray lastObject][indexPath.row - 1], self.personalSingleStats.statArray[indexPath.row - 1]];
+
+        }else if (self.buttonSelected == 2){
+            cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", [self.personalTeamStats.teamStatsArray lastObject][indexPath.row - 1], self.personalTeamStats.teamStatsArray[indexPath.row - 1]];
+        }
     }
     
     cell.textLabel.textColor = [UIColor lightTextColor];
@@ -110,9 +122,15 @@
 
 - (CGFloat)lineChartView:(JBLineChartView *)lineChartView verticalValueForHorizontalIndex:(NSUInteger)horizontalIndex atLineIndex:(NSUInteger)lineIndex
 {
-    Game *game = [self.games objectAtIndex:horizontalIndex];
-    //NSLog(@"%f",game.playerOneScore)
-    return (CGFloat)game.playerOneScore;
+        //NSLog(@"%f",game.playerOneScore)
+    if (self.buttonSelected == 1) {
+        Game *game = [self.games objectAtIndex:horizontalIndex];
+        return (CGFloat)game.playerOneScore;
+    }else{
+        TeamGame *teamGame = [self.games objectAtIndex:horizontalIndex];
+        return (CGFloat)teamGame.teamOneScore;
+    }
+
 }
 
 
