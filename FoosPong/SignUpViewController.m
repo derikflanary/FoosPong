@@ -162,7 +162,7 @@
     
     //[[UserController sharedInstance] updateUsers];
     [self dismissViewControllerAnimated:YES completion:^{
-        
+        [[UserController sharedInstance]updateUsers];
     }];
 }
 

@@ -38,19 +38,19 @@
     for (Game *singleGame in singleGames) {
         
         
-        if (singleGame.p1 == user && singleGame.playerOneWin) {
+        if (singleGame.p1 == user && [singleGame.playerOneWin boolValue]) {
             stats.singleGameWins ++;
             stats.pointsScored = stats.pointsScored + singleGame.playerOneScore;
             stats.pointsAllowed = stats.pointsAllowed + singleGame.playerTwoScore;
             [mutableOpponents addObject:singleGame.p2];
             
-        }else if (singleGame.p1 == user && !singleGame.playerOneWin){
+        }else if (singleGame.p1 == user && ![singleGame.playerOneWin boolValue]){
             stats.singleGameLoses ++;
             stats.pointsScored = stats.pointsScored + singleGame.playerOneScore;
             stats.pointsAllowed = stats.pointsAllowed + singleGame.playerTwoScore;
             [mutableOpponents addObject:singleGame.p2];
             
-        }else if (singleGame.p2 == user && !singleGame.playerOneWin){
+        }else if (singleGame.p2 == user && ![singleGame.playerOneWin boolValue]){
             stats.singleGameWins ++;
             stats.pointsScored = stats.pointsScored + singleGame.playerTwoScore;
             stats.pointsAllowed = stats.pointsAllowed + singleGame.playerOneScore;

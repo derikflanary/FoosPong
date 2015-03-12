@@ -11,6 +11,7 @@
 #import "UserController.h"
 #import "SignUpViewController.h"
 #import "InitialViewController.h"
+#import "UserController.h"
 
 @interface LogViewController ()
 
@@ -137,6 +138,7 @@
             [self presentViewController:failedLoginAlert animated:YES completion:nil];
         }else{
             [self dismissViewControllerAnimated:YES completion:^{
+                [[UserController sharedInstance]updateUsers];
             }];
         }
     }];

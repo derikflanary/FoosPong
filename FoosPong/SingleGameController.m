@@ -38,7 +38,7 @@
     finishedGame.p2 = gameStats.playerTwo;
     finishedGame.playerOneScore = gameStats.playerOneScore;
     finishedGame.playerTwoScore = gameStats.playerTwoScore;
-    finishedGame.playerOneWin = gameStats.playerOneWin;
+    finishedGame.playerOneWin = [NSNumber numberWithBool: gameStats.playerOneWin];
 //    PFObject *finishedGame = [PFObject objectWithClassName:@"SingleGame"];
 //    
 //    finishedGame[@"p1"] = gameStats.playerOne;

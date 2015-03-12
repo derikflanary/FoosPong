@@ -46,9 +46,11 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-
-    [[UserController sharedInstance] updateUsers];
+    NSLog(@"%@", [PFUser currentUser].username);
+//    if ([PFUser currentUser].username) {
+//        [[UserController sharedInstance] updateUsers];
+//
+//    }
     
     UIColor* mainColor = [UIColor mainColor];
     UIColor* darkColor = [UIColor darkColor];

@@ -39,6 +39,8 @@
     self.lineChart.dataSource = self;
     self.lineChart.delegate = self;
     self.lineChart.frame = CGRectMake(0, 0, self.view.frame.size.width, 100);
+    [self.lineChart setMinimumValue:0];
+    [self.lineChart setMaximumValue:10];
     [self.lineChart reloadData];
     
     self.view.backgroundColor = [UIColor clearColor];
@@ -102,10 +104,8 @@
 - (CGFloat)lineChartView:(JBLineChartView *)lineChartView verticalValueForHorizontalIndex:(NSUInteger)horizontalIndex atLineIndex:(NSUInteger)lineIndex
 {
     Game *game = [self.games objectAtIndex:horizontalIndex];
-    //NSLog(@"%f",game.playerOneScore);
-
+    //NSLog(@"%f",game.playerOneScore)
     return (CGFloat)game.playerOneScore;
-   
 }
 
 - (NSUInteger)numberOfLinesInLineChartView:(JBLineChartView *)lineChartView{
@@ -118,8 +118,7 @@
     return [self.games count] ;
 }
 
-- (BOOL)lineChartView:(JBLineChartView *)lineChartView showsDotsForLineAtLineIndex:(NSUInteger)lineIndex
-{
+- (BOOL)lineChartView:(JBLineChartView *)lineChartView showsDotsForLineAtLineIndex:(NSUInteger)lineIndex{
     return lineIndex == JBLineChartViewLineStyleDashed;
 }
 

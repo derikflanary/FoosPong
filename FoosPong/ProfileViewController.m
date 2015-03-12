@@ -58,10 +58,6 @@
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:2];
     
-    [[SingleGameController sharedInstance] updateGamesForUser:self.currentUser withBool:YES callback:^(NSArray * games) {
-        self.singleGames = games;
-        self.teamGames = [SingleGameController sharedInstance].teamGames;
-    }];
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 280, 320, 250) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
@@ -112,31 +108,38 @@
     svc.transitioningDelegate = self;
     svc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     
-    if (indexPath.row == 0) {
-        [[StatsController sharedInstance] retrieveSingleStatsForUser:self.currentUser andSingleGames:self.singleGames callback:^(PersonalSingleStats *stats) {
-            svc.personalSingleStats = stats;
-            svc.games = self.singleGames;
-            svc.buttonSelected = 1;
-            [self.navigationController presentViewController:statsNavController animated:YES completion:^{
-                
+    [[SingleGameController sharedInstance] updateGamesForUser:self.currentUser withBool:YES callback:^(NSArray * games) {
+        self.singleGames = games;
+        self.teamGames = [SingleGameController sharedInstance].teamGames;
+        if (indexPath.row == 0) {
+            [[StatsController sharedInstance] retrieveSingleStatsForUser:self.currentUser andSingleGames:self.singleGames callback:^(PersonalSingleStats *stats) {
+                svc.personalSingleStats = stats;
+                svc.games = self.singleGames;
+                svc.buttonSelected = 1;
+                [self.navigationController presentViewController:statsNavController animated:YES completion:^{
+                    
+                }];
             }];
-        }];
-    }else if (indexPath.row == 1){
-        [[StatsController sharedInstance] retrieveTeamStatsForUser:self.currentUser andTeamGames:self.teamGames callback:^(PersonalTeamStats *stats) {
-            [self.navigationController presentViewController:statsNavController animated:YES completion:^{
-                svc.personalTeamStats = stats;
-                svc.buttonSelected = 2;
+        }else if (indexPath.row == 1){
+            [[StatsController sharedInstance] retrieveTeamStatsForUser:self.currentUser andTeamGames:self.teamGames callback:^(PersonalTeamStats *stats) {
+                [self.navigationController presentViewController:statsNavController animated:YES completion:^{
+                    svc.personalTeamStats = stats;
+                    svc.buttonSelected = 2;
+                }];
             }];
-        }];
-    }else{
-        [[StatsController sharedInstance] retrieveOverallStatsForUser:self.currentUser andSingleGames:self.singleGames andTeamGames:self.teamGames callback:^(PersonalOverallStats *stats) {
-            [self.navigationController presentViewController:statsNavController animated:YES completion:^{
-                svc.overallStats = stats;
-                svc.buttonSelected = 3;
+        }else{
+            [[StatsController sharedInstance] retrieveOverallStatsForUser:self.currentUser andSingleGames:self.singleGames andTeamGames:self.teamGames callback:^(PersonalOverallStats *stats) {
+                [self.navigationController presentViewController:statsNavController animated:YES completion:^{
+                    svc.overallStats = stats;
+                    svc.buttonSelected = 3;
+                }];
             }];
-        }];
-    }
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        }
+
+    }];
+
+    
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 
