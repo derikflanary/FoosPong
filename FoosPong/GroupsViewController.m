@@ -54,7 +54,7 @@
     self.joinGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 230, 320, 62)];
     self.joinGroupButton.backgroundColor = darkColor;
     self.joinGroupButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
-    [self.joinGroupButton setTitle:@"SIGN UP HERE" forState:UIControlStateNormal];
+    [self.joinGroupButton setTitle:@"Join An Existing Group" forState:UIControlStateNormal];
     [self.joinGroupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.joinGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.joinGroupButton addTarget:self action:@selector(joinPressed:) forControlEvents:UIControlEventTouchUpInside];

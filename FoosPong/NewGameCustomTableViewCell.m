@@ -16,8 +16,8 @@
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NewGameCell"];
     self.textLabel.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:26];
     self.detailTextLabel.font = [UIFont boldSystemFontOfSize:11];
-    self.layer.cornerRadius = 10;
-    self.clipsToBounds = YES;
+//    self.layer.cornerRadius = 10;
+//    self.clipsToBounds = YES;
     self.backgroundColor = [UIColor mainColor];
     return self;
 }

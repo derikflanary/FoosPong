@@ -10,12 +10,18 @@
 
 @interface RulesViewController ()
 
+@property (nonatomic, strong) UIWebView *webView;
+
 @end
 
 @implementation RulesViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.webView = [[UIWebView alloc]initWithFrame:self.view.frame];
+    self.webView.scalesPageToFit = YES;
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.table-soccer.org/rules/documents/ITSFRulesEnglish.pdf"]]];
+    [self.view addSubview:self.webView];
     // Do any additional setup after loading the view.
 }
 

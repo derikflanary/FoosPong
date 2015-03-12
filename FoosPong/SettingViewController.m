@@ -7,6 +7,7 @@
 //
 
 #import "SettingViewController.h"
+#import "RulesViewController.h"
 
 @interface SettingViewController ()
 
@@ -20,8 +21,15 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    UIBarButtonItem *rulesButton = [[UIBarButtonItem alloc] initWithTitle:@"Rules" style:UIBarButtonItemStylePlain target:self action:@selector(rulesPressed:)];
+    self.navigationItem.rightBarButtonItem = rulesButton;
+    
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:4];
     // Do any additional setup after loading the view.
+}
+
+-(void)rulesPressed:(id)sender{
+    [self.navigationController pushViewController:[RulesViewController new] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -64,6 +64,8 @@
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = NO;
     self.tableView.bounces = NO;
+    self.tableView.layer.cornerRadius = 10;
+    self.tableView.clipsToBounds = YES;
     [self.view addSubview:self.tableView];
     
 }

@@ -49,6 +49,7 @@
 		EE58A3091AB0BDEF00832380 /* JBBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE58A3041AB0BDEF00832380 /* JBBarChartView.m */; };
 		EE58A30A1AB0BDEF00832380 /* JBChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE58A3061AB0BDEF00832380 /* JBChartView.m */; };
 		EE58A30B1AB0BDEF00832380 /* JBLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE58A3081AB0BDEF00832380 /* JBLineChartView.m */; };
+		EE76CC511AB240870038BD80 /* RulesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76CC501AB240870038BD80 /* RulesViewController.m */; };
 		EE7A6CDC1A868402000447D2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6CDB1A868402000447D2 /* main.m */; };
 		EE7A6CDF1A868402000447D2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6CDE1A868402000447D2 /* AppDelegate.m */; };
 		EE7A6CE51A868402000447D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE7A6CE31A868402000447D2 /* Main.storyboard */; };
@@ -154,6 +155,8 @@
 		EE58A3061AB0BDEF00832380 /* JBChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBChartView.m; sourceTree = "<group>"; };
 		EE58A3071AB0BDEF00832380 /* JBLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBLineChartView.h; sourceTree = "<group>"; };
 		EE58A3081AB0BDEF00832380 /* JBLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBLineChartView.m; sourceTree = "<group>"; };
+		EE76CC4F1AB240870038BD80 /* RulesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RulesViewController.h; sourceTree = "<group>"; };
+		EE76CC501AB240870038BD80 /* RulesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RulesViewController.m; sourceTree = "<group>"; };
 		EE7A6CD61A868401000447D2 /* FoosPong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoosPong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE7A6CDA1A868402000447D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE7A6CDB1A868402000447D2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -484,6 +487,8 @@
 			children = (
 				EE808DAE1A9FC3E30000F833 /* SettingViewController.h */,
 				EE808DAF1A9FC3E30000F833 /* SettingViewController.m */,
+				EE76CC4F1AB240870038BD80 /* RulesViewController.h */,
+				EE76CC501AB240870038BD80 /* RulesViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -676,6 +681,7 @@
 				EEFDF3D41AA809AF00A0E48F /* TeamGame.m in Sources */,
 				EE2C57E21A93F12300DA9835 /* SignUpViewController.m in Sources */,
 				EE58A30B1AB0BDEF00832380 /* JBLineChartView.m in Sources */,
+				EE76CC511AB240870038BD80 /* RulesViewController.m in Sources */,
 				EE5027CB1A98ED310079DFFC /* UIColor+ExtraColorTools.m in Sources */,
 				EE1A55811A9CFB4A00E6981E /* CurrentGroupViewController.m in Sources */,
 				EE4888701AA0FC6D00FCCA47 /* TeamGameViewController.m in Sources */,
