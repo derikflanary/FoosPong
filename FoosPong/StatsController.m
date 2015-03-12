@@ -66,6 +66,16 @@
     stats.opponents = mutableOpponents;
     stats.pointsPerGame = (float)stats.pointsScored/(float)stats.singleGamesPlayed;
     stats.pointsAllowedPerGame = (float)stats.pointsAllowed/(float)stats.singleGamesPlayed;
+    
+    stats.statArray = @[@{@"singleGameWins": [NSNumber numberWithLong:stats.singleGameWins]},
+                        @{@"singleGameLoses": [NSNumber numberWithLong:stats.singleGameLoses]},
+                        @{@"singleGamesPlayed": [NSNumber numberWithLong:stats.singleGamesPlayed]},
+                        @{@"pointsPerGame": [NSNumber numberWithFloat:stats.pointsPerGame]},
+                        @{@"pointsAllowedPerGame": [NSNumber numberWithFloat:stats.pointsAllowedPerGame]},
+                        @{@"opponents": stats.opponents},
+                        @[@"Single Game Wins", @"Single Game Loses", @"Single Games Played", @"Points Per Game", @"Points Allowed Per Game", @"Favorite Opponent"]];
+    
+    
     callback(stats);
     
 }

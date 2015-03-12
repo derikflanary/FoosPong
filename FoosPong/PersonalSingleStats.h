@@ -18,6 +18,7 @@
 @property (nonatomic, assign) NSInteger pointsAllowed;
 @property (nonatomic, assign) float pointsAllowedPerGame;
 @property (nonatomic, strong) NSArray *opponents;
+@property (nonatomic, strong) NSArray *statArray;
 
 
 @end

@@ -33,7 +33,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.scrollEnabled = NO;
+    self.tableView.scrollEnabled = YES;
     
     self.lineChart = [JBLineChartView new];
     self.lineChart.dataSource = self;
@@ -41,6 +41,7 @@
     self.lineChart.frame = CGRectMake(0, 0, self.view.frame.size.width, 100);
     [self.lineChart setMinimumValue:0];
     [self.lineChart setMaximumValue:10];
+
     [self.lineChart reloadData];
     
     self.view.backgroundColor = [UIColor clearColor];
@@ -62,14 +63,13 @@
         // Add Vibrancy View to Blur View
     [bluredEffectView.contentView addSubview:vibrancyEffectView];
     
-    
 }
 
 #pragma mark - tableview
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 1;
+    return [[self.personalSingleStats.statArray lastObject] count] + 1;
     
 }
 
@@ -80,9 +80,13 @@
     }
     
     cell.backgroundColor = [UIColor clearColor];
+    if (indexPath.row == 0 ) {
+        [cell.contentView addSubview:self.lineChart];
+        [cell.contentView sizeToFit];
 
-    [cell.contentView addSubview:self.lineChart];
-    [cell.contentView sizeToFit];
+    }else{
+        cell.textLabel.text = [self.personalSingleStats.statArray lastObject][indexPath.row - 1] ;
+    }
     
     cell.textLabel.textColor = [UIColor lightTextColor];
     return cell;
@@ -90,8 +94,11 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-   return self.lineChart.frame.size.height;
-    
+    if (indexPath.row == 0) {
+        return self.lineChart.frame.size.height;
+    }else{
+        return 50;
+    }
 }
 
 
@@ -108,25 +115,30 @@
     return (CGFloat)game.playerOneScore;
 }
 
+
 - (NSUInteger)numberOfLinesInLineChartView:(JBLineChartView *)lineChartView{
     
     return 2;
 }
+
 
 - (NSUInteger)lineChartView:(JBLineChartView *)lineChartView numberOfVerticalValuesAtLineIndex:(NSUInteger)lineIndex{
     //NSLog(@"%lu", [self.games count]);
     return [self.games count] ;
 }
 
+
 - (BOOL)lineChartView:(JBLineChartView *)lineChartView showsDotsForLineAtLineIndex:(NSUInteger)lineIndex{
     return lineIndex == JBLineChartViewLineStyleDashed;
 }
+
 
 - (void)cancelPressed:(id)sender{
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         
     }];
 }
+
 
 - (CGFloat)lineChartView:(JBLineChartView *)lineChartView widthForLineAtLineIndex:(NSUInteger)lineIndex
 {
