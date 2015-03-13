@@ -1,32 +1,22 @@
 //
-//  FindGroupViewController.m
+//  AddMembersViewController.m
 //  FoosPong
 //
-//  Created by Derik Flanary on 2/25/15.
+//  Created by Derik Flanary on 3/12/15.
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "FindGroupViewController.h"
+#import "AddMembersViewController.h"
 
-@interface FindGroupViewController ()
+@interface AddMembersViewController ()
 
 @end
 
-@implementation FindGroupViewController
+@implementation AddMembersViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
-    self.navigationItem.leftBarButtonItem = cancelButton;
-
     // Do any additional setup after loading the view.
-}
-
-- (void)cancelPressed:(id)sender{
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
 }
 
 - (void)didReceiveMemoryWarning {

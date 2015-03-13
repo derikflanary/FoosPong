@@ -33,9 +33,12 @@
     
 
     //PFUser *currentUser = [PFUser currentUser];
-    self.singleGames = [SingleGameController sharedInstance].games;
-    self.teamGames = [SingleGameController sharedInstance].teamGames;
- 
+    [[SingleGameController sharedInstance] updateGamesForUser:[PFUser currentUser] withBool:YES callback:^(NSArray *games) {
+        self.singleGames = games;
+        self.teamGames = [SingleGameController sharedInstance].teamGames;
+
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

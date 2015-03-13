@@ -104,7 +104,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
         gvc.tabBarItem.title = @"Groups";
         CurrentGroupViewController *cgvc = [CurrentGroupViewController new];
         cgvc.tabBarItem.title = @"Current Group";
-        groupTabBar.viewControllers = @[gvc, cgvc];
+        groupTabBar.viewControllers = @[cgvc, gvc];
         
         SettingViewController *svc = [SettingViewController new];
         

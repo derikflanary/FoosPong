@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Group.h"
 
 @interface GroupController : NSObject
 
+@property (nonatomic, strong) NSArray *groups;
+
++ (GroupController *)sharedInstance;
+- (void)addGroupforAdmin:(Group *)newGroup callback:(void (^)(BOOL *))callback;
+- (void)findGroupsForUser:(PFUser *)user callback:(void (^)(NSArray *))callback;
+    
 @end
