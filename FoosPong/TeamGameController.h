@@ -15,4 +15,6 @@
 - (void)addGameWithTeamGameStats:(TeamGameStats*)gameStats;
 - (void)updateGamesForUser:(PFUser*)user callback:(void (^)(NSArray *))callback;
 
+@property(nonatomic, strong)NSArray *teamGames;
+
 @end

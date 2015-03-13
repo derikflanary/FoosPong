@@ -63,7 +63,7 @@
         [[GroupController sharedInstance]addGroupforAdmin:group callback:^(BOOL *succeeded) {
             [self dismissViewControllerAnimated:YES completion:^{
                 [[GroupController sharedInstance]findGroupsForUser:group.admin callback:^(NSArray * groups) {
-                    
+                    [[GroupController sharedInstance]setCurrentGroup:[groups lastObject]];
                 }];
             }];
         }];

@@ -11,7 +11,7 @@
 
 @interface TeamGameController()
 
-@property(nonatomic, strong)NSArray *teamGames;
+
 
 @end
 

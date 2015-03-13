@@ -9,6 +9,7 @@
 #import "CurrentGroupViewController.h"
 #import "AddGroupViewController.h"
 #import "FindGroupViewController.h"
+#import "GroupController.h"
 
 @interface CurrentGroupViewController ()
 
@@ -16,6 +17,7 @@
 @property (nonatomic, strong) UIButton *createGroupButton;
 @property (nonatomic, strong) AddGroupViewController *addGroupViewController;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
+@property (nonatomic, strong) PFObject *currentGroup;
 
 @end
 
@@ -28,42 +30,62 @@
     // Do any additional setup after loading the view.
 
     
-    
-    //    UIColor* mainColor = [UIColor mainColor];
-    UIColor* darkColor = [UIColor darkColor];
-    //    NSString* fontName = [NSString mainFont];
-    NSString* boldFontName = [NSString boldFont];
-    
     //    UIBarButtonItem *addGroupButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createPressed:)];
     //    self.tabBarController.navigationItem.rightBarButtonItem = addGroupButton;
     self.tabBarController.navigationItem.hidesBackButton = YES;
     
     self.view.backgroundColor = [UIColor whiteColor];
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 80, 300, 100)];
-    titleLabel.text = @"No Group Yet? Create or join a group today.";
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.numberOfLines = 0;
-    [self.view addSubview:titleLabel];
     
-    self.createGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 160, 320, 62)];
-    self.createGroupButton.backgroundColor = darkColor;
-    self.createGroupButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
-    [self.createGroupButton setTitle:@"Create A Group" forState:UIControlStateNormal];
-    [self.createGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
-    [self.createGroupButton addTarget:self action:@selector(createPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [[GroupController sharedInstance]retrieveCurrentGroupWithCallback:^(PFObject *currentGroup) {
+        self.currentGroup = currentGroup;
+        [self noGroup];
+    }];
     
     
-    self.joinGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 230, 320, 62)];
-    self.joinGroupButton.backgroundColor = darkColor;
-    self.joinGroupButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
-    [self.joinGroupButton setTitle:@"Join An Existing Group" forState:UIControlStateNormal];
-    [self.joinGroupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.joinGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
-    [self.joinGroupButton addTarget:self action:@selector(joinPressed:) forControlEvents:UIControlEventTouchUpInside];
+        self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
     
-    [self.view addSubview:self.createGroupButton];
-    [self.view addSubview:self.joinGroupButton];
-    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
+}
+
+- (void)noGroup{
+    
+    if (!self.currentGroup) {
+        
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIVisualEffectView *bluredEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        [bluredEffectView setFrame:self.view.bounds];
+        
+        [self.view addSubview:bluredEffectView];
+        
+        UIView *noGroupView = [[UIView alloc]initWithFrame:CGRectMake(35, 80, 250, 250)];
+        noGroupView.backgroundColor = [UIColor lightGrayColor];
+        
+        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, 250, 60)];
+        titleLabel.text = @"No Group Yet? Create or join a group today.";
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.numberOfLines = 0;
+        
+        self.createGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 70, 250, 62)];
+        self.createGroupButton.backgroundColor = [UIColor darkColor];
+        self.createGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+        [self.createGroupButton setTitle:@"Create A Group" forState:UIControlStateNormal];
+        [self.createGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+        [self.createGroupButton addTarget:self action:@selector(createPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        self.joinGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 140, 250, 62)];
+        self.joinGroupButton.backgroundColor = [UIColor darkColor];
+        self.joinGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+        [self.joinGroupButton setTitle:@"Join An Existing Group" forState:UIControlStateNormal];
+        [self.joinGroupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.joinGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+        [self.joinGroupButton addTarget:self action:@selector(joinPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.view addSubview:bluredEffectView];
+        [self.view addSubview:noGroupView];
+        [noGroupView addSubview:titleLabel];
+        [noGroupView addSubview:self.createGroupButton];
+        [noGroupView addSubview:self.joinGroupButton];
+ 
+    }
     
 }
 

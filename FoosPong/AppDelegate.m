@@ -12,6 +12,7 @@
 #import <Analytics.h>
 #import "UserController.h"
 #import "HomeViewController.h"
+#import "GroupController.h"
 //#import <Fabric/Fabric.h>
 //#import <Crashlytics/Crashlytics.h>
 
@@ -50,6 +51,9 @@
         //gone a long-running operation on this. Probably need a block
         [[UserController sharedInstance] updateUsers];
         UINavigationController *mainNavController = [[UINavigationController alloc]initWithRootViewController:[HomeViewController new]];
+//        [[GroupController sharedInstance]findGroupsForUser:[PFUser currentUser] callback:^(NSArray *array) {
+//            
+//        }];
         self.window.rootViewController = mainNavController;
         
     }else{

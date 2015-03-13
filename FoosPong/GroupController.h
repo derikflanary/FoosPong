@@ -13,8 +13,12 @@
 
 @property (nonatomic, strong) NSArray *groups;
 
+
 + (GroupController *)sharedInstance;
 - (void)addGroupforAdmin:(Group *)newGroup callback:(void (^)(BOOL *))callback;
 - (void)findGroupsForUser:(PFUser *)user callback:(void (^)(NSArray *))callback;
-    
+- (void)retrieveCurrentGroupWithCallback:(void (^)(PFObject *))callback;
+- (void)setCurrentGroup:(PFObject *)group;
+
+-(void)testcallback:(void (^)(PFObject *))callback;
 @end

@@ -8,6 +8,7 @@
 
 #import "GroupController.h"
 
+static NSString * const currentGroupKey = @"currentGroup";
 
 @implementation GroupController
 
@@ -70,7 +71,31 @@
         }
 
     }];
+}
 
+- (void)setCurrentGroup:(PFObject *)group{
+    NSDictionary *currentGroupDict = @{currentGroupKey: group};
+    [[NSUserDefaults standardUserDefaults] setObject:currentGroupDict forKey:currentGroupKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)retrieveCurrentGroupWithCallback:(void (^)(PFObject *))callback{
+    NSDictionary *currentGroupDict = [[NSUserDefaults standardUserDefaults] objectForKey:currentGroupKey];
+    callback(currentGroupDict[currentGroupKey]);
+    
+}
+
+-(void)testcallback:(void (^)(PFObject *))callback{
+    PFQuery *query = [PFQuery queryWithClassName:@"Group"];
+    [query whereKey:@"admin" equalTo:[PFUser currentUser]];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (!error) {
+            //self.currentGroup = object;
+            callback(object);
+        }else{
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
     
 }
 

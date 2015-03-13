@@ -31,13 +31,22 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-
-    //PFUser *currentUser = [PFUser currentUser];
-    [[SingleGameController sharedInstance] updateGamesForUser:[PFUser currentUser] withBool:YES callback:^(NSArray *games) {
-        self.singleGames = games;
-        self.teamGames = [SingleGameController sharedInstance].teamGames;
-
-    }];
+    if (![SingleGameController sharedInstance].games || ![TeamGameController sharedInstance].teamGames) {
+        [[SingleGameController sharedInstance] updateGamesForUser:[PFUser currentUser] withBool:YES callback:^(NSArray *games) {
+            self.singleGames = games;
+            
+            [[TeamGameController sharedInstance]updateGamesForUser:[PFUser currentUser] callback:^(NSArray * teamGames) {
+                self.teamGames = teamGames;
+                [self.tableView reloadData];
+            }];
+            
+        }];
+    }else{
+        self.singleGames = [SingleGameController sharedInstance].games;
+        self.teamGames = [TeamGameController sharedInstance].teamGames;
+    }
+   
+    
     
 }
 
