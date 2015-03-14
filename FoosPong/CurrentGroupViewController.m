@@ -10,6 +10,7 @@
 #import "AddGroupViewController.h"
 #import "FindGroupViewController.h"
 #import "GroupController.h"
+#import "AddMembersViewController.h"
 
 @interface CurrentGroupViewController ()
 
@@ -31,8 +32,8 @@
    
     // Do any additional setup after loading the view.
     
-    //    UIBarButtonItem *addGroupButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createPressed:)];
-    //    self.tabBarController.navigationItem.rightBarButtonItem = addGroupButton;
+        UIBarButtonItem *addMemberButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMember:)];
+        self.tabBarController.navigationItem.rightBarButtonItem = addMemberButton;
     
     self.tabBarController.navigationItem.hidesBackButton = YES;
     
@@ -124,6 +125,14 @@
     }];
     
     
+}
+
+- (void)addMember:(id)sender{
+    AddMembersViewController *amvc = [AddMembersViewController new];
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:amvc];
+    [self presentViewController:navController animated:YES completion:^{
+        
+    }];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
