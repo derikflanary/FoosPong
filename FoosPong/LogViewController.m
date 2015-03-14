@@ -136,9 +136,9 @@
                 return;
             }]];
             [self presentViewController:failedLoginAlert animated:YES completion:nil];
+            
         }else{
             [self dismissViewControllerAnimated:YES completion:^{
-                [[UserController sharedInstance]updateUsers];
             }];
         }
     }];
