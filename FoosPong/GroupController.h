@@ -16,8 +16,8 @@
 
 + (GroupController *)sharedInstance;
 - (void)addGroupforAdmin:(Group *)newGroup callback:(void (^)(BOOL *))callback;
-- (void)findGroupsForUser:(PFUser *)user callback:(void (^)(NSArray *))callback;
-- (void)retrieveCurrentGroupWithCallback:(void (^)(PFObject *))callback;
+- (void)findGroupsForUser:(PFUser *)user callback:(void (^)(NSArray *, NSError *error))callback;
+- (void)retrieveCurrentGroupWithCallback:(void (^)(PFObject * group, NSError *error))callback;
 - (void)setCurrentGroup:(PFObject *)group;
 
 -(void)testcallback:(void (^)(PFObject *))callback;

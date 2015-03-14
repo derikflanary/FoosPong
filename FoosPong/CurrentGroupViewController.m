@@ -18,6 +18,7 @@
 @property (nonatomic, strong) AddGroupViewController *addGroupViewController;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 @property (nonatomic, strong) PFObject *currentGroup;
+@property (nonatomic, strong) UIView *noGroupView;
 
 @end
 
@@ -27,37 +28,54 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
    
+   
     // Do any additional setup after loading the view.
-
     
     //    UIBarButtonItem *addGroupButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createPressed:)];
     //    self.tabBarController.navigationItem.rightBarButtonItem = addGroupButton;
+    
     self.tabBarController.navigationItem.hidesBackButton = YES;
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [[GroupController sharedInstance]retrieveCurrentGroupWithCallback:^(PFObject *currentGroup) {
-        self.currentGroup = currentGroup;
-        [self noGroup];
+    [self checkForGroup];
+    
+    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
+    
+}
+
+- (void)checkForGroup{
+    
+    [[GroupController sharedInstance]retrieveCurrentGroupWithCallback:^(PFObject *group, NSError *error) {
+        
+        if (!error) {
+            if (!group[@"name"]) {
+                [self noGroup];
+            }else{
+                self.currentGroup = group;
+                self.tabBarController.title = group[@"name"];
+                
+                if (self.noGroupView) {
+                    [self.noGroupView removeFromSuperview];
+                }
+            }
+        }
     }];
-    
-    
-        self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
-    
+
 }
 
 - (void)noGroup{
     
     if (!self.currentGroup) {
         
-        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
         UIVisualEffectView *bluredEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
         [bluredEffectView setFrame:self.view.bounds];
         
         [self.view addSubview:bluredEffectView];
         
-        UIView *noGroupView = [[UIView alloc]initWithFrame:CGRectMake(35, 80, 250, 250)];
-        noGroupView.backgroundColor = [UIColor lightGrayColor];
+        self.noGroupView = [[UIView alloc]initWithFrame:CGRectMake(35, 80, 250, 250)];
+        self.noGroupView.backgroundColor = [UIColor lightGrayColor];
         
         UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, 250, 60)];
         titleLabel.text = @"No Group Yet? Create or join a group today.";
@@ -80,10 +98,10 @@
         [self.joinGroupButton addTarget:self action:@selector(joinPressed:) forControlEvents:UIControlEventTouchUpInside];
         
         [self.view addSubview:bluredEffectView];
-        [self.view addSubview:noGroupView];
-        [noGroupView addSubview:titleLabel];
-        [noGroupView addSubview:self.createGroupButton];
-        [noGroupView addSubview:self.joinGroupButton];
+        [self.view addSubview:self.noGroupView];
+        [self.noGroupView addSubview:titleLabel];
+        [self.noGroupView addSubview:self.createGroupButton];
+        [self.noGroupView addSubview:self.joinGroupButton];
  
     }
     
@@ -108,7 +126,10 @@
     
 }
 
-
+-(void)viewDidAppear:(BOOL)animated{
+    [self.noGroupView removeFromSuperview];
+    [self checkForGroup];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -23,6 +23,10 @@
 - (void)loginUser:(NSDictionary*)dictionary callback:(void (^)(PFUser *))callback;
 
 - (void)addGuestUser;
+
+- (void)saveProfilePhoto:(UIImage*)image;
+
+- (void)retrieveProfileImageWithCallback:(void (^)(UIImage *))callback;
     
 @property (nonatomic, strong, readonly)NSArray *users;
 @property (nonatomic, strong, readonly)NSArray *usersWithoutCurrentUser;

@@ -56,17 +56,17 @@ static NSString * const currentGroupKey = @"currentGroup";
     
 }
 
-- (void)findGroupsForUser:(PFUser *)user callback:(void (^)(NSArray *))callback{
+- (void)findGroupsForUser:(PFUser *)user callback:(void (^)(NSArray *, NSError *error))callback{
     
     PFQuery *query = [PFQuery queryWithClassName:@"Group"];
     [query whereKey:@"admin" equalTo:user];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             self.groups = objects;
-            callback(objects);
+            callback(objects, nil);
             
         } else {
-            
+            callback(nil, error);
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
 
@@ -74,30 +74,33 @@ static NSString * const currentGroupKey = @"currentGroup";
 }
 
 - (void)setCurrentGroup:(PFObject *)group{
-    NSDictionary *currentGroupDict = @{currentGroupKey: group};
-    [[NSUserDefaults standardUserDefaults] setObject:currentGroupDict forKey:currentGroupKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (void)retrieveCurrentGroupWithCallback:(void (^)(PFObject *))callback{
-    NSDictionary *currentGroupDict = [[NSUserDefaults standardUserDefaults] objectForKey:currentGroupKey];
-    callback(currentGroupDict[currentGroupKey]);
     
-}
-
--(void)testcallback:(void (^)(PFObject *))callback{
-    PFQuery *query = [PFQuery queryWithClassName:@"Group"];
-    [query whereKey:@"admin" equalTo:[PFUser currentUser]];
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+    PFUser *currentUser = [PFUser currentUser];
+    currentUser[currentGroupKey] = group;
+    [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
-            //self.currentGroup = object;
-            callback(object);
+            NSLog(@"Current Group Saved");
         }else{
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
     
 }
+
+- (void)retrieveCurrentGroupWithCallback:(void (^)(PFObject *, NSError *error))callback{
+    
+    PFUser *currentUser = [PFUser currentUser];
+    PFObject *group = currentUser[currentGroupKey];
+    [group fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (!error) {
+            callback(object, nil);
+        }else{
+            callback(nil, error);
+        }
+    }];
+  
+}
+
 
 
 

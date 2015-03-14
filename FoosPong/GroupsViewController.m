@@ -42,23 +42,30 @@
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
     
-    [[GroupController sharedInstance]testcallback:^(PFObject *group) {
-        self.currentGroup = group;
-        [self noCurrentGroup];
-    }];
-     
-        if (![GroupController sharedInstance].groups) {
-        [[GroupController sharedInstance]findGroupsForUser:[PFUser currentUser] callback:^(NSArray * groups) {
-            self.groups = groups;
-            [self.tableView reloadData];
+    [self checkForGroups];
+    
+}
+
+-(void)checkForGroups{
+    if (![GroupController sharedInstance].groups) {
+        [[GroupController sharedInstance]findGroupsForUser:[PFUser currentUser] callback:^(NSArray * groups, NSError *error) {
+            if (!error) {
+                self.groups = groups;
+                [self.tableView reloadData];
+                
+                if(!groups){
+                    [self noCurrentGroup];
+                }
+                
+            }else{
+                NSLog(@"%@", error);
+            }
+            
         }];
+        
     }else{
         self.groups = [GroupController sharedInstance].groups;
     }
-    
-    
-
-    // Do any additional setup after loading the view.
 }
 
 - (void)noCurrentGroup{

@@ -60,14 +60,20 @@
         group.name = self.groupNameField.text;
         group.organization = self.groupOrganiztionField.text;
         group.admin = [PFUser currentUser];
+        
         [[GroupController sharedInstance]addGroupforAdmin:group callback:^(BOOL *succeeded) {
-            [self dismissViewControllerAnimated:YES completion:^{
-                [[GroupController sharedInstance]findGroupsForUser:group.admin callback:^(NSArray * groups) {
+            if (succeeded) {
+                [[GroupController sharedInstance]findGroupsForUser:group.admin callback:^(NSArray *groups, NSError *error) {
                     [[GroupController sharedInstance]setCurrentGroup:[groups lastObject]];
+                    [self dismissViewControllerAnimated:YES completion:^{
+                    }];
                 }];
-            }];
+            }else{
+                return;
+            }
+            
         }];
-
+        
     }else{
         UIAlertController *failedAlert = [UIAlertController alertControllerWithTitle:@"Missing Data" message:@"Please give a group name and an organization" preferredStyle:UIAlertControllerStyleAlert];
         [failedAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
@@ -90,6 +96,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 /*
 #pragma mark - Navigation

@@ -123,6 +123,45 @@ PFQuery *query = [PFUser query];
     return self.usersWithoutCurrentUser;
 }
 
+- (void)saveProfilePhoto:(UIImage*)image{
+    
+    NSData *imageData = UIImagePNGRepresentation(image);
+    PFFile *imageFile = [PFFile fileWithName:@"profileImage.png" data:imageData];
+    
+    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            if (succeeded) {
+                PFUser *user = [PFUser currentUser];
+               
+                user[@"profileImage"] = imageFile;
+                [user saveInBackground];
+            }
+        } else {
+            // Handle error
+        }        
+    }];
+    PFObject *userPhoto = [PFObject objectWithClassName:@"UserPhoto"];
+    userPhoto[@"imageName"] = @"My trip to Hawaii!";
+    userPhoto[@"imageFile"] = imageFile;
+    [userPhoto saveInBackground];
+}
+
+- (void)retrieveProfileImageWithCallback:(void (^)(UIImage *))callback{
+    PFUser *user = [PFUser currentUser];
+    PFFile *userImageFile = user[@"profileImage"];
+    [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+        
+        if (!error) {
+            UIImage *image = [UIImage imageWithData:imageData];
+            callback(image);
+        }else{
+            callback(nil);
+        }
+    }];
+    
+
+}
+
 - (void)removeUser:(PFUser *)user{
     
     

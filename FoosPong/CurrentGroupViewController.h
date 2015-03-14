@@ -11,4 +11,6 @@
 
 @interface CurrentGroupViewController : MasterViewController
 
+- (void)checkForGroup;
+
 @end

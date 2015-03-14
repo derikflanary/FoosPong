@@ -16,6 +16,7 @@
 #import "TeamGameStats.h"
 #import "NewGameCustomTableViewCell.h"
 #import "StatsViewController.h"
+#import "UserController.h"
 
 @interface ProfileViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate,  UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) UIImageView *profileImageView;
@@ -39,17 +40,21 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    
     self.currentUser = [PFUser currentUser];
-    NSLog(@"%@", self.currentUser[@"firstName"]);
     
     NSString *fullName = [NSString combineNames:self.currentUser[@"firstName"] and:self.currentUser[@"lastName"]];
     self.profileImageView = [[UIImageView alloc]initWithFrame:CGRectMake(100, 120, 100, 100)];
     [self.profileImageView setImageWithString:fullName color:nil circular:YES];
-    self.profileImageView.backgroundColor = [UIColor grayColor];
     [self.view addSubview:self.profileImageView];
     self.profileImageView.layer.cornerRadius = 50;
     self.profileImageView.clipsToBounds = YES;
+    
+    [[UserController sharedInstance]retrieveProfileImageWithCallback:^(UIImage *profilePic) {
+        if (profilePic) {
+            self.profileImageView.image = profilePic;
+        }
+
+    }];
     
     UITapGestureRecognizer *tapOnProfilePicture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(profilePressed:)];
     tapOnProfilePicture.numberOfTapsRequired = 1;
@@ -194,6 +199,8 @@
     // Set Avatar Image
     
     self.profileImageView.image = image;
+    
+    [[UserController sharedInstance]saveProfilePhoto:image];
     
     // Any other actions you want to take with the image would go here
     
