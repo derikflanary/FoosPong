@@ -24,6 +24,11 @@
     UIBarButtonItem *rulesButton = [[UIBarButtonItem alloc] initWithTitle:@"Rules" style:UIBarButtonItemStylePlain target:self action:@selector(rulesPressed:)];
     self.navigationItem.rightBarButtonItem = rulesButton;
     
+    UILabel *comingSoonlabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 150, 200, 100)];
+    comingSoonlabel.text = @"Feature Coming Soon";
+    comingSoonlabel.numberOfLines = 0;
+    [self.view addSubview:comingSoonlabel];
+    
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:4];
     // Do any additional setup after loading the view.
 }

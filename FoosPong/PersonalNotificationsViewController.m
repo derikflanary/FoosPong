@@ -18,8 +18,11 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor grayColor];
-    
-    }
+    UILabel *comingSoonlabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 150, 200, 100)];
+    comingSoonlabel.text = @"Feature Coming Soon";
+    comingSoonlabel.numberOfLines = 0;
+    [self.view addSubview:comingSoonlabel];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

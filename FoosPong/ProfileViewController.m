@@ -53,7 +53,6 @@
         if (profilePic) {
             self.profileImageView.image = profilePic;
         }
-
     }];
     
     UITapGestureRecognizer *tapOnProfilePicture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(profilePressed:)];
@@ -62,7 +61,6 @@
     [self.profileImageView addGestureRecognizer:tapOnProfilePicture];
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:2];
-    
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 280, 320, 250) style:UITableViewStylePlain];
     self.tableView.dataSource = self;

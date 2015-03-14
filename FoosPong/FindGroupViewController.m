@@ -19,6 +19,11 @@
     self.view.backgroundColor = [UIColor whiteColor];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
+    
+    UILabel *comingSoonlabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 150, 200, 100)];
+    comingSoonlabel.text = @"Feature Coming Soon";
+    comingSoonlabel.numberOfLines = 0;
+    [self.view addSubview:comingSoonlabel];
 
     // Do any additional setup after loading the view.
 }
