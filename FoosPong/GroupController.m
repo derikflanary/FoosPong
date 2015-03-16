@@ -93,12 +93,16 @@ static NSString * const currentGroupKey = @"currentGroup";
     PFObject *group = currentUser[currentGroupKey];
     [group fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (!error) {
-            callback(object, nil);
+            if (!object) {
+                callback (nil, nil);
+            }else{
+                callback(object, nil);
+            }
         }else{
             callback(nil, error);
         }
     }];
-  
+    
 }
 
 

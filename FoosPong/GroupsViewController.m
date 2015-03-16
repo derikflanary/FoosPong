@@ -34,9 +34,10 @@
 
     self.view.backgroundColor = [UIColor whiteColor];
     
+    UIBarButtonItem *joinGroupButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(joinGroupButtonPressed:)];
+    self.tabBarController.navigationItem.leftBarButtonItem = joinGroupButton;
     
-    
-        self.tableView = [[UITableView alloc]initWithFrame:self.view.frame];
+    self.tableView = [[UITableView alloc]initWithFrame:self.view.frame];
     self.tableView.dataSource = self;
     self.navigationController.navigationBar.translucent = NO;
     self.tableView.delegate = self;
@@ -44,6 +45,15 @@
     
     [self checkForGroups];
     
+}
+
+- (void)joinGroupButtonPressed:(id)sender{
+    
+    FindGroupViewController *fgvc = [FindGroupViewController new];
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:fgvc];
+    [self presentViewController:navController animated:YES completion:^{
+        
+    }];
 }
 
 -(void)checkForGroups{
@@ -65,6 +75,9 @@
         
     }else{
         self.groups = [GroupController sharedInstance].groups;
+    }
+    if (!self.groups) {
+        [self noCurrentGroup];
     }
 }
 

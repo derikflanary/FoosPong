@@ -32,8 +32,8 @@
    
     // Do any additional setup after loading the view.
     
-        UIBarButtonItem *addMemberButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMember:)];
-        self.tabBarController.navigationItem.rightBarButtonItem = addMemberButton;
+//        UIBarButtonItem *addMemberButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMember:)];
+//        self.tabBarController.navigationItem.rightBarButtonItem = addMemberButton;
     
     self.tabBarController.navigationItem.hidesBackButton = YES;
     
@@ -50,19 +50,18 @@
     [[GroupController sharedInstance]retrieveCurrentGroupWithCallback:^(PFObject *group, NSError *error) {
         
         if (!error) {
-            if (!group[@"name"]) {
-                [self noGroup];
-            }else{
-                self.currentGroup = group;
-                self.tabBarController.title = group[@"name"];
+            self.currentGroup = group;
+            self.tabBarController.title = group[@"name"];
                 
-                if (self.noGroupView) {
-                    [self.noGroupView removeFromSuperview];
-                }
+            if (self.noGroupView) {
+                [self.noGroupView removeFromSuperview];
             }
         }
     }];
-
+    
+    if (!self.currentGroup) {
+        [self noGroup];
+    }
 }
 
 - (void)noGroup{

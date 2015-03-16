@@ -28,6 +28,7 @@
 
 
 - (void)addGuestUser{
+    
     [PFAnonymousUtils logInWithBlock:^(PFUser *user, NSError *error) {
         if (error) {
             NSLog(@"Anonymous login failed.");

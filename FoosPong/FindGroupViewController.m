@@ -7,8 +7,13 @@
 //
 
 #import "FindGroupViewController.h"
+#import "NewGameCustomTableViewCell.h"
 
-@interface FindGroupViewController ()
+@interface FindGroupViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) UITextField *groupNameField;
+@property (nonatomic, strong) UITextField *groupOrganizationField;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -20,10 +25,33 @@
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
-    UILabel *comingSoonlabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 150, 200, 100)];
-    comingSoonlabel.text = @"Feature Coming Soon";
-    comingSoonlabel.numberOfLines = 0;
-    [self.view addSubview:comingSoonlabel];
+    self.groupNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 80, 320, 41)];
+    self.groupNameField.backgroundColor = [UIColor whiteColor];
+    self.groupNameField.placeholder = @"Group Name";
+    self.groupNameField.font = [UIFont fontWithName:[NSString boldFont] size:16.0f];
+    self.groupNameField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
+    self.groupNameField.layer.borderWidth = 1.0f;
+    
+    self.groupOrganizationField = [[UITextField alloc]initWithFrame:CGRectMake(0, 120, 320, 41)];
+    self.groupOrganizationField.backgroundColor = [UIColor whiteColor];
+    self.groupOrganizationField.placeholder = @"Organization Name";
+    self.groupOrganizationField.font = [UIFont fontWithName:[NSString boldFont] size:16.0f];
+    self.groupOrganizationField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
+    self.groupOrganizationField.layer.borderWidth = 1.0f;
+    
+    [self.view addSubview:self.groupNameField];
+    [self.view addSubview:self.groupOrganizationField];
+    
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 280, 320, 250) style:UITableViewStylePlain];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.scrollEnabled = YES;
+    self.tableView.bounces = YES;
+    self.tableView.layer.cornerRadius = 10;
+    self.tableView.clipsToBounds = YES;
+    
+    [self.view addSubview:self.tableView];
+
 
     // Do any additional setup after loading the view.
 }
@@ -38,6 +66,24 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 0;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NewGameCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewGameCell" ];
+    if (!cell){
+        cell = [NewGameCustomTableViewCell new];
+        
+    }
+    
+    return cell;
+}
+
 
 /*
 #pragma mark - Navigation
