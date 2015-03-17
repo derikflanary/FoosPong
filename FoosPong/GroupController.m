@@ -105,7 +105,29 @@ static NSString * const currentGroupKey = @"currentGroup";
     
 }
 
-
+- (void)findGroupsByName:(NSString*)name withCallback:(void (^)(NSArray*))callback{
+//    PFQuery *query = [PFQuery queryWithClassName:@"Group"];
+//    [query whereKey:@"name" containsString:name];
+//    PFQuery *query2 = [PFQuery queryWithClassName:@"Group"];
+//    [query2 whereKey:@"organization" containsString:name];
+//    PFQuery *theQuery = [PFQuery orQueryWithSubqueries:@[query, query2]];
+//    [theQuery orderByAscending:@"name"];
+//    [theQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        if (!error) {
+//            callback(objects);
+//        }else{
+//            NSLog(@"%@", error);
+//        }
+//    }];
+    PFQuery *pQuery = [PFQuery queryWithClassName:@"Group"];
+    [pQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            callback(objects);
+        }else{
+            NSLog(@"%@", error);
+        }
+    }];
+}
 
 
 

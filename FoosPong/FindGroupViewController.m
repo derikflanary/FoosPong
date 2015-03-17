@@ -8,12 +8,15 @@
 
 #import "FindGroupViewController.h"
 #import "NewGameCustomTableViewCell.h"
+#import "GroupController.h"
 
-@interface FindGroupViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface FindGroupViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchControllerDelegate>
 
 @property (nonatomic, strong) UITextField *groupNameField;
 @property (nonatomic, strong) UITextField *groupOrganizationField;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UISearchController *searchController;
+@property (nonatomic, strong) NSMutableArray *foundGroups;
 
 @end
 
@@ -26,7 +29,7 @@
     self.navigationItem.leftBarButtonItem = cancelButton;
     
     self.groupNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 80, 320, 41)];
-    self.groupNameField.backgroundColor = [UIColor whiteColor];
+    self.groupNameField.backgroundColor = [UIColor mainColor];
     self.groupNameField.placeholder = @"Group Name";
     self.groupNameField.font = [UIFont fontWithName:[NSString boldFont] size:16.0f];
     self.groupNameField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
@@ -51,9 +54,46 @@
     self.tableView.clipsToBounds = YES;
     
     [self.view addSubview:self.tableView];
+    
+    self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
+    [self.searchController.searchBar sizeToFit];
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+    //self.searchController.searchResultsUpdater = self;
+    self.searchController.delegate = self;
+    self.searchController.searchBar.delegate = self;
+    self.searchController.searchBar.searchBarStyle = UISearchBarStyleProminent;
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    //self.searchController.searchBar.prompt = @"Search by name or organization";
+    
+    
+    
+    
 
 
     // Do any additional setup after loading the view.
+}
+
+-(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
+    self.searchController.searchBar.prompt = @"Search by name or by organizations";
+    return YES;
+}
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [[GroupController sharedInstance]findGroupsByName:self.searchController.searchBar.text withCallback:^(NSArray *foundGroups) {
+                self.foundGroups = foundGroups.mutableCopy;
+                [self.tableView reloadData];
+            }];
+}
+
+//- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+//    [[GroupController sharedInstance]findGroupsByName:self.searchController.searchBar.text withCallback:^(NSArray *foundGroups) {
+//        self.foundGroups = foundGroups.mutableCopy;
+//        [self.tableView reloadData];
+//    }];
+//}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    
 }
 
 - (void)cancelPressed:(id)sender{
@@ -69,7 +109,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 0;
+    return [self.foundGroups count];
 }
 
 
@@ -80,7 +120,12 @@
         cell = [NewGameCustomTableViewCell new];
         
     }
-    
+    PFObject *group = [self.foundGroups objectAtIndex:indexPath.row];
+    if (!group) {
+        cell.textLabel.text = @"";
+    }else{
+        cell.textLabel.text = group[@"name"];
+    }
     return cell;
 }
 

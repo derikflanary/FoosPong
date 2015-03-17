@@ -119,7 +119,7 @@
 
 - (void)joinPressed:(id)sender{
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:[FindGroupViewController new]];
-    [self presentViewController:navController animated:YES completion:^{
+    [self.view.window.rootViewController presentViewController:navController animated:YES completion:^{
         
     }];
     

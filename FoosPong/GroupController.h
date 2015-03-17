@@ -18,5 +18,6 @@
 - (void)findGroupsForUser:(PFUser *)user callback:(void (^)(NSArray *, NSError *error))callback;
 - (void)retrieveCurrentGroupWithCallback:(void (^)(PFObject * group, NSError *error))callback;
 - (void)setCurrentGroup:(PFObject *)group;
+- (void)findGroupsByName:(NSString*)name withCallback:(void (^)(NSArray *foundGroups))callback;
 
 @end
