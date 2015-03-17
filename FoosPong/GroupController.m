@@ -30,8 +30,10 @@ static NSString * const currentGroupKey = @"currentGroup";
         group[@"admin"] = newGroup.admin;
         group[@"name"] = newGroup.name;
         group[@"organization"] = newGroup.organization;
+        group[@"members"] = [NSArray array];
         PFACL *groupACL = [PFACL ACLWithUser:newGroup.admin];
         [groupACL setWriteAccess:YES forUser:newGroup.admin];
+        [groupACL setPublicReadAccess:YES];
         group.ACL = groupACL;
         [group saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error) {
@@ -48,7 +50,21 @@ static NSString * const currentGroupKey = @"currentGroup";
     
 }
 
-- (void)addUserToGroup:(PFUser *)user withAdmin:(PFUser *)admin{
+- (void)addUser:(PFUser *)user toGroup:(PFObject *)group{
+    
+    NSArray *members = group[@"members"];
+    NSMutableArray *mutableMembers = members.mutableCopy;
+    [mutableMembers addObject:user];
+    members = mutableMembers;
+    group[@"members"] = members;
+    [group addUniqueObject:user forKey:@"members"];
+    [group saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error){
+            
+        }else{
+            NSLog(@"%@", error);
+        }
+    }];
     
 }
 

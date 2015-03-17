@@ -45,7 +45,7 @@
     [self.view addSubview:self.groupNameField];
     [self.view addSubview:self.groupOrganizationField];
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 280, 320, 250) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 210, 320, 250) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = YES;
@@ -62,7 +62,11 @@
     self.searchController.delegate = self;
     self.searchController.searchBar.delegate = self;
     self.searchController.searchBar.searchBarStyle = UISearchBarStyleProminent;
-    self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.dimsBackgroundDuringPresentation = YES;
+
+    //[self.tableView.superview addSubview:self.searchController.searchBar];
+
+
     //self.searchController.searchBar.prompt = @"Search by name or organization";
     
     
@@ -73,8 +77,10 @@
     // Do any additional setup after loading the view.
 }
 
+
+
 -(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
-    self.searchController.searchBar.prompt = @"Search by name or by organizations";
+    self.searchController.searchBar.prompt = @"Search by name or by organization";
     return YES;
 }
 
@@ -127,6 +133,26 @@
         cell.textLabel.text = group[@"name"];
     }
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UIAlertController *passwordAlert = [UIAlertController alertControllerWithTitle:@"Enter Team Password" message:@"Please enter the team's password to join" preferredStyle:UIAlertControllerStyleAlert];
+    [passwordAlert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = NSLocalizedString(@"password", @"password");
+        
+    }];
+    [passwordAlert addAction:[UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UITextField *passwordTextfield = passwordAlert.textFields.firstObject;
+        NSString *password = passwordTextfield.text;
+        [[GroupController sharedInstance]addUser:[PFUser currentUser] toGroup:[self.foundGroups objectAtIndex:indexPath.row]];
+        
+    }]];
+    
+    [passwordAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        return ;
+    }]];
+    [self presentViewController:passwordAlert animated:YES completion:nil];
 }
 
 

@@ -19,5 +19,6 @@
 - (void)retrieveCurrentGroupWithCallback:(void (^)(PFObject * group, NSError *error))callback;
 - (void)setCurrentGroup:(PFObject *)group;
 - (void)findGroupsByName:(NSString*)name withCallback:(void (^)(NSArray *foundGroups))callback;
+- (void)addUser:(PFUser *)user toGroup:(PFObject *)group;
 
 @end
