@@ -37,7 +37,7 @@
     [application registerForRemoteNotifications];
     
     
-    //[Parse enableLocalDatastore];
+    [Parse enableLocalDatastore];
     
     [Parse setApplicationId:@"mqjgxXFS9TPQoSswF9CrWmElMXu7D1tPkBR3H4rC"
                   clientKey:@"XaBMEuMLhsBaWQyCgpAjL7jKsU11zXBrcLt0CzZ6"];

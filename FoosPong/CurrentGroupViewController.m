@@ -90,11 +90,11 @@
         cell = [NewGameCustomTableViewCell new];
         
     }
-//    if (self.groupMembers.count > 0) {
-//        PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
-//        cell.textLabel.text = user.username;
-//    }
-//   
+    if (self.groupMembers.count > 0) {
+        PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
+        cell.textLabel.text = user.username;
+    }
+   
     return cell;
 
 }
