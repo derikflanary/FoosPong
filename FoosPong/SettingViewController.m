@@ -31,6 +31,7 @@
     UILabel *comingSoonlabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 150, 200, 100)];
     comingSoonlabel.text = @"Feature Coming Soon";
     comingSoonlabel.numberOfLines = 0;
+    comingSoonlabel.backgroundColor = [UIColor transparentWhite];
     [self.view addSubview:comingSoonlabel];
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:4];

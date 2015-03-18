@@ -9,6 +9,14 @@
 #import "GroupController.h"
 
 static NSString * const currentGroupKey = @"currentGroup";
+static NSString * const membersKey = @"members";
+static NSString * const currentGameKey = @"currentGame";
+static NSString * const nameKey = @"name";
+static NSString * const organizationKey = @"organization";
+static NSString * const groupKey = @"Group";
+static NSString * const adminKey = @"admin";
+static NSString * const passwordKey = @"password";
+
 
 @implementation GroupController
 
@@ -48,18 +56,24 @@ static NSString * const currentGroupKey = @"currentGroup";
     }else{
         return;
     }
+}
+
+- (BOOL)isUserAdmin{
     
+    PFUser *currentUser = [PFUser currentUser];
+    PFObject *currentGroup = currentUser[currentGroupKey];
+    PFUser *admin = currentGroup[adminKey];
     
+    if (admin == currentUser) {
+        return YES;
+    }else{
+        return NO;
+    }
 }
 
 - (void)addUser:(PFUser *)user toGroup:(PFObject *)group{
     
-//    NSArray *members = group[@"members"];
-//    NSMutableArray *mutableMembers = members.mutableCopy;
-//    [mutableMembers addObject:user];
-//    members = mutableMembers;
-//    group[@"members"] = members;
-    [group addUniqueObject:user forKey:@"members"];
+    [group addUniqueObject:user forKey:membersKey];
     [group saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error){
             [self setCurrentGroup:group];
@@ -67,7 +81,6 @@ static NSString * const currentGroupKey = @"currentGroup";
             NSLog(@"%@", error);
         }
     }];
-    
 }
 
 - (void)removeUserFromGroup:(PFUser *)user{
@@ -77,7 +90,7 @@ static NSString * const currentGroupKey = @"currentGroup";
 - (void)findGroupsForUser:(PFUser *)user callback:(void (^)(NSArray *, NSError *error))callback{
     
     PFQuery *query = [PFQuery queryWithClassName:@"Group"];
-    [query whereKey:@"members" equalTo:user];
+    [query whereKey:membersKey equalTo:user];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             self.groups = objects;

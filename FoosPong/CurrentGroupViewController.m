@@ -20,6 +20,8 @@
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 @property (nonatomic, strong) PFObject *currentGroup;
 @property (nonatomic, strong) UIView *noGroupView;
+@property (nonatomic, strong) UIButton *addMembersButton;
+@property (nonatomic, assign) BOOL isAdmin;
 
 @end
 
@@ -42,7 +44,15 @@
     
     self.tabBarController.navigationItem.hidesBackButton = YES;
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    
+    
+    self.addMembersButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 400, 320, 41)];
+    self.addMembersButton.backgroundColor = [UIColor darkColor];
+    self.addMembersButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+    [self.addMembersButton setTitle:@"Add Member" forState:UIControlStateNormal];
+    [self.addMembersButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.addMembersButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.addMembersButton addTarget:self action:@selector(addMember:) forControlEvents:UIControlEventTouchUpInside];
     
     [self checkForGroup];
     
@@ -60,7 +70,10 @@
             }else{
                 self.currentGroup = group;
                 self.tabBarController.title = group[@"name"];
-                
+                self.isAdmin = [[GroupController sharedInstance]isUserAdmin];
+                if (self.isAdmin) {
+                    [self.view addSubview:self.addMembersButton];
+                }
                 if (self.noGroupView) {
                     [self.noGroupView removeFromSuperview];
                 }
@@ -128,8 +141,6 @@
     [self.view.window.rootViewController presentViewController:navController animated:YES completion:^{
         
     }];
-    
-    
 }
 
 - (void)addMember:(id)sender{
@@ -142,6 +153,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [self.noGroupView removeFromSuperview];
+    
     [self checkForGroup];
 }
 
