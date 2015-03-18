@@ -63,6 +63,10 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 //
     UIBarButtonItem * startGameButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Game" style:UIBarButtonItemStylePlain target:self action:@selector(startGame:)];
     
+    UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
+    background.frame = self.view.frame;
+    [self.view addSubview:background];
+
 //    self.navigationItem.rightBarButtonItems= @[startGameButton, addGuestButton];
     
     self.segmentedControl = [[HMSegmentedControl alloc]initWithSectionTitles:@[@"1v1", @"2v2"]];
@@ -83,6 +87,8 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.editing = NO;
+    self.tableView.backgroundColor = [UIColor transparentWhite];
+    
     //self.tableView.allowsMultipleSelectionDuringEditing = YES;
     self.tableView.allowsSelectionDuringEditing = YES;
     

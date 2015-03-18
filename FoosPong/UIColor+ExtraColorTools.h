@@ -18,4 +18,5 @@
 
 + (UIColor *)mainColorTransparent;
 
++ (UIColor *)transparentWhite;
 @end

@@ -25,11 +25,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
+    background.frame = self.view.frame;
+    [self.view addSubview:background];
+
     self.tableView = [[UITableView alloc]initWithFrame:self.view.frame];
     self.navigationController.navigationBar.translucent = NO;
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.backgroundColor = [UIColor transparentWhite];
     
     if (![SingleGameController sharedInstance].games || ![TeamGameController sharedInstance].teamGames) {
         [[SingleGameController sharedInstance] updateGamesForUser:[PFUser currentUser] withBool:YES callback:^(NSArray *games) {

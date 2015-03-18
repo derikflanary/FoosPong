@@ -36,6 +36,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.scoreToWin = 10;
     
+    UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
+    background.frame = self.view.frame;
+    [self.view addSubview:background];
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;

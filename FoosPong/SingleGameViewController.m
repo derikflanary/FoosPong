@@ -38,6 +38,11 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
+    background.frame = self.view.frame;
+    [self.view addSubview:background];
+    
     self.scoreToWin = 10;
     self.playerOneWin = NO;
     self.playerTwoWin = NO;

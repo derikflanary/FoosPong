@@ -36,6 +36,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
+    background.frame = self.view.frame;
+    [self.view addSubview:background];
+
     self.tabBarController.navigationItem.hidesBackButton = YES;
     
     self.automaticallyAdjustsScrollViewInsets = NO;

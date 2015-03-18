@@ -39,14 +39,17 @@
     self.title = user[@"firstName"];
     
     self.view.backgroundColor = [UIColor whiteColor];
-//    UIBarButtonItem * sideBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"17"] style:UIBarButtonItemStylePlain target:self action:@selector(sideBarButtonPressed:)];
-//    self.navigationItem.rightBarButtonItem = sideBarButton;
+    UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
+    background.frame = self.view.frame;
+    [self.view addSubview:background];
+    
+    self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.hidesBackButton = YES;
     
     self.pingPongTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     self.pingPongTableView.dataSource = self;
     self.pingPongTableView.delegate = self;
-    self.pingPongTableView.backgroundColor = [UIColor blackColor];
+    self.pingPongTableView.backgroundColor = [UIColor transparentWhite];
     [self.view addSubview:self.pingPongTableView];
     self.pingPongTableView.scrollEnabled = NO;
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];

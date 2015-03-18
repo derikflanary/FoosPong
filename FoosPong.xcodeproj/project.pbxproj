@@ -52,6 +52,7 @@
 		EE58A30A1AB0BDEF00832380 /* JBChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE58A3061AB0BDEF00832380 /* JBChartView.m */; };
 		EE58A30B1AB0BDEF00832380 /* JBLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE58A3081AB0BDEF00832380 /* JBLineChartView.m */; };
 		EE76CC511AB240870038BD80 /* RulesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76CC501AB240870038BD80 /* RulesViewController.m */; };
+		EE76CC571AB9E3AF0038BD80 /* UIImage+BackGrounImage.m in Sources */ = {isa = PBXBuildFile; fileRef = EE76CC561AB9E3AF0038BD80 /* UIImage+BackGrounImage.m */; };
 		EE7A6CDC1A868402000447D2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6CDB1A868402000447D2 /* main.m */; };
 		EE7A6CDF1A868402000447D2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6CDE1A868402000447D2 /* AppDelegate.m */; };
 		EE7A6CE51A868402000447D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE7A6CE31A868402000447D2 /* Main.storyboard */; };
@@ -164,6 +165,8 @@
 		EE58A3081AB0BDEF00832380 /* JBLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBLineChartView.m; sourceTree = "<group>"; };
 		EE76CC4F1AB240870038BD80 /* RulesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RulesViewController.h; sourceTree = "<group>"; };
 		EE76CC501AB240870038BD80 /* RulesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RulesViewController.m; sourceTree = "<group>"; };
+		EE76CC551AB9E3AF0038BD80 /* UIImage+BackGrounImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BackGrounImage.h"; sourceTree = "<group>"; };
+		EE76CC561AB9E3AF0038BD80 /* UIImage+BackGrounImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BackGrounImage.m"; sourceTree = "<group>"; };
 		EE7A6CD61A868401000447D2 /* FoosPong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoosPong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE7A6CDA1A868402000447D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE7A6CDB1A868402000447D2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -403,6 +406,8 @@
 				EE5027C71A965F1F0079DFFC /* NSString+Extensions.m */,
 				EE5027C91A98ED310079DFFC /* UIColor+ExtraColorTools.h */,
 				EE5027CA1A98ED310079DFFC /* UIColor+ExtraColorTools.m */,
+				EE76CC551AB9E3AF0038BD80 /* UIImage+BackGrounImage.h */,
+				EE76CC561AB9E3AF0038BD80 /* UIImage+BackGrounImage.m */,
 				EE808DB51A9FCCB10000F833 /* NSString+Fonts.h */,
 				EE808DB61A9FCCB10000F833 /* NSString+Fonts.m */,
 				EE9DAEE91A9D582200589897 /* RNFrostedSidebar.h */,
@@ -671,6 +676,7 @@
 				302E41C41A86958E005F1184 /* HomeViewController.m in Sources */,
 				EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */,
 				EE2EF8101AA4EF2200DE09E7 /* SingleGameStats.m in Sources */,
+				EE76CC571AB9E3AF0038BD80 /* UIImage+BackGrounImage.m in Sources */,
 				EE1817081AB2732800E608B3 /* Group.m in Sources */,
 				EE3356EE1A895F0600B83EC0 /* ProfileViewController.m in Sources */,
 				EE1A557E1A9CFB3000E6981E /* GroupsViewController.m in Sources */,

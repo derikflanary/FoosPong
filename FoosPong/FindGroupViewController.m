@@ -25,6 +25,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
+    background.frame = self.view.frame;
+    [self.view addSubview:background];
+    
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
@@ -52,6 +57,7 @@
     self.tableView.bounces = YES;
     self.tableView.layer.cornerRadius = 10;
     self.tableView.clipsToBounds = YES;
+    self.tableView.backgroundColor = [UIColor transparentWhite];
     
     [self.view addSubview:self.tableView];
     
@@ -106,6 +112,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - TableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [self.foundGroups count];
@@ -123,6 +130,11 @@
     if (!group) {
         cell.textLabel.text = @"";
     }else{
+        NSArray *members = group[@"members"];
+        if ([members containsObject:[PFUser currentUser]]) {
+            //cell.textLabel.tintColor = [UIColor lightGrayColor];
+            cell.backgroundColor = [UIColor colorWithWhite:.8 alpha:.2];
+        }
         cell.textLabel.text = group[@"name"];
         cell.detailTextLabel.text = group[@"organization"];
     }

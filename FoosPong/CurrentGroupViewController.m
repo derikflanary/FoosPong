@@ -32,9 +32,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-   
-   
-    // Do any additional setup after loading the view.
+    
+    UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
+    background.frame = self.view.frame;
+    [self.view addSubview:background];
     
 //        UIBarButtonItem *addMemberButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMember:)];
 //        self.tabBarController.navigationItem.rightBarButtonItem = addMemberButton;

@@ -38,6 +38,11 @@
     return mainColor;
 }
 
++ (UIColor *)transparentWhite{
+    UIColor* color = [UIColor colorWithWhite:1 alpha:.8];
+    return color;
+}
+
 
 
 @end

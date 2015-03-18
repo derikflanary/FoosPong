@@ -39,6 +39,11 @@
 
     self.view.backgroundColor = [UIColor whiteColor];
     
+    UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
+    background.frame = self.view.frame;
+    [self.view addSubview:background];
+
+    
 //    self.findGroupButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(joinGroupButtonPressed:)];
 //    self.navigationController.toolbarHidden = NO;
 //    [self setToolbarItems:@[self.findGroupButton]];
@@ -47,6 +52,7 @@
     self.tableView.dataSource = self;
     self.navigationController.navigationBar.translucent = NO;
     self.tableView.delegate = self;
+    self.tableView.backgroundColor = [UIColor transparentWhite];
     [self.view addSubview:self.tableView];
     
     self.joinGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 400, 320, 41)];

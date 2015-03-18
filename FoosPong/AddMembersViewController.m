@@ -21,6 +21,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
+    background.frame = self.view.frame;
+    [self.view addSubview:background];
+    
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
@@ -28,7 +32,7 @@
     comingSoonlabel.text = @"Feature Coming Soon";
     comingSoonlabel.numberOfLines = 0;
     [self.view addSubview:comingSoonlabel];
-
+    
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 280, 320, 250) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
@@ -37,6 +41,7 @@
     self.tableView.bounces = YES;
     self.tableView.layer.cornerRadius = 10;
     self.tableView.clipsToBounds = YES;
+    self.tableView.backgroundColor = [UIColor transparentWhite];
     [self.view addSubview:self.tableView];
 
     // Do any additional setup after loading the view.

@@ -57,7 +57,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     //NSString* fontName = [NSString mainFont];
     NSString* boldFontName = [NSString boldFont];
     
-    self.imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"FoosBallButton"]];
+    self.imageView = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     self.imageView.frame = self.view.frame;
     self.imageView.alpha = 1;
     [self.view addSubview:self.imageView];

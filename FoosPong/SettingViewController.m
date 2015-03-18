@@ -21,6 +21,10 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
+    background.frame = self.view.frame;
+    [self.view addSubview:background];
+    
     UIBarButtonItem *rulesButton = [[UIBarButtonItem alloc] initWithTitle:@"Rules" style:UIBarButtonItemStylePlain target:self action:@selector(rulesPressed:)];
     self.navigationItem.rightBarButtonItem = rulesButton;
     
