@@ -47,7 +47,7 @@
     
     self.tabBarController.navigationItem.hidesBackButton = YES;
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 210, 320, 250) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 210, 320, 200) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = YES;
@@ -57,7 +57,7 @@
     self.tableView.backgroundColor = [UIColor transparentWhite];
     [self.view addSubview:self.tableView];
     
-    self.addMembersButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 400, 320, 41)];
+    self.addMembersButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 410, 320, 41)];
     self.addMembersButton.backgroundColor = [UIColor darkColor];
     self.addMembersButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.addMembersButton setTitle:@"Add Member" forState:UIControlStateNormal];

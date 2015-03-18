@@ -7,6 +7,7 @@
 //
 
 #import "GroupController.h"
+#import "UserController.h"
 
 static NSString * const currentGroupKey = @"currentGroup";
 static NSString * const membersKey = @"members";
@@ -160,6 +161,28 @@ static NSString * const passwordKey = @"password";
     PFObject *group = currentUser[currentGroupKey];
     NSArray *members = group[membersKey];
     return members;
+    
+}
+
+- (void)notMembersOfCurrentGroupCallback:(void (^)(NSArray*))callback{
+
+    NSArray *members = [self membersForCurrentGroup];
+    NSMutableArray *users = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
+    for (PFUser *member in members) {
+        if ([users containsObject:member]) {
+            [users removeObject:member];
+        }
+        callback(users);
+    }
+//    PFQuery *query = [PFQuery queryWithClassName:@"Users"];
+//    [query whereKey:@"objectId" notContainedIn:members];
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        if (!error) {
+//            callback(objects);
+//        }else{
+//            NSLog(@"%@", error);
+//        }
+//    }];
     
 }
 

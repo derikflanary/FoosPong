@@ -14,6 +14,7 @@
 @interface AddMembersViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *nonMembers;
 
 @end
 
@@ -29,28 +30,37 @@
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
-    UILabel *comingSoonlabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 150, 200, 100)];
-    comingSoonlabel.text = @"Feature Coming Soon";
-    comingSoonlabel.numberOfLines = 0;
-    comingSoonlabel.backgroundColor = [UIColor transparentWhite];
-    [self.view addSubview:comingSoonlabel];
+//    UILabel *comingSoonlabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 150, 200, 100)];
+//    comingSoonlabel.text = @"Feature Coming Soon";
+//    comingSoonlabel.numberOfLines = 0;
+//    comingSoonlabel.backgroundColor = [UIColor transparentWhite];
+//    [self.view addSubview:comingSoonlabel];
     
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 280, 320, 250) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = YES;
-    self.tableView.bounces = YES;
+    self.tableView.bounces = NO;
     self.tableView.layer.cornerRadius = 10;
     self.tableView.clipsToBounds = YES;
     self.tableView.backgroundColor = [UIColor transparentWhite];
     [self.view addSubview:self.tableView];
-
+    
+    [self findNonMembers];
+    
     // Do any additional setup after loading the view.
 }
 
+- (void)findNonMembers{
+    [[GroupController sharedInstance]notMembersOfCurrentGroupCallback:^(NSArray * nonMembers) {
+        self.nonMembers = nonMembers.mutableCopy;
+        [self.tableView reloadData];
+    }];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [[UserController sharedInstance].usersWithoutCurrentUser count];
+    return [self.nonMembers count];
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -63,19 +73,27 @@
         cell = [NewGameCustomTableViewCell new];
         
     }
-    PFUser *user = [UserController sharedInstance].usersWithoutCurrentUser[indexPath.row];
+    if (!self.nonMembers) {
+        return cell;
+    }else{
+    PFUser *user = [self.nonMembers objectAtIndex:indexPath.row];
     cell.textLabel.text = user.username;
     return cell;
-    
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     PFUser *currentUser = [PFUser currentUser];
-    [[GroupController sharedInstance]addUser:[UserController sharedInstance].usersWithoutCurrentUser[indexPath.row] toGroup:currentUser[@"currentGroup"]];
+    [[GroupController sharedInstance]addUser:[self.nonMembers objectAtIndex:indexPath.row] toGroup:currentUser[@"currentGroup"]
+     ];
+    [self.nonMembers removeObjectAtIndex:indexPath.row];
+    [self.tableView reloadData];
     
-    
-    
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    return @"Add A User To Your Team";
 }
 
 - (void)didReceiveMemoryWarning {
