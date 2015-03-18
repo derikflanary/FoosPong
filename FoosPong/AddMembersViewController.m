@@ -9,6 +9,7 @@
 #import "AddMembersViewController.h"
 #import "UserController.h"
 #import "NewGameCustomTableViewCell.h"
+#import "GroupController.h"
 
 @interface AddMembersViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -65,6 +66,14 @@
     PFUser *user = [UserController sharedInstance].usersWithoutCurrentUser[indexPath.row];
     cell.textLabel.text = user.username;
     return cell;
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    PFUser *currentUser = [PFUser currentUser];
+    [[GroupController sharedInstance]addUser:[UserController sharedInstance].usersWithoutCurrentUser[indexPath.row] toGroup:currentUser[@"currentGroup"]];
+    
     
     
 }

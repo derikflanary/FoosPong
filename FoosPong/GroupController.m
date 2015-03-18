@@ -151,14 +151,16 @@ static NSString * const passwordKey = @"password";
             NSLog(@"%@", error);
         }
     }];
-//    PFQuery *pQuery = [PFQuery queryWithClassName:@"Group"];
-//    [pQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//        if (!error) {
-//            callback(objects);
-//        }else{
-//            NSLog(@"%@", error);
-//        }
-//    }];
+
+}
+
+- (NSArray*)membersForCurrentGroup{
+    
+    PFUser *currentUser = [PFUser currentUser];
+    PFObject *group = currentUser[currentGroupKey];
+    NSArray *members = group[membersKey];
+    return members;
+    
 }
 
 

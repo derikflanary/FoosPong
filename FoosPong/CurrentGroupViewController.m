@@ -11,8 +11,9 @@
 #import "FindGroupViewController.h"
 #import "GroupController.h"
 #import "AddMembersViewController.h"
+#import "NewGameCustomTableViewCell.h"
 
-@interface CurrentGroupViewController ()
+@interface CurrentGroupViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UIButton *joinGroupButton;
 @property (nonatomic, strong) UIButton *createGroupButton;
@@ -22,6 +23,8 @@
 @property (nonatomic, strong) UIView *noGroupView;
 @property (nonatomic, strong) UIButton *addMembersButton;
 @property (nonatomic, assign) BOOL isAdmin;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSArray *groupMembers;
 
 @end
 
@@ -44,7 +47,15 @@
     
     self.tabBarController.navigationItem.hidesBackButton = YES;
     
-    
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 210, 320, 250) style:UITableViewStylePlain];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.scrollEnabled = YES;
+    self.tableView.bounces = YES;
+    self.tableView.layer.cornerRadius = 10;
+    self.tableView.clipsToBounds = YES;
+    self.tableView.backgroundColor = [UIColor transparentWhite];
+    [self.view addSubview:self.tableView];
     
     self.addMembersButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 400, 320, 41)];
     self.addMembersButton.backgroundColor = [UIColor darkColor];
@@ -60,6 +71,27 @@
     
 }
 
+#pragma mark - TableView
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [self.groupMembers count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NewGameCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewGameCell" ];
+    if (!cell){
+        cell = [NewGameCustomTableViewCell new];
+        
+    }
+    PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
+    cell.textLabel.text = user.username;
+    return cell;
+
+}
+
+#pragma mark - Group Checks
+
 - (void)checkForGroup{
     
     [[GroupController sharedInstance]retrieveCurrentGroupWithCallback:^(PFObject *group, NSError *error) {
@@ -71,6 +103,7 @@
                 self.currentGroup = group;
                 self.tabBarController.title = group[@"name"];
                 self.isAdmin = [[GroupController sharedInstance]isUserAdmin];
+                self.groupMembers = [[GroupController sharedInstance]membersForCurrentGroup];
                 if (self.isAdmin) {
                     [self.view addSubview:self.addMembersButton];
                 }
@@ -126,6 +159,8 @@
     
 }
 
+#pragma mark - Buttons
+
 - (void)createPressed:(id)sender{
     
     self.addGroupViewController = [AddGroupViewController new];
@@ -133,7 +168,6 @@
     [self presentViewController:navController animated:YES completion:^{
         
     }];
-    
 }
 
 - (void)joinPressed:(id)sender{
