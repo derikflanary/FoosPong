@@ -7,13 +7,13 @@
 //
 
 #import "GroupsViewController.h"
-#import "NewGameCustomTableViewCell.h"
+#import "GroupTableViewCell.h"
 #import "GroupController.h"
 #import "AddGroupViewController.h"
 #import "FindGroupViewController.h"
 
 
-@interface GroupsViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface GroupsViewController ()<UITableViewDataSource, UITableViewDelegate, FindGroupViewControllerDelegate>
 
 
 
@@ -23,25 +23,40 @@
 @property (nonatomic, strong) UIButton *createGroupButton;
 @property (nonatomic, strong) UIViewController *addGroupViewController;
 @property (nonatomic, strong) PFObject *currentGroup;
+@property (nonatomic, strong) UIBarButtonItem *findGroupButton;
 
 
 @end
 
 @implementation GroupsViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.tabBarController.navigationItem.leftBarButtonItem = self.findGroupButton;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIBarButtonItem *joinGroupButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(joinGroupButtonPressed:)];
-    self.tabBarController.navigationItem.leftBarButtonItem = joinGroupButton;
+//    self.findGroupButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(joinGroupButtonPressed:)];
+//    self.navigationController.toolbarHidden = NO;
+//    [self setToolbarItems:@[self.findGroupButton]];
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.frame];
     self.tableView.dataSource = self;
     self.navigationController.navigationBar.translucent = NO;
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
+    
+    self.joinGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 400, 320, 41)];
+    self.joinGroupButton.backgroundColor = [UIColor darkColor];
+    self.joinGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+    [self.joinGroupButton setTitle:@"Join An Existing Group" forState:UIControlStateNormal];
+    [self.joinGroupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.joinGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.joinGroupButton addTarget:self action:@selector(joinPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.joinGroupButton];
     
     [self checkForGroups];
     
@@ -50,6 +65,7 @@
 - (void)joinGroupButtonPressed:(id)sender{
     
     FindGroupViewController *fgvc = [FindGroupViewController new];
+    fgvc.delegate = self;
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:fgvc];
     [self presentViewController:navController animated:YES completion:^{
         
@@ -57,14 +73,14 @@
 }
 
 -(void)checkForGroups{
-    if (![GroupController sharedInstance].groups) {
-        [[GroupController sharedInstance]findGroupsForUser:[PFUser currentUser] callback:^(NSArray * groups, NSError *error) {
+    
+    [[GroupController sharedInstance]findGroupsForUser:[PFUser currentUser] callback:^(NSArray * groups, NSError *error) {
             if (!error) {
-                self.groups = groups;
-                [self.tableView reloadData];
-                
                 if(!groups){
                     [self noCurrentGroup];
+                }else{
+                self.groups = groups;
+                [self.tableView reloadData];
                 }
                 
             }else{
@@ -72,13 +88,8 @@
             }
             
         }];
-        
-    }else{
-        self.groups = [GroupController sharedInstance].groups;
-    }
-    if (!self.groups) {
-        [self noCurrentGroup];
-    }
+    
+    
 }
 
 - (void)noCurrentGroup{
@@ -147,24 +158,32 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -TableView
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [self.groups count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NewGameCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewGameCell" ];
+    GroupTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GroupCell" ];
     if (!cell){
-        cell = [NewGameCustomTableViewCell new];
+        cell = [GroupTableViewCell new];
     }
     
     PFObject *group = self.groups[indexPath.row];
     cell.textLabel.text = group[@"name"];
+    cell.detailTextLabel.text = group[@"organization"];
    
     return cell;
 }
 
-
+-(void)groupSelected{
+    [self checkForGroups];
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
 /*
 #pragma mark - Navigation
 

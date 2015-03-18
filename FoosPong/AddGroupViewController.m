@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) UITextField *groupNameField;
 @property (nonatomic, strong) UITextField *groupOrganiztionField;
+@property (nonatomic, strong) UITextField *passwordField;
 
 @end
 
@@ -37,7 +38,7 @@
     
     self.groupNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 100, 320, 41)];
     self.groupNameField.backgroundColor = [UIColor whiteColor];
-    self.groupNameField.placeholder = @"Group Name";
+    self.groupNameField.placeholder = @"Team Name";
     self.groupNameField.font = [UIFont fontWithName:fontName size:16.0f];
     self.groupNameField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.groupNameField.layer.borderWidth = 1.0f;
@@ -48,9 +49,17 @@
     self.groupOrganiztionField.font = [UIFont fontWithName:fontName size:16.0f];
     self.groupOrganiztionField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.groupOrganiztionField.layer.borderWidth = 1.0f;
+    
+    self.passwordField = [[UITextField alloc]initWithFrame:CGRectMake(0, 190, 320, 41)];
+    self.passwordField.backgroundColor = [UIColor whiteColor];
+    self.passwordField.placeholder = @"Team Password";
+    self.passwordField.font = [UIFont fontWithName:fontName size:16.0f];
+    self.passwordField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
+    self.passwordField.layer.borderWidth = 1.0f;
 
     [self.view addSubview:self.groupNameField];
     [self.view addSubview:self.groupOrganiztionField];
+    [self.view addSubview:self.passwordField];
     // Do any additional setup after loading the view.
 }
 
@@ -60,6 +69,7 @@
         group.name = self.groupNameField.text;
         group.organization = self.groupOrganiztionField.text;
         group.admin = [PFUser currentUser];
+        group.password = self.passwordField.text;
         
         [[GroupController sharedInstance]addGroupforAdmin:group callback:^(BOOL *succeeded) {
             if (succeeded) {

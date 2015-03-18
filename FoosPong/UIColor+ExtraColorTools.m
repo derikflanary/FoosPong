@@ -24,7 +24,7 @@
 }
 
 + (UIColor *)mainColor{
-    UIColor* mainColor = [UIColor colorWithRed:189.0/255 green:242.0/255 blue:139.0/255 alpha:1.0f];
+    UIColor* mainColor = [UIColor colorWithRed:122.0/255 green:207.0/255 blue:99.0/255 alpha:1.0f];
     return mainColor;
 }
 
@@ -32,6 +32,12 @@
     UIColor* darkColor = [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:1.0f];
     return darkColor;
 }
+
++ (UIColor *)mainColorTransparent{
+    UIColor* mainColor = [UIColor colorWithRed:122.0/255 green:207.0/255 blue:99.0/255 alpha:.8f];
+    return mainColor;
+}
+
 
 
 @end

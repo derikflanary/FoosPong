@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol FindGroupViewControllerDelegate;
+
+
 @interface FindGroupViewController : UIViewController
+
+@property (nonatomic, weak) id <FindGroupViewControllerDelegate> delegate;
+
+@end
+
+@protocol FindGroupViewControllerDelegate <NSObject>
+
+-(void)groupSelected;
 
 @end

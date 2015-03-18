@@ -25,6 +25,10 @@
 
 @implementation CurrentGroupViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationItem.leftBarButtonItem = nil;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -50,18 +54,19 @@
     [[GroupController sharedInstance]retrieveCurrentGroupWithCallback:^(PFObject *group, NSError *error) {
         
         if (!error) {
-            self.currentGroup = group;
-            self.tabBarController.title = group[@"name"];
+            if (!group) {
+                [self noGroup];
+            }else{
+                self.currentGroup = group;
+                self.tabBarController.title = group[@"name"];
                 
-            if (self.noGroupView) {
-                [self.noGroupView removeFromSuperview];
+                if (self.noGroupView) {
+                    [self.noGroupView removeFromSuperview];
+                }
             }
         }
     }];
     
-    if (!self.currentGroup) {
-        [self noGroup];
-    }
 }
 
 - (void)noGroup{
@@ -75,7 +80,7 @@
         [self.view addSubview:bluredEffectView];
         
         self.noGroupView = [[UIView alloc]initWithFrame:CGRectMake(35, 80, 250, 250)];
-        self.noGroupView.backgroundColor = [UIColor lightGrayColor];
+        self.noGroupView.backgroundColor = [UIColor clearColor];
         
         UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, 250, 60)];
         titleLabel.text = @"No Group Yet? Create or join a group today.";

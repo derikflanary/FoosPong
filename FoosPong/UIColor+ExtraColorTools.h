@@ -16,4 +16,6 @@
 
 + (UIColor *)darkColor;
 
++ (UIColor *)mainColorTransparent;
+
 @end

@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *organization;
 @property (nonatomic, strong) PFUser *admin;
+@property (nonatomic, strong) NSString *password;
 
 
 

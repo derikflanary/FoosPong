@@ -25,15 +25,17 @@ static NSString * const currentGroupKey = @"currentGroup";
 }
 
 - (void)addGroupforAdmin:(Group *)newGroup callback:(void (^)(BOOL *))callback{
+    
     if (newGroup) {
         PFObject *group = [PFObject objectWithClassName:@"Group"];
         group[@"admin"] = newGroup.admin;
         group[@"name"] = newGroup.name;
         group[@"organization"] = newGroup.organization;
-        group[@"members"] = [NSArray array];
+        group[@"password"] = newGroup.password;
+        group[@"members"] = @[newGroup.admin];
         PFACL *groupACL = [PFACL ACLWithUser:newGroup.admin];
-        [groupACL setWriteAccess:YES forUser:newGroup.admin];
-        [groupACL setPublicReadAccess:YES];
+                [groupACL setPublicReadAccess:YES];
+        [groupACL setPublicWriteAccess:YES];
         group.ACL = groupACL;
         [group saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error) {
@@ -52,15 +54,15 @@ static NSString * const currentGroupKey = @"currentGroup";
 
 - (void)addUser:(PFUser *)user toGroup:(PFObject *)group{
     
-    NSArray *members = group[@"members"];
-    NSMutableArray *mutableMembers = members.mutableCopy;
-    [mutableMembers addObject:user];
-    members = mutableMembers;
-    group[@"members"] = members;
+//    NSArray *members = group[@"members"];
+//    NSMutableArray *mutableMembers = members.mutableCopy;
+//    [mutableMembers addObject:user];
+//    members = mutableMembers;
+//    group[@"members"] = members;
     [group addUniqueObject:user forKey:@"members"];
     [group saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error){
-            
+            [self setCurrentGroup:group];
         }else{
             NSLog(@"%@", error);
         }
@@ -75,7 +77,7 @@ static NSString * const currentGroupKey = @"currentGroup";
 - (void)findGroupsForUser:(PFUser *)user callback:(void (^)(NSArray *, NSError *error))callback{
     
     PFQuery *query = [PFQuery queryWithClassName:@"Group"];
-    [query whereKey:@"admin" equalTo:user];
+    [query whereKey:@"members" equalTo:user];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             self.groups = objects;

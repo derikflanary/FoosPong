@@ -7,7 +7,7 @@
 //
 
 #import "FindGroupViewController.h"
-#import "NewGameCustomTableViewCell.h"
+#import "GroupTableViewCell.h"
 #import "GroupController.h"
 
 @interface FindGroupViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchControllerDelegate>
@@ -63,26 +63,19 @@
     self.searchController.searchBar.delegate = self;
     self.searchController.searchBar.searchBarStyle = UISearchBarStyleProminent;
     self.searchController.dimsBackgroundDuringPresentation = YES;
+    self.searchController.searchBar.placeholder = @"Search by name or organization";
 
     //[self.tableView.superview addSubview:self.searchController.searchBar];
 
 
     //self.searchController.searchBar.prompt = @"Search by name or organization";
-    
-    
-    
-    
-
 
     // Do any additional setup after loading the view.
 }
 
 
 
--(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
-    self.searchController.searchBar.prompt = @"Search by name or by organization";
-    return YES;
-}
+
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [[GroupController sharedInstance]findGroupsByName:self.searchController.searchBar.text withCallback:^(NSArray *foundGroups) {
@@ -121,9 +114,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NewGameCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewGameCell" ];
+    GroupTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewGameCell" ];
     if (!cell){
-        cell = [NewGameCustomTableViewCell new];
+        cell = [GroupTableViewCell new];
         
     }
     PFObject *group = [self.foundGroups objectAtIndex:indexPath.row];
@@ -131,11 +124,14 @@
         cell.textLabel.text = @"";
     }else{
         cell.textLabel.text = group[@"name"];
+        cell.detailTextLabel.text = group[@"organization"];
     }
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    PFObject *selectedGroup = [self.foundGroups objectAtIndex:indexPath.row];
     
     UIAlertController *passwordAlert = [UIAlertController alertControllerWithTitle:@"Enter Team Password" message:@"Please enter the team's password to join" preferredStyle:UIAlertControllerStyleAlert];
     [passwordAlert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
@@ -145,7 +141,19 @@
     [passwordAlert addAction:[UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         UITextField *passwordTextfield = passwordAlert.textFields.firstObject;
         NSString *password = passwordTextfield.text;
-        [[GroupController sharedInstance]addUser:[PFUser currentUser] toGroup:[self.foundGroups objectAtIndex:indexPath.row]];
+        if ([password isEqualToString:selectedGroup[@"password"]]) {
+            [[GroupController sharedInstance]addUser:[PFUser currentUser] toGroup:selectedGroup];
+            [self.delegate groupSelected];
+        }else{
+            UIAlertController *failedAlert = [UIAlertController alertControllerWithTitle:@"Incorrect Password" message:@"Please try again" preferredStyle:UIAlertControllerStyleAlert];
+            [failedAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                //[self presentViewController:passwordAlert animated:YES completion:nil];
+                return;
+            }]];
+            [self presentViewController:failedAlert animated:YES completion:nil];
+
+        }
+        
         
     }]];
     
