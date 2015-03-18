@@ -35,6 +35,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    
     PFUser *user = [PFUser currentUser];
     self.title = user[@"firstName"];
     

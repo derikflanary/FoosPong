@@ -27,7 +27,7 @@
     background.frame = self.view.frame;
     [self.view addSubview:background];
     
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
 //    UILabel *comingSoonlabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 150, 200, 100)];
@@ -84,11 +84,25 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    PFUser *currentUser = [PFUser currentUser];
-    [[GroupController sharedInstance]addUser:[self.nonMembers objectAtIndex:indexPath.row] toGroup:currentUser[@"currentGroup"]
-     ];
-    [self.nonMembers removeObjectAtIndex:indexPath.row];
-    [self.tableView reloadData];
+    PFUser *selectedUser = [self.nonMembers objectAtIndex:indexPath.row];
+    
+    UIAlertController *addPlayerAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Add %@ to your team?", selectedUser[@"username"]] message:@"Please try again" preferredStyle:UIAlertControllerStyleAlert];
+    [addPlayerAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        PFUser *currentUser = [PFUser currentUser];
+        [[GroupController sharedInstance]addUser:[self.nonMembers objectAtIndex:indexPath.row] toGroup:currentUser[@"currentGroup"]
+         ];
+        [self.nonMembers removeObjectAtIndex:indexPath.row];
+        [self.tableView reloadData];
+
+    }]];
+    [addPlayerAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        return;
+    }]];
+    [self presentViewController:addPlayerAlert animated:YES completion:nil];
+    
     
 }
 

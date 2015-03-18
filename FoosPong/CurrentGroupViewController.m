@@ -31,7 +31,7 @@
 @implementation CurrentGroupViewController
 
 -(void)viewWillAppear:(BOOL)animated{
-    self.navigationItem.leftBarButtonItem = nil;
+    
 }
 
 - (void)viewDidLoad {
@@ -65,7 +65,13 @@
     [self.addMembersButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.addMembersButton addTarget:self action:@selector(addMember:) forControlEvents:UIControlEventTouchUpInside];
     
+    PFUser *currentUser = [PFUser currentUser];
+    if (!currentUser[@"currentGroup"]) {
+        [self noGroup];
+    }else{
+    
     [self checkForGroup];
+    }
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
     
@@ -84,8 +90,11 @@
         cell = [NewGameCustomTableViewCell new];
         
     }
-    PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
-    cell.textLabel.text = user.username;
+//    if (self.groupMembers.count > 0) {
+//        PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
+//        cell.textLabel.text = user.username;
+//    }
+//   
     return cell;
 
 }
@@ -104,6 +113,7 @@
                 self.tabBarController.title = group[@"name"];
                 self.isAdmin = [[GroupController sharedInstance]isUserAdmin];
                 self.groupMembers = [[GroupController sharedInstance]membersForCurrentGroup];
+                [self.tableView reloadData];
                 if (self.isAdmin) {
                     [self.view addSubview:self.addMembersButton];
                 }
@@ -118,16 +128,15 @@
 
 - (void)noGroup{
     
-    if (!self.currentGroup) {
         
-        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
         UIVisualEffectView *bluredEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
         [bluredEffectView setFrame:self.view.bounds];
         
         [self.view addSubview:bluredEffectView];
         
         self.noGroupView = [[UIView alloc]initWithFrame:CGRectMake(35, 80, 250, 250)];
-        self.noGroupView.backgroundColor = [UIColor clearColor];
+        self.noGroupView.backgroundColor = [UIColor whiteColor];
         
         UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, 250, 60)];
         titleLabel.text = @"No Group Yet? Create or join a group today.";
@@ -155,7 +164,6 @@
         [self.noGroupView addSubview:self.createGroupButton];
         [self.noGroupView addSubview:self.joinGroupButton];
  
-    }
     
 }
 
@@ -186,9 +194,15 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [self.noGroupView removeFromSuperview];
     
-    [self checkForGroup];
+    PFUser *currentUser = [PFUser currentUser];
+    if (!currentUser[@"currentGroup"]) {
+        [self noGroup];
+    }else{
+        
+        [self checkForGroup];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {

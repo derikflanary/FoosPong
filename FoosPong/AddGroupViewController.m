@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UITextField *groupNameField;
 @property (nonatomic, strong) UITextField *groupOrganiztionField;
 @property (nonatomic, strong) UITextField *passwordField;
+@property (nonatomic, strong) UIButton *addGroupButton;
 
 @end
 
@@ -24,12 +25,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
-    
-    UIBarButtonItem *createGroupButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createGroupPressed:)];
-    self.navigationItem.rightBarButtonItem = createGroupButton;
-
     
 //    UIColor* mainColor = [UIColor mainColor];
 //    UIColor* darkColor = [UIColor darkColor];
@@ -56,7 +53,16 @@
     self.passwordField.font = [UIFont fontWithName:fontName size:16.0f];
     self.passwordField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.passwordField.layer.borderWidth = 1.0f;
-
+    
+    self.addGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 410, 320, 41)];
+    self.addGroupButton.backgroundColor = [UIColor darkColor];
+    self.addGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+    [self.addGroupButton setTitle:@"Add Group" forState:UIControlStateNormal];
+    [self.addGroupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.addGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.addGroupButton addTarget:self action:@selector(createGroupPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:self.addGroupButton];
     [self.view addSubview:self.groupNameField];
     [self.view addSubview:self.groupOrganiztionField];
     [self.view addSubview:self.passwordField];

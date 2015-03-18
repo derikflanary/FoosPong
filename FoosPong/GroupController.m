@@ -160,6 +160,7 @@ static NSString * const passwordKey = @"password";
     PFUser *currentUser = [PFUser currentUser];
     PFObject *group = currentUser[currentGroupKey];
     NSArray *members = group[membersKey];
+        
     return members;
     
 }

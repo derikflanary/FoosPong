@@ -30,7 +30,7 @@
     background.frame = self.view.frame;
     [self.view addSubview:background];
     
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
     self.groupNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 80, 320, 41)];
@@ -162,6 +162,8 @@
                 //[self presentViewController:passwordAlert animated:YES completion:nil];
                 return;
             }]];
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
             [self presentViewController:failedAlert animated:YES completion:nil];
 
         }
