@@ -14,6 +14,8 @@
     
 - (void)addUserwithDictionary:(NSDictionary*)dictionary;
 
+- (void)addGuestUserWithArray:(NSArray*)users;
+
 - (void)removeUser:(PFUser *)user;
 
 - (void)updateUsers;
@@ -22,12 +24,11 @@
 
 - (void)loginUser:(NSDictionary*)dictionary callback:(void (^)(PFUser *))callback;
 
-- (void)addGuestUser;
-
 - (void)saveProfilePhoto:(UIImage*)image;
 
 - (void)retrieveProfileImageWithCallback:(void (^)(UIImage *))callback;
-    
+
+
 @property (nonatomic, strong, readonly)NSArray *users;
 @property (nonatomic, strong, readonly)NSArray *usersWithoutCurrentUser;
 @property (nonatomic, strong)PFUser *theCurrentUser;

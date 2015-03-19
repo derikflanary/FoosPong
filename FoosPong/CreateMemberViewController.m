@@ -8,6 +8,7 @@
 
 #import "CreateMemberViewController.h"
 #import "NewGameCustomTableViewCell.h"
+#import "UserController.h"
 
 
 @interface CreateMemberViewController ()<UITableViewDataSource, UITableViewDelegate, ABPeoplePickerNavigationControllerDelegate>
@@ -15,7 +16,8 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ABPeoplePickerNavigationController *addressBookController;
 @property (nonatomic, strong) NSMutableArray *arrContactsData;
-@property (nonatomic, strong) NSDictionary *contact;
+@property (nonatomic, strong) UIButton *saveNewMembersButton;
+@property (nonatomic, strong) NSMutableArray *contacts;
 
 @end
 
@@ -40,8 +42,24 @@
     self.tableView.clipsToBounds = YES;
     self.tableView.backgroundColor = [UIColor transparentWhite];
     [self.view addSubview:self.tableView];
+    
+    self.saveNewMembersButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 400, 320, 41)];
+    self.saveNewMembersButton.backgroundColor = [UIColor darkColor];
+    self.saveNewMembersButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+    [self.saveNewMembersButton setTitle:@"Save Guest Member" forState:UIControlStateNormal];
+    [self.saveNewMembersButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.saveNewMembersButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.saveNewMembersButton addTarget:self action:@selector(savePressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.contacts = [NSMutableArray array];
+    //[self.view addSubview:self.saveNewMembersButton];
+    //self.saveNewMembersButton.enabled = NO;
 
     // Do any additional setup after loading the view.
+}
+
+- (void)savePressed:(id)sender{
+    [[UserController sharedInstance]addGuestUserWithArray:self.contacts];
 }
 
 - (void)showAddressBook{
@@ -53,7 +71,11 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    
+    if ([self.contacts count] > 0) {
+        [self.view addSubview:self.saveNewMembersButton];
+    }
+    return [self.contacts count];
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -64,12 +86,11 @@
     if (!cell){
         cell = [NewGameCustomTableViewCell new];
     }
-    if (!self.contact) {
-        return cell;
-    }else{
-        cell.textLabel.text = self.contact[@"firstName"];
-        return cell;
-    }
+    
+    NSDictionary *dict = [self.contacts objectAtIndex:indexPath.row];
+    cell.textLabel.text = dict[@"firstName"];
+    
+    return cell;
 }
 
 
@@ -110,9 +131,10 @@
         CFRelease(generalCFObject);
     }
     
-    self.contact = contactInfoDict;
+    [self.contacts addObject:contactInfoDict];
     [self.tableView reloadData];
     [self.addressBookController dismissViewControllerAnimated:YES completion:nil];
+    [self.view addSubview:self.saveNewMembersButton];
 
 }
 

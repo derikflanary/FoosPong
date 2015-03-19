@@ -39,6 +39,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
     [self.view addSubview:background];
@@ -50,7 +51,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.playerTwoName = self.playerTwo.username;
     
     UIBarButtonItem * saveGameButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveGamePressed:)];
-    self.navigationItem.rightBarButtonItem = saveGameButton;
+    //self.navigationItem.rightBarButtonItem = saveGameButton;
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;

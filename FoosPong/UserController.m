@@ -7,6 +7,7 @@
 //
 
 #import "UserController.h"
+#import "GroupController.h"
 
 
 @interface UserController()
@@ -27,15 +28,27 @@
 }
 
 
-- (void)addGuestUser{
+- (void)addGuestUserWithArray:(NSArray*)users{
     
-    [PFAnonymousUtils logInWithBlock:^(PFUser *user, NSError *error) {
-        if (error) {
-            NSLog(@"Anonymous login failed.");
-        } else {
-            NSLog(@"Anonymous user logged in.");
-        }
-    }];
+    for (NSDictionary *dict in users) {
+        [PFAnonymousUtils logInWithBlock:^(PFUser *user, NSError *error) {
+            if (error) {
+                NSLog(@"Anonymous login failed.");
+            } else {
+                NSLog(@"Anonymous user logged in.");
+                user[@"firstName"] = dict[@"firstName"];
+                user[@"lastName"] = dict[@"lastName"];
+                [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (!error) {
+                        
+                    }else{
+                        NSLog(@"User With names failed");
+                    }
+                }];
+            }
+        }];
+
+    }
 }
 
 - (void)addUserwithDictionary:(NSDictionary*)dictionary{
@@ -62,6 +75,9 @@
                                         block:^(PFUser *user, NSError *error) {
                                             if (user) {
                                                 [self updateUsers];
+                                                [[GroupController sharedInstance]retrieveCurrentGroupWithCallback:^(PFObject *group, NSError *error) {
+                                                    
+                                                }];
                                                 callback(user);
                                             } else {
                                                 NSLog(@"%@", error);
@@ -124,6 +140,7 @@ PFQuery *query = [PFUser query];
     return self.usersWithoutCurrentUser;
 }
 
+
 - (void)saveProfilePhoto:(UIImage*)image{
     
     NSData *imageData = UIImagePNGRepresentation(image);
@@ -159,9 +176,16 @@ PFQuery *query = [PFUser query];
             callback(nil);
         }
     }];
-    
 
 }
+
+//- (void)searchUsersNotInGroupCallback(void (^)(NSArray *))callback{
+//    PFObject *group = [PFUser currentUser][@"currentGroup"];
+//    PFQuery *query = [PFUser query];
+//    query whereKey:<#(NSString *)#> notContainedIn:<#(NSArray *)#>
+//}
+
+
 
 - (void)removeUser:(PFUser *)user{
     

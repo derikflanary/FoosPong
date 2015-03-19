@@ -13,6 +13,7 @@
 #import "UserController.h"
 #import "HMSegmentedControl.h"
 #import "TeamGameViewController.h"
+#import "GroupController.h"
 
 typedef NS_ENUM(NSInteger, TableViewSection) {
     TableViewSectionCurrent,
@@ -88,25 +89,12 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     [self setToolbarItems:@[addGuestButton, seg, startGameButton]];
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStyleGrouped];
-    [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.editing = NO;
     self.tableView.backgroundColor = [UIColor transparentWhite];
-    
-    //self.tableView.allowsMultipleSelectionDuringEditing = YES;
     self.tableView.allowsSelectionDuringEditing = YES;
-    
-    
-    self.currentUser = [PFUser currentUser];
-    self.currentPlayers = [NSMutableArray array];
-    [self.currentPlayers insertObject:self.currentUser atIndex:0];
-    
-    self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
-    self.teamTwoPlayers = [NSMutableArray array];
-    [self.teamTwoPlayers addObject:[PFUser new]];
-    [self.teamTwoPlayers addObject:[PFUser new]];
-
+    [self.view addSubview:self.tableView];
     
     self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
     [self.searchController.searchBar sizeToFit];
@@ -116,6 +104,23 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     self.searchController.searchBar.delegate = self;
     self.searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
     self.searchController.dimsBackgroundDuringPresentation = NO;
+    
+    self.currentUser = [PFUser currentUser];
+    self.currentPlayers = [NSMutableArray array];
+    [self.currentPlayers insertObject:self.currentUser atIndex:0];
+    
+    //self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
+    [[GroupController sharedInstance]retrieveCurrentGroupWithCallback:^(PFObject *group, NSError *error) {
+        self.availablePlayers = [[GroupController sharedInstance]membersForCurrentGroup:group].mutableCopy;
+        [self.availablePlayers removeObject:self.currentUser];
+        self.title = group[@"name"];
+        [self.tableView reloadData];
+    }];
+    self.teamTwoPlayers = [NSMutableArray array];
+    [self.teamTwoPlayers addObject:[PFUser new]];
+    [self.teamTwoPlayers addObject:[PFUser new]];
+
+    
     
     if (self.segmentedControl.selectedSegmentIndex == 0) {
         self.isTwoPlayer = NO;
@@ -334,6 +339,8 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
             case TableViewSectionAvailable:{
                 PFUser *theUser = [self.availablePlayers objectAtIndex:indexPath.row];
                 cell.textLabel.text = theUser.username;
+                cell.textLabel.textColor = [UIColor blackColor];
+
                 return cell;
             }
         }
@@ -343,7 +350,9 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
             case TableView2TeamSectionTeam1:{
                 PFUser *theUser = [self.currentPlayers objectAtIndex:indexPath.row];
                 if (!theUser.username) {
-                    cell.textLabel.text = @"";
+                    cell.textLabel.text = @"Add Player";
+                    cell.textLabel.textColor = [UIColor colorWithWhite:.5 alpha:.7];
+
                 }else{
                     cell.textLabel.text = theUser.username;                }
                 return cell;
@@ -355,7 +364,9 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 PFUser *theUser = [self.teamTwoPlayers objectAtIndex:indexPath.row];
                 
                 if (!theUser.username) {
-                    cell.textLabel.text = @"";
+                    cell.textLabel.text = @"Add Player";
+                    cell.textLabel.textColor = [UIColor colorWithWhite:.5 alpha:.7];
+
                 }else{
                     cell.textLabel.text = theUser.username;
                 }

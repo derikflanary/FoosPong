@@ -112,7 +112,7 @@
                 self.currentGroup = group;
                 self.tabBarController.title = group[@"name"];
                 self.isAdmin = [[GroupController sharedInstance]isUserAdmin];
-                self.groupMembers = [[GroupController sharedInstance]membersForCurrentGroup];
+                self.groupMembers = [[GroupController sharedInstance]membersForCurrentGroup:self.currentGroup];
                 [self.tableView reloadData];
                 if (self.isAdmin) {
                     [self.view addSubview:self.addMembersButton];

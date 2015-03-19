@@ -155,19 +155,26 @@ static NSString * const passwordKey = @"password";
 
 }
 
-- (NSArray*)membersForCurrentGroup{
+- (NSArray*)membersForCurrentGroup:(PFObject *)currentGroup{
     
-    PFUser *currentUser = [PFUser currentUser];
-    PFObject *group = currentUser[currentGroupKey];
-    NSArray *members = group[membersKey];
-        
-    return members;
-    
+        NSArray *members = currentGroup[membersKey];
+        return members;
+
 }
 
 - (void)notMembersOfCurrentGroupCallback:(void (^)(NSArray*))callback{
-
-    NSArray *members = [self membersForCurrentGroup];
+    PFUser *currentUser = [PFUser currentUser];
+    NSArray *members = [self membersForCurrentGroup:currentUser[currentGroupKey]];
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"objectId" notContainedIn:[members valueForKey:@"objectId"]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            callback(objects);
+        }else{
+            NSLog(@"%@", error);
+        }
+    }];
+    
     NSMutableArray *users = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
     for (PFUser *member in members) {
         if ([users containsObject:member]) {
@@ -175,17 +182,11 @@ static NSString * const passwordKey = @"password";
         }
         callback(users);
     }
-//    PFQuery *query = [PFQuery queryWithClassName:@"Users"];
-//    [query whereKey:@"objectId" notContainedIn:members];
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//        if (!error) {
-//            callback(objects);
-//        }else{
-//            NSLog(@"%@", error);
-//        }
-//    }];
-    
 }
+
+
+    
+
 
 
 

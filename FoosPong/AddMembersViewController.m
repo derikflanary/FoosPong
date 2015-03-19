@@ -12,13 +12,14 @@
 #import "GroupController.h"
 #import "CreateMemberViewController.h"
 
-@interface AddMembersViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface AddMembersViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *nonMembers;
 @property (nonatomic, strong) UIButton *addGuestMemberButton;
 @property (nonatomic, strong) UITableView *contactsTableView;
 @property (nonatomic, assign) BOOL searchUsers;
+@property (nonatomic, strong) UISearchController *searchController;
 
 @end
 
@@ -42,7 +43,6 @@
     [self.addGuestMemberButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.addGuestMemberButton addTarget:self action:@selector(addGuestMemberPressed:) forControlEvents:UIControlEventTouchUpInside];
 
-    
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 80, 320, 250) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -52,25 +52,43 @@
     self.tableView.clipsToBounds = YES;
     self.tableView.backgroundColor = [UIColor transparentWhite];
     
+    self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
+    [self.searchController.searchBar sizeToFit];
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+    //self.searchController.searchResultsUpdater = self;
+    self.searchController.delegate = self;
+    self.searchController.searchBar.delegate = self;
+    self.searchController.searchBar.searchBarStyle = UISearchBarStyleProminent;
+    self.searchController.dimsBackgroundDuringPresentation = YES;
+    self.searchController.searchBar.placeholder = @"Search by name or organization";
+
+    
     [self.view addSubview:self.tableView];
-    [self.view addSubview:self.addGuestMemberButton];
-    
-    
-    
+    //[self.view addSubview:self.addGuestMemberButton];
     [self findNonMembers];
     
+    
     // Do any additional setup after loading the view.
+}
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [self findNonMembers];
+    
 }
 
 - (void)findNonMembers{
     [[GroupController sharedInstance]notMembersOfCurrentGroupCallback:^(NSArray * nonMembers) {
         self.nonMembers = nonMembers.mutableCopy;
+        
         [self.tableView reloadData];
     }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    
     return [self.nonMembers count];
+    
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:

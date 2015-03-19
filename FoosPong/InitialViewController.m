@@ -116,14 +116,6 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     [self presentViewController:signUpNavController animated:YES completion:nil];
 }
 
--(void)guestPressed:(id)sender{
-    [[UserController sharedInstance] addGuestUser];
-    HomeViewController *hvc = [HomeViewController new];
-    hvc.isGuest = YES;
-    self.navigationController.viewControllers = @[hvc];
-    
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
