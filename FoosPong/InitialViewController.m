@@ -32,6 +32,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
 @property (nonatomic, strong) UITabBarController *tabBarControllerGroup;
 @property (nonatomic, strong) UIButton *loginButton;
 @property (nonatomic, strong) UIButton *guestButton;
+@property (nonatomic, strong) UIButton *logOutButton;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
@@ -42,19 +43,18 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    if ([PFUser currentUser]) {
+        self.loginButton.hidden = YES;
+        self.guestButton.hidden = YES;
+        self.logOutButton.hidden = NO;
+        
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"%@", [PFUser currentUser].username);
-//    if ([PFUser currentUser].username) {
-//        [[UserController sharedInstance] updateUsers];
-//
-//    }
     
-    UIColor* mainColor = [UIColor mainColor];
     UIColor* darkColor = [UIColor darkColor];
-    //NSString* fontName = [NSString mainFont];
     NSString* boldFontName = [NSString boldFont];
     
     self.imageView = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
@@ -63,7 +63,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     [self.view addSubview:self.imageView];
     
     
-    self.loginButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 383, 320, 62)];
+    self.loginButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 383, self.view.frame.size.width, 62)];
     self.loginButton.backgroundColor = darkColor;
     self.loginButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
     [self.loginButton setTitle:@"Log In" forState:UIControlStateNormal];
@@ -72,8 +72,8 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     [self.loginButton addTarget:self action:@selector(loginPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.loginButton];
     
-    self.guestButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 300, 320, 62)];
-    self.guestButton.backgroundColor = mainColor;
+    self.guestButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 62)];
+    self.guestButton.backgroundColor = darkColor;
     self.guestButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
     [self.guestButton setTitle:@"Sign Up" forState:UIControlStateNormal];
     [self.guestButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -81,10 +81,31 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     [self.guestButton addTarget:self action:@selector(signUpPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.guestButton];
     
+    self.logOutButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 62)];
+    self.logOutButton.backgroundColor = darkColor;
+    self.logOutButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
+    [self.logOutButton setTitle:@"Log Out" forState:UIControlStateNormal];
+    [self.logOutButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.logOutButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.logOutButton addTarget:self action:@selector(logOutPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.logOutButton];
+    self.logOutButton.hidden = YES;
+
+    
+    
+    
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:0];
 }
 
 #pragma mark - Login Buttons
+
+- (void)logOutPressed:(id)sender{
+    self.loginButton.hidden = NO;
+    self.guestButton.hidden = NO;
+    self.logOutButton.hidden = YES;
+    
+    [PFUser logOut];
+}
 
 -(void)loginPressed:(id)selector{
     
@@ -96,16 +117,6 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
         
     }];
     //[self presentViewController:logInController animated:YES completion:nil];
-}
-
-- (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user{
-    
-    [logInController dismissViewControllerAnimated:YES completion:^{
-        //[[UserController sharedInstance] findCurrentUser];
-        [[UserController sharedInstance] updateUsers];
-
-    }];
-    //[self.navigationController showViewController:self.tabBarController sender:self];
 }
 
 -(void)signUpPressed:(id)sender{

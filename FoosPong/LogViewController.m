@@ -12,6 +12,7 @@
 #import "SignUpViewController.h"
 #import "InitialViewController.h"
 #import "UserController.h"
+#import "HomeViewController.h"
 
 @interface LogViewController ()
 
@@ -139,6 +140,7 @@
             
         }else{
             [self dismissViewControllerAnimated:YES completion:^{
+                
             }];
         }
     }];

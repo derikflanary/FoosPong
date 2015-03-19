@@ -39,13 +39,20 @@
     self.groupNameField.font = [UIFont fontWithName:fontName size:16.0f];
     self.groupNameField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.groupNameField.layer.borderWidth = 1.0f;
-    
+    UIView* leftView2= [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 20)];
+    self.groupNameField.leftViewMode = UITextFieldViewModeAlways;
+    self.groupNameField.leftView = leftView2;
+
     self.groupOrganiztionField = [[UITextField alloc]initWithFrame:CGRectMake(0, 150, 320, 41)];
     self.groupOrganiztionField.backgroundColor = [UIColor whiteColor];
     self.groupOrganiztionField.placeholder = @"Organization Name";
     self.groupOrganiztionField.font = [UIFont fontWithName:fontName size:16.0f];
     self.groupOrganiztionField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.groupOrganiztionField.layer.borderWidth = 1.0f;
+    UIView* leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 20)];
+    self.groupOrganiztionField.leftViewMode = UITextFieldViewModeAlways;
+    self.groupOrganiztionField.leftView = leftView;
+
     
     self.passwordField = [[UITextField alloc]initWithFrame:CGRectMake(0, 190, 320, 41)];
     self.passwordField.backgroundColor = [UIColor whiteColor];
@@ -53,6 +60,9 @@
     self.passwordField.font = [UIFont fontWithName:fontName size:16.0f];
     self.passwordField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.passwordField.layer.borderWidth = 1.0f;
+    UIView* leftView3 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 20)];
+    self.passwordField.leftViewMode = UITextFieldViewModeAlways;
+    self.passwordField.leftView = leftView3;
     
     self.addGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 410, 320, 41)];
     self.addGroupButton.backgroundColor = [UIColor darkColor];

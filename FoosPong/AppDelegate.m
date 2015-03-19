@@ -45,11 +45,11 @@
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     
-    [PFUser enableAutomaticUser];
+    //[PFUser enableAutomaticUser];
     
-    if ([PFUser currentUser].username) {
+    if ([PFUser currentUser]) {
         //got a long-running operation on this. Probably need a block
-        [[UserController sharedInstance] updateUsers];
+        //[[UserController sharedInstance] updateUsers];
         UINavigationController *mainNavController = [[UINavigationController alloc]initWithRootViewController:[HomeViewController new]];
 //        [[GroupController sharedInstance]findGroupsForUser:[PFUser currentUser] callback:^(NSArray *array) {
 //            

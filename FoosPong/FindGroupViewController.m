@@ -165,10 +165,7 @@
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
             [self presentViewController:failedAlert animated:YES completion:nil];
-
         }
-        
-        
     }]];
     
     [passwordAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {

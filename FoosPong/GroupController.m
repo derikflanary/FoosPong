@@ -86,6 +86,18 @@ static NSString * const passwordKey = @"password";
 
 - (void)removeUserFromGroup:(PFUser *)user{
     
+    PFUser *currentUser = [PFUser currentUser];
+    PFObject *group = currentUser[currentGroupKey];
+    NSMutableArray *members = [self membersForCurrentGroup:group].mutableCopy;
+    [members removeObject:user];
+    group[membersKey] = members;
+    [group saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error){
+            
+        }else{
+            NSLog(@"%@", error);
+        }
+    }];
 }
 
 - (void)findGroupsForUser:(PFUser *)user callback:(void (^)(NSArray *, NSError *error))callback{

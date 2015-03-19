@@ -354,7 +354,7 @@ static RNFrostedSidebar *rn_frostedMenu;
 
 - (void)animateSpringWithView:(RNCalloutItemView *)view idx:(NSUInteger)idx initDelay:(CGFloat)initDelay {
 #if __IPHONE_OS_VERSION_SOFT_MAX_REQUIRED
-    [UIView animateWithDuration:0.5
+    [UIView animateWithDuration:0.4
                           delay:(initDelay + idx*0.1f)
          usingSpringWithDamping:10
           initialSpringVelocity:50

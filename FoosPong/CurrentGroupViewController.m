@@ -60,7 +60,7 @@
     self.addMembersButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 410, 320, 41)];
     self.addMembersButton.backgroundColor = [UIColor darkColor];
     self.addMembersButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-    [self.addMembersButton setTitle:@"Add Member" forState:UIControlStateNormal];
+    [self.addMembersButton setTitle:@"Edit Team" forState:UIControlStateNormal];
     [self.addMembersButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.addMembersButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.addMembersButton addTarget:self action:@selector(addMember:) forControlEvents:UIControlEventTouchUpInside];
@@ -111,9 +111,10 @@
             }else{
                 self.currentGroup = group;
                 self.tabBarController.title = group[@"name"];
-                self.isAdmin = [[GroupController sharedInstance]isUserAdmin];
                 self.groupMembers = [[GroupController sharedInstance]membersForCurrentGroup:self.currentGroup];
                 [self.tableView reloadData];
+                
+                self.isAdmin = [[GroupController sharedInstance]isUserAdmin];
                 if (self.isAdmin) {
                     [self.view addSubview:self.addMembersButton];
                 }
