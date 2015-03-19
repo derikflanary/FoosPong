@@ -42,6 +42,10 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:leftSwipe];;
     
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    
     self.navigationController.toolbarHidden = YES;
     
     
@@ -63,7 +67,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     
    
     
-    NSArray *barImages = @[ [UIImage imageNamed:@"68"],
+    NSArray *barImages = @[ [UIImage imageNamed:@"57"],
                             [UIImage imageNamed:@"85"],
                             [UIImage imageNamed:@"74"],
                             [UIImage imageNamed:@"70"],
@@ -74,7 +78,6 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
                         [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
                         [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
                         [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f]];
-    
     
     
     

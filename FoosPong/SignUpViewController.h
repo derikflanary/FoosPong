@@ -12,26 +12,17 @@
 @interface SignUpViewController : BaseLoginController
 
 @property (nonatomic, strong) UITextField * usernameField;
-
 @property (nonatomic, strong) UITextField * passwordField;
-
 @property (nonatomic, strong) UIButton *loginButton;
-
 @property (nonatomic, strong) UIButton * forgotButton;
-
 @property (nonatomic, strong) UILabel * titleLabel;
-
 @property (nonatomic, strong) UIImageView * headerImageView;
-
 @property (nonatomic, strong) UIView * infoView;
-
 @property (nonatomic, strong) UILabel * infoLabel;
-
 @property (nonatomic, strong) UIView * overlayView;
-
 @property (nonatomic, strong) UITextField * firstNameField;
-
 @property (nonatomic, strong) UITextField * lastNameField;
+@property (nonatomic, strong) UITextField *emailField;
 
 
 @end

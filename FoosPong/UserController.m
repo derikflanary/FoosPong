@@ -45,6 +45,7 @@
     user.password = dictionary[@"password"];
     user[@"firstName"] = dictionary[@"firstName"];
     user[@"lastName"] = dictionary[@"lastName"];
+    user.email = dictionary[@"email"];
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             [self updateUsers];

@@ -10,11 +10,15 @@
 #import "UserController.h"
 #import "NewGameCustomTableViewCell.h"
 #import "GroupController.h"
+#import "CreateMemberViewController.h"
 
 @interface AddMembersViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *nonMembers;
+@property (nonatomic, strong) UIButton *addGuestMemberButton;
+@property (nonatomic, strong) UITableView *contactsTableView;
+@property (nonatomic, assign) BOOL searchUsers;
 
 @end
 
@@ -30,14 +34,16 @@
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
-//    UILabel *comingSoonlabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 150, 200, 100)];
-//    comingSoonlabel.text = @"Feature Coming Soon";
-//    comingSoonlabel.numberOfLines = 0;
-//    comingSoonlabel.backgroundColor = [UIColor transparentWhite];
-//    [self.view addSubview:comingSoonlabel];
+    self.addGuestMemberButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 410, 320, 41)];
+    self.addGuestMemberButton.backgroundColor = [UIColor darkColor];
+    self.addGuestMemberButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+    [self.addGuestMemberButton setTitle:@"Create Guest Member" forState:UIControlStateNormal];
+    [self.addGuestMemberButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.addGuestMemberButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.addGuestMemberButton addTarget:self action:@selector(addGuestMemberPressed:) forControlEvents:UIControlEventTouchUpInside];
+
     
-    
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 280, 320, 250) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 80, 320, 250) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = YES;
@@ -45,7 +51,11 @@
     self.tableView.layer.cornerRadius = 10;
     self.tableView.clipsToBounds = YES;
     self.tableView.backgroundColor = [UIColor transparentWhite];
+    
     [self.view addSubview:self.tableView];
+    [self.view addSubview:self.addGuestMemberButton];
+    
+    
     
     [self findNonMembers];
     
@@ -71,8 +81,8 @@
     NewGameCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewGameCell" ];
     if (!cell){
         cell = [NewGameCustomTableViewCell new];
-        
     }
+    
     if (!self.nonMembers) {
         return cell;
     }else{
@@ -86,8 +96,8 @@
     
     PFUser *selectedUser = [self.nonMembers objectAtIndex:indexPath.row];
     
-    UIAlertController *addPlayerAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Add %@ to your team?", selectedUser[@"username"]] message:@"Please try again" preferredStyle:UIAlertControllerStyleAlert];
-    [addPlayerAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertController *addPlayerAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Add %@ to your team?", selectedUser[@"username"]] message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [addPlayerAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
         PFUser *currentUser = [PFUser currentUser];
         [[GroupController sharedInstance]addUser:[self.nonMembers objectAtIndex:indexPath.row] toGroup:currentUser[@"currentGroup"]
@@ -119,6 +129,11 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         
     }];
+}
+
+- (void)addGuestMemberPressed:(id)sender{
+    [self.navigationController pushViewController:[CreateMemberViewController new] animated:YES];
+    
 }
 
 /*

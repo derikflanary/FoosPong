@@ -18,7 +18,7 @@
     self.detailTextLabel.font = [UIFont boldSystemFontOfSize:11];
 //    self.layer.cornerRadius = 10;
 //    self.clipsToBounds = YES;
-    self.backgroundColor = [UIColor mainColor];
+    self.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
     return self;
 }
 

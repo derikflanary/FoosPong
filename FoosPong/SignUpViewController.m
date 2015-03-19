@@ -31,20 +31,20 @@
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
-
-	
-    UIColor* mainColor = [UIColor colorWithRed:189.0/255 green:242.0/255 blue:139.0/255 alpha:1.0f];
-    UIColor* darkColor = [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:1.0f];
     
+    UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
+    background.frame = self.view.frame;
+    [self.view addSubview:background];
+
     NSString* fontName = @"Avenir-Book";
     NSString* boldFontName = @"Avenir-Black";
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
     [self.view addGestureRecognizer:tap];
     
-    self.view.backgroundColor = mainColor;
+    self.view.backgroundColor = [UIColor mainColor];
     
-    self.firstNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 220, 320, 41)];
+    self.firstNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 180, 320, 41)];
     self.firstNameField.backgroundColor = [UIColor whiteColor];
     self.firstNameField.placeholder = @"First Name";
     self.firstNameField.font = [UIFont fontWithName:fontName size:16.0f];
@@ -55,7 +55,7 @@
     self.firstNameField.leftViewMode = UITextFieldViewModeAlways;
     self.firstNameField.leftView = leftView3;
     
-    self.lastNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 260, 320, 41)];
+    self.lastNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 220, 320, 41)];
     self.lastNameField.backgroundColor = [UIColor whiteColor];
     self.lastNameField.placeholder = @"Last Name";
     self.lastNameField.font = [UIFont fontWithName:fontName size:16.0f];
@@ -66,6 +66,16 @@
     self.lastNameField.leftViewMode = UITextFieldViewModeAlways;
     self.lastNameField.leftView = leftView4;
 
+    self.emailField = [[UITextField alloc]initWithFrame:CGRectMake(0, 260, 320, 41)];
+    self.emailField.backgroundColor = [UIColor whiteColor];
+    self.emailField.placeholder = @"Email";
+    self.emailField.font = [UIFont fontWithName:fontName size:16.0f];
+    self.emailField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
+    self.emailField.layer.borderWidth = 1.0f;
+    self.emailField.autocorrectionType = UITextAutocorrectionTypeNo;
+    UIView* leftView5 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 20)];
+    self.emailField.leftViewMode = UITextFieldViewModeAlways;
+    self.emailField.leftView = leftView5;
     
     self.usernameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 301, 320, 41)];
     self.usernameField.backgroundColor = [UIColor whiteColor];
@@ -96,7 +106,7 @@
     self.passwordField.leftView = leftView2;
     
     self.loginButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 383, 320, 62)];
-    self.loginButton.backgroundColor = darkColor;
+    self.loginButton.backgroundColor = [UIColor darkColor];
     self.loginButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
     [self.loginButton setTitle:@"SIGN UP HERE" forState:UIControlStateNormal];
     [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -106,7 +116,7 @@
     self.forgotButton.backgroundColor = [UIColor clearColor];
     self.forgotButton.titleLabel.font = [UIFont fontWithName:fontName size:12.0f];
     [self.forgotButton setTitle:@"Forgot Password?" forState:UIControlStateNormal];
-    [self.forgotButton setTitleColor:darkColor forState:UIControlStateNormal];
+    [self.forgotButton setTitleColor:[UIColor darkColor] forState:UIControlStateNormal];
     [self.forgotButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateHighlighted];
     
     self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(43, 97, 243, 60)];
@@ -131,11 +141,13 @@
     
     [self.view addSubview:self.firstNameField];
     [self.view addSubview:self.lastNameField];
+    [self.view addSubview:self.emailField];
     [self.view addSubview:self.usernameField];
     [self.view addSubview:self.passwordField];
     [self.view addSubview:self.titleLabel];
     [self.view addSubview:self.loginButton];
     [self.view addSubview:self.overlayView];
+    
     
 }
 
@@ -157,7 +169,8 @@
     NSDictionary *dictionary = @{@"firstName": self.firstNameField.text,
                                  @"lastName": self.lastNameField.text,
                                  @"username": self.usernameField.text,
-                                 @"password": self.passwordField.text,};
+                                 @"password": self.passwordField.text,
+                                 @"email": self.emailField.text};
     [[UserController sharedInstance] addUserwithDictionary:dictionary];
     
     //[[UserController sharedInstance] updateUsers];

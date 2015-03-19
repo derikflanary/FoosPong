@@ -47,7 +47,7 @@
     
     self.tabBarController.navigationItem.hidesBackButton = YES;
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 210, 320, 200) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 200, 320, 200) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = YES;

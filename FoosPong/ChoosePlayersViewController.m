@@ -58,6 +58,11 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
         [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+//    self.navigationController.navigationBar.shadowImage = [UIImage new];
+//    self.navigationController.navigationBar.translucent = YES;
+
+    
     //self.navigationController.toolbarHidden = NO;
     UIBarButtonItem *addGuestButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Player" style:UIBarButtonItemStylePlain target:self action:@selector(addGuestPressed:)];
 //
@@ -82,7 +87,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     UIBarButtonItem *seg = [[UIBarButtonItem alloc]initWithCustomView:self.segmentedControl];
     [self setToolbarItems:@[addGuestButton, seg, startGameButton]];
     
-    self.tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStyleGrouped];
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
