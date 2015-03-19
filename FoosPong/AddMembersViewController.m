@@ -64,22 +64,18 @@
 
     
     [self.view addSubview:self.tableView];
-    //[self.view addSubview:self.addGuestMemberButton];
-    [self findNonMembers];
     
-    
-    // Do any additional setup after loading the view.
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-    [self findNonMembers];
     
+    [self findNonMembers];
 }
 
 - (void)findNonMembers{
-    [[GroupController sharedInstance]notMembersOfCurrentGroupCallback:^(NSArray * nonMembers) {
-        self.nonMembers = nonMembers.mutableCopy;
-        
+    
+    [[GroupController sharedInstance]notMembersOfCurrentGroupsearchString:self.searchController.searchBar.text callback:^(NSArray *nonMembers) {
+         self.nonMembers = nonMembers.mutableCopy;
         [self.tableView reloadData];
     }];
 }
