@@ -97,10 +97,10 @@
         
         PFObject *game = [self.singleGames objectAtIndex:indexPath.row];
         PFUser *p1 = game[@"p1"];
-        NSString *p1Name = p1[@"firstName"];
         PFUser *p2 = game[@"p2"];
+
+        NSString *p1Name = p1[@"firstName"];
         NSString *p2Name = p2[@"firstName"];
-        
         cell.textLabel.text = [NSString stringWithFormat:@"%@:%@ vs %@:%@", p1Name, game[@"playerOneScore"], p2Name, game[@"playerTwoScore"]];
         return cell;
 

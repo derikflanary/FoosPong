@@ -39,13 +39,6 @@
     finishedGame.playerOneScore = gameStats.playerOneScore;
     finishedGame.playerTwoScore = gameStats.playerTwoScore;
     finishedGame.playerOneWin = [NSNumber numberWithBool: gameStats.playerOneWin];
-//    PFObject *finishedGame = [PFObject objectWithClassName:@"SingleGame"];
-//    
-//    finishedGame[@"p1"] = gameStats.playerOne;
-//    finishedGame[@"p2"] = gameStats.playerTwo;
-//    finishedGame[@"playerOneScore"] = gameStats.playerOneScore;
-//    finishedGame[@"playerTwoScore"] = gameStats.playerTwoScore;
-//    finishedGame[@"playerOneWin"] = gameStats.playerOneWin;
     
     [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
@@ -54,26 +47,6 @@
             NSLog(@"%@", error);
     }];
 }
-
-//-(void)addGameWithDictionary:(NSDictionary*)dictionary andUser:(PFUser*)user andOtherUser:(PFUser*)user2{
-//    
-//    PFObject *finishedGame = [PFObject objectWithClassName:@"Game"];
-//    
-//    finishedGame[@"P1"] = user;
-//    finishedGame[@"P2"] = user2;
-//    finishedGame[@"playerOneScore"] = dictionary[playerOneScoreKey];
-//    finishedGame[@"playerOneWin"] = dictionary[playerOneWinKey];
-//    finishedGame[@"playerTwoScore"] = dictionary[playerTwoScoreKey];
-//    finishedGame[@"playerTwoWin"] = dictionary[playerTwoWinKey];
-//    
-//    [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        if (succeeded) {
-//            NSLog(@"saved");
-//        }else{
-//            NSLog(@"%@", error);
-//        }
-//    }];
-//}
 
 
 -(void)updateGamesForUser:(PFUser*)user withBool:(BOOL)getTeamGames callback:(void (^)(NSArray *))callback{
@@ -105,6 +78,20 @@
     }
     
 }
+
+- (void)fetchPlayers:(PFUser*)p1 andP2:(PFUser*)p2 withCallback:(void (^)(NSArray *))callback{
+    
+    [p1 fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        NSMutableArray *players = [NSMutableArray array];
+        [players addObject:object];
+        [p2 fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            [players addObject:object];
+            callback (players);
+        }];
+    }];
+}
+    
+
 
 
 -(void)removeGame:(PFObject*)game{

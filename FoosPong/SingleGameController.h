@@ -17,6 +17,7 @@
 -(void)saveGames;
 -(void)updateGamesForUser:(PFUser*)user withBool:(BOOL)getTeamGames callback:(void (^)(NSArray *))callback;
 -(void)addGameWithSingleGameStats:(SingleGameStats*)gameStats;
+- (void)fetchPlayers:(PFUser*)p1 andP2:(PFUser*)p2 withCallback:(void (^)(NSArray *))callback;
 @property (nonatomic, strong, readonly)NSArray *games;
 @property(nonatomic, strong)NSArray *teamGames;
 
