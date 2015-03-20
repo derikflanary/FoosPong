@@ -28,6 +28,9 @@
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
+    [self.view addGestureRecognizer:tap];
+    
 //    UIColor* mainColor = [UIColor mainColor];
 //    UIColor* darkColor = [UIColor darkColor];
     NSString* fontName = [NSString mainFont];
@@ -121,6 +124,13 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)dismissKeyboard:(id)sender{
+    
+    [self.groupNameField resignFirstResponder];
+    [self.groupNameField resignFirstResponder];
+    [self.passwordField resignFirstResponder];
 }
 
 
