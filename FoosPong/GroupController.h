@@ -25,5 +25,6 @@
 - (void)notMembersOfCurrentGroupsearchString:(NSString *)searchString callback:(void (^)(NSArray*))callback;
 - (void)fetchMembersOfGroup:(PFObject *)group Callback:(void (^)(NSArray *))callback;
 - (void)removeUserFromGroup:(PFUser *)user callback:(void (^)(BOOL *))callback;
+- (void)deleteGroupCallback:(void (^)(BOOL *))callback;
 
 @end

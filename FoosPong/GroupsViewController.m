@@ -117,7 +117,7 @@
         noGroupView.backgroundColor = [UIColor lightGrayColor];
         
         UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, 250, 60)];
-        titleLabel.text = @"No Group Yet? Create or join a group today.";
+        titleLabel.text = @"No Team Yet? Create or join a team today.";
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.numberOfLines = 0;
         

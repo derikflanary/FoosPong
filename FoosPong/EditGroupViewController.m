@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "AddMembersViewController.h"
+#import "EditGroupViewController.h"
 #import "UserController.h"
 #import "NewGameCustomTableViewCell.h"
 #import "GroupController.h"
@@ -14,11 +14,11 @@
 #import "CurrentGroupViewController.h"
 #import "MembersTableViewDataSource.h"
 
-@interface AddMembersViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchControllerDelegate>
+@interface EditGroupViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchControllerDelegate>
 
 
 @property (nonatomic, strong) NSMutableArray *nonMembers;
-@property (nonatomic, strong) UIButton *addGuestMemberButton;
+@property (nonatomic, strong) UIButton *deleteGroupButton;
 @property (nonatomic, strong) UITableView *contactsTableView;
 @property (nonatomic, assign) BOOL searchUsers;
 @property (nonatomic, strong) UISearchController *searchController;
@@ -27,7 +27,7 @@
 
 @end
 
-@implementation AddMembersViewController
+@implementation EditGroupViewController
 
 -(void)viewDidDisappear:(BOOL)animated{
     self.navigationController.toolbarHidden = YES;
@@ -48,13 +48,13 @@
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
-    self.addGuestMemberButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 410, 320, 41)];
-    self.addGuestMemberButton.backgroundColor = [UIColor darkColor];
-    self.addGuestMemberButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-    [self.addGuestMemberButton setTitle:@"Create Guest Member" forState:UIControlStateNormal];
-    [self.addGuestMemberButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.addGuestMemberButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
-    [self.addGuestMemberButton addTarget:self action:@selector(addGuestMemberPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.deleteGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 410, 320, 41)];
+    self.deleteGroupButton.backgroundColor = [UIColor darkColor];
+    self.deleteGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+    [self.deleteGroupButton setTitle:@"Delete Team" forState:UIControlStateNormal];
+    [self.deleteGroupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.deleteGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.deleteGroupButton addTarget:self action:@selector(deleteGroupButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     self.membersDataSource = [MembersTableViewDataSource new];
 
@@ -67,7 +67,6 @@
     self.tableView.clipsToBounds = YES;
     self.tableView.backgroundColor = [UIColor transparentWhite];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
-    
     
     self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
     [self.searchController.searchBar sizeToFit];
@@ -91,9 +90,12 @@
     [self setToolbarItems:@[spacer, seg, spacer]];
     
     [self.view addSubview:self.tableView];
+    [self.view addSubview:self.deleteGroupButton];
 
     [self populateTableView];
 }
+
+#pragma mark - segmentedControl
 
 - (void)segmentedControlChanged:(id)sender{
     if (self.segmentedControl.selectedSegmentIndex == 0) {
@@ -109,6 +111,8 @@
     
 }
 
+#pragma mark - searchBar
+
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     
     [self findNonMembers];
@@ -123,7 +127,7 @@
     }];
 }
 
--(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     self.tableView.allowsSelection = YES;
 }
 
@@ -131,9 +135,16 @@
     self.tableView.allowsSelection = NO;
 }
 
--(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
     self.tableView.allowsSelection = YES;
 }
+
+
+
+
+// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+#pragma mark - TableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -142,15 +153,11 @@
     
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-#pragma mark - TableView
-
 - (void)populateTableView{
     PFUser *currentUser = [PFUser currentUser];
 
     [[GroupController sharedInstance]fetchMembersOfGroup:currentUser[@"currentGroup"] Callback:^(NSArray *members) {
-        self.membersDataSource.groupMembers = members;
+        self.membersDataSource.groupMembers = members.mutableCopy;
         [self.tableView reloadData];
         
     }];
@@ -207,6 +214,8 @@
     return 40;
 }
 
+#pragma mark - Other Methods
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -222,6 +231,25 @@
 - (void)addGuestMemberPressed:(id)sender{
     [self.navigationController pushViewController:[CreateMemberViewController new] animated:YES];
     
+}
+
+- (void)deleteGroupButtonPressed:(id)sender{
+    UIAlertController *deleteGroupAlert = [UIAlertController alertControllerWithTitle:@"Delete Your Team?" message:@"Are you sure?" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [deleteGroupAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        
+        [[GroupController sharedInstance]deleteGroupCallback:^(BOOL *succeeded) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                [self.tableView setEditing:NO animated:YES];
+            }];
+        }];
+        
+    }]];
+    
+    [deleteGroupAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        return;
+    }]];
+    [self presentViewController:deleteGroupAlert animated:YES completion:nil];
 }
 
 /*

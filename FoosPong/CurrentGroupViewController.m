@@ -10,7 +10,7 @@
 #import "AddGroupViewController.h"
 #import "FindGroupViewController.h"
 #import "GroupController.h"
-#import "AddMembersViewController.h"
+#import "EditGroupViewController.h"
 #import "NewGameCustomTableViewCell.h"
 
 @interface CurrentGroupViewController () 
@@ -155,7 +155,7 @@
         self.noGroupView.backgroundColor = [UIColor whiteColor];
         
         UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, 250, 60)];
-        titleLabel.text = @"No Group Yet? Create or join a group today.";
+        titleLabel.text = @"No Team Yet? Create or join a team today.";
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.numberOfLines = 0;
         
@@ -202,7 +202,7 @@
 }
 
 - (void)addMember:(id)sender{
-    AddMembersViewController *amvc = [AddMembersViewController new];
+    EditGroupViewController *amvc = [EditGroupViewController new];
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:amvc];
     [self presentViewController:navController animated:YES completion:^{
         

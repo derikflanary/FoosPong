@@ -169,16 +169,7 @@ static NSString * const passwordKey = @"password";
             NSLog(@"%@", error);
         }
     }];
-    //    for (PFUser *user in members) {
-//        [user fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-//            if (!error) {
-//                [fetchedMembers addObject:object];
-//            }else{
-//                NSLog(@"%@", error);
-//            }
-//        }];
-//    }
-//    callback(fetchedMembers);
+
 }
 
 - (void)findGroupsByName:(NSString*)name withCallback:(void (^)(NSArray*))callback{
@@ -221,13 +212,18 @@ static NSString * const passwordKey = @"password";
             NSLog(@"%@", error);
         }
     }];
-    
-    
-    
 }
 
-- (void)searchNonMembers:(NSArray *)array withString:(NSString*)searchString withCallback:(void (^)(NSArray*))callback{
+- (void)deleteGroupCallback:(void (^)(BOOL *))callback{
     
+    PFUser *currentUser = [PFUser currentUser];
+    PFObject *group = currentUser[currentGroupKey];
+    [group deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+        [currentUser removeObjectForKey:currentGroupKey];
+        callback(&succeeded);
+        
+    }];
 }
 
     

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddMembersViewController : UIViewController
+@interface EditGroupViewController : UIViewController
 
 @property (nonatomic, strong) UITableView *tableView;
 

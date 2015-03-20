@@ -14,7 +14,7 @@
 		EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC00E1A8D9456000235B3 /* UserController.m */; };
 		EE0DC0121A8D96D8000235B3 /* SingleGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC0111A8D96D8000235B3 /* SingleGameController.m */; };
 		EE1817081AB2732800E608B3 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1817071AB2732800E608B3 /* Group.m */; };
-		EE18170B1AB27BDC00E608B3 /* AddMembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE18170A1AB27BDC00E608B3 /* AddMembersViewController.m */; };
+		EE18170B1AB27BDC00E608B3 /* EditGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE18170A1AB27BDC00E608B3 /* EditGroupViewController.m */; };
 		EE1A557E1A9CFB3000E6981E /* GroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A557D1A9CFB3000E6981E /* GroupsViewController.m */; };
 		EE1A55811A9CFB4A00E6981E /* CurrentGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A55801A9CFB4A00E6981E /* CurrentGroupViewController.m */; };
 		EE1A55851A9CFBB500E6981E /* GroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A55841A9CFBB500E6981E /* GroupController.m */; };
@@ -106,8 +106,8 @@
 		EE0DC0111A8D96D8000235B3 /* SingleGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleGameController.m; sourceTree = "<group>"; };
 		EE1817061AB2732800E608B3 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
 		EE1817071AB2732800E608B3 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
-		EE1817091AB27BDC00E608B3 /* AddMembersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMembersViewController.h; sourceTree = "<group>"; };
-		EE18170A1AB27BDC00E608B3 /* AddMembersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMembersViewController.m; sourceTree = "<group>"; };
+		EE1817091AB27BDC00E608B3 /* EditGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditGroupViewController.h; sourceTree = "<group>"; };
+		EE18170A1AB27BDC00E608B3 /* EditGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditGroupViewController.m; sourceTree = "<group>"; };
 		EE1A557C1A9CFB3000E6981E /* GroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupsViewController.h; sourceTree = "<group>"; };
 		EE1A557D1A9CFB3000E6981E /* GroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupsViewController.m; sourceTree = "<group>"; };
 		EE1A557F1A9CFB4A00E6981E /* CurrentGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentGroupViewController.h; sourceTree = "<group>"; };
@@ -328,8 +328,8 @@
 				EE9DAEF21A9ECEC600589897 /* AddGroupViewController.m */,
 				EE9DAEF41A9ECED800589897 /* FindGroupViewController.h */,
 				EE9DAEF51A9ECED800589897 /* FindGroupViewController.m */,
-				EE1817091AB27BDC00E608B3 /* AddMembersViewController.h */,
-				EE18170A1AB27BDC00E608B3 /* AddMembersViewController.m */,
+				EE1817091AB27BDC00E608B3 /* EditGroupViewController.h */,
+				EE18170A1AB27BDC00E608B3 /* EditGroupViewController.m */,
 				EE7C85C21ABC87D1008467AD /* MembersTableViewDataSource.h */,
 				EE7C85C31ABC87D1008467AD /* MembersTableViewDataSource.m */,
 				EEC4E4781ABA6BC50060DDF5 /* CreateMemberViewController.h */,
@@ -676,7 +676,7 @@
 				EE9DAEF31A9ECEC600589897 /* AddGroupViewController.m in Sources */,
 				EEC4E4771AB91BF30060DDF5 /* GroupTableViewCell.m in Sources */,
 				EEC4E47A1ABA6BC50060DDF5 /* CreateMemberViewController.m in Sources */,
-				EE18170B1AB27BDC00E608B3 /* AddMembersViewController.m in Sources */,
+				EE18170B1AB27BDC00E608B3 /* EditGroupViewController.m in Sources */,
 				EE58A3091AB0BDEF00832380 /* JBBarChartView.m in Sources */,
 				EE9DAEEB1A9D582200589897 /* RNFrostedSidebar.m in Sources */,
 				EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */,

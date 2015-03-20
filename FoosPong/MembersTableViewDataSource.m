@@ -54,6 +54,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
         [[GroupController sharedInstance]removeUserFromGroup:[self.groupMembers objectAtIndex:indexPath.row] callback:^(BOOL *succeeded) {
             [self.groupMembers removeObject:[self.groupMembers objectAtIndex:indexPath.row]];
             [tableView reloadData];
