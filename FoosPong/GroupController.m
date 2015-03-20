@@ -84,7 +84,7 @@ static NSString * const passwordKey = @"password";
     }];
 }
 
-- (void)removeUserFromGroup:(PFUser *)user{
+- (void)removeUserFromGroup:(PFUser *)user callback:(void (^)(BOOL *))callback{
     
     PFUser *currentUser = [PFUser currentUser];
     PFObject *group = currentUser[currentGroupKey];
@@ -93,7 +93,7 @@ static NSString * const passwordKey = @"password";
     group[membersKey] = members;
     [group saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error){
-            
+            callback(&succeeded);
         }else{
             NSLog(@"%@", error);
         }
@@ -146,7 +146,39 @@ static NSString * const passwordKey = @"password";
             callback(nil, error);
         }
     }];
+   
+}
+
+- (NSArray*)membersForCurrentGroup:(PFObject *)currentGroup{
     
+    NSArray *members = currentGroup[membersKey];
+    return members;
+    
+}
+
+- (void)fetchMembersOfGroup:(PFObject *)group Callback:(void (^)(NSArray *))callback{
+    
+    NSArray *members = group[membersKey];
+    //NSMutableArray *fetchedMembers = [NSMutableArray array];
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"objectId" containedIn:[members valueForKey:@"objectId"]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            callback(objects);
+        }else{
+            NSLog(@"%@", error);
+        }
+    }];
+    //    for (PFUser *user in members) {
+//        [user fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+//            if (!error) {
+//                [fetchedMembers addObject:object];
+//            }else{
+//                NSLog(@"%@", error);
+//            }
+//        }];
+//    }
+//    callback(fetchedMembers);
 }
 
 - (void)findGroupsByName:(NSString*)name withCallback:(void (^)(NSArray*))callback{
@@ -167,12 +199,7 @@ static NSString * const passwordKey = @"password";
 
 }
 
-- (NSArray*)membersForCurrentGroup:(PFObject *)currentGroup{
-    
-        NSArray *members = currentGroup[membersKey];
-        return members;
 
-}
 
 - (void)notMembersOfCurrentGroupsearchString:(NSString *)searchString callback:(void (^)(NSArray*))callback {
     

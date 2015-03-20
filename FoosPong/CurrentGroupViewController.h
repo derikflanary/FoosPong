@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "MasterViewController.h"
 
-@interface CurrentGroupViewController : MasterViewController
+@interface CurrentGroupViewController : MasterViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) NSArray *groupMembers;
 
 - (void)checkForGroup;
 

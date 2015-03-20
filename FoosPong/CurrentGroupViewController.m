@@ -13,8 +13,7 @@
 #import "AddMembersViewController.h"
 #import "NewGameCustomTableViewCell.h"
 
-@interface CurrentGroupViewController () <UITableViewDataSource, UITableViewDelegate>
-
+@interface CurrentGroupViewController () 
 @property (nonatomic, strong) UIButton *joinGroupButton;
 @property (nonatomic, strong) UIButton *createGroupButton;
 @property (nonatomic, strong) AddGroupViewController *addGroupViewController;
@@ -24,7 +23,7 @@
 @property (nonatomic, strong) UIButton *addMembersButton;
 @property (nonatomic, assign) BOOL isAdmin;
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray *groupMembers;
+
 
 @end
 
@@ -55,6 +54,7 @@
     self.tableView.layer.cornerRadius = 10;
     self.tableView.clipsToBounds = YES;
     self.tableView.backgroundColor = [UIColor transparentWhite];
+    [self.tableView setEditing:NO];
     [self.view addSubview:self.tableView];
     
     self.addMembersButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 410, 320, 41)];
@@ -98,6 +98,17 @@
     return cell;
 
 }
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+   return  @"Team Members";
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 40;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 40;
+}
 
 #pragma mark - Group Checks
 
@@ -111,8 +122,12 @@
             }else{
                 self.currentGroup = group;
                 self.tabBarController.title = group[@"name"];
-                self.groupMembers = [[GroupController sharedInstance]membersForCurrentGroup:self.currentGroup];
-                [self.tableView reloadData];
+                
+                [[GroupController sharedInstance]fetchMembersOfGroup:self.currentGroup Callback:^(NSArray *members) {
+                    self.groupMembers = members;
+                    [self.tableView reloadData];
+
+                }];
                 
                 self.isAdmin = [[GroupController sharedInstance]isUserAdmin];
                 if (self.isAdmin) {

@@ -63,7 +63,6 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 //    self.navigationController.navigationBar.shadowImage = [UIImage new];
 //    self.navigationController.navigationBar.translucent = YES;
 
-    
     //self.navigationController.toolbarHidden = NO;
     UIBarButtonItem *addGuestButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Player" style:UIBarButtonItemStylePlain target:self action:@selector(addGuestPressed:)];
 //
@@ -88,7 +87,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     UIBarButtonItem *seg = [[UIBarButtonItem alloc]initWithCustomView:self.segmentedControl];
     [self setToolbarItems:@[addGuestButton, seg, startGameButton]];
     
-    self.tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.editing = NO;
@@ -104,6 +103,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     self.searchController.searchBar.delegate = self;
     self.searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
     self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.hidesNavigationBarDuringPresentation = NO;
     
     self.currentUser = [PFUser currentUser];
     self.currentPlayers = [NSMutableArray array];
@@ -111,17 +111,18 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     
     //self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
     [[GroupController sharedInstance]retrieveCurrentGroupWithCallback:^(PFObject *group, NSError *error) {
-        self.availablePlayers = [[GroupController sharedInstance]membersForCurrentGroup:group].mutableCopy;
-        [self.availablePlayers removeObject:self.currentUser];
-        self.title = group[@"name"];
-        [self.tableView reloadData];
+        [[GroupController sharedInstance]fetchMembersOfGroup:group Callback:^(NSArray *members) {
+            self.availablePlayers = members.mutableCopy;
+            [self.availablePlayers removeObject:self.currentUser];
+            self.title = group[@"name"];
+            [self.tableView reloadData];
+        }];
     }];
+   
     self.teamTwoPlayers = [NSMutableArray array];
     [self.teamTwoPlayers addObject:[PFUser new]];
     [self.teamTwoPlayers addObject:[PFUser new]];
 
-    
-    
     if (self.segmentedControl.selectedSegmentIndex == 0) {
         self.isTwoPlayer = NO;
     }else{

@@ -11,22 +11,35 @@
 #import "NewGameCustomTableViewCell.h"
 #import "GroupController.h"
 #import "CreateMemberViewController.h"
+#import "CurrentGroupViewController.h"
+#import "MembersTableViewDataSource.h"
 
 @interface AddMembersViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchControllerDelegate>
 
-@property (nonatomic, strong) UITableView *tableView;
+
 @property (nonatomic, strong) NSMutableArray *nonMembers;
 @property (nonatomic, strong) UIButton *addGuestMemberButton;
 @property (nonatomic, strong) UITableView *contactsTableView;
 @property (nonatomic, assign) BOOL searchUsers;
 @property (nonatomic, strong) UISearchController *searchController;
+@property (nonatomic, strong) UISegmentedControl *segmentedControl;
+@property (nonatomic, strong) MembersTableViewDataSource *membersDataSource;
 
 @end
 
 @implementation AddMembersViewController
 
+-(void)viewDidDisappear:(BOOL)animated{
+    self.navigationController.toolbarHidden = YES;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    self.navigationController.toolbarHidden = NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.translucent = NO;
     
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
@@ -42,15 +55,19 @@
     [self.addGuestMemberButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.addGuestMemberButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.addGuestMemberButton addTarget:self action:@selector(addGuestMemberPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.membersDataSource = [MembersTableViewDataSource new];
 
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 80, 320, 250) style:UITableViewStylePlain];
-    self.tableView.dataSource = self;
+    self.tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStylePlain];
+    self.tableView.dataSource = self.membersDataSource;
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = YES;
     self.tableView.bounces = NO;
     self.tableView.layer.cornerRadius = 10;
     self.tableView.clipsToBounds = YES;
     self.tableView.backgroundColor = [UIColor transparentWhite];
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    
     
     self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
     [self.searchController.searchBar sizeToFit];
@@ -58,18 +75,44 @@
     //self.searchController.searchResultsUpdater = self;
     self.searchController.delegate = self;
     self.searchController.searchBar.delegate = self;
-    self.searchController.searchBar.searchBarStyle = UISearchBarStyleProminent;
+    self.searchController.searchBar.searchBarStyle = UISearchBarStyleDefault;
     self.searchController.dimsBackgroundDuringPresentation = YES;
-    self.searchController.searchBar.placeholder = @"Search by name or organization";
-
+    self.searchController.searchBar.placeholder = @"Search for user";
+    self.searchController.searchBar.hidden = YES;
+    self.searchController.hidesNavigationBarDuringPresentation = NO;
+    
+    self.segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"Edit Team", @"Add Member"]];
+    [self.segmentedControl addTarget:self action:@selector(segmentedControlChanged:) forControlEvents:UIControlEventValueChanged];
+    self.segmentedControl.tintColor = [UIColor darkColor];
+    self.segmentedControl.selectedSegmentIndex = 0;
+   
+    UIBarButtonItem *seg = [[UIBarButtonItem alloc]initWithCustomView:self.segmentedControl];
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    [self setToolbarItems:@[spacer, seg, spacer]];
     
     [self.view addSubview:self.tableView];
+
+    [self populateTableView];
+}
+
+- (void)segmentedControlChanged:(id)sender{
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        self.tableView.dataSource = self.membersDataSource;
+        self.searchController.searchBar.hidden = YES;
+        [self populateTableView];
+        
+    }else{
+        self.tableView.dataSource = self;
+        self.searchController.searchBar.hidden = NO;
+        [self.tableView reloadData];
+    }
     
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     
     [self findNonMembers];
+    self.tableView.allowsSelection = NO;
 }
 
 - (void)findNonMembers{
@@ -78,6 +121,18 @@
          self.nonMembers = nonMembers.mutableCopy;
         [self.tableView reloadData];
     }];
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    self.tableView.allowsSelection = YES;
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
+    self.tableView.allowsSelection = NO;
+}
+
+-(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
+    self.tableView.allowsSelection = YES;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -89,6 +144,17 @@
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+#pragma mark - TableView
+
+- (void)populateTableView{
+    PFUser *currentUser = [PFUser currentUser];
+
+    [[GroupController sharedInstance]fetchMembersOfGroup:currentUser[@"currentGroup"] Callback:^(NSArray *members) {
+        self.membersDataSource.groupMembers = members;
+        [self.tableView reloadData];
+        
+    }];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -108,30 +174,37 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    PFUser *selectedUser = [self.nonMembers objectAtIndex:indexPath.row];
-    
-    UIAlertController *addPlayerAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Add %@ to your team?", selectedUser[@"username"]] message:@"" preferredStyle:UIAlertControllerStyleAlert];
-    [addPlayerAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    if (self.segmentedControl.selectedSegmentIndex == 1) {
+        PFUser *selectedUser = [self.nonMembers objectAtIndex:indexPath.row];
         
-        PFUser *currentUser = [PFUser currentUser];
-        [[GroupController sharedInstance]addUser:[self.nonMembers objectAtIndex:indexPath.row] toGroup:currentUser[@"currentGroup"]
-         ];
-        [self.nonMembers removeObjectAtIndex:indexPath.row];
-        [self.tableView reloadData];
-
-    }]];
-    [addPlayerAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        UIAlertController *addPlayerAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Add %@ to your team?", selectedUser[@"username"]] message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        [addPlayerAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+            PFUser *currentUser = [PFUser currentUser];
+            [[GroupController sharedInstance]addUser:[self.nonMembers objectAtIndex:indexPath.row] toGroup:currentUser[@"currentGroup"]
+             ];
+            [self.nonMembers removeObjectAtIndex:indexPath.row];
+            [self.tableView reloadData];
+            
+        }]];
+        [addPlayerAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            return;
+        }]];
         
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        return;
-    }]];
-    [self presentViewController:addPlayerAlert animated:YES completion:nil];
-    
-    
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            [self presentViewController:addPlayerAlert animated:YES completion:nil];
+        });
+    }
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     return @"Add A User To Your Team";
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 40;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -140,6 +213,7 @@
 }
 
 - (void)cancelPressed:(id)sender{
+    [self.tableView setEditing:NO animated:YES];
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         
     }];

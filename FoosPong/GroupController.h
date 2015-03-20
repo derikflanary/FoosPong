@@ -23,5 +23,7 @@
 - (BOOL)isUserAdmin;
 - (NSArray*)membersForCurrentGroup:(PFObject *)currentGroup;
 - (void)notMembersOfCurrentGroupsearchString:(NSString *)searchString callback:(void (^)(NSArray*))callback;
+- (void)fetchMembersOfGroup:(PFObject *)group Callback:(void (^)(NSArray *))callback;
+- (void)removeUserFromGroup:(PFUser *)user callback:(void (^)(BOOL *))callback;
 
 @end

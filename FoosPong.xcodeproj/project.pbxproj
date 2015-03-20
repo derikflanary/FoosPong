@@ -62,6 +62,7 @@
 		EE7A6D041A869169000447D2 /* InitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D031A869169000447D2 /* InitialViewController.m */; };
 		EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */; };
 		EE7A6D0A1A869CD4000447D2 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D091A869CD4000447D2 /* HistoryViewController.m */; };
+		EE7C85C41ABC87D1008467AD /* MembersTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7C85C31ABC87D1008467AD /* MembersTableViewDataSource.m */; };
 		EE808DB01A9FC3E30000F833 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE808DAF1A9FC3E30000F833 /* SettingViewController.m */; };
 		EE808DB71A9FCCB10000F833 /* NSString+Fonts.m in Sources */ = {isa = PBXBuildFile; fileRef = EE808DB61A9FCCB10000F833 /* NSString+Fonts.m */; };
 		EE9DAEEB1A9D582200589897 /* RNFrostedSidebar.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */; };
@@ -185,6 +186,8 @@
 		EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGameCustomTableViewCell.m; sourceTree = "<group>"; };
 		EE7A6D081A869CD4000447D2 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
 		EE7A6D091A869CD4000447D2 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
+		EE7C85C21ABC87D1008467AD /* MembersTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MembersTableViewDataSource.h; sourceTree = "<group>"; };
+		EE7C85C31ABC87D1008467AD /* MembersTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MembersTableViewDataSource.m; sourceTree = "<group>"; };
 		EE808DAE1A9FC3E30000F833 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		EE808DAF1A9FC3E30000F833 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		EE808DB51A9FCCB10000F833 /* NSString+Fonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Fonts.h"; sourceTree = "<group>"; };
@@ -327,6 +330,8 @@
 				EE9DAEF51A9ECED800589897 /* FindGroupViewController.m */,
 				EE1817091AB27BDC00E608B3 /* AddMembersViewController.h */,
 				EE18170A1AB27BDC00E608B3 /* AddMembersViewController.m */,
+				EE7C85C21ABC87D1008467AD /* MembersTableViewDataSource.h */,
+				EE7C85C31ABC87D1008467AD /* MembersTableViewDataSource.m */,
 				EEC4E4781ABA6BC50060DDF5 /* CreateMemberViewController.h */,
 				EEC4E4791ABA6BC50060DDF5 /* CreateMemberViewController.m */,
 			);
@@ -701,6 +706,7 @@
 				EE2EF8191AA6422000DE09E7 /* PersonalSingleStats.m in Sources */,
 				EE7A6CDC1A868402000447D2 /* main.m in Sources */,
 				EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */,
+				EE7C85C41ABC87D1008467AD /* MembersTableViewDataSource.m in Sources */,
 				302E41C71A86A195005F1184 /* ChoosePlayersViewController.m in Sources */,
 				EEFDF3CE1AA6AE7200A0E48F /* StatsController.m in Sources */,
 				EE2C57D61A93DFC600DA9835 /* UIImageView+Letters.m in Sources */,
