@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface MembersTableViewDataSource : NSObject <UITableViewDataSource>
+
 @property (nonatomic, strong) NSMutableArray *groupMembers;
+@property (nonatomic, strong) PFObject *group;
+
 - (void)registerTableView:(UITableView *)tableView;
 
 @end

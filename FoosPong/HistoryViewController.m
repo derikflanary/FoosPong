@@ -99,8 +99,8 @@
         PFUser *p1 = game[@"p1"];
         PFUser *p2 = game[@"p2"];
 
-        NSString *p1Name = p1[@"firstName"];
-        NSString *p2Name = p2[@"firstName"];
+        NSString *p1Name = p1.username;
+        NSString *p2Name = p2.username;
         cell.textLabel.text = [NSString stringWithFormat:@"%@:%@ vs %@:%@", p1Name, game[@"playerOneScore"], p2Name, game[@"playerTwoScore"]];
         return cell;
 
@@ -108,9 +108,9 @@
         
         PFObject *teamGame = [self.teamGames objectAtIndex:indexPath.row];
         PFUser *t1p1 = teamGame[@"teamOnePlayerOne"];
-        NSString *t1p1Name = t1p1[@"firstName"];
+        NSString *t1p1Name = t1p1.username;
         PFUser *t1p2 = teamGame[@"teamOnePlayerTwo"];
-        NSString *t1p2Name = t1p2[@"firstName"];
+        NSString *t1p2Name = t1p2.username;
         
         cell.textLabel.text = [NSString stringWithFormat:@"%@ and %@", t1p1Name, t1p2Name];
         return cell;

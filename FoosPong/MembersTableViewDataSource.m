@@ -30,6 +30,9 @@
     }
     if (self.groupMembers.count > 0) {
         PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
+        if (user == [PFUser currentUser]) {
+            cell.detailTextLabel.text = @"Admin";
+        }
         cell.textLabel.text = user.username;
     }
     
@@ -49,7 +52,12 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 0) {
+        return NO;
+    }else{
+    
     return YES;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{

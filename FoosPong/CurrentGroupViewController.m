@@ -23,6 +23,7 @@
 @property (nonatomic, strong) UIButton *addMembersButton;
 @property (nonatomic, assign) BOOL isAdmin;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) PFUser *admin;
 
 
 @end
@@ -30,7 +31,13 @@
 @implementation CurrentGroupViewController
 
 -(void)viewWillAppear:(BOOL)animated{
-    
+    PFUser *currentUser = [PFUser currentUser];
+    if (!currentUser[@"currentGroup"]) {
+        [self noGroup];
+    }else{
+        
+        [self checkForGroup];
+    }
 }
 
 - (void)viewDidLoad {
@@ -65,13 +72,13 @@
     [self.addMembersButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.addMembersButton addTarget:self action:@selector(addMember:) forControlEvents:UIControlEventTouchUpInside];
     
-    PFUser *currentUser = [PFUser currentUser];
-    if (!currentUser[@"currentGroup"]) {
-        [self noGroup];
-    }else{
-    
-    [self checkForGroup];
-    }
+//    PFUser *currentUser = [PFUser currentUser];
+//    if (!currentUser[@"currentGroup"]) {
+//        [self noGroup];
+//    }else{
+//    
+//    [self checkForGroup];
+//    }
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
     
@@ -92,12 +99,13 @@
     }
     if (self.groupMembers.count > 0) {
         PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
+        
         cell.textLabel.text = user.username;
     }
    
     return cell;
-
 }
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
    return  @"Team Members";
 }
@@ -129,10 +137,11 @@
 
                 }];
                 
-                self.isAdmin = [[GroupController sharedInstance]isUserAdmin];
-                if (self.isAdmin) {
-                    [self.view addSubview:self.addMembersButton];
-                }
+                [[GroupController sharedInstance]fetchAdminForGroup:self.currentGroup callback:^(PFObject *admin) {
+                    if ([PFUser currentUser] == admin) {
+                        [self.view addSubview:self.addMembersButton];
+                    }
+                }];
                 if (self.noGroupView) {
                     [self.noGroupView removeFromSuperview];
                 }
@@ -211,13 +220,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     
-    PFUser *currentUser = [PFUser currentUser];
-    if (!currentUser[@"currentGroup"]) {
-        [self noGroup];
-    }else{
-        
-        [self checkForGroup];
-    }
+    
 
 }
 

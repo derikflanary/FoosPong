@@ -59,17 +59,14 @@ static NSString * const passwordKey = @"password";
     }
 }
 
-- (BOOL)isUserAdmin{
+- (void)fetchAdminForGroup:(PFObject*)group callback:(void (^)(PFObject *))callback{
     
-    PFUser *currentUser = [PFUser currentUser];
-    PFObject *currentGroup = currentUser[currentGroupKey];
-    PFUser *admin = currentGroup[adminKey];
     
-    if (admin == currentUser) {
-        return YES;
-    }else{
-        return NO;
-    }
+    PFUser *admin = group[adminKey];
+    [admin fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        callback(object);
+    }];
+    
 }
 
 - (void)addUser:(PFUser *)user toGroup:(PFObject *)group{

@@ -20,7 +20,7 @@
 - (void)setCurrentGroup:(PFObject *)group;
 - (void)findGroupsByName:(NSString*)name withCallback:(void (^)(NSArray *foundGroups))callback;
 - (void)addUser:(PFUser *)user toGroup:(PFObject *)group;
-- (BOOL)isUserAdmin;
+- (void)fetchAdminForGroup:(PFObject*)group callback:(void (^)(PFObject *))callback;
 - (NSArray*)membersForCurrentGroup:(PFObject *)currentGroup;
 - (void)notMembersOfCurrentGroupsearchString:(NSString *)searchString callback:(void (^)(NSArray*))callback;
 - (void)fetchMembersOfGroup:(PFObject *)group Callback:(void (^)(NSArray *))callback;

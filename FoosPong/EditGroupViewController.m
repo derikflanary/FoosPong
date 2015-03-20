@@ -25,6 +25,7 @@
 @property (nonatomic, strong) UISegmentedControl *segmentedControl;
 @property (nonatomic, strong) MembersTableViewDataSource *membersDataSource;
 
+
 @end
 
 @implementation EditGroupViewController
@@ -144,6 +145,18 @@
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+
+- (void)populateTableView{
+    PFUser *currentUser = [PFUser currentUser];
+    
+    [[GroupController sharedInstance]fetchMembersOfGroup:currentUser[@"currentGroup"] Callback:^(NSArray *members) {
+        self.membersDataSource.groupMembers = members.mutableCopy;
+//        [self.membersDataSource.groupMembers removeObject:currentUser];
+        [self.tableView reloadData];
+        
+    }];
+}
+
 #pragma mark - TableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -153,15 +166,6 @@
     
 }
 
-- (void)populateTableView{
-    PFUser *currentUser = [PFUser currentUser];
-
-    [[GroupController sharedInstance]fetchMembersOfGroup:currentUser[@"currentGroup"] Callback:^(NSArray *members) {
-        self.membersDataSource.groupMembers = members.mutableCopy;
-        [self.tableView reloadData];
-        
-    }];
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
