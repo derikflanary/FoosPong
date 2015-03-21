@@ -44,6 +44,10 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     background.frame = self.view.frame;
     [self.view addSubview:background];
     
+    UIView *view = [[UIView alloc]initWithFrame:self.view.frame];
+    view.backgroundColor = [UIColor transparentWhite];
+    [self.view addSubview:view];
+    
     self.scoreToWin = 10;
     self.playerOneWin = NO;
     self.playerTwoWin = NO;
@@ -63,6 +67,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     };
     [self.playerOneStepper setup];
     self.playerOneStepper.maximum = self.scoreToWin;
+    self.playerOneStepper.tintColor = [UIColor darkColor];
     [self.view addSubview:self.playerOneStepper];
     
     self.playerTwoStepper = [[PKYStepper alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 100)];

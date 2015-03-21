@@ -13,6 +13,7 @@
 #import "InitialViewController.h"
 #import "UserController.h"
 #import "HomeViewController.h"
+#import "AppDelegate.h"
 
 @interface LogViewController ()
 
@@ -123,10 +124,14 @@
 }
 
 - (void)cancelPressed:(id)sender{
+    [self.view endEditing:YES];
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)loginPressed:(id)sender{
+    [self.view endEditing:YES];
+
     NSDictionary *dictionary = @{@"username":self.usernameField.text,
                                  @"password":self.passwordField.text};
     [[UserController sharedInstance] loginUser:dictionary callback:^(PFUser *currentUser) {
@@ -139,8 +144,11 @@
             [self presentViewController:failedLoginAlert animated:YES completion:nil];
             
         }else{
+            
+            AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+            appDelegate.mainNavigationController.viewControllers = @[[HomeViewController new]];
+
             [self dismissViewControllerAnimated:YES completion:^{
-                
             }];
         }
     }];

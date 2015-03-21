@@ -67,10 +67,7 @@
             [self.groupMembers removeObject:[self.groupMembers objectAtIndex:indexPath.row]];
             [tableView reloadData];
         }];
-       
     }
-    
-    
 }
 
 

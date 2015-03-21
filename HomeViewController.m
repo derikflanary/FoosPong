@@ -27,13 +27,15 @@
         
     }else{
         
-        
     }
     self.navigationController.toolbarHidden = YES;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
     
     PFUser *user = [PFUser currentUser];
     self.title = user[@"firstName"];
@@ -60,7 +62,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  1;
+    return  2;
     //return [self.projects count];
 }
 
@@ -72,9 +74,9 @@
         cell = [NewGameCustomTableViewCell new];
     }
     if (indexPath.row == 0) {
-        cell.textLabel.text = @"Create A New Game";
+        cell.textLabel.text = @"Play A Live Game";
     }else if (indexPath.row == 1){
-        cell.textLabel.text = @"Add A Game";
+        cell.textLabel.text = @"Add A Completed Game";
     }else{
         cell.textLabel.text = @"Continue Saved Game";
     }
@@ -93,11 +95,16 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ChoosePlayersViewController * newGameViewController = [ChoosePlayersViewController new];
     
+    if (indexPath.row == 0) {
+        newGameViewController.isLiveGame = YES;
+    }else{
+        newGameViewController.isLiveGame = NO;
+    }
+    
     [self.navigationController pushViewController:newGameViewController animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
-
 
 
 - (void)didReceiveMemoryWarning {

@@ -66,14 +66,13 @@
     [self.tableView setEditing:NO];
     [self.view addSubview:self.tableView];
     
-    self.addMembersButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 410, 320, 41)];
+    self.addMembersButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 420, 320, 41)];
     self.addMembersButton.backgroundColor = [UIColor darkColor];
     self.addMembersButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.addMembersButton setTitle:@"Edit Team" forState:UIControlStateNormal];
     [self.addMembersButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.addMembersButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.addMembersButton addTarget:self action:@selector(addMember:) forControlEvents:UIControlEventTouchUpInside];
-    
     
     self.groupStatsButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 160, self.view.frame.size.width, 41)];
     self.groupStatsButton.backgroundColor = [UIColor darkColor];
@@ -82,16 +81,6 @@
     [self.groupStatsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.groupStatsButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.groupStatsButton addTarget:self action:@selector(statsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-
-//    PFUser *currentUser = [PFUser currentUser];
-//    if (!currentUser[@"currentGroup"]) {
-//        [self noGroup];
-//    }else{
-//    
-//    [self checkForGroup];
-//    }
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
     

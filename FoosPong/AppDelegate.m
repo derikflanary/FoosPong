@@ -47,22 +47,14 @@
     
     //[PFUser enableAutomaticUser];
     
-    if ([PFUser currentUser]) {
-        //got a long-running operation on this. Probably need a block
-        //[[UserController sharedInstance] updateUsers];
-        UINavigationController *mainNavController = [[UINavigationController alloc]initWithRootViewController:[HomeViewController new]];
+
+        self.mainNavigationController = [[UINavigationController alloc]initWithRootViewController:[PFUser currentUser]?[HomeViewController new]:[InitialViewController new]];
 //        [[GroupController sharedInstance]findGroupsForUser:[PFUser currentUser] callback:^(NSArray *array) {
 //            
 //        }];
-        self.window.rootViewController = mainNavController;
+        self.window.rootViewController = self.mainNavigationController;
         
-    }else{
         
-    UINavigationController *mainNavController = [[UINavigationController alloc]initWithRootViewController:[InitialViewController new]];
-    self.window.rootViewController = mainNavController;
-        
-    }
-    
     [SEGAnalytics setupWithConfiguration:[SEGAnalyticsConfiguration configurationWithWriteKey:@"osIWhCUd5Y50pBl1YrHV1Grj4nHrL0eI"]];
     
     

@@ -10,4 +10,6 @@
 
 @interface ChoosePlayersViewController : UIViewController
 
+@property (nonatomic, assign) BOOL isLiveGame;
+
 @end

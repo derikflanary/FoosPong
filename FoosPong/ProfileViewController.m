@@ -48,7 +48,7 @@
     self.currentUser = [PFUser currentUser];
     
     NSString *fullName = [NSString combineNames:self.currentUser[@"firstName"] and:self.currentUser[@"lastName"]];
-    self.profileImageView = [[UIImageView alloc]initWithFrame:CGRectMake(100, 120, 100, 100)];
+    self.profileImageView = [[UIImageView alloc]initWithFrame:CGRectMake(100, 80, 100, 100)];
     [self.profileImageView setImageWithString:fullName color:nil circular:YES];
     [self.view addSubview:self.profileImageView];
     self.profileImageView.layer.cornerRadius = 50;
@@ -162,7 +162,7 @@
     UIImagePickerController *imagePicker = [UIImagePickerController new];
     imagePicker.delegate = self;
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Add Profile Picture" message:@"Where do you want to get your image from" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Add Profile Picture" message:@"Where do you want to get your image from?" preferredStyle:UIAlertControllerStyleActionSheet];
     [alert addAction:[UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         if ([UIImagePickerController isSourceTypeAvailable:
              UIImagePickerControllerSourceTypeCamera] == YES){

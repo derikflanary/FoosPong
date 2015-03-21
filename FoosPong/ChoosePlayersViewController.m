@@ -36,11 +36,13 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 @property (nonatomic, strong) NSMutableArray *teamTwoPlayers;
 @property (nonatomic, strong) UISearchController *searchController;
 @property (nonatomic, strong) NSMutableArray *filteredPlayers;
-@property (nonatomic, strong) HMSegmentedControl *segmentedControl;
+@property (nonatomic, strong) UISegmentedControl *segmentedControl;
 @property (nonatomic, assign) BOOL isTwoPlayer;
 @property (nonatomic, assign) BOOL cellSelected;
 @property (nonatomic, strong) NSIndexPath *selectedPath;
 @property (nonatomic, assign) NSInteger userIndex;
+@property (nonatomic, strong) UIButton *startButton;
+
 
 @end
 
@@ -59,33 +61,37 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
         [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-//    self.navigationController.navigationBar.shadowImage = [UIImage new];
-//    self.navigationController.navigationBar.translucent = YES;
-
     //self.navigationController.toolbarHidden = NO;
-    UIBarButtonItem *addGuestButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Player" style:UIBarButtonItemStylePlain target:self action:@selector(addGuestPressed:)];
+//    UIBarButtonItem *addGuestButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Player" style:UIBarButtonItemStylePlain target:self action:@selector(addGuestPressed:)];
 //
-    UIBarButtonItem * startGameButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Game" style:UIBarButtonItemStylePlain target:self action:@selector(startGame:)];
+//    UIBarButtonItem * startGameButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Game" style:UIBarButtonItemStylePlain target:self action:@selector(startGame:)];
     
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
     [self.view addSubview:background];
-
-//    self.navigationItem.rightBarButtonItems= @[startGameButton, addGuestButton];
     
-    self.segmentedControl = [[HMSegmentedControl alloc]initWithSectionTitles:@[@"1v1", @"2v2"]];
+    self.startButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 420, 320, 41)];
+    self.startButton.backgroundColor = [UIColor darkColor];
+    self.startButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+    [self.startButton setTitle:@"Start Game" forState:UIControlStateNormal];
+    [self.startButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.startButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.startButton addTarget:self action:@selector(startGame:) forControlEvents:UIControlEventTouchUpInside];
 
-    self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleBox;
-    self.segmentedControl.frame = CGRectMake(160, 0, 100, 44);
-    self.segmentedControl.selectionIndicatorColor = [UIColor darkColor];
-    self.segmentedControl.backgroundColor = [UIColor clearColor];
-    self.segmentedControl.verticalDividerEnabled = YES;
+    self.segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"1 V 1", @"2 V 2"]];
     [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+    self.segmentedControl.tintColor = [UIColor darkColor];
+    self.segmentedControl.selectedSegmentIndex = 0;
+    UIFont *font = [UIFont boldSystemFontOfSize:18.0f];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
+                                                           forKey:NSFontAttributeName];
+    [self.segmentedControl setTitleTextAttributes:attributes
+                                    forState:UIControlStateNormal];
 //    [self.segmentedControl sizeToFit];
     
     UIBarButtonItem *seg = [[UIBarButtonItem alloc]initWithCustomView:self.segmentedControl];
-    [self setToolbarItems:@[addGuestButton, seg, startGameButton]];
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    [self setToolbarItems:@[spacer,seg, spacer]];
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStylePlain];
     self.tableView.dataSource = self;
@@ -94,6 +100,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     self.tableView.backgroundColor = [UIColor transparentWhite];
     self.tableView.allowsSelectionDuringEditing = YES;
     [self.view addSubview:self.tableView];
+    [self.view addSubview:self.startButton];
     
     self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
     [self.searchController.searchBar sizeToFit];
