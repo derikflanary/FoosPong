@@ -39,7 +39,6 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
     [self.view addSubview:background];
@@ -83,7 +82,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     [self.playerTwoStepper.countLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
     
     
-       }
+}
 
 -(void)saveGamePressed:(id)sender{
     UIAlertController *saveAlert = [UIAlertController alertControllerWithTitle:@"Save Game" message:@"Would you like to save this game for later?" preferredStyle:UIAlertControllerStyleAlert];

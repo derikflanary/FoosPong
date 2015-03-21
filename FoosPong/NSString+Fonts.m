@@ -11,13 +11,13 @@
 @implementation NSString (Fonts)
 
 + (NSString*)mainFont{
-    NSString* fontName = @"Avenir-Book";
+    NSString* fontName = @"Thonburi-Light";
     return fontName;
 
 }
 
 + (NSString*)boldFont{
-    NSString* boldFontName = @"Avenir-Black";
+    NSString* boldFontName = @"Thonburi-Bold ";
     return boldFontName;
 }
 

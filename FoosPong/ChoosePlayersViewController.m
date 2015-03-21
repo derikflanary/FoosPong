@@ -737,6 +737,18 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     [self.tableView reloadData];
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+    
+    header.textLabel.textColor = [UIColor darkGrayColor];
+    header.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
+    CGRect headerFrame = header.frame;
+    header.textLabel.frame = headerFrame;
+    header.textLabel.textAlignment = NSTextAlignmentCenter;
+    header.backgroundColor = [UIColor transparentWhite];
+}
+
+
 #pragma mark - Other
 
 -(void)addGuestPressed:(id)sender{

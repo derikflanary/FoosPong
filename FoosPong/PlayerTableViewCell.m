@@ -1,19 +1,19 @@
 //
-//  GroupTableViewCell.m
+//  PlayerTableViewCell.m
 //  FoosPong
 //
-//  Created by Derik Flanary on 3/17/15.
+//  Created by Derik Flanary on 3/21/15.
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "GroupTableViewCell.h"
+#import "PlayerTableViewCell.h"
 
-@implementation GroupTableViewCell
+@implementation PlayerTableViewCell
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     
     
-    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"NewGameCell"];
+    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"PlayerGameCell"];
     self.textLabel.font = [UIFont fontWithName:@"Thonburi-Light" size:22];
     self.detailTextLabel.font = [UIFont boldSystemFontOfSize:11];
     
@@ -33,7 +33,4 @@
     
     // Configure the view for the selected state
 }
-
-
-
 @end

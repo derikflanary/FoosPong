@@ -181,18 +181,6 @@ PFQuery *query = [PFUser query];
 
 }
 
-//- (void)searchUsersNotInGroupCallback(void (^)(NSArray *))callback{
-//    PFObject *group = [PFUser currentUser][@"currentGroup"];
-//    PFQuery *query = [PFUser query];
-//    query whereKey:<#(NSString *)#> notContainedIn:<#(NSArray *)#>
-//}
-
-- (void)fetchPlayerInfo:(PFUser *)user callback:(void (^)(PFUser *))callback{
-    
-    [user fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        callback(object);
-    }];
-}
 
 - (void)removeUser:(PFUser *)user{
     

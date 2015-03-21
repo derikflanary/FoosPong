@@ -10,6 +10,8 @@
 		302E41C41A86958E005F1184 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302E41C31A86958E005F1184 /* HomeViewController.m */; };
 		302E41C71A86A195005F1184 /* ChoosePlayersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302E41C61A86A195005F1184 /* ChoosePlayersViewController.m */; };
 		7F7C9D7F76CC544EEC3A87D2 /* libPods-FoosPong.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B77DFF6D64A66AF6288C73B1 /* libPods-FoosPong.a */; };
+		EE0976AD1ABE1991006CC328 /* PlayerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0976AC1ABE1991006CC328 /* PlayerTableViewCell.m */; };
+		EE0976B01ABE19B2006CC328 /* HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0976AF1ABE19B2006CC328 /* HistoryTableViewCell.m */; };
 		EE0DC00B1A8C4604000235B3 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE0DC00A1A8C4604000235B3 /* ParseUI.framework */; };
 		EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC00E1A8D9456000235B3 /* UserController.m */; };
 		EE0DC0121A8D96D8000235B3 /* SingleGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC0111A8D96D8000235B3 /* SingleGameController.m */; };
@@ -100,6 +102,10 @@
 		6775E9090F7D5300C9E7454A /* Pods-FoosPong.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoosPong.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FoosPong/Pods-FoosPong.debug.xcconfig"; sourceTree = "<group>"; };
 		B77DFF6D64A66AF6288C73B1 /* libPods-FoosPong.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FoosPong.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5F931099152F99036552F2B /* Pods-FoosPong.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoosPong.release.xcconfig"; path = "Pods/Target Support Files/Pods-FoosPong/Pods-FoosPong.release.xcconfig"; sourceTree = "<group>"; };
+		EE0976AB1ABE1991006CC328 /* PlayerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTableViewCell.h; sourceTree = "<group>"; };
+		EE0976AC1ABE1991006CC328 /* PlayerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTableViewCell.m; sourceTree = "<group>"; };
+		EE0976AE1ABE19B2006CC328 /* HistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewCell.h; sourceTree = "<group>"; };
+		EE0976AF1ABE19B2006CC328 /* HistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewCell.m; sourceTree = "<group>"; };
 		EE0DC00A1A8C4604000235B3 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		EE0DC00C1A8C53A1000235B3 /* FoosPong-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FoosPong-Prefix.pch"; sourceTree = "<group>"; };
 		EE0DC00D1A8D9456000235B3 /* UserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserController.h; sourceTree = "<group>"; };
@@ -387,6 +393,10 @@
 				EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */,
 				EEC4E4751AB91BF30060DDF5 /* GroupTableViewCell.h */,
 				EEC4E4761AB91BF30060DDF5 /* GroupTableViewCell.m */,
+				EE0976AB1ABE1991006CC328 /* PlayerTableViewCell.h */,
+				EE0976AC1ABE1991006CC328 /* PlayerTableViewCell.m */,
+				EE0976AE1ABE19B2006CC328 /* HistoryTableViewCell.h */,
+				EE0976AF1ABE19B2006CC328 /* HistoryTableViewCell.m */,
 			);
 			name = CustomCells;
 			sourceTree = "<group>";
@@ -684,6 +694,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE9DAEF31A9ECEC600589897 /* AddGroupViewController.m in Sources */,
+				EE0976B01ABE19B2006CC328 /* HistoryTableViewCell.m in Sources */,
 				EEC4E4771AB91BF30060DDF5 /* GroupTableViewCell.m in Sources */,
 				EEC4E47A1ABA6BC50060DDF5 /* CreateMemberViewController.m in Sources */,
 				EE18170B1AB27BDC00E608B3 /* EditGroupViewController.m in Sources */,
@@ -719,6 +730,7 @@
 				EE7A6CDC1A868402000447D2 /* main.m in Sources */,
 				EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */,
 				EE7C85C41ABC87D1008467AD /* MembersTableViewDataSource.m in Sources */,
+				EE0976AD1ABE1991006CC328 /* PlayerTableViewCell.m in Sources */,
 				302E41C71A86A195005F1184 /* ChoosePlayersViewController.m in Sources */,
 				EEFDF3CE1AA6AE7200A0E48F /* StatsController.m in Sources */,
 				EE2C57D61A93DFC600DA9835 /* UIImageView+Letters.m in Sources */,

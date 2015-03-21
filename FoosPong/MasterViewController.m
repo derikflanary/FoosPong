@@ -38,6 +38,12 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIFont fontWithName:@"Thonburi-Light" size:18],
+      NSFontAttributeName, nil]];
+    
     UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(sideBarButtonPressed:)];
     leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:leftSwipe];
