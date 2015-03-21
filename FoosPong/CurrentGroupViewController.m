@@ -163,19 +163,19 @@
         self.noGroupView = [[UIView alloc]initWithFrame:CGRectMake(35, 80, 250, 250)];
         self.noGroupView.backgroundColor = [UIColor whiteColor];
         
-        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, 250, 60)];
+        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, self.view.frame.size.width, 60)];
         titleLabel.text = @"No Team Yet? Create or join a team today.";
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.numberOfLines = 0;
         
-        self.createGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 70, 250, 62)];
+        self.createGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 70, self.view.frame.size.width, 62)];
         self.createGroupButton.backgroundColor = [UIColor darkColor];
         self.createGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
         [self.createGroupButton setTitle:@"Create A Group" forState:UIControlStateNormal];
         [self.createGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
         [self.createGroupButton addTarget:self action:@selector(createPressed:) forControlEvents:UIControlEventTouchUpInside];
         
-        self.joinGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 140, 250, 62)];
+        self.joinGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 140, self.view.frame.size.width, 62)];
         self.joinGroupButton.backgroundColor = [UIColor darkColor];
         self.joinGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
         [self.joinGroupButton setTitle:@"Join An Existing Group" forState:UIControlStateNormal];
@@ -184,10 +184,13 @@
         [self.joinGroupButton addTarget:self action:@selector(joinPressed:) forControlEvents:UIControlEventTouchUpInside];
         
         [self.view addSubview:bluredEffectView];
-        [self.view addSubview:self.noGroupView];
-        [self.noGroupView addSubview:titleLabel];
-        [self.noGroupView addSubview:self.createGroupButton];
-        [self.noGroupView addSubview:self.joinGroupButton];
+//        [self.view addSubview:self.noGroupView];
+        [self.view addSubview:titleLabel];
+        [self.view addSubview:self.createGroupButton];
+        [self.view addSubview:self.joinGroupButton];
+//        [self.noGroupView addSubview:titleLabel];
+//        [self.noGroupView addSubview:self.createGroupButton];
+//        [self.noGroupView addSubview:self.joinGroupButton];
  
     
 }

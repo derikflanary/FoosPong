@@ -80,7 +80,7 @@
                                                 }];
                                                 callback(user);
                                             } else {
-                                                NSLog(@"%@", error);
+                                                NSLog(@"%@, login error", error);
                                                 callback(nil);
                                                 // The login failed. Check error to see why.
                                             }

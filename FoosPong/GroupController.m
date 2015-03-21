@@ -188,20 +188,22 @@ static NSString * const passwordKey = @"password";
 }
 
 
-
 - (void)notMembersOfCurrentGroupsearchString:(NSString *)searchString callback:(void (^)(NSArray*))callback {
     
     PFUser *currentUser = [PFUser currentUser];
     NSArray *members = [self membersForCurrentGroup:currentUser[currentGroupKey]];
-    PFQuery *query = [PFUser query];
-    [query whereKey:@"objectId" notContainedIn:[members valueForKey:@"objectId"]];
+    
     PFQuery *query2 = [PFUser query];
     [query2 whereKey:@"firstName" containsString:searchString];
+    
     PFQuery *query3 = [PFUser query];
     [query3 whereKey:@"lastName" containsString:searchString];
+    
     PFQuery *query4 = [PFUser query];
     [query4 whereKey:@"username" containsString:searchString];
-    PFQuery *theQuery = [PFQuery orQueryWithSubqueries:@[query, query2, query3, query4]];
+    
+    PFQuery *theQuery = [PFQuery orQueryWithSubqueries:@[query2, query3, query4]];
+    [theQuery whereKey:@"objectId" notContainedIn:[members valueForKey:@"objectId"]];
     [theQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             callback(objects);

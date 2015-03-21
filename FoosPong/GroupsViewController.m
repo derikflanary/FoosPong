@@ -115,24 +115,22 @@
         
         [self.view addSubview:bluredEffectView];
         
-        UIView *noGroupView = [[UIView alloc]initWithFrame:CGRectMake(35, 80, 250, 250)];
+        UIView *noGroupView = [[UIView alloc]initWithFrame:CGRectMake(35, 80, self.view.frame.size.width, 250)];
         noGroupView.backgroundColor = [UIColor lightGrayColor];
         
-        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, 250, 60)];
+        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, self.view.frame.size.width, 60)];
         titleLabel.text = @"No Team Yet? Create or join a team today.";
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.numberOfLines = 0;
         
-        self.createGroupButton.frame = CGRectMake(0, 70, 250, 62);
+        self.createGroupButton.frame = CGRectMake(0, 70, self.view.frame.size.width, 62);
         
-        self.joinGroupButton.frame = CGRectMake(0, 140, 250, 62);
+        self.joinGroupButton.frame = CGRectMake(0, 140, self.view.frame.size.width, 62);
         
         [self.view addSubview:bluredEffectView];
-        [self.view addSubview:noGroupView];
-        [noGroupView addSubview:titleLabel];
-        [noGroupView addSubview:self.createGroupButton];
-        [noGroupView addSubview:self.joinGroupButton];
-        
+        [self.view addSubview:titleLabel];
+        [self.view addSubview:self.createGroupButton];
+        [self.view addSubview:self.joinGroupButton];
     }
 
     
