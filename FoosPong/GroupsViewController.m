@@ -93,8 +93,10 @@
                 if(!groups){
                     [self noCurrentGroup];
                 }else{
-                self.groups = groups;
-                [self.tableView reloadData];
+                    self.groups = groups;
+                    [self.tableView reloadData];
+//                    self.currentGroup = [PFUser currentUser][@"currentGroup"];
+//                    self.title = self.currentGroup[@"name"];
                 }
                 
             }else{
@@ -173,10 +175,31 @@
     }
     
     PFObject *group = self.groups[indexPath.row];
+    
+    if (group == [PFUser currentUser][@"currentGroup"]) {
+        cell.backgroundColor = [UIColor mainColor];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@: (Current Group)", group[@"name"]];
+    }else{
     cell.textLabel.text = group[@"name"];
+    }
+    
     cell.detailTextLabel.text = group[@"organization"];
    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    PFObject *group = self.groups[indexPath.row];
+    if (group == [PFUser currentUser][@"currentGroup"]) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        return;
+    }else{
+        [[GroupController sharedInstance]setCurrentGroup:group];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        self.title = group[@"name"];
+        [tableView reloadData];
+    }
+    
 }
 
 -(void)groupSelected{
