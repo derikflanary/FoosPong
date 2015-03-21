@@ -153,13 +153,6 @@
 }
 
 
-- (void)cancelPressed:(id)sender{
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        
-    }];
-}
-
-
 - (CGFloat)lineChartView:(JBLineChartView *)lineChartView widthForLineAtLineIndex:(NSUInteger)lineIndex
 {
     return 3; // width of line in chart
@@ -169,6 +162,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)cancelPressed:(id)sender{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 /*

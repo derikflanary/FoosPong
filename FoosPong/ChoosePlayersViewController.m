@@ -250,6 +250,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     
     
     if (self.segmentedControl.selectedSegmentIndex == 0) {
+        
         TableViewSection tableViewSection = section;
         switch (tableViewSection) {
             case TableViewSectionCurrent:{

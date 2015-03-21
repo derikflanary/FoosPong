@@ -12,6 +12,7 @@
 #import "GroupController.h"
 #import "EditGroupViewController.h"
 #import "NewGameCustomTableViewCell.h"
+#import "GroupStatsViewController.h"
 
 @interface CurrentGroupViewController () 
 @property (nonatomic, strong) UIButton *joinGroupButton;
@@ -24,6 +25,7 @@
 @property (nonatomic, assign) BOOL isAdmin;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) PFUser *admin;
+@property (nonatomic, strong) UIButton *groupStatsButton;
 
 
 @end
@@ -58,8 +60,8 @@
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = YES;
     self.tableView.bounces = YES;
-    self.tableView.layer.cornerRadius = 10;
-    self.tableView.clipsToBounds = YES;
+//    self.tableView.layer.cornerRadius = 10;
+//    self.tableView.clipsToBounds = YES;
     self.tableView.backgroundColor = [UIColor transparentWhite];
     [self.tableView setEditing:NO];
     [self.view addSubview:self.tableView];
@@ -72,6 +74,17 @@
     [self.addMembersButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.addMembersButton addTarget:self action:@selector(addMember:) forControlEvents:UIControlEventTouchUpInside];
     
+    
+    self.groupStatsButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 160, self.view.frame.size.width, 41)];
+    self.groupStatsButton.backgroundColor = [UIColor darkColor];
+    self.groupStatsButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+    [self.groupStatsButton setTitle:@"Group Stats" forState:UIControlStateNormal];
+    [self.groupStatsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.groupStatsButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.groupStatsButton addTarget:self action:@selector(statsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+
 //    PFUser *currentUser = [PFUser currentUser];
 //    if (!currentUser[@"currentGroup"]) {
 //        [self noGroup];
@@ -130,6 +143,7 @@
             }else{
                 self.currentGroup = group;
                 self.tabBarController.title = group[@"name"];
+                [self.view addSubview:self.groupStatsButton];
                 
                 [[GroupController sharedInstance]fetchMembersOfGroup:self.currentGroup Callback:^(NSArray *members) {
                     self.groupMembers = members;
@@ -219,6 +233,16 @@
     [self presentViewController:navController animated:YES completion:^{
         
     }];
+}
+
+- (void)statsButtonPressed:(id)sender{
+    
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:[GroupStatsViewController new]];
+    
+    [self presentViewController:navController animated:YES completion:^{
+        
+    }];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{

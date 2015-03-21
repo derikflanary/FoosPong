@@ -91,9 +91,6 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     [self.view addSubview:self.logOutButton];
     self.logOutButton.hidden = YES;
 
-    
-    
-    
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:0];
 }
 
