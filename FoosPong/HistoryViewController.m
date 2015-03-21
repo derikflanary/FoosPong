@@ -11,6 +11,9 @@
 #import "SingleGameController.h"
 #import "UserController.h"
 #import "TeamGameController.h"
+#import "Game.h"
+#import "TeamGame.h"
+#import "GameDetailViewController.h"
 
 @interface HistoryViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -30,15 +33,17 @@
     background.frame = self.view.frame;
     [self.view addSubview:background];
 
-    self.tableView = [[UITableView alloc]initWithFrame:self.view.frame];
+    self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds];
     self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.toolbar.translucent = NO;
     [self.view addSubview:self.tableView];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.backgroundColor = [UIColor transparentWhite];
+    self.tableView.bounces = NO;
     
-    if (![SingleGameController sharedInstance].games || ![TeamGameController sharedInstance].teamGames) {
-        [[SingleGameController sharedInstance] updateGamesForUser:[PFUser currentUser] withBool:YES callback:^(NSArray *games) {
+    
+        [[SingleGameController sharedInstance] updateGamesForUser:[PFUser currentUser] withBool:NO callback:^(NSArray *games) {
             self.singleGames = games;
             
             [[TeamGameController sharedInstance]updateGamesForUser:[PFUser currentUser] callback:^(NSArray * teamGames) {
@@ -47,12 +52,6 @@
             }];
             
         }];
-    }else{
-        self.singleGames = [SingleGameController sharedInstance].games;
-        self.teamGames = [TeamGameController sharedInstance].teamGames;
-    }
-   
-    
     
 }
 
@@ -95,27 +94,56 @@
     }
     if (indexPath.section == 0) {
         
-        PFObject *game = [self.singleGames objectAtIndex:indexPath.row];
-        PFUser *p1 = game[@"p1"];
-        PFUser *p2 = game[@"p2"];
+        Game *game = [self.singleGames objectAtIndex:indexPath.row];
+        PFUser *p1 = game.p1;
+        PFUser *p2 = game.p2;
 
         NSString *p1Name = p1.username;
         NSString *p2Name = p2.username;
-        cell.textLabel.text = [NSString stringWithFormat:@"%@:%@ vs %@:%@", p1Name, game[@"playerOneScore"], p2Name, game[@"playerTwoScore"]];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@:%.0f vs %@:%.0f", p1Name, game.playerOneScore, p2Name, game.playerTwoScore];
+        cell.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
+        //cell.backgroundColor = [UIColor mainColor];
         return cell;
 
     }else{
         
-        PFObject *teamGame = [self.teamGames objectAtIndex:indexPath.row];
-        PFUser *t1p1 = teamGame[@"teamOnePlayerOne"];
+        TeamGame *teamGame = [self.teamGames objectAtIndex:indexPath.row];
+        PFUser *t1p1 = teamGame.teamOnePlayerOne;
         NSString *t1p1Name = t1p1.username;
-        PFUser *t1p2 = teamGame[@"teamOnePlayerTwo"];
+        PFUser *t1p2 = teamGame.teamOnePlayerTwo;
         NSString *t1p2Name = t1p2.username;
+        PFUser *t2p1 = teamGame.teamTwoPlayerOne;
+        NSString *t2p1Name = t2p1.username;
+        PFUser *t2p2 = teamGame.teamTwoPlayerTwo;
+        NSString *t2p2Name = t2p2.username;
         
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ and %@", t1p1Name, t1p2Name];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ & %@: %.0f | %@ & %@: %.0f", t1p1Name, t1p2Name, teamGame.teamOneScore, t2p1Name, t2p2Name, teamGame.teamTwoScore];
+        cell.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:16];
         return cell;
     }
    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    GameDetailViewController *gameDetailViewController = [GameDetailViewController new];
+    
+    if (indexPath.section == 0) {
+        gameDetailViewController.singleGame = [self.singleGames objectAtIndex:indexPath.row];
+    }else{
+        gameDetailViewController.teamGame = [self.teamGames objectAtIndex:indexPath.row];
+    }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gameDetailViewController];
+    
+    navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    
+    [self.navigationController presentViewController:navController animated:YES completion:^{
+        
+    }];
+    
 }
 
 

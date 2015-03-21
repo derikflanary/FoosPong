@@ -9,6 +9,8 @@
 #import "SignUpViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UserController.h"
+#import "HomeViewController.h"
+#import "AppDelegate.h"
 
 @interface SignUpViewController ()
 
@@ -171,11 +173,13 @@
                                  @"username": self.usernameField.text,
                                  @"password": self.passwordField.text,
                                  @"email": self.emailField.text};
-    [[UserController sharedInstance] addUserwithDictionary:dictionary];
-    
-    //[[UserController sharedInstance] updateUsers];
-    [self dismissViewControllerAnimated:YES completion:^{
+    [[UserController sharedInstance] addUserwithDictionary:dictionary callback:^(BOOL *succeeded) {
+        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        appDelegate.mainNavigationController.viewControllers = @[[HomeViewController new]];
+        [self dismissViewControllerAnimated:YES completion:^{
+        }];
     }];
+    
 }
 
 -(void)dismissKeyboard:(id)sender{

@@ -75,6 +75,7 @@
 		EEE7DDD41AAE8E490089A488 /* PersonalTeamStats.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE7DDD31AAE8E490089A488 /* PersonalTeamStats.m */; };
 		EEE7DDD71AAE8E670089A488 /* PersonalOverallStats.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE7DDD61AAE8E670089A488 /* PersonalOverallStats.m */; };
 		EEF716B31ABD18DF005DDB61 /* GroupStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF716B21ABD18DF005DDB61 /* GroupStatsViewController.m */; };
+		EEF716B61ABD57FA005DDB61 /* GameDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF716B51ABD57FA005DDB61 /* GameDetailViewController.m */; };
 		EEFB90DC1AAA753100DEA099 /* StatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFB90DB1AAA753100DEA099 /* StatsViewController.m */; };
 		EEFDF3CE1AA6AE7200A0E48F /* StatsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFDF3CD1AA6AE7200A0E48F /* StatsController.m */; };
 		EEFDF3D11AA7FEA600A0E48F /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFDF3D01AA7FEA600A0E48F /* Game.m */; };
@@ -212,6 +213,8 @@
 		EEE7DDD61AAE8E670089A488 /* PersonalOverallStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalOverallStats.m; sourceTree = "<group>"; };
 		EEF716B11ABD18DF005DDB61 /* GroupStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupStatsViewController.h; sourceTree = "<group>"; };
 		EEF716B21ABD18DF005DDB61 /* GroupStatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupStatsViewController.m; sourceTree = "<group>"; };
+		EEF716B41ABD57FA005DDB61 /* GameDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameDetailViewController.h; sourceTree = "<group>"; };
+		EEF716B51ABD57FA005DDB61 /* GameDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameDetailViewController.m; sourceTree = "<group>"; };
 		EEFB90DA1AAA753100DEA099 /* StatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsViewController.h; sourceTree = "<group>"; };
 		EEFB90DB1AAA753100DEA099 /* StatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsViewController.m; sourceTree = "<group>"; };
 		EEFDF3CC1AA6AE7200A0E48F /* StatsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsController.h; sourceTree = "<group>"; };
@@ -299,6 +302,8 @@
 				EEFB90DB1AAA753100DEA099 /* StatsViewController.m */,
 				EE7A6D081A869CD4000447D2 /* HistoryViewController.h */,
 				EE7A6D091A869CD4000447D2 /* HistoryViewController.m */,
+				EEF716B41ABD57FA005DDB61 /* GameDetailViewController.h */,
+				EEF716B51ABD57FA005DDB61 /* GameDetailViewController.m */,
 				EE1A55861A9D217700E6981E /* PersonalNotificationsViewController.h */,
 				EE1A55871A9D217700E6981E /* PersonalNotificationsViewController.m */,
 			);
@@ -684,6 +689,7 @@
 				EE18170B1AB27BDC00E608B3 /* EditGroupViewController.m in Sources */,
 				EE58A3091AB0BDEF00832380 /* JBBarChartView.m in Sources */,
 				EE9DAEEB1A9D582200589897 /* RNFrostedSidebar.m in Sources */,
+				EEF716B61ABD57FA005DDB61 /* GameDetailViewController.m in Sources */,
 				EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */,
 				EE1A55881A9D217700E6981E /* PersonalNotificationsViewController.m in Sources */,
 				EE1A55851A9CFBB500E6981E /* GroupController.m in Sources */,

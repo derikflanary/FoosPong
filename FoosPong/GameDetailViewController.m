@@ -1,18 +1,18 @@
 //
-//  GroupStatsViewController.m
+//  GameDetailViewController.m
 //  FoosPong
 //
-//  Created by Derik Flanary on 3/20/15.
+//  Created by Derik Flanary on 3/21/15.
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "GroupStatsViewController.h"
+#import "GameDetailViewController.h"
 
-@interface GroupStatsViewController ()
+@interface GameDetailViewController ()
 
 @end
 
-@implementation GroupStatsViewController
+@implementation GameDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,10 +22,9 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     
-    self.view.backgroundColor = [UIColor clearColor];
-    
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
+    // self.view.backgroundColor = [UIColor clearColor];
     
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     UIVisualEffectView *bluredEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
@@ -33,17 +32,23 @@
     
     [self.view addSubview:bluredEffectView];
     
-     //Vibrancy Effect
+    //Vibrancy Effect
     UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
     UIVisualEffectView *vibrancyEffectView = [[UIVisualEffectView alloc] initWithEffect:vibrancyEffect];
     [vibrancyEffectView setFrame:self.view.bounds];
-
+    
+    UILabel *comingSoonlabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 150, 200, 100)];
+    comingSoonlabel.text = @"Feature Coming Soon";
+    comingSoonlabel.numberOfLines = 0;
+    comingSoonlabel.backgroundColor = [UIColor clearColor];
+    comingSoonlabel.textColor = [UIColor clearColor];
+    
+    [vibrancyEffectView.contentView addSubview:comingSoonlabel];
     // Add Vibrancy View to Blur View
     [bluredEffectView.contentView addSubview:vibrancyEffectView];
-
-    //[self.view addSubview:self.tableView];
-
     // Do any additional setup after loading the view.
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,6 +61,7 @@
         
     }];
 }
+
 /*
 #pragma mark - Navigation
 

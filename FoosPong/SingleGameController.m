@@ -53,11 +53,15 @@
     
     PFQuery *query = [PFQuery queryWithClassName:@"Game"];
     [query whereKey:@"p1" equalTo:user];
+    //[query includeKey:@"p1"];
     
     PFQuery *query2 = [PFQuery queryWithClassName:@"Game"];
     [query2 whereKey:@"p2" equalTo:user];
+    //[query2 includeKey:@"p2"];
     
     PFQuery *theQuery = [PFQuery orQueryWithSubqueries:@[query, query2]];
+    [theQuery includeKey:@"p1"];
+    [theQuery includeKey:@"p2"];
     [theQuery orderByAscending:@"createdAt"];
     [theQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -79,18 +83,7 @@
     
 }
 
-- (void)fetchPlayers:(PFUser*)p1 andP2:(PFUser*)p2 withCallback:(void (^)(NSArray *))callback{
-    
-    [p1 fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        NSMutableArray *players = [NSMutableArray array];
-        [players addObject:object];
-        [p2 fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-            [players addObject:object];
-            callback (players);
-        }];
-    }];
-}
-    
+
 
 
 

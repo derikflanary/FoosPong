@@ -51,7 +51,7 @@
     }
 }
 
-- (void)addUserwithDictionary:(NSDictionary*)dictionary{
+- (void)addUserwithDictionary:(NSDictionary*)dictionary callback:(void (^)(BOOL *))callback{
     
     PFUser *user = [PFUser user];
     user.username = dictionary[@"username"];
@@ -62,6 +62,7 @@
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             [self updateUsers];
+            callback(&succeeded);
         }else{
             NSLog(@"%@", error);
         }
@@ -118,6 +119,7 @@
 
 
 - (NSArray*)usersWithoutCurrentUser:(PFUser*)currentUser{
+    
 PFQuery *query = [PFUser query];
 [query whereKey:@"username" notEqualTo:currentUser.username];
 [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -185,7 +187,12 @@ PFQuery *query = [PFUser query];
 //    query whereKey:<#(NSString *)#> notContainedIn:<#(NSArray *)#>
 //}
 
-
+- (void)fetchPlayerInfo:(PFUser *)user callback:(void (^)(PFUser *))callback{
+    
+    [user fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        callback(object);
+    }];
+}
 
 - (void)removeUser:(PFUser *)user{
     

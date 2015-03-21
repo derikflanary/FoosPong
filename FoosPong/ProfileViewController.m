@@ -67,13 +67,14 @@
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:2];
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 240, self.view.frame.size.width, 250) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 240, self.view.frame.size.width, 210) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = NO;
     self.tableView.bounces = NO;
     self.tableView.layer.cornerRadius = 10;
     self.tableView.clipsToBounds = YES;
+    self.tableView.backgroundColor = [UIColor transparentWhite];
     [self.view addSubview:self.tableView];
     
 }
@@ -98,6 +99,7 @@
     }else{
         cell.textLabel.text = @"Overall Stats";
     }
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
     return cell;
     
     

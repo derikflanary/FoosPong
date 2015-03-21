@@ -62,7 +62,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  2;
+    return  1;
     //return [self.projects count];
 }
 
@@ -74,13 +74,13 @@
         cell = [NewGameCustomTableViewCell new];
     }
     if (indexPath.row == 0) {
-        cell.textLabel.text = @"Play A Live Game";
+        cell.textLabel.text = @"Create A New Game";
     }else if (indexPath.row == 1){
         cell.textLabel.text = @"Add A Completed Game";
     }else{
         cell.textLabel.text = @"Continue Saved Game";
     }
-
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
     return cell;
     
 }

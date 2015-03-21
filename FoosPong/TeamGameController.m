@@ -74,6 +74,10 @@
     [query2 whereKey:@"teamTwoPlayerTwo" equalTo:user];
     
     PFQuery *theQuery = [PFQuery orQueryWithSubqueries:@[query, query2, query3, query4]];
+    [theQuery includeKey:@"teamOnePlayerOne"];
+    [theQuery includeKey:@"teamOnePlayerTwo"];
+    [theQuery includeKey:@"teamTwoPlayerOne"];
+    [theQuery includeKey:@"teamTwoPlayerTwo"];
     [theQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             
