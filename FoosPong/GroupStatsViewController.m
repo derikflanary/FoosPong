@@ -17,15 +17,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor clearColor];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     
+    self.view.backgroundColor = [UIColor clearColor];
+    
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
-
+    
+    self.view.backgroundColor = [UIColor clearColor];
     
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     UIVisualEffectView *bluredEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
@@ -33,13 +35,15 @@
     
     [self.view addSubview:bluredEffectView];
     
-    // Vibrancy Effect
+     //Vibrancy Effect
     UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
     UIVisualEffectView *vibrancyEffectView = [[UIVisualEffectView alloc] initWithEffect:vibrancyEffect];
     [vibrancyEffectView setFrame:self.view.bounds];
-    
+
     // Add Vibrancy View to Blur View
-    //[bluredEffectView.contentView addSubview:vibrancyEffectView];
+    [bluredEffectView.contentView addSubview:vibrancyEffectView];
+
+    //[self.view addSubview:self.tableView];
 
     // Do any additional setup after loading the view.
 }

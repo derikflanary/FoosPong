@@ -46,7 +46,7 @@
     [self.lineChart reloadData];
     
     self.view.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:self.tableView];
+    //[self.view addSubview:self.tableView];
     
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     UIVisualEffectView *bluredEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];

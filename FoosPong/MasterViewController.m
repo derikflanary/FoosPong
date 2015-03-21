@@ -40,14 +40,9 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     [super viewDidLoad];
     UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(sideBarButtonPressed:)];
     leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:leftSwipe];;
-    
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
+    [self.view addGestureRecognizer:leftSwipe];
     
     self.navigationController.toolbarHidden = YES;
-    
     
     
 //    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
@@ -117,9 +112,9 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
         switch (section) {
             case SideBarSectionLogin:{
                 [sidebar dismissAnimated:YES completion:^(BOOL finished) {
-                    
+                    if (finished){
                     self.navigationController.viewControllers = @[ivc];
-                    
+                    }
                 }];
                 break;
             }

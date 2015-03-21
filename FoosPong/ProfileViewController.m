@@ -112,12 +112,9 @@
     StatsViewController *svc = [StatsViewController new];
     UINavigationController *statsNavController = [[UINavigationController alloc]initWithRootViewController:svc];
     
-    statsNavController.transitioningDelegate = self;
+    //statsNavController.transitioningDelegate = self;
     statsNavController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
 
-    svc.transitioningDelegate = self;
-    svc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    
     [[SingleGameController sharedInstance] updateGamesForUser:self.currentUser withBool:YES callback:^(NSArray * games) {
         self.singleGames = games;
         self.teamGames = [SingleGameController sharedInstance].teamGames;

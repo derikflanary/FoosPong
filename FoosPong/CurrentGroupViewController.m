@@ -236,9 +236,13 @@
 }
 
 - (void)statsButtonPressed:(id)sender{
+
+    
     
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:[GroupStatsViewController new]];
     
+    navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+
     [self presentViewController:navController animated:YES completion:^{
         
     }];
