@@ -64,6 +64,7 @@
 		EE7A6D0A1A869CD4000447D2 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D091A869CD4000447D2 /* HistoryViewController.m */; };
 		EE7C85C41ABC87D1008467AD /* MembersTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7C85C31ABC87D1008467AD /* MembersTableViewDataSource.m */; };
 		EE7C85C51AC07C23008467AD /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE33572B1A8C1C4700B83EC0 /* Parse.framework */; };
+		EE7C85C81AC0CE48008467AD /* FoosButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7C85C71AC0CE48008467AD /* FoosButton.m */; };
 		EE808DB01A9FC3E30000F833 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE808DAF1A9FC3E30000F833 /* SettingViewController.m */; };
 		EE808DB71A9FCCB10000F833 /* NSString+Fonts.m in Sources */ = {isa = PBXBuildFile; fileRef = EE808DB61A9FCCB10000F833 /* NSString+Fonts.m */; };
 		EE9DAEEB1A9D582200589897 /* RNFrostedSidebar.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */; };
@@ -195,6 +196,8 @@
 		EE7A6D091A869CD4000447D2 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
 		EE7C85C21ABC87D1008467AD /* MembersTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MembersTableViewDataSource.h; sourceTree = "<group>"; };
 		EE7C85C31ABC87D1008467AD /* MembersTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MembersTableViewDataSource.m; sourceTree = "<group>"; };
+		EE7C85C61AC0CE48008467AD /* FoosButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoosButton.h; sourceTree = "<group>"; };
+		EE7C85C71AC0CE48008467AD /* FoosButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoosButton.m; sourceTree = "<group>"; };
 		EE808DAE1A9FC3E30000F833 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		EE808DAF1A9FC3E30000F833 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		EE808DB51A9FCCB10000F833 /* NSString+Fonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Fonts.h"; sourceTree = "<group>"; };
@@ -440,6 +443,8 @@
 				EE808DB61A9FCCB10000F833 /* NSString+Fonts.m */,
 				EE9DAEE91A9D582200589897 /* RNFrostedSidebar.h */,
 				EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */,
+				EE7C85C61AC0CE48008467AD /* FoosButton.h */,
+				EE7C85C71AC0CE48008467AD /* FoosButton.m */,
 				EE0DC00C1A8C53A1000235B3 /* FoosPong-Prefix.pch */,
 				EE7A6CE31A868402000447D2 /* Main.storyboard */,
 			);
@@ -705,6 +710,7 @@
 				EEFDF3D11AA7FEA600A0E48F /* Game.m in Sources */,
 				EE2EF8131AA4EF3400DE09E7 /* TeamGameStats.m in Sources */,
 				302E41C41A86958E005F1184 /* HomeViewController.m in Sources */,
+				EE7C85C81AC0CE48008467AD /* FoosButton.m in Sources */,
 				EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */,
 				EE2EF8101AA4EF2200DE09E7 /* SingleGameStats.m in Sources */,
 				EE76CC571AB9E3AF0038BD80 /* UIImage+BackGrounImage.m in Sources */,

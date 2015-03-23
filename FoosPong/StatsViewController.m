@@ -118,7 +118,7 @@
 
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return @"Stats";
+    return @"Statistics";
 }
 
 #pragma mark - LineChart

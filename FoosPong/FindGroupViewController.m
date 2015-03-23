@@ -80,6 +80,7 @@
     self.searchController.dimsBackgroundDuringPresentation = YES;
     self.searchController.searchBar.placeholder = @"Search by name or organization";
 
+
     //[self.tableView.superview addSubview:self.searchController.searchBar];
 
 

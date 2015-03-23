@@ -41,7 +41,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 @property (nonatomic, assign) BOOL cellSelected;
 @property (nonatomic, strong) NSIndexPath *selectedPath;
 @property (nonatomic, assign) NSInteger userIndex;
-@property (nonatomic, strong) UIButton *startButton;
+@property (nonatomic, strong) FoosButton *startButton;
 
 
 @end
@@ -70,10 +70,10 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     background.frame = self.view.frame;
     [self.view addSubview:background];
     
-    self.startButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 420, 320, 41)];
+    self.startButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 420, 320, 41)];
     self.startButton.backgroundColor = [UIColor darkColor];
     self.startButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-    [self.startButton setTitle:@"Start Game" forState:UIControlStateNormal];
+    [self.startButton setTitle:@"START GAME" forState:UIControlStateNormal];
     [self.startButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.startButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.startButton addTarget:self action:@selector(startGame:) forControlEvents:UIControlEventTouchUpInside];

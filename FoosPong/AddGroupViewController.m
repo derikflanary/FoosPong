@@ -15,7 +15,7 @@
 @property (nonatomic, strong) UITextField *groupNameField;
 @property (nonatomic, strong) UITextField *groupOrganiztionField;
 @property (nonatomic, strong) UITextField *passwordField;
-@property (nonatomic, strong) UIButton *addGroupButton;
+@property (nonatomic, strong) FoosButton *addGroupButton;
 
 @end
 
@@ -82,10 +82,10 @@
     self.passwordField.autocorrectionType = UITextAutocorrectionTypeNo;
 
     
-    self.addGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 410, 320, 41)];
+    self.addGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 410, 320, 41)];
     self.addGroupButton.backgroundColor = [UIColor darkColor];
     self.addGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-    [self.addGroupButton setTitle:@"Add Group" forState:UIControlStateNormal];
+    [self.addGroupButton setTitle:@"CREATE TEAM" forState:UIControlStateNormal];
     [self.addGroupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.addGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.addGroupButton addTarget:self action:@selector(createGroupPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -120,7 +120,7 @@
         }];
         
     }else{
-        UIAlertController *failedAlert = [UIAlertController alertControllerWithTitle:@"Missing Data" message:@"Please give a group name and an organization" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *failedAlert = [UIAlertController alertControllerWithTitle:@"Missing Data" message:@"Please give a team name and an organization" preferredStyle:UIAlertControllerStyleAlert];
         [failedAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
             
             return;

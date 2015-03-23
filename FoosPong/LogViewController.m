@@ -89,7 +89,7 @@
     self.passwordField.leftViewMode = UITextFieldViewModeAlways;
     self.passwordField.leftView = leftView2;
     
-    self.loginButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 383, 320, 62)];
+    self.loginButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 383, 320, 62)];
     self.loginButton.backgroundColor = darkColor;
     self.loginButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
     [self.loginButton setTitle:@"LOG IN" forState:UIControlStateNormal];
@@ -107,7 +107,7 @@
     self.titleLabel.textColor =  [UIColor whiteColor];
     self.titleLabel.font =  [UIFont fontWithName:boldFontName size:24.0f];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.titleLabel.text = @"FOOSPONG";
+    self.titleLabel.text = @"FOOS";
     
     
     self.infoLabel.textColor =  [UIColor darkGrayColor];

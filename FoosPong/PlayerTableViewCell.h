@@ -10,4 +10,6 @@
 
 @interface PlayerTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) UILabel *adminLabel;
+
 @end

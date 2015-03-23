@@ -15,17 +15,17 @@
 #import "GroupStatsViewController.h"
 
 @interface CurrentGroupViewController () 
-@property (nonatomic, strong) UIButton *joinGroupButton;
-@property (nonatomic, strong) UIButton *createGroupButton;
+@property (nonatomic, strong) FoosButton *joinGroupButton;
+@property (nonatomic, strong) FoosButton *createGroupButton;
 @property (nonatomic, strong) AddGroupViewController *addGroupViewController;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 @property (nonatomic, strong) PFObject *currentGroup;
 @property (nonatomic, strong) UIView *noGroupView;
-@property (nonatomic, strong) UIButton *addMembersButton;
+@property (nonatomic, strong) FoosButton *addMembersButton;
 @property (nonatomic, assign) BOOL isAdmin;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) PFUser *admin;
-@property (nonatomic, strong) UIButton *groupStatsButton;
+@property (nonatomic, strong) FoosButton *groupStatsButton;
 
 
 @end
@@ -66,7 +66,7 @@
     [self.tableView setEditing:NO];
     [self.view addSubview:self.tableView];
     
-    self.addMembersButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 420, self.view.frame.size.width, 41)];
+    self.addMembersButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 420, self.view.frame.size.width, 41)];
     self.addMembersButton.backgroundColor = [UIColor darkColor];
     self.addMembersButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.addMembersButton setTitle:@"EDIT TEAM" forState:UIControlStateNormal];
@@ -76,7 +76,7 @@
     [self.addMembersButton.layer setBorderColor:[[UIColor transparentCellWhite] CGColor]];
     
     
-    self.groupStatsButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 380, self.view.frame.size.width, 41)];
+    self.groupStatsButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 380, self.view.frame.size.width, 41)];
     self.groupStatsButton.backgroundColor = [UIColor darkColor];
     self.groupStatsButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.groupStatsButton setTitle:@"GROUP STATISTICS" forState:UIControlStateNormal];
@@ -112,6 +112,8 @@
         if (user == self.admin) {
             cell.textLabel.text = [NSString stringWithFormat:@"%@ - Admin", user.username];
             cell.detailTextLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
+            cell.adminLabel.text = @"Admin";
+            
         }else{
         
             cell.textLabel.text = user.username;
@@ -198,17 +200,17 @@
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.numberOfLines = 0;
         
-        self.createGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 70, self.view.frame.size.width, 62)];
+        self.createGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 70, self.view.frame.size.width, 62)];
         self.createGroupButton.backgroundColor = [UIColor darkColor];
         self.createGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-        [self.createGroupButton setTitle:@"Create A Group" forState:UIControlStateNormal];
+        [self.createGroupButton setTitle:@"CREATE A TEAM" forState:UIControlStateNormal];
         [self.createGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
         [self.createGroupButton addTarget:self action:@selector(createPressed:) forControlEvents:UIControlEventTouchUpInside];
         
-        self.joinGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 140, self.view.frame.size.width, 62)];
+        self.joinGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 140, self.view.frame.size.width, 62)];
         self.joinGroupButton.backgroundColor = [UIColor darkColor];
         self.joinGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-        [self.joinGroupButton setTitle:@"Join An Existing Group" forState:UIControlStateNormal];
+        [self.joinGroupButton setTitle:@"JOIN AN EXISTING TEAM" forState:UIControlStateNormal];
         [self.joinGroupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.joinGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
         [self.joinGroupButton addTarget:self action:@selector(joinPressed:) forControlEvents:UIControlEventTouchUpInside];

@@ -18,7 +18,7 @@
 
 
 @property (nonatomic, strong) NSMutableArray *nonMembers;
-@property (nonatomic, strong) UIButton *deleteGroupButton;
+@property (nonatomic, strong) FoosButton *deleteGroupButton;
 @property (nonatomic, strong) UITableView *contactsTableView;
 @property (nonatomic, assign) BOOL searchUsers;
 @property (nonatomic, strong) UISearchController *searchController;
@@ -58,10 +58,10 @@
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
-    self.deleteGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 410, 320, 41)];
+    self.deleteGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 410, 320, 41)];
     self.deleteGroupButton.backgroundColor = [UIColor darkColor];
     self.deleteGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-    [self.deleteGroupButton setTitle:@"Delete Team" forState:UIControlStateNormal];
+    [self.deleteGroupButton setTitle:@"DELETE TEAM" forState:UIControlStateNormal];
     [self.deleteGroupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.deleteGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.deleteGroupButton addTarget:self action:@selector(deleteGroupButtonPressed:) forControlEvents:UIControlEventTouchUpInside];

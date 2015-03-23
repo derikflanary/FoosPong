@@ -34,7 +34,7 @@
 }
 
 + (UIColor *)mainColorTransparent{
-    UIColor* mainColor = [UIColor colorWithRed:.77 green:.15 blue:.2 alpha:.65f];
+    UIColor* mainColor = [UIColor colorWithRed:.77 green:.15 blue:.2 alpha:.8f];
     return mainColor;
 }
 

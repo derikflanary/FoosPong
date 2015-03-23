@@ -93,11 +93,11 @@
         cell = [NewGameCustomTableViewCell new];
     }
     if (indexPath.row == 0) {
-        cell.textLabel.text = @"Single Game Stats";
+        cell.textLabel.text = @"1 V 1 GAME STATS";
     }else if (indexPath.row == 1){
-        cell.textLabel.text = @"Team Game Stats";
+        cell.textLabel.text = @"2 V 2 GAME STATS";
     }else{
-        cell.textLabel.text = @"Overall Stats";
+        cell.textLabel.text = @"COMBINED STATS";
     }
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     //cell.contentView.backgroundColor = [UIColor mainColorTransparent];

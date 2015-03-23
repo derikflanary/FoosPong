@@ -30,9 +30,9 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
 
 @property (nonatomic, strong) UITabBarController *tabBarControllerProfile;
 @property (nonatomic, strong) UITabBarController *tabBarControllerGroup;
-@property (nonatomic, strong) UIButton *loginButton;
-@property (nonatomic, strong) UIButton *guestButton;
-@property (nonatomic, strong) UIButton *logOutButton;
+@property (nonatomic, strong) FoosButton *loginButton;
+@property (nonatomic, strong) FoosButton *guestButton;
+@property (nonatomic, strong) FoosButton *logOutButton;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
@@ -63,16 +63,17 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     [self.view addSubview:self.imageView];
     
     
-    self.loginButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 383, self.view.frame.size.width, 62)];
+    self.loginButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 383, self.view.frame.size.width, 62)];
     self.loginButton.backgroundColor = darkColor;
     self.loginButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
     [self.loginButton setTitle:@"LOG IN" forState:UIControlStateNormal];
     [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.loginButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.loginButton setTintColor: [UIColor blackColor]];
     [self.loginButton addTarget:self action:@selector(loginPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.loginButton];
     
-    self.guestButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 62)];
+    self.guestButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 62)];
     self.guestButton.backgroundColor = darkColor;
     self.guestButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
     [self.guestButton setTitle:@"SIGN UP" forState:UIControlStateNormal];
@@ -81,7 +82,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     [self.guestButton addTarget:self action:@selector(signUpPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.guestButton];
     
-    self.logOutButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 62)];
+    self.logOutButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 62)];
     self.logOutButton.backgroundColor = darkColor;
     self.logOutButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
     [self.logOutButton setTitle:@"Log Out" forState:UIControlStateNormal];
