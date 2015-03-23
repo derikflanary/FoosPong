@@ -163,8 +163,13 @@
         UITextField *passwordTextfield = passwordAlert.textFields.firstObject;
         NSString *password = passwordTextfield.text;
         if ([password isEqualToString:selectedGroup[@"password"]]) {
-            [[GroupController sharedInstance]addUser:[PFUser currentUser] toGroup:selectedGroup];
-            [self.delegate groupSelected];
+            [[GroupController sharedInstance]addUser:[PFUser currentUser] toGroup:selectedGroup callback:^(BOOL *success) {
+                [self.delegate groupSelected];
+                [self dismissViewControllerAnimated:YES completion:^{
+                    
+                }];
+            }];
+            
         }else{
             UIAlertController *failedAlert = [UIAlertController alertControllerWithTitle:@"Incorrect Password" message:@"Please try again" preferredStyle:UIAlertControllerStyleAlert];
             [failedAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {

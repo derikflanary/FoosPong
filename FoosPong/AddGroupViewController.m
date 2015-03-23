@@ -54,6 +54,8 @@
     UIView* leftView2= [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 20)];
     self.groupNameField.leftViewMode = UITextFieldViewModeAlways;
     self.groupNameField.leftView = leftView2;
+    self.groupNameField.autocorrectionType = UITextAutocorrectionTypeNo;
+
 
     self.groupOrganiztionField = [[UITextField alloc]initWithFrame:CGRectMake(0, 150, 320, 41)];
     self.groupOrganiztionField.backgroundColor = [UIColor whiteColor];
@@ -64,6 +66,7 @@
     UIView* leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 20)];
     self.groupOrganiztionField.leftViewMode = UITextFieldViewModeAlways;
     self.groupOrganiztionField.leftView = leftView;
+    self.groupNameField.autocorrectionType = UITextAutocorrectionTypeNo;
 
     
     self.passwordField = [[UITextField alloc]initWithFrame:CGRectMake(0, 190, 320, 41)];
@@ -75,6 +78,9 @@
     UIView* leftView3 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 20)];
     self.passwordField.leftViewMode = UITextFieldViewModeAlways;
     self.passwordField.leftView = leftView3;
+    self.passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.passwordField.autocorrectionType = UITextAutocorrectionTypeNo;
+
     
     self.addGroupButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 410, 320, 41)];
     self.addGroupButton.backgroundColor = [UIColor darkColor];
@@ -102,8 +108,9 @@
         [[GroupController sharedInstance]addGroupforAdmin:group callback:^(BOOL *succeeded) {
             if (succeeded) {
                 [[GroupController sharedInstance]findGroupsForUser:group.admin callback:^(NSArray *groups, NSError *error) {
-                    [[GroupController sharedInstance]setCurrentGroup:[groups lastObject]];
-                    [self dismissViewControllerAnimated:YES completion:^{
+                    [[GroupController sharedInstance]setCurrentGroup:[groups lastObject] callback:^(BOOL *success) {
+                        [self dismissViewControllerAnimated:YES completion:^{
+                        }];
                     }];
                 }];
             }else{

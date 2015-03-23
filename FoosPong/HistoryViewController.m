@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "NewGameCustomTableViewCell.h"
 #import "HistoryViewController.h"
 #import "SingleGameController.h"
 #import "UserController.h"
@@ -14,6 +13,7 @@
 #import "Game.h"
 #import "TeamGame.h"
 #import "GameDetailViewController.h"
+#import "HistoryTableViewCell.h"
 
 @interface HistoryViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -89,9 +89,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NewGameCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewGameCell" ];
+    HistoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HistoryCell" ];
     if (!cell){
-        cell = [NewGameCustomTableViewCell new];
+        cell = [HistoryTableViewCell new];
     }
     if (indexPath.section == 0) {
         
@@ -119,7 +119,8 @@
         NSString *t2p2Name = t2p2.username;
         
         cell.textLabel.text = [NSString stringWithFormat:@"%@ & %@: %.0f | %@ & %@: %.0f", t1p1Name, t1p2Name, teamGame.teamOneScore, t2p1Name, t2p2Name, teamGame.teamTwoScore];
-        cell.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:16];
+        cell.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
+        cell.textLabel.numberOfLines = 0;
         return cell;
     }
    

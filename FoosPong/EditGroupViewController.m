@@ -196,15 +196,16 @@
         PFUser *selectedUser = [self.nonMembers objectAtIndex:indexPath.row];
         
         UIAlertController *addPlayerAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Add %@ to your team?", selectedUser[@"username"]] message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        
         [addPlayerAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            
+    
             PFUser *currentUser = [PFUser currentUser];
-            [[GroupController sharedInstance]addUser:[self.nonMembers objectAtIndex:indexPath.row] toGroup:currentUser[@"currentGroup"]
-             ];
-            [self.nonMembers removeObjectAtIndex:indexPath.row];
-            [self.tableView reloadData];
-            
+            [[GroupController sharedInstance]addUser:[self.nonMembers objectAtIndex:indexPath.row] toGroup:currentUser[@"currentGroup"] callback:^(BOOL *success) {
+                [self.nonMembers removeObjectAtIndex:indexPath.row];
+                [self.tableView reloadData];
+            }];
         }]];
+        
         [addPlayerAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
             
             [tableView deselectRowAtIndexPath:indexPath animated:YES];

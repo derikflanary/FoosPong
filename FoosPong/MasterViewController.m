@@ -103,11 +103,14 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
         ProfileViewController *pvc = [ProfileViewController new];
         pvc.tabBarItem.title = @"Profile";
         pvc.tabBarItem.image = [UIImage imageNamed:@"145"];
+        
         historyVC.tabBarItem.title = @"History";
         historyVC.tabBarItem.image = [UIImage imageNamed:@"146"];
         pnvc.tabBarItem.title = @"Notifications";
         pnvc.tabBarItem.image = [UIImage imageNamed:@"167"];
         profileTabBar.viewControllers = @[pvc, historyVC, pnvc];
+        
+        
        
         
         UITabBarController *groupTabBar = [UITabBarController new];

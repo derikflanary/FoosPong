@@ -16,7 +16,7 @@
     self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"HistoryGameCell"];
     self.textLabel.font = [UIFont fontWithName:@"Thonburi-Light" size:18];
     self.detailTextLabel.font = [UIFont boldSystemFontOfSize:11];
-    
+    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     //    self.layer.cornerRadius = 10;
     //    self.clipsToBounds = YES;
     self.backgroundColor = [UIColor transparentCellWhite];

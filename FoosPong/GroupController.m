@@ -69,12 +69,14 @@ static NSString * const passwordKey = @"password";
     
 }
 
-- (void)addUser:(PFUser *)user toGroup:(PFObject *)group{
+- (void)addUser:(PFUser *)user toGroup:(PFObject *)group callback:(void (^)(BOOL *))callback{
     
     [group addUniqueObject:user forKey:membersKey];
     [group saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error){
-            [self setCurrentGroup:group];
+            [self setCurrentGroup:group callback:^(BOOL *succeeded) {
+                callback(succeeded);
+            }];
         }else{
             NSLog(@"%@", error);
         }
@@ -114,13 +116,14 @@ static NSString * const passwordKey = @"password";
     }];
 }
 
-- (void)setCurrentGroup:(PFObject *)group{
+- (void)setCurrentGroup:(PFObject *)group callback:(void (^)(BOOL *))callback{
     
     PFUser *currentUser = [PFUser currentUser];
     currentUser[currentGroupKey] = group;
     [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             NSLog(@"Current Group Saved");
+            callback (&succeeded);
         }else{
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }

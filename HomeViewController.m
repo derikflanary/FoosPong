@@ -81,6 +81,7 @@
         cell.textLabel.text = @"Continue Saved Game";
     }
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
     
 }

@@ -197,12 +197,13 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         return;
     }else{
-        [[GroupController sharedInstance]setCurrentGroup:group];
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        self.title = group[@"name"];
-        [tableView reloadData];
+        [[GroupController sharedInstance]setCurrentGroup:group callback:^(BOOL *success) {
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            self.title = group[@"name"];
+            [tableView reloadData];
+
+        }];
     }
-    
 }
 
 -(void)groupSelected{

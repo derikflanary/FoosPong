@@ -100,6 +100,8 @@
         cell.textLabel.text = @"Overall Stats";
     }
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    //cell.contentView.backgroundColor = [UIColor mainColorTransparent];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
     
     
