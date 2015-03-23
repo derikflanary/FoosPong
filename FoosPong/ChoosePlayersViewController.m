@@ -87,7 +87,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                                                            forKey:NSFontAttributeName];
     [self.segmentedControl setTitleTextAttributes:attributes
                                     forState:UIControlStateNormal];
-//    [self.segmentedControl sizeToFit];
+   [self.segmentedControl sizeToFit];
     
     UIBarButtonItem *seg = [[UIBarButtonItem alloc]initWithCustomView:self.segmentedControl];
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];

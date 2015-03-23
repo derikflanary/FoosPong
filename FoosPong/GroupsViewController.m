@@ -24,6 +24,7 @@
 @property (nonatomic, strong) UIViewController *addGroupViewController;
 @property (nonatomic, strong) PFObject *currentGroup;
 @property (nonatomic, strong) UIBarButtonItem *findGroupButton;
+@property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
 
 @end
@@ -74,6 +75,7 @@
     
     [self checkForGroups];
     
+    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
 }
 
 - (void)joinGroupButtonPressed:(id)sender{
@@ -175,10 +177,13 @@
     PFObject *group = self.groups[indexPath.row];
     
     if (group == [PFUser currentUser][@"currentGroup"]) {
-        cell.backgroundColor = [UIColor mainColor];
+        cell.backgroundColor = [UIColor transparentCellBlack];
+        cell.textLabel.textColor = [UIColor mainWhite];
         cell.textLabel.text = [NSString stringWithFormat:@"%@: (Current Group)", group[@"name"]];
     }else{
-    cell.textLabel.text = group[@"name"];
+        cell.textLabel.text = group[@"name"];
+        cell.backgroundColor = [UIColor transparentCellWhite];
+        cell.textLabel.textColor = [UIColor mainBlack];
     }
     
     cell.detailTextLabel.text = group[@"organization"];

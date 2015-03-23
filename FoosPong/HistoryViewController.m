@@ -20,6 +20,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *singleGames;
 @property (nonatomic, strong) NSArray *teamGames;
+@property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 
 @end
 
@@ -52,7 +53,7 @@
             }];
             
         }];
-    
+    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:2];
 }
 
 - (void)didReceiveMemoryWarning {

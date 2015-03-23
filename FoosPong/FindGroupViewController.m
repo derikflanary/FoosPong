@@ -56,8 +56,8 @@
     self.groupOrganizationField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.groupOrganizationField.layer.borderWidth = 1.0f;
     
-    [self.view addSubview:self.groupNameField];
-    [self.view addSubview:self.groupOrganizationField];
+//    [self.view addSubview:self.groupNameField];
+//    [self.view addSubview:self.groupOrganizationField];
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 210, 320, 250) style:UITableViewStylePlain];
     self.tableView.dataSource = self;

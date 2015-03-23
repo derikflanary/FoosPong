@@ -71,17 +71,17 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     
    
     
-    NSArray *barImages = @[ [UIImage imageNamed:@"57"],
+    NSArray *barImages = @[ [UIImage imageNamed:@"97"],
                             [UIImage imageNamed:@"85"],
                             [UIImage imageNamed:@"74"],
                             [UIImage imageNamed:@"70"],
                             [UIImage imageNamed:@"101"]];
     NSArray *colors = @[
-                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
-                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
-                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
-                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f],
-                        [UIColor colorWithRed:255/255 green:101/255 blue:57/255 alpha:.5f]];
+                        [UIColor mainWhite],
+                        [UIColor mainWhite],
+                        [UIColor mainWhite],
+                        [UIColor mainWhite],
+                        [UIColor mainWhite]];
     
     
     
@@ -102,9 +102,13 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
         PersonalNotificationsViewController *pnvc = [PersonalNotificationsViewController new];
         ProfileViewController *pvc = [ProfileViewController new];
         pvc.tabBarItem.title = @"Profile";
+        pvc.tabBarItem.image = [UIImage imageNamed:@"145"];
         historyVC.tabBarItem.title = @"History";
+        historyVC.tabBarItem.image = [UIImage imageNamed:@"146"];
         pnvc.tabBarItem.title = @"Notifications";
+        pnvc.tabBarItem.image = [UIImage imageNamed:@"167"];
         profileTabBar.viewControllers = @[pvc, historyVC, pnvc];
+       
         
         UITabBarController *groupTabBar = [UITabBarController new];
         GroupsViewController *gvc = [GroupsViewController new];

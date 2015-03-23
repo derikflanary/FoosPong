@@ -25,4 +25,6 @@
 + (UIColor *)mainBlack;
 
 + (UIColor *)transparentCellWhite;
+
++ (UIColor *)transparentCellBlack;
 @end

@@ -67,7 +67,7 @@
     [self.view addSubview:self.tableView];
     
     self.addMembersButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 420, self.view.frame.size.width, 41)];
-    self.addMembersButton.backgroundColor = [UIColor mainBlack];
+    self.addMembersButton.backgroundColor = [UIColor darkColor];
     self.addMembersButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.addMembersButton setTitle:@"Edit Team" forState:UIControlStateNormal];
     [self.addMembersButton setTitleColor:[UIColor mainWhite] forState:UIControlStateNormal];
@@ -77,7 +77,7 @@
     
     
     self.groupStatsButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 380, self.view.frame.size.width, 41)];
-    self.groupStatsButton.backgroundColor = [UIColor mainBlack];
+    self.groupStatsButton.backgroundColor = [UIColor darkColor];
     self.groupStatsButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.groupStatsButton setTitle:@"Group Stats" forState:UIControlStateNormal];
     [self.groupStatsButton setTitleColor:[UIColor mainWhite] forState:UIControlStateNormal];
