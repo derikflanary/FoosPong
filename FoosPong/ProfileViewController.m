@@ -163,7 +163,7 @@
     CGRect headerFrame = header.frame;
     header.textLabel.frame = headerFrame;
     header.textLabel.textAlignment = NSTextAlignmentCenter;
-    header.backgroundColor = [UIColor transparentWhite];
+    header.contentView.backgroundColor = [UIColor transparentWhite];
 }
 
 

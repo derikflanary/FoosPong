@@ -9,7 +9,7 @@
 #ifndef FoosPong_FoosPong_Prefix_pch
 #define FoosPong_FoosPong_Prefix_pch
 
-#import <ParseUI/ParseUI.h>
+
 #import <Parse/Parse.h>
 #import "UIColor+ExtraColorTools.h"
 #import "NSString+Fonts.h"

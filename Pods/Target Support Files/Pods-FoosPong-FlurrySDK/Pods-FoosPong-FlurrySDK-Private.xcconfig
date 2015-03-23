@@ -1,6 +1,0 @@
-#include "Pods-FoosPong-FlurrySDK.xcconfig"
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/FlurrySDK" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/Analytics" "${PODS_ROOT}/Headers/Public/FlurrySDK" "${PODS_ROOT}/Headers/Public/PKYStepper" "${PODS_ROOT}/Headers/Public/TRVSDictionaryWithCaseInsensitivity"
-LIBRARY_SEARCH_PATHS = ${PODS_FOOSPONG_FLURRYSDK_LIBRARY_SEARCH_PATHS}
-OTHER_LDFLAGS = ${PODS_FOOSPONG_FLURRYSDK_OTHER_LDFLAGS} -ObjC
-PODS_ROOT = ${SRCROOT}

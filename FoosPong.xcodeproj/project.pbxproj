@@ -12,7 +12,6 @@
 		7F7C9D7F76CC544EEC3A87D2 /* libPods-FoosPong.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B77DFF6D64A66AF6288C73B1 /* libPods-FoosPong.a */; };
 		EE0976AD1ABE1991006CC328 /* PlayerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0976AC1ABE1991006CC328 /* PlayerTableViewCell.m */; };
 		EE0976B01ABE19B2006CC328 /* HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0976AF1ABE19B2006CC328 /* HistoryTableViewCell.m */; };
-		EE0DC00B1A8C4604000235B3 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE0DC00A1A8C4604000235B3 /* ParseUI.framework */; };
 		EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC00E1A8D9456000235B3 /* UserController.m */; };
 		EE0DC0121A8D96D8000235B3 /* SingleGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC0111A8D96D8000235B3 /* SingleGameController.m */; };
 		EE1817081AB2732800E608B3 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1817071AB2732800E608B3 /* Group.m */; };
@@ -31,7 +30,6 @@
 		EE3356EE1A895F0600B83EC0 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */; };
 		EE3356F11A89610B00B83EC0 /* SingleGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3356F01A89610B00B83EC0 /* SingleGameViewController.m */; };
 		EE33572A1A8C1C2A00B83EC0 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357291A8C1C2A00B83EC0 /* Bolts.framework */; };
-		EE33572C1A8C1C4700B83EC0 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE33572B1A8C1C4700B83EC0 /* Parse.framework */; };
 		EE33572E1A8C1C9B00B83EC0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE33572D1A8C1C9B00B83EC0 /* AudioToolbox.framework */; };
 		EE3357301A8C1CAD00B83EC0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE33572F1A8C1CAD00B83EC0 /* CFNetwork.framework */; };
 		EE3357321A8C1CC900B83EC0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357311A8C1CC900B83EC0 /* CoreGraphics.framework */; };
@@ -65,6 +63,7 @@
 		EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */; };
 		EE7A6D0A1A869CD4000447D2 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7A6D091A869CD4000447D2 /* HistoryViewController.m */; };
 		EE7C85C41ABC87D1008467AD /* MembersTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7C85C31ABC87D1008467AD /* MembersTableViewDataSource.m */; };
+		EE7C85C51AC07C23008467AD /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE33572B1A8C1C4700B83EC0 /* Parse.framework */; };
 		EE808DB01A9FC3E30000F833 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE808DAF1A9FC3E30000F833 /* SettingViewController.m */; };
 		EE808DB71A9FCCB10000F833 /* NSString+Fonts.m in Sources */ = {isa = PBXBuildFile; fileRef = EE808DB61A9FCCB10000F833 /* NSString+Fonts.m */; };
 		EE9DAEEB1A9D582200589897 /* RNFrostedSidebar.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */; };
@@ -246,13 +245,12 @@
 				EE33573C1A8C1CFB00B83EC0 /* StoreKit.framework in Frameworks */,
 				EE33573A1A8C1CF100B83EC0 /* Security.framework in Frameworks */,
 				EE3357361A8C1CDB00B83EC0 /* MobileCoreServices.framework in Frameworks */,
-				EE0DC00B1A8C4604000235B3 /* ParseUI.framework in Frameworks */,
 				EE3357341A8C1CD100B83EC0 /* CoreLocation.framework in Frameworks */,
 				EE3357321A8C1CC900B83EC0 /* CoreGraphics.framework in Frameworks */,
 				EE3357301A8C1CAD00B83EC0 /* CFNetwork.framework in Frameworks */,
 				EE33572E1A8C1C9B00B83EC0 /* AudioToolbox.framework in Frameworks */,
 				EE33572A1A8C1C2A00B83EC0 /* Bolts.framework in Frameworks */,
-				EE33572C1A8C1C4700B83EC0 /* Parse.framework in Frameworks */,
+				EE7C85C51AC07C23008467AD /* Parse.framework in Frameworks */,
 				7F7C9D7F76CC544EEC3A87D2 /* libPods-FoosPong.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -873,14 +871,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Derik Flanary (2A5TNCG5KX)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/derikflanary/Downloads/parse-library-1.6.2",
 					"$(PROJECT_DIR)/FoosPong",
-					"$(PROJECT_DIR)",
 				);
 				GCC_PREFIX_HEADER = "FoosPong/FoosPong-Prefix.pch";
 				INFOPLIST_FILE = FoosPong/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -893,14 +890,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Derik Flanary (2A5TNCG5KX)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/derikflanary/Downloads/parse-library-1.6.2",
 					"$(PROJECT_DIR)/FoosPong",
-					"$(PROJECT_DIR)",
 				);
 				GCC_PREFIX_HEADER = "FoosPong/FoosPong-Prefix.pch";
 				INFOPLIST_FILE = FoosPong/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -12,7 +12,6 @@
 #import "InitialViewController.h"
 #import "UserController.h"
 #import <Parse/Parse.h>
-#import <ParseUI/ParseUI.h>
 #import "SignUpViewController.h"
 #import "LogViewController.h"
 
@@ -27,7 +26,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     SideBarSectionSettings,
 };
 
-@interface InitialViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface InitialViewController ()
 
 @property (nonatomic, strong) UITabBarController *tabBarControllerProfile;
 @property (nonatomic, strong) UITabBarController *tabBarControllerGroup;
@@ -67,7 +66,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     self.loginButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 383, self.view.frame.size.width, 62)];
     self.loginButton.backgroundColor = darkColor;
     self.loginButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
-    [self.loginButton setTitle:@"Log In" forState:UIControlStateNormal];
+    [self.loginButton setTitle:@"LOG IN" forState:UIControlStateNormal];
     [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.loginButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.loginButton addTarget:self action:@selector(loginPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -107,8 +106,6 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
 
 -(void)loginPressed:(id)selector{
     
-    PFLogInViewController *logInController = [[PFLogInViewController alloc] init];
-    logInController.delegate = self;
     LogViewController *logViewController = [LogViewController new];
     UINavigationController *logNavController = [[UINavigationController alloc]initWithRootViewController:logViewController];
     [self presentViewController:logNavController animated:YES completion:^{

@@ -20,30 +20,14 @@ PODS:
   - AFNetworking/UIKit (2.5.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Analytics/Core-iOS (1.11.0):
-    - TRVSDictionaryWithCaseInsensitivity (= 0.0.2)
-  - Analytics/Flurry (1.11.0):
-    - Analytics/Core-iOS
-    - Analytics/Segmentio
-    - FlurrySDK (= 4.4.0)
-  - Analytics/Segmentio (1.11.0):
-    - Analytics/Core-iOS
-  - FlurrySDK (4.4.0):
-    - FlurrySDK/FlurrySDK (= 4.4.0)
-  - FlurrySDK/FlurrySDK (4.4.0)
   - PKYStepper (0.0.1)
-  - TRVSDictionaryWithCaseInsensitivity (0.0.2)
 
 DEPENDENCIES:
   - AFNetworking
-  - Analytics/Flurry
   - PKYStepper
 
 SPEC CHECKSUMS:
   AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
-  Analytics: 57af1211d00ab8f6ccd655d2efa71c855a834011
-  FlurrySDK: abaedafc350afa41b004236b67ae14f7d3748b68
   PKYStepper: 551554f434444e332fbf184cbbc243a747546592
-  TRVSDictionaryWithCaseInsensitivity: a61daa8469fa079e05b694f6aad5441785c837d1
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.36.0

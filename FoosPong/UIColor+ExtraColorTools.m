@@ -39,9 +39,25 @@
 }
 
 + (UIColor *)transparentWhite{
-    UIColor* color = [UIColor colorWithWhite:1 alpha:.8];
+    UIColor* color = [UIColor colorWithRed:.95 green:.95 blue:.95 alpha:.8];
     return color;
 }
+
++ (UIColor *)mainWhite{
+    UIColor* color = [UIColor colorWithRed:.95 green:.95 blue:.95 alpha:1];
+    return color;
+}
+
++ (UIColor *)mainBlack{
+    UIColor* color = [UIColor colorWithRed:.16 green:.17 blue:.2 alpha:1];
+    return color;
+}
+
++ (UIColor *)transparentCellWhite{
+    UIColor* color = [UIColor colorWithRed:.95 green:.95 blue:.95 alpha:.5];
+    return color;
+}
+
 
 
 

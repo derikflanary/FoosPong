@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "InitialViewController.h"
 #import <Parse/Parse.h>
-#import <Analytics.h>
+//#import <Analytics.h>
 #import "UserController.h"
 #import "HomeViewController.h"
 #import "GroupController.h"
@@ -55,7 +55,7 @@
         self.window.rootViewController = self.mainNavigationController;
         
         
-    [SEGAnalytics setupWithConfiguration:[SEGAnalyticsConfiguration configurationWithWriteKey:@"osIWhCUd5Y50pBl1YrHV1Grj4nHrL0eI"]];
+//    [SEGAnalytics setupWithConfiguration:[SEGAnalyticsConfiguration configurationWithWriteKey:@"osIWhCUd5Y50pBl1YrHV1Grj4nHrL0eI"]];
     
     
 //    [[SEGAnalytics sharedAnalytics] identify:@"f4ca124298"

@@ -19,7 +19,7 @@
     
     //    self.layer.cornerRadius = 10;
     //    self.clipsToBounds = YES;
-    self.backgroundColor = [UIColor darkColor];
+    self.backgroundColor = [UIColor transparentCellWhite];
     return self;
 }
 

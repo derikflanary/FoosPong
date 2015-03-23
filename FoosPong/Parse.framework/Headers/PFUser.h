@@ -31,6 +31,13 @@ PF_ASSUME_NONNULL_BEGIN
 
 @interface PFUser : PFObject<PFSubclassing>
 
+/*!
+ @abstract The name of the `PFUser` class in the REST API.
+
+ @discussion This is a required <PFSubclassing> method.
+ */
++ (NSString *)parseClassName;
+
 ///--------------------------------------
 /// @name Accessing the Current User
 ///--------------------------------------
@@ -47,7 +54,7 @@ PF_ASSUME_NONNULL_BEGIN
 
  @discussion This is set by the server upon successful authentication.
  */
-@property (PF_NULLABLE_PROPERTY nonatomic, copy, readonly) NSString *sessionToken;
+@property (PF_NULLABLE_PROPERTY nonatomic, strong) NSString *sessionToken;
 
 /*!
  @abstract Whether the `PFUser` was just created from a request.
@@ -396,6 +403,15 @@ PF_ASSUME_NONNULL_BEGIN
  */
 + (void)requestPasswordResetForEmailInBackground:(NSString *)email
                                            block:(PF_NULLABLE PFBooleanResultBlock)block;
+
+///--------------------------------------
+/// @name Querying for Users
+///--------------------------------------
+
+/*!
+ @abstract Creates a <PFQuery> for `PFUser` objects.
+ */
++ (PF_NULLABLE PFQuery *)query;
 
 @end
 

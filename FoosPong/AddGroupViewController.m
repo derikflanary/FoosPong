@@ -23,7 +23,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIFont fontWithName:@"Thonburi-Light" size:18],
+      NSFontAttributeName, nil]];
+    [self.navigationController.navigationBar setTintColor:[UIColor mainBlack]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor mainWhite]];
+
+    self.view.backgroundColor = [UIColor mainWhite];
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;

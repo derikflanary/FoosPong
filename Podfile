@@ -5,7 +5,6 @@ target 'FoosPong' do
 
 pod 'AFNetworking'
 pod 'PKYStepper'
-pod 'Analytics/Flurry'
 end
 
 target 'FoosPongTests' do

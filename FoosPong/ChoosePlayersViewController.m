@@ -80,7 +80,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 
     self.segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"1 V 1", @"2 V 2"]];
     [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-    self.segmentedControl.tintColor = [UIColor darkColor];
+    self.segmentedControl.tintColor = [UIColor mainBlack];
     self.segmentedControl.selectedSegmentIndex = 0;
     UIFont *font = [UIFont boldSystemFontOfSize:18.0f];
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
@@ -93,7 +93,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     [self setToolbarItems:@[spacer,seg, spacer]];
     
-    self.tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 41) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.editing = NO;
@@ -385,6 +385,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
             }
             case TableView2TeamSectionAvailable:{
                 PFUser *theUser = [self.availablePlayers objectAtIndex:indexPath.row];
+                cell.textLabel.textColor = [UIColor blackColor];
                 cell.textLabel.text = theUser.username;
                 return cell;
 

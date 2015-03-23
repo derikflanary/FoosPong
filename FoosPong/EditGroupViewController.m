@@ -42,6 +42,15 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.translucent = NO;
     
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIFont fontWithName:@"Thonburi-Light" size:18],
+      NSFontAttributeName, nil]];
+    [self.navigationController.navigationBar setTintColor:[UIColor mainBlack]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor transparentWhite]];
+
+    
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
     [self.view addSubview:background];
@@ -64,8 +73,6 @@
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = YES;
     self.tableView.bounces = NO;
-    self.tableView.layer.cornerRadius = 10;
-    self.tableView.clipsToBounds = YES;
     self.tableView.backgroundColor = [UIColor transparentWhite];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     

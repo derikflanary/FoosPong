@@ -11,7 +11,7 @@
 #import "FindGroupViewController.h"
 #import "GroupController.h"
 #import "EditGroupViewController.h"
-#import "NewGameCustomTableViewCell.h"
+#import "PlayerTableViewCell.h"
 #import "GroupStatsViewController.h"
 
 @interface CurrentGroupViewController () 
@@ -55,7 +55,7 @@
     
     self.tabBarController.navigationItem.hidesBackButton = YES;
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 200, 320, 200) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 180, 320, 200) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = YES;
@@ -66,21 +66,24 @@
     [self.tableView setEditing:NO];
     [self.view addSubview:self.tableView];
     
-    self.addMembersButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 420, 320, 41)];
-    self.addMembersButton.backgroundColor = [UIColor darkColor];
+    self.addMembersButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 420, self.view.frame.size.width, 41)];
+    self.addMembersButton.backgroundColor = [UIColor mainBlack];
     self.addMembersButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.addMembersButton setTitle:@"Edit Team" forState:UIControlStateNormal];
-    [self.addMembersButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.addMembersButton setTitleColor:[UIColor mainWhite] forState:UIControlStateNormal];
     [self.addMembersButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.addMembersButton addTarget:self action:@selector(addMember:) forControlEvents:UIControlEventTouchUpInside];
+    [self.addMembersButton.layer setBorderColor:[[UIColor transparentCellWhite] CGColor]];
     
-    self.groupStatsButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 160, self.view.frame.size.width, 41)];
-    self.groupStatsButton.backgroundColor = [UIColor darkColor];
+    
+    self.groupStatsButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 380, self.view.frame.size.width, 41)];
+    self.groupStatsButton.backgroundColor = [UIColor mainBlack];
     self.groupStatsButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.groupStatsButton setTitle:@"Group Stats" forState:UIControlStateNormal];
-    [self.groupStatsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.groupStatsButton setTitleColor:[UIColor mainWhite] forState:UIControlStateNormal];
     [self.groupStatsButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.groupStatsButton addTarget:self action:@selector(statsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.addMembersButton.layer setBorderColor:[[UIColor mainWhite] CGColor]];
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
     
@@ -94,9 +97,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NewGameCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewGameCell" ];
+    PlayerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlayerGameCell" ];
     if (!cell){
-        cell = [NewGameCustomTableViewCell new];
+        cell = [PlayerTableViewCell new];
         
     }
     if (self.groupMembers.count > 0) {

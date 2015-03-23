@@ -19,4 +19,10 @@
 + (UIColor *)mainColorTransparent;
 
 + (UIColor *)transparentWhite;
+
++ (UIColor *)mainWhite;
+
++ (UIColor *)mainBlack;
+
++ (UIColor *)transparentCellWhite;
 @end
