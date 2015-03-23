@@ -34,6 +34,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIFont fontWithName:@"Thonburi-Light" size:18],
+      NSFontAttributeName, nil]];
+    [self.navigationController.navigationBar setTintColor:[UIColor mainBlack]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor transparentWhite]];
+    
     self.scoreToWin = 10;
     
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
@@ -43,8 +52,8 @@
     UIView *view = [[UIView alloc]initWithFrame:self.view.frame];
     view.backgroundColor = [UIColor transparentWhite];
     [self.view addSubview:view];
-    
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
+
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
     PFUser *player = [self.teamOne objectAtIndex:0];

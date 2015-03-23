@@ -14,4 +14,6 @@
 
 + (NSString*)boldFont;
 
++ (NSString*)combineNames:(NSString*)firstName and:(NSString*)lastName;
+
 @end

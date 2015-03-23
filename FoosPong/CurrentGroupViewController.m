@@ -69,7 +69,7 @@
     self.addMembersButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 420, self.view.frame.size.width, 41)];
     self.addMembersButton.backgroundColor = [UIColor darkColor];
     self.addMembersButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-    [self.addMembersButton setTitle:@"Edit Team" forState:UIControlStateNormal];
+    [self.addMembersButton setTitle:@"EDIT TEAM" forState:UIControlStateNormal];
     [self.addMembersButton setTitleColor:[UIColor mainWhite] forState:UIControlStateNormal];
     [self.addMembersButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.addMembersButton addTarget:self action:@selector(addMember:) forControlEvents:UIControlEventTouchUpInside];
@@ -79,7 +79,7 @@
     self.groupStatsButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 380, self.view.frame.size.width, 41)];
     self.groupStatsButton.backgroundColor = [UIColor darkColor];
     self.groupStatsButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-    [self.groupStatsButton setTitle:@"Group Stats" forState:UIControlStateNormal];
+    [self.groupStatsButton setTitle:@"GROUP STATISTICS" forState:UIControlStateNormal];
     [self.groupStatsButton setTitleColor:[UIColor mainWhite] forState:UIControlStateNormal];
     [self.groupStatsButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.groupStatsButton addTarget:self action:@selector(statsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -105,7 +105,14 @@
     if (self.groupMembers.count > 0) {
         PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
         
-        cell.textLabel.text = user.username;
+        if (user == self.admin) {
+            cell.textLabel.text = [NSString stringWithFormat:@"%@ - Admin", user.username];
+            cell.detailTextLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
+        }else{
+        
+            cell.textLabel.text = user.username;
+            cell.detailTextLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
+        }
     }
    
     return cell;
@@ -156,6 +163,7 @@
                 }];
                 
                 [[GroupController sharedInstance]fetchAdminForGroup:self.currentGroup callback:^(PFObject *admin) {
+                    self.admin = admin;
                     if ([PFUser currentUser] == admin) {
                         [self.view addSubview:self.addMembersButton];
                     }

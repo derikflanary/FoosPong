@@ -75,7 +75,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     self.guestButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 62)];
     self.guestButton.backgroundColor = darkColor;
     self.guestButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
-    [self.guestButton setTitle:@"Sign Up" forState:UIControlStateNormal];
+    [self.guestButton setTitle:@"SIGN UP" forState:UIControlStateNormal];
     [self.guestButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.guestButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.guestButton addTarget:self action:@selector(signUpPressed:) forControlEvents:UIControlEventTouchUpInside];

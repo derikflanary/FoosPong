@@ -21,4 +21,12 @@
     return boldFontName;
 }
 
++ (NSString*)combineNames:(NSString*)firstName and:(NSString*)lastName{
+    
+    NSString *fullName = [NSString stringWithFormat:@"%@ %@", firstName,lastName];
+    return fullName;
+}
+
+
+
 @end

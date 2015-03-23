@@ -39,6 +39,14 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIFont fontWithName:@"Thonburi-Light" size:18],
+      NSFontAttributeName, nil]];
+    [self.navigationController.navigationBar setTintColor:[UIColor mainBlack]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor transparentWhite]];
+    
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
     [self.view addSubview:background];
@@ -56,17 +64,30 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 //    UIBarButtonItem * saveGameButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveGamePressed:)];
     //self.navigationItem.rightBarButtonItem = saveGameButton;
     
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
     __block SingleGameViewController *bSelf = self;
     self.playerOneStepper = [[PKYStepper alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 100)];
+
     self.playerOneStepper.valueChangedCallback = ^(PKYStepper *stepper, float count) {
         stepper.countLabel.text = [NSString stringWithFormat:@"%@: %@",bSelf.playerOneName, @(count)];
     };
     [self.playerOneStepper setup];
     self.playerOneStepper.maximum = self.scoreToWin;
-    self.playerOneStepper.tintColor = [UIColor darkColor];
+    [self.playerOneStepper setBorderColor:[UIColor clearColor]];
+    [self.playerOneStepper setBorderWidth:0];
+    //[self.playerOneStepper setLabelColor:[UIColor mainColorTransparent]];
+    [self.playerOneStepper setLabelFont:[UIFont fontWithName:[NSString mainFont] size:22]];
+    [self.playerOneStepper setLabelTextColor:[UIColor transparentCellBlack]];
+    self.playerOneStepper.backgroundColor = [UIColor clearColor];
+    [self.playerOneStepper setButtonTextColor:[UIColor mainBlack] forState:UIControlStateNormal];
+    [self.playerOneStepper setButtonTextColor:[UIColor transparentCellBlack] forState:UIControlStateHighlighted];
+    [self.playerOneStepper.incrementButton setImage:[UIImage imageNamed:@"68"] forState:UIControlStateNormal];
+    [self.playerOneStepper.incrementButton setImage:[UIImage imageNamed:@"58"] forState:UIControlStateHighlighted];
+    [self.playerOneStepper.decrementButton setImage:[UIImage imageNamed:@"69"] forState:UIControlStateNormal];
+    self.playerOneStepper.buttonWidth = 75;
+    
     [self.view addSubview:self.playerOneStepper];
     
     self.playerTwoStepper = [[PKYStepper alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 100)];
