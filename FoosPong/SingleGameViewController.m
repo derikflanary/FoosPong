@@ -44,6 +44,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 @property (strong, nonatomic) UILabel *p2Label;
 
 
+
 @end
 
 @implementation SingleGameViewController
@@ -79,41 +80,6 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
-    
-    __block SingleGameViewController *bSelf = self;
-    self.playerOneStepper = [[PKYStepper alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 100)];
-
-    self.playerOneStepper.valueChangedCallback = ^(PKYStepper *stepper, float count) {
-        stepper.countLabel.text = [NSString stringWithFormat:@"%@: %@",bSelf.playerOneName, @(count)];
-    };
-    [self.playerOneStepper setup];
-    self.playerOneStepper.maximum = self.scoreToWin;
-    [self.playerOneStepper setBorderColor:[UIColor clearColor]];
-    [self.playerOneStepper setBorderWidth:0];
-    //[self.playerOneStepper setLabelColor:[UIColor mainColorTransparent]];
-    [self.playerOneStepper setLabelFont:[UIFont fontWithName:[NSString mainFont] size:22]];
-    [self.playerOneStepper setLabelTextColor:[UIColor transparentCellBlack]];
-    self.playerOneStepper.backgroundColor = [UIColor clearColor];
-    [self.playerOneStepper setButtonTextColor:[UIColor mainBlack] forState:UIControlStateNormal];
-    [self.playerOneStepper setButtonTextColor:[UIColor transparentCellBlack] forState:UIControlStateHighlighted];
-    [self.playerOneStepper.incrementButton setImage:[UIImage imageNamed:@"68"] forState:UIControlStateNormal];
-    [self.playerOneStepper.incrementButton setImage:[UIImage imageNamed:@"58"] forState:UIControlStateHighlighted];
-    [self.playerOneStepper.decrementButton setImage:[UIImage imageNamed:@"69"] forState:UIControlStateNormal];
-    self.playerOneStepper.buttonWidth = 75;
-    
-    //[self.view addSubview:self.playerOneStepper];
-    
-    self.playerTwoStepper = [[PKYStepper alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 100)];
-    self.playerTwoStepper.valueChangedCallback = ^(PKYStepper *stepper, float count) {
-        stepper.countLabel.text = [NSString stringWithFormat:@"%@: %@",bSelf.playerTwoName, @(count)];
-    };
-    [self.playerTwoStepper setup];
-    self.playerTwoStepper.maximum = self.scoreToWin;
-    //[self.view addSubview:self.playerTwoStepper];
-    
-    [self.playerOneStepper.countLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
-    
-    [self.playerTwoStepper.countLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
     
     self.p1PlusButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 200, 100, 100)];
     [self.p1PlusButton setTitle:@"+" forState:UIControlStateNormal];
@@ -189,8 +155,6 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
     }
     
-    
-    
 }
 
 - (void)p1PlusButtonPressed:(id)sender{
@@ -198,10 +162,27 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     if (self.playerOneScore < (self.scoreToWin - 1)) {
         self.playerOneScore ++;
         self.p1ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.playerOneScore];
+        
     }else{
         self.playerOneScore = self.scoreToWin;
         self.p1ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.playerOneScore];
-        NSLog(@"win");
+        self.playerOneWin = YES;
+        
+        [[OEPocketsphinxController sharedInstance] setActive:FALSE error:nil];
+        [self updateGameStats];
+        
+        UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", self.playerOneName] message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        
+        [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            
+            [[SingleGameController sharedInstance] addGameWithSingleGameStats:self.gameStats];
+            
+            [self dismissViewControllerAnimated:YES completion:^{
+                
+            }];
+            
+        }]];
+        [self presentViewController:setTitleAlert animated:YES completion:nil];
     }
 }
 
@@ -213,9 +194,24 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     }else{
         self.playerTwoScore = self.scoreToWin;
         self.p2ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.playerTwoScore];
-        NSLog(@"win");
+        self.playerTwoWin = YES;
+        
+        [[OEPocketsphinxController sharedInstance] setActive:FALSE error:nil];
+        [self updateGameStats];
+        
+        UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", self.playerTwoName] message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        
+        [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            
+            [[SingleGameController sharedInstance] addGameWithSingleGameStats:self.gameStats];
+            
+            [self dismissViewControllerAnimated:YES completion:^{
+                
+            }];
+            
+        }]];
+        [self presentViewController:setTitleAlert animated:YES completion:nil];
     }
-    
 }
 
 #pragma mark - Voice Commands
@@ -253,6 +249,11 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 - (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
     NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
     
+    if ([hypothesis isEqualToString:@"PLAYER ONE GOAL"]) {
+        [self p1PlusButtonPressed:self];
+    }else if ([hypothesis isEqualToString:@"PLAYER TWO GOAL"]){
+        [self p2PlusButtonPressed:self];
+    }
 }
 
 - (void) pocketsphinxDidStartListening {
