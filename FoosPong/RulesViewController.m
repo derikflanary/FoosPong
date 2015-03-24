@@ -8,9 +8,12 @@
 
 #import "RulesViewController.h"
 
-@interface RulesViewController ()
+
+@interface RulesViewController ()   <UIWebViewDelegate>
 
 @property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
+
 
 @end
 
@@ -22,7 +25,22 @@
     self.webView.scalesPageToFit = YES;
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.table-soccer.org/rules/documents/ITSFRulesEnglish.pdf"]]];
     [self.view addSubview:self.webView];
-    // Do any additional setup after loading the view.
+    
+    self.webView.delegate = self;
+    self.activityView = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.activityView.center = CGPointMake(160, 240);
+    self.activityView.color = [UIColor darkColor];
+    self.activityView.hidesWhenStopped = YES;
+    [self.view addSubview:self.activityView];
+    
+    [self.activityView startAnimating];
+
+   
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+    [self.activityView stopAnimating];
+    
 }
 
 - (void)didReceiveMemoryWarning {
