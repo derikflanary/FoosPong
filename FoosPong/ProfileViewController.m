@@ -85,6 +85,10 @@
     return 3;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -93,11 +97,11 @@
         cell = [NewGameCustomTableViewCell new];
     }
     if (indexPath.row == 0) {
-        cell.textLabel.text = @"1 V 1 GAME STATS";
+        cell.textLabel.text = @"1V1 Statistics";
     }else if (indexPath.row == 1){
-        cell.textLabel.text = @"2 V 2 GAME STATS";
+        cell.textLabel.text = @"2V2 Statistics";
     }else{
-        cell.textLabel.text = @"COMBINED STATS";
+        cell.textLabel.text = @"Combined Stats";
     }
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     //cell.contentView.backgroundColor = [UIColor mainColorTransparent];
@@ -108,7 +112,7 @@
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return @"Stats";
+    return @"Personal Statistics";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

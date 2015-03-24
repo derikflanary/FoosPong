@@ -17,11 +17,10 @@
     self.textLabel.font = [UIFont fontWithName:@"Thonburi-Light" size:22];
     self.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
     
-    self.adminLabel = [[UILabel alloc]initWithFrame:CGRectMake(260, 0, 80, 40)];
+    self.adminLabel = [[UILabel alloc]initWithFrame:CGRectMake(200, 0, 80, 40)];
     self.adminLabel.textAlignment = NSTextAlignmentCenter;
     
     [self.contentView addSubview: self.adminLabel];
-    
     //    self.layer.cornerRadius = 10;
     //    self.clipsToBounds = YES;
     self.backgroundColor = [UIColor transparentCellWhite];

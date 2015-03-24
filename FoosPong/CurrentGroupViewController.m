@@ -110,7 +110,7 @@
         PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
         
         if (user == self.admin) {
-            cell.textLabel.text = [NSString stringWithFormat:@"%@ - Admin", user.username];
+            cell.textLabel.text = user.username;
             cell.detailTextLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
             cell.adminLabel.text = @"Admin";
             
@@ -147,6 +147,11 @@
     header.contentView.backgroundColor = [UIColor transparentWhite];
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 
 #pragma mark - Group Checks
 
@@ -163,8 +168,15 @@
                 [self.view addSubview:self.groupStatsButton];
                 
                 [[GroupController sharedInstance]fetchMembersOfGroup:self.currentGroup Callback:^(NSArray *members) {
-                    self.groupMembers = members;
+                    self.groupMembers = members.mutableCopy;
+                    //NSUInteger theIndex = [self.groupMembers indexOfObject:self.admin];
+                    
+                    //id object = [self.groupMembers objectAtIndex:theIndex];
+                    [self.groupMembers removeObject:self.admin];
+                    [self.groupMembers insertObject:self.admin atIndex:0];
+                
                     [self.tableView reloadData];
+                    [[GroupController sharedInstance]saveGroupMembers:self.currentGroup andMembers:members];
 
                 }];
                 
@@ -254,8 +266,6 @@
 }
 
 - (void)statsButtonPressed:(id)sender{
-
-    
     
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:[GroupStatsViewController new]];
     

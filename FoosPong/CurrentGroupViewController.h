@@ -11,7 +11,7 @@
 
 @interface CurrentGroupViewController : MasterViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) NSArray *groupMembers;
+@property (nonatomic, strong) NSMutableArray *groupMembers;
 
 - (void)checkForGroup;
 

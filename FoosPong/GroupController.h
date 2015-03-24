@@ -14,17 +14,33 @@
 @property (nonatomic, strong) NSArray *groups;
 
 + (GroupController *)sharedInstance;
+
 - (void)addGroupforAdmin:(Group *)newGroup callback:(void (^)(BOOL *))callback;
+
 - (void)findGroupsForUser:(PFUser *)user callback:(void (^)(NSArray *, NSError *error))callback;
+
 - (void)retrieveCurrentGroupWithCallback:(void (^)(PFObject * group, NSError *error))callback;
+
 - (void)setCurrentGroup:(PFObject *)group callback:(void (^)(BOOL *))callback;
+
 - (void)findGroupsByName:(NSString*)name withCallback:(void (^)(NSArray *foundGroups))callback;
+
 - (void)addUser:(PFUser *)user toGroup:(PFObject *)group callback:(void (^)(BOOL *))callback;
+
 - (void)fetchAdminForGroup:(PFObject*)group callback:(void (^)(PFObject *))callback;
+
 - (NSArray*)membersForCurrentGroup:(PFObject *)currentGroup;
+
 - (void)notMembersOfCurrentGroupsearchString:(NSString *)searchString callback:(void (^)(NSArray*))callback;
+
 - (void)fetchMembersOfGroup:(PFObject *)group Callback:(void (^)(NSArray *))callback;
+
 - (void)removeUserFromGroup:(PFUser *)user callback:(void (^)(BOOL *))callback;
+
 - (void)deleteGroupCallback:(void (^)(BOOL *))callback;
+
+- (void)saveGroupMembers:(PFObject *)group andMembers:(NSArray *)members;
+
+
 
 @end

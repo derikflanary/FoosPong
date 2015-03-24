@@ -228,6 +228,14 @@ static NSString * const passwordKey = @"password";
     }];
 }
 
+- (void)saveGroupMembers:(PFObject *)group andMembers:(NSArray *)members{
+    
+    group[membersKey] = members;
+    [group saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+    }];
+    
+}
     
 
 

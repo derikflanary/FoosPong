@@ -85,7 +85,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     self.logOutButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 62)];
     self.logOutButton.backgroundColor = darkColor;
     self.logOutButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
-    [self.logOutButton setTitle:@"Log Out" forState:UIControlStateNormal];
+    [self.logOutButton setTitle:@"LOG OUT" forState:UIControlStateNormal];
     [self.logOutButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.logOutButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.logOutButton addTarget:self action:@selector(logOutPressed:) forControlEvents:UIControlEventTouchUpInside];
