@@ -26,16 +26,22 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 
 @interface SingleGameViewController () <OEEventsObserverDelegate>
 
-@property (nonatomic, assign) float scoreToWin;
+@property (nonatomic, assign) NSInteger scoreToWin;
 @property (nonatomic, strong) PKYStepper *playerOneStepper;
 @property (nonatomic, strong) PKYStepper *playerTwoStepper;
-@property (nonatomic, assign) NSNumber *playerOneScore;
-@property (nonatomic, assign) NSNumber *playerTwoScore;
+@property (nonatomic, assign) NSInteger playerOneScore;
+@property (nonatomic, assign) NSInteger playerTwoScore;
 @property (nonatomic, assign) BOOL playerOneWin;
 @property (nonatomic, assign) BOOL playerTwoWin;
 @property (nonatomic, strong) SingleGameStats *gameStats;
-
 @property (strong, nonatomic) OEEventsObserver *openEarsEventsObserver;
+
+@property (strong, nonatomic) UIButton *p1PlusButton;
+@property (strong, nonatomic) UIButton *p2PlusButton;
+@property (strong, nonatomic) UILabel *p1ScoreLabel;
+@property (strong, nonatomic) UILabel *p2ScoreLabel;
+@property (strong, nonatomic) UILabel *p1Label;
+@property (strong, nonatomic) UILabel *p2Label;
 
 
 @end
@@ -95,21 +101,67 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     [self.playerOneStepper.decrementButton setImage:[UIImage imageNamed:@"69"] forState:UIControlStateNormal];
     self.playerOneStepper.buttonWidth = 75;
     
-    [self.view addSubview:self.playerOneStepper];
+    //[self.view addSubview:self.playerOneStepper];
     
     self.playerTwoStepper = [[PKYStepper alloc]initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 100)];
     self.playerTwoStepper.valueChangedCallback = ^(PKYStepper *stepper, float count) {
         stepper.countLabel.text = [NSString stringWithFormat:@"%@: %@",bSelf.playerTwoName, @(count)];
     };
-        [self.playerTwoStepper setup];
+    [self.playerTwoStepper setup];
     self.playerTwoStepper.maximum = self.scoreToWin;
-        [self.view addSubview:self.playerTwoStepper];
+    //[self.view addSubview:self.playerTwoStepper];
     
     [self.playerOneStepper.countLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
     
     [self.playerTwoStepper.countLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
     
+    self.p1PlusButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 200, 100, 100)];
+    [self.p1PlusButton setTitle:@"+" forState:UIControlStateNormal];
+    [self.p1PlusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    self.p1PlusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
+    self.p1PlusButton.backgroundColor = [UIColor darkColor];
+    [self.p1PlusButton addTarget:self action:@selector(p1PlusButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.p1PlusButton.layer.cornerRadius = 50;
+    self.p1PlusButton.clipsToBounds = YES;
     
+    self.p2PlusButton = [[UIButton alloc]initWithFrame:CGRectMake(180, 200, 100, 100)];
+    [self.p2PlusButton setTitle:@"+" forState:UIControlStateNormal];
+    [self.p2PlusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    self.p2PlusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
+    self.p2PlusButton.backgroundColor = [UIColor darkColor];
+    [self.p2PlusButton addTarget:self action:@selector(p2PlusButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.p2PlusButton.layer.cornerRadius = 50;
+    self.p2PlusButton.clipsToBounds = YES;
+
+    self.p1ScoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, 100, 100, 100)];
+    self.p1ScoreLabel.textAlignment = NSTextAlignmentCenter;
+    self.p1ScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:50];
+    
+    self.p2ScoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(180, 100, 100, 100)];
+    self.p2ScoreLabel.textAlignment = NSTextAlignmentCenter;
+    self.p2ScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:50];
+    
+    self.p1Label = [[UILabel alloc]initWithFrame:CGRectMake(30, 60, 100, 50)];
+    self.p1Label.text = self.playerOneName;
+    self.p1Label.textAlignment = NSTextAlignmentCenter;
+    self.p1Label.font = [UIFont fontWithName:[NSString mainFont] size:22];
+    
+    self.p2Label = [[UILabel alloc]initWithFrame:CGRectMake(180, 60, 100, 50)];
+    self.p2Label.text = self.playerTwoName;
+    self.p2Label.textAlignment = NSTextAlignmentCenter;
+    self.p2Label.font = [UIFont fontWithName:[NSString mainFont] size:22];
+
+    [self.view addSubview:self.p1Label];
+    [self.view addSubview:self.p1PlusButton];
+    [self.view addSubview:self.p1ScoreLabel];
+    [self.view addSubview:self.p2PlusButton];
+    [self.view addSubview:self.p2ScoreLabel];
+    [self.view addSubview:self.p2Label];
+    
+    self.playerOneScore = 0;
+    self.playerTwoScore = 0;
+    self.p1ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.playerOneScore];
+    self.p2ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.playerTwoScore];
     
 //VOICE RECOGNITION
     
@@ -132,12 +184,71 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.openEarsEventsObserver = [[OEEventsObserver alloc] init];
     [self.openEarsEventsObserver setDelegate:self];
     
-    [[OEPocketsphinxController sharedInstance] setActive:TRUE error:nil];
-    [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
+    if ([[OEPocketsphinxController sharedInstance]micPermissionIsGranted]) {
+        [[OEPocketsphinxController sharedInstance] setActive:TRUE error:nil];
+        [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
+    }
+    
+    
+    
+}
+
+- (void)p1PlusButtonPressed:(id)sender{
+    
+    if (self.playerOneScore < (self.scoreToWin - 1)) {
+        self.playerOneScore ++;
+        self.p1ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.playerOneScore];
+    }else{
+        self.playerOneScore = self.scoreToWin;
+        self.p1ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.playerOneScore];
+        NSLog(@"win");
+    }
+}
+
+- (void)p2PlusButtonPressed:(id)sender{
+    
+    if (self.playerTwoScore < (self.scoreToWin - 1)) {
+        self.playerTwoScore ++;
+        self.p2ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.playerTwoScore];
+    }else{
+        self.playerTwoScore = self.scoreToWin;
+        self.p2ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.playerTwoScore];
+        NSLog(@"win");
+    }
     
 }
 
 #pragma mark - Voice Commands
+
+- (void) pocketsphinxFailedNoMicPermissions{
+    
+}
+/** The user prompt to get mic permissions, or a check of the mic permissions, has completed with a TRUE or a FALSE result  (will only be returned on iOS7 or later).*/
+- (void) micPermissionCheckCompleted:(BOOL)result{
+    
+    if (result){
+        
+        OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
+        
+        NSArray *words = @[@"PLAYER ONE GOAL", @"PLAYER TWO GOAL"];
+        NSString *name = @"LanguageFiles";
+        NSError *err = [lmGenerator generateLanguageModelFromArray:words withFilesNamed:name forAcousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"]];
+        NSString *lmPath = nil;
+        NSString *dicPath = nil;
+        
+        if(err == nil) {
+            
+            lmPath = [lmGenerator pathToSuccessfullyGeneratedLanguageModelWithRequestedName:@"LanguageFiles"];
+            dicPath = [lmGenerator pathToSuccessfullyGeneratedDictionaryWithRequestedName:@"LanguageFiles"];
+            
+        } else {
+            NSLog(@"Error: %@",[err localizedDescription]);
+        }
+        
+    [[OEPocketsphinxController sharedInstance] setActive:TRUE error:nil];
+    [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
+    }
+}
 
 - (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
     NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
@@ -193,6 +304,8 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     NSLog(@"A test file that was submitted for recognition is now complete.");
     
 }
+
+
 
 
 

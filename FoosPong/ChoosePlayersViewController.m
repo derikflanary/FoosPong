@@ -71,7 +71,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     background.frame = self.view.frame;
     [self.view addSubview:background];
     
-    self.startButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 420, 320, 41)];
+    self.startButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 410, 320, 51)];
     self.startButton.backgroundColor = [UIColor darkColor];
     self.startButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.startButton setTitle:@"START GAME" forState:UIControlStateNormal];
