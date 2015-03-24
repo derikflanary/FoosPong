@@ -42,6 +42,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 @property (nonatomic, strong) NSIndexPath *selectedPath;
 @property (nonatomic, assign) NSInteger userIndex;
 @property (nonatomic, strong) FoosButton *startButton;
+@property (nonatomic, strong) NSArray *searchAvailablePlayers;
 
 
 @end
@@ -122,6 +123,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
             self.availablePlayers = members.mutableCopy;
             [self.availablePlayers removeObject:self.currentUser];
             self.title = group[@"name"];
+            self.searchAvailablePlayers = members;
             [self.tableView reloadData];
         }];
     }];
@@ -569,109 +571,110 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 [tableView moveRowAtIndexPath:indexPath toIndexPath:self.selectedPath];
             }
         }
-        
+        //self.searchAvailablePlayers = self.availablePlayers;
         self.cellSelected = NO;
         [tableView endUpdates];
     }
 }
 
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return YES;
-}
 
-- (NSIndexPath *)tableView:(UITableView *)tableView
-targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
-       toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath{
-    if (self.segmentedControl.selectedSegmentIndex == 0) {
-        if (proposedDestinationIndexPath.section == 0 && self.currentPlayers.count == 2) {
-            return sourceIndexPath;
-        }else{
-    
-            return proposedDestinationIndexPath;
-        }
-    }else{
-        if (proposedDestinationIndexPath.section == 0 && self.currentPlayers.count == 2) {
-            return sourceIndexPath;
-        }else if(proposedDestinationIndexPath.section == 1 && self.teamTwoPlayers.count ==2){
-            return sourceIndexPath;
-        }else{
-            return proposedDestinationIndexPath;
-        }
-    }
-}
 
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    
-    if (self.segmentedControl.selectedSegmentIndex == 0){
-        if (sourceIndexPath.section == 1 && destinationIndexPath.section == 0) {
-            PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
-            [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
-            [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
-        }
-        if (sourceIndexPath.section == 1 && destinationIndexPath.section == 1) {
-            PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
-            [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
-            [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
-        }
-        if (sourceIndexPath.section == 0 && destinationIndexPath.section == 0) {
-            PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
-            [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
-            [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
-        }
-        if (sourceIndexPath.section == 0 && destinationIndexPath.section == 1) {
-            PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
-            [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
-            [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
-        }
-    }else{
-        if (sourceIndexPath.section == 1 && destinationIndexPath.section == 0) {
-            PFUser *user = [self.teamTwoPlayers objectAtIndex:sourceIndexPath.row];
-            [self.teamTwoPlayers removeObjectAtIndex:sourceIndexPath.row];
-            [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
-        }
-        if (sourceIndexPath.section == 0 && destinationIndexPath.section == 1) {
-            PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
-            [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
-            [self.teamTwoPlayers insertObject:user atIndex:destinationIndexPath.row];
-        }
-        if (sourceIndexPath.section == 2 && destinationIndexPath.section == 0) {
-            PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
-            [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
-            [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
-        }
-        if (sourceIndexPath.section == 0 && destinationIndexPath.section == 2) {
-            PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
-            [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
-            [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
-        }
-        if (sourceIndexPath.section == 2 && destinationIndexPath.section == 1) {
-            PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
-            [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
-            [self.teamTwoPlayers insertObject:user atIndex:destinationIndexPath.row];
-        }
-        if (sourceIndexPath.section == 1 && destinationIndexPath.section == 2) {
-            PFUser *user = [self.teamTwoPlayers objectAtIndex:sourceIndexPath.row];
-            [self.teamTwoPlayers removeObjectAtIndex:sourceIndexPath.row];
-            [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
-        }
-        if (sourceIndexPath.section == 1 && destinationIndexPath.section == 1) {
-            PFUser *user = [self.teamTwoPlayers objectAtIndex:sourceIndexPath.row];
-            [self.teamTwoPlayers removeObjectAtIndex:sourceIndexPath.row];
-            [self.teamTwoPlayers insertObject:user atIndex:destinationIndexPath.row];
-        }
-        if (sourceIndexPath.section == 0 && destinationIndexPath.section == 0) {
-            PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
-            [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
-            [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
-        }
-        if (sourceIndexPath.section == 2 && destinationIndexPath.section == 2) {
-            PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
-            [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
-            [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
-        }
-    }
-}
+//- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//    return YES;
+//}
+//
+//- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath{
+//    
+//    if (self.segmentedControl.selectedSegmentIndex == 0) {
+//        if (proposedDestinationIndexPath.section == 0 && self.currentPlayers.count == 2) {
+//            return sourceIndexPath;
+//        }else{
+//    
+//            return proposedDestinationIndexPath;
+//        }
+//    }else{
+//        if (proposedDestinationIndexPath.section == 0 && self.currentPlayers.count == 2) {
+//            return sourceIndexPath;
+//        }else if(proposedDestinationIndexPath.section == 1 && self.teamTwoPlayers.count ==2){
+//            return sourceIndexPath;
+//        }else{
+//            return proposedDestinationIndexPath;
+//        }
+//    }
+//}
+//
+//- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+//    
+//    if (self.segmentedControl.selectedSegmentIndex == 0){
+//        if (sourceIndexPath.section == 1 && destinationIndexPath.section == 0) {
+//            PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
+//            [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
+//            [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
+//        }
+//        if (sourceIndexPath.section == 1 && destinationIndexPath.section == 1) {
+//            PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
+//            [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
+//            [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
+//        }
+//        if (sourceIndexPath.section == 0 && destinationIndexPath.section == 0) {
+//            PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
+//            [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
+//            [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
+//        }
+//        if (sourceIndexPath.section == 0 && destinationIndexPath.section == 1) {
+//            PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
+//            [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
+//            [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
+//        }
+//    }else{
+//        if (sourceIndexPath.section == 1 && destinationIndexPath.section == 0) {
+//            PFUser *user = [self.teamTwoPlayers objectAtIndex:sourceIndexPath.row];
+//            [self.teamTwoPlayers removeObjectAtIndex:sourceIndexPath.row];
+//            [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
+//        }
+//        if (sourceIndexPath.section == 0 && destinationIndexPath.section == 1) {
+//            PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
+//            [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
+//            [self.teamTwoPlayers insertObject:user atIndex:destinationIndexPath.row];
+//        }
+//        if (sourceIndexPath.section == 2 && destinationIndexPath.section == 0) {
+//            PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
+//            [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
+//            [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
+//        }
+//        if (sourceIndexPath.section == 0 && destinationIndexPath.section == 2) {
+//            PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
+//            [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
+//            [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
+//        }
+//        if (sourceIndexPath.section == 2 && destinationIndexPath.section == 1) {
+//            PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
+//            [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
+//            [self.teamTwoPlayers insertObject:user atIndex:destinationIndexPath.row];
+//        }
+//        if (sourceIndexPath.section == 1 && destinationIndexPath.section == 2) {
+//            PFUser *user = [self.teamTwoPlayers objectAtIndex:sourceIndexPath.row];
+//            [self.teamTwoPlayers removeObjectAtIndex:sourceIndexPath.row];
+//            [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
+//        }
+//        if (sourceIndexPath.section == 1 && destinationIndexPath.section == 1) {
+//            PFUser *user = [self.teamTwoPlayers objectAtIndex:sourceIndexPath.row];
+//            [self.teamTwoPlayers removeObjectAtIndex:sourceIndexPath.row];
+//            [self.teamTwoPlayers insertObject:user atIndex:destinationIndexPath.row];
+//        }
+//        if (sourceIndexPath.section == 0 && destinationIndexPath.section == 0) {
+//            PFUser *user = [self.currentPlayers objectAtIndex:sourceIndexPath.row];
+//            [self.currentPlayers removeObjectAtIndex:sourceIndexPath.row];
+//            [self.currentPlayers insertObject:user atIndex:destinationIndexPath.row];
+//        }
+//        if (sourceIndexPath.section == 2 && destinationIndexPath.section == 2) {
+//            PFUser *user = [self.availablePlayers objectAtIndex:sourceIndexPath.row];
+//            [self.availablePlayers removeObjectAtIndex:sourceIndexPath.row];
+//            [self.availablePlayers insertObject:user atIndex:destinationIndexPath.row];
+//        }
+//    }
+//}
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -693,13 +696,18 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 
 #pragma mark - SearchController
 
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
+    self.navigationItem.hidesBackButton = YES;
+}
+
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
     
     
     NSString *searchText = searchController.searchBar.text;
     if ([searchText isEqualToString:@""]) {
         
-        self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
+        self.availablePlayers = self.searchAvailablePlayers.mutableCopy;
+        
         for (PFUser *user in self.currentPlayers) {
             if ([self.availablePlayers containsObject:user]) {
                 [self.availablePlayers removeObject:user];
@@ -724,7 +732,8 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     
-    self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
+    self.availablePlayers = self.searchAvailablePlayers.mutableCopy;
+    
     for (PFUser *user in self.currentPlayers) {
         if ([self.availablePlayers containsObject:user]) {
             [self.availablePlayers removeObject:user];
@@ -736,7 +745,9 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
         }
     }
     [self.tableView reloadData];
+    self.navigationItem.hidesBackButton = NO;
 }
+
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;

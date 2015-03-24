@@ -26,6 +26,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) PFUser *admin;
 @property (nonatomic, strong) FoosButton *groupStatsButton;
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
 
 @end
@@ -33,6 +34,14 @@
 @implementation CurrentGroupViewController
 
 -(void)viewWillAppear:(BOOL)animated{
+    
+    self.activityView = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.activityView.center = CGPointMake(160, 240);
+    self.activityView.color = [UIColor darkColor];
+    self.activityView.hidesWhenStopped = YES;
+    [self.view addSubview:self.activityView];
+    [self.activityView startAnimating];
+
     PFUser *currentUser = [PFUser currentUser];
     if (!currentUser[@"currentGroup"]) {
         [self noGroup];
@@ -174,7 +183,7 @@
                     //id object = [self.groupMembers objectAtIndex:theIndex];
                     [self.groupMembers removeObject:self.admin];
                     [self.groupMembers insertObject:self.admin atIndex:0];
-                
+                    [self.activityView stopAnimating];
                     [self.tableView reloadData];
                     [[GroupController sharedInstance]saveGroupMembers:self.currentGroup andMembers:members];
 
@@ -197,6 +206,7 @@
 
 - (void)noGroup{
     
+        [self.activityView stopAnimating];
         
         UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
         UIVisualEffectView *bluredEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];

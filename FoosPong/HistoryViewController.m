@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSArray *singleGames;
 @property (nonatomic, strong) NSArray *teamGames;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
 @end
 
@@ -29,6 +30,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.activityView = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.activityView.center = CGPointMake(160, 240);
+    self.activityView.color = [UIColor darkColor];
+    self.activityView.hidesWhenStopped = YES;
+    [self.view addSubview:self.activityView];
+    [self.activityView startAnimating];
     
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
@@ -49,6 +57,7 @@
             
             [[TeamGameController sharedInstance]updateGamesForUser:[PFUser currentUser] callback:^(NSArray * teamGames) {
                 self.teamGames = teamGames;
+                [self.activityView stopAnimating];
                 [self.tableView reloadData];
             }];
             

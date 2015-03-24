@@ -65,6 +65,11 @@
 		EE7C85C41ABC87D1008467AD /* MembersTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7C85C31ABC87D1008467AD /* MembersTableViewDataSource.m */; };
 		EE7C85C51AC07C23008467AD /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE33572B1A8C1C4700B83EC0 /* Parse.framework */; };
 		EE7C85C81AC0CE48008467AD /* FoosButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EE7C85C71AC0CE48008467AD /* FoosButton.m */; };
+		EE7C85CA1AC1DEB0008467AD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE7C85C91AC1DEB0008467AD /* AVFoundation.framework */; };
+		EE7C85D01AC1DEE4008467AD /* AcousticModelEnglish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EE7C85CC1AC1DEE4008467AD /* AcousticModelEnglish.bundle */; };
+		EE7C85D11AC1DEE4008467AD /* AcousticModelSpanish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EE7C85CD1AC1DEE4008467AD /* AcousticModelSpanish.bundle */; };
+		EE7C85D21AC1DEE4008467AD /* OpenEars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE7C85CE1AC1DEE4008467AD /* OpenEars.framework */; };
+		EE7C85D31AC1DEE4008467AD /* Slt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE7C85CF1AC1DEE4008467AD /* Slt.framework */; };
 		EE808DB01A9FC3E30000F833 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE808DAF1A9FC3E30000F833 /* SettingViewController.m */; };
 		EE808DB71A9FCCB10000F833 /* NSString+Fonts.m in Sources */ = {isa = PBXBuildFile; fileRef = EE808DB61A9FCCB10000F833 /* NSString+Fonts.m */; };
 		EE9DAEEB1A9D582200589897 /* RNFrostedSidebar.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */; };
@@ -198,6 +203,11 @@
 		EE7C85C31ABC87D1008467AD /* MembersTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MembersTableViewDataSource.m; sourceTree = "<group>"; };
 		EE7C85C61AC0CE48008467AD /* FoosButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoosButton.h; sourceTree = "<group>"; };
 		EE7C85C71AC0CE48008467AD /* FoosButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoosButton.m; sourceTree = "<group>"; };
+		EE7C85C91AC1DEB0008467AD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		EE7C85CC1AC1DEE4008467AD /* AcousticModelEnglish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AcousticModelEnglish.bundle; sourceTree = "<group>"; };
+		EE7C85CD1AC1DEE4008467AD /* AcousticModelSpanish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AcousticModelSpanish.bundle; sourceTree = "<group>"; };
+		EE7C85CE1AC1DEE4008467AD /* OpenEars.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenEars.framework; sourceTree = "<group>"; };
+		EE7C85CF1AC1DEE4008467AD /* Slt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Slt.framework; sourceTree = "<group>"; };
 		EE808DAE1A9FC3E30000F833 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		EE808DAF1A9FC3E30000F833 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		EE808DB51A9FCCB10000F833 /* NSString+Fonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Fonts.h"; sourceTree = "<group>"; };
@@ -238,6 +248,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE7C85D31AC1DEE4008467AD /* Slt.framework in Frameworks */,
+				EE7C85CA1AC1DEB0008467AD /* AVFoundation.framework in Frameworks */,
+				EE33572E1A8C1C9B00B83EC0 /* AudioToolbox.framework in Frameworks */,
 				EE3357381A8C1CE600B83EC0 /* QuartzCore.framework in Frameworks */,
 				EE9DAEED1A9D583500589897 /* Accelerate.framework in Frameworks */,
 				EE3357461A8C202600B83EC0 /* Accounts.framework in Frameworks */,
@@ -249,9 +262,9 @@
 				EE33573A1A8C1CF100B83EC0 /* Security.framework in Frameworks */,
 				EE3357361A8C1CDB00B83EC0 /* MobileCoreServices.framework in Frameworks */,
 				EE3357341A8C1CD100B83EC0 /* CoreLocation.framework in Frameworks */,
+				EE7C85D21AC1DEE4008467AD /* OpenEars.framework in Frameworks */,
 				EE3357321A8C1CC900B83EC0 /* CoreGraphics.framework in Frameworks */,
 				EE3357301A8C1CAD00B83EC0 /* CFNetwork.framework in Frameworks */,
-				EE33572E1A8C1C9B00B83EC0 /* AudioToolbox.framework in Frameworks */,
 				EE33572A1A8C1C2A00B83EC0 /* Bolts.framework in Frameworks */,
 				EE7C85C51AC07C23008467AD /* Parse.framework in Frameworks */,
 				7F7C9D7F76CC544EEC3A87D2 /* libPods-FoosPong.a in Frameworks */,
@@ -280,6 +293,8 @@
 		AED8EE843DD92B7D2CCC995D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EE7C85CB1AC1DEE4008467AD /* Framework */,
+				EE7C85C91AC1DEB0008467AD /* AVFoundation.framework */,
 				EE9DAEEC1A9D583500589897 /* Accelerate.framework */,
 				EE0DC00A1A8C4604000235B3 /* ParseUI.framework */,
 				EE3357451A8C202600B83EC0 /* Accounts.framework */,
@@ -535,6 +550,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		EE7C85CB1AC1DEE4008467AD /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				EE7C85CC1AC1DEE4008467AD /* AcousticModelEnglish.bundle */,
+				EE7C85CD1AC1DEE4008467AD /* AcousticModelSpanish.bundle */,
+				EE7C85CE1AC1DEE4008467AD /* OpenEars.framework */,
+				EE7C85CF1AC1DEE4008467AD /* Slt.framework */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
 		EE808DB11A9FC3EA0000F833 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -631,6 +657,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE7A6CE51A868402000447D2 /* Main.storyboard in Resources */,
+				EE7C85D11AC1DEE4008467AD /* AcousticModelSpanish.bundle in Resources */,
+				EE7C85D01AC1DEE4008467AD /* AcousticModelEnglish.bundle in Resources */,
 				EE7A6CEA1A868402000447D2 /* LaunchScreen.xib in Resources */,
 				EE7A6CE71A868402000447D2 /* Images.xcassets in Resources */,
 			);
@@ -878,6 +906,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FoosPong",
+					"$(PROJECT_DIR)/Framework",
 				);
 				GCC_PREFIX_HEADER = "FoosPong/FoosPong-Prefix.pch";
 				INFOPLIST_FILE = FoosPong/Info.plist;
@@ -897,6 +926,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FoosPong",
+					"$(PROJECT_DIR)/Framework",
 				);
 				GCC_PREFIX_HEADER = "FoosPong/FoosPong-Prefix.pch";
 				INFOPLIST_FILE = FoosPong/Info.plist;

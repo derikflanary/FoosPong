@@ -12,6 +12,11 @@
 #import "SingleGameController.h"
 #import "SingleGameStats.h"
 
+#import <OpenEars/OELanguageModelGenerator.h>
+#import <OpenEars/OEPocketsphinxController.h>
+#import <OpenEars/OEAcousticModel.h>
+#import <OpenEars/OEEventsObserver.h>
+
 static NSString * const playerOneKey = @"playerOneKey";
 static NSString * const playerTwoKey = @"playerTwoKey";
 static NSString * const playerOneScoreKey = @"playerOneScoreKey";
@@ -19,7 +24,7 @@ static NSString * const playerTwoScoreKey = @"playerTwoScoreKey";
 static NSString * const playerOneWinKey = @"playerOneWinKey";
 static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 
-@interface SingleGameViewController ()
+@interface SingleGameViewController () <OEEventsObserverDelegate>
 
 @property (nonatomic, assign) float scoreToWin;
 @property (nonatomic, strong) PKYStepper *playerOneStepper;
@@ -29,7 +34,9 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 @property (nonatomic, assign) BOOL playerOneWin;
 @property (nonatomic, assign) BOOL playerTwoWin;
 @property (nonatomic, strong) SingleGameStats *gameStats;
-//@property (nonatomic, strong) NSDictionary *gameStats;
+
+@property (strong, nonatomic) OEEventsObserver *openEarsEventsObserver;
+
 
 @end
 
@@ -103,19 +110,94 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     [self.playerTwoStepper.countLabel addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:NULL];
     
     
-}
-
--(void)saveGamePressed:(id)sender{
-    UIAlertController *saveAlert = [UIAlertController alertControllerWithTitle:@"Save Game" message:@"Would you like to save this game for later?" preferredStyle:UIAlertControllerStyleAlert];
-    [saveAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }]];
-    [saveAlert addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-    }]];
     
-    [self presentViewController:saveAlert animated:YES completion:nil];
-
+//VOICE RECOGNITION
+    
+    OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
+    
+    NSArray *words = @[@"PLAYER ONE GOAL", @"PLAYER TWO GOAL"];
+    NSString *name = @"LanguageFiles";
+    NSError *err = [lmGenerator generateLanguageModelFromArray:words withFilesNamed:name forAcousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"]];
+    NSString *lmPath = nil;
+    NSString *dicPath = nil;
+    
+    if(err == nil) {
+        
+        lmPath = [lmGenerator pathToSuccessfullyGeneratedLanguageModelWithRequestedName:@"LanguageFiles"];
+        dicPath = [lmGenerator pathToSuccessfullyGeneratedDictionaryWithRequestedName:@"LanguageFiles"];
+        
+    } else {
+        NSLog(@"Error: %@",[err localizedDescription]);
+    }
+    self.openEarsEventsObserver = [[OEEventsObserver alloc] init];
+    [self.openEarsEventsObserver setDelegate:self];
+    
+    [[OEPocketsphinxController sharedInstance] setActive:TRUE error:nil];
+    [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
+    
 }
+
+#pragma mark - Voice Commands
+
+- (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
+    NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
+    
+}
+
+- (void) pocketsphinxDidStartListening {
+    NSLog(@"Pocketsphinx is now listening.");
+    
+}
+
+- (void) pocketsphinxDidDetectSpeech {
+    NSLog(@"Pocketsphinx has detected speech.");
+    
+}
+
+- (void) pocketsphinxDidDetectFinishedSpeech {
+    NSLog(@"Pocketsphinx has detected a period of silence, concluding an utterance.");
+    
+}
+
+- (void) pocketsphinxDidStopListening {
+    NSLog(@"Pocketsphinx has stopped listening.");
+    
+}
+
+- (void) pocketsphinxDidSuspendRecognition {
+    NSLog(@"Pocketsphinx has suspended recognition.");
+    
+}
+
+- (void) pocketsphinxDidResumeRecognition {
+    NSLog(@"Pocketsphinx has resumed recognition.");
+    
+}
+
+- (void) pocketsphinxDidChangeLanguageModelToFile:(NSString *)newLanguageModelPathAsString andDictionary:(NSString *)newDictionaryPathAsString {
+    NSLog(@"Pocketsphinx is now using the following language model: \n%@ and the following dictionary: %@",newLanguageModelPathAsString,newDictionaryPathAsString);
+    
+}
+
+- (void) pocketSphinxContinuousSetupDidFailWithReason:(NSString *)reasonForFailure {
+    NSLog(@"Listening setup wasn't successful and returned the failure reason: %@", reasonForFailure);
+    
+}
+
+- (void) pocketSphinxContinuousTeardownDidFailWithReason:(NSString *)reasonForFailure {
+    NSLog(@"Listening teardown wasn't successful and returned the failure reason: %@", reasonForFailure);
+    
+}
+
+- (void) testRecognitionCompleted {
+    NSLog(@"A test file that was submitted for recognition is now complete.");
+    
+}
+
+
+
+#pragma mark - Tracking Scores
+
 
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -177,6 +259,9 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     [self.playerTwoStepper.countLabel removeObserver:self forKeyPath:@"text"];
     //[super dealloc];
 }
+
+#pragma mark - Other Methods
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -187,6 +272,19 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         
     }];
 }
+
+-(void)saveGamePressed:(id)sender{
+    UIAlertController *saveAlert = [UIAlertController alertControllerWithTitle:@"Save Game" message:@"Would you like to save this game for later?" preferredStyle:UIAlertControllerStyleAlert];
+    [saveAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }]];
+    [saveAlert addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    }]];
+    
+    [self presentViewController:saveAlert animated:YES completion:nil];
+    
+}
+
 
 /*
 #pragma mark - Navigation

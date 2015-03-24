@@ -25,7 +25,7 @@
 @property (nonatomic, strong) PFObject *currentGroup;
 @property (nonatomic, strong) UIBarButtonItem *findGroupButton;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
-
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
 @end
 
@@ -37,6 +37,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.activityView = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.activityView.center = CGPointMake(160, 240);
+    self.activityView.color = [UIColor darkColor];
+    self.activityView.hidesWhenStopped = YES;
+    [self.view addSubview:self.activityView];
+    [self.activityView startAnimating];
+
 
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -56,7 +64,7 @@
     self.tableView.backgroundColor = [UIColor transparentWhite];
     [self.view addSubview:self.tableView];
     
-    self.joinGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 41)];
+    self.joinGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 420, self.view.frame.size.width, 41)];
     self.joinGroupButton.backgroundColor = [UIColor darkColor];
     self.joinGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.joinGroupButton setTitle:@"JOIN AN EXISTING TEAM" forState:UIControlStateNormal];
@@ -96,6 +104,7 @@
                     [self noCurrentGroup];
                 }else{
                     self.groups = groups;
+                    [self.activityView stopAnimating];
                     [self.tableView reloadData];
 //                    self.currentGroup = [PFUser currentUser][@"currentGroup"];
 //                    self.title = self.currentGroup[@"name"];
