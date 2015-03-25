@@ -12,6 +12,7 @@
 		7F7C9D7F76CC544EEC3A87D2 /* libPods-FoosPong.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B77DFF6D64A66AF6288C73B1 /* libPods-FoosPong.a */; };
 		EE0976AD1ABE1991006CC328 /* PlayerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0976AC1ABE1991006CC328 /* PlayerTableViewCell.m */; };
 		EE0976B01ABE19B2006CC328 /* HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0976AF1ABE19B2006CC328 /* HistoryTableViewCell.m */; };
+		EE0976B31AC24EE8006CC328 /* SettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0976B21AC24EE8006CC328 /* SettingsTableViewCell.m */; };
 		EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC00E1A8D9456000235B3 /* UserController.m */; };
 		EE0DC0121A8D96D8000235B3 /* SingleGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC0111A8D96D8000235B3 /* SingleGameController.m */; };
 		EE1817081AB2732800E608B3 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1817071AB2732800E608B3 /* Group.m */; };
@@ -111,6 +112,8 @@
 		EE0976AC1ABE1991006CC328 /* PlayerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTableViewCell.m; sourceTree = "<group>"; };
 		EE0976AE1ABE19B2006CC328 /* HistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewCell.h; sourceTree = "<group>"; };
 		EE0976AF1ABE19B2006CC328 /* HistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewCell.m; sourceTree = "<group>"; };
+		EE0976B11AC24EE8006CC328 /* SettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewCell.h; sourceTree = "<group>"; };
+		EE0976B21AC24EE8006CC328 /* SettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewCell.m; sourceTree = "<group>"; };
 		EE0DC00A1A8C4604000235B3 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		EE0DC00C1A8C53A1000235B3 /* FoosPong-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FoosPong-Prefix.pch"; sourceTree = "<group>"; };
 		EE0DC00D1A8D9456000235B3 /* UserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserController.h; sourceTree = "<group>"; };
@@ -413,6 +416,8 @@
 				EE0976AC1ABE1991006CC328 /* PlayerTableViewCell.m */,
 				EE0976AE1ABE19B2006CC328 /* HistoryTableViewCell.h */,
 				EE0976AF1ABE19B2006CC328 /* HistoryTableViewCell.m */,
+				EE0976B11AC24EE8006CC328 /* SettingsTableViewCell.h */,
+				EE0976B21AC24EE8006CC328 /* SettingsTableViewCell.m */,
 			);
 			name = CustomCells;
 			sourceTree = "<group>";
@@ -758,6 +763,7 @@
 				EEFB90DC1AAA753100DEA099 /* StatsViewController.m in Sources */,
 				EE48886A1A9FDD9B00FCCA47 /* HMSegmentedControl.m in Sources */,
 				EE2EF8161AA4F88900DE09E7 /* TeamGameController.m in Sources */,
+				EE0976B31AC24EE8006CC328 /* SettingsTableViewCell.m in Sources */,
 				EE2EF8191AA6422000DE09E7 /* PersonalSingleStats.m in Sources */,
 				EE7A6CDC1A868402000447D2 /* main.m in Sources */,
 				EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */,

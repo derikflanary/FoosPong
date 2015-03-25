@@ -1,24 +1,24 @@
 //
-//  HistoryTableViewCell.m
+//  SettingsTableViewCell.m
 //  FoosPong
 //
-//  Created by Derik Flanary on 3/21/15.
+//  Created by Derik Flanary on 3/24/15.
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "HistoryTableViewCell.h"
+#import "SettingsTableViewCell.h"
 
-@implementation HistoryTableViewCell
+@implementation SettingsTableViewCell
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     
     
-    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"HistoryGameCell"];
+    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"SettingsGameCell"];
     self.textLabel.font = [UIFont fontWithName:@"Thonburi-Light" size:18];
     self.detailTextLabel.font = [UIFont boldSystemFontOfSize:11];
-    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+
     
-   
     
     
     self.backgroundColor = [UIColor transparentCellWhite];
@@ -32,7 +32,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
+
     // Configure the view for the selected state
 }
 

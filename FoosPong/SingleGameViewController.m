@@ -36,12 +36,14 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 @property (nonatomic, strong) SingleGameStats *gameStats;
 @property (strong, nonatomic) OEEventsObserver *openEarsEventsObserver;
 
-@property (strong, nonatomic) UIButton *p1PlusButton;
-@property (strong, nonatomic) UIButton *p2PlusButton;
+@property (strong, nonatomic) FoosButton *p1PlusButton;
+@property (strong, nonatomic) FoosButton *p2PlusButton;
 @property (strong, nonatomic) UILabel *p1ScoreLabel;
 @property (strong, nonatomic) UILabel *p2ScoreLabel;
 @property (strong, nonatomic) UILabel *p1Label;
 @property (strong, nonatomic) UILabel *p2Label;
+@property (strong, nonatomic) FoosButton *p1MinusButton;
+@property (strong, nonatomic) FoosButton *p2MinusButton;
 
 
 
@@ -81,7 +83,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
-    self.p1PlusButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 200, 100, 100)];
+    self.p1PlusButton = [[FoosButton alloc]initWithFrame:CGRectMake(30, 200, 100, 100)];
     [self.p1PlusButton setTitle:@"+" forState:UIControlStateNormal];
     [self.p1PlusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     self.p1PlusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
@@ -90,7 +92,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.p1PlusButton.layer.cornerRadius = 50;
     self.p1PlusButton.clipsToBounds = YES;
     
-    self.p2PlusButton = [[UIButton alloc]initWithFrame:CGRectMake(180, 200, 100, 100)];
+    self.p2PlusButton = [[FoosButton alloc]initWithFrame:CGRectMake(180, 200, 100, 100)];
     [self.p2PlusButton setTitle:@"+" forState:UIControlStateNormal];
     [self.p2PlusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     self.p2PlusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
@@ -116,6 +118,24 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.p2Label.text = self.playerTwoName;
     self.p2Label.textAlignment = NSTextAlignmentCenter;
     self.p2Label.font = [UIFont fontWithName:[NSString mainFont] size:18];
+    
+    self.p1MinusButton = [[FoosButton alloc]initWithFrame:CGRectMake(45, 350, 50, 50)];
+    [self.p1MinusButton setTitle:@"-" forState:UIControlStateNormal];
+    [self.p1MinusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    self.p1MinusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
+    self.p1MinusButton.backgroundColor = [UIColor darkColor];
+    [self.p1MinusButton addTarget:self action:@selector(p1MinusButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.p1MinusButton.layer.cornerRadius = 25;
+    self.p1MinusButton.clipsToBounds = YES;
+    
+    self.p2MinusButton = [[FoosButton alloc]initWithFrame:CGRectMake(215, 350, 50, 50)];
+    [self.p2MinusButton setTitle:@"-" forState:UIControlStateNormal];
+    [self.p2MinusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    self.p2MinusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
+    self.p2MinusButton.backgroundColor = [UIColor darkColor];
+    [self.p2MinusButton addTarget:self action:@selector(p2MinusButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.p2MinusButton.layer.cornerRadius = 25;
+    self.p2MinusButton.clipsToBounds = YES;
 
     [self.view addSubview:self.p1Label];
     [self.view addSubview:self.p1PlusButton];
@@ -123,6 +143,8 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     [self.view addSubview:self.p2PlusButton];
     [self.view addSubview:self.p2ScoreLabel];
     [self.view addSubview:self.p2Label];
+    [self.view addSubview:self.p1MinusButton];
+    [self.view addSubview:self.p2MinusButton];
     
     self.playerOneScore = 0;
     self.playerTwoScore = 0;
@@ -130,29 +152,43 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.p2ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.playerTwoScore];
     
 //VOICE RECOGNITION
-    
-    OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
-    
-    NSArray *words = @[@"PLAYER ONE GOAL", @"PLAYER TWO GOAL"];
-    NSString *name = @"LanguageFiles";
-    NSError *err = [lmGenerator generateLanguageModelFromArray:words withFilesNamed:name forAcousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"]];
-    NSString *lmPath = nil;
-    NSString *dicPath = nil;
-    
-    if(err == nil) {
+    NSNumber *micOff = [[NSUserDefaults standardUserDefaults]objectForKey:@"micOff"];
+    BOOL microphoneOff = micOff.boolValue;
+    if (!microphoneOff) {
         
-        lmPath = [lmGenerator pathToSuccessfullyGeneratedLanguageModelWithRequestedName:@"LanguageFiles"];
-        dicPath = [lmGenerator pathToSuccessfullyGeneratedDictionaryWithRequestedName:@"LanguageFiles"];
+        OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
         
-    } else {
-        NSLog(@"Error: %@",[err localizedDescription]);
-    }
-    self.openEarsEventsObserver = [[OEEventsObserver alloc] init];
-    [self.openEarsEventsObserver setDelegate:self];
-    
-    if ([[OEPocketsphinxController sharedInstance]micPermissionIsGranted]) {
-        [[OEPocketsphinxController sharedInstance] setActive:TRUE error:nil];
-        [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
+        NSArray *words = @[@"PLAYER ONE GOAL", @"PLAYER TWO GOAL"];
+        NSString *name = @"LanguageFiles";
+        NSError *err = [lmGenerator generateLanguageModelFromArray:words withFilesNamed:name forAcousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"]];
+        NSString *lmPath = nil;
+        NSString *dicPath = nil;
+        
+        if(err == nil) {
+            
+            lmPath = [lmGenerator pathToSuccessfullyGeneratedLanguageModelWithRequestedName:@"LanguageFiles"];
+            dicPath = [lmGenerator pathToSuccessfullyGeneratedDictionaryWithRequestedName:@"LanguageFiles"];
+            
+        } else {
+            NSLog(@"Error: %@",[err localizedDescription]);
+        }
+        self.openEarsEventsObserver = [[OEEventsObserver alloc] init];
+        [self.openEarsEventsObserver setDelegate:self];
+        
+        if ([[OEPocketsphinxController sharedInstance]isListening]) {
+            [[OEPocketsphinxController sharedInstance]stopListening];
+        }
+        
+        if ([[OEPocketsphinxController sharedInstance]micPermissionIsGranted]) {
+            [OEPocketsphinxController sharedInstance].secondsOfSilenceToDetect = .5;
+            [OEPocketsphinxController sharedInstance].vadThreshold = 3;
+            
+            [[OEPocketsphinxController sharedInstance] setActive:TRUE error:nil];
+            [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
+            
+        }
+        
+ 
     }
     
 }
@@ -214,6 +250,22 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     }
 }
 
+- (void)p1MinusButtonPressed:(id)sender{
+    if (self.playerOneScore > 0) {
+        self.playerOneScore --;
+        self.p1ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.playerOneScore];
+    }
+    
+}
+
+- (void)p2MinusButtonPressed:(id)sender{
+    if (self.playerTwoScore > 0) {
+        self.playerTwoScore --;
+        self.p2ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.playerTwoScore];
+    }
+    
+}
+
 #pragma mark - Voice Commands
 
 - (void) pocketsphinxFailedNoMicPermissions{
@@ -240,9 +292,16 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         } else {
             NSLog(@"Error: %@",[err localizedDescription]);
         }
-        
-    [[OEPocketsphinxController sharedInstance] setActive:TRUE error:nil];
-    [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
+        if ([[OEPocketsphinxController sharedInstance]isListening]) {
+            
+        }else {
+            
+            [OEPocketsphinxController sharedInstance].secondsOfSilenceToDetect = .5;
+            [OEPocketsphinxController sharedInstance].vadThreshold = 3;
+
+            [[OEPocketsphinxController sharedInstance] setActive:TRUE error:nil];
+            [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
+                    }
    }
 }
 
@@ -263,6 +322,11 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 
 - (void) pocketsphinxDidDetectSpeech {
     NSLog(@"Pocketsphinx has detected speech.");
+//    double delayInSeconds = 2.0; // number of seconds to wait
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//       
+//    });
     
 }
 
@@ -314,47 +378,6 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 
 
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-
-    if (self.playerOneStepper.value == self.scoreToWin) {
-        
-        self.playerOneWin = YES;
-        
-        [self updateGameStats];
-        
-        UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", self.playerOneName] message:@"" preferredStyle:UIAlertControllerStyleAlert];
-        
-        [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-        
-            [[SingleGameController sharedInstance] addGameWithSingleGameStats:self.gameStats];
-        
-            [self dismissViewControllerAnimated:YES completion:^{
-                
-            }];
-        
-        }]];
-        [self presentViewController:setTitleAlert animated:YES completion:nil];
-        
-    }else if (self.playerTwoStepper.value == self.scoreToWin){
-        
-        self.playerTwoWin = YES;
-        
-        [self updateGameStats];
-        
-        UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", self.playerTwoName] message:@"" preferredStyle:UIAlertControllerStyleAlert];
-        
-        [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-            
-            [[SingleGameController sharedInstance] addGameWithSingleGameStats:self.gameStats];
-            
-            [self dismissViewControllerAnimated:YES completion:^{
-                
-            }];
-            
-        }]];
-        [self presentViewController:setTitleAlert animated:YES completion:nil];
-    }
-}
 
 - (void)updateGameStats{
     
@@ -382,6 +405,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 }
 
 - (void)cancelPressed:(id)sender{
+    [[OEPocketsphinxController sharedInstance]stopListening];
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         
     }];

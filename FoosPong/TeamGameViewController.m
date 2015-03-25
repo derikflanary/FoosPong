@@ -33,12 +33,14 @@
 @property (nonatomic, strong) TeamGameStats *gameStats;
 @property (strong, nonatomic) OEEventsObserver *openEarsEventsObserver;
 
-@property (strong, nonatomic) UIButton *team1PlusButton;
-@property (strong, nonatomic) UIButton *team2PlusButton;
+@property (strong, nonatomic) FoosButton *team1PlusButton;
+@property (strong, nonatomic) FoosButton *team2PlusButton;
 @property (strong, nonatomic) UILabel *team1ScoreLabel;
 @property (strong, nonatomic) UILabel *team2ScoreLabel;
 @property (strong, nonatomic) UILabel *team1Label;
 @property (strong, nonatomic) UILabel *team2Label;
+@property (strong, nonatomic) FoosButton *team1MinusButton;
+@property (strong, nonatomic) FoosButton *team2MinusButton;
 
 @end
 
@@ -113,12 +115,33 @@
     self.team2Label.textAlignment = NSTextAlignmentCenter;
     self.team2Label.font = [UIFont fontWithName:[NSString mainFont] size:22];
     
+    self.team1MinusButton = [[FoosButton alloc]initWithFrame:CGRectMake(45, 350, 50, 50)];
+    [self.team1MinusButton setTitle:@"-" forState:UIControlStateNormal];
+    [self.team1MinusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    self.team1MinusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
+    self.team1MinusButton.backgroundColor = [UIColor darkColor];
+    [self.team1MinusButton addTarget:self action:@selector(team1MinusButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.team1MinusButton.layer.cornerRadius = 25;
+    self.team1MinusButton.clipsToBounds = YES;
+    
+    self.team2MinusButton = [[FoosButton alloc]initWithFrame:CGRectMake(215, 350, 50, 50)];
+    [self.team2MinusButton setTitle:@"-" forState:UIControlStateNormal];
+    [self.team2MinusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    self.team2MinusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
+    self.team2MinusButton.backgroundColor = [UIColor darkColor];
+    [self.team2MinusButton addTarget:self action:@selector(team2MinusButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.team2MinusButton.layer.cornerRadius = 25;
+    self.team2MinusButton.clipsToBounds = YES;
+
+    
     [self.view addSubview:self.team1Label];
     [self.view addSubview:self.team1ScoreLabel];
     [self.view addSubview:self.team1PlusButton];
     [self.view addSubview:self.team2Label];
     [self.view addSubview:self.team2ScoreLabel];
     [self.view addSubview:self.team2PlusButton];
+    [self.view addSubview:self.team1MinusButton];
+    [self.view addSubview:self.team2MinusButton];
 
     self.scoreToWin = 10;
     self.teamOneScore = 0;
@@ -146,9 +169,18 @@
     self.openEarsEventsObserver = [[OEEventsObserver alloc] init];
     [self.openEarsEventsObserver setDelegate:self];
     
+    
+    if ([[OEPocketsphinxController sharedInstance]isListening]) {
+        [[OEPocketsphinxController sharedInstance]stopListening];
+    }
+    
     if ([[OEPocketsphinxController sharedInstance]micPermissionIsGranted]) {
+        
+        [OEPocketsphinxController sharedInstance].secondsOfSilenceToDetect = .4;
+        [OEPocketsphinxController sharedInstance].vadThreshold = 3;
         [[OEPocketsphinxController sharedInstance] setActive:TRUE error:nil];
         [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
+        
     }
 
 }
@@ -211,6 +243,21 @@
     }
 }
 
+- (void)team1MinusButtonPressed:(id)sender{
+    if (self.teamOneScore > 0) {
+        self.teamOneScore --;
+        self.team1ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.teamOneScore];
+    }
+    
+}
+
+- (void)team2MinusButtonPressed:(id)sender{
+    if (self.teamTwoScore > 0) {
+        self.teamTwoScore --;
+        self.team2ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.teamTwoScore];
+    }
+    
+}
 
 
 #pragma mark - Voice Commands
@@ -240,8 +287,14 @@
             NSLog(@"Error: %@",[err localizedDescription]);
         }
         
-        [[OEPocketsphinxController sharedInstance] setActive:TRUE error:nil];
-        [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
+        if ([[OEPocketsphinxController sharedInstance]isListening]) {
+         
+        }else{
+            [OEPocketsphinxController sharedInstance].secondsOfSilenceToDetect = .4;
+            [OEPocketsphinxController sharedInstance].vadThreshold = 3;
+            [[OEPocketsphinxController sharedInstance] setActive:TRUE error:nil];
+            [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
+                    }
     }
 }
 
@@ -372,6 +425,7 @@
 
 
 - (void)cancelPressed:(id)sender{
+    [[OEPocketsphinxController sharedInstance]stopListening];
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         
     }];

@@ -43,6 +43,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 @property (nonatomic, assign) NSInteger userIndex;
 @property (nonatomic, strong) FoosButton *startButton;
 @property (nonatomic, strong) NSArray *searchAvailablePlayers;
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
 
 @end
@@ -58,8 +59,17 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     self.navigationController.toolbarHidden = NO;
 }
 
+
 - (void)viewDidLoad {
         [super viewDidLoad];
+    
+    self.activityView = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.activityView.center = CGPointMake(160, 240);
+    self.activityView.color = [UIColor darkColor];
+    self.activityView.hidesWhenStopped = YES;
+    [self.view addSubview:self.activityView];
+    [self.activityView startAnimating];
+
     self.view.backgroundColor = [UIColor whiteColor];
     
     //self.navigationController.toolbarHidden = NO;
@@ -124,6 +134,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
             [self.availablePlayers removeObject:self.currentUser];
             self.title = group[@"name"];
             self.searchAvailablePlayers = members;
+            [self.activityView stopAnimating];
             [self.tableView reloadData];
         }];
     }];
