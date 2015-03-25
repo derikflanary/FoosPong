@@ -110,12 +110,12 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.p1Label = [[UILabel alloc]initWithFrame:CGRectMake(30, 60, 100, 50)];
     self.p1Label.text = self.playerOneName;
     self.p1Label.textAlignment = NSTextAlignmentCenter;
-    self.p1Label.font = [UIFont fontWithName:[NSString mainFont] size:22];
+    self.p1Label.font = [UIFont fontWithName:[NSString mainFont] size:18];
     
     self.p2Label = [[UILabel alloc]initWithFrame:CGRectMake(180, 60, 100, 50)];
     self.p2Label.text = self.playerTwoName;
     self.p2Label.textAlignment = NSTextAlignmentCenter;
-    self.p2Label.font = [UIFont fontWithName:[NSString mainFont] size:22];
+    self.p2Label.font = [UIFont fontWithName:[NSString mainFont] size:18];
 
     [self.view addSubview:self.p1Label];
     [self.view addSubview:self.p1PlusButton];
@@ -168,7 +168,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         self.p1ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.playerOneScore];
         self.playerOneWin = YES;
         
-        [[OEPocketsphinxController sharedInstance] setActive:FALSE error:nil];
+        [[OEPocketsphinxController sharedInstance]stopListening];
         [self updateGameStats];
         
         UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", self.playerOneName] message:@"" preferredStyle:UIAlertControllerStyleAlert];
@@ -196,7 +196,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         self.p2ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.playerTwoScore];
         self.playerTwoWin = YES;
         
-        [[OEPocketsphinxController sharedInstance] setActive:FALSE error:nil];
+        [[OEPocketsphinxController sharedInstance]stopListening];
         [self updateGameStats];
         
         UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", self.playerTwoName] message:@"" preferredStyle:UIAlertControllerStyleAlert];
@@ -223,7 +223,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 - (void) micPermissionCheckCompleted:(BOOL)result{
     
     if (result){
-        
+                
         OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
         
         NSArray *words = @[@"PLAYER ONE GOAL", @"PLAYER TWO GOAL"];
@@ -243,7 +243,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         
     [[OEPocketsphinxController sharedInstance] setActive:TRUE error:nil];
     [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
-    }
+   }
 }
 
 - (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
