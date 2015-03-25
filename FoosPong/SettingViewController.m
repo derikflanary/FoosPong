@@ -88,6 +88,14 @@
         self.mySwitch = [[UISwitch alloc]initWithFrame:CGRectMake(250, 10, 50, 50)];
         self.mySwitch.onTintColor = [UIColor darkColor];
         [self.mySwitch addTarget:self action:@selector(switchSwitched:) forControlEvents:UIControlEventValueChanged];
+        
+        NSNumber *micOff = [[NSUserDefaults standardUserDefaults]objectForKey:@"micOff"];
+        BOOL microphoneOff = micOff.boolValue;
+        if (!microphoneOff) {
+            self.mySwitch.on = NO;
+        }else{
+            self.mySwitch.on = YES;
+        }
         self.cellLabel = [[UILabel alloc]initWithFrame:CGRectMake(8, 0, 240, 50)];
         self.cellLabel.text = @"Say 'Player One Goal' or 'Team One Goal' for scoring";
         self.cellLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
@@ -130,10 +138,15 @@
 }
 
 - (void)switchSwitched:(id)sender{
-    self.microphoneOff = !self.microphoneOff;
+    if (self.mySwitch.on) {
+        self.microphoneOff = YES;
+    }else{
+        self.microphoneOff = NO;
+    }
     NSNumber *micOff = [NSNumber numberWithBool:self.microphoneOff];
     [[NSUserDefaults standardUserDefaults] setObject:micOff forKey:@"micOff"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    //[self.tableView reloadData];
 }
 
 /*

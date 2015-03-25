@@ -152,10 +152,12 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.p2ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.playerTwoScore];
     
 //VOICE RECOGNITION
+    
     NSNumber *micOff = [[NSUserDefaults standardUserDefaults]objectForKey:@"micOff"];
     BOOL microphoneOff = micOff.boolValue;
     if (!microphoneOff) {
-        
+        self.navigationController.navigationBar.topItem.prompt = @"Voice Scoring Activated";
+
         OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
         
         NSArray *words = @[@"PLAYER ONE GOAL", @"PLAYER TWO GOAL"];

@@ -79,7 +79,7 @@
     player = [self.teamTwo objectAtIndex:1];
     self.t2p2 = player.username;
     
-    self.team1PlusButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 200, 100, 100)];
+    self.team1PlusButton = [[FoosButton alloc]initWithFrame:CGRectMake(30, 200, 100, 100)];
     [self.team1PlusButton setTitle:@"+" forState:UIControlStateNormal];
     [self.team1PlusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     self.team1PlusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
@@ -88,7 +88,7 @@
     self.team1PlusButton.layer.cornerRadius = 50;
     self.team1PlusButton.clipsToBounds = YES;
     
-    self.team2PlusButton = [[UIButton alloc]initWithFrame:CGRectMake(180, 200, 100, 100)];
+    self.team2PlusButton = [[FoosButton alloc]initWithFrame:CGRectMake(180, 200, 100, 100)];
     [self.team2PlusButton setTitle:@"+" forState:UIControlStateNormal];
     [self.team2PlusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     self.team2PlusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
