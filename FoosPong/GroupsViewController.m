@@ -64,7 +64,7 @@
     self.tableView.backgroundColor = [UIColor transparentWhite];
     [self.view addSubview:self.tableView];
     
-    self.joinGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 420, self.view.frame.size.width, 41)];
+    self.joinGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 410, self.view.frame.size.width, 41)];
     self.joinGroupButton.backgroundColor = [UIColor darkColor];
     self.joinGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.joinGroupButton setTitle:@"JOIN AN EXISTING TEAM" forState:UIControlStateNormal];

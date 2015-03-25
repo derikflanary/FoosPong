@@ -59,6 +59,10 @@
     background.frame = self.view.frame;
     [self.view addSubview:background];
     
+    UIView *whiteWall = [[UIView alloc]initWithFrame:self.view.bounds];
+    whiteWall.backgroundColor = [UIColor transparentWhite];
+    [self.view addSubview:whiteWall];
+    
 //        UIBarButtonItem *addMemberButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMember:)];
 //        self.tabBarController.navigationItem.rightBarButtonItem = addMemberButton;
     

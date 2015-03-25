@@ -149,38 +149,44 @@
     self.team1ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.teamOneScore];
     self.team2ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.teamTwoScore];
     
-    
-    OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
-    
-    NSArray *words = @[@"PLAYER ONE GOAL", @"PLAYER TWO GOAL"];
-    NSString *name = @"LanguageFiles";
-    NSError *err = [lmGenerator generateLanguageModelFromArray:words withFilesNamed:name forAcousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"]];
-    NSString *lmPath = nil;
-    NSString *dicPath = nil;
-    
-    if(err == nil) {
+    NSNumber *micOff = [[NSUserDefaults standardUserDefaults]objectForKey:@"micOff"];
+    BOOL microphoneOff = micOff.boolValue;
+    if (!microphoneOff) {
+
+         self.navigationController.navigationBar.topItem.prompt = @"Voice Scoring Activated: Say 'Team One Goal' or 'Team Two Goal'.";
         
-        lmPath = [lmGenerator pathToSuccessfullyGeneratedLanguageModelWithRequestedName:@"LanguageFiles"];
-        dicPath = [lmGenerator pathToSuccessfullyGeneratedDictionaryWithRequestedName:@"LanguageFiles"];
+        OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
         
-    } else {
-        NSLog(@"Error: %@",[err localizedDescription]);
-    }
-    self.openEarsEventsObserver = [[OEEventsObserver alloc] init];
-    [self.openEarsEventsObserver setDelegate:self];
-    
-    
-    if ([[OEPocketsphinxController sharedInstance]isListening]) {
-        [[OEPocketsphinxController sharedInstance]stopListening];
-    }
-    
-    if ([[OEPocketsphinxController sharedInstance]micPermissionIsGranted]) {
+        NSArray *words = @[@"PLAYER ONE GOAL", @"PLAYER TWO GOAL"];
+        NSString *name = @"LanguageFiles";
+        NSError *err = [lmGenerator generateLanguageModelFromArray:words withFilesNamed:name forAcousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"]];
+        NSString *lmPath = nil;
+        NSString *dicPath = nil;
         
-        [OEPocketsphinxController sharedInstance].secondsOfSilenceToDetect = .4;
-        [OEPocketsphinxController sharedInstance].vadThreshold = 3;
-        [[OEPocketsphinxController sharedInstance] setActive:TRUE error:nil];
-        [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
+        if(err == nil) {
+            
+            lmPath = [lmGenerator pathToSuccessfullyGeneratedLanguageModelWithRequestedName:@"LanguageFiles"];
+            dicPath = [lmGenerator pathToSuccessfullyGeneratedDictionaryWithRequestedName:@"LanguageFiles"];
+            
+        } else {
+            NSLog(@"Error: %@",[err localizedDescription]);
+        }
+        self.openEarsEventsObserver = [[OEEventsObserver alloc] init];
+        [self.openEarsEventsObserver setDelegate:self];
         
+        
+        if ([[OEPocketsphinxController sharedInstance]isListening]) {
+            [[OEPocketsphinxController sharedInstance]stopListening];
+        }
+        
+        if ([[OEPocketsphinxController sharedInstance]micPermissionIsGranted]) {
+            
+            [OEPocketsphinxController sharedInstance].secondsOfSilenceToDetect = .4;
+            [OEPocketsphinxController sharedInstance].vadThreshold = 3;
+            [[OEPocketsphinxController sharedInstance] setActive:TRUE error:nil];
+            [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
+            
+        }
     }
 
 }

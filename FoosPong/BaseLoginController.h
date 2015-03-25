@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomAccessoryView.h"
 
-@interface BaseLoginController : UIViewController
+@interface BaseLoginController : UIViewController 
 
 @end

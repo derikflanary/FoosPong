@@ -25,6 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationController.navigationBar.translucent = NO;
+    
     [self.navigationController.navigationBar setTitleTextAttributes:
      
      [NSDictionary dictionaryWithObjectsAndKeys:
@@ -42,30 +44,11 @@
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
-    self.groupNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 80, 320, 41)];
-    self.groupNameField.backgroundColor = [UIColor mainColor];
-    self.groupNameField.placeholder = @"Group Name";
-    self.groupNameField.font = [UIFont fontWithName:[NSString boldFont] size:16.0f];
-    self.groupNameField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
-    self.groupNameField.layer.borderWidth = 1.0f;
-    
-    self.groupOrganizationField = [[UITextField alloc]initWithFrame:CGRectMake(0, 120, 320, 41)];
-    self.groupOrganizationField.backgroundColor = [UIColor whiteColor];
-    self.groupOrganizationField.placeholder = @"Organization Name";
-    self.groupOrganizationField.font = [UIFont fontWithName:[NSString boldFont] size:16.0f];
-    self.groupOrganizationField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
-    self.groupOrganizationField.layer.borderWidth = 1.0f;
-    
-//    [self.view addSubview:self.groupNameField];
-//    [self.view addSubview:self.groupOrganizationField];
-    
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 210, 320, 250) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = YES;
     self.tableView.bounces = NO;
-    self.tableView.layer.cornerRadius = 10;
-    self.tableView.clipsToBounds = YES;
     self.tableView.backgroundColor = [UIColor transparentWhite];
     
     [self.view addSubview:self.tableView];
@@ -76,10 +59,16 @@
     //self.searchController.searchResultsUpdater = self;
     self.searchController.delegate = self;
     self.searchController.searchBar.delegate = self;
-    self.searchController.searchBar.searchBarStyle = UISearchBarStyleProminent;
+    self.searchController.searchBar.searchBarStyle = UISearchBarStyleDefault;
     self.searchController.dimsBackgroundDuringPresentation = YES;
-    self.searchController.searchBar.placeholder = @"Search by name or organization";
+    self.searchController.hidesNavigationBarDuringPresentation = NO;
+    self.searchController.searchBar.placeholder = @"Search by Team Name or Organization";
 
+    if ([self.tableView respondsToSelector:@selector(layoutMargins)]) {
+        self.tableView.layoutMargins = UIEdgeInsetsZero;
+    }
+    
+    
 
     //[self.tableView.superview addSubview:self.searchController.searchBar];
 
@@ -136,6 +125,11 @@
         cell = [GroupTableViewCell new];
         
     }
+    
+    if ([cell respondsToSelector:@selector(layoutMargins)]) {
+        cell.layoutMargins = UIEdgeInsetsZero;
+    }
+    
     PFObject *group = [self.foundGroups objectAtIndex:indexPath.row];
     if (!group) {
         cell.textLabel.text = @"";

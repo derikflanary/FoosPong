@@ -97,7 +97,7 @@
             self.mySwitch.on = YES;
         }
         self.cellLabel = [[UILabel alloc]initWithFrame:CGRectMake(8, 0, 240, 50)];
-        self.cellLabel.text = @"Say 'Player One Goal' or 'Team One Goal' for scoring";
+        self.cellLabel.text = @"Voice Scoring Off";
         self.cellLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
         self.cellLabel.numberOfLines = 0;
         

@@ -15,7 +15,8 @@
 #import "HomeViewController.h"
 #import "AppDelegate.h"
 
-@interface LogViewController ()
+
+@interface LogViewController ()<DXCustomInputAccessoryViewDelegate>
 
 @end
 
@@ -130,6 +131,12 @@
     [self.view addSubview:self.overlayView];
     [self.view addSubview:self.forgotButton];
     
+    CustomAccessoryView *inputAccesoryView = [CustomAccessoryView new];
+    inputAccesoryView.delegate = self;
+    
+    self.usernameField.inputAccessoryView = inputAccesoryView;
+    self.passwordField.inputAccessoryView = inputAccesoryView;
+    
 }
 
 - (void)cancelPressed:(id)sender{
@@ -184,6 +191,22 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)donePressed{
+    [self.view endEditing:YES];
+}
+
+- (void)nextPressed{
+    if ([self.usernameField isFirstResponder]) {
+        [self.passwordField becomeFirstResponder];
+    }
+}
+
+- (void)previousPressed{
+    if ([self.passwordField isFirstResponder]) {
+        [self.usernameField becomeFirstResponder];
+    }
 }
 
 

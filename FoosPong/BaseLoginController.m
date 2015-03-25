@@ -8,7 +8,8 @@
 
 #import "BaseLoginController.h"
 
-@interface BaseLoginController ()
+
+@interface BaseLoginController () 
 
 @end
 
@@ -37,7 +38,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#define kOFFSET_FOR_KEYBOARD 195.0
+#define kOFFSET_FOR_KEYBOARD 140.0
 
 -(void)keyboardWillShow {
     // Animate the current view out of the way

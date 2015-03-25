@@ -84,7 +84,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.navigationItem.leftBarButtonItem = cancelButton;
     
     self.p1PlusButton = [[FoosButton alloc]initWithFrame:CGRectMake(30, 200, 100, 100)];
-    [self.p1PlusButton setTitle:@"+" forState:UIControlStateNormal];
+    [self.p1PlusButton setImage:[UIImage imageNamed:@"58"] forState:UIControlStateNormal];
     [self.p1PlusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     self.p1PlusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
     self.p1PlusButton.backgroundColor = [UIColor darkColor];
@@ -93,7 +93,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.p1PlusButton.clipsToBounds = YES;
     
     self.p2PlusButton = [[FoosButton alloc]initWithFrame:CGRectMake(180, 200, 100, 100)];
-    [self.p2PlusButton setTitle:@"+" forState:UIControlStateNormal];
+    [self.p2PlusButton setImage:[UIImage imageNamed:@"68"] forState:UIControlStateNormal];
     [self.p2PlusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     self.p2PlusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
     self.p2PlusButton.backgroundColor = [UIColor darkColor];
@@ -120,7 +120,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.p2Label.font = [UIFont fontWithName:[NSString mainFont] size:18];
     
     self.p1MinusButton = [[FoosButton alloc]initWithFrame:CGRectMake(45, 350, 50, 50)];
-    [self.p1MinusButton setTitle:@"-" forState:UIControlStateNormal];
+    [self.p1MinusButton setImage:[UIImage imageNamed:@"69"] forState:UIControlStateNormal];
     [self.p1MinusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     self.p1MinusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
     self.p1MinusButton.backgroundColor = [UIColor darkColor];
@@ -129,7 +129,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.p1MinusButton.clipsToBounds = YES;
     
     self.p2MinusButton = [[FoosButton alloc]initWithFrame:CGRectMake(215, 350, 50, 50)];
-    [self.p2MinusButton setTitle:@"-" forState:UIControlStateNormal];
+    [self.p2MinusButton setImage:[UIImage imageNamed:@"69"] forState:UIControlStateNormal];
     [self.p2MinusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     self.p2MinusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
     self.p2MinusButton.backgroundColor = [UIColor darkColor];
@@ -156,7 +156,8 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     NSNumber *micOff = [[NSUserDefaults standardUserDefaults]objectForKey:@"micOff"];
     BOOL microphoneOff = micOff.boolValue;
     if (!microphoneOff) {
-        self.navigationController.navigationBar.topItem.prompt = @"Voice Scoring Activated";
+        
+        self.navigationController.navigationBar.topItem.prompt = @"Say 'Player One Goal' or 'Player Two Goal'";
 
         OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
         

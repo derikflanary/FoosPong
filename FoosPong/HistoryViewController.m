@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSArray *teamGames;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) UISegmentedControl *segmentedControl;
 
 @end
 
@@ -42,7 +43,7 @@
     background.frame = self.view.frame;
     [self.view addSubview:background];
 
-    self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height)];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.toolbar.translucent = NO;
     [self.view addSubview:self.tableView];
@@ -63,6 +64,33 @@
             
         }];
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:2];
+    
+    self.segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"1 V 1", @"2 V 2"]];
+    [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+    self.segmentedControl.tintColor = [UIColor mainBlack];
+    self.segmentedControl.selectedSegmentIndex = 0;
+    UIFont *font = [UIFont boldSystemFontOfSize:18.0f];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
+                                                           forKey:NSFontAttributeName];
+    [self.segmentedControl setTitleTextAttributes:attributes
+                                         forState:UIControlStateNormal];
+    
+    
+    
+
+    
+//    [self.navigationController setToolbarHidden:NO];
+    UIBarButtonItem *seg = [[UIBarButtonItem alloc]initWithCustomView:self.segmentedControl];
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+//    [self setToolbarItems:@[spacer,seg, spacer]];
+
+    UIToolbar *toolBar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    [toolBar setItems:@[spacer, seg, spacer]];
+    [self.view addSubview:toolBar];
+}
+
+- (void)segmentedControlChangedValue:(id)sender{
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,13 +100,13 @@
 
 #pragma mark - TableView Datasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (section == 0) {
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
         return [self.singleGames count];
     }else{
         return [self.teamGames count];
@@ -88,11 +116,15 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
  
-    if (section == 0) {
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
         return @"Single Games";
     }else{
         return @"Team Games";
     }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 44;
 }
 
 
@@ -102,7 +134,7 @@
     if (!cell){
         cell = [HistoryTableViewCell new];
     }
-    if (indexPath.section == 0) {
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
         
         Game *game = [self.singleGames objectAtIndex:indexPath.row];
         PFUser *p1 = game.p1;
@@ -139,7 +171,7 @@
     
     GameDetailViewController *gameDetailViewController = [GameDetailViewController new];
     
-    if (indexPath.section == 0) {
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
         gameDetailViewController.singleGame = [self.singleGames objectAtIndex:indexPath.row];
     }else{
         gameDetailViewController.teamGame = [self.teamGames objectAtIndex:indexPath.row];
@@ -159,6 +191,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+    
     
     header.textLabel.textColor = [UIColor darkGrayColor];
     header.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];

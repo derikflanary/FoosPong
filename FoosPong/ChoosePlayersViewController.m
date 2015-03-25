@@ -67,7 +67,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     self.activityView.center = CGPointMake(160, 240);
     self.activityView.color = [UIColor darkColor];
     self.activityView.hidesWhenStopped = YES;
-    [self.view addSubview:self.activityView];
+    
     [self.activityView startAnimating];
 
     self.view.backgroundColor = [UIColor whiteColor];
@@ -112,6 +112,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     self.tableView.allowsSelectionDuringEditing = YES;
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.startButton];
+    [self.view addSubview:self.activityView];
     
     self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
     [self.searchController.searchBar sizeToFit];
