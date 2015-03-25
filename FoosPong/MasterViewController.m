@@ -71,11 +71,11 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     
    
     
-    NSArray *barImages = @[ [UIImage imageNamed:@"97"],
+    NSArray *barImages = @[ [UIImage imageNamed:@"Slice 2"],
                             [UIImage imageNamed:@"Artboard 1"],
                             [UIImage imageNamed:@"singleman"],
                             [UIImage imageNamed:@"Group 4"],
-                            [UIImage imageNamed:@"101"]];
+                            [UIImage imageNamed:@"Slice 1"]];
     NSArray *colors = @[
                         [UIColor mainWhite],
                         [UIColor mainWhite],
