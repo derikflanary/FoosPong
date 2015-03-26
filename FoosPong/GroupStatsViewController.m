@@ -34,11 +34,18 @@
     
     [self.view addSubview:bluredEffectView];
     
+    UILabel *comingSoonlabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 150, 200, 100)];
+    comingSoonlabel.text = @"Feature Coming Soon";
+    comingSoonlabel.numberOfLines = 0;
+    comingSoonlabel.backgroundColor = [UIColor clearColor];
+    comingSoonlabel.textColor = [UIColor lightTextColor];
+    [self.view addSubview:comingSoonlabel];
+    
      //Vibrancy Effect
     UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
     UIVisualEffectView *vibrancyEffectView = [[UIVisualEffectView alloc] initWithEffect:vibrancyEffect];
     [vibrancyEffectView setFrame:self.view.bounds];
-
+    [vibrancyEffectView addSubview:comingSoonlabel];
     // Add Vibrancy View to Blur View
     [bluredEffectView.contentView addSubview:vibrancyEffectView];
 

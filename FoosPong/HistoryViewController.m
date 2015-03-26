@@ -15,7 +15,7 @@
 #import "GameDetailViewController.h"
 #import "HistoryTableViewCell.h"
 
-@interface HistoryViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface HistoryViewController () <UITableViewDataSource, UITableViewDelegate, UIToolbarDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *singleGames;
@@ -75,11 +75,7 @@
     [self.segmentedControl setTitleTextAttributes:attributes
                                          forState:UIControlStateNormal];
     
-    
-    
 
-    
-//    [self.navigationController setToolbarHidden:NO];
     UIBarButtonItem *seg = [[UIBarButtonItem alloc]initWithCustomView:self.segmentedControl];
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 //    [self setToolbarItems:@[spacer,seg, spacer]];
@@ -87,6 +83,12 @@
     UIToolbar *toolBar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
     [toolBar setItems:@[spacer, seg, spacer]];
     [self.view addSubview:toolBar];
+    toolBar.delegate = self;
+    
+}
+
+- (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar{
+    return UIBarPositionTop;
 }
 
 - (void)segmentedControlChangedValue:(id)sender{

@@ -11,10 +11,11 @@
 #import "Game.h"
 #import "TeamGame.h"
 
-@interface StatsViewController () <UITableViewDataSource, UITableViewDelegate, JBLineChartViewDataSource, JBLineChartViewDelegate>
+@interface StatsViewController () <UITableViewDataSource, UITableViewDelegate, JBLineChartViewDataSource, JBLineChartViewDelegate, UIToolbarDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) JBLineChartView *lineChart;
+@property (nonatomic, strong) UISegmentedControl *segmentedControl;
 
 @end
 
@@ -23,11 +24,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
-    [self.navigationController.navigationBar setTintColor:[UIColor mainWhite]];
         
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+//    self.navigationController.navigationBar.shadowImage = [UIImage new];
+//    self.navigationController.navigationBar.translucent = YES;
+//    [self.navigationController.navigationBar setTintColor:[UIColor mainWhite]];
+    self.navigationController.toolbarHidden = NO;
+    
+    self.segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"1 V 1", @"2 V 2"]];
+    [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+    self.segmentedControl.tintColor = [UIColor mainBlack];
+    self.segmentedControl.selectedSegmentIndex = 0;
+    UIFont *font = [UIFont boldSystemFontOfSize:18.0f];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
+                                                           forKey:NSFontAttributeName];
+    [self.segmentedControl setTitleTextAttributes:attributes
+                                         forState:UIControlStateNormal];
+    [self.segmentedControl sizeToFit];
+    
+    UIBarButtonItem *seg = [[UIBarButtonItem alloc]initWithCustomView:self.segmentedControl];
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    [self setToolbarItems:@[spacer,seg, spacer]];
+    
+    
+
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
@@ -62,9 +82,14 @@
     
     [vibrancyEffectView.contentView addSubview:self.tableView];
     
+    
         // Add Vibrancy View to Blur View
     [bluredEffectView.contentView addSubview:vibrancyEffectView];
     
+}
+
+- (void)segmentedControlChangedValue:(id)sender{
+    //[self.tableView reloadData];
 }
 
 #pragma mark - tableview

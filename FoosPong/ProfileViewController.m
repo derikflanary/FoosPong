@@ -25,9 +25,9 @@
 @property (nonatomic, strong) NSArray *teamGames;
 @property (nonatomic, strong) PersonalSingleStats *persoanlStats;
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) UIButton *statsButton;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) PFUser *currentUser;
+@property (nonatomic, strong) FoosButton *statsButton;
 
 @end
 
@@ -40,6 +40,10 @@
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
     [self.view addSubview:background];
+    
+    UIView *whiteWall = [[UIView alloc]initWithFrame:self.view.bounds];
+    whiteWall.backgroundColor = [UIColor transparentWhite];
+    [self.view addSubview:whiteWall];
 
     self.tabBarController.navigationItem.hidesBackButton = YES;
     
@@ -67,13 +71,25 @@
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:2];
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 240, self.view.frame.size.width, 210) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 200, self.view.frame.size.width, 210) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = NO;
     self.tableView.bounces = NO;
     self.tableView.backgroundColor = [UIColor transparentWhite];
     [self.view addSubview:self.tableView];
+    
+    self.statsButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 410, self.view.frame.size.width, 41)];
+    self.statsButton.backgroundColor = [UIColor darkColor];
+    self.statsButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+    [self.statsButton setTitle:@"PERSONAL STATISTICS" forState:UIControlStateNormal];
+    [self.statsButton setTitleColor:[UIColor mainWhite] forState:UIControlStateNormal];
+    [self.statsButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.statsButton addTarget:self action:@selector(statsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.statsButton];
+}
+
+- (void)statsButtonPressed:(id)sender{
     
 }
 

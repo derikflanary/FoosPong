@@ -96,7 +96,7 @@
     [self.groupStatsButton setTitleColor:[UIColor mainWhite] forState:UIControlStateNormal];
     [self.groupStatsButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.groupStatsButton addTarget:self action:@selector(statsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self.addMembersButton.layer setBorderColor:[[UIColor mainWhite] CGColor]];
+
     self.groupStatsButton.layer.shadowColor = [UIColor grayColor].CGColor;
     self.groupStatsButton.layer.shadowOffset = CGSizeMake(0, 1.0);
     self.groupStatsButton.layer.shadowOpacity = 1.0;
