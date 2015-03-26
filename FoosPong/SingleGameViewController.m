@@ -7,7 +7,6 @@
 //
 
 #import "SingleGameViewController.h"
-#import <PKYStepper/PKYStepper.h>
 #import "ChoosePlayersViewController.h"
 #import "SingleGameController.h"
 #import "SingleGameStats.h"
@@ -27,8 +26,6 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 @interface SingleGameViewController () <OEEventsObserverDelegate>
 
 @property (nonatomic, assign) NSInteger scoreToWin;
-@property (nonatomic, strong) PKYStepper *playerOneStepper;
-@property (nonatomic, strong) PKYStepper *playerTwoStepper;
 @property (nonatomic, assign) NSInteger playerOneScore;
 @property (nonatomic, assign) NSInteger playerTwoScore;
 @property (nonatomic, assign) BOOL playerOneWin;
@@ -196,6 +193,8 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     
 }
 
+#pragma mark - Tracking Scores
+
 - (void)p1PlusButtonPressed:(id)sender{
     
     if (self.playerOneScore < (self.scoreToWin - 1)) {
@@ -253,6 +252,8 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     }
 }
 
+
+
 - (void)p1MinusButtonPressed:(id)sender{
     if (self.playerOneScore > 0) {
         self.playerOneScore --;
@@ -269,6 +270,44 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     
 }
 
+- (void)updateGameStats{
+    
+    self.gameStats = [SingleGameStats new];
+    self.gameStats.playerOne = self.playerOne;
+    self.gameStats.playerTwo = self.playerTwo;
+    self.gameStats.playerOneScore = self.playerOneScore;
+    self.gameStats.playerTwoScore = self.playerTwoScore;
+    self.gameStats.playerOneWin = self.playerOneWin;
+
+}
+
+
+#pragma mark - Other Methods
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)cancelPressed:(id)sender{
+    [[OEPocketsphinxController sharedInstance]stopListening];
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+-(void)saveGamePressed:(id)sender{
+    UIAlertController *saveAlert = [UIAlertController alertControllerWithTitle:@"Save Game" message:@"Would you like to save this game for later?" preferredStyle:UIAlertControllerStyleAlert];
+    [saveAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }]];
+    [saveAlert addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    }]];
+    
+    [self presentViewController:saveAlert animated:YES completion:nil];
+    
+}
+
 #pragma mark - Voice Commands
 
 - (void) pocketsphinxFailedNoMicPermissions{
@@ -278,7 +317,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 - (void) micPermissionCheckCompleted:(BOOL)result{
     
     if (result){
-                
+        
         OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
         
         NSArray *words = @[@"PLAYER ONE GOAL", @"PLAYER TWO GOAL"];
@@ -301,12 +340,13 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
             
             [OEPocketsphinxController sharedInstance].secondsOfSilenceToDetect = .5;
             [OEPocketsphinxController sharedInstance].vadThreshold = 3;
-
+            
             [[OEPocketsphinxController sharedInstance] setActive:TRUE error:nil];
             [[OEPocketsphinxController sharedInstance] startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
-                    }
-   }
+        }
+    }
 }
+
 
 - (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
     NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
@@ -325,11 +365,11 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 
 - (void) pocketsphinxDidDetectSpeech {
     NSLog(@"Pocketsphinx has detected speech.");
-//    double delayInSeconds = 2.0; // number of seconds to wait
-//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//       
-//    });
+    //    double delayInSeconds = 2.0; // number of seconds to wait
+    //    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    //    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+    //
+    //    });
     
 }
 
@@ -373,58 +413,6 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     
 }
 
-
-
-
-
-#pragma mark - Tracking Scores
-
-
-
-
-- (void)updateGameStats{
-    
-    self.gameStats = [SingleGameStats new];
-    self.gameStats.playerOne = self.playerOne;
-    self.gameStats.playerTwo = self.playerTwo;
-    self.gameStats.playerOneScore = (double)self.playerOneStepper.value;
-    self.gameStats.playerTwoScore = (double)self.playerTwoStepper.value;
-    self.gameStats.playerOneWin = self.playerOneWin;
-
-}
-
-- (void)dealloc {
-    
-    [self.playerOneStepper.countLabel removeObserver:self forKeyPath:@"text"];
-    [self.playerTwoStepper.countLabel removeObserver:self forKeyPath:@"text"];
-    //[super dealloc];
-}
-
-#pragma mark - Other Methods
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)cancelPressed:(id)sender{
-    [[OEPocketsphinxController sharedInstance]stopListening];
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        
-    }];
-}
-
--(void)saveGamePressed:(id)sender{
-    UIAlertController *saveAlert = [UIAlertController alertControllerWithTitle:@"Save Game" message:@"Would you like to save this game for later?" preferredStyle:UIAlertControllerStyleAlert];
-    [saveAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }]];
-    [saveAlert addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-    }]];
-    
-    [self presentViewController:saveAlert animated:YES completion:nil];
-    
-}
 
 
 /*

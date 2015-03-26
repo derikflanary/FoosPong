@@ -66,7 +66,7 @@
 //    [[SEGAnalytics sharedAnalytics] track:@"Signed Up"
 //                               properties:@{ @"plan": @"Enterprise" }];
     
-//    [Fabric with:@[CrashlyticsKit]];
+    
     
     //InitialViewController *ivc = [InitialViewController new];
     
@@ -93,6 +93,8 @@
 //    
 //    [mainNavController setViewControllers:@[hvc, profileTabBar, groupTabBar, ivc]];
     //mainNavController.viewControllers = @[ivc, hvc, profileTabBar, groupTabBar];
+    
+    [Fabric with:@[CrashlyticsKit]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

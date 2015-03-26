@@ -20,14 +20,11 @@ PODS:
   - AFNetworking/UIKit (2.5.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - PKYStepper (0.0.1)
 
 DEPENDENCIES:
   - AFNetworking
-  - PKYStepper
 
 SPEC CHECKSUMS:
   AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
-  PKYStepper: 551554f434444e332fbf184cbbc243a747546592
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.36.0

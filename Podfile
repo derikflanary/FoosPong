@@ -4,7 +4,7 @@
 target 'FoosPong' do
 
 pod 'AFNetworking'
-pod 'PKYStepper'
+
 end 
 
 target 'FoosPongTests' do

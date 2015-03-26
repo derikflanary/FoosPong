@@ -1,1 +1,0 @@
-PODS_FOOSPONG_PKYSTEPPER_OTHER_LDFLAGS = -framework "Foundation" -framework "QuartzCore" -framework "UIKit"

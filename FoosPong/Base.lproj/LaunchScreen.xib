@@ -25,12 +25,6 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="foosimg" translatesAutoresizingMaskIntoConstraints="NO" id="PuN-gU-W2J">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOOS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Yt-5B-yUo">
-                    <rect key="frame" x="175" y="385" width="129" height="65"/>
-                    <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="49"/>
-                    <color key="textColor" red="0.9730705492424242" green="0.9730705492424242" blue="0.9730705492424242" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -38,9 +32,7 @@
                 <constraint firstItem="PuN-gU-W2J" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2lH-Va-XPk"/>
                 <constraint firstAttribute="centerY" secondItem="PuN-gU-W2J" secondAttribute="centerY" id="5L5-tM-9I0"/>
                 <constraint firstItem="PuN-gU-W2J" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8YN-0w-lqS"/>
-                <constraint firstAttribute="centerX" secondItem="1Yt-5B-yUo" secondAttribute="centerX" constant="0.5" id="QL4-Tr-pUO"/>
                 <constraint firstAttribute="bottom" secondItem="PuN-gU-W2J" secondAttribute="bottom" id="XYs-Ta-sy5"/>
-                <constraint firstAttribute="bottom" secondItem="1Yt-5B-yUo" secondAttribute="bottom" constant="30" id="naf-0K-Yq8"/>
                 <constraint firstAttribute="trailing" secondItem="PuN-gU-W2J" secondAttribute="trailing" id="tQI-xl-ynt"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

@@ -7,7 +7,6 @@
 //
 
 #import "TeamGameViewController.h"
-#import <PKYStepper/PKYStepper.h>
 #import "ChoosePlayersViewController.h"
 #import "SingleGameController.h"
 #import "TeamGameStats.h"
@@ -20,8 +19,6 @@
 
 @interface TeamGameViewController () <OEEventsObserverDelegate>
 
-@property (nonatomic, strong) PKYStepper *stepperTeamOne;
-@property (nonatomic, strong) PKYStepper *stepperTeamTwo;
 @property (nonatomic, assign) BOOL teamOneWin;
 @property (nonatomic, assign) NSInteger teamOneScore;
 @property (nonatomic, assign) NSInteger teamTwoScore;
@@ -366,45 +363,6 @@
 
 
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if (self.stepperTeamOne.value == self.scoreToWin) {
-        
-        self.teamOneWin = YES;
-        [self updateTeamGameStats];
-        
-        UIAlertController *winnerAlert = [UIAlertController alertControllerWithTitle:@"Team One Wins!" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-        
-        [winnerAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-            
-            [[TeamGameController sharedInstance] addGameWithTeamGameStats:self.gameStats];
-            
-            [self.navigationController dismissViewControllerAnimated:YES completion:^{
-                
-            }];
-            
-        }]];
-        [self presentViewController:winnerAlert animated:YES completion:nil];
-        
-    }else if (self.stepperTeamTwo.value == self.scoreToWin){
-        
-        self.teamOneWin = NO;
-        [self updateTeamGameStats];
-        
-        UIAlertController *winnerAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Team Two Wins!"] message:@"" preferredStyle:UIAlertControllerStyleAlert];
-        
-        [winnerAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-            
-            [[TeamGameController sharedInstance] addGameWithTeamGameStats:self.gameStats];
-            
-            [self.navigationController dismissViewControllerAnimated:YES completion:^{
-                
-            }];
-            
-        }]];
-        [self presentViewController:winnerAlert animated:YES completion:nil];
-    }
-
-}
 
 
 - (void)updateTeamGameStats{
@@ -416,18 +374,12 @@
     self.gameStats.teamOnePlayerTwo = [self.teamOne objectAtIndex:1];
     self.gameStats.teamTwoPlayerOne = [self.teamTwo objectAtIndex:0];
     self.gameStats.teamTwoPlayerTwo = [self.teamTwo objectAtIndex:1];
-    self.gameStats.teamOneScore =  (double)self.stepperTeamOne.value;
-    self.gameStats.teamTwoScore =  (double)self.stepperTeamTwo.value;
+    self.gameStats.teamOneScore = self.teamOneScore;
+    self.gameStats.teamTwoScore = self.teamTwoScore;
     self.gameStats.teamOneWin = [NSNumber numberWithBool:self.teamOneWin];
 }
 
 
-- (void)dealloc {
-    
-    [self.stepperTeamOne.countLabel removeObserver:self forKeyPath:@"text"];
-    [self.stepperTeamTwo.countLabel removeObserver:self forKeyPath:@"text"];
-    //[super dealloc];
-}
 
 
 - (void)cancelPressed:(id)sender{
