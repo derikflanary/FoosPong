@@ -64,7 +64,7 @@
     self.tableView.backgroundColor = [UIColor transparentWhite];
     [self.view addSubview:self.tableView];
     
-    self.joinGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 410, self.view.frame.size.width, 41)];
+    self.joinGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 51)];
     self.joinGroupButton.backgroundColor = [UIColor darkColor];
     self.joinGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.joinGroupButton setTitle:@"JOIN AN EXISTING TEAM" forState:UIControlStateNormal];
@@ -73,7 +73,7 @@
     [self.joinGroupButton addTarget:self action:@selector(joinPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.joinGroupButton];
     
-    self.createGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 360, self.view.frame.size.width, 41)];
+    self.createGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 340, self.view.frame.size.width, 51)];
     self.createGroupButton.backgroundColor = [UIColor darkColor];
     self.createGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.createGroupButton setTitle:@"CREATE A TEAM" forState:UIControlStateNormal];

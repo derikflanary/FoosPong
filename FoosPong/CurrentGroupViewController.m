@@ -68,7 +68,7 @@
     
     self.tabBarController.navigationItem.hidesBackButton = YES;
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 160, 320, 200) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 140, 320, 250) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = YES;
@@ -79,7 +79,7 @@
     [self.tableView setEditing:NO];
     [self.view addSubview:self.tableView];
     
-    self.addMembersButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 410, self.view.frame.size.width, 41)];
+    self.addMembersButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 340, self.view.frame.size.width, 51)];
     self.addMembersButton.backgroundColor = [UIColor darkColor];
     self.addMembersButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.addMembersButton setTitle:@"EDIT TEAM" forState:UIControlStateNormal];
@@ -89,7 +89,7 @@
     [self.addMembersButton.layer setBorderColor:[[UIColor transparentCellWhite] CGColor]];
     
     
-    self.groupStatsButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 360, self.view.frame.size.width, 41)];
+    self.groupStatsButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 51)];
     self.groupStatsButton.backgroundColor = [UIColor darkColor];
     self.groupStatsButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.groupStatsButton setTitle:@"GROUP STATISTICS" forState:UIControlStateNormal];
@@ -198,6 +198,7 @@
                     self.admin = admin;
                     if ([PFUser currentUser] == admin) {
                         [self.view addSubview:self.addMembersButton];
+                        self.tableView.frame = CGRectMake(0, 140, 320, 200);
                     }
                 }];
                 if (self.noGroupView) {
@@ -273,8 +274,9 @@
 }
 
 - (void)addMember:(id)sender{
-    EditGroupViewController *amvc = [EditGroupViewController new];
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:amvc];
+    EditGroupViewController *egvc = [EditGroupViewController new];
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:egvc];
+    egvc.groupMembers = self.groupMembers;
     [self presentViewController:navController animated:YES completion:^{
         
     }];

@@ -82,7 +82,7 @@
     self.passwordField.autocorrectionType = UITextAutocorrectionTypeNo;
 
     
-    self.addGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 410, 320, 41)];
+    self.addGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, 320, 51)];
     self.addGroupButton.backgroundColor = [UIColor darkColor];
     self.addGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.addGroupButton setTitle:@"CREATE TEAM" forState:UIControlStateNormal];

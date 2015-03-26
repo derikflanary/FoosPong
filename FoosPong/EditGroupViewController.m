@@ -14,7 +14,7 @@
 #import "CurrentGroupViewController.h"
 #import "MembersTableViewDataSource.h"
 
-@interface EditGroupViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface EditGroupViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *nonMembers;
 @property (nonatomic, strong) FoosButton *deleteGroupButton;
@@ -57,7 +57,7 @@
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
-    self.deleteGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 410, 320, 41)];
+    self.deleteGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, 320, 51)];
     self.deleteGroupButton.backgroundColor = [UIColor darkColor];
     self.deleteGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.deleteGroupButton setTitle:@"DELETE TEAM" forState:UIControlStateNormal];
@@ -66,6 +66,7 @@
     [self.deleteGroupButton addTarget:self action:@selector(deleteGroupButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     self.membersDataSource = [MembersTableViewDataSource new];
+    self.membersDataSource.groupMembers = self.groupMembers;
 
     self.tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStylePlain];
     self.tableView.dataSource = self.membersDataSource;
@@ -74,18 +75,19 @@
     self.tableView.bounces = NO;
     self.tableView.backgroundColor = [UIColor transparentWhite];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    self.tableView.allowsSelection = NO;
     
-//    self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
-//    [self.searchController.searchBar sizeToFit];
-//    self.tableView.tableHeaderView = self.searchController.searchBar;
-//    self.searchController.searchResultsUpdater = self;
-//    self.searchController.delegate = self;
-//    self.searchController.searchBar.delegate = self;
-//    self.searchController.searchBar.searchBarStyle = UISearchBarStyleDefault;
-//    self.searchController.dimsBackgroundDuringPresentation = YES;
-//    self.searchController.searchBar.placeholder = @"Search for user";
-//    self.searchController.searchBar.hidden = YES;
-//    self.searchController.hidesNavigationBarDuringPresentation = NO;
+    self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
+    [self.searchController.searchBar sizeToFit];
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+    //self.searchController.searchResultsUpdater = self;
+    self.searchController.delegate = self;
+    self.searchController.searchBar.delegate = self;
+    self.searchController.searchBar.searchBarStyle = UISearchBarStyleDefault;
+    self.searchController.dimsBackgroundDuringPresentation = YES;
+    self.searchController.searchBar.placeholder = @"Search for user";
+    self.searchController.searchBar.hidden = YES;
+    self.searchController.hidesNavigationBarDuringPresentation = NO;
     
     self.segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"Edit Team", @"Add Member"]];
     [self.segmentedControl addTarget:self action:@selector(segmentedControlChanged:) forControlEvents:UIControlEventValueChanged];
@@ -104,7 +106,8 @@
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.deleteGroupButton];
 
-    [self populateTableView];
+
+    //[self populateTableView];
 }
 
 #pragma mark - segmentedControl
@@ -113,11 +116,15 @@
     if (self.segmentedControl.selectedSegmentIndex == 0) {
         self.tableView.dataSource = self.membersDataSource;
         self.searchController.searchBar.hidden = YES;
-        [self populateTableView];
+        self.tableView.allowsSelection = NO;
+        [self.tableView reloadData];
+        
+        //[self populateTableView];
         
     }else{
         self.tableView.dataSource = self;
         self.searchController.searchBar.hidden = NO;
+        self.tableView.allowsSelection = YES;
         [self.tableView reloadData];
     }
     
@@ -125,31 +132,31 @@
 
 #pragma mark - searchBar
 
-//-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-//    
-//    [self findNonMembers];
-//    self.tableView.allowsSelection = NO;
-//}
-//
-//- (void)findNonMembers{
-//    
-//    [[GroupController sharedInstance]notMembersOfCurrentGroupsearchString:self.searchController.searchBar.text callback:^(NSArray *nonMembers) {
-//         self.nonMembers = nonMembers.mutableCopy;
-//        [self.tableView reloadData];
-//    }];
-//}
-//
-//- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
-//    self.tableView.allowsSelection = YES;
-//}
-//
-//- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
-//    self.tableView.allowsSelection = NO;
-//}
-//
-//- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
-//    self.tableView.allowsSelection = YES;
-//}
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    
+    [self findNonMembers];
+    self.tableView.allowsSelection = NO;
+}
+
+- (void)findNonMembers{
+    
+    [[GroupController sharedInstance]notMembersOfCurrentGroupsearchString:self.searchController.searchBar.text callback:^(NSArray *nonMembers) {
+         self.nonMembers = nonMembers.mutableCopy;
+        [self.tableView reloadData];
+    }];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    self.tableView.allowsSelection = YES;
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
+    self.tableView.allowsSelection = NO;
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
+    self.tableView.allowsSelection = YES;
+}
 
 
 - (void)populateTableView{

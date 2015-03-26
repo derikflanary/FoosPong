@@ -71,7 +71,7 @@
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:2];
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 200, self.view.frame.size.width, 210) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 190, self.view.frame.size.width, 210) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = NO;
@@ -79,7 +79,7 @@
     self.tableView.backgroundColor = [UIColor transparentWhite];
     [self.view addSubview:self.tableView];
     
-    self.statsButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 410, self.view.frame.size.width, 41)];
+    self.statsButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 51)];
     self.statsButton.backgroundColor = [UIColor darkColor];
     self.statsButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.statsButton setTitle:@"PERSONAL STATISTICS" forState:UIControlStateNormal];

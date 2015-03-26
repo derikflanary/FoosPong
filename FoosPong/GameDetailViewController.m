@@ -41,7 +41,7 @@
     comingSoonlabel.text = @"Feature Coming Soon";
     comingSoonlabel.numberOfLines = 0;
     comingSoonlabel.backgroundColor = [UIColor clearColor];
-    comingSoonlabel.textColor = [UIColor clearColor];
+    comingSoonlabel.textColor = [UIColor lightTextColor];
     
     [vibrancyEffectView.contentView addSubview:comingSoonlabel];
     // Add Vibrancy View to Blur View
