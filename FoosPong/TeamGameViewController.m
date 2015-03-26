@@ -150,7 +150,7 @@
     BOOL microphoneOff = micOff.boolValue;
     if (!microphoneOff) {
 
-         self.navigationController.navigationBar.topItem.prompt = @"Voice Scoring Activated: Say 'Team One Goal' or 'Team Two Goal'.";
+         self.navigationController.navigationBar.topItem.prompt = @"Voice Scoring Commands Activated";
         
         OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
         
@@ -202,16 +202,21 @@
         
         [self updateTeamGameStats];
         
-        UIAlertController *winnerAlert = [UIAlertController alertControllerWithTitle:@"Team One Wins!" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *winnerAlert = [UIAlertController alertControllerWithTitle:@"Team One Wins!" message:@"End Game?" preferredStyle:UIAlertControllerStyleAlert];
         
-        [winnerAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        [winnerAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
             [[TeamGameController sharedInstance] addGameWithTeamGameStats:self.gameStats];
             
             [self.navigationController dismissViewControllerAnimated:YES completion:^{
                 
             }];
+           
+        }]];
+        
+        [winnerAlert addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
             
+            [self team1MinusButtonPressed:self];
         }]];
         [self presentViewController:winnerAlert animated:YES completion:nil];
     }
@@ -231,9 +236,9 @@
         
         [self updateTeamGameStats];
         
-        UIAlertController *winnerAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Team Two Wins!"] message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *winnerAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Team Two Wins!"] message:@"End Game?" preferredStyle:UIAlertControllerStyleAlert];
         
-        [winnerAlert addAction:[UIAlertAction actionWithTitle:@"End Game" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        [winnerAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
             [[TeamGameController sharedInstance] addGameWithTeamGameStats:self.gameStats];
             
@@ -242,6 +247,12 @@
             }];
             
         }]];
+        
+        [winnerAlert addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            
+            [self team2MinusButtonPressed:self];
+        }]];
+
         [self presentViewController:winnerAlert animated:YES completion:nil];
     }
 }
@@ -260,6 +271,18 @@
         self.team2ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.teamTwoScore];
     }
     
+}
+
+- (void)updateTeamGameStats{
+    
+    self.gameStats = [TeamGameStats new];
+    self.gameStats.teamOnePlayerOne = [self.teamOne objectAtIndex:0];
+    self.gameStats.teamOnePlayerTwo = [self.teamOne objectAtIndex:1];
+    self.gameStats.teamTwoPlayerOne = [self.teamTwo objectAtIndex:0];
+    self.gameStats.teamTwoPlayerTwo = [self.teamTwo objectAtIndex:1];
+    self.gameStats.teamOneScore = self.teamOneScore;
+    self.gameStats.teamTwoScore = self.teamTwoScore;
+    self.gameStats.teamOneWin = [NSNumber numberWithBool:self.teamOneWin];
 }
 
 
@@ -359,24 +382,6 @@
 - (void) testRecognitionCompleted {
     NSLog(@"A test file that was submitted for recognition is now complete.");
     
-}
-
-
-
-
-
-- (void)updateTeamGameStats{
-    
-    
-    
-    self.gameStats = [TeamGameStats new];
-    self.gameStats.teamOnePlayerOne = [self.teamOne objectAtIndex:0];
-    self.gameStats.teamOnePlayerTwo = [self.teamOne objectAtIndex:1];
-    self.gameStats.teamTwoPlayerOne = [self.teamTwo objectAtIndex:0];
-    self.gameStats.teamTwoPlayerTwo = [self.teamTwo objectAtIndex:1];
-    self.gameStats.teamOneScore = self.teamOneScore;
-    self.gameStats.teamTwoScore = self.teamTwoScore;
-    self.gameStats.teamOneWin = [NSNumber numberWithBool:self.teamOneWin];
 }
 
 

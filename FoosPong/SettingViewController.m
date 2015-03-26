@@ -65,16 +65,20 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 2;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 100;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        return @"Points To Win";
+        return @"Voice Command Scoring Off";
     }else if (section == 1){
-        return @"Voice Command Scoring";
-    }else{
         return @"Other";
+    }else{
+        return @"Points Per Game";
     }
 }
 
@@ -84,8 +88,8 @@
         cell = [SettingsTableViewCell new];
         
     }
-    if (indexPath.section == 1) {
-        self.mySwitch = [[UISwitch alloc]initWithFrame:CGRectMake(250, 10, 50, 50)];
+    if (indexPath.section == 0) {
+        self.mySwitch = [[UISwitch alloc]initWithFrame:CGRectMake(250, 50, 50, 50)];
         self.mySwitch.onTintColor = [UIColor darkColor];
         [self.mySwitch addTarget:self action:@selector(switchSwitched:) forControlEvents:UIControlEventValueChanged];
         
@@ -96,15 +100,15 @@
         }else{
             self.mySwitch.on = YES;
         }
-        self.cellLabel = [[UILabel alloc]initWithFrame:CGRectMake(8, 0, 240, 50)];
-        self.cellLabel.text = @"Voice Scoring Off";
+        self.cellLabel = [[UILabel alloc]initWithFrame:CGRectMake(8, 0, 240, 100)];
+        self.cellLabel.text = @"Voice Scoring Off: To use the voice scoring commands. During a 1v1 game you can say 'Player One Goal', or 'Player Two Goal' to add a point for either player. During a 2v2 game you can say 'Team One Goal' or 'Team Two Goal'.";
         self.cellLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
         self.cellLabel.numberOfLines = 0;
         
         [cell.contentView addSubview:self.mySwitch];
         [cell.contentView addSubview:self.cellLabel];
 
-    }else if(indexPath.section == 0){
+    }else if(indexPath.section == 2){
         self.stepper = [[UIStepper alloc]initWithFrame:CGRectMake(220, 10, 50, 50)];
         [self.stepper addTarget:self action:@selector(stepperChanged:) forControlEvents:UIControlEventValueChanged];
         self.stepper.tintColor = [UIColor darkColor];
