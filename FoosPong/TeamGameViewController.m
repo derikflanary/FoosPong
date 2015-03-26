@@ -35,7 +35,9 @@
 @property (strong, nonatomic) UILabel *team1ScoreLabel;
 @property (strong, nonatomic) UILabel *team2ScoreLabel;
 @property (strong, nonatomic) UILabel *team1Label;
+@property (strong, nonatomic) UILabel *team1p2Label;
 @property (strong, nonatomic) UILabel *team2Label;
+@property (strong, nonatomic) UILabel *team2p2Label;
 @property (strong, nonatomic) FoosButton *team1MinusButton;
 @property (strong, nonatomic) FoosButton *team2MinusButton;
 
@@ -77,7 +79,7 @@
     self.t2p2 = player.username;
     
     self.team1PlusButton = [[FoosButton alloc]initWithFrame:CGRectMake(30, 200, 100, 100)];
-    [self.team1PlusButton setTitle:@"+" forState:UIControlStateNormal];
+    [self.team1PlusButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
     [self.team1PlusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     self.team1PlusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
     self.team1PlusButton.backgroundColor = [UIColor darkColor];
@@ -86,7 +88,7 @@
     self.team1PlusButton.clipsToBounds = YES;
     
     self.team2PlusButton = [[FoosButton alloc]initWithFrame:CGRectMake(180, 200, 100, 100)];
-    [self.team2PlusButton setTitle:@"+" forState:UIControlStateNormal];
+    [self.team2PlusButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
     [self.team2PlusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     self.team2PlusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
     self.team2PlusButton.backgroundColor = [UIColor darkColor];
@@ -102,18 +104,29 @@
     self.team2ScoreLabel.textAlignment = NSTextAlignmentCenter;
     self.team2ScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:50];
     
-    self.team1Label = [[UILabel alloc]initWithFrame:CGRectMake(30, 60, 100, 50)];
+    self.team1Label = [[UILabel alloc]initWithFrame:CGRectMake(30, 425, 100, 50)];
     self.team1Label.text = self.t1p1;
     self.team1Label.textAlignment = NSTextAlignmentCenter;
     self.team1Label.font = [UIFont fontWithName:[NSString mainFont] size:22];
     
-    self.team2Label = [[UILabel alloc]initWithFrame:CGRectMake(180, 60, 100, 50)];
+    self.team1p2Label = [[UILabel alloc]initWithFrame:CGRectMake(30, 475, 100, 50)];
+    self.team1p2Label.text = self.t1p2;
+    self.team1p2Label.textAlignment = NSTextAlignmentCenter;
+    self.team1p2Label.font = [UIFont fontWithName:[NSString mainFont] size:22];
+    
+    self.team2Label = [[UILabel alloc]initWithFrame:CGRectMake(180, 425, 100, 50)];
     self.team2Label.text = self.t2p1;
     self.team2Label.textAlignment = NSTextAlignmentCenter;
     self.team2Label.font = [UIFont fontWithName:[NSString mainFont] size:22];
     
+    self.team2p2Label = [[UILabel alloc]initWithFrame:CGRectMake(180, 475, 100, 50)];
+    self.team2p2Label.text = self.t2p2;
+    self.team2p2Label.textAlignment = NSTextAlignmentCenter;
+    self.team2p2Label.font = [UIFont fontWithName:[NSString mainFont] size:22];
+
+    
     self.team1MinusButton = [[FoosButton alloc]initWithFrame:CGRectMake(45, 350, 50, 50)];
-    [self.team1MinusButton setTitle:@"-" forState:UIControlStateNormal];
+    [self.team1MinusButton setImage:[UIImage imageNamed:@"minus"] forState:UIControlStateNormal];
     [self.team1MinusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     self.team1MinusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
     self.team1MinusButton.backgroundColor = [UIColor darkColor];
@@ -122,7 +135,7 @@
     self.team1MinusButton.clipsToBounds = YES;
     
     self.team2MinusButton = [[FoosButton alloc]initWithFrame:CGRectMake(215, 350, 50, 50)];
-    [self.team2MinusButton setTitle:@"-" forState:UIControlStateNormal];
+    [self.team2MinusButton setImage:[UIImage imageNamed:@"minus"] forState:UIControlStateNormal];
     [self.team2MinusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     self.team2MinusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
     self.team2MinusButton.backgroundColor = [UIColor darkColor];
@@ -135,6 +148,8 @@
     [self.view addSubview:self.team1ScoreLabel];
     [self.view addSubview:self.team1PlusButton];
     [self.view addSubview:self.team2Label];
+    [self.view addSubview:self.team1p2Label];
+    [self.view addSubview:self.team2p2Label];
     [self.view addSubview:self.team2ScoreLabel];
     [self.view addSubview:self.team2PlusButton];
     [self.view addSubview:self.team1MinusButton];

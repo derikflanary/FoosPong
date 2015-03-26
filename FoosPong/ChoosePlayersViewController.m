@@ -355,7 +355,9 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                     cell.textLabel.text = @"Add Player";
                     cell.textLabel.textColor = [UIColor colorWithWhite:.5 alpha:.7];
                 }else{
-                    cell.textLabel.text = theUser.username;                }
+                    cell.textLabel.text = theUser.username;
+                }
+                cell.detailTextLabel.text = @"";
                 return cell;
                 break;
             }
@@ -363,7 +365,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 PFUser *theUser = [self.availablePlayers objectAtIndex:indexPath.row];
                 cell.textLabel.text = theUser.username;
                 cell.textLabel.textColor = [UIColor blackColor];
-
+                cell.detailTextLabel.text = @"";
                 return cell;
             }
         }
@@ -377,8 +379,13 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                     cell.textLabel.textColor = [UIColor colorWithWhite:.5 alpha:.7];
 
                 }else{
-                    cell.textLabel.text = theUser.username;                }
-                return cell;
+                    cell.textLabel.text = theUser.username;
+                }
+                if (indexPath.row == 0) {
+                    cell.detailTextLabel.text = @"Attacker";
+                }else{
+                    cell.detailTextLabel.text = @"Defender";
+                }
                 return cell;
                 break;
 
@@ -393,6 +400,13 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 }else{
                     cell.textLabel.text = theUser.username;
                 }
+                
+                if (indexPath.row == 0) {
+                    cell.detailTextLabel.text = @"Attacker";
+                    
+                }else{
+                    cell.detailTextLabel.text = @"Defender";
+                }
                 return cell;
                 break;
 
@@ -401,6 +415,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 PFUser *theUser = [self.availablePlayers objectAtIndex:indexPath.row];
                 cell.textLabel.textColor = [UIColor blackColor];
                 cell.textLabel.text = theUser.username;
+                cell.detailTextLabel.text = @"";
                 return cell;
 
             }
@@ -586,6 +601,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
         //self.searchAvailablePlayers = self.availablePlayers;
         self.cellSelected = NO;
         [tableView endUpdates];
+        [tableView reloadData];
     }
 }
 

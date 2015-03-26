@@ -101,7 +101,7 @@
             self.mySwitch.on = YES;
         }
         self.cellLabel = [[UILabel alloc]initWithFrame:CGRectMake(8, 0, 240, 100)];
-        self.cellLabel.text = @"Voice Scoring Off: To use the voice scoring commands. During a 1v1 game you can say 'Player One Goal', or 'Player Two Goal' to add a point for either player. During a 2v2 game you can say 'Team One Goal' or 'Team Two Goal'.";
+        self.cellLabel.text = @"Voice Scoring Off: To use the voice scoring commands during a 1v1 game you can say 'Player One Goal', or 'Player Two Goal' to add a point for either player. During a 2v2 game you can say 'Team One Goal' or 'Team Two Goal'.";
         self.cellLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
         self.cellLabel.numberOfLines = 0;
         

@@ -106,12 +106,12 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.p2ScoreLabel.textAlignment = NSTextAlignmentCenter;
     self.p2ScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:50];
     
-    self.p1Label = [[UILabel alloc]initWithFrame:CGRectMake(30, 60, 100, 50)];
+    self.p1Label = [[UILabel alloc]initWithFrame:CGRectMake(30, 425, 100, 50)];
     self.p1Label.text = self.playerOneName;
     self.p1Label.textAlignment = NSTextAlignmentCenter;
     self.p1Label.font = [UIFont fontWithName:[NSString mainFont] size:18];
     
-    self.p2Label = [[UILabel alloc]initWithFrame:CGRectMake(180, 60, 100, 50)];
+    self.p2Label = [[UILabel alloc]initWithFrame:CGRectMake(180, 425, 100, 50)];
     self.p2Label.text = self.playerTwoName;
     self.p2Label.textAlignment = NSTextAlignmentCenter;
     self.p2Label.font = [UIFont fontWithName:[NSString mainFont] size:18];
