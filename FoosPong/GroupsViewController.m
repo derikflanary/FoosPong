@@ -186,7 +186,7 @@
     PFObject *group = self.groups[indexPath.row];
     
     if (group == [PFUser currentUser][@"currentGroup"]) {
-        cell.backgroundColor = [UIColor transparentCellBlack];
+        cell.backgroundColor = [UIColor mainColorTransparent];
         cell.textLabel.textColor = [UIColor mainWhite];
         cell.textLabel.text = [NSString stringWithFormat:@"%@: (Current Group)", group[@"name"]];
     }else{

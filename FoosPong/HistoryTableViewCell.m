@@ -18,7 +18,11 @@
     self.detailTextLabel.font = [UIFont boldSystemFontOfSize:11];
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-   
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = [UIColor mainColorTransparent];
+    self.textLabel.highlightedTextColor = [UIColor mainWhite];
+    [self setSelectedBackgroundView:bgColorView];
+
     
     
     self.backgroundColor = [UIColor transparentCellWhite];

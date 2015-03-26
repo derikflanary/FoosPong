@@ -14,8 +14,7 @@
 #import "CurrentGroupViewController.h"
 #import "MembersTableViewDataSource.h"
 
-@interface EditGroupViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchControllerDelegate>
-
+@interface EditGroupViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray *nonMembers;
 @property (nonatomic, strong) FoosButton *deleteGroupButton;
@@ -76,22 +75,27 @@
     self.tableView.backgroundColor = [UIColor transparentWhite];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     
-    self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
-    [self.searchController.searchBar sizeToFit];
-    self.tableView.tableHeaderView = self.searchController.searchBar;
-    //self.searchController.searchResultsUpdater = self;
-    self.searchController.delegate = self;
-    self.searchController.searchBar.delegate = self;
-    self.searchController.searchBar.searchBarStyle = UISearchBarStyleDefault;
-    self.searchController.dimsBackgroundDuringPresentation = YES;
-    self.searchController.searchBar.placeholder = @"Search for user";
-    self.searchController.searchBar.hidden = YES;
-    self.searchController.hidesNavigationBarDuringPresentation = NO;
+//    self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
+//    [self.searchController.searchBar sizeToFit];
+//    self.tableView.tableHeaderView = self.searchController.searchBar;
+//    self.searchController.searchResultsUpdater = self;
+//    self.searchController.delegate = self;
+//    self.searchController.searchBar.delegate = self;
+//    self.searchController.searchBar.searchBarStyle = UISearchBarStyleDefault;
+//    self.searchController.dimsBackgroundDuringPresentation = YES;
+//    self.searchController.searchBar.placeholder = @"Search for user";
+//    self.searchController.searchBar.hidden = YES;
+//    self.searchController.hidesNavigationBarDuringPresentation = NO;
     
     self.segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"Edit Team", @"Add Member"]];
     [self.segmentedControl addTarget:self action:@selector(segmentedControlChanged:) forControlEvents:UIControlEventValueChanged];
-    self.segmentedControl.tintColor = [UIColor darkColor];
+    self.segmentedControl.tintColor = [UIColor mainBlack];
     self.segmentedControl.selectedSegmentIndex = 0;
+    UIFont *font = [UIFont boldSystemFontOfSize:18];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
+                                                           forKey:NSFontAttributeName];
+    [self.segmentedControl setTitleTextAttributes:attributes
+                                         forState:UIControlStateNormal];
    
     UIBarButtonItem *seg = [[UIBarButtonItem alloc]initWithCustomView:self.segmentedControl];
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -121,37 +125,32 @@
 
 #pragma mark - searchBar
 
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-    
-    [self findNonMembers];
-    self.tableView.allowsSelection = NO;
-}
+//-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+//    
+//    [self findNonMembers];
+//    self.tableView.allowsSelection = NO;
+//}
+//
+//- (void)findNonMembers{
+//    
+//    [[GroupController sharedInstance]notMembersOfCurrentGroupsearchString:self.searchController.searchBar.text callback:^(NSArray *nonMembers) {
+//         self.nonMembers = nonMembers.mutableCopy;
+//        [self.tableView reloadData];
+//    }];
+//}
+//
+//- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+//    self.tableView.allowsSelection = YES;
+//}
+//
+//- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
+//    self.tableView.allowsSelection = NO;
+//}
+//
+//- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
+//    self.tableView.allowsSelection = YES;
+//}
 
-- (void)findNonMembers{
-    
-    [[GroupController sharedInstance]notMembersOfCurrentGroupsearchString:self.searchController.searchBar.text callback:^(NSArray *nonMembers) {
-         self.nonMembers = nonMembers.mutableCopy;
-        [self.tableView reloadData];
-    }];
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
-    self.tableView.allowsSelection = YES;
-}
-
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
-    self.tableView.allowsSelection = NO;
-}
-
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
-    self.tableView.allowsSelection = YES;
-}
-
-
-
-
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (void)populateTableView{
     PFUser *currentUser = [PFUser currentUser];
