@@ -160,9 +160,14 @@
         if ([password isEqualToString:selectedGroup[@"password"]]) {
             [[GroupController sharedInstance]addUser:[PFUser currentUser] toGroup:selectedGroup callback:^(BOOL *success) {
                 [self.delegate groupSelected];
-                [self dismissViewControllerAnimated:YES completion:^{
-                    
-                }];
+                UIAlertController *addedAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"You Were Added To %@", selectedGroup[@"name"]] message:@"" preferredStyle:UIAlertControllerStyleAlert];
+                [addedAlert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    [self dismissViewControllerAnimated:YES completion:^{
+                        
+                    }];
+                }]];
+                [self presentViewController:addedAlert animated:YES completion:nil];
+                
             }];
             
         }else{

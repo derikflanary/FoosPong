@@ -9,6 +9,7 @@
 #import "MembersTableViewDataSource.h"
 #import "NewGameCustomTableViewCell.h"
 #import "GroupController.h"
+#import "PlayerTableViewCell.h"
 
 @implementation MembersTableViewDataSource
 
@@ -23,9 +24,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class])];
+    PlayerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([PlayerTableViewCell class])];
     if (!cell){
-        cell = [UITableViewCell new];
+        cell = [PlayerTableViewCell new];
         
     }
     if (self.groupMembers.count > 0) {
@@ -52,7 +53,9 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
+    
+    PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
+    if (user == [PFUser currentUser]) {
         return NO;
     }else{
     

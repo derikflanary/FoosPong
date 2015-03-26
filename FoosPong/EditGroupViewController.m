@@ -215,6 +215,8 @@
         dispatch_async(dispatch_get_main_queue(), ^ {
             [self presentViewController:addPlayerAlert animated:YES completion:nil];
         });
+    }else{
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
 
@@ -236,6 +238,7 @@
     header.textLabel.textAlignment = NSTextAlignmentCenter;
     header.contentView.backgroundColor = [UIColor transparentWhite];
 }
+
 
 #pragma mark - Other Methods
 

@@ -13,9 +13,9 @@
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     
     
-    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"PlayerGameCell"];
+    self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"PlayerGameCell"];
     self.textLabel.font = [UIFont fontWithName:@"Thonburi-Light" size:22];
-    self.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
+    self.detailTextLabel.font = [UIFont boldSystemFontOfSize:14];
     
     self.adminLabel = [[UILabel alloc]initWithFrame:CGRectMake(200, 0, 80, 40)];
     self.adminLabel.textAlignment = NSTextAlignmentCenter;

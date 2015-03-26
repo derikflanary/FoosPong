@@ -13,8 +13,8 @@
 #import "UserController.h"
 #import "HomeViewController.h"
 #import "GroupController.h"
-//#import <Fabric/Fabric.h>
-//#import <Crashlytics/Crashlytics.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 
 @interface AppDelegate ()

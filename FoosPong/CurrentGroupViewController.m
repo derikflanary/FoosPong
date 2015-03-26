@@ -42,13 +42,13 @@
     [self.view addSubview:self.activityView];
     [self.activityView startAnimating];
 
-    PFUser *currentUser = [PFUser currentUser];
-    if (!currentUser[@"currentGroup"]) {
-        [self noGroup];
-    }else{
-        
+//    PFUser *currentUser = [PFUser currentUser];
+//    if (!currentUser[@"currentGroup"]) {
+//        [self noGroup];
+//    }else{
+//        
         [self checkForGroup];
-    }
+//    }
 }
 
 - (void)viewDidLoad {
@@ -124,8 +124,9 @@
         
         if (user == self.admin) {
             cell.textLabel.text = user.username;
-            cell.detailTextLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
-            cell.adminLabel.text = @"Admin";
+            cell.detailTextLabel.text = @"Admin";
+            //cell.detailTextLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
+            //cell.adminLabel.text = @"Admin";
             
         }else{
         
