@@ -51,7 +51,7 @@
     }
 }
 
-- (void)addUserwithDictionary:(NSDictionary*)dictionary callback:(void (^)(BOOL *))callback{
+- (void)addUserwithDictionary:(NSDictionary*)dictionary Callback:(void (^)(BOOL *, NSError * error))callback{
     
     PFUser *user = [PFUser user];
     user.username = dictionary[@"username"];
@@ -62,9 +62,11 @@
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             [self updateUsers];
-            callback(&succeeded);
+            callback(&succeeded, nil);
         }else{
             NSLog(@"%@", error);
+            
+            callback(nil, error);
         }
     }];
     

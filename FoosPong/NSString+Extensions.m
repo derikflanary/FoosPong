@@ -16,5 +16,25 @@
     return fullName;
 }
 
++ (NSString*)cleanUpError:(NSError *)error{
+    
+    NSInteger code = [error code];
+    if (code == kPFErrorUsernameTaken){
+        return @"Username Taken";
+    }
+    
+    if (code == kPFErrorInvalidEmailAddress) {
+        return @"Please enter a valid email address";
+    }
+    
+    if (code == kPFErrorUserEmailTaken) {
+        return @"Email already in use";
+    }
+    else{
+        return [error userInfo][@"error"];
+    }
+    
+}
+
 
 @end

@@ -32,7 +32,7 @@
 @implementation GroupsViewController
 
 -(void)viewWillAppear:(BOOL)animated{
-    self.tabBarController.navigationItem.leftBarButtonItem = self.findGroupButton;
+    //self.tabBarController.navigationItem.leftBarButtonItem = self.findGroupButton;
 }
 
 - (void)viewDidLoad {
@@ -84,6 +84,7 @@
     [self checkForGroups];
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
+    
 }
 
 - (void)joinGroupButtonPressed:(id)sender{
@@ -104,9 +105,17 @@
                     [self noCurrentGroup];
                 }else{
                     self.groups = groups;
-                    [self.activityView stopAnimating];
-                    [self.tableView reloadData];
-//                    self.currentGroup = [PFUser currentUser][@"currentGroup"];
+                    [[GroupController sharedInstance]retrieveCurrentGroupWithCallback:^(PFObject *group, NSError *error) {
+                        if (!error) {
+                            self.currentGroup = group;
+                        }else{
+                            NSLog(@"%@", error);
+                        }
+                        [self.activityView stopAnimating];
+                        [self.tableView reloadData];
+
+                    }];
+                    //                    self.currentGroup = [PFUser currentUser][@"currentGroup"];
 //                    self.title = self.currentGroup[@"name"];
                 }
                 
@@ -158,6 +167,7 @@
 }
 
 - (void)joinPressed:(id)sender{
+    
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:[FindGroupViewController new]];
     [self.view.window.rootViewController presentViewController:navController animated:YES completion:^{
         
@@ -185,7 +195,7 @@
     
     PFObject *group = self.groups[indexPath.row];
     
-    if (group == [PFUser currentUser][@"currentGroup"]) {
+    if (group == self.currentGroup) {
         cell.backgroundColor = [UIColor mainColorTransparent];
         cell.textLabel.textColor = [UIColor mainWhite];
         cell.textLabel.text = [NSString stringWithFormat:@"%@: (Current Group)", group[@"name"]];
@@ -209,6 +219,7 @@
         [[GroupController sharedInstance]setCurrentGroup:group callback:^(BOOL *success) {
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
             self.title = group[@"name"];
+            self.currentGroup = [PFUser currentUser][@"currentGroup"];
             [tableView reloadData];
 
         }];

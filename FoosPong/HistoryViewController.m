@@ -42,7 +42,7 @@
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
     [self.view addSubview:background];
-
+    
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height)];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.toolbar.translucent = NO;

@@ -11,5 +11,6 @@
 @interface NSString (Extensions)
 
 + (NSString*)combineNames:(NSString*)firstName and:(NSString*)lastName;
++ (NSString*)cleanUpError:(NSError *)error;
 
 @end
