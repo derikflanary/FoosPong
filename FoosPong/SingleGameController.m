@@ -31,7 +31,7 @@
 }
 
 
--(void)addGameWithSingleGameStats:(SingleGameStats*)gameStats{
+-(void)addGameWithSingleGameStats:(SingleGameDetails*)gameStats{
     
     Game *finishedGame = [Game object];
     finishedGame.p1 = gameStats.playerOne;
@@ -39,6 +39,7 @@
     finishedGame.playerOneScore = gameStats.playerOneScore;
     finishedGame.playerTwoScore = gameStats.playerTwoScore;
     finishedGame.playerOneWin = [NSNumber numberWithBool: gameStats.playerOneWin];
+    finishedGame.group = gameStats.group;
     
     [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
@@ -83,15 +84,33 @@
     
 }
 
-
-
-
-
--(void)removeGame:(PFObject*)game{
+- (void)updateGamesForGroup:(PFObject*)group Callback:(void (^)(NSArray *))callback{
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Game"];
+    [query whereKey:@"group" equalTo:group];
+    
+    PFQuery *query2 = [PFQuery orQueryWithSubqueries:@[query]];
+    [query2 includeKey:@"p1"];
+    [query2 includeKey:@"p2"];
+    [query2 orderByAscending:@"createdAt"];
+    [query2 findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            
+            callback(objects);
+            
+        } else {
+            
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
     
 }
 
--(void)saveGames{
+- (void)removeGame:(PFObject*)game{
+    
+}
+
+- (void)saveGames{
     
 }
 

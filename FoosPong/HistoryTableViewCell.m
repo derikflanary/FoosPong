@@ -13,7 +13,7 @@
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     
     
-    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"HistoryGameCell"];
+    self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"HistoryGameCell"];
     self.textLabel.font = [UIFont fontWithName:@"Thonburi-Light" size:18];
     self.detailTextLabel.font = [UIFont boldSystemFontOfSize:11];
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

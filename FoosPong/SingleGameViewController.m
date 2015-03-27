@@ -9,7 +9,7 @@
 #import "SingleGameViewController.h"
 #import "ChoosePlayersViewController.h"
 #import "SingleGameController.h"
-#import "SingleGameStats.h"
+#import "SingleGameDetails.h"
 
 #import <OpenEars/OELanguageModelGenerator.h>
 #import <OpenEars/OEPocketsphinxController.h>
@@ -30,7 +30,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 @property (nonatomic, assign) NSInteger playerTwoScore;
 @property (nonatomic, assign) BOOL playerOneWin;
 @property (nonatomic, assign) BOOL playerTwoWin;
-@property (nonatomic, strong) SingleGameStats *gameStats;
+@property (nonatomic, strong) SingleGameDetails *gameStats;
 @property (strong, nonatomic) OEEventsObserver *openEarsEventsObserver;
 
 @property (strong, nonatomic) FoosButton *p1PlusButton;
@@ -283,13 +283,13 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 
 - (void)updateGameStats{
     
-    self.gameStats = [SingleGameStats new];
+    self.gameStats = [SingleGameDetails new];
     self.gameStats.playerOne = self.playerOne;
     self.gameStats.playerTwo = self.playerTwo;
     self.gameStats.playerOneScore = self.playerOneScore;
     self.gameStats.playerTwoScore = self.playerTwoScore;
     self.gameStats.playerOneWin = self.playerOneWin;
-
+    self.gameStats.group = [PFUser currentUser][@"currentGroup"];
 }
 
 

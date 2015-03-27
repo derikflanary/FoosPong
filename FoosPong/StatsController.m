@@ -109,30 +109,30 @@
     
     for (TeamGame *teamGame in teamGames) {
         
-        if (teamGame.teamOnePlayerOne == user || teamGame.teamOnePlayerTwo == user) {
+        if (teamGame.teamOneAttacker == user || teamGame.teamOneDefender == user) {
             if ([teamGame.teamOneWin boolValue]) {
                 stats.teamGameWins ++;
                 stats.pointsScored = stats.pointsScored + teamGame.teamOneScore;
                 stats.pointsAllowed = stats.pointsAllowed + teamGame.teamTwoScore;
-                [mutableOpponents addObjectsFromArray: @[teamGame.teamTwoPlayerOne, teamGame.teamOnePlayerTwo]];
+                [mutableOpponents addObjectsFromArray: @[teamGame.teamTwoAttacker, teamGame.teamOneDefender]];
             }else{
                 stats.teamGameLoses ++;
                 stats.pointsScored = stats.pointsScored + teamGame.teamOneScore;
                 stats.pointsAllowed = stats.pointsAllowed + teamGame.teamTwoScore;
-                [mutableOpponents addObjectsFromArray: @[teamGame.teamTwoPlayerOne, teamGame.teamOnePlayerTwo]];
+                [mutableOpponents addObjectsFromArray: @[teamGame.teamTwoAttacker, teamGame.teamOneDefender]];
             }
             
-        }else if (teamGame.teamTwoPlayerOne == user || teamGame.teamTwoPlayerTwo == user){
+        }else if (teamGame.teamTwoAttacker == user || teamGame.teamTwoDefender == user){
             if ([teamGame.teamOneWin boolValue]) {
                 stats.teamGameLoses ++;
                 stats.pointsScored = stats.pointsScored + teamGame.teamTwoScore;
                 stats.pointsAllowed = stats.pointsAllowed + teamGame.teamOneScore;
-                [mutableOpponents addObjectsFromArray: @[teamGame.teamOnePlayerOne, teamGame.teamOnePlayerTwo]];
+                [mutableOpponents addObjectsFromArray: @[teamGame.teamOneAttacker, teamGame.teamOneDefender]];
             }else{
                 stats.teamGameWins ++;
                 stats.pointsScored = stats.pointsScored + teamGame.teamTwoScore;
                 stats.pointsAllowed = stats.pointsAllowed + teamGame.teamOneScore;
-                [mutableOpponents addObjectsFromArray: @[teamGame.teamOnePlayerOne, teamGame.teamOnePlayerTwo]];
+                [mutableOpponents addObjectsFromArray: @[teamGame.teamOneAttacker, teamGame.teamOneDefender]];
             }
         }
     }
@@ -179,7 +179,7 @@
     
     for (TeamGame *teamGame in teamGames) {
         
-        if (teamGame.teamOnePlayerOne == user || teamGame.teamOnePlayerTwo == user) {
+        if (teamGame.teamOneAttacker == user || teamGame.teamOneDefender == user) {
             if ([teamGame.teamOneWin boolValue]) {
                 stats.wins ++;
                 
@@ -187,7 +187,7 @@
                 stats.loses ++;
             }
             
-        }else if (teamGame.teamTwoPlayerOne == user || teamGame.teamTwoPlayerTwo == user){
+        }else if (teamGame.teamTwoAttacker == user || teamGame.teamTwoDefender == user){
             if ([teamGame.teamOneWin boolValue]) {
                 stats.loses ++;
                 

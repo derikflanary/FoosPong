@@ -13,7 +13,7 @@
 #import "SingleGameController.h"
 #import "StatsController.h"
 #import "PersonalSingleStats.h"
-#import "TeamGameStats.h"
+#import "TeamGameDetails.h"
 #import "NewGameCustomTableViewCell.h"
 #import "StatsViewController.h"
 #import "UserController.h"

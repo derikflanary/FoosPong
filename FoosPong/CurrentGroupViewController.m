@@ -70,7 +70,7 @@
     
     self.tabBarController.navigationItem.hidesBackButton = YES;
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 140, 320, 250) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 140, self.view.frame.size.width, 250) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = YES;
@@ -193,13 +193,14 @@
                 [self.view addSubview:self.groupStatsButton];
                 
                 [[GroupController sharedInstance]fetchMembersOfGroup:self.currentGroup Callback:^(NSArray *members) {
+                    [self.activityView stopAnimating];
                     self.groupMembers = members.mutableCopy;
                     //NSUInteger theIndex = [self.groupMembers indexOfObject:self.admin];
                     
                     //id object = [self.groupMembers objectAtIndex:theIndex];
                     [self.groupMembers removeObject:self.admin];
                     [self.groupMembers insertObject:self.admin atIndex:0];
-                    [self.activityView stopAnimating];
+                    
                     [self.tableView reloadData];
                     [[GroupController sharedInstance]saveGroupMembers:self.currentGroup andMembers:members];
 
@@ -210,7 +211,7 @@
                     self.admin = admin;
                     if ([[PFUser currentUser].objectId isEqualToString:admin.objectId]) {
                         [self.view addSubview:self.addMembersButton];
-                        self.tableView.frame = CGRectMake(0, 140, 320, 200);
+                        self.tableView.frame = CGRectMake(0, 140, self.view.frame.size.width, 200);
                         [self.tableView reloadData];
                     }
                 }];

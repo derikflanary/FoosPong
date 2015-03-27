@@ -57,7 +57,7 @@
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
-    self.deleteGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, 320, 51)];
+    self.deleteGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 51)];
     self.deleteGroupButton.backgroundColor = [UIColor darkColor];
     self.deleteGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.deleteGroupButton setTitle:@"DELETE TEAM" forState:UIControlStateNormal];

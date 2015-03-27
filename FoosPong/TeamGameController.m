@@ -30,7 +30,7 @@
 }
 
 
--(void)addGameWithTeamGameStats:(TeamGameStats*)gameStats{
+-(void)addGameWithTeamGameStats:(TeamGameDetails*)gameStats{
 //    PFObject *finishedGame = [PFObject objectWithClassName:@"TeamGame"];
 //    
 //    finishedGame[@"teamOnePlayerOne"] = gameStats.teamOnePlayerOne;
@@ -43,10 +43,10 @@
     
     TeamGame *finishedGame = [TeamGame object];
     
-    finishedGame.teamOnePlayerOne = gameStats.teamOnePlayerOne;
-    finishedGame.teamOnePlayerTwo = gameStats.teamOnePlayerTwo;
-    finishedGame.teamTwoPlayerOne = gameStats.teamTwoPlayerOne;
-    finishedGame.teamTwoPlayerTwo = gameStats.teamTwoPlayerTwo;
+    finishedGame.teamOneAttacker = gameStats.teamOneAttacker;
+    finishedGame.teamOneDefender = gameStats.teamOneDefender;
+    finishedGame.teamTwoAttacker = gameStats.teamTwoAttacker;
+    finishedGame.teamTwoDefender = gameStats.teamTwoDefender;
     finishedGame.teamOneScore = gameStats.teamOneScore;
     finishedGame.teamTwoScore = gameStats.teamTwoScore;
     finishedGame.teamOneWin = gameStats.teamOneWin;
@@ -62,22 +62,22 @@
 -(void)updateGamesForUser:(PFUser*)user callback:(void (^)(NSArray *))callback{
     
     PFQuery *query = [PFQuery queryWithClassName:@"TeamGame"];
-    [query whereKey:@"teamOnePlayerOne" equalTo:user];
+    [query whereKey:@"teamOneAttacker" equalTo:user];
     
     PFQuery *query2 = [PFQuery queryWithClassName:@"TeamGame"];
-    [query2 whereKey:@"teamOnePlayerTwo" equalTo:user];
+    [query2 whereKey:@"teamOneDefender" equalTo:user];
     
     PFQuery *query3 = [PFQuery queryWithClassName:@"TeamGame"];
-    [query2 whereKey:@"teamTwoPlayerOne" equalTo:user];
+    [query2 whereKey:@"teamTwoAttacker" equalTo:user];
     
     PFQuery *query4 = [PFQuery queryWithClassName:@"TeamGame"];
-    [query2 whereKey:@"teamTwoPlayerTwo" equalTo:user];
+    [query2 whereKey:@"teamTwoDefender" equalTo:user];
     
     PFQuery *theQuery = [PFQuery orQueryWithSubqueries:@[query, query2, query3, query4]];
-    [theQuery includeKey:@"teamOnePlayerOne"];
-    [theQuery includeKey:@"teamOnePlayerTwo"];
-    [theQuery includeKey:@"teamTwoPlayerOne"];
-    [theQuery includeKey:@"teamTwoPlayerTwo"];
+    [theQuery includeKey:@"teamOneAttacker"];
+    [theQuery includeKey:@"teamOneDefender"];
+    [theQuery includeKey:@"teamTwoAttacker"];
+    [theQuery includeKey:@"teamTwoDefender"];
     [theQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             
@@ -89,6 +89,31 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
+}
+
+- (void)updateGamesForGroup:(PFObject*)group Callback:(void (^)(NSArray *))callback{
+ 
+    PFQuery *query = [PFQuery queryWithClassName:@"TeamGame"];
+    [query whereKey:@"group" equalTo:group];
+    
+    PFQuery *query2 = [PFQuery orQueryWithSubqueries:@[query]];
+    [query2 includeKey:@"teamOneAttacker"];
+    [query2 includeKey:@"teamOneDefender"];
+    [query2 includeKey:@"teamTwoDefender"];
+    [query2 includeKey:@"teamTwoAttacker"];
+    [query2 orderByAscending:@"createdAt"];
+    [query2 findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            
+            callback(objects);
+            
+        } else {
+            
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+
+    
 }
 
 

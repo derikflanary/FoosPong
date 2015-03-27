@@ -12,10 +12,10 @@
 
 + (NSString *)parseClassName;
 
-@property PFUser *teamOnePlayerOne;
-@property PFUser *teamOnePlayerTwo;
-@property PFUser *teamTwoPlayerOne;
-@property PFUser *teamTwoPlayerTwo;
+@property PFUser *teamOneAttacker;
+@property PFUser *teamOneDefender;
+@property PFUser *teamTwoAttacker;
+@property PFUser *teamTwoDefender;
 @property double teamOneScore;
 @property double teamTwoScore;
 @property NSNumber *teamOneWin;

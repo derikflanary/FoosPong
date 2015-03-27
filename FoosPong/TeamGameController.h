@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TeamGameStats.h"
+#import "TeamGameDetails.h"
 
 @interface TeamGameController : NSObject
 
 + (TeamGameController *)sharedInstance;
-- (void)addGameWithTeamGameStats:(TeamGameStats*)gameStats;
+- (void)addGameWithTeamGameStats:(TeamGameDetails*)gameStats;
 - (void)updateGamesForUser:(PFUser*)user callback:(void (^)(NSArray *))callback;
 
 @property(nonatomic, strong)NSArray *teamGames;

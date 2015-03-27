@@ -7,18 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SingleGameStats.h"
+#import "SingleGameDetails.h"
 
 @interface SingleGameController : NSObject
 
-+ (SingleGameController *)sharedInstance;
-
--(void)removeGame:(PFObject*)game;
--(void)saveGames;
--(void)updateGamesForUser:(PFUser*)user withBool:(BOOL)getTeamGames callback:(void (^)(NSArray *))callback;
--(void)addGameWithSingleGameStats:(SingleGameStats*)gameStats;
-
 @property (nonatomic, strong, readonly)NSArray *games;
 @property(nonatomic, strong)NSArray *teamGames;
+
++ (SingleGameController *)sharedInstance;
+
+- (void)removeGame:(PFObject*)game;
+- (void)saveGames;
+- (void)updateGamesForUser:(PFUser*)user withBool:(BOOL)getTeamGames callback:(void (^)(NSArray *))callback;
+- (void)addGameWithSingleGameStats:(SingleGameDetails*)gameStats;
+- (void)updateGamesForGroup:(PFObject*)group Callback:(void (^)(NSArray *))callback;
+
+
 
 @end

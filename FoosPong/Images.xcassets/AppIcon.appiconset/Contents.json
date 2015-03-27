@@ -45,7 +45,7 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "FoosIcon60.png",
+      "filename" : "Icon-60@3x.png",
       "scale" : "3x"
     },
     {
@@ -90,9 +90,8 @@
       "scale" : "2x"
     },
     {
-      "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "Icon-76.png",
+      "size" : "76x76",
       "scale" : "1x"
     },
     {
@@ -170,7 +169,7 @@
     {
       "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "foosIcon.png",
+      "filename" : "iTunesArtwork@2x.png",
       "scale" : "2x"
     }
   ],

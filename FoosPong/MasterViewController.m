@@ -109,7 +109,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
         historyVC.tabBarItem.image = [UIImage imageNamed:@"146"];
         pnvc.tabBarItem.title = @"Notifications";
         pnvc.tabBarItem.image = [UIImage imageNamed:@"167"];
-        profileTabBar.viewControllers = @[pvc, historyVC, pnvc];
+        profileTabBar.viewControllers = @[pvc, historyVC];
         
         
        

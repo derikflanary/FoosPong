@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "TeamGameStats.h"
+#import "TeamGameDetails.h"
 
-@implementation TeamGameStats
+@implementation TeamGameDetails
 
 @end

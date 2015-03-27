@@ -9,6 +9,8 @@
 #import "GroupHistoryViewController.h"
 #import "HistoryTableViewCell.h"
 #import "GameDetailViewController.h"
+#import "SingleGameController.h"
+#import "TeamGameController.h"
 
 @interface GroupHistoryViewController () <UITableViewDataSource, UITableViewDelegate, UIToolbarDelegate>
 
@@ -49,6 +51,12 @@
     self.tableView.backgroundColor = [UIColor transparentWhite];
     self.tableView.bounces = NO;
     
+    [[SingleGameController sharedInstance]updateGamesForGroup:[PFUser currentUser][@"currentGroup"] Callback:^(NSArray *singleGames) {
+        
+        self.singleGames = singleGames;
+        [self.tableView reloadData];
+        
+    }];
     
 //    [[SingleGameController sharedInstance] updateGamesForUser:[PFUser currentUser] withBool:NO callback:^(NSArray *games) {
 //        self.singleGames = games;
@@ -135,19 +143,22 @@
     if (!cell){
         cell = [HistoryTableViewCell new];
     }
-//    if (self.segmentedControl.selectedSegmentIndex == 0) {
-//        
-//        Game *game = [self.singleGames objectAtIndex:indexPath.row];
-//        PFUser *p1 = game.p1;
-//        PFUser *p2 = game.p2;
-//        
-//        NSString *p1Name = p1.username;
-//        NSString *p2Name = p2.username;
-//        cell.textLabel.text = [NSString stringWithFormat:@"%@:%.0f vs %@:%.0f", p1Name, game.playerOneScore, p2Name, game.playerTwoScore];
-//        cell.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
-//        //cell.backgroundColor = [UIColor mainColor];
-//        return cell;
-//        
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        
+        Game *game = [self.singleGames objectAtIndex:indexPath.row];
+        PFUser *p1 = game.p1;
+        PFUser *p2 = game.p2;
+        NSDate *date =  game.createdAt;
+        NSString *p1Name = p1.username;
+        NSString *p2Name = p2.username;
+        
+        cell.textLabel.text = [NSString stringWithFormat:@"%@:%.0f vs %@:%.0f", p1Name, game.playerOneScore, p2Name, game.playerTwoScore];
+        cell.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
+        
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", date]
+        ;        //cell.backgroundColor = [UIColor mainColor];
+        return cell;
+    }
 //    }else{
 //        
 //        TeamGame *teamGame = [self.teamGames objectAtIndex:indexPath.row];

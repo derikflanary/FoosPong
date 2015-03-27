@@ -26,8 +26,8 @@
 		EE2C57D61A93DFC600DA9835 /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57D51A93DFC600DA9835 /* UIImageView+Letters.m */; };
 		EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57DE1A93ECD200DA9835 /* BaseLoginController.m */; };
 		EE2C57E21A93F12300DA9835 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57E11A93F12300DA9835 /* SignUpViewController.m */; };
-		EE2EF8101AA4EF2200DE09E7 /* SingleGameStats.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2EF80F1AA4EF2200DE09E7 /* SingleGameStats.m */; };
-		EE2EF8131AA4EF3400DE09E7 /* TeamGameStats.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2EF8121AA4EF3400DE09E7 /* TeamGameStats.m */; };
+		EE2EF8101AA4EF2200DE09E7 /* SingleGameDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2EF80F1AA4EF2200DE09E7 /* SingleGameDetails.m */; };
+		EE2EF8131AA4EF3400DE09E7 /* TeamGameDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2EF8121AA4EF3400DE09E7 /* TeamGameDetails.m */; };
 		EE2EF8161AA4F88900DE09E7 /* TeamGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2EF8151AA4F88900DE09E7 /* TeamGameController.m */; };
 		EE2EF8191AA6422000DE09E7 /* PersonalSingleStats.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2EF8181AA6422000DE09E7 /* PersonalSingleStats.m */; };
 		EE3356EE1A895F0600B83EC0 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3356ED1A895F0600B83EC0 /* ProfileViewController.m */; };
@@ -144,10 +144,10 @@
 		EE2C57DE1A93ECD200DA9835 /* BaseLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseLoginController.m; sourceTree = "<group>"; };
 		EE2C57E01A93F12300DA9835 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		EE2C57E11A93F12300DA9835 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
-		EE2EF80E1AA4EF2200DE09E7 /* SingleGameStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleGameStats.h; sourceTree = "<group>"; };
-		EE2EF80F1AA4EF2200DE09E7 /* SingleGameStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleGameStats.m; sourceTree = "<group>"; };
-		EE2EF8111AA4EF3400DE09E7 /* TeamGameStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamGameStats.h; sourceTree = "<group>"; };
-		EE2EF8121AA4EF3400DE09E7 /* TeamGameStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamGameStats.m; sourceTree = "<group>"; };
+		EE2EF80E1AA4EF2200DE09E7 /* SingleGameDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleGameDetails.h; sourceTree = "<group>"; };
+		EE2EF80F1AA4EF2200DE09E7 /* SingleGameDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleGameDetails.m; sourceTree = "<group>"; };
+		EE2EF8111AA4EF3400DE09E7 /* TeamGameDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamGameDetails.h; sourceTree = "<group>"; };
+		EE2EF8121AA4EF3400DE09E7 /* TeamGameDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamGameDetails.m; sourceTree = "<group>"; };
 		EE2EF8141AA4F88900DE09E7 /* TeamGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamGameController.h; sourceTree = "<group>"; };
 		EE2EF8151AA4F88900DE09E7 /* TeamGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamGameController.m; sourceTree = "<group>"; };
 		EE2EF8171AA6422000DE09E7 /* PersonalSingleStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalSingleStats.h; sourceTree = "<group>"; };
@@ -441,10 +441,10 @@
 		EE2EF80D1AA4EEF100DE09E7 /* Model Objects */ = {
 			isa = PBXGroup;
 			children = (
-				EE2EF80E1AA4EF2200DE09E7 /* SingleGameStats.h */,
-				EE2EF80F1AA4EF2200DE09E7 /* SingleGameStats.m */,
-				EE2EF8111AA4EF3400DE09E7 /* TeamGameStats.h */,
-				EE2EF8121AA4EF3400DE09E7 /* TeamGameStats.m */,
+				EE2EF80E1AA4EF2200DE09E7 /* SingleGameDetails.h */,
+				EE2EF80F1AA4EF2200DE09E7 /* SingleGameDetails.m */,
+				EE2EF8111AA4EF3400DE09E7 /* TeamGameDetails.h */,
+				EE2EF8121AA4EF3400DE09E7 /* TeamGameDetails.m */,
 				EE2EF8171AA6422000DE09E7 /* PersonalSingleStats.h */,
 				EE2EF8181AA6422000DE09E7 /* PersonalSingleStats.m */,
 				EEE7DDD21AAE8E490089A488 /* PersonalTeamStats.h */,
@@ -761,11 +761,11 @@
 				EEB88E811AC36543008FFF87 /* CustomAccessoryView.m in Sources */,
 				EE1A55851A9CFBB500E6981E /* GroupController.m in Sources */,
 				EEFDF3D11AA7FEA600A0E48F /* Game.m in Sources */,
-				EE2EF8131AA4EF3400DE09E7 /* TeamGameStats.m in Sources */,
+				EE2EF8131AA4EF3400DE09E7 /* TeamGameDetails.m in Sources */,
 				302E41C41A86958E005F1184 /* HomeViewController.m in Sources */,
 				EE7C85C81AC0CE48008467AD /* FoosButton.m in Sources */,
 				EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */,
-				EE2EF8101AA4EF2200DE09E7 /* SingleGameStats.m in Sources */,
+				EE2EF8101AA4EF2200DE09E7 /* SingleGameDetails.m in Sources */,
 				EE76CC571AB9E3AF0038BD80 /* UIImage+BackGrounImage.m in Sources */,
 				EE1817081AB2732800E608B3 /* Group.m in Sources */,
 				EE3356EE1A895F0600B83EC0 /* ProfileViewController.m in Sources */,

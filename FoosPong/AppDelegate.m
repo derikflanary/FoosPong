@@ -30,13 +30,13 @@
     
     [[UITabBar appearance] setTintColor:[UIColor darkColor]];
     
-    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
-                                                    UIUserNotificationTypeBadge |
-                                                    UIUserNotificationTypeSound);
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
-                                                                             categories:nil];
-    [application registerUserNotificationSettings:settings];
-    [application registerForRemoteNotifications];
+//    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+//                                                    UIUserNotificationTypeBadge |
+//                                                    UIUserNotificationTypeSound);
+//    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+//                                                                             categories:nil];
+//    [application registerUserNotificationSettings:settings];
+//    [application registerForRemoteNotifications];
     
     
     //[Parse enableLocalDatastore];
@@ -67,32 +67,6 @@
 //                               properties:@{ @"plan": @"Enterprise" }];
     
     
-    
-    //InitialViewController *ivc = [InitialViewController new];
-    
-    
-    
-//    HomeViewController *hvc = [HomeViewController new];
-//    InitialViewController *ivc = [InitialViewController new];
-//    
-//    UITabBarController *profileTabBar = [UITabBarController new];
-//    HistoryViewController *historyVC = [HistoryViewController new];
-//    PersonalNotificationsViewController *pnvc = [PersonalNotificationsViewController new];
-//    ProfileViewController *pvc = [ProfileViewController new];
-//    pvc.tabBarItem.title = @"Profile";
-//    historyVC.tabBarItem.title = @"History";
-//    pnvc.tabBarItem.title = @"Notifications";
-//    profileTabBar.viewControllers = @[pvc, historyVC, pnvc];
-//    
-//    UITabBarController *groupTabBar = [UITabBarController new];
-//    GroupsViewController *gvc = [GroupsViewController new];
-//    gvc.tabBarItem.title = @"Groups";
-//    CurrentGroupViewController *cgvc = [CurrentGroupViewController new];
-//    cgvc.tabBarItem.title = @"Current Group";
-//    groupTabBar.viewControllers = @[gvc, cgvc];
-//    
-//    [mainNavController setViewControllers:@[hvc, profileTabBar, groupTabBar, ivc]];
-    //mainNavController.viewControllers = @[ivc, hvc, profileTabBar, groupTabBar];
     
     [Fabric with:@[CrashlyticsKit]];
     self.window.backgroundColor = [UIColor whiteColor];

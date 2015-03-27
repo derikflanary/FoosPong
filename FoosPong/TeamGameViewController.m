@@ -9,7 +9,7 @@
 #import "TeamGameViewController.h"
 #import "ChoosePlayersViewController.h"
 #import "SingleGameController.h"
-#import "TeamGameStats.h"
+#import "TeamGameDetails.h"
 #import "TeamGameController.h"
 
 #import <OpenEars/OELanguageModelGenerator.h>
@@ -27,7 +27,7 @@
 @property (nonatomic, strong) NSString *t1p2;
 @property (nonatomic, strong) NSString *t2p1;
 @property (nonatomic, strong) NSString *t2p2;
-@property (nonatomic, strong) TeamGameStats *gameStats;
+@property (nonatomic, strong) TeamGameDetails *gameStats;
 @property (strong, nonatomic) OEEventsObserver *openEarsEventsObserver;
 
 @property (strong, nonatomic) FoosButton *team1PlusButton;
@@ -290,14 +290,15 @@
 
 - (void)updateTeamGameStats{
     
-    self.gameStats = [TeamGameStats new];
-    self.gameStats.teamOnePlayerOne = [self.teamOne objectAtIndex:0];
-    self.gameStats.teamOnePlayerTwo = [self.teamOne objectAtIndex:1];
-    self.gameStats.teamTwoPlayerOne = [self.teamTwo objectAtIndex:0];
-    self.gameStats.teamTwoPlayerTwo = [self.teamTwo objectAtIndex:1];
+    self.gameStats = [TeamGameDetails new];
+    self.gameStats.teamOneAttacker = [self.teamOne objectAtIndex:0];
+    self.gameStats.teamOneDefender = [self.teamOne objectAtIndex:1];
+    self.gameStats.teamTwoAttacker = [self.teamTwo objectAtIndex:0];
+    self.gameStats.teamTwoDefender = [self.teamTwo objectAtIndex:1];
     self.gameStats.teamOneScore = self.teamOneScore;
     self.gameStats.teamTwoScore = self.teamTwoScore;
     self.gameStats.teamOneWin = [NSNumber numberWithBool:self.teamOneWin];
+    self.gameStats.group = [PFUser currentUser][@"currentGroup"];
 }
 
 
@@ -398,7 +399,6 @@
     NSLog(@"A test file that was submitted for recognition is now complete.");
     
 }
-
 
 
 

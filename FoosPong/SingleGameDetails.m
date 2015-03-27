@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "SingleGameStats.h"
+#import "SingleGameDetails.h"
 
-@interface SingleGameStats()
+@interface SingleGameDetails()
 
 @end
 
-@implementation SingleGameStats
+@implementation SingleGameDetails
 
 
 @end

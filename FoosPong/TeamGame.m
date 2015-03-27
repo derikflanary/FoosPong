@@ -10,10 +10,10 @@
 
 @implementation TeamGame
 
-@dynamic teamOnePlayerOne;
-@dynamic teamOnePlayerTwo;
-@dynamic teamTwoPlayerOne;
-@dynamic teamTwoPlayerTwo;
+@dynamic teamOneAttacker;
+@dynamic teamOneDefender;
+@dynamic teamTwoAttacker;
+@dynamic teamTwoDefender;
 @dynamic teamOneScore;
 @dynamic teamTwoScore;
 @dynamic teamOneWin;

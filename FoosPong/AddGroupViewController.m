@@ -45,7 +45,7 @@
     NSString* fontName = [NSString mainFont];
 //    NSString* boldFontName = [NSString boldFont];
     
-    self.groupNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 100, 320, 41)];
+    self.groupNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 41)];
     self.groupNameField.backgroundColor = [UIColor whiteColor];
     self.groupNameField.placeholder = @"Team Name";
     self.groupNameField.font = [UIFont fontWithName:fontName size:16.0f];
@@ -57,7 +57,7 @@
     self.groupNameField.autocorrectionType = UITextAutocorrectionTypeNo;
 
 
-    self.groupOrganiztionField = [[UITextField alloc]initWithFrame:CGRectMake(0, 150, 320, 41)];
+    self.groupOrganiztionField = [[UITextField alloc]initWithFrame:CGRectMake(0, 150, self.view.frame.size.width, 41)];
     self.groupOrganiztionField.backgroundColor = [UIColor whiteColor];
     self.groupOrganiztionField.placeholder = @"Organization Name";
     self.groupOrganiztionField.font = [UIFont fontWithName:fontName size:16.0f];
@@ -69,7 +69,7 @@
     self.groupNameField.autocorrectionType = UITextAutocorrectionTypeNo;
 
     
-    self.passwordField = [[UITextField alloc]initWithFrame:CGRectMake(0, 190, 320, 41)];
+    self.passwordField = [[UITextField alloc]initWithFrame:CGRectMake(0, 190, self.view.frame.size.width, 41)];
     self.passwordField.backgroundColor = [UIColor whiteColor];
     self.passwordField.placeholder = @"Team Password";
     self.passwordField.font = [UIFont fontWithName:fontName size:16.0f];
@@ -82,7 +82,7 @@
     self.passwordField.autocorrectionType = UITextAutocorrectionTypeNo;
 
     
-    self.addGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, 320, 51)];
+    self.addGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 51)];
     self.addGroupButton.backgroundColor = [UIColor darkColor];
     self.addGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.addGroupButton setTitle:@"CREATE TEAM" forState:UIControlStateNormal];

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SingleGameStats : NSObject
+@interface SingleGameDetails : NSObject
 
 @property (nonatomic, strong)PFUser *playerOne;
 @property (nonatomic, strong)PFUser *playerTwo;
