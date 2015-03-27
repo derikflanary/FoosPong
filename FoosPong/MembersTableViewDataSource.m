@@ -10,6 +10,7 @@
 #import "NewGameCustomTableViewCell.h"
 #import "GroupController.h"
 #import "PlayerTableViewCell.h"
+#import "EditGroupViewController.h"
 
 @implementation MembersTableViewDataSource
 
@@ -66,10 +67,25 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
-        [[GroupController sharedInstance]removeUserFromGroup:[self.groupMembers objectAtIndex:indexPath.row] callback:^(BOOL *succeeded) {
-            [self.groupMembers removeObject:[self.groupMembers objectAtIndex:indexPath.row]];
-            [tableView reloadData];
-        }];
+        PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
+
+        
+        UIAlertController *removePlayerAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Remove %@ From Team?", user.username] message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        
+        [removePlayerAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+            
+            [[GroupController sharedInstance]removeUserFromGroup:[self.groupMembers objectAtIndex:indexPath.row] callback:^(BOOL *succeeded) {
+                [self.groupMembers removeObject:[self.groupMembers objectAtIndex:indexPath.row]];
+                [tableView reloadData];
+            }];
+        }]];
+        [removePlayerAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            
+        }]];
+        EditGroupViewController *egvc = [EditGroupViewController new];
+        [egvc presentViewController:removePlayerAlert animated:YES completion:nil];
+        
+        
     }
 }
 

@@ -177,8 +177,12 @@
         [self noGroup];
         [self.activityView stopAnimating];
     }else{
+        
+        //self.currentGroup = [PFUser currentUser][@"currentGroup"];
+        
+
     
-    [[GroupController sharedInstance]retrieveCurrentGroupWithCallback:^(PFObject *group, NSError *error) {
+        [[GroupController sharedInstance]retrieveCurrentGroupWithCallback:^(PFObject *group, NSError *error) {
         
         if (!error) {
             if (!group) {
@@ -201,13 +205,16 @@
 
                 }];
                 
+                
                 [[GroupController sharedInstance]fetchAdminForGroup:self.currentGroup callback:^(PFObject *admin) {
                     self.admin = admin;
-                    if ([PFUser currentUser] == admin) {
+                    if ([[PFUser currentUser].objectId isEqualToString:admin.objectId]) {
                         [self.view addSubview:self.addMembersButton];
                         self.tableView.frame = CGRectMake(0, 140, 320, 200);
+                        [self.tableView reloadData];
                     }
                 }];
+                
                 if (self.noGroupView) {
                     [self.noGroupView removeFromSuperview];
                 }

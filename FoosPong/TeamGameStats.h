@@ -20,7 +20,7 @@
 @property (nonatomic, assign) NSInteger teamGameWins;
 @property (nonatomic, assign) NSInteger teamGameLoses;
 @property (nonatomic, assign) NSInteger teamGamesPlayed;
-
+@property (nonatomic, strong)PFObject *group;
 
 
 @end

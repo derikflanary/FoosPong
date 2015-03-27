@@ -17,6 +17,7 @@
 #import "PersonalNotificationsViewController.h"
 #import "SettingViewController.h"
 #import "AppDelegate.h"
+#import "GroupHistoryViewController.h"
 
 typedef NS_ENUM(NSInteger, SideBarSection) {
     SideBarSectionLogin,
@@ -116,9 +117,14 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
         UITabBarController *groupTabBar = [UITabBarController new];
         GroupsViewController *gvc = [GroupsViewController new];
         gvc.tabBarItem.title = @"Groups";
+        gvc.tabBarItem.image = [UIImage imageNamed:@"70"];
         CurrentGroupViewController *cgvc = [CurrentGroupViewController new];
         cgvc.tabBarItem.title = @"Current Group";
-        groupTabBar.viewControllers = @[cgvc, gvc];
+        cgvc.tabBarItem.image = [UIImage imageNamed:@"85"];
+        GroupHistoryViewController *ghvc = [GroupHistoryViewController new];
+        ghvc.tabBarItem.title = @"Group Feed";
+        ghvc.tabBarItem.image = [UIImage imageNamed:@"124"];
+        groupTabBar.viewControllers = @[cgvc, gvc, ghvc];
         
         SettingViewController *svc = [SettingViewController new];
         

@@ -63,10 +63,9 @@ static NSString * const passwordKey = @"password";
     
     
     PFUser *admin = group[adminKey];
-    [admin fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+    [admin fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         callback(object);
     }];
-    
 }
 
 - (void)addUser:(PFUser *)user toGroup:(PFObject *)group callback:(void (^)(BOOL *))callback{
@@ -135,7 +134,7 @@ static NSString * const passwordKey = @"password";
     
     PFUser *currentUser = [PFUser currentUser];
     PFObject *group = currentUser[currentGroupKey];
-    [group fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+    [group fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (!error) {
             if (!object) {
                 callback (nil, nil);

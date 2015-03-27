@@ -17,6 +17,7 @@
 @property NSNumber *playerOneWin;
 @property PFUser *p1;
 @property PFUser *p2;
+@property PFObject *group;
 
 
 @end

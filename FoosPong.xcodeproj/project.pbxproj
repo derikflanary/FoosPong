@@ -81,6 +81,7 @@
 		EE9DAEF31A9ECEC600589897 /* AddGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEF21A9ECEC600589897 /* AddGroupViewController.m */; };
 		EE9DAEF61A9ECED800589897 /* FindGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEF51A9ECED800589897 /* FindGroupViewController.m */; };
 		EEB88E811AC36543008FFF87 /* CustomAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB88E801AC36543008FFF87 /* CustomAccessoryView.m */; };
+		EEB88E881AC5C20F008FFF87 /* GroupHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB88E871AC5C20F008FFF87 /* GroupHistoryViewController.m */; };
 		EEC4E4771AB91BF30060DDF5 /* GroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC4E4761AB91BF30060DDF5 /* GroupTableViewCell.m */; };
 		EEC4E47A1ABA6BC50060DDF5 /* CreateMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC4E4791ABA6BC50060DDF5 /* CreateMemberViewController.m */; };
 		EEE7DDD41AAE8E490089A488 /* PersonalTeamStats.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE7DDD31AAE8E490089A488 /* PersonalTeamStats.m */; };
@@ -231,6 +232,8 @@
 		EE9DAEF51A9ECED800589897 /* FindGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindGroupViewController.m; sourceTree = "<group>"; };
 		EEB88E7F1AC36543008FFF87 /* CustomAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAccessoryView.h; sourceTree = "<group>"; };
 		EEB88E801AC36543008FFF87 /* CustomAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAccessoryView.m; sourceTree = "<group>"; };
+		EEB88E861AC5C20F008FFF87 /* GroupHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupHistoryViewController.h; sourceTree = "<group>"; };
+		EEB88E871AC5C20F008FFF87 /* GroupHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupHistoryViewController.m; sourceTree = "<group>"; };
 		EEC4E4751AB91BF30060DDF5 /* GroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupTableViewCell.h; sourceTree = "<group>"; };
 		EEC4E4761AB91BF30060DDF5 /* GroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupTableViewCell.m; sourceTree = "<group>"; };
 		EEC4E4781ABA6BC50060DDF5 /* CreateMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateMemberViewController.h; sourceTree = "<group>"; };
@@ -368,6 +371,8 @@
 				EE1A557D1A9CFB3000E6981E /* GroupsViewController.m */,
 				EE1A557F1A9CFB4A00E6981E /* CurrentGroupViewController.h */,
 				EE1A55801A9CFB4A00E6981E /* CurrentGroupViewController.m */,
+				EEB88E861AC5C20F008FFF87 /* GroupHistoryViewController.h */,
+				EEB88E871AC5C20F008FFF87 /* GroupHistoryViewController.m */,
 				EEF716B11ABD18DF005DDB61 /* GroupStatsViewController.h */,
 				EEF716B21ABD18DF005DDB61 /* GroupStatsViewController.m */,
 				EE9DAEF11A9ECEC500589897 /* AddGroupViewController.h */,
@@ -748,6 +753,7 @@
 				EEC4E47A1ABA6BC50060DDF5 /* CreateMemberViewController.m in Sources */,
 				EE18170B1AB27BDC00E608B3 /* EditGroupViewController.m in Sources */,
 				EE58A3091AB0BDEF00832380 /* JBBarChartView.m in Sources */,
+				EEB88E881AC5C20F008FFF87 /* GroupHistoryViewController.m in Sources */,
 				EE9DAEEB1A9D582200589897 /* RNFrostedSidebar.m in Sources */,
 				EEF716B61ABD57FA005DDB61 /* GameDetailViewController.m in Sources */,
 				EE7A6D071A869970000447D2 /* NewGameCustomTableViewCell.m in Sources */,

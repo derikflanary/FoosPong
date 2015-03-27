@@ -15,6 +15,7 @@
 @dynamic playerOneWin;
 @dynamic p1;
 @dynamic p2;
+@dynamic group;
 
 + (void)load {
     [self registerSubclass];
