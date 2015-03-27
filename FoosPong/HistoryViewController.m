@@ -152,13 +152,13 @@
     }else{
         
         TeamGame *teamGame = [self.teamGames objectAtIndex:indexPath.row];
-        PFUser *t1p1 = teamGame.teamOnePlayerOne;
+        PFUser *t1p1 = teamGame.teamOneAttacker;
         NSString *t1p1Name = t1p1.username;
-        PFUser *t1p2 = teamGame.teamOnePlayerTwo;
+        PFUser *t1p2 = teamGame.teamOneDefender;
         NSString *t1p2Name = t1p2.username;
-        PFUser *t2p1 = teamGame.teamTwoPlayerOne;
+        PFUser *t2p1 = teamGame.teamTwoAttacker;
         NSString *t2p1Name = t2p1.username;
-        PFUser *t2p2 = teamGame.teamTwoPlayerTwo;
+        PFUser *t2p2 = teamGame.teamTwoDefender;
         NSString *t2p2Name = t2p2.username;
         
         cell.textLabel.text = [NSString stringWithFormat:@"%@ & %@: %.0f | %@ & %@: %.0f", t1p1Name, t1p2Name, teamGame.teamOneScore, t2p1Name, t2p2Name, teamGame.teamTwoScore];

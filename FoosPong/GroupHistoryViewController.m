@@ -54,21 +54,15 @@
     [[SingleGameController sharedInstance]updateGamesForGroup:[PFUser currentUser][@"currentGroup"] Callback:^(NSArray *singleGames) {
         
         self.singleGames = singleGames;
-        [self.tableView reloadData];
-        
+                
+        [[TeamGameController sharedInstance]updateGamesForGroup:[PFUser currentUser][@"currentGroup"] Callback:^(NSArray *teamGames) {
+            
+            self.teamGames = teamGames;
+            [self.tableView reloadData];
+            
+        }];
     }];
     
-//    [[SingleGameController sharedInstance] updateGamesForUser:[PFUser currentUser] withBool:NO callback:^(NSArray *games) {
-//        self.singleGames = games;
-//        
-//        [[TeamGameController sharedInstance]updateGamesForUser:[PFUser currentUser] callback:^(NSArray * teamGames) {
-//            self.teamGames = teamGames;
-//            [self.activityView stopAnimating];
-//            [self.tableView reloadData];
-//        }];
-//        
-//    }];
-//    
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:2];
     
@@ -158,25 +152,25 @@
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", date]
         ;        //cell.backgroundColor = [UIColor mainColor];
         return cell;
-    }
-//    }else{
-//        
-//        TeamGame *teamGame = [self.teamGames objectAtIndex:indexPath.row];
-//        PFUser *t1p1 = teamGame.teamOnePlayerOne;
-//        NSString *t1p1Name = t1p1.username;
-//        PFUser *t1p2 = teamGame.teamOnePlayerTwo;
-//        NSString *t1p2Name = t1p2.username;
-//        PFUser *t2p1 = teamGame.teamTwoPlayerOne;
-//        NSString *t2p1Name = t2p1.username;
-//        PFUser *t2p2 = teamGame.teamTwoPlayerTwo;
-//        NSString *t2p2Name = t2p2.username;
-//        
-//        cell.textLabel.text = [NSString stringWithFormat:@"%@ & %@: %.0f | %@ & %@: %.0f", t1p1Name, t1p2Name, teamGame.teamOneScore, t2p1Name, t2p2Name, teamGame.teamTwoScore];
-//        cell.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
-//        cell.textLabel.numberOfLines = 0;
-        return cell;
-//    }
     
+    }else{
+        
+        TeamGame *teamGame = [self.teamGames objectAtIndex:indexPath.row];
+        PFUser *t1p1 = teamGame.teamOneAttacker;
+        NSString *t1p1Name = t1p1.username;
+        PFUser *t1p2 = teamGame.teamOneDefender;
+        NSString *t1p2Name = t1p2.username;
+        PFUser *t2p1 = teamGame.teamTwoAttacker;
+        NSString *t2p1Name = t2p1.username;
+        PFUser *t2p2 = teamGame.teamTwoDefender;
+        NSString *t2p2Name = t2p2.username;
+        
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ & %@: %.0f | %@ & %@: %.0f", t1p1Name, t1p2Name, teamGame.teamOneScore, t2p1Name, t2p2Name, teamGame.teamTwoScore];
+        cell.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
+        cell.textLabel.numberOfLines = 0;
+        return cell;
+    }
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

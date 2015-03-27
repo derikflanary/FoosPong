@@ -50,6 +50,7 @@
     finishedGame.teamOneScore = gameStats.teamOneScore;
     finishedGame.teamTwoScore = gameStats.teamTwoScore;
     finishedGame.teamOneWin = gameStats.teamOneWin;
+    finishedGame.group = gameStats.group;
     
     [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {

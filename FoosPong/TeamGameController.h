@@ -14,6 +14,8 @@
 + (TeamGameController *)sharedInstance;
 - (void)addGameWithTeamGameStats:(TeamGameDetails*)gameStats;
 - (void)updateGamesForUser:(PFUser*)user callback:(void (^)(NSArray *))callback;
+- (void)updateGamesForGroup:(PFObject*)group Callback:(void (^)(NSArray *))callback;
+
 
 @property(nonatomic, strong)NSArray *teamGames;
 
