@@ -23,7 +23,7 @@
     self.textLabel.highlightedTextColor = [UIColor mainWhite];
     [self setSelectedBackgroundView:bgColorView];
 
-    
+    self.textLabel.textAlignment = NSTextAlignmentCenter;
     
     self.backgroundColor = [UIColor transparentCellWhite];
     return self;

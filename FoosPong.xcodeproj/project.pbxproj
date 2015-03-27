@@ -82,6 +82,8 @@
 		EE9DAEF61A9ECED800589897 /* FindGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEF51A9ECED800589897 /* FindGroupViewController.m */; };
 		EEB88E811AC36543008FFF87 /* CustomAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB88E801AC36543008FFF87 /* CustomAccessoryView.m */; };
 		EEB88E881AC5C20F008FFF87 /* GroupHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB88E871AC5C20F008FFF87 /* GroupHistoryViewController.m */; };
+		EEB88E8B1AC5F713008FFF87 /* RankingController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB88E8A1AC5F713008FFF87 /* RankingController.m */; };
+		EEB88E8F1AC60302008FFF87 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB88E8E1AC60302008FFF87 /* ODRefreshControl.m */; };
 		EEC4E4771AB91BF30060DDF5 /* GroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC4E4761AB91BF30060DDF5 /* GroupTableViewCell.m */; };
 		EEC4E47A1ABA6BC50060DDF5 /* CreateMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC4E4791ABA6BC50060DDF5 /* CreateMemberViewController.m */; };
 		EEE7DDD41AAE8E490089A488 /* PersonalTeamStats.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE7DDD31AAE8E490089A488 /* PersonalTeamStats.m */; };
@@ -234,6 +236,10 @@
 		EEB88E801AC36543008FFF87 /* CustomAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAccessoryView.m; sourceTree = "<group>"; };
 		EEB88E861AC5C20F008FFF87 /* GroupHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupHistoryViewController.h; sourceTree = "<group>"; };
 		EEB88E871AC5C20F008FFF87 /* GroupHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupHistoryViewController.m; sourceTree = "<group>"; };
+		EEB88E891AC5F713008FFF87 /* RankingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingController.h; sourceTree = "<group>"; };
+		EEB88E8A1AC5F713008FFF87 /* RankingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingController.m; sourceTree = "<group>"; };
+		EEB88E8D1AC60302008FFF87 /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
+		EEB88E8E1AC60302008FFF87 /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRefreshControl.m; sourceTree = "<group>"; };
 		EEC4E4751AB91BF30060DDF5 /* GroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupTableViewCell.h; sourceTree = "<group>"; };
 		EEC4E4761AB91BF30060DDF5 /* GroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupTableViewCell.m; sourceTree = "<group>"; };
 		EEC4E4781ABA6BC50060DDF5 /* CreateMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateMemberViewController.h; sourceTree = "<group>"; };
@@ -417,6 +423,8 @@
 				EE1A55841A9CFBB500E6981E /* GroupController.m */,
 				EEFDF3CC1AA6AE7200A0E48F /* StatsController.h */,
 				EEFDF3CD1AA6AE7200A0E48F /* StatsController.m */,
+				EEB88E891AC5F713008FFF87 /* RankingController.h */,
+				EEB88E8A1AC5F713008FFF87 /* RankingController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -464,6 +472,7 @@
 		EE5027CC1A98F1180079DFFC /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				EEB88E8C1AC60302008FFF87 /* ODRefreshControl */,
 				EE58A3021AB0BDEF00832380 /* Classes */,
 				EE4888681A9FDD9B00FCCA47 /* HMSegmentedControl.h */,
 				EE4888691A9FDD9B00FCCA47 /* HMSegmentedControl.m */,
@@ -593,6 +602,15 @@
 				EE76CC501AB240870038BD80 /* RulesViewController.m */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		EEB88E8C1AC60302008FFF87 /* ODRefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				EEB88E8D1AC60302008FFF87 /* ODRefreshControl.h */,
+				EEB88E8E1AC60302008FFF87 /* ODRefreshControl.m */,
+			);
+			path = ODRefreshControl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -792,6 +810,7 @@
 				302E41C71A86A195005F1184 /* ChoosePlayersViewController.m in Sources */,
 				EEFDF3CE1AA6AE7200A0E48F /* StatsController.m in Sources */,
 				EE2C57D61A93DFC600DA9835 /* UIImageView+Letters.m in Sources */,
+				EEB88E8F1AC60302008FFF87 /* ODRefreshControl.m in Sources */,
 				EE58A30A1AB0BDEF00832380 /* JBChartView.m in Sources */,
 				EE5027C81A965F1F0079DFFC /* NSString+Extensions.m in Sources */,
 				EE7A6D0A1A869CD4000447D2 /* HistoryViewController.m in Sources */,
@@ -803,6 +822,7 @@
 				EE5027CB1A98ED310079DFFC /* UIColor+ExtraColorTools.m in Sources */,
 				EE1A55811A9CFB4A00E6981E /* CurrentGroupViewController.m in Sources */,
 				EE4888701AA0FC6D00FCCA47 /* TeamGameViewController.m in Sources */,
+				EEB88E8B1AC5F713008FFF87 /* RankingController.m in Sources */,
 				EE5027C21A9654A30079DFFC /* LogViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

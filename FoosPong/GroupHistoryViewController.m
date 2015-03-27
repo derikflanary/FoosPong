@@ -11,6 +11,7 @@
 #import "GameDetailViewController.h"
 #import "SingleGameController.h"
 #import "TeamGameController.h"
+#import "ODRefreshControl/ODRefreshControl.h"
 
 @interface GroupHistoryViewController () <UITableViewDataSource, UITableViewDelegate, UIToolbarDelegate>
 
@@ -20,6 +21,7 @@
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 @property (nonatomic, strong) UISegmentedControl *segmentedControl;
+@property (nonatomic, strong) ODRefreshControl *refreshControl;
 
 
 @end
@@ -31,12 +33,12 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.activityView = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    self.activityView.center = CGPointMake(160, 240);
-    self.activityView.color = [UIColor darkColor];
-    self.activityView.hidesWhenStopped = YES;
-    [self.view addSubview:self.activityView];
-    [self.activityView startAnimating];
+//    self.activityView = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//    self.activityView.center = CGPointMake(160, 240);
+//    self.activityView.color = [UIColor darkColor];
+//    self.activityView.hidesWhenStopped = YES;
+//    [self.view addSubview:self.activityView];
+//    [self.activityView startAnimating];
     
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
@@ -49,20 +51,23 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.backgroundColor = [UIColor transparentWhite];
-    self.tableView.bounces = NO;
+    self.tableView.bounces = YES;
     
-    [[SingleGameController sharedInstance]updateGamesForGroup:[PFUser currentUser][@"currentGroup"] Callback:^(NSArray *singleGames) {
-        
-        self.singleGames = singleGames;
-                
-        [[TeamGameController sharedInstance]updateGamesForGroup:[PFUser currentUser][@"currentGroup"] Callback:^(NSArray *teamGames) {
-            
-            self.teamGames = teamGames;
-            [self.tableView reloadData];
-            
-        }];
-    }];
+
     
+    self.refreshControl = [[ODRefreshControl alloc]initInScrollView:self.tableView];
+    self.refreshControl.backgroundColor = [UIColor darkColor];
+    self.refreshControl.tintColor = [UIColor darkColor];
+    [self.refreshControl addTarget:self
+                            action:@selector(pulledToRefresh)
+                  forControlEvents:UIControlEventValueChanged];
+    self.refreshControl.activityIndicatorViewColor = [UIColor transparentWhite];
+    self.refreshControl.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    
+    [self.refreshControl beginRefreshing];
+    
+    [self updateTableView];
+
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:2];
     
@@ -88,8 +93,44 @@
     
 }
 
+- (void)pulledToRefresh{
+   
+    [self updateTableView];
+}
+
+- (void)updateTableView{
+    
+    [[SingleGameController sharedInstance]updateGamesForGroup:[PFUser currentUser][@"currentGroup"] Callback:^(NSArray *singleGames) {
+        
+        self.singleGames = singleGames;
+        
+        [[TeamGameController sharedInstance]updateGamesForGroup:[PFUser currentUser][@"currentGroup"] Callback:^(NSArray *teamGames) {
+            
+            self.teamGames = teamGames;
+            [self.tableView reloadData];
+            
+            if (self.refreshControl) {
+                
+//                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//                [formatter setDateFormat:@"MMM d, h:mm a"];
+//                NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+//                NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+//                                                                            forKey:NSForegroundColorAttributeName];
+//                NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+                double delayInSeconds = 1.0;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    [self.refreshControl endRefreshing];
+                });
+                
+            }
+            
+        }];
+    }];
+}
+
 - (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar{
-    return UIBarPositionTop;
+    return UIBarPositionTopAttached;
 }
 
 - (void)segmentedControlChangedValue:(id)sender{
@@ -137,20 +178,23 @@
     if (!cell){
         cell = [HistoryTableViewCell new];
     }
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMM d, h:mm a"];
     if (self.segmentedControl.selectedSegmentIndex == 0) {
         
         Game *game = [self.singleGames objectAtIndex:indexPath.row];
         PFUser *p1 = game.p1;
         PFUser *p2 = game.p2;
         NSDate *date =  game.createdAt;
+        
         NSString *p1Name = p1.username;
         NSString *p2Name = p2.username;
         
         cell.textLabel.text = [NSString stringWithFormat:@"%@:%.0f vs %@:%.0f", p1Name, game.playerOneScore, p2Name, game.playerTwoScore];
         cell.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
         
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", date]
-        ;        //cell.backgroundColor = [UIColor mainColor];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
+        
         return cell;
     
     }else{
@@ -164,10 +208,14 @@
         NSString *t2p1Name = t2p1.username;
         PFUser *t2p2 = teamGame.teamTwoDefender;
         NSString *t2p2Name = t2p2.username;
+        NSDate *date = teamGame.createdAt;
         
         cell.textLabel.text = [NSString stringWithFormat:@"%@ & %@: %.0f | %@ & %@: %.0f", t1p1Name, t1p2Name, teamGame.teamOneScore, t2p1Name, t2p2Name, teamGame.teamTwoScore];
         cell.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
+
         cell.textLabel.numberOfLines = 0;
+        
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
         return cell;
     }
 
