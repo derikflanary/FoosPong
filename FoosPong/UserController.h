@@ -12,7 +12,7 @@
 
 + (UserController *)sharedInstance;
     
-- (void)addUserwithDictionary:(NSDictionary*)dictionary callback:(void (^)(BOOL *))callback;
+- (void)addUserwithDictionary:(NSDictionary*)dictionary Callback:(void (^)(BOOL *, NSError * error))callback;
 
 - (void)addGuestUserWithArray:(NSArray*)users;
 

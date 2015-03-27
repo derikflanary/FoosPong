@@ -14,7 +14,7 @@
 #import "PlayerTableViewCell.h"
 #import "GroupStatsViewController.h"
 
-@interface CurrentGroupViewController () 
+@interface CurrentGroupViewController () <FindGroupViewControllerDelegate>
 @property (nonatomic, strong) FoosButton *joinGroupButton;
 @property (nonatomic, strong) FoosButton *createGroupButton;
 @property (nonatomic, strong) AddGroupViewController *addGroupViewController;
@@ -27,13 +27,15 @@
 @property (nonatomic, strong) PFUser *admin;
 @property (nonatomic, strong) FoosButton *groupStatsButton;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
-
+@property (nonatomic, strong) UIVisualEffectView *bluredEffectView;
 
 @end
 
 @implementation CurrentGroupViewController
 
 -(void)viewWillAppear:(BOOL)animated{
+    
+    
     
     self.activityView = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.activityView.center = CGPointMake(160, 240);
@@ -171,6 +173,11 @@
 
 - (void)checkForGroup{
     
+    if (![PFUser currentUser][@"currentGroup"]) {
+        [self noGroup];
+        [self.activityView stopAnimating];
+    }else{
+    
     [[GroupController sharedInstance]retrieveCurrentGroupWithCallback:^(PFObject *group, NSError *error) {
         
         if (!error) {
@@ -207,7 +214,7 @@
             }
         }
     }];
-    
+    }
 }
 
 - (void)noGroup{
@@ -215,12 +222,10 @@
         [self.activityView stopAnimating];
         
         UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-        UIVisualEffectView *bluredEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-        [bluredEffectView setFrame:self.view.bounds];
+        self.bluredEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        [self.bluredEffectView setFrame:self.view.bounds];
         
-        [self.view addSubview:bluredEffectView];
-        
-        self.noGroupView = [[UIView alloc]initWithFrame:CGRectMake(35, 80, 250, 250)];
+        self.noGroupView = [[UIView alloc]initWithFrame:self.view.frame];
         self.noGroupView.backgroundColor = [UIColor whiteColor];
         
         UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, self.view.frame.size.width, 60)];
@@ -243,14 +248,13 @@
         [self.joinGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
         [self.joinGroupButton addTarget:self action:@selector(joinPressed:) forControlEvents:UIControlEventTouchUpInside];
         
-        [self.view addSubview:bluredEffectView];
-//        [self.view addSubview:self.noGroupView];
-        [self.view addSubview:titleLabel];
-        [self.view addSubview:self.createGroupButton];
-        [self.view addSubview:self.joinGroupButton];
-//        [self.noGroupView addSubview:titleLabel];
-//        [self.noGroupView addSubview:self.createGroupButton];
-//        [self.noGroupView addSubview:self.joinGroupButton];
+        [self.view addSubview:self.bluredEffectView];
+
+        [self.noGroupView addSubview:titleLabel];
+        [self.noGroupView addSubview:self.createGroupButton];
+        [self.noGroupView addSubview:self.joinGroupButton];
+        [self.view addSubview:self.noGroupView];
+
  
     
 }
@@ -267,7 +271,11 @@
 }
 
 - (void)joinPressed:(id)sender{
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:[FindGroupViewController new]];
+    
+    FindGroupViewController *fgvc = [FindGroupViewController new];
+    fgvc.delegate = self;
+
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:fgvc];
     [self.view.window.rootViewController presentViewController:navController animated:YES completion:^{
         
     }];
@@ -305,6 +313,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)groupSelected{
+    [self checkForGroup];
+    [self.noGroupView removeFromSuperview];
+    [self.bluredEffectView removeFromSuperview];
+    
+}
 /*
 #pragma mark - Navigation
 

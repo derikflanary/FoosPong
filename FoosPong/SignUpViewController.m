@@ -12,6 +12,7 @@
 #import "HomeViewController.h"
 #import "AppDelegate.h"
 #import "LogViewController.h"
+#import "NSString+Extensions.h"
 
 @interface SignUpViewController () <DXCustomInputAccessoryViewDelegate>
 
@@ -191,11 +192,23 @@
                                  @"username": self.usernameField.text,
                                  @"password": self.passwordField.text,
                                  @"email": self.emailField.text};
-    [[UserController sharedInstance] addUserwithDictionary:dictionary callback:^(BOOL *succeeded) {
-        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-        appDelegate.mainNavigationController.viewControllers = @[[HomeViewController new]];
-        [self dismissViewControllerAnimated:YES completion:^{
-        }];
+    
+    [[UserController sharedInstance] addUserwithDictionary:dictionary Callback:^(BOOL *succeeded, NSError *error) {
+        
+        if (succeeded) {
+            AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+            appDelegate.mainNavigationController.viewControllers = @[[HomeViewController new]];
+            [self dismissViewControllerAnimated:YES completion:^{
+            }];
+
+        }else{
+            UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@", [NSString cleanUpError:error]] message:@"" preferredStyle:UIAlertControllerStyleAlert];
+            
+            [errorAlert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                return;
+            }]];
+            [self presentViewController:errorAlert animated:YES completion:nil];
+        }
     }];
     
 }

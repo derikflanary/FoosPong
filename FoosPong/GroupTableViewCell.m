@@ -21,10 +21,10 @@
     //    self.clipsToBounds = YES;
     self.backgroundColor = [UIColor transparentCellWhite];
     
-    UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.backgroundColor = [UIColor mainColorTransparent];
-    self.textLabel.highlightedTextColor = [UIColor mainWhite];
-    [self setSelectedBackgroundView:bgColorView];
+//    UIView *bgColorView = [[UIView alloc] init];
+//    bgColorView.backgroundColor = [UIColor mainColorTransparent];
+//    self.textLabel.highlightedTextColor = [UIColor mainWhite];
+//    [self setSelectedBackgroundView:bgColorView];
     
     return self;
 }

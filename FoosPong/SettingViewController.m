@@ -33,7 +33,7 @@
     [self.view addSubview:background];
     
     UIBarButtonItem *rulesButton = [[UIBarButtonItem alloc] initWithTitle:@"Rules" style:UIBarButtonItemStylePlain target:self action:@selector(rulesPressed:)];
-    self.navigationItem.rightBarButtonItem = rulesButton;
+    self.navigationItem.leftBarButtonItem = rulesButton;
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.navigationController.navigationBar.translucent = NO;
