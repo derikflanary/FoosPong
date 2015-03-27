@@ -212,7 +212,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     PFObject *group = self.groups[indexPath.row];
-    if (group == [PFUser currentUser][@"currentGroup"]) {
+    PFObject *currentGroup = [PFUser currentUser][@"currentGroup"];
+    if (group.objectId == currentGroup.objectId) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         return;
     }else{
@@ -231,6 +232,10 @@
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 80;
 }
 /*
 #pragma mark - Navigation
