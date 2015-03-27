@@ -36,6 +36,14 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
+    UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
+    background.frame = self.view.frame;
+    [self.view addSubview:background];
+    
+    UIView *whiteWall = [[UIView alloc]initWithFrame:self.view.bounds];
+    whiteWall.backgroundColor = [UIColor transparentWhite];
+    [self.view addSubview:whiteWall];
+    
     [self.navigationController.navigationBar setTitleTextAttributes:
      
      [NSDictionary dictionaryWithObjectsAndKeys:
@@ -49,10 +57,7 @@
     self.navigationItem.leftBarButtonItem = cancelButton;
 
     
-    UIColor* mainColor = [UIColor mainColor];
-    UIColor* darkColor = [UIColor darkColor];
-    NSString* fontName = [NSString mainFont];
-    NSString* boldFontName = [NSString boldFont];
+    
     
     UIBarButtonItem *otherLogIn = [[UIBarButtonItem alloc] initWithTitle:@"Sign Up" style:UIBarButtonItemStylePlain target:self action:@selector(openSignUp:)];
     self.navigationItem.rightBarButtonItem = otherLogIn;
@@ -60,12 +65,12 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
     [self.view addGestureRecognizer:tap];
     
-    self.view.backgroundColor = mainColor;
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    self.usernameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 301, 320, 41)];
+    self.usernameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 301, self.view.frame.size.width, 41)];
     self.usernameField.backgroundColor = [UIColor whiteColor];
     self.usernameField.placeholder = @"Username";
-    self.usernameField.font = [UIFont fontWithName:fontName size:16.0f];
+    self.usernameField.font = [UIFont fontWithName:[NSString mainFont] size:16.0f];
     self.usernameField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.usernameField.layer.borderWidth = 1.0f;
     self.usernameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -76,10 +81,10 @@
     self.usernameField.leftViewMode = UITextFieldViewModeAlways;
     self.usernameField.leftView = leftView;
     
-    self.passwordField = [[UITextField alloc]initWithFrame:CGRectMake(0, 342, 320, 41)];
+    self.passwordField = [[UITextField alloc]initWithFrame:CGRectMake(0, 342, self.view.frame.size.width, 41)];
     self.passwordField.backgroundColor = [UIColor whiteColor];
     self.passwordField.placeholder = @"Password";
-    self.passwordField.font = [UIFont fontWithName:fontName size:16.0f];
+    self.passwordField.font = [UIFont fontWithName:[NSString mainFont] size:16.0f];
     self.passwordField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.passwordField.layer.borderWidth = 1.0f;
     self.passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -90,29 +95,29 @@
     self.passwordField.leftViewMode = UITextFieldViewModeAlways;
     self.passwordField.leftView = leftView2;
     
-    self.loginButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 383, 320, 62)];
-    self.loginButton.backgroundColor = darkColor;
-    self.loginButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
+    self.loginButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 383, self.view.frame.size.width, 62)];
+    self.loginButton.backgroundColor = [UIColor darkColor];
+    self.loginButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.loginButton setTitle:@"LOG IN" forState:UIControlStateNormal];
     [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.loginButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.loginButton addTarget:self action:@selector(loginPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     self.forgotButton.backgroundColor = [UIColor clearColor];
-    self.forgotButton.titleLabel.font = [UIFont fontWithName:fontName size:12.0f];
+    self.forgotButton.titleLabel.font = [UIFont fontWithName:[NSString mainFont] size:12.0f];
     [self.forgotButton setTitle:@"Forgot Password?" forState:UIControlStateNormal];
-    [self.forgotButton setTitleColor:darkColor forState:UIControlStateNormal];
+    [self.forgotButton setTitleColor:[UIColor darkColor] forState:UIControlStateNormal];
     [self.forgotButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateHighlighted];
     
     self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(43, 97, 243, 60)];
     self.titleLabel.textColor =  [UIColor whiteColor];
-    self.titleLabel.font =  [UIFont fontWithName:boldFontName size:24.0f];
+    self.titleLabel.font =  [UIFont fontWithName:[NSString boldFont] size:24.0f];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.text = @"FOOS";
     
     
     self.infoLabel.textColor =  [UIColor darkGrayColor];
-    self.infoLabel.font =  [UIFont fontWithName:boldFontName size:14.0f];
+    self.infoLabel.font =  [UIFont fontWithName:[NSString boldFont] size:14.0f];
     self.infoLabel.text = @"Welcome back, please login below";
     
     self.infoView.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];

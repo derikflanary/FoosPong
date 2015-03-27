@@ -62,6 +62,10 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     self.imageView.alpha = 1;
     [self.view addSubview:self.imageView];
     
+    UIView *whiteWall = [[UIView alloc]initWithFrame:self.view.bounds];
+    whiteWall.backgroundColor = [UIColor transparentWhite];
+    [self.view addSubview:whiteWall];
+    
     
     self.loginButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 383, self.view.frame.size.width, 62)];
     self.loginButton.backgroundColor = darkColor;

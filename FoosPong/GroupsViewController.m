@@ -195,7 +195,7 @@
     
     PFObject *group = self.groups[indexPath.row];
     
-    if (group == self.currentGroup) {
+    if ([group.objectId isEqualToString: self.currentGroup.objectId]) {
         cell.backgroundColor = [UIColor mainColorTransparent];
         cell.textLabel.textColor = [UIColor mainWhite];
         cell.textLabel.text = [NSString stringWithFormat:@"%@: (Current Group)", group[@"name"]];
