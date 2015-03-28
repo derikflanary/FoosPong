@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FoosPong/SingleGameController.m"
-            timestampString = "449217517.06848"
+            filePath = "FoosPong/RankingController.m"
+            timestampString = "449252677.068388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "-addGameWithSingleGameStats:"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "-updateNewRankingsForWinner:andLoser:callback:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

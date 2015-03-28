@@ -95,8 +95,14 @@ static int const konstant = 50;
             winnerIsHigherRanked = NO;
         }
         
+        double winnerPercentage = 0.0;
+        double loserPercentage = 0.0;
+
+        
         if (self.rankingDiff == 0) {
             self.realDifference = 0;
+            winnerPercentage = .5;
+            loserPercentage = .5;
             
         }else if (self.rankingDiff < 26) {
             self.realDifference = 25;
@@ -129,27 +135,42 @@ static int const konstant = 50;
         
         NSUInteger idx = [diffArray indexOfObject:[NSNumber numberWithDouble:self.realDifference]];
         //    NSUInteger idx = [diffArray indexOfObject:[NSString stringWithFormat:@"%f", self.realDifference]];
-        float winnerPercentage;
-        float loserPercentage;
         
-        if (winnerIsHigherRanked) {
-            winnerPercentage = [[RankingsTable higherRatedPlayerPercentageAtIndex:idx] doubleValue] / 100;
-            loserPercentage = [[RankingsTable lowerRatedPlayerAtIndex:idx] doubleValue] / 100;
+        if (self.realDifference == 0 ) {
             
         }else{
-            winnerPercentage = [[RankingsTable lowerRatedPlayerAtIndex:idx] doubleValue] / 100;
-            loserPercentage = [[RankingsTable higherRatedPlayerPercentageAtIndex:idx] doubleValue] / 100;
-            
+        
+            if (winnerIsHigherRanked) {
+                NSNumber *winPercentNum = [RankingsTable higherRatedPlayerPercentageAtIndex:idx];
+                double winPercentDbl = [winPercentNum doubleValue];
+                winnerPercentage = winPercentDbl / 100;
+                
+                NSNumber *losePercentNum = [RankingsTable higherRatedPlayerPercentageAtIndex:idx];
+                double losePercentDbl = [losePercentNum doubleValue];
+                loserPercentage = losePercentDbl / 100;
+                
+            }else{
+                NSNumber *winPercentNum = [RankingsTable higherRatedPlayerPercentageAtIndex:idx];
+                double winPercentDbl = [winPercentNum doubleValue];
+                winnerPercentage = winPercentDbl / 100;
+                
+                NSNumber *losePercentNum = [RankingsTable higherRatedPlayerPercentageAtIndex:idx];
+                double losePercentDbl = [losePercentNum doubleValue];
+                loserPercentage = losePercentDbl / 100;
+            }
         }
         
         double winnerNewRank = winnerRankDouble + konstant * (1 - winnerPercentage);
         
         double loserNewRank = loserRankDouble + konstant * (0 - loserPercentage);
         
+        int roundedWinnerNewRank = (int)winnerNewRank;
+        int roundedLoserNewRank =  (int)loserNewRank;
+        
         //round the floats to doubles and call them back.
         
-        NSNumber *newWinnerRank = [NSNumber numberWithDouble:winnerNewRank];
-        NSNumber *newLoserRank = [NSNumber numberWithDouble:loserNewRank];
+        NSNumber *newWinnerRank = [NSNumber numberWithInt:roundedWinnerNewRank];
+        NSNumber *newLoserRank = [NSNumber numberWithDouble:roundedLoserNewRank];
 
         winnerRanking[@"rank"] = newWinnerRank;
         loserRanking[@"rank"] = newLoserRank;
