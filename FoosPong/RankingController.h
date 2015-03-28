@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "RankingController.h"
+#import "RankingsTable.h"
 
 @interface RankingController : NSObject
 

@@ -154,7 +154,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     BOOL microphoneOff = micOff.boolValue;
     if (!microphoneOff) {
         
-        self.navigationController.navigationBar.topItem.prompt = @"Voice Scoring Commands Active'";
+        self.navigationController.navigationBar.topItem.prompt = @"Voice Scoring Commands Active";
 
         OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
         
