@@ -198,11 +198,11 @@
                     //NSUInteger theIndex = [self.groupMembers indexOfObject:self.admin];
                     
                     //id object = [self.groupMembers objectAtIndex:theIndex];
-                    [self.groupMembers removeObject:self.admin];
-                    [self.groupMembers insertObject:self.admin atIndex:0];
+//                    [self.groupMembers removeObject:self.admin];
+//                    [self.groupMembers insertObject:self.admin atIndex:0];
                     
                     [self.tableView reloadData];
-                    [[GroupController sharedInstance]saveGroupMembers:self.currentGroup andMembers:members];
+                    //[[GroupController sharedInstance]saveGroupMembers:self.currentGroup andMembers:members];
 
                 }];
                 

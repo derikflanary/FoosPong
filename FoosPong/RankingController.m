@@ -33,7 +33,7 @@ static NSString * const rankHistoryKey = @"rankHistory";
     return sharedInstance;
 }
 
-- (void)createRankingforUser:(PFUser*)user forGroup:(PFObject *)group{
+- (void)createRankingforUser:(PFUser*)user forGroup:(PFObject *)group withCallback:(void (^)(BOOL * itSucceeded))callback{
     
     PFObject *ranking = [PFObject objectWithClassName:rankingClassKey];
     ranking[rankKey] = @1000;
@@ -42,15 +42,11 @@ static NSString * const rankHistoryKey = @"rankHistory";
     ranking[rankHistoryKey] = @[@1000];
     [ranking saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
-            user[rankingClassKey] = ranking;
             
-//            [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//                if (!error) {
-//                    
-//                }else{
-//                    NSLog(@"%@", error);
-//                }
-//            }];
+            user[@"rankings"] = @[ranking];
+            [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                callback(&succeeded);
+            }];
             
         }else{
             NSLog(@"%@", error);
@@ -58,6 +54,54 @@ static NSString * const rankHistoryKey = @"rankHistory";
     }];
     
 }
+
+- (void)setRankingWithCallback:(void (^)(BOOL * succeeded))callback{
+    
+    PFUser *currentUser = [PFUser currentUser];
+    PFObject *currentGroup = currentUser[@"currentGroup"];
+    
+    PFQuery *query = [PFQuery queryWithClassName:rankingClassKey];
+    [query whereKey:@"group" equalTo:currentGroup.objectId];
+    [query whereKey:@"user" equalTo:currentUser.objectId];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (!error) {
+            currentUser[@"ranking"] = object;
+            [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (!error) {
+                    callback(&succeeded);
+                }else{
+                    NSLog(@"%@", error);
+                }
+            }];
+        }
+    }];
+}
+
+- (void)goSetCorrectRankingForUser:(PFUser *)user andGroup:(PFObject *)group withCallback:(void (^)(BOOL * succeeded))callback{
+    
+    PFQuery *query = [PFQuery queryWithClassName:rankingClassKey];
+    [query whereKey:@"group" equalTo:group.objectId];
+    [query whereKey:@"user" equalTo:user.objectId];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (!error) {
+            object[@"user"] = user;
+            [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (!error) {
+                    callback(&succeeded);
+                }else{
+                    NSLog(@"tryint to save rank pointer to user %@", error);
+                }
+            }];
+            
+        }else{
+            NSLog(@"tyring to pull out the correct rank %@", error);
+        }
+    }];
+    
+    
+}
+
+
 
 - (void)fetchRankingForUsers:(PFUser *)winner andUser:(PFUser *)loser withCallback:(void (^)(PFObject *winnerRanking, PFObject *loserRanking))callback{
     
@@ -178,10 +222,10 @@ static NSString * const rankHistoryKey = @"rankHistory";
         NSNumber *newLoserRank = [NSNumber numberWithDouble:roundedLoserNewRank];
 
         loserRanking[rankKey] = newLoserRank;
-        [loserRanking addObject:newLoserRank forKey:rankKey];
+        [loserRanking addObject:newLoserRank forKey:rankHistoryKey];
         
         winnerRanking[rankKey] = newWinnerRank;
-        [winnerRanking addObject:newWinnerRank forKey:rankKey];
+        [winnerRanking addObject:newWinnerRank forKey:rankHistoryKey];
         
         [winnerRanking saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error) {

@@ -49,9 +49,17 @@ static NSString * const passwordKey = @"password";
         group.ACL = groupACL;
         [group saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error) {
+                [self setCurrentGroup:group callback:^(BOOL *success) {
+                    
+                    [[RankingController sharedInstance]createRankingforUser:[PFUser currentUser] forGroup:group withCallback:^(BOOL *itSucceeded) {
+                        
+                        callback(itSucceeded);
+                        
+                    }];
+                    
+                }];
+
                 
-                [[RankingController sharedInstance]createRankingforUser:newGroup.admin forGroup:group];
-                callback(&succeeded);
             }else{
                 NSLog(@"%@", error);
             }
@@ -79,8 +87,10 @@ static NSString * const passwordKey = @"password";
         if (!error){
             [self setCurrentGroup:group callback:^(BOOL *succeeded) {
                 
-                [[RankingController sharedInstance]createRankingforUser:user forGroup:group];
-                callback(succeeded);
+                [[RankingController sharedInstance]createRankingforUser:user forGroup:group withCallback:^(BOOL *itSucceeded) {
+                    callback(itSucceeded);
+                }];
+
             }];
         }else{
             NSLog(@"%@", error);
@@ -167,10 +177,25 @@ static NSString * const passwordKey = @"password";
     //NSMutableArray *fetchedMembers = [NSMutableArray array];
     PFQuery *query = [PFUser query];
     [query whereKey:@"objectId" containedIn:[members valueForKey:@"objectId"]];
-    [query includeKey:@"ranking"];
+//    [query includeKey:@"ranking"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             callback(objects);
+//            for (PFUser *user in objects) {
+//                PFObject *ranking = user[@"ranking"];
+//                PFObject *groupForRanking = ranking[@"group"];
+//                if (groupForRanking.objectId != group.objectId ) {
+//                    //go get the ranking and set it's pointer to this user
+//                    [[RankingController sharedInstance]goSetCorrectRankingForUser:user andGroup:group withCallback:^(BOOL *succeeded) {
+//                        
+//                        callback(objects);
+//                    }];
+//                }
+//            }
+            
+            
+            
+            
         }else{
             NSLog(@"%@", error);
         }

@@ -101,7 +101,7 @@
     PFQuery *query2 = [PFQuery orQueryWithSubqueries:@[query]];
     [query2 includeKey:@"p1"];
     [query2 includeKey:@"p2"];
-    [query2 orderByAscending:@"createdAt"];
+    [query2 orderByDescending:@"createdAt"];
     [query2 findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             

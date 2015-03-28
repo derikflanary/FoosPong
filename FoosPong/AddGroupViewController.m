@@ -107,12 +107,13 @@
         
         [[GroupController sharedInstance]addGroupforAdmin:group callback:^(BOOL *succeeded) {
             if (succeeded) {
-                [[GroupController sharedInstance]findGroupsForUser:group.admin callback:^(NSArray *groups, NSError *error) {
-                    [[GroupController sharedInstance]setCurrentGroup:[groups lastObject] callback:^(BOOL *success) {
-                        [self dismissViewControllerAnimated:YES completion:^{
-                        }];
+//                [[GroupController sharedInstance]findGroupsForUser:group.admin callback:^(NSArray *groups, NSError *error) {
+                    [self dismissViewControllerAnimated:YES completion:^{
                     }];
-                }];
+
+//                    [[GroupController sharedInstance]setCurrentGroup:[groups lastObject] callback:^(BOOL *success) {
+//                                            }];
+//                }];
             }else{
                 return;
             }
