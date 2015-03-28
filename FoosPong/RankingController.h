@@ -13,5 +13,7 @@
 @interface RankingController : NSObject
 
 + (RankingController *)sharedInstance;
+- (void)updateNewRankingsForWinner:(PFUser*)winner andLoser:(PFUser*)loser callback:(void (^)(NSNumber *winnerNewRank, NSNumber *loserNewRank))callback;
+
 
 @end

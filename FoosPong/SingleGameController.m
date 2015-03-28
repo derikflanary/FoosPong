@@ -9,6 +9,7 @@
 #import "SingleGameController.h"
 #import "TeamGameController.h"
 #import "Game.h"
+#import "RankingController.h"
 
 @interface SingleGameController()
 
@@ -47,6 +48,14 @@
         }else
             NSLog(@"%@", error);
     }];
+    
+    if (gameStats.playerOneWin) {
+        [[RankingController sharedInstance]updateNewRankingsForWinner:gameStats.playerOne andLoser:gameStats.playerTwo callback:^(NSNumber *winnerNewRank, NSNumber *loserNewRank) {
+            NSLog(@"%@, %@", winnerNewRank, loserNewRank);
+        }];
+        
+    }
+    
 }
 
 

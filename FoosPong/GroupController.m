@@ -161,7 +161,6 @@ static NSString * const passwordKey = @"password";
     //NSMutableArray *fetchedMembers = [NSMutableArray array];
     PFQuery *query = [PFUser query];
     [query whereKey:@"objectId" containedIn:[members valueForKey:@"objectId"]];
-    [query includeKey:@"ranking"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             callback(objects);
