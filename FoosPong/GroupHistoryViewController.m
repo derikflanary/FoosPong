@@ -54,7 +54,6 @@
     self.tableView.bounces = YES;
     
 
-    
     self.refreshControl = [[ODRefreshControl alloc]initInScrollView:self.tableView];
     self.refreshControl.backgroundColor = [UIColor darkColor];
     self.refreshControl.tintColor = [UIColor darkColor];

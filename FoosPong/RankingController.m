@@ -10,6 +10,9 @@
 #import "UserController.h"
 
 static int const konstant = 50;
+static NSString * const rankingClassKey = @"Ranking";
+static NSString * const rankKey = @"rank";
+static NSString * const rankHistoryKey = @"rankHistory";
 
 @interface RankingController()
 
@@ -30,22 +33,24 @@ static int const konstant = 50;
     return sharedInstance;
 }
 
-- (void)createRankingforUser:(PFUser*)user{
+- (void)createRankingforUser:(PFUser*)user forGroup:(PFObject *)group{
     
-    PFObject *ranking = [PFObject objectWithClassName:@"Ranking"];
-    ranking[@"rank"] = @1000;
+    PFObject *ranking = [PFObject objectWithClassName:rankingClassKey];
+    ranking[rankKey] = @1000;
     ranking[@"user"] = user;
+    ranking[@"group"] = group;
+    ranking[rankHistoryKey] = @[@1000];
     [ranking saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
-            user[@"ranking"] = ranking;
+            user[rankingClassKey] = ranking;
             
-            [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (!error) {
-                    
-                }else{
-                    NSLog(@"%@", error);
-                }
-            }];
+//            [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//                if (!error) {
+//                    
+//                }else{
+//                    NSLog(@"%@", error);
+//                }
+//            }];
             
         }else{
             NSLog(@"%@", error);
@@ -79,8 +84,8 @@ static int const konstant = 50;
     
     [self fetchRankingForUsers:winner andUser:loser withCallback:^(PFObject *winnerRanking, PFObject *loserRanking) {
         
-        NSNumber *winnersRanking = winnerRanking[@"rank"];
-        NSNumber *losersRanking = loserRanking[@"rank"];
+        NSNumber *winnersRanking = winnerRanking[rankKey];
+        NSNumber *losersRanking = loserRanking[rankKey];
         
         double winnerRankDouble = [winnersRanking doubleValue];
         double loserRankDouble = [losersRanking doubleValue];
@@ -172,8 +177,11 @@ static int const konstant = 50;
         NSNumber *newWinnerRank = [NSNumber numberWithInt:roundedWinnerNewRank];
         NSNumber *newLoserRank = [NSNumber numberWithDouble:roundedLoserNewRank];
 
-        winnerRanking[@"rank"] = newWinnerRank;
-        loserRanking[@"rank"] = newLoserRank;
+        loserRanking[rankKey] = newLoserRank;
+        [loserRanking addObject:newLoserRank forKey:rankKey];
+        
+        winnerRanking[rankKey] = newWinnerRank;
+        [winnerRanking addObject:newWinnerRank forKey:rankKey];
         
         [winnerRanking saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error) {

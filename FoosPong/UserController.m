@@ -66,7 +66,7 @@
         if (!error) {
             
             [self updateUsers];
-            [[RankingController sharedInstance]createRankingforUser:user];
+//            [[RankingController sharedInstance]createRankingforUser:user];
             callback(&succeeded, nil);
         
         }else{

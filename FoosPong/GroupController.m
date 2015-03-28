@@ -8,6 +8,7 @@
 
 #import "GroupController.h"
 #import "UserController.h"
+#import "RankingController.h"
 
 static NSString * const currentGroupKey = @"currentGroup";
 static NSString * const membersKey = @"members";
@@ -48,6 +49,8 @@ static NSString * const passwordKey = @"password";
         group.ACL = groupACL;
         [group saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error) {
+                
+                [[RankingController sharedInstance]createRankingforUser:newGroup.admin forGroup:group];
                 callback(&succeeded);
             }else{
                 NSLog(@"%@", error);
@@ -68,12 +71,15 @@ static NSString * const passwordKey = @"password";
     }];
 }
 
+
 - (void)addUser:(PFUser *)user toGroup:(PFObject *)group callback:(void (^)(BOOL *))callback{
     
     [group addUniqueObject:user forKey:membersKey];
     [group saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error){
             [self setCurrentGroup:group callback:^(BOOL *succeeded) {
+                
+                [[RankingController sharedInstance]createRankingforUser:user forGroup:group];
                 callback(succeeded);
             }];
         }else{

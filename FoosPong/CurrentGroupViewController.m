@@ -70,7 +70,7 @@
     
     self.tabBarController.navigationItem.hidesBackButton = YES;
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 140, self.view.frame.size.width, 250) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 400) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = YES;
@@ -211,7 +211,7 @@
                     self.admin = admin;
                     if ([[PFUser currentUser].objectId isEqualToString:admin.objectId]) {
                         [self.view addSubview:self.addMembersButton];
-                        self.tableView.frame = CGRectMake(0, 140, self.view.frame.size.width, 200);
+                        self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, 350);
                         [self.tableView reloadData];
                     }
                 }];

@@ -98,10 +98,10 @@
                                                            forKey:NSFontAttributeName];
     [self.segmentedControl setTitleTextAttributes:attributes
                                          forState:UIControlStateNormal];
-   
-    UIBarButtonItem *seg = [[UIBarButtonItem alloc]initWithCustomView:self.segmentedControl];
-    UIBarButtonItem *spacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    [self setToolbarItems:@[spacer, seg, spacer]];
+//   
+//    UIBarButtonItem *seg = [[UIBarButtonItem alloc]initWithCustomView:self.segmentedControl];
+//    UIBarButtonItem *spacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+//    [self setToolbarItems:@[spacer, seg, spacer]];
     
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.deleteGroupButton];
