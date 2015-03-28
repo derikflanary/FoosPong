@@ -14,6 +14,6 @@
 
 + (RankingController *)sharedInstance;
 - (void)updateNewRankingsForWinner:(PFUser*)winner andLoser:(PFUser*)loser callback:(void (^)(NSNumber *winnerNewRank, NSNumber *loserNewRank))callback;
-
+- (void)createRankingforUser:(PFUser*)user;
 
 @end

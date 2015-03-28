@@ -8,6 +8,7 @@
 
 #import "UserController.h"
 #import "GroupController.h"
+#import "RankingController.h"
 
 
 @interface UserController()
@@ -53,7 +54,6 @@
 
 - (void)addUserwithDictionary:(NSDictionary*)dictionary Callback:(void (^)(BOOL *, NSError * error))callback{
     
-    NSNumber *ranking = [NSNumber numberWithInt:1000];
     
     PFUser *user = [PFUser user];
     user.username = dictionary[@"username"];
@@ -61,12 +61,16 @@
     user[@"firstName"] = dictionary[@"firstName"];
     user[@"lastName"] = dictionary[@"lastName"];
     user.email = dictionary[@"email"];
-    user[@"ranking"] = ranking;
+    
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
+            
             [self updateUsers];
+            [[RankingController sharedInstance]createRankingforUser:user];
             callback(&succeeded, nil);
+        
         }else{
+            
             NSLog(@"%@", error);
             
             callback(nil, error);
