@@ -81,7 +81,7 @@
 //    self.tableView.clipsToBounds = YES;
     self.tableView.backgroundColor = [UIColor transparentWhite];
     [self.tableView setEditing:NO];
-    [self.view addSubview:self.tableView];
+    
     
     self.addMembersButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 340, self.view.frame.size.width, 51)];
     self.addMembersButton.backgroundColor = [UIColor darkColor];
@@ -190,45 +190,59 @@
                 [self noGroup];
             }else{
                 self.currentGroup = group;
-                self.tabBarController.title = group[@"name"];
-                [self.view addSubview:self.groupStatsButton];
+                
                 
                 [[GroupController sharedInstance]fetchMembersOfGroup:self.currentGroup Callback:^(NSArray *members) {
                     [self.activityView stopAnimating];
-                    self.groupMembers = members.mutableCopy;
                     
-                    [[RankingController sharedInstance]retrieveRankingsForGroup:group forUsers:self.groupMembers withCallBack:^(NSArray *rankings) {
-                        for (PFUser *user in self.groupMembers) {
-                            
-                            for (PFObject *ranking in rankings) {
-                                PFUser *userForRanking = ranking[@"user"];
-                                if ([userForRanking.objectId isEqualToString:user.objectId]) {
-                                    [self.memberRankings addObject:ranking];
+                    if ([members containsObject:[PFUser currentUser]]) {
+                        [self.view addSubview:self.tableView];
+                        self.groupMembers = members.mutableCopy;
+                        self.tabBarController.title = group[@"name"];
+                        [self.view addSubview:self.groupStatsButton];
+                        
+                        [[RankingController sharedInstance]retrieveRankingsForGroup:group forUsers:self.groupMembers withCallBack:^(NSArray *rankings) {
+                            for (PFUser *user in self.groupMembers) {
+                                
+                                for (PFObject *ranking in rankings) {
+                                    PFUser *userForRanking = ranking[@"user"];
+                                    if ([userForRanking.objectId isEqualToString:user.objectId]) {
+                                        [self.memberRankings addObject:ranking];
+                                    }
                                 }
                             }
-                        }
+                            
+                            [[GroupController sharedInstance]fetchAdminForGroup:self.currentGroup callback:^(PFObject *admin) {
+                                self.admin = admin;
+                                if ([[PFUser currentUser].objectId isEqualToString:admin.objectId]) {
+                                    [self.view addSubview:self.addMembersButton];
+                                    self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, 350);
+                                    [self.tableView reloadData];
+                                }
+                            }];
+                            
+                            if (self.noGroupView) {
+                                [self.noGroupView removeFromSuperview];
+                            }
+
+                            
+                            [self.tableView reloadData];
+                        }];
+
+                    }else{
+                        //need to remove current group
+                        [self noGroup];
+                        [[GroupController sharedInstance]setCurrentGroup:nil callback:^(BOOL *success) {
+                            NSLog(@"current Group removed");
+                        }];
                         
-                        [self.tableView reloadData];
-                    }];
-                   
-                }];
-                
-                
-                [[GroupController sharedInstance]fetchAdminForGroup:self.currentGroup callback:^(PFObject *admin) {
-                    self.admin = admin;
-                    if ([[PFUser currentUser].objectId isEqualToString:admin.objectId]) {
-                        [self.view addSubview:self.addMembersButton];
-                        self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, 350);
-                        [self.tableView reloadData];
+                        
                     }
+                    
                 }];
-                
-                if (self.noGroupView) {
-                    [self.noGroupView removeFromSuperview];
-                }
             }
         }
-    }];
+        }];
     }
 }
 

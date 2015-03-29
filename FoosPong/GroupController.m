@@ -132,17 +132,42 @@ static NSString * const passwordKey = @"password";
 
 - (void)setCurrentGroup:(PFObject *)group callback:(void (^)(BOOL *))callback{
     
-    PFUser *currentUser = [PFUser currentUser];
-    currentUser[currentGroupKey] = group;
-    [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (!error) {
-            NSLog(@"Current Group Saved");
-            callback (&succeeded);
-        }else{
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
+     PFUser *currentUser = [PFUser currentUser];
     
+    if (!group) {
+        [self findGroupsForUser:currentUser callback:^(NSArray *groups, NSError *error) {
+            
+            if ([groups count] == 0) {
+                [currentUser removeObjectForKey:currentGroupKey];
+                
+            }else{
+                currentUser[currentGroupKey] = [groups firstObject];
+            }
+            
+            [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (!error) {
+                    NSLog(@"Current Group Set");
+                    callback (&succeeded);
+                }else{
+                    NSLog(@"Error: %@ %@", error, [error userInfo]);
+                }
+            }];
+        }];
+        
+    }else{
+        currentUser[currentGroupKey] = group;
+        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (!error) {
+                NSLog(@"Current Group Saved");
+                callback (&succeeded);
+            }else{
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
+    }
+   
+    
+        
 }
 
 - (void)retrieveCurrentGroupWithCallback:(void (^)(PFObject *, NSError *error))callback{
