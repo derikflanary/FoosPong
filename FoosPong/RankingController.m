@@ -117,11 +117,34 @@ static NSString * const rankHistoryKey = @"rankHistory";
     
 }
 
+- (void)findRankingsForUsers:(PFUser *)winner andUser:(PFUser *)loser withCallback:(void (^)(PFObject *winnerRanking, PFObject *loserRanking))callback{
+ 
+    
+    PFQuery *query = [PFQuery queryWithClassName:rankingClassKey];
+    [query whereKey:@"user" equalTo:winner];
+    [query whereKey:@"user" equalTo:loser];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        PFObject *winnerRanking;
+        PFObject *loserRanking;
+        
+        for (PFObject *ranking in objects) {
+            PFObject *rankingUser = ranking[@"user"];
+            if ([rankingUser.objectId isEqualToString:winner.objectId]) {
+                winnerRanking = ranking;
+            }else{
+                loserRanking = ranking;
+            }
+        }
+        callback(winnerRanking, loserRanking);
+    }];
+    
+}
+
 - (void)updateNewRankingsForWinner:(PFUser*)winner andLoser:(PFUser*)loser callback:(void (^)(NSNumber *winnerNewRank, NSNumber *loserNewRank))callback{
     
     //r'(1) = r(1) + K * (S(1) – E(1))
     
-    [self fetchRankingForUsers:winner andUser:loser withCallback:^(PFObject *winnerRanking, PFObject *loserRanking) {
+    [self findRankingsForUsers:winner andUser:loser withCallback:^(PFObject *winnerRanking, PFObject *loserRanking) {
         
         NSNumber *winnersRanking = winnerRanking[rankKey];
         NSNumber *losersRanking = loserRanking[rankKey];

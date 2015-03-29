@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FoosPong/CurrentGroupViewController.m"
-            timestampString = "449358482.664003"
+            timestampString = "449365165.559502"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "323"
-            endingLineNumber = "323"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
             landmarkName = "-statsButtonPressed:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FoosPong/RankingController.m"
-            timestampString = "449356166.402794"
+            timestampString = "449363756.487338"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "-createRankingforUser:forGroup:withCallback:"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "-findRankingsForUsers:andUser:withCallback:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FoosPong/GroupController.m"
-            timestampString = "449359004.508229"
+            filePath = "FoosPong/CurrentGroupViewController.m"
+            timestampString = "449365165.559502"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "-setCurrentGroup:callback:"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "-checkForGroup"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

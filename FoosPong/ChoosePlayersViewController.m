@@ -124,15 +124,27 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     self.searchController.dimsBackgroundDuringPresentation = NO;
     self.searchController.hidesNavigationBarDuringPresentation = NO;
     
-    self.currentUser = [PFUser currentUser];
-    self.currentPlayers = [NSMutableArray array];
-    [self.currentPlayers insertObject:self.currentUser atIndex:0];
     
     //self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
     [[GroupController sharedInstance]retrieveCurrentGroupWithCallback:^(PFObject *group, NSError *error) {
         [[GroupController sharedInstance]fetchMembersOfGroup:group Callback:^(NSArray *members) {
             self.availablePlayers = members.mutableCopy;
+            self.currentUser = [PFUser currentUser];
+            for (PFUser *user in self.availablePlayers) {
+                if ([user.objectId isEqualToString:self.currentUser.objectId]) {
+                    self.currentUser = user;
+                    
+                }
+            }
             [self.availablePlayers removeObject:self.currentUser];
+            
+            self.currentPlayers = [NSMutableArray array];
+            [self.currentPlayers insertObject:self.currentUser atIndex:0];
+            
+            if ([self.currentPlayers count] <2) {
+                [self.currentPlayers addObject:[PFUser new]];
+            }
+            
             self.title = group[@"name"];
             self.searchAvailablePlayers = members;
             [self.activityView stopAnimating];
@@ -152,9 +164,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     
     self.cellSelected = NO;
     
-    if ([self.currentPlayers count] <2) {
-        [self.currentPlayers addObject:[PFUser new]];
-    }
+    
     
     //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }

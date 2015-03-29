@@ -194,8 +194,16 @@
                 
                 [[GroupController sharedInstance]fetchMembersOfGroup:self.currentGroup Callback:^(NSArray *members) {
                     [self.activityView stopAnimating];
+                    PFUser *currentUser = [PFUser currentUser];
+                    BOOL isInGroup = false;
+                    for (PFUser *member in members) {
+                        if ([member.objectId isEqualToString:currentUser.objectId]) {
+                            isInGroup = YES;
+                            break;
+                        }
+                    }
                     
-                    if ([members containsObject:[PFUser currentUser]]) {
+                    if (isInGroup) {
                         [self.view addSubview:self.tableView];
                         self.groupMembers = members.mutableCopy;
                         self.tabBarController.title = group[@"name"];
