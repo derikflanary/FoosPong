@@ -61,12 +61,13 @@
     user[@"firstName"] = dictionary[@"firstName"];
     user[@"lastName"] = dictionary[@"lastName"];
     user.email = dictionary[@"email"];
+    user[@"rankings"] = @[];
     
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             
             [self updateUsers];
-//            [[RankingController sharedInstance]createRankingforUser:user];
+
             callback(&succeeded, nil);
         
         }else{

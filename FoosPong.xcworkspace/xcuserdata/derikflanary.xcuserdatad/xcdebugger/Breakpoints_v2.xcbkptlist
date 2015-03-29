@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FoosPong/CurrentGroupViewController.m"
-            timestampString = "449284133.885915"
+            timestampString = "449356556.155784"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
             landmarkName = "-statsButtonPressed:"
             landmarkType = "5">
          </BreakpointContent>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FoosPong/CurrentGroupViewController.m"
-            timestampString = "449284215.874568"
+            filePath = "FoosPong/RankingController.m"
+            timestampString = "449356166.402794"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
-            landmarkName = "-checkForGroup"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "-createRankingforUser:forGroup:withCallback:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

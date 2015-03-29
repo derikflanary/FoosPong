@@ -126,7 +126,7 @@
     if (self.groupMembers.count > 0) {
         PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
         
-        if (user == self.admin) {
+        if ([user.objectId isEqualToString: self.admin.objectId]) {
             cell.textLabel.text = user.username;
             cell.detailTextLabel.text = @"Admin";
             //cell.detailTextLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
@@ -183,8 +183,6 @@
         
         //self.currentGroup = [PFUser currentUser][@"currentGroup"];
         
-
-    
         [[GroupController sharedInstance]retrieveCurrentGroupWithCallback:^(PFObject *group, NSError *error) {
         
         if (!error) {
@@ -203,7 +201,8 @@
                         for (PFUser *user in self.groupMembers) {
                             
                             for (PFObject *ranking in rankings) {
-                                if (ranking[@"user"] == user) {
+                                PFUser *userForRanking = ranking[@"user"];
+                                if ([userForRanking.objectId isEqualToString:user.objectId]) {
                                     [self.memberRankings addObject:ranking];
                                 }
                             }

@@ -42,8 +42,11 @@ static NSString * const rankHistoryKey = @"rankHistory";
     ranking[rankHistoryKey] = @[@1000];
     [ranking saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
-            
-            user[@"rankings"] = @[ranking];
+//            if (!user[@"rankings"]){
+//                user[@"rankings"] = @[ranking];
+//            }else{
+            [user addObject:ranking forKey:@"rankings"];
+//            }
             [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 callback(&succeeded);
             }];

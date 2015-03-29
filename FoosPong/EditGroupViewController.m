@@ -81,13 +81,13 @@
     [self.searchController.searchBar sizeToFit];
     self.tableView.tableHeaderView = self.searchController.searchBar;
     //self.searchController.searchResultsUpdater = self;
-    self.searchController.delegate = self;
-    self.searchController.searchBar.delegate = self;
-    self.searchController.searchBar.searchBarStyle = UISearchBarStyleDefault;
-    self.searchController.dimsBackgroundDuringPresentation = YES;
-    self.searchController.searchBar.placeholder = @"Search for user";
-    self.searchController.searchBar.hidden = YES;
-    self.searchController.hidesNavigationBarDuringPresentation = NO;
+//    self.searchController.delegate = self;
+//    self.searchController.searchBar.delegate = self;
+//    self.searchController.searchBar.searchBarStyle = UISearchBarStyleDefault;
+//    self.searchController.dimsBackgroundDuringPresentation = YES;
+//    self.searchController.searchBar.placeholder = @"Search for user";
+//    self.searchController.searchBar.hidden = YES;
+//    self.searchController.hidesNavigationBarDuringPresentation = NO;
     
     self.segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"Edit Team", @"Add Member"]];
     [self.segmentedControl addTarget:self action:@selector(segmentedControlChanged:) forControlEvents:UIControlEventValueChanged];
@@ -132,32 +132,32 @@
 
 #pragma mark - searchBar
 
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-    
-    [self findNonMembers];
-    self.tableView.allowsSelection = NO;
-}
+//-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+//    
+//    [self findNonMembers];
+//    self.tableView.allowsSelection = NO;
+//}
 
-- (void)findNonMembers{
-    
-    [[GroupController sharedInstance]notMembersOfCurrentGroupsearchString:self.searchController.searchBar.text callback:^(NSArray *nonMembers) {
-         self.nonMembers = nonMembers.mutableCopy;
-        [self.tableView reloadData];
-    }];
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
-    self.tableView.allowsSelection = YES;
-}
-
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
-    self.tableView.allowsSelection = NO;
-}
-
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
-    self.tableView.allowsSelection = YES;
-}
-
+//- (void)findNonMembers{
+//    
+//    [[GroupController sharedInstance]notMembersOfCurrentGroupsearchString:self.searchController.searchBar.text callback:^(NSArray *nonMembers) {
+//         self.nonMembers = nonMembers.mutableCopy;
+//        [self.tableView reloadData];
+//    }];
+//}
+//
+//- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+//    self.tableView.allowsSelection = YES;
+//}
+//
+//- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
+//    self.tableView.allowsSelection = NO;
+//}
+//
+//- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
+//    self.tableView.allowsSelection = YES;
+//}
+//
 
 - (void)populateTableView{
     PFUser *currentUser = [PFUser currentUser];

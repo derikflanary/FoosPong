@@ -56,7 +56,7 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     
     PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
-    if (user == [PFUser currentUser]) {
+    if ([user.objectId isEqualToString:[PFUser currentUser].objectId]) {
         return NO;
     }else{
     

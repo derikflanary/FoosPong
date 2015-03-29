@@ -102,12 +102,11 @@ static NSString * const passwordKey = @"password";
     
     PFUser *currentUser = [PFUser currentUser];
     PFObject *group = currentUser[currentGroupKey];
-    NSMutableArray *members = [self membersForCurrentGroup:group].mutableCopy;
-    [members removeObject:user];
-    group[membersKey] = members;
+    [group removeObject:user forKey:membersKey];
     [group saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error){
             callback(&succeeded);
+            NSLog(@"Player removed");
         }else{
             NSLog(@"%@", error);
         }
