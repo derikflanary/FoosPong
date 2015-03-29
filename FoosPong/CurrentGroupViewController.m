@@ -13,6 +13,7 @@
 #import "EditGroupViewController.h"
 #import "PlayerTableViewCell.h"
 #import "GroupStatsViewController.h"
+#import "RankingController.h"
 
 @interface CurrentGroupViewController () <FindGroupViewControllerDelegate>
 @property (nonatomic, strong) FoosButton *joinGroupButton;
@@ -28,6 +29,7 @@
 @property (nonatomic, strong) FoosButton *groupStatsButton;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 @property (nonatomic, strong) UIVisualEffectView *bluredEffectView;
+@property (nonatomic, strong) NSMutableArray *memberRankings;
 
 @end
 
@@ -172,6 +174,7 @@
 #pragma mark - Group Checks
 
 - (void)checkForGroup{
+    self.memberRankings = [NSMutableArray array];
     
     if (![PFUser currentUser][@"currentGroup"]) {
         [self noGroup];
@@ -195,15 +198,20 @@
                 [[GroupController sharedInstance]fetchMembersOfGroup:self.currentGroup Callback:^(NSArray *members) {
                     [self.activityView stopAnimating];
                     self.groupMembers = members.mutableCopy;
-                    //NSUInteger theIndex = [self.groupMembers indexOfObject:self.admin];
                     
-                    //id object = [self.groupMembers objectAtIndex:theIndex];
-//                    [self.groupMembers removeObject:self.admin];
-//                    [self.groupMembers insertObject:self.admin atIndex:0];
-                    
-                    [self.tableView reloadData];
-                    //[[GroupController sharedInstance]saveGroupMembers:self.currentGroup andMembers:members];
-
+                    [[RankingController sharedInstance]retrieveRankingsForGroup:group forUsers:self.groupMembers withCallBack:^(NSArray *rankings) {
+                        for (PFUser *user in self.groupMembers) {
+                            
+                            for (PFObject *ranking in rankings) {
+                                if (ranking[@"user"] == user) {
+                                    [self.memberRankings addObject:ranking];
+                                }
+                            }
+                        }
+                        
+                        [self.tableView reloadData];
+                    }];
+                   
                 }];
                 
                 

@@ -180,6 +180,10 @@ static NSString * const passwordKey = @"password";
 //    [query includeKey:@"ranking"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
+            
+            
+            
+            
             callback(objects);
 //            for (PFUser *user in objects) {
 //                PFObject *ranking = user[@"ranking"];
