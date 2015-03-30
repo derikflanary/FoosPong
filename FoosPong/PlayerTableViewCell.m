@@ -18,7 +18,7 @@
     self.profileImageView = [[UIImageView alloc]initWithFrame:CGRectMake(20, 11, 40, 40)];
     self.profileImageView.layer.cornerRadius = 20.0f;
     self.profileImageView.clipsToBounds = YES;
-    self.profileImageView.image = [UIImage imageNamed:@"74"];
+    //self.profileImageView.image = [UIImage imageNamed:@"74"];
     self.profileImageView.backgroundColor = [UIColor darkColor];
     
     self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(68, 11, 220, 21)];
@@ -31,7 +31,7 @@
     self.adminLabel.textAlignment = NSTextAlignmentRight;
     
     self.fullNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(68, 32, 220, 21)];
-    self.fullNameLabel.font = [UIFont fontWithName:[NSString mainFont] size:16];
+    self.fullNameLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
     self.fullNameLabel.textColor = [UIColor lunarGreen];
     
     self.backgroundColor = [UIColor transparentCellWhite];
