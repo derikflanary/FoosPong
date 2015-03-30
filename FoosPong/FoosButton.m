@@ -13,7 +13,7 @@
 - (void)setHighlighted:(BOOL)highlighted{
     [super setHighlighted:highlighted];
     if (highlighted) {
-        self.backgroundColor = [UIColor mainColorTransparent];
+        self.backgroundColor = [UIColor darkColorTransparent];
     }
     else {
         self.backgroundColor = [UIColor darkColor];

@@ -33,7 +33,7 @@
     
     self.segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"1 V 1", @"2 V 2"]];
     [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-    self.segmentedControl.tintColor = [UIColor mainBlack];
+    self.segmentedControl.tintColor = [UIColor darkColor];
     self.segmentedControl.selectedSegmentIndex = 0;
     UIFont *font = [UIFont boldSystemFontOfSize:18.0f];
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:font

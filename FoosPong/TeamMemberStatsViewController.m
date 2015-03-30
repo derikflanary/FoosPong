@@ -23,6 +23,8 @@
 @implementation TeamMemberStatsViewController
 
 - (void)viewDidLoad {
+    
+    self.navigationController.toolbarHidden = NO;
     [super viewDidLoad];
     
     self.rankingHistory = self.ranking[@"rankHistory"];
@@ -33,11 +35,11 @@
     self.navigationController.navigationBar.translucent = YES;
     [self.navigationController.navigationBar setTintColor:[UIColor mainWhite]];
     
-    self.view.backgroundColor = [UIColor mainBlack];
+    self.view.backgroundColor = [UIColor darkColor];
     
     self.segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"1 V 1", @"2 V 2"]];
     [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-    self.segmentedControl.tintColor = [UIColor mainBlack];
+    self.segmentedControl.tintColor = [UIColor golderBrown];
     self.segmentedControl.selectedSegmentIndex = 0;
     UIFont *font = [UIFont boldSystemFontOfSize:18.0f];
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
@@ -76,13 +78,13 @@
 //    self.lineChart.footerView = nil;
     
 
-    self.lineChart.frame = CGRectMake(0, 0, self.view.frame.size.width, 400);
+    self.lineChart.frame = CGRectMake(0, 0, self.view.frame.size.width, 350);
 //    self.informationView = [[JBChartInformationView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, CGRectGetMaxY(self.lineChartView.frame), self.view.bounds.size.width, self.view.bounds.size.height - CGRectGetMaxY(self.lineChartView.frame) - CGRectGetMaxY(self.navigationController.navigationBar.frame))];
-    self.informationView = [[JBChartInformationView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.lineChart.frame), self.view.bounds.size.width, self.view.bounds.size.height - CGRectGetMaxY(self.lineChart.frame) - 20)];
+    self.informationView = [[JBChartInformationView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.lineChart.frame), self.view.bounds.size.width, self.view.frame.size.height - CGRectGetMaxY(self.lineChart.frame) - 50)];
     [self.informationView setValueAndUnitTextColor:[UIColor colorWithWhite:1.0 alpha:0.75]];
-    [self.informationView setTitleTextColor:kJBColorLineChartHeader];
+    [self.informationView setTitleTextColor:[UIColor vanilla]];
     [self.informationView setTextShadowColor:nil];
-    [self.informationView setSeparatorColor:kJBColorLineChartHeaderSeparatorColor];
+    [self.informationView setSeparatorColor:[UIColor lunarGreen]];
 
     
     
@@ -156,14 +158,13 @@
 {
     NSNumber *valueNumber = [self.rankingHistory objectAtIndex:horizontalIndex];
     CGFloat rankFloat = [valueNumber floatValue];
-    [self.informationView setValueText:[NSString stringWithFormat:@"%.f", rankFloat] unitText:@"Rank"];
-    
+    [self.informationView setValueText:[NSString stringWithFormat:@"%.f", rankFloat] unitText:@"Score"];
     
     NSNumber *lastNumber = [self.rankingHistory lastObject];
     if ([valueNumber isEqualToNumber:lastNumber]) {
-        [self.informationView setTitleText:@"Current Ranking"];
+        [self.informationView setTitleText:@"Current Score"];
     }else{
-        [self.informationView setTitleText:@"Previous Ranking"];
+        [self.informationView setTitleText:@"Previous Score"];
     }
     
     [self.informationView setHidden:NO animated:YES];

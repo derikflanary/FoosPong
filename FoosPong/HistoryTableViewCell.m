@@ -19,7 +19,7 @@
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.backgroundColor = [UIColor mainColorTransparent];
+    bgColorView.backgroundColor = [UIColor darkColorTransparent];
     self.textLabel.highlightedTextColor = [UIColor mainWhite];
     [self setSelectedBackgroundView:bgColorView];
 

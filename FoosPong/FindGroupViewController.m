@@ -32,7 +32,7 @@
      [NSDictionary dictionaryWithObjectsAndKeys:
       [UIFont fontWithName:@"Thonburi-Light" size:18],
       NSFontAttributeName, nil]];
-    [self.navigationController.navigationBar setTintColor:[UIColor mainBlack]];
+    [self.navigationController.navigationBar setTintColor:[UIColor darkColor]];
     [self.navigationController.navigationBar setBarTintColor:[UIColor mainWhite]];
 
     self.view.backgroundColor = [UIColor mainWhite];

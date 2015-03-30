@@ -10,21 +10,28 @@
 
 @interface UIColor (ExtraColorTools)
 
-+ (UIColor *)randomColor;
-
 + (UIColor *)mainColor;
 
 + (UIColor *)darkColor;
 
-+ (UIColor *)mainColorTransparent;
++ (UIColor *)marigoldBrown;
 
-+ (UIColor *)transparentWhite;
++ (UIColor *)golderBrown;
+
++ (UIColor *)vanilla;
+
++ (UIColor *)indianYellow;
+
++ (UIColor *)mint;
+
++ (UIColor *)lunarGreen;
 
 + (UIColor *)mainWhite;
 
-+ (UIColor *)mainBlack;
++ (UIColor *)darkColorTransparent;
+
++ (UIColor *)transparentWhite;
 
 + (UIColor *)transparentCellWhite;
 
-+ (UIColor *)transparentCellBlack;
 @end

@@ -46,7 +46,7 @@
      [NSDictionary dictionaryWithObjectsAndKeys:
       [UIFont fontWithName:@"Thonburi-Light" size:18],
       NSFontAttributeName, nil]];
-    [self.navigationController.navigationBar setTintColor:[UIColor mainBlack]];
+    [self.navigationController.navigationBar setTintColor:[UIColor darkColor]];
     [self.navigationController.navigationBar setBarTintColor:[UIColor transparentWhite]];
 
     
@@ -91,7 +91,7 @@
     
     self.segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"Edit Team", @"Add Member"]];
     [self.segmentedControl addTarget:self action:@selector(segmentedControlChanged:) forControlEvents:UIControlEventValueChanged];
-    self.segmentedControl.tintColor = [UIColor mainBlack];
+    self.segmentedControl.tintColor = [UIColor darkColor];
     self.segmentedControl.selectedSegmentIndex = 0;
     UIFont *font = [UIFont boldSystemFontOfSize:18];
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
