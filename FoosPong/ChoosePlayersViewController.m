@@ -44,6 +44,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 @property (nonatomic, strong) FoosButton *startButton;
 @property (nonatomic, strong) NSArray *searchAvailablePlayers;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) UILabel *messageLabel;
 
 
 @end
@@ -62,6 +63,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 
 - (void)viewDidLoad {
         [super viewDidLoad];
+    self.currentUser = [PFUser currentUser];
     
     self.activityView = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.activityView.center = CGPointMake(160, 240);
@@ -116,8 +118,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     
     self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
     [self.searchController.searchBar sizeToFit];
-    self.tableView.tableHeaderView = self.searchController.searchBar;
-    self.searchController.searchResultsUpdater = self;
+        self.searchController.searchResultsUpdater = self;
     self.searchController.delegate = self;
     self.searchController.searchBar.delegate = self;
     self.searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
@@ -125,8 +126,11 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     self.searchController.hidesNavigationBarDuringPresentation = NO;
     
     
+    
     //self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
     [[GroupController sharedInstance]retrieveCurrentGroupWithCallback:^(PFObject *group, NSError *error) {
+        self.tableView.tableHeaderView = self.searchController.searchBar;
+
         [[GroupController sharedInstance]fetchMembersOfGroup:group Callback:^(NSArray *members) {
             self.availablePlayers = members.mutableCopy;
             self.currentUser = [PFUser currentUser];
@@ -150,6 +154,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
             [self.activityView stopAnimating];
             [self.tableView reloadData];
         }];
+        
     }];
    
     self.teamTwoPlayers = [NSMutableArray array];
@@ -269,23 +274,24 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 #define NUMBER_OF_STATIC_CELLS  2
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if ([self.availablePlayers count] == 0) {
+    if (!self.currentUser[@"currentGroup"]) {
         
         [self.activityView stopAnimating];
-        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
         
-        messageLabel.text = @"No data is currently available. Please pull down to refresh.";
-        messageLabel.textColor = [UIColor blackColor];
-        messageLabel.numberOfLines = 0;
-        messageLabel.textAlignment = NSTextAlignmentCenter;
-        messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
-        [messageLabel sizeToFit];
+        self.messageLabel.text = @"No current players to play with. Please join a team to play.";
+        self.messageLabel.textColor = [UIColor blackColor];
+        self.messageLabel.numberOfLines = 0;
+        self.messageLabel.textAlignment = NSTextAlignmentCenter;
+        self.messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
+        [self.messageLabel sizeToFit];
         
-        self.tableView.backgroundView = messageLabel;
+        self.tableView.backgroundView = self.messageLabel;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         return 0;
    
     }else{
+        self.messageLabel.text = @"";
         if (self.segmentedControl.selectedSegmentIndex == 0) {
             return TableViewSectionAvailable + 1;
         }else{
