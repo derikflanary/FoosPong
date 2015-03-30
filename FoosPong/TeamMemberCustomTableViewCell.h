@@ -24,4 +24,6 @@
 
 @property (nonatomic, strong) UILabel *lastDatePlayedLabel;
 
+@property (nonatomic, strong) UILabel *recordLabel;
+
 @end

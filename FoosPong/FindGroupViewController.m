@@ -85,6 +85,8 @@
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [[GroupController sharedInstance]findGroupsByName:self.searchController.searchBar.text withCallback:^(NSArray *foundGroups) {
                 self.foundGroups = foundGroups.mutableCopy;
+        
+        
                 [self.tableView reloadData];
             }];
 }
@@ -117,6 +119,10 @@
     return [self.foundGroups count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -129,18 +135,24 @@
     if ([cell respondsToSelector:@selector(layoutMargins)]) {
         cell.layoutMargins = UIEdgeInsetsZero;
     }
+    PFUser *currentUser = [PFUser currentUser];
     
     PFObject *group = [self.foundGroups objectAtIndex:indexPath.row];
     if (!group) {
-        cell.textLabel.text = @"";
+        cell.teamNameLabel.text = @"";
     }else{
         NSArray *members = group[@"members"];
-        if ([members containsObject:[PFUser currentUser]]) {
-            //cell.textLabel.tintColor = [UIColor lightGrayColor];
-            cell.backgroundColor = [UIColor colorWithWhite:.8 alpha:.2];
+        for (PFUser *member in members) {
+            if ([member.objectId isEqualToString:currentUser.objectId]) {
+                //cell.textLabel.tintColor = [UIColor lightGrayColor];
+                cell.backgroundColor = [UIColor colorWithWhite:.7 alpha:.2];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.userInteractionEnabled = NO;
+            }
         }
-        cell.textLabel.text = group[@"name"];
-        cell.detailTextLabel.text = group[@"organization"];
+        
+        cell.teamNameLabel.text = group[@"name"];
+        cell.organizationLabel.text = group[@"organization"];
     }
     return cell;
 }
@@ -185,6 +197,9 @@
     }]];
     
     [passwordAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
         return ;
     }]];
     [self presentViewController:passwordAlert animated:YES completion:nil];

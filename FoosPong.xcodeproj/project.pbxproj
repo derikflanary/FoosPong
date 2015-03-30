@@ -447,14 +447,14 @@
 			children = (
 				EE7A6D051A869970000447D2 /* NewGameCustomTableViewCell.h */,
 				EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */,
-				EEC4E4751AB91BF30060DDF5 /* GroupTableViewCell.h */,
-				EEC4E4761AB91BF30060DDF5 /* GroupTableViewCell.m */,
-				EE0976AB1ABE1991006CC328 /* PlayerTableViewCell.h */,
-				EE0976AC1ABE1991006CC328 /* PlayerTableViewCell.m */,
 				EE0976AE1ABE19B2006CC328 /* HistoryTableViewCell.h */,
 				EE0976AF1ABE19B2006CC328 /* HistoryTableViewCell.m */,
 				EE0976B11AC24EE8006CC328 /* SettingsTableViewCell.h */,
 				EE0976B21AC24EE8006CC328 /* SettingsTableViewCell.m */,
+				EE0976AB1ABE1991006CC328 /* PlayerTableViewCell.h */,
+				EE0976AC1ABE1991006CC328 /* PlayerTableViewCell.m */,
+				EEC4E4751AB91BF30060DDF5 /* GroupTableViewCell.h */,
+				EEC4E4761AB91BF30060DDF5 /* GroupTableViewCell.m */,
 				EE0938571AC9B8710009AD40 /* TeamMemberCustomTableViewCell.h */,
 				EE0938581AC9B8710009AD40 /* TeamMemberCustomTableViewCell.m */,
 			);

@@ -76,6 +76,7 @@
     self.tableView.backgroundColor = [UIColor transparentWhite];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     self.tableView.allowsSelection = NO;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
     [self.searchController.searchBar sizeToFit];

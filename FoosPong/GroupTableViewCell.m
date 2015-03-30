@@ -35,7 +35,16 @@
     
     
     self.backgroundColor = [UIColor transparentCellWhite];
-        
+    
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = [UIColor darkColorTransparent];
+    self.teamNameLabel.highlightedTextColor = [UIColor indianYellow];
+    self.organizationLabel.highlightedTextColor = [UIColor mainWhite];
+    
+    [self setSelectedBackgroundView:bgColorView];
+    
+    
+    
     return self;
 }
 

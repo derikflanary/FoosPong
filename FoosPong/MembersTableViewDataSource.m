@@ -33,9 +33,11 @@
     if (self.groupMembers.count > 0) {
         PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
         if (user == [PFUser currentUser]) {
-            cell.detailTextLabel.text = @"Admin";
+            cell.adminLabel.text = @"Admin";
         }
-        cell.textLabel.text = user.username;
+        cell.nameLabel.text = user.username;
+        cell.fullNameLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
+        
     }
     
     return cell;
@@ -46,11 +48,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 40;
+    return 30;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 40;
+    return 60;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{

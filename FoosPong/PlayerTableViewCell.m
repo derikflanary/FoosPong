@@ -14,21 +14,40 @@
     
     
     self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"PlayerGameCell"];
-    self.textLabel.font = [UIFont fontWithName:@"Thonburi-Light" size:22];
-    self.detailTextLabel.font = [UIFont boldSystemFontOfSize:14];
     
-    self.adminLabel = [[UILabel alloc]initWithFrame:CGRectMake(200, 0, 80, 40)];
-    self.adminLabel.textAlignment = NSTextAlignmentCenter;
+    self.profileImageView = [[UIImageView alloc]initWithFrame:CGRectMake(20, 11, 40, 40)];
+    self.profileImageView.layer.cornerRadius = 20.0f;
+    self.profileImageView.clipsToBounds = YES;
+    self.profileImageView.image = [UIImage imageNamed:@"74"];
+    self.profileImageView.backgroundColor = [UIColor darkColor];
     
-    [self.contentView addSubview: self.adminLabel];
-    //    self.layer.cornerRadius = 10;
-    //    self.clipsToBounds = YES;
+    self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(68, 11, 220, 21)];
+    self.nameLabel.font = [UIFont fontWithName:[NSString boldFont] size:18];
+    self.nameLabel.textColor = [UIColor darkColor];
+    
+    self.adminLabel = [[UILabel alloc]initWithFrame:CGRectMake(235, 32, 71, 21)];
+    self.adminLabel.font = [UIFont fontWithName:[NSString mainFont] size:10];
+    self.adminLabel.textColor = [UIColor colorWithWhite:.4 alpha:1];
+    self.adminLabel.textAlignment = NSTextAlignmentRight;
+    
+    self.fullNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(68, 32, 220, 21)];
+    self.fullNameLabel.font = [UIFont fontWithName:[NSString mainFont] size:16];
+    self.fullNameLabel.textColor = [UIColor lunarGreen];
+    
     self.backgroundColor = [UIColor transparentCellWhite];
+    
     
     UIView *bgColorView = [[UIView alloc] init];
     bgColorView.backgroundColor = [UIColor darkColorTransparent];
-    self.textLabel.highlightedTextColor = [UIColor mainWhite];
+    self.nameLabel.highlightedTextColor = [UIColor mainWhite];
+    
     [self setSelectedBackgroundView:bgColorView];
+    
+    
+    [self.contentView addSubview:self.profileImageView];
+    [self.contentView addSubview:self.nameLabel];
+    [self.contentView addSubview:self.adminLabel];
+    [self.contentView addSubview:self.fullNameLabel];
     return self;
 }
 
