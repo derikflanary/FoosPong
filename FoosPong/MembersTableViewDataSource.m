@@ -30,14 +30,16 @@
         cell = [PlayerTableViewCell new];
         
     }
+    PFUser *currentUser = [PFUser currentUser];
+    
     if (self.groupMembers.count > 0) {
         PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
-        if (user == [PFUser currentUser]) {
+        if ([user.objectId isEqualToString:currentUser.objectId]) {
             cell.adminLabel.text = @"Admin";
         }
-        cell.nameLabel.text = user.username;
+        cell.nameLabel.text = [user.username uppercaseString];
         cell.fullNameLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
-        
+        [cell.profileImageView setImage:[UIImage imageNamed:@"74"]];
     }
     
     return cell;

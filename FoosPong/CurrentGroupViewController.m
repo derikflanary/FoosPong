@@ -150,13 +150,12 @@
                 cell.scoreLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
             
             }
-//            cell.textLabel.text = user.username;
-            
         }
         
         cell.nameLabel.text = [user.username uppercaseString];
         cell.fullNameLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
         cell.profileImageView.backgroundColor = [UIColor darkColor];
+        [cell.profileImageView setImage:[UIImage imageNamed:@"74"]];
 
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

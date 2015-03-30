@@ -52,6 +52,10 @@
     background.frame = self.view.frame;
     [self.view addSubview:background];
 
+    UIView *whiteWall = [[UIView alloc]initWithFrame:self.view.bounds];
+    whiteWall.backgroundColor = [UIColor transparentWhite];
+    [self.view addSubview:whiteWall];
+
     
 //    self.findGroupButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(joinGroupButtonPressed:)];
 //    self.navigationController.toolbarHidden = NO;

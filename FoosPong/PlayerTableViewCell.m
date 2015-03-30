@@ -32,7 +32,7 @@
     
     self.fullNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(68, 32, 220, 21)];
     self.fullNameLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
-    self.fullNameLabel.textColor = [UIColor lunarGreen];
+    self.fullNameLabel.textColor = [UIColor marigoldBrown];
     
     self.backgroundColor = [UIColor transparentCellWhite];
     
