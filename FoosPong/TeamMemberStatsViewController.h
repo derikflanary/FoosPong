@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GroupStatsViewController : UIViewController
+@interface TeamMemberStatsViewController : UIViewController
+
+@property (nonatomic, strong) PFObject *ranking;
+@property (nonatomic, strong) PFUser *user;
 
 @end

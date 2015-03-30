@@ -47,7 +47,6 @@
     [self setToolbarItems:@[spacer,seg, spacer]];
     
     
-
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
@@ -81,7 +80,6 @@
     [vibrancyEffectView setFrame:self.view.bounds];
     
     [vibrancyEffectView.contentView addSubview:self.tableView];
-    
     
         // Add Vibrancy View to Blur View
     [bluredEffectView.contentView addSubview:vibrancyEffectView];

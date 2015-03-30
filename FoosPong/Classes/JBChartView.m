@@ -74,7 +74,7 @@ static UIColor *kJBChartVerticalSelectionViewDefaultBgColor = nil;
 
 - (void)validateHeaderAndFooterHeights
 {
-    NSAssert((self.headerView.bounds.size.height + self.footerView.bounds.size.height) <= self.bounds.size.height, @"JBChartView // the combined height of the footer and header can not be greater than the total height of the chart.");
+//    NSAssert((self.headerView.bounds.size.height + self.footerView.bounds.size.height) <= self.bounds.size.height, @"JBChartView // the combined height of the footer and header can not be greater than the total height of the chart.");
 }
 
 #pragma mark - Setters

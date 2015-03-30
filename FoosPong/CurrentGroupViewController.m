@@ -12,7 +12,7 @@
 #import "GroupController.h"
 #import "EditGroupViewController.h"
 #import "PlayerTableViewCell.h"
-#import "GroupStatsViewController.h"
+#import "TeamMemberStatsViewController.h"
 #import "RankingController.h"
 
 @interface CurrentGroupViewController () <FindGroupViewControllerDelegate>
@@ -152,7 +152,7 @@
             cell.detailTextLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
         }
     }
-   
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
@@ -180,6 +180,20 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    TeamMemberStatsViewController *gsvc = [TeamMemberStatsViewController new];
+    gsvc.ranking = [self.memberRankings objectAtIndex:indexPath.row];
+    gsvc.user = [self.groupMembers objectAtIndex:indexPath.row];
+    
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gsvc];
+    
+//    navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    
+    [self presentViewController:navController animated:YES completion:^{
+        
+    }];
+
+    
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -344,13 +358,6 @@
 
 - (void)statsButtonPressed:(id)sender{
     
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:[GroupStatsViewController new]];
-    
-    navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-
-    [self presentViewController:navController animated:YES completion:^{
-        
-    }];
     
 }
 
