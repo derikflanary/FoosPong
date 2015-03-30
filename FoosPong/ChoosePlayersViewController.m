@@ -269,11 +269,29 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 #define NUMBER_OF_STATIC_CELLS  2
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (self.segmentedControl.selectedSegmentIndex == 0) {
-        return TableViewSectionAvailable + 1;
+    if ([self.availablePlayers count] == 0) {
+        
+        [self.activityView stopAnimating];
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        messageLabel.text = @"No data is currently available. Please pull down to refresh.";
+        messageLabel.textColor = [UIColor blackColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
+        [messageLabel sizeToFit];
+        
+        self.tableView.backgroundView = messageLabel;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        return 0;
+   
     }else{
-    
-    return TableView2TeamSectionAvailable + 1;
+        if (self.segmentedControl.selectedSegmentIndex == 0) {
+            return TableViewSectionAvailable + 1;
+        }else{
+        
+        return TableView2TeamSectionAvailable + 1;
+        }
     }
 }
 

@@ -80,6 +80,7 @@
 //    self.tableView.layer.cornerRadius = 10;
 //    self.tableView.clipsToBounds = YES;
     self.tableView.backgroundColor = [UIColor transparentWhite];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView setEditing:NO];
     
     
