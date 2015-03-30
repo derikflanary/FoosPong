@@ -96,23 +96,24 @@ static NSString * const rankHistoryKey = @"rankHistory";
     
 }
 
-
-- (void)fetchRankingForUsers:(PFUser *)winner andUser:(PFUser *)loser withCallback:(void (^)(PFObject *winnerRanking, PFObject *loserRanking))callback{
+- (void)removeRankingForGroup:(PFObject*)group{
     
-    PFObject *ranking = winner[@"ranking"];
-    PFObject *loserRanking = loser[@"ranking"];
-    
-    [ranking fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        if (!error) {
-            PFObject *fetchedRanking = object;
-            [loserRanking fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-                if (!error) {
-                    PFObject *loserFetchedRanking = object;
-                    callback(fetchedRanking, loserFetchedRanking);
-                }
+    PFUser *currentUser = [PFUser currentUser];
+    PFQuery *query = [PFQuery queryWithClassName:rankingClassKey];
+    [query whereKey:@"group" equalTo:group];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        PFObject *ranking = object;
+        [currentUser removeObject:ranking forKey:@"rankings"];
+        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            NSLog(@"ranking removed");
+            [ranking deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                NSLog(@"ranking deleted");
             }];
-        }
+        }];
+        
     }];
+    
     
 }
 

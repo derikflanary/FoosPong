@@ -240,6 +240,7 @@
                     }else{
                         //need to remove current group
                         [self noGroup];
+                        [[RankingController sharedInstance]removeRankingForGroup:self.currentGroup];
                         [[GroupController sharedInstance]setCurrentGroup:nil callback:^(BOOL *success) {
                             NSLog(@"current Group removed");
                         }];
