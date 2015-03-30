@@ -63,7 +63,6 @@ static NSString * const rankHistoryKey = @"rankHistory";
     
     PFUser *currentUser = [PFUser currentUser];
     PFObject *currentGroup = currentUser[@"currentGroup"];
-    
     PFQuery *query = [PFQuery queryWithClassName:rankingClassKey];
     [query whereKey:@"group" equalTo:currentGroup.objectId];
     [query whereKey:@"user" equalTo:currentUser.objectId];
@@ -122,8 +121,10 @@ static NSString * const rankHistoryKey = @"rankHistory";
     
     PFQuery *query = [PFQuery queryWithClassName:rankingClassKey];
     [query whereKey:@"user" equalTo:winner];
-    [query whereKey:@"user" equalTo:loser];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    PFQuery *query2 = [PFQuery queryWithClassName:rankingClassKey];
+    [query2 whereKey:@"user" equalTo:loser];
+    PFQuery *theQuery = [PFQuery orQueryWithSubqueries:@[query, query2]];
+    [theQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         PFObject *winnerRanking;
         PFObject *loserRanking;
         

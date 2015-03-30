@@ -16,7 +16,7 @@
 - (void)updateNewRankingsForWinner:(PFUser*)winner andLoser:(PFUser*)loser callback:(void (^)(NSNumber *winnerNewRank, NSNumber *loserNewRank))callback;
 - (void)createRankingforUser:(PFUser*)user forGroup:(PFObject *)group withCallback:(void (^)(BOOL * itSucceeded))callback;
 - (void)goSetCorrectRankingForUser:(PFUser *)user andGroup:(PFObject *)group withCallback:(void (^)(BOOL * succeeded))callback;
-- (void)setRankingWithCallback:(void (^)(BOOL * succeeded))callback;
+- (void)setNewRankingWithCallback:(void (^)(BOOL * succeeded))callback;
 - (void)retrieveRankingsForGroup:(PFObject *)group forUsers:(NSArray *)members withCallBack:(void (^)(NSArray *))callback;
 
 @end

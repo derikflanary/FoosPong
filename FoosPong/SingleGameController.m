@@ -53,7 +53,11 @@
         [[RankingController sharedInstance]updateNewRankingsForWinner:gameStats.playerOne andLoser:gameStats.playerTwo callback:^(NSNumber *winnerNewRank, NSNumber *loserNewRank) {
             NSLog(@"%@, %@", winnerNewRank, loserNewRank);
         }];
-        
+    
+    }else{
+        [[RankingController sharedInstance]updateNewRankingsForWinner:gameStats.playerTwo andLoser:gameStats.playerOne callback:^(NSNumber *winnerNewRank, NSNumber *loserNewRank) {
+            NSLog(@"%@, %@", winnerNewRank, loserNewRank);
+        }];
     }
     
 }
