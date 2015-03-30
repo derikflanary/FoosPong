@@ -44,9 +44,9 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
      
      [NSDictionary dictionaryWithObjectsAndKeys:
                                 [UIFont fontWithName:@"Thonburi-Light" size:18],
-                                NSFontAttributeName, nil]];
-    [self.navigationController.navigationBar setTintColor:[UIColor darkColor]];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor mainWhite]];
+                                NSFontAttributeName, [UIColor mainWhite], NSForegroundColorAttributeName, nil]];
+    [self.navigationController.navigationBar setTintColor:[UIColor vanilla]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor darkColor]];
     
     UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(sideBarButtonPressed:)];
     leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;

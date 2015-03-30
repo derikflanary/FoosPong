@@ -28,7 +28,7 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    [[UITabBar appearance] setTintColor:[UIColor darkColor]];
+    [[UITabBar appearance] setTintColor:[UIColor indianYellow]];
     
 //    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
 //                                                    UIUserNotificationTypeBadge |

@@ -62,6 +62,7 @@
     self.navigationController.navigationBar.translucent = NO;
     self.tableView.delegate = self;
     self.tableView.backgroundColor = [UIColor transparentWhite];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     
     self.joinGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 51)];
@@ -186,6 +187,11 @@
     return [self.groups count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 60;
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     GroupTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GroupCell" ];
@@ -197,15 +203,17 @@
     
     if ([group.objectId isEqualToString: self.currentGroup.objectId]) {
         cell.backgroundColor = [UIColor darkColorTransparent];
-        cell.textLabel.textColor = [UIColor mainWhite];
-        cell.textLabel.text = [NSString stringWithFormat:@"%@: (Current Group)", group[@"name"]];
+        
+        cell.teamNameLabel.textColor = [UIColor indianYellow];
+        cell.organizationLabel.textColor = [UIColor mainWhite];
+        cell.currentGroupLabel.text = @"Current Team";
+
     }else{
-        cell.textLabel.text = group[@"name"];
-        cell.backgroundColor = [UIColor transparentCellWhite];
-        cell.textLabel.textColor = [UIColor darkTextColor];
+       cell.currentGroupLabel.text = @"";
     }
     
-    cell.detailTextLabel.text = group[@"organization"];
+    cell.teamNameLabel.text = [group[@"name"] uppercaseString];
+    cell.organizationLabel.text = group[@"organization"];
    
     return cell;
 }
@@ -234,9 +242,7 @@
     }];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 80;
-}
+
 /*
 #pragma mark - Navigation
 

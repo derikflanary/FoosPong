@@ -273,7 +273,7 @@ static RNFrostedSidebar *rn_frostedMenu;
         _itemViews = [NSMutableArray array];
         _tintColor = [UIColor colorWithWhite:.5 alpha:.15];
         _borderWidth = 2;
-        _itemBackgroundColor = [UIColor golderBrown];
+        _itemBackgroundColor = [UIColor marigoldBrown];
         _showFromRight = YES;
         if (colors) {
             NSAssert([colors count] == [images count], @"Border color count must match images count. If you want a blank border, use [UIColor clearColor].");

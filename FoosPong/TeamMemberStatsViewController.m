@@ -9,6 +9,18 @@
 #import "TeamMemberStatsViewController.h"
 #import "JBLineChartView.h"
 #import "JBChartInformationView.h"
+#import "JBChartHeaderView.h"
+
+// Numerics
+CGFloat const kJBLineChartViewControllerChartHeight = 250.0f;
+CGFloat const kJBLineChartViewControllerChartPadding = 10.0f;
+CGFloat const kJBLineChartViewControllerChartHeaderHeight = 75.0f;
+CGFloat const kJBLineChartViewControllerChartHeaderPadding = 20.0f;
+CGFloat const kJBLineChartViewControllerChartFooterHeight = 20.0f;
+CGFloat const kJBLineChartViewControllerChartSolidLineWidth = 6.0f;
+CGFloat const kJBLineChartViewControllerChartDashedLineWidth = 2.0f;
+NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
+
 
 @interface TeamMemberStatsViewController () <JBLineChartViewDelegate, JBLineChartViewDataSource>
 
@@ -29,19 +41,25 @@
     
     self.rankingHistory = self.ranking[@"rankHistory"];
     
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIFont fontWithName:@"Thonburi-Light" size:18],
+      NSFontAttributeName, [UIColor mainWhite], NSForegroundColorAttributeName, nil]];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     [self.navigationController.navigationBar setTintColor:[UIColor mainWhite]];
+    self.title = [self.user.username uppercaseString];
     
     self.view.backgroundColor = [UIColor darkColor];
     
-    self.segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"1 V 1", @"2 V 2"]];
+    self.segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"1 V 1 Rank", @"1 V 1 Stats", @"2 V 2 Rank", @"2 V 2 Stats"]];
     [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-    self.segmentedControl.tintColor = [UIColor golderBrown];
+    self.segmentedControl.tintColor = [UIColor marigoldBrown];
     self.segmentedControl.selectedSegmentIndex = 0;
-    UIFont *font = [UIFont boldSystemFontOfSize:18.0f];
+    UIFont *font = [UIFont boldSystemFontOfSize:12.0f];
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
                                                            forKey:NSFontAttributeName];
     [self.segmentedControl setTitleTextAttributes:attributes
@@ -58,33 +76,37 @@
     self.lineChart = [JBLineChartView new];
     self.lineChart.dataSource = self;
     self.lineChart.delegate = self;
-    
+     self.lineChart.frame = CGRectMake(0, 20, self.view.frame.size.width, 300);
     [self.lineChart setMinimumValue:900];
     [self.lineChart setMaximumValue:1100];
     [self.lineChart setHidden:NO];
     
-    UIView *chartHeader = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
-    chartHeader.backgroundColor = [UIColor clearColor];
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:chartHeader.frame];
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:50];
-    titleLabel.textColor = [UIColor mainWhite];
-    titleLabel.text = self.user.username;
-    titleLabel.numberOfLines = 0;
-    titleLabel.backgroundColor = [UIColor clearColor];
-    [chartHeader addSubview:titleLabel];
     
    //self.lineChart.headerView = chartHeader;
 //    self.lineChart.footerView = nil;
     
 
-    self.lineChart.frame = CGRectMake(0, 0, self.view.frame.size.width, 350);
+   
 //    self.informationView = [[JBChartInformationView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, CGRectGetMaxY(self.lineChartView.frame), self.view.bounds.size.width, self.view.bounds.size.height - CGRectGetMaxY(self.lineChartView.frame) - CGRectGetMaxY(self.navigationController.navigationBar.frame))];
     self.informationView = [[JBChartInformationView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.lineChart.frame), self.view.bounds.size.width, self.view.frame.size.height - CGRectGetMaxY(self.lineChart.frame) - 50)];
     [self.informationView setValueAndUnitTextColor:[UIColor colorWithWhite:1.0 alpha:0.75]];
     [self.informationView setTitleTextColor:[UIColor vanilla]];
     [self.informationView setTextShadowColor:nil];
     [self.informationView setSeparatorColor:[UIColor lunarGreen]];
+
+    
+    JBChartHeaderView *headerView = [[JBChartHeaderView alloc] initWithFrame:CGRectMake(kJBLineChartViewControllerChartPadding, ceil(self.view.bounds.size.height * 0.5) - ceil(kJBLineChartViewControllerChartHeaderHeight * 0.5), self.view.bounds.size.width - (kJBLineChartViewControllerChartPadding * 2), kJBLineChartViewControllerChartHeaderHeight)];
+    headerView.titleLabel.text = @"";
+    headerView.titleLabel.textColor = [UIColor vanilla];
+    headerView.titleLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.25];
+    headerView.titleLabel.shadowOffset = CGSizeMake(0, 1);
+    headerView.subtitleLabel.text = @"Single's Ranking";
+    headerView.subtitleLabel.textColor = [UIColor vanilla];
+//    headerView.subtitleLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.25];
+//    headerView.subtitleLabel.shadowOffset = CGSizeMake(0, 1);
+    headerView.separatorColor = [UIColor lunarGreen];
+//    headerView.separatorColor = kJBColorLineChartHeaderSeparatorColor;
+    self.lineChart.headerView = headerView;
 
     
     

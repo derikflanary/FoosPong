@@ -11,9 +11,9 @@
 #import "FindGroupViewController.h"
 #import "GroupController.h"
 #import "EditGroupViewController.h"
-#import "PlayerTableViewCell.h"
 #import "TeamMemberStatsViewController.h"
 #import "RankingController.h"
+#import "TeamMemberCustomTableViewCell.h"
 
 @interface CurrentGroupViewController () <FindGroupViewControllerDelegate>
 @property (nonatomic, strong) FoosButton *joinGroupButton;
@@ -117,9 +117,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    PlayerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlayerGameCell" ];
+    TeamMemberCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TeamMemberCell" ];
     if (!cell){
-        cell = [PlayerTableViewCell new];
+        cell = [TeamMemberCustomTableViewCell new];
         
     }
     if (self.groupMembers.count > 0) {
@@ -133,11 +133,12 @@
                 
                 PFObject *rankingObject = [self.memberRankings objectAtIndex:indexPath.row];
                 NSNumber *ranking = rankingObject[@"rank"];
+                cell.scoreLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
                 
-                cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", user.username, ranking];
+                
             }
             
-            cell.detailTextLabel.text = @"Admin";
+            cell.adminLabel.text = @"Admin";
             //cell.detailTextLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
             //cell.adminLabel.text = @"Admin";
             
@@ -146,11 +147,17 @@
             if ([self.memberRankings count] > 0) {
                 PFObject *rankingObject = [self.memberRankings objectAtIndex:indexPath.row];
                 NSNumber *ranking = rankingObject[@"rank"];
-                cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", user.username, ranking];
+                cell.scoreLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
+            
             }
 //            cell.textLabel.text = user.username;
-            cell.detailTextLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
+            
         }
+        
+        cell.nameLabel.text = [user.username uppercaseString];
+        cell.fullNameLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
+        cell.profileImageView.backgroundColor = [UIColor darkColor];
+
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
@@ -161,17 +168,17 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 40;
+    return 30;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 40;
+    return 80;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
     
-    header.textLabel.textColor = [UIColor darkGrayColor];
+    header.textLabel.textColor = [UIColor darkColor];
     header.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
     CGRect headerFrame = header.frame;
     header.textLabel.frame = headerFrame;

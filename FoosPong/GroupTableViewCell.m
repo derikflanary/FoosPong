@@ -14,18 +14,28 @@
     
     
     self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"GroupCell"];
-    self.textLabel.font = [UIFont fontWithName:@"Thonburi-Light" size:22];
-    self.detailTextLabel.font = [UIFont boldSystemFontOfSize:11];
     
-    //    self.layer.cornerRadius = 10;
-    //    self.clipsToBounds = YES;
+    self.teamNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(11, 11, self.frame.size.width - 22, 21)];
+    self.teamNameLabel.font = [UIFont fontWithName:[NSString boldFont] size:22];
+    self.teamNameLabel.textColor = [UIColor darkColor];
+    
+    self.organizationLabel = [[UILabel alloc]initWithFrame:CGRectMake(11, 30, self.teamNameLabel.frame.size.width, 21)];
+    self.organizationLabel.font = [UIFont fontWithName:[NSString mainFont] size:14];
+    self.organizationLabel.textColor = [UIColor marigoldBrown];
+    
+    self.currentGroupLabel = [[UILabel alloc]initWithFrame:CGRectMake(215, 30, 90, 21)];
+    self.currentGroupLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
+    self.currentGroupLabel.textColor = [UIColor mainWhite];
+    self.currentGroupLabel.textAlignment = NSTextAlignmentRight;
+    
+    [self.contentView addSubview:self.teamNameLabel];
+    [self.contentView addSubview:self.organizationLabel];
+    [self.contentView addSubview:self.currentGroupLabel];
+    
+    
+    
     self.backgroundColor = [UIColor transparentCellWhite];
-    
-//    UIView *bgColorView = [[UIView alloc] init];
-//    bgColorView.backgroundColor = [UIColor mainColorTransparent];
-//    self.textLabel.highlightedTextColor = [UIColor mainWhite];
-//    [self setSelectedBackgroundView:bgColorView];
-    
+        
     return self;
 }
 

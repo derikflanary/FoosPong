@@ -10,4 +10,13 @@
 
 @interface GroupTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) UILabel *teamNameLabel;
+
+@property (nonatomic, strong) UILabel *currentGroupLabel;
+
+@property (nonatomic, strong) UILabel *organizationLabel;
+
+@property (nonatomic, strong) UILabel *numberOfMembersLabel;
+
+
 @end
