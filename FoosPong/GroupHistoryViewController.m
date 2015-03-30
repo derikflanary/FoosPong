@@ -7,11 +7,11 @@
 //
 
 #import "GroupHistoryViewController.h"
-#import "HistoryTableViewCell.h"
 #import "GameDetailViewController.h"
 #import "SingleGameController.h"
 #import "TeamGameController.h"
 #import "ODRefreshControl/ODRefreshControl.h"
+#import "TeamFeedTableViewCell.h"
 
 @interface GroupHistoryViewController () <UITableViewDataSource, UITableViewDelegate, UIToolbarDelegate>
 
@@ -33,12 +33,6 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-//    self.activityView = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-//    self.activityView.center = CGPointMake(160, 240);
-//    self.activityView.color = [UIColor darkColor];
-//    self.activityView.hidesWhenStopped = YES;
-//    [self.view addSubview:self.activityView];
-//    [self.activityView startAnimating];
     
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
@@ -49,7 +43,7 @@
     [self.view addSubview:whiteWall];
 
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height)];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, self.view.bounds.size.width, self.view.bounds.size.height - 44)];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.toolbar.translucent = NO;
     [self.view addSubview:self.tableView];
@@ -57,6 +51,10 @@
     self.tableView.delegate = self;
     self.tableView.backgroundColor = [UIColor transparentWhite];
     self.tableView.bounces = YES;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    self.edgesForExtendedLayout = UIRectEdgeAll;
+    self.tableView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, CGRectGetHeight(self.tabBarController.tabBar.frame) + 50, 0.0f);
     
 
     self.refreshControl = [[ODRefreshControl alloc]initInScrollView:self.tableView];
@@ -172,18 +170,23 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 44;
+    return 30;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 80;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    HistoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HistoryCell" ];
+    TeamFeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TeamFeedCell" ];
     if (!cell){
-        cell = [HistoryTableViewCell new];
+        cell = [TeamFeedTableViewCell new];
     }
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MMM d, h:mm a"];
+    
     if (self.segmentedControl.selectedSegmentIndex == 0) {
         
         Game *game = [self.singleGames objectAtIndex:indexPath.row];
@@ -194,10 +197,13 @@
         NSString *p1Name = p1.username;
         NSString *p2Name = p2.username;
         
-        cell.textLabel.text = [NSString stringWithFormat:@"%@:%.0f vs %@:%.0f", p1Name, game.playerOneScore, p2Name, game.playerTwoScore];
-        cell.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
+        cell.playerOneLabel.text = [p1Name uppercaseString];
+        cell.playerTwoLabel.text = [p2Name uppercaseString];
+        cell.playerOneScoreLabel.text = [NSString stringWithFormat:@"%.f", game.playerOneScore];
+        cell.playerTwoScoreLabel.text = [NSString stringWithFormat:@"%.f", game.playerTwoScore];
+        cell.dateLabel.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
         
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
+//        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
         
         return cell;
     
@@ -251,7 +257,7 @@
     UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
     
     
-    header.textLabel.textColor = [UIColor darkGrayColor];
+    header.textLabel.textColor = [UIColor darkColor];
     header.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
     CGRect headerFrame = header.frame;
     header.textLabel.frame = headerFrame;

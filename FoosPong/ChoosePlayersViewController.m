@@ -83,6 +83,10 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     background.frame = self.view.frame;
     [self.view addSubview:background];
     
+    UIView *whiteWall = [[UIView alloc]initWithFrame:self.view.bounds];
+    whiteWall.backgroundColor = [UIColor transparentWhite];
+    [self.view addSubview:whiteWall];
+    
     self.startButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 410, self.view.frame.size.width, 51)];
     self.startButton.backgroundColor = [UIColor darkColor];
     self.startButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
@@ -93,7 +97,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 
     self.segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"1 V 1", @"2 V 2"]];
     [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-    self.segmentedControl.tintColor = [UIColor darkColor];
+    self.segmentedControl.tintColor = [UIColor vanilla];
     self.segmentedControl.selectedSegmentIndex = 0;
     UIFont *font = [UIFont boldSystemFontOfSize:18.0f];
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
@@ -447,7 +451,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
             }
             case TableView2TeamSectionAvailable:{
                 PFUser *theUser = [self.availablePlayers objectAtIndex:indexPath.row];
-                cell.textLabel.textColor = [UIColor blackColor];
+                cell.textLabel.textColor = [UIColor darkColor];
                 cell.textLabel.text = theUser.username;
                 cell.detailTextLabel.text = @"";
                 return cell;

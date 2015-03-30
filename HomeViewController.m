@@ -45,6 +45,10 @@
     background.frame = self.view.frame;
     [self.view addSubview:background];
     
+    UIView *whiteWall = [[UIView alloc]initWithFrame:self.view.bounds];
+    whiteWall.backgroundColor = [UIColor transparentWhite];
+    [self.view addSubview:whiteWall];
+    
     self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.hidesBackButton = YES;
     
@@ -82,6 +86,7 @@
     }
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.textLabel.textColor = [UIColor darkColor];
     return cell;
     
 }

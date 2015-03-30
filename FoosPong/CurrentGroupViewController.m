@@ -14,6 +14,7 @@
 #import "TeamMemberStatsViewController.h"
 #import "RankingController.h"
 #import "TeamMemberCustomTableViewCell.h"
+#import "GameDetailViewController.h"
 
 @interface CurrentGroupViewController () <FindGroupViewControllerDelegate>
 @property (nonatomic, strong) FoosButton *joinGroupButton;
@@ -30,6 +31,7 @@
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 @property (nonatomic, strong) UIVisualEffectView *bluredEffectView;
 @property (nonatomic, strong) NSMutableArray *memberRankings;
+@property (nonatomic, strong) UILabel *messageLabel;
 
 @end
 
@@ -80,9 +82,10 @@
     self.tableView.backgroundColor = [UIColor transparentWhite];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView setEditing:NO];
+    [self.view addSubview:self.tableView];
     
     
-    self.addMembersButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 340, self.view.frame.size.width, 51)];
+    self.addMembersButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 350, self.view.frame.size.width, 51)];
     self.addMembersButton.backgroundColor = [UIColor darkColor];
     self.addMembersButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.addMembersButton setTitle:@"EDIT TEAM" forState:UIControlStateNormal];
@@ -112,7 +115,27 @@
 #pragma mark - TableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.groupMembers count];
+    
+    if ([self.groupMembers count] < 1) {
+//        
+//        self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+//        
+//        self.messageLabel.text = @"Not apart of any teams? Join or create a team below.";
+//        self.messageLabel.textColor = [UIColor darkColor];
+//        self.messageLabel.numberOfLines = 0;
+//        self.messageLabel.textAlignment = NSTextAlignmentCenter;
+//        self.messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
+//        [self.messageLabel sizeToFit];
+//        
+//        self.tableView.backgroundView = self.messageLabel;
+        
+        return 0;
+    }else{
+        self.messageLabel.text = @"";
+        return [self.groupMembers count];
+    }
+    
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -163,7 +186,12 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-   return  @"Team Members";
+   
+    if ([self.groupMembers count] < 1) {
+       return @"";
+   }else{
+    return  @"Team Members";
+   }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -238,7 +266,7 @@
                     }
                     
                     if (isInGroup) {
-                        [self.view addSubview:self.tableView];
+                        
                         self.groupMembers = members.mutableCopy;
                         self.tabBarController.title = group[@"name"];
                         [self.view addSubview:self.groupStatsButton];
@@ -267,7 +295,7 @@
                                 [self.noGroupView removeFromSuperview];
                             }
 
-                            
+                            self.messageLabel.text = @"";
                             [self.tableView reloadData];
                         }];
 
@@ -290,42 +318,47 @@
 }
 
 - (void)noGroup{
-    
-        [self.activityView stopAnimating];
-        
-        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-        self.bluredEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-        [self.bluredEffectView setFrame:self.view.bounds];
-        
-        self.noGroupView = [[UIView alloc]initWithFrame:self.view.frame];
-        self.noGroupView.backgroundColor = [UIColor whiteColor];
-        
-        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, self.view.frame.size.width, 60)];
-        titleLabel.text = @"No Team Yet? Create or join a team today.";
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.numberOfLines = 0;
-        
-        self.createGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 70, self.view.frame.size.width, 62)];
-        self.createGroupButton.backgroundColor = [UIColor darkColor];
-        self.createGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-        [self.createGroupButton setTitle:@"CREATE A TEAM" forState:UIControlStateNormal];
-        [self.createGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
-        [self.createGroupButton addTarget:self action:@selector(createPressed:) forControlEvents:UIControlEventTouchUpInside];
-        
-        self.joinGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 140, self.view.frame.size.width, 62)];
-        self.joinGroupButton.backgroundColor = [UIColor darkColor];
-        self.joinGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-        [self.joinGroupButton setTitle:@"JOIN AN EXISTING TEAM" forState:UIControlStateNormal];
-        [self.joinGroupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.joinGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
-        [self.joinGroupButton addTarget:self action:@selector(joinPressed:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:self.bluredEffectView];
 
-        [self.noGroupView addSubview:titleLabel];
-        [self.noGroupView addSubview:self.createGroupButton];
-        [self.noGroupView addSubview:self.joinGroupButton];
-        [self.view addSubview:self.noGroupView];
+    [self.activityView stopAnimating];
+
+    self.noGroupView = [[UIView alloc]initWithFrame:self.view.frame];
+    self.noGroupView.backgroundColor = [UIColor clearColor];
+    
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, self.view.frame.size.width, 60)];
+    titleLabel.text = @"No Team Yet? Create or join a team today.";
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.numberOfLines = 0;
+    
+    self.createGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 350, self.view.frame.size.width, 62)];
+    self.createGroupButton.backgroundColor = [UIColor darkColor];
+    self.createGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+    [self.createGroupButton setTitle:@"CREATE A TEAM" forState:UIControlStateNormal];
+    [self.createGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.createGroupButton addTarget:self action:@selector(createPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.joinGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 62)];
+    self.joinGroupButton.backgroundColor = [UIColor darkColor];
+    self.joinGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+    [self.joinGroupButton setTitle:@"JOIN AN EXISTING TEAM" forState:UIControlStateNormal];
+    [self.joinGroupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.joinGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.joinGroupButton addTarget:self action:@selector(joinPressed:) forControlEvents:UIControlEventTouchUpInside];
+
+    //[self.noGroupView addSubview:titleLabel];
+    [self.noGroupView addSubview:self.createGroupButton];
+    [self.noGroupView addSubview:self.joinGroupButton];
+    [self.view addSubview:self.noGroupView];
+
+    self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    
+    self.messageLabel.text = @"Not apart of any teams? Join or create a team below.";
+    self.messageLabel.textColor = [UIColor darkColor];
+    self.messageLabel.numberOfLines = 0;
+    self.messageLabel.textAlignment = NSTextAlignmentCenter;
+    self.messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
+    [self.messageLabel sizeToFit];
+    
+    self.tableView.backgroundView = self.messageLabel;
 
  
     
@@ -364,6 +397,16 @@
 
 - (void)statsButtonPressed:(id)sender{
     
+    GameDetailViewController *gameDetailViewController = [GameDetailViewController new];
+    
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gameDetailViewController];
+    
+    navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    
+    [self.navigationController presentViewController:navController animated:YES completion:^{
+        
+    }];
+
     
 }
 

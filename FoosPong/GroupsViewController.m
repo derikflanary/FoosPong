@@ -78,7 +78,7 @@
     [self.joinGroupButton addTarget:self action:@selector(joinPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.joinGroupButton];
     
-    self.createGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 340, self.view.frame.size.width, 51)];
+    self.createGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 350, self.view.frame.size.width, 51)];
     self.createGroupButton.backgroundColor = [UIColor darkColor];
     self.createGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.createGroupButton setTitle:@"CREATE A TEAM" forState:UIControlStateNormal];
