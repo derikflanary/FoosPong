@@ -77,8 +77,6 @@
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = YES;
     self.tableView.bounces = YES;
-//    self.tableView.layer.cornerRadius = 10;
-//    self.tableView.clipsToBounds = YES;
     self.tableView.backgroundColor = [UIColor transparentWhite];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView setEditing:NO];
@@ -125,17 +123,32 @@
         
     }
     if (self.groupMembers.count > 0) {
-        PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
         
-        if ([user.objectId isEqualToString: self.admin.objectId]) {
-            cell.textLabel.text = user.username;
+        PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
+        PFUser *admin = self.currentGroup[@"admin"];
+        
+        if ([user.objectId isEqualToString: admin.objectId]) {
+            
+            if ([self.memberRankings count] > 0) {
+                
+                PFObject *rankingObject = [self.memberRankings objectAtIndex:indexPath.row];
+                NSNumber *ranking = rankingObject[@"rank"];
+                
+                cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", user.username, ranking];
+            }
+            
             cell.detailTextLabel.text = @"Admin";
             //cell.detailTextLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
             //cell.adminLabel.text = @"Admin";
             
         }else{
-        
-            cell.textLabel.text = user.username;
+            
+            if ([self.memberRankings count] > 0) {
+                PFObject *rankingObject = [self.memberRankings objectAtIndex:indexPath.row];
+                NSNumber *ranking = rankingObject[@"rank"];
+                cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", user.username, ranking];
+            }
+//            cell.textLabel.text = user.username;
             cell.detailTextLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
         }
     }
@@ -220,13 +233,13 @@
                                     }
                                 }
                             }
-                            
+                            [self.tableView reloadData];
                             [[GroupController sharedInstance]fetchAdminForGroup:self.currentGroup callback:^(PFObject *admin) {
                                 self.admin = admin;
                                 if ([[PFUser currentUser].objectId isEqualToString:admin.objectId]) {
                                     [self.view addSubview:self.addMembersButton];
                                     self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, 350);
-                                    [self.tableView reloadData];
+                                    
                                 }
                             }];
                             
