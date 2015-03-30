@@ -268,7 +268,7 @@
                     if (isInGroup) {
                         
                         self.groupMembers = members.mutableCopy;
-                        self.tabBarController.title = group[@"name"];
+                        self.tabBarController.title = [group[@"name"] uppercaseString];
                         [self.view addSubview:self.groupStatsButton];
                         
                         [[RankingController sharedInstance]retrieveRankingsForGroup:group forUsers:self.groupMembers withCallBack:^(NSArray *rankings) {

@@ -20,4 +20,6 @@
 
 @property (nonatomic, strong) UILabel *memberSinceLabel;
 
+@property (nonatomic, strong) UILabel *rankLabel;
+
 @end

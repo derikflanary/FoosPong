@@ -8,12 +8,12 @@
 
 
 #import "ChoosePlayersViewController.h"
-#import "NewGameCustomTableViewCell.h"
 #import "SingleGameViewController.h"
 #import "UserController.h"
 #import "HMSegmentedControl.h"
 #import "TeamGameViewController.h"
 #import "GroupController.h"
+#import "PlayerTableViewCell.h"
 
 typedef NS_ENUM(NSInteger, TableViewSection) {
     TableViewSectionCurrent,
@@ -97,7 +97,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 
     self.segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"1 V 1", @"2 V 2"]];
     [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-    self.segmentedControl.tintColor = [UIColor vanilla];
+    self.segmentedControl.tintColor = [UIColor golderBrown];
     self.segmentedControl.selectedSegmentIndex = 0;
     UIFont *font = [UIFont boldSystemFontOfSize:18.0f];
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
@@ -153,7 +153,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 [self.currentPlayers addObject:[PFUser new]];
             }
             
-            self.title = group[@"name"];
+            self.title = [group[@"name"] uppercaseString];
             self.searchAvailablePlayers = members;
             [self.activityView stopAnimating];
             [self.tableView reloadData];
@@ -305,6 +305,10 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
+}
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     
     
@@ -376,9 +380,9 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NewGameCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewGameCell" ];
+    PlayerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlayerCell" ];
     if (!cell){
-        cell = [NewGameCustomTableViewCell new];
+        cell = [PlayerTableViewCell new];
       
     }
     //cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -390,20 +394,21 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 
                 PFUser *theUser = [self.currentPlayers objectAtIndex:indexPath.row];
                 if (!theUser.username) {
-                    cell.textLabel.text = @"Add Player";
-                    cell.textLabel.textColor = [UIColor colorWithWhite:.5 alpha:.7];
+                    cell.nameLabel.text = @"Add Player";
+                    cell.nameLabel.textColor = [UIColor colorWithWhite:.5 alpha:.7];
                 }else{
-                    cell.textLabel.text = theUser.username;
+                    cell.nameLabel.text = [theUser.username uppercaseString];
+                    cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
+                    
                 }
-                cell.detailTextLabel.text = @"";
+                
                 return cell;
                 break;
             }
             case TableViewSectionAvailable:{
                 PFUser *theUser = [self.availablePlayers objectAtIndex:indexPath.row];
-                cell.textLabel.text = theUser.username;
-                cell.textLabel.textColor = [UIColor blackColor];
-                cell.detailTextLabel.text = @"";
+                cell.nameLabel.text = [theUser.username uppercaseString];
+                cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
                 return cell;
             }
         }
@@ -413,11 +418,12 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
             case TableView2TeamSectionTeam1:{
                 PFUser *theUser = [self.currentPlayers objectAtIndex:indexPath.row];
                 if (!theUser.username) {
-                    cell.textLabel.text = @"Add Player";
-                    cell.textLabel.textColor = [UIColor colorWithWhite:.5 alpha:.7];
+                    cell.nameLabel.text = @"Add Player";
+                    cell.nameLabel.textColor = [UIColor colorWithWhite:.5 alpha:.7];
 
                 }else{
-                    cell.textLabel.text = theUser.username;
+                    cell.nameLabel.text = [theUser.username uppercaseString];
+                    cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
                 }
                 if (indexPath.row == 0) {
                     cell.detailTextLabel.text = @"Attacker";
@@ -432,11 +438,13 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 PFUser *theUser = [self.teamTwoPlayers objectAtIndex:indexPath.row];
                 
                 if (!theUser.username) {
-                    cell.textLabel.text = @"Add Player";
-                    cell.textLabel.textColor = [UIColor colorWithWhite:.5 alpha:.7];
+                    cell.nameLabel.text = @"Add Player";
+                    cell.nameLabel.textColor = [UIColor colorWithWhite:.5 alpha:.7];
 
                 }else{
-                    cell.textLabel.text = theUser.username;
+                    cell.nameLabel.text = [theUser.username uppercaseString];
+                    cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
+
                 }
                 
                 if (indexPath.row == 0) {
@@ -451,8 +459,8 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
             }
             case TableView2TeamSectionAvailable:{
                 PFUser *theUser = [self.availablePlayers objectAtIndex:indexPath.row];
-                cell.textLabel.textColor = [UIColor darkColor];
-                cell.textLabel.text = theUser.username;
+                cell.nameLabel.text = [theUser.username uppercaseString];
+                cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
                 cell.detailTextLabel.text = @"";
                 return cell;
 
@@ -752,9 +760,6 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     return NO;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 44;
-}
 
 -(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
     

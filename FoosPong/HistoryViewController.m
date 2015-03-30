@@ -14,6 +14,7 @@
 #import "TeamGame.h"
 #import "GameDetailViewController.h"
 #import "HistoryTableViewCell.h"
+#import "TeamFeedTableViewCell.h"
 
 @interface HistoryViewController () <UITableViewDataSource, UITableViewDelegate, UIToolbarDelegate>
 
@@ -132,9 +133,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    HistoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HistoryCell" ];
+    TeamFeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HistoryCell" ];
     if (!cell){
-        cell = [HistoryTableViewCell new];
+        cell = [TeamFeedTableViewCell new];
     }
     if (self.segmentedControl.selectedSegmentIndex == 0) {
         

@@ -34,6 +34,11 @@
     self.fullNameLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
     self.fullNameLabel.textColor = [UIColor marigoldBrown];
     
+    self.rankLabel = [[UILabel alloc]initWithFrame:CGRectMake(183, 11, 120, 21)];
+    self.rankLabel.font = [UIFont fontWithName:[NSString mainFont] size:16];
+    self.rankLabel.textColor = [UIColor lunarGreen];
+    self.rankLabel.textAlignment = NSTextAlignmentRight;
+    
     self.backgroundColor = [UIColor transparentCellWhite];
     
     
@@ -48,6 +53,7 @@
     [self.contentView addSubview:self.nameLabel];
     [self.contentView addSubview:self.adminLabel];
     [self.contentView addSubview:self.fullNameLabel];
+    [self.contentView addSubview:self.rankLabel];
     return self;
 }
 

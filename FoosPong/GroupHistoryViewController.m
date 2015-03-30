@@ -22,6 +22,7 @@
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 @property (nonatomic, strong) UISegmentedControl *segmentedControl;
 @property (nonatomic, strong) ODRefreshControl *refreshControl;
+@property (nonatomic, strong) UILabel *messageLabel;
 
 
 @end
@@ -101,34 +102,51 @@
 }
 
 - (void)updateTableView{
+    PFUser *currentUser = [PFUser currentUser];
     
-    [[SingleGameController sharedInstance]updateGamesForGroup:[PFUser currentUser][@"currentGroup"] Callback:^(NSArray *singleGames) {
+    if (!currentUser[@"currentGroup"]) {
+        self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
         
-        self.singleGames = singleGames;
+        self.messageLabel.text = @"Not apart of any teams? Join or create a team on the 'Groups' tab.";
+        self.messageLabel.textColor = [UIColor darkColor];
+        self.messageLabel.numberOfLines = 0;
+        self.messageLabel.textAlignment = NSTextAlignmentCenter;
+        self.messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
+        [self.messageLabel sizeToFit];
         
-        [[TeamGameController sharedInstance]updateGamesForGroup:[PFUser currentUser][@"currentGroup"] Callback:^(NSArray *teamGames) {
+        self.tableView.backgroundView = self.messageLabel;
+    }else{
+        self.messageLabel.text = @"";
+        
+        double delayInSeconds = 1.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self.refreshControl endRefreshing];
+        });
+    
+        [[SingleGameController sharedInstance]updateGamesForGroup:[PFUser currentUser][@"currentGroup"] Callback:^(NSArray *singleGames) {
             
-            self.teamGames = teamGames;
-            [self.tableView reloadData];
+            self.singleGames = singleGames;
             
-            if (self.refreshControl) {
+            [[TeamGameController sharedInstance]updateGamesForGroup:[PFUser currentUser][@"currentGroup"] Callback:^(NSArray *teamGames) {
                 
-//                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//                [formatter setDateFormat:@"MMM d, h:mm a"];
-//                NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
-//                NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
-//                                                                            forKey:NSForegroundColorAttributeName];
-//                NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
-                double delayInSeconds = 1.0;
-                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                    [self.refreshControl endRefreshing];
-                });
+                self.teamGames = teamGames;
+                [self.tableView reloadData];
                 
-            }
-            
+                if (self.refreshControl) {
+                    
+    
+                    double delayInSeconds = 1.0;
+                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                        [self.refreshControl endRefreshing];
+                    });
+                    
+                }
+                
+            }];
         }];
-    }];
+    }
 }
 
 - (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar{
@@ -152,10 +170,42 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    if (![PFUser currentUser][@"currentGroup"]) {
+        return 0;
+    }
+    
+    
     if (self.segmentedControl.selectedSegmentIndex == 0) {
-        return [self.singleGames count];
+        if ([self.singleGames count] < 1) {
+            
+            self.messageLabel.text = @"No 1v1 games have been played yet";
+            self.messageLabel.textColor = [UIColor darkColor];
+            self.messageLabel.numberOfLines = 0;
+            self.messageLabel.textAlignment = NSTextAlignmentCenter;
+            self.messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
+            [self.messageLabel sizeToFit];
+            
+            return 0;
+
+        }else{
+        
+            return [self.singleGames count];
+        }
     }else{
-        return [self.teamGames count];
+        if ([self.teamGames count] < 1) {
+            self.messageLabel.text = @"No 2v2 games have been played yet";
+            self.messageLabel.textColor = [UIColor darkColor];
+            self.messageLabel.numberOfLines = 0;
+            self.messageLabel.textAlignment = NSTextAlignmentCenter;
+            self.messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
+            [self.messageLabel sizeToFit];
+            
+            return 0;
+            
+        }else{
+            
+            return [self.teamGames count];
+        }
     }
     
 }

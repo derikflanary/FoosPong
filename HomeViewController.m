@@ -38,7 +38,7 @@
     self.navigationItem.backBarButtonItem = backButton;
     
     PFUser *user = [PFUser currentUser];
-    self.title = user[@"firstName"];
+    self.title = [user[@"firstName"] uppercaseString];
     
     self.view.backgroundColor = [UIColor whiteColor];
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
@@ -59,6 +59,7 @@
     [self.view addSubview:self.pingPongTableView];
     self.pingPongTableView.scrollEnabled = NO;
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
+    self.pingPongTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
 }
 #pragma mark - TableView Datasource
@@ -71,14 +72,16 @@
 }
 
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NewGameCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewGameCell" ];
     if (!cell){
         cell = [NewGameCustomTableViewCell new];
     }
     if (indexPath.row == 0) {
-        cell.textLabel.text = @"Create A New Game";
+        cell.textLabel.text = @"CREATE A NEW GAME";
+        cell.textLabel.textColor = [UIColor darkColor];
+        cell.textLabel.font = [UIFont fontWithName:[NSString boldFont] size:100];
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
     }else if (indexPath.row == 1){
         cell.textLabel.text = @"Add A Completed Game";
     }else{

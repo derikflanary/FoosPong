@@ -83,9 +83,9 @@
     self.tableView.allowsSelection = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
-    [self.searchController.searchBar sizeToFit];
-    self.tableView.tableHeaderView = self.searchController.searchBar;
+//    self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
+//    [self.searchController.searchBar sizeToFit];
+//    self.tableView.tableHeaderView = self.searchController.searchBar;
     //self.searchController.searchResultsUpdater = self;
 //    self.searchController.delegate = self;
 //    self.searchController.searchBar.delegate = self;

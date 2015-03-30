@@ -231,7 +231,7 @@
     }else{
         [[GroupController sharedInstance]setCurrentGroup:group callback:^(BOOL *success) {
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
-            self.title = group[@"name"];
+            self.title = [group[@"name"] uppercaseString];
             self.currentGroup = [PFUser currentUser][@"currentGroup"];
             [tableView reloadData];
 
