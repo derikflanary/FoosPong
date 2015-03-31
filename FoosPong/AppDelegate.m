@@ -31,6 +31,8 @@
     [[UITabBar appearance] setTintColor:[UIColor golderBrown]];
     [[UITabBar appearance] setBackgroundColor:[UIColor darkColor]];
     
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
 //    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
 //                                                    UIUserNotificationTypeBadge |
 //                                                    UIUserNotificationTypeSound);

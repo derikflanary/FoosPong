@@ -40,6 +40,8 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     [self.navigationController.navigationBar setTitleTextAttributes:
      
      [NSDictionary dictionaryWithObjectsAndKeys:
@@ -205,6 +207,8 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 /*
 #pragma mark - Navigation

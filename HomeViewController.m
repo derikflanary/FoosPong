@@ -34,6 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
     self.navigationItem.backBarButtonItem = backButton;
     
@@ -42,6 +43,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
+    background.contentMode = UIViewContentModeScaleAspectFill;
     background.frame = self.view.frame;
     [self.view addSubview:background];
     

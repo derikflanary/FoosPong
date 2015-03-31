@@ -59,6 +59,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     
     self.imageView = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     self.imageView.frame = self.view.frame;
+    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.imageView.alpha = 1;
     [self.view addSubview:self.imageView];
     

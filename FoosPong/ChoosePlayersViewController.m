@@ -81,7 +81,8 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
-    [self.view addSubview:background];
+    background.contentMode = UIViewContentModeScaleAspectFill;
+//    [self.view addSubview:background];
     
     UIView *whiteWall = [[UIView alloc]initWithFrame:self.view.bounds];
     whiteWall.backgroundColor = [UIColor transparentWhite];

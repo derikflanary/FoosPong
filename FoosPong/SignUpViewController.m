@@ -49,9 +49,12 @@
     
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
+    background.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:background];
-
     
+    UIView *whiteWall = [[UIView alloc]initWithFrame:self.view.bounds];
+    whiteWall.backgroundColor = [UIColor transparentWhite];
+    [self.view addSubview:whiteWall];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
     [self.view addGestureRecognizer:tap];

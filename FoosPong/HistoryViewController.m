@@ -42,6 +42,7 @@
     
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
+    background.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:background];
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height)];

@@ -32,7 +32,16 @@
     [self.navigationController.navigationBar setTintColor:[UIColor darkColor]];
     [self.navigationController.navigationBar setBarTintColor:[UIColor mainWhite]];
 
-    self.view.backgroundColor = [UIColor mainWhite];
+    self.view.backgroundColor = [UIColor transparentWhite];
+    
+    UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
+    background.frame = self.view.frame;
+    background.contentMode = UIViewContentModeScaleAspectFill;
+    [self.view addSubview:background];
+    
+    UIView *whiteWall = [[UIView alloc]initWithFrame:self.view.bounds];
+    whiteWall.backgroundColor = [UIColor transparentWhite];
+    [self.view addSubview:whiteWall];
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;

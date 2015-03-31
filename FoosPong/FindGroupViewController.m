@@ -39,6 +39,7 @@
     
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
+    background.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:background];
     
     UIView *whiteWall = [[UIView alloc]initWithFrame:self.view.bounds];
