@@ -31,7 +31,7 @@
     self.playerTwoScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:26];
     self.playerTwoScoreLabel.textColor = [UIColor marigoldBrown];
     
-    self.dateLabel = [[UILabel alloc]initWithFrame:CGRectMake(180, 40, 100, 21)];
+    self.dateLabel = [[UILabel alloc]initWithFrame:CGRectMake(160, 40, 100, 21)];
     self.dateLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
     self.dateLabel.textColor = [UIColor colorWithWhite:.4 alpha:1];
     //self.dateLabel.textAlignment = NSTextAlignmentRight;

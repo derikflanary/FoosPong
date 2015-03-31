@@ -39,19 +39,20 @@
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
     background.contentMode = UIViewContentModeScaleAspectFill;
-    [self.view addSubview:background];
+//    [self.view addSubview:background];
     
-    UIView *whiteWall = [[UIView alloc]initWithFrame:self.view.bounds];
-    whiteWall.backgroundColor = [UIColor transparentWhite];
-    [self.view addSubview:whiteWall];
+//    UIView *whiteWall = [[UIView alloc]initWithFrame:self.view.bounds];
+//    whiteWall.backgroundColor = [UIColor transparentWhite];
+//    [self.view addSubview:whiteWall];
     
     [self.navigationController.navigationBar setTitleTextAttributes:
      
      [NSDictionary dictionaryWithObjectsAndKeys:
       [UIFont fontWithName:@"Thonburi-Light" size:18],
       NSFontAttributeName, nil]];
-    [self.navigationController.navigationBar setTintColor:[UIColor darkColor]];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor mainWhite]];
+    [self.navigationController.navigationBar setTintColor:[UIColor mainWhite]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor darkColor]];
+    self.navigationController.navigationBar.translucent = YES;
 
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
@@ -66,10 +67,13 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
     [self.view addGestureRecognizer:tap];
     
-    self.view.backgroundColor = [UIColor whiteColor];
     
-    self.usernameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 301, self.view.frame.size.width, 41)];
-    self.usernameField.backgroundColor = [UIColor whiteColor];
+    self.headerImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"foos"]];
+    self.headerImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, 165);
+    
+    
+    self.usernameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 220, self.view.frame.size.width, 41)];
+    self.usernameField.backgroundColor = [UIColor mainWhite];
     self.usernameField.placeholder = @"Username";
     self.usernameField.font = [UIFont fontWithName:[NSString mainFont] size:16.0f];
     self.usernameField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
@@ -82,8 +86,8 @@
     self.usernameField.leftViewMode = UITextFieldViewModeAlways;
     self.usernameField.leftView = leftView;
     
-    self.passwordField = [[UITextField alloc]initWithFrame:CGRectMake(0, 342, self.view.frame.size.width, 41)];
-    self.passwordField.backgroundColor = [UIColor whiteColor];
+    self.passwordField = [[UITextField alloc]initWithFrame:CGRectMake(0, 260, self.view.frame.size.width, 41)];
+    self.passwordField.backgroundColor = [UIColor mainWhite];
     self.passwordField.placeholder = @"Password";
     self.passwordField.font = [UIFont fontWithName:[NSString mainFont] size:16.0f];
     self.passwordField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
@@ -96,7 +100,7 @@
     self.passwordField.leftViewMode = UITextFieldViewModeAlways;
     self.passwordField.leftView = leftView2;
     
-    self.loginButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 383, self.view.frame.size.width, 62)];
+    self.loginButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 301, self.view.frame.size.width, 62)];
     self.loginButton.backgroundColor = [UIColor darkColor];
     self.loginButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.loginButton setTitle:@"LOG IN" forState:UIControlStateNormal];
@@ -110,32 +114,37 @@
     [self.forgotButton setTitleColor:[UIColor darkColor] forState:UIControlStateNormal];
     [self.forgotButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateHighlighted];
     
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(43, 97, 243, 60)];
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 97, self.view.frame.size.width, 60)];
     self.titleLabel.textColor =  [UIColor whiteColor];
-    self.titleLabel.font =  [UIFont fontWithName:[NSString boldFont] size:24.0f];
+    self.titleLabel.font =  [UIFont fontWithName:[NSString boldFont] size:100.0f];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.text = @"FOOS";
     
-    
-    self.infoLabel.textColor =  [UIColor darkGrayColor];
-    self.infoLabel.font =  [UIFont fontWithName:[NSString boldFont] size:14.0f];
+    self.infoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 165, self.view.frame.size.width, 55)];
+    self.infoLabel.textColor =  [UIColor darkColor];
+    self.infoLabel.font =  [UIFont fontWithName:[NSString mainFont] size:18.0f];
     self.infoLabel.text = @"Welcome back, please login below";
+    self.infoLabel.textAlignment = NSTextAlignmentCenter;
+    self.infoLabel.backgroundColor = [UIColor mainWhite];
     
-    self.infoView.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
     
-    self.headerImageView.image = [UIImage imageNamed:@"running.jpg"];
-    self.headerImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.infoView.backgroundColor = [UIColor darkColorTransparent];
     
-    self.overlayView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.3f];
+    self.view.backgroundColor = [UIColor vanilla];
+//    self.headerImageView.contentMode = UIViewContentModeScaleAspectFill;
+    
+    //self.overlayView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.3f];
     
     [self.forgotButton addTarget:self action:@selector(toggleNav:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:self.usernameField];
     [self.view addSubview:self.passwordField];
-    [self.view addSubview:self.titleLabel];
+//    [self.view addSubview:self.titleLabel];
     [self.view addSubview:self.loginButton];
     [self.view addSubview:self.overlayView];
     [self.view addSubview:self.forgotButton];
+    [self.view addSubview:self.infoLabel];
+    [self.view addSubview:self.headerImageView];
     
     CustomAccessoryView *inputAccesoryView = [CustomAccessoryView new];
     inputAccesoryView.delegate = self;

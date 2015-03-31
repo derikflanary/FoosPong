@@ -22,7 +22,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="foosimg" translatesAutoresizingMaskIntoConstraints="NO" id="PuN-gU-W2J">
+                <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="foos" translatesAutoresizingMaskIntoConstraints="NO" id="PuN-gU-W2J">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                 </imageView>
             </subviews>
@@ -41,6 +41,6 @@
         </view>
     </objects>
     <resources>
-        <image name="foosimg" width="275" height="183"/>
+        <image name="foos" width="1920" height="1080"/>
     </resources>
 </document>

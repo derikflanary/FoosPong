@@ -61,7 +61,7 @@
     [self.view addSubview:self.pingPongTableView];
     self.pingPongTableView.scrollEnabled = NO;
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
-    self.pingPongTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.pingPongTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
 }
 #pragma mark - TableView Datasource

@@ -38,8 +38,8 @@
      [NSDictionary dictionaryWithObjectsAndKeys:
       [UIFont fontWithName:@"Thonburi-Light" size:18],
       NSFontAttributeName, nil]];
-    [self.navigationController.navigationBar setTintColor:[UIColor darkColor]];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor mainWhite]];
+    [self.navigationController.navigationBar setTintColor:[UIColor mainWhite]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor darkColor]];
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
@@ -47,22 +47,25 @@
     UIBarButtonItem *otherLogIn = [[UIBarButtonItem alloc] initWithTitle:@"Already Signed Up" style:UIBarButtonItemStylePlain target:self action:@selector(openLogIn:)];
     self.navigationItem.rightBarButtonItem = otherLogIn;
     
-    UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
-    background.frame = self.view.frame;
-    background.contentMode = UIViewContentModeScaleAspectFill;
-    [self.view addSubview:background];
-    
-    UIView *whiteWall = [[UIView alloc]initWithFrame:self.view.bounds];
-    whiteWall.backgroundColor = [UIColor transparentWhite];
-    [self.view addSubview:whiteWall];
+//    UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
+//    background.frame = self.view.frame;
+//    background.contentMode = UIViewContentModeScaleAspectFill;
+//    [self.view addSubview:background];
+//    
+//    UIView *whiteWall = [[UIView alloc]initWithFrame:self.view.bounds];
+//    whiteWall.backgroundColor = [UIColor transparentWhite];
+//    [self.view addSubview:whiteWall];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
     [self.view addGestureRecognizer:tap];
     
-    self.view.backgroundColor = [UIColor mainColor];
     
-    self.firstNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 180, 320, 41)];
-    self.firstNameField.backgroundColor = [UIColor whiteColor];
+    
+    self.headerImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"foos"]];
+    self.headerImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, 165);
+    
+    self.firstNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 165, self.view.frame.size.width, 41)];
+    self.firstNameField.backgroundColor = [UIColor mainWhite];
     self.firstNameField.placeholder = @"First Name";
     self.firstNameField.font = [UIFont fontWithName:[NSString mainFont] size:16.0f];
     self.firstNameField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
@@ -72,8 +75,8 @@
     self.firstNameField.leftViewMode = UITextFieldViewModeAlways;
     self.firstNameField.leftView = leftView3;
     
-    self.lastNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 220, 320, 41)];
-    self.lastNameField.backgroundColor = [UIColor whiteColor];
+    self.lastNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 205, self.view.frame.size.width, 41)];
+    self.lastNameField.backgroundColor = [UIColor mainWhite];
     self.lastNameField.placeholder = @"Last Name";
     self.lastNameField.font = [UIFont fontWithName:[NSString mainFont] size:16.0f];
     self.lastNameField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
@@ -83,8 +86,8 @@
     self.lastNameField.leftViewMode = UITextFieldViewModeAlways;
     self.lastNameField.leftView = leftView4;
 
-    self.emailField = [[UITextField alloc]initWithFrame:CGRectMake(0, 260, 320, 41)];
-    self.emailField.backgroundColor = [UIColor whiteColor];
+    self.emailField = [[UITextField alloc]initWithFrame:CGRectMake(0, 245, self.view.frame.size.width, 41)];
+    self.emailField.backgroundColor = [UIColor mainWhite];
     self.emailField.placeholder = @"Email";
     self.emailField.font = [UIFont fontWithName:[NSString mainFont] size:16.0f];
     self.emailField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
@@ -94,8 +97,8 @@
     self.emailField.leftViewMode = UITextFieldViewModeAlways;
     self.emailField.leftView = leftView5;
     
-    self.usernameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 301, 320, 41)];
-    self.usernameField.backgroundColor = [UIColor whiteColor];
+    self.usernameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 286, self.view.frame.size.width, 41)];
+    self.usernameField.backgroundColor = [UIColor mainWhite];
     self.usernameField.placeholder = @"Username";
     self.usernameField.font = [UIFont fontWithName:[NSString mainFont] size:16.0f];
     self.usernameField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
@@ -108,8 +111,8 @@
     self.usernameField.leftViewMode = UITextFieldViewModeAlways;
     self.usernameField.leftView = leftView;
     
-    self.passwordField = [[UITextField alloc]initWithFrame:CGRectMake(0, 342, 320, 41)];
-    self.passwordField.backgroundColor = [UIColor whiteColor];
+    self.passwordField = [[UITextField alloc]initWithFrame:CGRectMake(0, 327, self.view.frame.size.width, 41)];
+    self.passwordField.backgroundColor = [UIColor mainWhite];
     self.passwordField.placeholder = @"Password";
     self.passwordField.font = [UIFont fontWithName:[NSString mainFont] size:16.0f];
     self.passwordField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
@@ -122,7 +125,7 @@
     self.passwordField.leftViewMode = UITextFieldViewModeAlways;
     self.passwordField.leftView = leftView2;
     
-    self.loginButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 383, 320, 62)];
+    self.loginButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 367, self.view.frame.size.width, 62)];
     self.loginButton.backgroundColor = [UIColor darkColor];
     self.loginButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.loginButton setTitle:@"SIGN UP HERE" forState:UIControlStateNormal];
@@ -149,11 +152,6 @@
     
     self.infoView.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
     
-    self.headerImageView.image = [UIImage imageNamed:@"running.jpg"];
-    self.headerImageView.contentMode = UIViewContentModeScaleAspectFill;
-    
-    self.overlayView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.3f];
-    
     [self.forgotButton addTarget:self action:@selector(toggleNav:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:self.firstNameField];
@@ -161,9 +159,11 @@
     [self.view addSubview:self.emailField];
     [self.view addSubview:self.usernameField];
     [self.view addSubview:self.passwordField];
-    [self.view addSubview:self.titleLabel];
     [self.view addSubview:self.loginButton];
     [self.view addSubview:self.overlayView];
+    [self.view addSubview:self.headerImageView];
+    
+    self.view.backgroundColor = [UIColor vanilla];
     
     CustomAccessoryView *inputAccesoryView = [CustomAccessoryView new];
     inputAccesoryView.delegate = self;
