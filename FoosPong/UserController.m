@@ -176,8 +176,8 @@ PFQuery *query = [PFUser query];
     [userPhoto saveInBackground];
 }
 
-- (void)retrieveProfileImageWithCallback:(void (^)(UIImage *))callback{
-    PFUser *user = [PFUser currentUser];
+- (void)retrieveProfileImageForUser:(PFUser *)user withCallback:(void (^)(UIImage *))callback{
+    
     PFFile *userImageFile = user[@"profileImage"];
     [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
         

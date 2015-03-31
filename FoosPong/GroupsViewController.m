@@ -91,6 +91,21 @@
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
     
+    
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.joinGroupButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.createGroupButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_tableView, _createGroupButton, _joinGroupButton);
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_tableView]-(==0)-[_createGroupButton(==51)]-[_joinGroupButton(==52)]-(==44)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_tableView]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_joinGroupButton]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_createGroupButton]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
+
 }
 
 - (void)joinGroupButtonPressed:(id)sender{

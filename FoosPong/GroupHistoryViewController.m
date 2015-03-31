@@ -95,6 +95,7 @@
     [self.view addSubview:toolBar];
     toolBar.delegate = self;
     
+    
 }
 
 - (void)pulledToRefresh{

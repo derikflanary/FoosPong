@@ -111,6 +111,9 @@
     self.groupStatsButton.layer.shadowRadius = 0.0;
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
+    [self.view addSubview:self.groupStatsButton];
+    [self.view addSubview:self.addMembersButton];
+    
     
 }
 
@@ -187,7 +190,8 @@
             cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
             
         }else{
-            [[UserController sharedInstance]retrieveProfileImageWithCallback:^(UIImage *pic) {
+            [[UserController sharedInstance]retrieveProfileImageForUser:user withCallback:^(UIImage *pic) {
+                
                 cell.profileImageView.image = pic;
                 
             }];
@@ -300,6 +304,10 @@
                                 self.admin = admin;
                                 if ([[PFUser currentUser].objectId isEqualToString:admin.objectId]) {
                                     [self.view addSubview:self.addMembersButton];
+                                
+                                    
+                                    
+
                                     self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, 350);
                                     
                                 }

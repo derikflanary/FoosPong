@@ -12,4 +12,5 @@
 
 + (UIImage *)mainBackgroundImage;
 
++ squareImageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 @end

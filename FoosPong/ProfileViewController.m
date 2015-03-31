@@ -164,8 +164,10 @@
     self.profileImageView.clipsToBounds = YES;
     self.profileImageView.layer.borderWidth = 4.0f;
     self.profileImageView.layer.borderColor = [UIColor mainWhite].CGColor;
+    self.profileImageView.contentMode = UIViewContentModeScaleToFill;
     
-    [[UserController sharedInstance]retrieveProfileImageWithCallback:^(UIImage *profilePic) {
+    [[UserController sharedInstance]retrieveProfileImageForUser:self.currentUser withCallback:^(UIImage * profilePic) {
+        
         if (profilePic) {
             self.profileImageView.image = profilePic;
             self.headerImageView.image = profilePic;
@@ -353,20 +355,24 @@
     
 }
 
+
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     
     // Access the uncropped image from info dictionary
     UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    
+    UIImage *smallImage = [UIImage squareImageWithImage:image scaledToSize:CGSizeMake(100, 100)];
     
     // Dismiss controller
     [picker dismissViewControllerAnimated:YES completion:nil];
     
     // Set Avatar Image
     
-    self.profileImageView.image = image;
-    self.headerImageView.image = image;
+    self.profileImageView.image = smallImage;
+    self.headerImageView.image = smallImage;
     
-    [[UserController sharedInstance]saveProfilePhoto:image];
+    [[UserController sharedInstance]saveProfilePhoto:smallImage];
     
     // Any other actions you want to take with the image would go here
     

@@ -28,6 +28,8 @@
 
 - (void)retrieveProfileImageWithCallback:(void (^)(UIImage *))callback;
 
+- (void)retrieveProfileImageForUser:(PFUser *)user withCallback:(void (^)(UIImage *))callback;
+
 
 @property (nonatomic, strong, readonly)NSArray *users;
 @property (nonatomic, strong, readonly)NSArray *usersWithoutCurrentUser;

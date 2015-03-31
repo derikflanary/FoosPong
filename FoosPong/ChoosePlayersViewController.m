@@ -174,8 +174,19 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     
     self.cellSelected = NO;
     
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.startButton.translatesAutoresizingMaskIntoConstraints = NO;
     
     
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_tableView, _startButton);
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_tableView]-(==0)-[_startButton(==51)]-(==44)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
+
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_tableView]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_startButton]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
+
+
     //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
@@ -406,7 +417,8 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                         cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
                         
                     }else{
-                        [[UserController sharedInstance]retrieveProfileImageWithCallback:^(UIImage *pic) {
+                        [[UserController sharedInstance]retrieveProfileImageForUser:theUser withCallback:^(UIImage *pic) {
+                            
                             cell.profileImageView.image = pic;
                             
                         }];
@@ -425,7 +437,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                     cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
                     
                 }else{
-                    [[UserController sharedInstance]retrieveProfileImageWithCallback:^(UIImage *pic) {
+                    [[UserController sharedInstance]retrieveProfileImageForUser:theUser withCallback:^(UIImage *pic) {
                         cell.profileImageView.image = pic;
                         
                     }];
@@ -449,7 +461,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                         cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
                         
                     }else{
-                        [[UserController sharedInstance]retrieveProfileImageWithCallback:^(UIImage *pic) {
+                        [[UserController sharedInstance]retrieveProfileImageForUser:theUser withCallback:^(UIImage *pic) {
                             cell.profileImageView.image = pic;
                             
                         }];
@@ -479,7 +491,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                         cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
                         
                     }else{
-                        [[UserController sharedInstance]retrieveProfileImageWithCallback:^(UIImage *pic) {
+                        [[UserController sharedInstance]retrieveProfileImageForUser:theUser withCallback:^(UIImage *pic) {
                             cell.profileImageView.image = pic;
                             
                         }];
@@ -506,7 +518,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                     cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
                     
                 }else{
-                    [[UserController sharedInstance]retrieveProfileImageWithCallback:^(UIImage *pic) {
+                    [[UserController sharedInstance]retrieveProfileImageForUser:theUser withCallback:^(UIImage *pic) {
                         cell.profileImageView.image = pic;
                         
                     }];

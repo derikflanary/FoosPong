@@ -45,7 +45,8 @@
             cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
             
         }else{
-            [[UserController sharedInstance]retrieveProfileImageWithCallback:^(UIImage *pic) {
+            [[UserController sharedInstance]retrieveProfileImageForUser:user withCallback:^(UIImage * pic) {
+                
                 cell.profileImageView.image = pic;
                 
             }];
