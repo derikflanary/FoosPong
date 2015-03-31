@@ -387,6 +387,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
       
     }
     //cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
     
     if (self.segmentedControl.selectedSegmentIndex == 0) {
         TableViewSection tableViewSection = indexPath.section;

@@ -107,6 +107,10 @@
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 80;
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -128,7 +132,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 44;
+    return 30;
 }
 
 
@@ -143,12 +147,19 @@
         Game *game = [self.singleGames objectAtIndex:indexPath.row];
         PFUser *p1 = game.p1;
         PFUser *p2 = game.p2;
+        NSDate *date =  game.createdAt;
 
         NSString *p1Name = p1.username;
         NSString *p2Name = p2.username;
-        cell.textLabel.text = [NSString stringWithFormat:@"%@:%.0f vs %@:%.0f", p1Name, game.playerOneScore, p2Name, game.playerTwoScore];
-        cell.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
-        //cell.backgroundColor = [UIColor mainColor];
+        cell.playerOneLabel.text = [p1Name uppercaseString];
+        cell.playerTwoLabel.text = [p2Name uppercaseString];
+        cell.playerOneScoreLabel.text = [NSString stringWithFormat:@"%.f", game.playerOneScore];
+        cell.playerTwoScoreLabel.text = [NSString stringWithFormat:@"%.f", game.playerTwoScore];
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MMM d, h:mm a"];
+        cell.dateLabel.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
+                //cell.backgroundColor = [UIColor mainColor];
         return cell;
 
     }else{

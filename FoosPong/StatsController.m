@@ -163,13 +163,13 @@
     
     for (Game *singleGame in singleGames) {
         
-        if (singleGame.p1 == user && [singleGame.playerOneWin boolValue]) {
+        if ([singleGame.p1.objectId isEqualToString:user.objectId] && [singleGame.playerOneWin boolValue]) {
             stats.wins ++;
             
-        }else if (singleGame.p1 == user && ![singleGame.playerOneWin boolValue]){
+        }else if ([singleGame.p1.objectId isEqualToString: user.objectId] && ![singleGame.playerOneWin boolValue]){
             stats.loses ++;
             
-        }else if (singleGame.p2 == user && ![singleGame.playerOneWin boolValue]){
+        }else if ([singleGame.p2.objectId isEqualToString: user.objectId] && ![singleGame.playerOneWin boolValue]){
             stats.wins ++;
             
         }else{
@@ -179,7 +179,7 @@
     
     for (TeamGame *teamGame in teamGames) {
         
-        if (teamGame.teamOneAttacker == user || teamGame.teamOneDefender == user) {
+        if ([teamGame.teamOneAttacker.objectId isEqualToString: user.objectId] || [teamGame.teamOneDefender.objectId isEqualToString: user.objectId]) {
             if ([teamGame.teamOneWin boolValue]) {
                 stats.wins ++;
                 
@@ -187,7 +187,7 @@
                 stats.loses ++;
             }
             
-        }else if (teamGame.teamTwoAttacker == user || teamGame.teamTwoDefender == user){
+        }else if ([teamGame.teamTwoAttacker.objectId isEqualToString: user.objectId] || [teamGame.teamTwoDefender.objectId isEqualToString: user.objectId]){
             if ([teamGame.teamOneWin boolValue]) {
                 stats.loses ++;
                 
@@ -205,8 +205,8 @@
                                 @[@"Games Played",
                                   @"Wins",
                                   @"Loses",
-                                  @"Single Games Played",
-                                  @"Team Games Played"]];
+                                  @"1V1 Games Played",
+                                  @"2V2 Games Played"]];
     
     callback(stats);
 

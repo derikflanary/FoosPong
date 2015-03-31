@@ -13,9 +13,10 @@
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     
     
-    self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"NewGameCell"];
+    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"NewGameCell"];
     self.textLabel.font = [UIFont fontWithName:@"Thonburi-Light" size:22];
-    self.detailTextLabel.font = [UIFont boldSystemFontOfSize:14];
+    self.detailTextLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
+    self.detailTextLabel.textColor = [UIColor marigoldBrown];
 //    self.layer.cornerRadius = 10;
 //    self.clipsToBounds = YES;
     self.backgroundColor = [UIColor transparentCellWhite];

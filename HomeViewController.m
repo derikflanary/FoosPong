@@ -82,8 +82,9 @@
     if (indexPath.row == 0) {
         cell.textLabel.text = @"CREATE A NEW GAME";
         cell.textLabel.textColor = [UIColor darkColor];
-        cell.textLabel.font = [UIFont fontWithName:[NSString boldFont] size:100];
+        cell.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:20];
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.detailTextLabel.text = @"Click Here";
     }else if (indexPath.row == 1){
         cell.textLabel.text = @"Add A Completed Game";
     }else{

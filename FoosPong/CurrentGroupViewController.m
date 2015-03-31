@@ -15,6 +15,7 @@
 #import "RankingController.h"
 #import "TeamMemberCustomTableViewCell.h"
 #import "GameDetailViewController.h"
+#import "UserController.h"
 
 @interface CurrentGroupViewController () <FindGroupViewControllerDelegate>
 @property (nonatomic, strong) FoosButton *joinGroupButton;
@@ -146,6 +147,8 @@
         cell = [TeamMemberCustomTableViewCell new];
         
     }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
     if (self.groupMembers.count > 0) {
         
         PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
@@ -179,11 +182,21 @@
         cell.nameLabel.text = [user.username uppercaseString];
         cell.fullNameLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
         cell.profileImageView.backgroundColor = [UIColor darkColor];
-        [cell.profileImageView setImage:[UIImage imageNamed:@"74"]];
+        
+        if (!user[@"profileImage"]) {
+            cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
+            
+        }else{
+            [[UserController sharedInstance]retrieveProfileImageWithCallback:^(UIImage *pic) {
+                cell.profileImageView.image = pic;
+                
+            }];
+            
+        }
 
     }
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
+    
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{

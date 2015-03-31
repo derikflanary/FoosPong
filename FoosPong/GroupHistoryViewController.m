@@ -73,7 +73,7 @@
     [self updateTableView];
 
     
-    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:2];
+    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
     
     self.segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"1 V 1", @"2 V 2"]];
     [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
