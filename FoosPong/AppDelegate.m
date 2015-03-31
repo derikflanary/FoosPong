@@ -15,6 +15,7 @@
 #import "GroupController.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import "LogViewController.h"
 
 
 @interface AppDelegate ()
@@ -53,7 +54,7 @@
     //[PFUser enableAutomaticUser];
     
 
-        self.mainNavigationController = [[UINavigationController alloc]initWithRootViewController:[PFUser currentUser]?[HomeViewController new]:[InitialViewController new]];
+        self.mainNavigationController = [[UINavigationController alloc]initWithRootViewController:[PFUser currentUser]?[HomeViewController new]:[LogViewController new]];
 //        [[GroupController sharedInstance]findGroupsForUser:[PFUser currentUser] callback:^(NSArray *array) {
 //            
 //        }];

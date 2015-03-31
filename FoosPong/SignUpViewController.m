@@ -41,11 +41,11 @@
     [self.navigationController.navigationBar setTintColor:[UIColor mainWhite]];
     [self.navigationController.navigationBar setBarTintColor:[UIColor darkColor]];
     
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
-    self.navigationItem.leftBarButtonItem = cancelButton;
+//    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
+//    self.navigationItem.leftBarButtonItem = cancelButton;
     
-    UIBarButtonItem *otherLogIn = [[UIBarButtonItem alloc] initWithTitle:@"Already Signed Up" style:UIBarButtonItemStylePlain target:self action:@selector(openLogIn:)];
-    self.navigationItem.rightBarButtonItem = otherLogIn;
+//    UIBarButtonItem *otherLogIn = [[UIBarButtonItem alloc] initWithTitle:@"Already Signed Up" style:UIBarButtonItemStylePlain target:self action:@selector(openLogIn:)];
+//    self.navigationItem.rightBarButtonItem = otherLogIn;
     
 //    UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
 //    background.frame = self.view.frame;

@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Vibe. All rights reserved.
 //
 
-#import "BaseLoginController.h"
+#import "MasterViewController.h"
 
-@interface LogViewController : BaseLoginController
+@interface LogViewController : MasterViewController
 
 @property (nonatomic, strong) UITextField * usernameField;
 

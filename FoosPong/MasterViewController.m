@@ -18,6 +18,7 @@
 #import "SettingViewController.h"
 #import "AppDelegate.h"
 #import "GroupHistoryViewController.h"
+#import "LogViewController.h"
 
 typedef NS_ENUM(NSInteger, SideBarSection) {
     SideBarSectionLogin,
@@ -100,6 +101,8 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
         HomeViewController *hvc = [HomeViewController new];
         InitialViewController *ivc = [InitialViewController new];
         
+        LogViewController *lvc = [LogViewController new];
+        
         UITabBarController *profileTabBar = [UITabBarController new];
         HistoryViewController *historyVC = [HistoryViewController new];
         PersonalNotificationsViewController *pnvc = [PersonalNotificationsViewController new];
@@ -138,7 +141,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
                 [PFUser logOut];
                 [sidebar dismissAnimated:YES completion:^(BOOL finished) {
                     if (finished){
-                    self.navigationController.viewControllers = @[ivc];
+                    self.navigationController.viewControllers = @[lvc];
                     }
                 }];
                 break;
