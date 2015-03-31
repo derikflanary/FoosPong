@@ -158,7 +158,7 @@
     
     NSString *fullName = [NSString combineNames:self.currentUser[@"firstName"] and:self.currentUser[@"lastName"]];
     self.profileImageView = [[UIImageView alloc]initWithFrame:CGRectMake(9, 160, 100, 100)];
-    [self.profileImageView setImageWithString:fullName color:nil circular:YES];
+    [self.profileImageView setImageWithString:fullName color:[UIColor darkColor] circular:YES];
     [self.view addSubview:self.profileImageView];
     self.profileImageView.layer.cornerRadius = 50;
     self.profileImageView.clipsToBounds = YES;
