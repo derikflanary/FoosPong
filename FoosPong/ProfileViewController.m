@@ -181,8 +181,8 @@
             self.navController = [[UINavigationController alloc]initWithRootViewController:svc];
             self.recordLabel.text = [NSString stringWithFormat:@"%ld-%ld", (long)stats.wins, (long)stats.loses];
             
-            self.singleAmountLabel.text = [NSString stringWithFormat:@"%ld", stats.singleGamesPlayed];
-            self.doubleAmountLabel.text = [NSString stringWithFormat:@"%ld", stats.teamGamesPlayed];
+            self.singleAmountLabel.text = [NSString stringWithFormat:@"%ld", (long)stats.singleGamesPlayed];
+            self.doubleAmountLabel.text = [NSString stringWithFormat:@"%ld", (long)stats.teamGamesPlayed];
             
             self.navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
             svc.overallStats = stats;

@@ -99,7 +99,7 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
     
     if ([PFUser currentUser].username) {
         HomeViewController *hvc = [HomeViewController new];
-        InitialViewController *ivc = [InitialViewController new];
+//        InitialViewController *ivc = [InitialViewController new];
         
         LogViewController *lvc = [LogViewController new];
         

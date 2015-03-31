@@ -10,6 +10,7 @@
 #import "ChoosePlayersViewController.h"
 #import "SingleGameController.h"
 #import "SingleGameDetails.h"
+#import "MinusButton.h"
 
 #import <OpenEars/OELanguageModelGenerator.h>
 #import <OpenEars/OEPocketsphinxController.h>
@@ -39,8 +40,8 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 @property (strong, nonatomic) UILabel *p2ScoreLabel;
 @property (strong, nonatomic) UILabel *p1Label;
 @property (strong, nonatomic) UILabel *p2Label;
-@property (strong, nonatomic) FoosButton *p1MinusButton;
-@property (strong, nonatomic) FoosButton *p2MinusButton;
+@property (strong, nonatomic) MinusButton *p1MinusButton;
+@property (strong, nonatomic) MinusButton *p2MinusButton;
 
 
 
@@ -57,8 +58,8 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
      [NSDictionary dictionaryWithObjectsAndKeys:
       [UIFont fontWithName:@"Thonburi-Light" size:18],
       NSFontAttributeName, nil]];
-    [self.navigationController.navigationBar setTintColor:[UIColor darkColor]];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor transparentWhite]];
+    [self.navigationController.navigationBar setTintColor:[UIColor mainWhite]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor darkColor]];
     
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
@@ -66,7 +67,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     [self.view addSubview:background];
     
     UIView *view = [[UIView alloc]initWithFrame:self.view.frame];
-    view.backgroundColor = [UIColor transparentWhite];
+    view.backgroundColor = [UIColor darkColor];
     [self.view addSubview:view];
     
     self.scoreToWin = 10;
@@ -101,23 +102,31 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 
     self.p1ScoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, 100, 100, 100)];
     self.p1ScoreLabel.textAlignment = NSTextAlignmentCenter;
-    self.p1ScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:50];
+    self.p1ScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:80];
+    self.p1ScoreLabel.textColor = [UIColor mainWhite];
+    self.p1ScoreLabel.layer.borderColor = [UIColor golderBrown].CGColor;
+    self.p1ScoreLabel.layer.borderWidth = 1.0f;
     
     self.p2ScoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(180, 100, 100, 100)];
     self.p2ScoreLabel.textAlignment = NSTextAlignmentCenter;
-    self.p2ScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:50];
+    self.p2ScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:80];
+    self.p2ScoreLabel.textColor = [UIColor mainWhite];
+    self.p2ScoreLabel.layer.borderColor = [UIColor golderBrown].CGColor;
+    self.p2ScoreLabel.layer.borderWidth = 1.0f;
     
     self.p1Label = [[UILabel alloc]initWithFrame:CGRectMake(30, 425, 100, 50)];
-    self.p1Label.text = self.playerOneName;
+    self.p1Label.text = [self.playerOneName uppercaseString];
     self.p1Label.textAlignment = NSTextAlignmentCenter;
-    self.p1Label.font = [UIFont fontWithName:[NSString mainFont] size:18];
+    self.p1Label.font = [UIFont fontWithName:[NSString mainFont] size:22];
+    self.p1Label.textColor = [UIColor mainWhite];
     
     self.p2Label = [[UILabel alloc]initWithFrame:CGRectMake(180, 425, 100, 50)];
-    self.p2Label.text = self.playerTwoName;
+    self.p2Label.text = [self.playerTwoName uppercaseString];
     self.p2Label.textAlignment = NSTextAlignmentCenter;
-    self.p2Label.font = [UIFont fontWithName:[NSString mainFont] size:18];
+    self.p2Label.font = [UIFont fontWithName:[NSString mainFont] size:22];
+    self.p2Label.textColor = [UIColor mainWhite];
     
-    self.p1MinusButton = [[FoosButton alloc]initWithFrame:CGRectMake(45, 350, 50, 50)];
+    self.p1MinusButton = [[MinusButton alloc]initWithFrame:CGRectMake(45, 350, 50, 50)];
     [self.p1MinusButton setImage:[UIImage imageNamed:@"minus"] forState:UIControlStateNormal];
     [self.p1MinusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     self.p1MinusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];
@@ -126,7 +135,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.p1MinusButton.layer.cornerRadius = 25;
     self.p1MinusButton.clipsToBounds = YES;
     
-    self.p2MinusButton = [[FoosButton alloc]initWithFrame:CGRectMake(215, 350, 50, 50)];
+    self.p2MinusButton = [[MinusButton alloc]initWithFrame:CGRectMake(215, 350, 50, 50)];
     [self.p2MinusButton setImage:[UIImage imageNamed:@"minus"] forState:UIControlStateNormal];
     [self.p2MinusButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     self.p2MinusButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:40];

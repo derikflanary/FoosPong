@@ -34,4 +34,6 @@
 
 + (UIColor *)transparentCellWhite;
 
++ (UIColor *)transparentButtonColor;
+    
 @end

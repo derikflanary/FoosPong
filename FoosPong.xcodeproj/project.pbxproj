@@ -25,6 +25,7 @@
 		EE1A55811A9CFB4A00E6981E /* CurrentGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A55801A9CFB4A00E6981E /* CurrentGroupViewController.m */; };
 		EE1A55851A9CFBB500E6981E /* GroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A55841A9CFBB500E6981E /* GroupController.m */; };
 		EE1A55881A9D217700E6981E /* PersonalNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A55871A9D217700E6981E /* PersonalNotificationsViewController.m */; };
+		EE1CBBB41ACA86930099D98A /* MinusButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1CBBB31ACA86930099D98A /* MinusButton.m */; };
 		EE2C57D61A93DFC600DA9835 /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57D51A93DFC600DA9835 /* UIImageView+Letters.m */; };
 		EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57DE1A93ECD200DA9835 /* BaseLoginController.m */; };
 		EE2C57E21A93F12300DA9835 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2C57E11A93F12300DA9835 /* SignUpViewController.m */; };
@@ -149,6 +150,8 @@
 		EE1A55841A9CFBB500E6981E /* GroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupController.m; sourceTree = "<group>"; };
 		EE1A55861A9D217700E6981E /* PersonalNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalNotificationsViewController.h; sourceTree = "<group>"; };
 		EE1A55871A9D217700E6981E /* PersonalNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalNotificationsViewController.m; sourceTree = "<group>"; };
+		EE1CBBB21ACA86930099D98A /* MinusButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinusButton.h; sourceTree = "<group>"; };
+		EE1CBBB31ACA86930099D98A /* MinusButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinusButton.m; sourceTree = "<group>"; };
 		EE2C57D41A93DFC600DA9835 /* UIImageView+Letters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Letters.h"; sourceTree = "<group>"; };
 		EE2C57D51A93DFC600DA9835 /* UIImageView+Letters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Letters.m"; sourceTree = "<group>"; };
 		EE2C57DD1A93ECD200DA9835 /* BaseLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseLoginController.h; sourceTree = "<group>"; };
@@ -513,6 +516,8 @@
 				EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */,
 				EE7C85C61AC0CE48008467AD /* FoosButton.h */,
 				EE7C85C71AC0CE48008467AD /* FoosButton.m */,
+				EE1CBBB21ACA86930099D98A /* MinusButton.h */,
+				EE1CBBB31ACA86930099D98A /* MinusButton.m */,
 				EEB88E7F1AC36543008FFF87 /* CustomAccessoryView.h */,
 				EEB88E801AC36543008FFF87 /* CustomAccessoryView.m */,
 				EE0DC00C1A8C53A1000235B3 /* FoosPong-Prefix.pch */,
@@ -828,6 +833,7 @@
 				EEF716B31ABD18DF005DDB61 /* TeamMemberStatsViewController.m in Sources */,
 				EE0DC0121A8D96D8000235B3 /* SingleGameController.m in Sources */,
 				EE7A6CDF1A868402000447D2 /* AppDelegate.m in Sources */,
+				EE1CBBB41ACA86930099D98A /* MinusButton.m in Sources */,
 				EE3356F11A89610B00B83EC0 /* SingleGameViewController.m in Sources */,
 				EEE7DDD71AAE8E670089A488 /* PersonalOverallStats.m in Sources */,
 				EE808DB71A9FCCB10000F833 /* NSString+Fonts.m in Sources */,

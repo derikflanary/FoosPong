@@ -402,6 +402,15 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                     cell.nameLabel.text = [theUser.username uppercaseString];
                     cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
                     
+                    if (!theUser[@"profileImage"]) {
+                        cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
+                        
+                    }else{
+                        [[UserController sharedInstance]retrieveProfileImageWithCallback:^(UIImage *pic) {
+                            cell.profileImageView.image = pic;
+                            
+                        }];
+                    }
                 }
                 
                 return cell;
@@ -411,6 +420,16 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 PFUser *theUser = [self.availablePlayers objectAtIndex:indexPath.row];
                 cell.nameLabel.text = [theUser.username uppercaseString];
                 cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
+                
+                if (!theUser[@"profileImage"]) {
+                    cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
+                    
+                }else{
+                    [[UserController sharedInstance]retrieveProfileImageWithCallback:^(UIImage *pic) {
+                        cell.profileImageView.image = pic;
+                        
+                    }];
+                }
                 return cell;
             }
         }
@@ -426,6 +445,15 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 }else{
                     cell.nameLabel.text = [theUser.username uppercaseString];
                     cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
+                    if (!theUser[@"profileImage"]) {
+                        cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
+                        
+                    }else{
+                        [[UserController sharedInstance]retrieveProfileImageWithCallback:^(UIImage *pic) {
+                            cell.profileImageView.image = pic;
+                            
+                        }];
+                    }
                 }
                 if (indexPath.row == 0) {
                     cell.detailTextLabel.text = @"Attacker";
@@ -446,7 +474,16 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 }else{
                     cell.nameLabel.text = [theUser.username uppercaseString];
                     cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
-
+                   
+                    if (!theUser[@"profileImage"]) {
+                        cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
+                        
+                    }else{
+                        [[UserController sharedInstance]retrieveProfileImageWithCallback:^(UIImage *pic) {
+                            cell.profileImageView.image = pic;
+                            
+                        }];
+                    }
                 }
                 
                 if (indexPath.row == 0) {
@@ -464,6 +501,16 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 cell.nameLabel.text = [theUser.username uppercaseString];
                 cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
                 cell.detailTextLabel.text = @"";
+                
+                if (!theUser[@"profileImage"]) {
+                    cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
+                    
+                }else{
+                    [[UserController sharedInstance]retrieveProfileImageWithCallback:^(UIImage *pic) {
+                        cell.profileImageView.image = pic;
+                        
+                    }];
+                }
                 return cell;
 
             }

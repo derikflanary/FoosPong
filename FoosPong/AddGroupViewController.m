@@ -29,8 +29,8 @@
      [NSDictionary dictionaryWithObjectsAndKeys:
       [UIFont fontWithName:@"Thonburi-Light" size:18],
       NSFontAttributeName, nil]];
-    [self.navigationController.navigationBar setTintColor:[UIColor darkColor]];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor mainWhite]];
+    [self.navigationController.navigationBar setTintColor:[UIColor mainWhite]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor darkColor]];
 
     self.view.backgroundColor = [UIColor transparentWhite];
     
@@ -66,7 +66,7 @@
     self.groupNameField.autocorrectionType = UITextAutocorrectionTypeNo;
 
 
-    self.groupOrganiztionField = [[UITextField alloc]initWithFrame:CGRectMake(0, 150, self.view.frame.size.width, 41)];
+    self.groupOrganiztionField = [[UITextField alloc]initWithFrame:CGRectMake(0, 140, self.view.frame.size.width, 41)];
     self.groupOrganiztionField.backgroundColor = [UIColor whiteColor];
     self.groupOrganiztionField.placeholder = @"Organization Name";
     self.groupOrganiztionField.font = [UIFont fontWithName:fontName size:16.0f];
@@ -78,7 +78,7 @@
     self.groupNameField.autocorrectionType = UITextAutocorrectionTypeNo;
 
     
-    self.passwordField = [[UITextField alloc]initWithFrame:CGRectMake(0, 190, self.view.frame.size.width, 41)];
+    self.passwordField = [[UITextField alloc]initWithFrame:CGRectMake(0, 181, self.view.frame.size.width, 41)];
     self.passwordField.backgroundColor = [UIColor whiteColor];
     self.passwordField.placeholder = @"Team Password";
     self.passwordField.font = [UIFont fontWithName:fontName size:16.0f];

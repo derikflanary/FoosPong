@@ -85,6 +85,10 @@
     return color;
 }
 
++ (UIColor *)transparentButtonColor{
+    UIColor* color = [UIColor colorWithRed:.81 green:.73 blue:.6 alpha:.7f];
+    return color;
+}
 
 
 

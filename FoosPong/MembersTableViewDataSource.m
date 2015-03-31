@@ -11,6 +11,7 @@
 #import "GroupController.h"
 #import "PlayerTableViewCell.h"
 #import "EditGroupViewController.h"
+#import "UserController.h"
 
 @implementation MembersTableViewDataSource
 
@@ -39,7 +40,18 @@
         }
         cell.nameLabel.text = [user.username uppercaseString];
         cell.fullNameLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
-        [cell.profileImageView setImage:[UIImage imageNamed:@"74"]];
+        
+        if (!user[@"profileImage"]) {
+            cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
+            
+        }else{
+            [[UserController sharedInstance]retrieveProfileImageWithCallback:^(UIImage *pic) {
+                cell.profileImageView.image = pic;
+                
+            }];
+            
+        }
+
     }
     
     return cell;

@@ -46,8 +46,8 @@
      [NSDictionary dictionaryWithObjectsAndKeys:
       [UIFont fontWithName:@"Thonburi-Light" size:18],
       NSFontAttributeName, nil]];
-    [self.navigationController.navigationBar setTintColor:[UIColor darkColor]];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor transparentWhite]];
+    [self.navigationController.navigationBar setTintColor:[UIColor mainWhite]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor darkColor]];
 
     
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
