@@ -59,7 +59,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
       [UIFont fontWithName:@"Thonburi-Light" size:18],
       NSFontAttributeName, nil]];
     [self.navigationController.navigationBar setTintColor:[UIColor mainWhite]];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor darkColor]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor golderBrown]];
     
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
@@ -104,15 +104,15 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.p1ScoreLabel.textAlignment = NSTextAlignmentCenter;
     self.p1ScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:80];
     self.p1ScoreLabel.textColor = [UIColor mainWhite];
-    self.p1ScoreLabel.layer.borderColor = [UIColor golderBrown].CGColor;
-    self.p1ScoreLabel.layer.borderWidth = 1.0f;
+//    self.p1ScoreLabel.layer.borderColor = [UIColor golderBrown].CGColor;
+//    self.p1ScoreLabel.layer.borderWidth = 1.0f;
     
     self.p2ScoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(180, 100, 100, 100)];
     self.p2ScoreLabel.textAlignment = NSTextAlignmentCenter;
     self.p2ScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:80];
     self.p2ScoreLabel.textColor = [UIColor mainWhite];
-    self.p2ScoreLabel.layer.borderColor = [UIColor golderBrown].CGColor;
-    self.p2ScoreLabel.layer.borderWidth = 1.0f;
+//    self.p2ScoreLabel.layer.borderColor = [UIColor golderBrown].CGColor;
+//    self.p2ScoreLabel.layer.borderWidth = 1.0f;
     
     self.p1Label = [[UILabel alloc]initWithFrame:CGRectMake(30, 425, 100, 50)];
     self.p1Label.text = [self.playerOneName uppercaseString];
@@ -200,6 +200,51 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         
  
     }
+    
+//AutoLayout
+    
+    self.p1ScoreLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.p1PlusButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.p1MinusButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.p1Label.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    self.p2ScoreLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.p2PlusButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.p2MinusButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.p2Label.translatesAutoresizingMaskIntoConstraints = NO;
+
+    
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_p1PlusButton, _p2PlusButton, _p1ScoreLabel, _p1MinusButton, _p1Label, _p2ScoreLabel, _p2MinusButton, _p2Label);
+    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_p1PlusButton(>=100)]-(>=8)-[_p2PlusButton(>=100)]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary];
+    [self.view addConstraints:constraints];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=8)-[_p1MinusButton(==50)]-(>=8)-[_p2MinusButton(==50)]-(>=8)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
+    [self.view addConstraints:constraints];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==100)-[_p1ScoreLabel(>=100)]-[_p1PlusButton]-(==50)-[_p1MinusButton(==50)]-(==50)-[_p1Label]-(==50)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==100)-[_p2ScoreLabel(>=100)]-[_p2PlusButton]-(==50)-[_p2MinusButton(==50)]-(==50)-[_p2Label]-(==50)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
+    
+//    NSLayoutConstraint *centerConstraint =
+//    [NSLayoutConstraint constraintWithItem:self.scoreField
+//                                 attribute:NSLayoutAttributeCenterX
+//                                 relatedBy:NSLayoutRelationEqual
+//                                    toItem:self.contentView
+//                                 attribute:NSLayoutAttributeCenterX
+//                                multiplier:1
+//                                  constant:0];
+//    centerConstraint.priority = UILayoutPriorityDefaultHigh;
+//    [self.contentView addConstraint:centerConstraint];
+//    
+//    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.photoButton
+//                                                                 attribute:NSLayoutAttributeWidth
+//                                                                 relatedBy:NSLayoutRelationEqual
+//                                                                    toItem:self.photoButton
+//                                                                 attribute:NSLayoutAttributeHeight
+//                                                                multiplier:1
+//                                                                  constant:0]];
+    
+
     
 }
 
