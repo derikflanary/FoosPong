@@ -117,6 +117,7 @@
         [self.messageLabel sizeToFit];
         
         self.tableView.backgroundView = self.messageLabel;
+        [self.refreshControl endRefreshing];
     }else{
         self.messageLabel.text = @"";
         
@@ -148,6 +149,8 @@
                 
             }];
         }];
+    }if ([self.singleGames count] < 1) {
+        [self.refreshControl endRefreshing];
     }
 }
 

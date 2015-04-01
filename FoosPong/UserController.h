@@ -26,8 +26,6 @@
 
 - (void)saveProfilePhoto:(UIImage*)image;
 
-- (void)retrieveProfileImageWithCallback:(void (^)(UIImage *))callback;
-
 - (void)retrieveProfileImageForUser:(PFUser *)user withCallback:(void (^)(UIImage *))callback;
 
 

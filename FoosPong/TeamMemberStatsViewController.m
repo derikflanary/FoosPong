@@ -174,6 +174,10 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
     return YES;
 }
 
+- (CGFloat)lineChartView:(JBLineChartView *)lineChartView dotRadiusForDotAtHorizontalIndex:(NSUInteger)horizontalIndex atLineIndex:(NSUInteger)lineIndex{
+    return 7;
+}
+
 #pragma mark - information view
 
 - (void)lineChartView:(JBLineChartView *)lineChartView didSelectLineAtIndex:(NSUInteger)lineIndex horizontalIndex:(NSUInteger)horizontalIndex touchPoint:(CGPoint)touchPoint

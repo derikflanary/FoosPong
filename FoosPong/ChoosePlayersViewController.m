@@ -14,6 +14,7 @@
 #import "TeamGameViewController.h"
 #import "GroupController.h"
 #import "PlayerTableViewCell.h"
+#import "RankingController.h"
 
 typedef NS_ENUM(NSInteger, TableViewSection) {
     TableViewSectionCurrent,
@@ -45,6 +46,8 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 @property (nonatomic, strong) NSArray *searchAvailablePlayers;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 @property (nonatomic, strong) UILabel *messageLabel;
+@property (nonatomic, strong) NSMutableArray *currentPlayersRankings;
+@property (nonatomic, strong) NSMutableArray *availablePlayersRankings;
 
 
 @end
@@ -145,21 +148,54 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                     
                 }
             }
-            [self.availablePlayers removeObject:self.currentUser];
-            
-            self.currentPlayers = [NSMutableArray array];
-            [self.currentPlayers insertObject:self.currentUser atIndex:0];
-            
-            if ([self.currentPlayers count] <2) {
-                [self.currentPlayers addObject:[PFUser new]];
+            BOOL isInGroup = false;
+            for (PFUser *member in members) {
+                if ([member.objectId isEqualToString:self.currentUser.objectId]) {
+                    isInGroup = YES;
+                    break;
+                }
             }
             
-            self.title = [group[@"name"] uppercaseString];
-            self.searchAvailablePlayers = members;
-            [self.activityView stopAnimating];
-            [self.tableView reloadData];
+            if (!isInGroup) {
+                [[GroupController sharedInstance]setCurrentGroup:nil callback:^(BOOL *success) {
+                    NSLog(@"current Group removed");
+                    [self.tableView reloadData];
+                }];
+
+            }else{
+                [[RankingController sharedInstance]retrieveRankingsForGroup:group forUsers:self.availablePlayers withCallBack:^(NSArray *rankings) {
+                    
+                    NSMutableArray *mutableGroupMembers = [NSMutableArray array];
+                    
+                    for (PFObject *ranking in rankings) {
+                        PFUser *userForRanking = ranking[@"user"];
+                        
+                        for (PFUser *member in self.availablePlayers) {
+                            if ([userForRanking.objectId isEqualToString:member.objectId]) {
+                                [mutableGroupMembers addObject:member];
+                            }
+                        }
+                    }
+                    self.availablePlayers = mutableGroupMembers;
+                    self.availablePlayersRankings = rankings.mutableCopy;
+                    [self.availablePlayers removeObject:self.currentUser];
+                    
+                    self.currentPlayers = [NSMutableArray array];
+                    [self.currentPlayers insertObject:self.currentUser atIndex:0];
+                    
+                    if ([self.currentPlayers count] <2) {
+                        [self.currentPlayers addObject:[PFUser new]];
+                        PFObject *emptyRanking = [PFObject objectWithClassName:@"Ranking"];
+                        [self.currentPlayersRankings addObject:emptyRanking];
+                    }
+                    
+                    self.title = [group[@"name"] uppercaseString];
+                    self.searchAvailablePlayers = members;
+                    [self.activityView stopAnimating];
+                    [self.tableView reloadData];
+                }];
+            }
         }];
-        
     }];
    
     self.teamTwoPlayers = [NSMutableArray array];
@@ -401,18 +437,31 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     
     
     if (self.segmentedControl.selectedSegmentIndex == 0) {
+        
         TableViewSection tableViewSection = indexPath.section;
         switch (tableViewSection) {
             case TableViewSectionCurrent:{
                 
                 PFUser *theUser = [self.currentPlayers objectAtIndex:indexPath.row];
+                PFObject *userRank = [PFObject objectWithClassName:@"Ranking"];
+                
+                for (PFObject *ranking in self.availablePlayersRankings) {
+                    PFUser *rankingUser = ranking[@"user"];
+                    if ([rankingUser.objectId isEqualToString:theUser.objectId]) {
+                        userRank = ranking;
+                    }
+                }
+                
                 if (!theUser.username) {
                     cell.nameLabel.text = @"Add Player";
                     cell.nameLabel.textColor = [UIColor colorWithWhite:.5 alpha:.7];
                     cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
                 }else{
+                    
                     cell.nameLabel.text = [theUser.username uppercaseString];
                     cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
+                    NSNumber *ranking = userRank[@"rank"];
+                    cell.rankLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
                     
                     if (!theUser[@"profileImage"]) {
                         cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
@@ -430,10 +479,23 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 break;
             }
             case TableViewSectionAvailable:{
+                
                 PFUser *theUser = [self.availablePlayers objectAtIndex:indexPath.row];
+                PFObject *userRank = [PFObject objectWithClassName:@"Ranking"];
+                
+                for (PFObject *ranking in self.availablePlayersRankings) {
+                    PFUser *rankingUser = ranking[@"user"];
+                    if ([rankingUser.objectId isEqualToString:theUser.objectId]) {
+                        userRank = ranking;
+                    }
+                }
+                
                 cell.nameLabel.text = [theUser.username uppercaseString];
                 cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
-                
+//                PFObject *userRank = [self.availablePlayersRankings objectAtIndex:indexPath.row];
+                NSNumber *ranking = userRank[@"rank"];
+                cell.rankLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
+
                 if (!theUser[@"profileImage"]) {
                     cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
                     
@@ -447,10 +509,22 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
             }
         }
     }else{
+        
         TableView2TeamSection tableView2TeamSection = indexPath.section;
         switch (tableView2TeamSection) {
             case TableView2TeamSectionTeam1:{
+                
                 PFUser *theUser = [self.currentPlayers objectAtIndex:indexPath.row];
+                
+                PFObject *userRank = [PFObject objectWithClassName:@"Ranking"];
+                
+                for (PFObject *ranking in self.availablePlayersRankings) {
+                    PFUser *rankingUser = ranking[@"user"];
+                    if ([rankingUser.objectId isEqualToString:theUser.objectId]) {
+                        userRank = ranking;
+                    }
+                }
+
                 if (!theUser.username) {
                     cell.nameLabel.text = @"Add Player";
                     cell.nameLabel.textColor = [UIColor colorWithWhite:.5 alpha:.7];
@@ -458,6 +532,9 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 }else{
                     cell.nameLabel.text = [theUser.username uppercaseString];
                     cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
+                    NSNumber *ranking = userRank[@"rank"];
+                    cell.rankLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
+                    
                     if (!theUser[@"profileImage"]) {
                         cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
                         
@@ -469,16 +546,25 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                     }
                 }
                 if (indexPath.row == 0) {
-                    cell.detailTextLabel.text = @"Attacker";
+                    cell.positionLabel.text = @"Attacker";
                 }else{
-                    cell.detailTextLabel.text = @"Defender";
+                    cell.positionLabel.text = @"Defender";
                 }
                 return cell;
                 break;
 
             }
             case TableView2TeamSectionTeam2:{
+                
                 PFUser *theUser = [self.teamTwoPlayers objectAtIndex:indexPath.row];
+                PFObject *userRank = [PFObject objectWithClassName:@"Ranking"];
+                
+                for (PFObject *ranking in self.availablePlayersRankings) {
+                    PFUser *rankingUser = ranking[@"user"];
+                    if ([rankingUser.objectId isEqualToString:theUser.objectId]) {
+                        userRank = ranking;
+                    }
+                }
                 
                 if (!theUser.username) {
                     cell.nameLabel.text = @"Add Player";
@@ -487,7 +573,9 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 }else{
                     cell.nameLabel.text = [theUser.username uppercaseString];
                     cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
-                   
+                    NSNumber *ranking = userRank[@"rank"];
+                    cell.rankLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
+
                     if (!theUser[@"profileImage"]) {
                         cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
                         
@@ -500,20 +588,32 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 }
                 
                 if (indexPath.row == 0) {
-                    cell.detailTextLabel.text = @"Attacker";
+                    cell.positionLabel.text = @"Attacker";
                     
                 }else{
-                    cell.detailTextLabel.text = @"Defender";
+                    cell.positionLabel.text = @"Defender";
                 }
                 return cell;
                 break;
 
             }
             case TableView2TeamSectionAvailable:{
+                
                 PFUser *theUser = [self.availablePlayers objectAtIndex:indexPath.row];
+                PFObject *userRank = [PFObject objectWithClassName:@"Ranking"];
+                
+                for (PFObject *ranking in self.availablePlayersRankings) {
+                    PFUser *rankingUser = ranking[@"user"];
+                    if ([rankingUser.objectId isEqualToString:theUser.objectId]) {
+                        userRank = ranking;
+                    }
+                }
+
                 cell.nameLabel.text = [theUser.username uppercaseString];
                 cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
                 cell.detailTextLabel.text = @"";
+                NSNumber *ranking = userRank[@"rank"];
+                cell.rankLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
                 
                 if (!theUser[@"profileImage"]) {
                     cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
@@ -545,6 +645,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
         [tableView cellForRowAtIndexPath:self.selectedPath].selected = NO;
         
         if (self.segmentedControl.selectedSegmentIndex == 0) {
+            
             if (self.selectedPath.section == 1 && indexPath.section == 0) {
                 PFUser *fromUser = [self.availablePlayers objectAtIndex:self.selectedPath.row];
                 PFUser *toUser = [self.currentPlayers objectAtIndex:indexPath.row];

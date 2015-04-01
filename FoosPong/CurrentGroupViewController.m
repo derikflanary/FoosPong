@@ -54,7 +54,7 @@
 //    if (!currentUser[@"currentGroup"]) {
 //        [self noGroup];
 //    }else{
-//        
+        [self.addMembersButton removeFromSuperview];
         [self checkForGroup];
 //    }
 }
@@ -166,13 +166,10 @@
                 NSNumber *ranking = rankingObject[@"rank"];
                 cell.scoreLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
                 
-                
             }
             
             cell.adminLabel.text = @"Admin";
-            //cell.detailTextLabel.text = [NSString combineNames:user[@"firstName"] and:user[@"lastName"]];
-            //cell.adminLabel.text = @"Admin";
-            
+           
         }else{
             
             if ([self.memberRankings count] > 0) {
@@ -275,7 +272,7 @@
                 
                 [[GroupController sharedInstance]fetchMembersOfGroup:self.currentGroup Callback:^(NSArray *members) {
                     [self.activityView stopAnimating];
-                    self.tableView.allowsSelection = YES;
+                    
                     PFUser *currentUser = [PFUser currentUser];
                     BOOL isInGroup = false;
                     for (PFUser *member in members) {
@@ -315,7 +312,11 @@
                                     [self.view addSubview:self.addMembersButton];
                                 
                                     self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, 350);
+                                    self.tableView.allowsSelection = YES;
                                     [self.tableView reloadData];
+                                }
+                                else{
+                                    [self.addMembersButton removeFromSuperview];
                                 }
                             }];
                             
@@ -451,9 +452,9 @@
 
 -(void)groupSelected{
     [self checkForGroup];
-    [self.noGroupView removeFromSuperview];
-    [self.bluredEffectView removeFromSuperview];
-    
+//    [self.noGroupView removeFromSuperview];
+//    [self.bluredEffectView removeFromSuperview];
+//    
 }
 /*
 #pragma mark - Navigation

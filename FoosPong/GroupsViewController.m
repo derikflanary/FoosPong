@@ -33,6 +33,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     //self.tabBarController.navigationItem.leftBarButtonItem = self.findGroupButton;
+    [self checkForGroups];
 }
 
 - (void)viewDidLoad {
@@ -87,7 +88,7 @@
     [self.createGroupButton addTarget:self action:@selector(createPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.createGroupButton];
     
-    [self checkForGroups];
+//    [self checkForGroups];
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
     
@@ -256,10 +257,9 @@
 }
 
 -(void)groupSelected{
-    [self checkForGroups];
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    
+//    [self checkForGroups];
+    
 }
 
 

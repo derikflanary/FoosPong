@@ -22,4 +22,6 @@
 
 @property (nonatomic, strong) UILabel *rankLabel;
 
+@property (nonatomic, strong) UILabel *positionLabel;
+
 @end

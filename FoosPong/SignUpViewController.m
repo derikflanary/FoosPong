@@ -96,6 +96,7 @@
     UIView* leftView5 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 20)];
     self.emailField.leftViewMode = UITextFieldViewModeAlways;
     self.emailField.leftView = leftView5;
+    [self.emailField setKeyboardType:UIKeyboardTypeEmailAddress];
     
     self.usernameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 286, self.view.frame.size.width, 41)];
     self.usernameField.backgroundColor = [UIColor mainWhite];
