@@ -155,6 +155,19 @@ PFQuery *query = [PFUser query];
 
 - (void)saveProfilePhoto:(UIImage*)image{
     
+    PFUser *currentUser = [PFUser currentUser];
+    
+    if (currentUser[@"profileImage"]) {
+        PFQuery *query = [PFQuery queryWithClassName:@"UserPhoto"];
+        [query whereKey:@"imageName" equalTo:currentUser.username];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            
+            [object deleteInBackground];
+        }];
+   
+    }
+    
+    
     NSData *imageData = UIImagePNGRepresentation(image);
     PFFile *imageFile = [PFFile fileWithName:@"profileImage.png" data:imageData];
     
@@ -171,7 +184,7 @@ PFQuery *query = [PFUser query];
         }        
     }];
     PFObject *userPhoto = [PFObject objectWithClassName:@"UserPhoto"];
-    userPhoto[@"imageName"] = @"My trip to Hawaii!";
+    userPhoto[@"imageName"] = currentUser.username;
     userPhoto[@"imageFile"] = imageFile;
     [userPhoto saveInBackground];
 }
@@ -190,6 +203,8 @@ PFQuery *query = [PFUser query];
     }];
 
 }
+
+
 
 
 - (void)removeUser:(PFUser *)user{

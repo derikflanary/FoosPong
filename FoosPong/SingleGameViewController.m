@@ -363,16 +363,20 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 }
 
 -(void)saveGamePressed:(id)sender{
+    
     UIAlertController *saveAlert = [UIAlertController alertControllerWithTitle:@"Save Game" message:@"Would you like to save this game for later?" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [saveAlert addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    }]];
+    
     [saveAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self.navigationController popToRootViewControllerAnimated:YES];
-    }]];
-    [saveAlert addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
     }]];
     
     [self presentViewController:saveAlert animated:YES completion:nil];
     
 }
+
 
 #pragma mark - Voice Commands
 

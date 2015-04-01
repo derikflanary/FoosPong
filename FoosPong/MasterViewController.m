@@ -121,13 +121,13 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
         
         UITabBarController *groupTabBar = [UITabBarController new];
         GroupsViewController *gvc = [GroupsViewController new];
-        gvc.tabBarItem.title = @"Groups";
+        gvc.tabBarItem.title = @"Teams";
         gvc.tabBarItem.image = [UIImage imageNamed:@"70"];
         CurrentGroupViewController *cgvc = [CurrentGroupViewController new];
-        cgvc.tabBarItem.title = @"Current Group";
+        cgvc.tabBarItem.title = @"Current Team";
         cgvc.tabBarItem.image = [UIImage imageNamed:@"85"];
         GroupHistoryViewController *ghvc = [GroupHistoryViewController new];
-        ghvc.tabBarItem.title = @"Group Feed";
+        ghvc.tabBarItem.title = @"Team Feed";
         ghvc.tabBarItem.image = [UIImage imageNamed:@"124"];
         groupTabBar.viewControllers = @[cgvc, gvc, ghvc];
         

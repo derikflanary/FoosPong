@@ -172,6 +172,15 @@
         textField.placeholder = NSLocalizedString(@"password", @"password");
         
     }];
+    
+    [passwordAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+        return ;
+    }]];
+    [self presentViewController:passwordAlert animated:YES completion:nil];
+    
     [passwordAlert addAction:[UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         UITextField *passwordTextfield = passwordAlert.textFields.firstObject;
         NSString *password = passwordTextfield.text;
@@ -202,13 +211,6 @@
         }
     }]];
     
-    [passwordAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-        
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        
-        return ;
-    }]];
-    [self presentViewController:passwordAlert animated:YES completion:nil];
 }
 
 

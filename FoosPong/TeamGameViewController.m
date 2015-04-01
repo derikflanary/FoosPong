@@ -284,6 +284,11 @@
         
         UIAlertController *winnerAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Team Two Wins!"] message:@"End Game?" preferredStyle:UIAlertControllerStyleAlert];
         
+        [winnerAlert addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            
+            [self team2MinusButtonPressed:self];
+        }]];
+        
         [winnerAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
             [[TeamGameController sharedInstance] addGameWithTeamGameStats:self.gameStats];
@@ -293,12 +298,6 @@
             }];
             
         }]];
-        
-        [winnerAlert addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-            
-            [self team2MinusButtonPressed:self];
-        }]];
-
         [self presentViewController:winnerAlert animated:YES completion:nil];
     }
 }

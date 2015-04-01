@@ -398,7 +398,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
       
     }
     //cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
+    
     
     if (self.segmentedControl.selectedSegmentIndex == 0) {
         TableViewSection tableViewSection = indexPath.section;
@@ -409,6 +409,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 if (!theUser.username) {
                     cell.nameLabel.text = @"Add Player";
                     cell.nameLabel.textColor = [UIColor colorWithWhite:.5 alpha:.7];
+                    cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
                 }else{
                     cell.nameLabel.text = [theUser.username uppercaseString];
                     cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
@@ -453,7 +454,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 if (!theUser.username) {
                     cell.nameLabel.text = @"Add Player";
                     cell.nameLabel.textColor = [UIColor colorWithWhite:.5 alpha:.7];
-
+                    cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
                 }else{
                     cell.nameLabel.text = [theUser.username uppercaseString];
                     cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
@@ -482,7 +483,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 if (!theUser.username) {
                     cell.nameLabel.text = @"Add Player";
                     cell.nameLabel.textColor = [UIColor colorWithWhite:.5 alpha:.7];
-
+                    cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
                 }else{
                     cell.nameLabel.text = [theUser.username uppercaseString];
                     cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];

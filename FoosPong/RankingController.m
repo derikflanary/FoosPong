@@ -86,6 +86,7 @@ static NSString * const rankHistoryKey = @"rankHistory";
     PFQuery *query = [PFQuery queryWithClassName:rankingClassKey];
     [query whereKey:@"group" equalTo:group];
     [query whereKey:@"user" containedIn:members];
+    [query orderByDescending:@"rank"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             callback(objects);
