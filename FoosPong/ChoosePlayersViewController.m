@@ -207,6 +207,9 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     }else{
         self.isTwoPlayer = YES;
     }
+    self.currentPlayersRankings = [NSMutableArray array];
+    [self.currentPlayersRankings addObject:[PFObject objectWithClassName:@"ranking"]];
+    [self.currentPlayersRankings addObject:[PFObject objectWithClassName:@"ranking"]];
     
     self.cellSelected = NO;
     
@@ -247,6 +250,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     [self.tableView reloadData];
 }
 
+
 -(void)startGame:(id)sender{
     
     if (self.segmentedControl.selectedSegmentIndex == 0) {
@@ -261,6 +265,8 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 UINavigationController *singleGameNavController = [[UINavigationController alloc]initWithRootViewController:gvc];
                 gvc.playerOne = [self.currentPlayers objectAtIndex:0];
                 gvc.playerTwo = [self.currentPlayers objectAtIndex:1];
+                gvc.playerOneRanking = [self.currentPlayersRankings objectAtIndex:0];
+                gvc.playerTwoRanking = [self.currentPlayersRankings objectAtIndex:1];
                 
                 [self.navigationController presentViewController:singleGameNavController animated:YES completion:^{
                     
@@ -451,6 +457,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                         userRank = ranking;
                     }
                 }
+                [self.currentPlayersRankings replaceObjectAtIndex:indexPath.row withObject:userRank];
                 
                 if (!theUser.username) {
                     cell.nameLabel.text = @"Add Player";

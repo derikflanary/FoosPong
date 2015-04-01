@@ -14,5 +14,7 @@
 @property (nonatomic, strong) NSString *playerTwoName;
 @property (nonatomic, strong) PFUser *playerOne;
 @property (nonatomic, strong) PFUser *playerTwo;
+@property (nonatomic, strong) PFObject *playerOneRanking;
+@property (nonatomic, strong) PFObject *playerTwoRanking;
 
 @end
