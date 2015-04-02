@@ -32,7 +32,7 @@
 }
 
 
--(void)addGameWithSingleGameStats:(SingleGameDetails*)gameStats{
+-(void)addGameWithSingleGameStats:(SingleGameDetails*)gameStats callback:(void (^)(Game *))callback{
     
     Game *finishedGame = [Game object];
     finishedGame.p1 = gameStats.playerOne;
@@ -41,25 +41,43 @@
     finishedGame.playerTwoScore = gameStats.playerTwoScore;
     finishedGame.playerOneWin = [NSNumber numberWithBool: gameStats.playerOneWin];
     finishedGame.group = gameStats.group;
+    finishedGame.playerOneStartingRank = gameStats.playerOneStartingRank;
+    finishedGame.playerTwoStartingRank = gameStats.playerTwoStartingRank;
     
-    [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"Single Game Saved");
-        }else
-            NSLog(@"%@", error);
-    }];
     
     if (gameStats.playerOneWin) {
         [[RankingController sharedInstance]updateNewRankingsForWinner:gameStats.playerOne andLoser:gameStats.playerTwo callback:^(NSNumber *winnerNewRank, NSNumber *loserNewRank) {
+            finishedGame.playerOneNewRank = winnerNewRank;
+            finishedGame.playerTwoNewRank = loserNewRank;
             NSLog(@"%@, %@", winnerNewRank, loserNewRank);
+            
+            [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    NSLog(@"Single Game Saved");
+                    callback(finishedGame);
+                }else
+                    NSLog(@"%@", error);
+            }];
         }];
     
     }else{
         [[RankingController sharedInstance]updateNewRankingsForWinner:gameStats.playerTwo andLoser:gameStats.playerOne callback:^(NSNumber *winnerNewRank, NSNumber *loserNewRank) {
+            finishedGame.playerOneNewRank = loserNewRank;
+            finishedGame.playerTwoNewRank = winnerNewRank;
             NSLog(@"%@, %@", winnerNewRank, loserNewRank);
+            
+            [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    NSLog(@"Single Game Saved");
+                    callback(finishedGame);
+                }else
+                    NSLog(@"%@", error);
+            }];
         }];
     }
     
+   
+
 }
 
 

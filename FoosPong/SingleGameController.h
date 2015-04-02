@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SingleGameDetails.h"
+#import "Game.h"
 
 @interface SingleGameController : NSObject
 
@@ -19,7 +20,7 @@
 - (void)removeGame:(PFObject*)game;
 - (void)saveGames;
 - (void)updateGamesForUser:(PFUser*)user withBool:(BOOL)getTeamGames callback:(void (^)(NSArray *))callback;
-- (void)addGameWithSingleGameStats:(SingleGameDetails*)gameStats;
+- (void)addGameWithSingleGameStats:(SingleGameDetails*)gameStats callback:(void (^)(Game *))callback;
 - (void)updateGamesForGroup:(PFObject*)group Callback:(void (^)(NSArray *))callback;
 
 

@@ -16,6 +16,10 @@
 @dynamic p1;
 @dynamic p2;
 @dynamic group;
+@dynamic playerOneStartingRank;
+@dynamic playerOneNewRank;
+@dynamic playerTwoStartingRank;
+@dynamic playerTwoNewRank;
 
 + (void)load {
     [self registerSubclass];

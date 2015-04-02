@@ -7,8 +7,21 @@
 //
 
 #import "GameDetailViewController.h"
+#import "JTNumberScrollAnimatedView.h"
 
 @interface GameDetailViewController ()
+
+@property (nonatomic, strong) UILabel *p1NameLabel;
+@property (nonatomic, strong) UILabel *p2NameLabel;
+@property (nonatomic, strong) UILabel *p1ScoreLabel;
+@property (nonatomic, strong) UILabel *p2ScoreLabel;
+@property (nonatomic, strong) UILabel *p1RankNameLabel;
+@property (nonatomic, strong) UILabel *p2RankNameLabel;
+@property (nonatomic, strong) JTNumberScrollAnimatedView *p1Rank;
+@property (nonatomic, strong) JTNumberScrollAnimatedView *p2Rank;
+@property (nonatomic, strong) UILabel *p1RankChangeLabel;
+@property (nonatomic, strong) UILabel *p2RankChangeLabel;
+
 
 @end
 
@@ -38,18 +51,74 @@
     UIVisualEffectView *vibrancyEffectView = [[UIVisualEffectView alloc] initWithEffect:vibrancyEffect];
     [vibrancyEffectView setFrame:self.view.bounds];
     
-    UILabel *comingSoonlabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 150, 200, 100)];
-    comingSoonlabel.text = @"Feature Coming Soon";
-    comingSoonlabel.numberOfLines = 0;
-    comingSoonlabel.backgroundColor = [UIColor clearColor];
-    comingSoonlabel.textColor = [UIColor lightTextColor];
-    
-    [vibrancyEffectView.contentView addSubview:comingSoonlabel];
     // Add Vibrancy View to Blur View
     [bluredEffectView.contentView addSubview:vibrancyEffectView];
     // Do any additional setup after loading the view.
+    self.p1NameLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 50, 100, 30)];
+    self.p1NameLabel.font = [UIFont fontWithName:[NSString mainFont] size:24];
+    self.p1NameLabel.textColor = [UIColor mint];
+    self.p1NameLabel.text = [self.singleGame.p1.username uppercaseString];
     
+    self.p2NameLabel = [[UILabel alloc]initWithFrame:CGRectMake(200, 50, 100, 30)];
+    self.p2NameLabel.font = [UIFont fontWithName:[NSString mainFont] size:24];
+    self.p2NameLabel.textColor = [UIColor mint];
+    self.p2NameLabel.text = [self.singleGame.p2.username uppercaseString];
     
+    self.p1ScoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 100, 50, 50)];
+    self.p1ScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:34];
+    self.p1ScoreLabel.textColor = [UIColor indianYellow];
+    self.p1ScoreLabel.text = [NSString stringWithFormat:@"%.f", self.singleGame.playerOneScore];
+    
+    self.p2ScoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(200, 100, 50, 50)];
+    self.p2ScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:34];
+    self.p2ScoreLabel.textColor = [UIColor indianYellow];
+    self.p2ScoreLabel.text = [NSString stringWithFormat:@"%.f", self.singleGame.playerTwoScore];
+    
+    self.p1RankNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 200, 100, 30)];
+    self.p1RankNameLabel.font = [UIFont fontWithName:[NSString mainFont] size:20];
+    self.p1RankNameLabel.textColor = [UIColor mint];
+    self.p1RankNameLabel.text = @"Rank";
+    
+    self.p2RankNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(200, 200, 100, 30)];
+    self.p2RankNameLabel.font = [UIFont fontWithName:[NSString mainFont] size:20];
+    self.p2RankNameLabel.textColor = [UIColor mint];
+    self.p2RankNameLabel.text = @"Rank";
+    
+    self.p1Rank = [[JTNumberScrollAnimatedView alloc]initWithFrame:CGRectMake(20, 250, 100, 50)];
+    self.p1Rank.textColor = [UIColor lightTextColor];
+    self.p1Rank.font = [UIFont fontWithName:@"GillSans-Bold" size:28];
+    [self.p1Rank setValue:self.singleGame.playerOneNewRank];
+    
+    self.p2Rank = [[JTNumberScrollAnimatedView alloc]initWithFrame:CGRectMake(180, 250, 100, 50)];
+    self.p2Rank.textColor = [UIColor lightTextColor];
+    self.p2Rank.font = [UIFont fontWithName:@"GillSans-Bold" size:28];
+    [self.p2Rank setValue:self.singleGame.playerTwoNewRank];
+    
+    self.p1RankChangeLabel = [[UILabel alloc]initWithFrame:CGRectMake(120, 240, 50, 21)];
+    self.p1RankChangeLabel.textColor = [UIColor lunarGreen];
+    self.p1RankChangeLabel.font = [UIFont fontWithName:[NSString mainFont] size:14];
+    NSInteger diff1 = [self.singleGame.playerOneNewRank integerValue] - [self.singleGame.playerOneStartingRank integerValue];
+    self.p1RankChangeLabel.text = [NSString stringWithFormat:@"%+ld", (long)diff1];
+    
+    self.p2RankChangeLabel = [[UILabel alloc]initWithFrame:CGRectMake(280, 240, 50, 21)];
+    self.p2RankChangeLabel.textColor = [UIColor lunarGreen];
+    self.p2RankChangeLabel.font = [UIFont fontWithName:[NSString mainFont] size:14];
+    NSInteger diff2 = [self.singleGame.playerTwoNewRank integerValue] - [self.singleGame.playerTwoStartingRank integerValue];
+    self.p2RankChangeLabel.text = [NSString stringWithFormat:@"%+ld", (long)diff2];
+    
+    [vibrancyEffectView addSubview:self.p1NameLabel];
+    [vibrancyEffectView addSubview:self.p2NameLabel];
+    [vibrancyEffectView addSubview:self.p1ScoreLabel];
+    [vibrancyEffectView addSubview:self.p2ScoreLabel];
+    [vibrancyEffectView addSubview:self.p1RankNameLabel];
+    [vibrancyEffectView addSubview:self.p2RankNameLabel];
+    [vibrancyEffectView addSubview:self.p1Rank];
+    [vibrancyEffectView addSubview:self.p2Rank];
+    [vibrancyEffectView addSubview:self.p1RankChangeLabel];
+    [vibrancyEffectView addSubview:self.p2RankChangeLabel];
+
+    [self.p1Rank startAnimation];
+    [self.p2Rank startAnimation];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,8 +127,11 @@
 }
 
 - (void)cancelPressed:(id)sender{
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        
+//    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+//        
+//    }];
+    [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
+
     }];
 }
 

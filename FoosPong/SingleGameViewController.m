@@ -11,6 +11,7 @@
 #import "SingleGameController.h"
 #import "SingleGameDetails.h"
 #import "MinusButton.h"
+#import "GameDetailViewController.h"
 
 #import <OpenEars/OELanguageModelGenerator.h>
 #import <OpenEars/OEPocketsphinxController.h>
@@ -264,14 +265,21 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         [[OEPocketsphinxController sharedInstance]stopListening];
         [self updateGameStats];
         
-        UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", self.playerOneName] message:@"End Game?" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", [self.playerOneName uppercaseString]] message:@"End Game?" preferredStyle:UIAlertControllerStyleAlert];
         
         [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
-            [[SingleGameController sharedInstance] addGameWithSingleGameStats:self.gameStats];
-            
-            [self dismissViewControllerAnimated:YES completion:^{
+            [[SingleGameController sharedInstance] addGameWithSingleGameStats:self.gameStats callback:^(Game *singleGame) {
                 
+                    GameDetailViewController *gdvc = [GameDetailViewController new];
+                    gdvc.singleGame = singleGame;
+                    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gdvc];
+                    
+                    navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+                    
+                    [self.navigationController presentViewController:navController animated:YES completion:^{
+                    
+                }];
             }];
             
         }]];
@@ -298,15 +306,23 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         [[OEPocketsphinxController sharedInstance]stopListening];
         [self updateGameStats];
         
-        UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", self.playerTwoName] message:@"End Game?" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", [self.playerTwoName uppercaseString]] message:@"End Game?" preferredStyle:UIAlertControllerStyleAlert];
         
         [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
-            [[SingleGameController sharedInstance] addGameWithSingleGameStats:self.gameStats];
-            
-            [self dismissViewControllerAnimated:YES completion:^{
+            [[SingleGameController sharedInstance] addGameWithSingleGameStats:self.gameStats callback:^(Game *singleGame) {
                 
+                GameDetailViewController *gdvc = [GameDetailViewController new];
+                gdvc.singleGame = singleGame;
+                UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gdvc];
+                
+                navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+                
+                [self.navigationController presentViewController:navController animated:YES completion:^{
+                    
+                }];
             }];
+
             
         }]];
         
@@ -345,6 +361,8 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.gameStats.playerTwoScore = self.playerTwoScore;
     self.gameStats.playerOneWin = self.playerOneWin;
     self.gameStats.group = [PFUser currentUser][@"currentGroup"];
+    self.gameStats.playerOneStartingRank = self.playerOneRanking[@"rank"];
+    self.gameStats.playerTwoStartingRank = self.playerTwoRanking[@"rank"];
 }
 
 

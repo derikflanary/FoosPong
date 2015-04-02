@@ -18,6 +18,11 @@
 @property PFUser *p1;
 @property PFUser *p2;
 @property PFObject *group;
+@property NSNumber *playerOneStartingRank;
+@property NSNumber *playerTwoStartingRank;
+@property NSNumber *playerOneNewRank;
+@property NSNumber *playerTwoNewRank;
+
 
 
 @end
