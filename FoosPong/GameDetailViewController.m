@@ -58,31 +58,37 @@
     self.p1NameLabel.font = [UIFont fontWithName:[NSString mainFont] size:24];
     self.p1NameLabel.textColor = [UIColor mint];
     self.p1NameLabel.text = [self.singleGame.p1.username uppercaseString];
+    self.p1NameLabel.textAlignment = NSTextAlignmentCenter;
     
     self.p2NameLabel = [[UILabel alloc]initWithFrame:CGRectMake(200, 50, 100, 30)];
     self.p2NameLabel.font = [UIFont fontWithName:[NSString mainFont] size:24];
     self.p2NameLabel.textColor = [UIColor mint];
     self.p2NameLabel.text = [self.singleGame.p2.username uppercaseString];
+    self.p2NameLabel.textAlignment = NSTextAlignmentCenter;
     
     self.p1ScoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 100, 50, 50)];
     self.p1ScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:34];
     self.p1ScoreLabel.textColor = [UIColor indianYellow];
     self.p1ScoreLabel.text = [NSString stringWithFormat:@"%.f", self.singleGame.playerOneScore];
+    self.p1ScoreLabel.textAlignment = NSTextAlignmentCenter;
     
     self.p2ScoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(200, 100, 50, 50)];
     self.p2ScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:34];
     self.p2ScoreLabel.textColor = [UIColor indianYellow];
     self.p2ScoreLabel.text = [NSString stringWithFormat:@"%.f", self.singleGame.playerTwoScore];
+    self.p2ScoreLabel.textAlignment = NSTextAlignmentCenter;
     
     self.p1RankNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 200, 100, 30)];
     self.p1RankNameLabel.font = [UIFont fontWithName:[NSString mainFont] size:20];
     self.p1RankNameLabel.textColor = [UIColor mint];
     self.p1RankNameLabel.text = @"Rank";
+    self.p1RankNameLabel.textAlignment = NSTextAlignmentCenter;
     
     self.p2RankNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(200, 200, 100, 30)];
     self.p2RankNameLabel.font = [UIFont fontWithName:[NSString mainFont] size:20];
     self.p2RankNameLabel.textColor = [UIColor mint];
     self.p2RankNameLabel.text = @"Rank";
+    self.p2RankNameLabel.textAlignment = NSTextAlignmentCenter;
     
     self.p1Rank = [[JTNumberScrollAnimatedView alloc]initWithFrame:CGRectMake(20, 250, 100, 50)];
     self.p1Rank.textColor = [UIColor lightTextColor];
@@ -119,6 +125,37 @@
 
     [self.p1Rank startAnimation];
     [self.p2Rank startAnimation];
+
+//autoLayout
+    
+    self.p1NameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.p2NameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.p1ScoreLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.p2ScoreLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    self.p1RankNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.p2RankNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.p1Rank.translatesAutoresizingMaskIntoConstraints = NO;
+    self.p2Rank.translatesAutoresizingMaskIntoConstraints = NO;
+    self.p1RankChangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.p2RankChangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_p1NameLabel, _p2NameLabel, _p1ScoreLabel, _p2ScoreLabel, _p1RankNameLabel, _p2RankNameLabel, _p1Rank, _p2Rank, _p1RankChangeLabel, _p2RankChangeLabel);
+    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==50)-[_p1NameLabel(>=100)]-(>=8)-[_p2NameLabel(>=100)]-(==50)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary];
+    [self.view addConstraints:constraints];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==50)-[_p1Rank(>=100)]-(>=8)-[_p2Rank(>=100)]-(==50)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
+    [self.view addConstraints:constraints];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==100)-[_p1NameLabel(==31)]-[_p1ScoreLabel(>=50)]-(==50)-[_p1RankNameLabel(==31)]-[_p1Rank(==50)]-(>=100)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
+    
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==100)-[_p2NameLabel(==31)]-[_p2ScoreLabel(>=50)]-(==50)-[_p2RankNameLabel(==31)]-[_p2Rank(==50)]-(>=100)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
+    
+
+    
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==100)-[_p2ScoreLabel(>=100)]-[_p2PlusButton]-(==50)-[_p2MinusButton(==50)]-(==50)-[_p2Label]-(==50)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
+
 }
 
 - (void)didReceiveMemoryWarning {

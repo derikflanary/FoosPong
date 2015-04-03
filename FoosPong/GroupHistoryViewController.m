@@ -298,13 +298,13 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gameDetailViewController];
-    
-    navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    
-    [self.navigationController presentViewController:navController animated:YES completion:^{
-        
-    }];
+//    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gameDetailViewController];
+//    
+//    navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//    
+//    [self.navigationController presentViewController:navController animated:YES completion:^{
+//        
+//    }];
     
 }
 
