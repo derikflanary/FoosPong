@@ -145,9 +145,6 @@
     PFQuery *query1 = [PFQuery queryWithClassName:@"Game"];
     [query1 whereKey:@"p1" equalTo:user];
     
-    
-
-    
     PFQuery *query2 = [PFQuery orQueryWithSubqueries:@[query, query1]];
     [query2 whereKey:@"group" equalTo:group];
     [query2 includeKey:@"p1"];

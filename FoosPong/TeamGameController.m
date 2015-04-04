@@ -31,16 +31,7 @@
 
 
 -(void)addGameWithTeamGameStats:(TeamGameDetails*)gameStats{
-//    PFObject *finishedGame = [PFObject objectWithClassName:@"TeamGame"];
-//    
-//    finishedGame[@"teamOnePlayerOne"] = gameStats.teamOnePlayerOne;
-//    finishedGame[@"teamOnePlayerTwo"] = gameStats.teamOnePlayerTwo;
-//    finishedGame[@"teamTwoPlayerOne"] = gameStats.teamTwoPlayerOne;
-//    finishedGame[@"teamTwoPlayerTwo"] = gameStats.teamTwoPlayerTwo;
-//    finishedGame[@"teamOneScore"] = @(gameStats.teamOneScore);
-//    finishedGame[@"teamTwoScore"] = @(gameStats.teamTwoScore);
-//    finishedGame[@"teamOneWin"] = gameStats.teamOneWin;
-    
+
     TeamGame *finishedGame = [TeamGame object];
     
     finishedGame.teamOneAttacker = gameStats.teamOneAttacker;
@@ -114,6 +105,43 @@
         }
     }];
 
+    
+}
+
+- (void)updateGamesForUser:(PFUser *)user forGroup:(PFObject *)group callback:(void (^)(NSArray *))callback{
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"TeamGame"];
+    [query whereKey:@"teamOneAttacker" equalTo:user];
+    
+    PFQuery *query2 = [PFQuery queryWithClassName:@"TeamGame"];
+    [query2 whereKey:@"teamOneDefender" equalTo:user];
+    
+    PFQuery *query3 = [PFQuery queryWithClassName:@"TeamGame"];
+    [query2 whereKey:@"teamTwoAttacker" equalTo:user];
+    
+    PFQuery *query4 = [PFQuery queryWithClassName:@"TeamGame"];
+    [query2 whereKey:@"teamTwoDefender" equalTo:user];
+    
+    PFQuery *theQuery = [PFQuery orQueryWithSubqueries:@[query, query2, query3, query4]];
+    [theQuery whereKey:@"group" equalTo:group];
+    [theQuery includeKey:@"teamOneAttacker"];
+    [theQuery includeKey:@"teamOneDefender"];
+    [theQuery includeKey:@"teamTwoAttacker"];
+    [theQuery includeKey:@"teamTwoDefender"];
+    [theQuery orderByDescending:@"createdAt"];
+    [theQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            
+            self.teamGames = objects;
+            callback(objects);
+            
+        } else {
+            
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+
+    
     
 }
 

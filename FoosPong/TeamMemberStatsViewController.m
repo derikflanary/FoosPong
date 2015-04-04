@@ -194,7 +194,13 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
 #pragma mark - tableview
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.singleStats.statArray count] - 1;
+    
+    if (self.segmentedControl.selectedSegmentIndex == 1) {
+        return [self.singleStats.statArray count] - 1;
+    }else{
+        return [self.teamStats.teamStatsArray count] - 1;
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -203,14 +209,16 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
         cell = [StatisticsCustomTableViewCell new];
     }
     
-    cell.textLabel.text = [[self.singleStats.statArray lastObject] objectAtIndex:indexPath.row];
-    
-   
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [self.singleStats.statArray objectAtIndex:indexPath.row]];
-    
-    
-    return cell;
-    
+    if (self.segmentedControl.selectedSegmentIndex == 1) {
+        cell.textLabel.text = [[self.singleStats.statArray lastObject] objectAtIndex:indexPath.row];
+        
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [self.singleStats.statArray objectAtIndex:indexPath.row]];
+    }else{
+        cell.textLabel.text = [[self.teamStats.teamStatsArray lastObject] objectAtIndex:indexPath.row];
+        
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [self.teamStats.teamStatsArray objectAtIndex:indexPath.row]];
+    }
+        return cell;
     
 }
 

@@ -18,6 +18,7 @@
 #import "UserController.h"
 #import "SingleGameController.h"
 #import "StatsController.h"
+#import "TeamGameController.h"
 
 @interface CurrentGroupViewController () <FindGroupViewControllerDelegate>
 @property (nonatomic, strong) FoosButton *joinGroupButton;
@@ -231,6 +232,7 @@
     header.contentView.backgroundColor = [UIColor transparentCellWhite];
 }
 
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
     
@@ -245,8 +247,17 @@
         [[StatsController sharedInstance]retrieveSingleStatsForUser:user andSingleGames:singleGames callback:^(PersonalSingleStats *singleStats) {
             
             gsvc.singleStats = singleStats;
-            [self presentViewController:navController animated:YES completion:^{
+            
+            [[TeamGameController sharedInstance]updateGamesForUser:user forGroup:self.currentGroup callback:^(NSArray *teamGames) {
+                
+                [[StatsController sharedInstance]retrieveTeamStatsForUser:user andTeamGames:teamGames callback:^(PersonalTeamStats *teamStats) {
+                    gsvc.teamStats = teamStats;
+                    [self presentViewController:navController animated:YES completion:^{
+                    }];
+                }];
             }];
+            
+            
         }];
         
     }];
