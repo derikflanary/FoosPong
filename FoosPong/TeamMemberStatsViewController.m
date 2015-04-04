@@ -10,6 +10,7 @@
 #import "JBLineChartView.h"
 #import "JBChartInformationView.h"
 #import "JBChartHeaderView.h"
+#import "StatisticsCustomTableViewCell.h"
 
 // Numerics
 CGFloat const kJBLineChartViewControllerChartHeight = 250.0f;
@@ -22,12 +23,13 @@ CGFloat const kJBLineChartViewControllerChartDashedLineWidth = 2.0f;
 NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
 
 
-@interface TeamMemberStatsViewController () <JBLineChartViewDelegate, JBLineChartViewDataSource>
+@interface TeamMemberStatsViewController () <JBLineChartViewDelegate, JBLineChartViewDataSource, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) JBLineChartView *lineChart;
 @property (nonatomic, strong) UISegmentedControl *segmentedControl;
 @property (nonatomic, strong) JBChartInformationView *informationView;
 @property (nonatomic, strong) NSArray *rankingHistory;
+@property (nonatomic, strong) UITableView *tableView;
 
 
 @end
@@ -81,13 +83,6 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
     [self.lineChart setMaximumValue:1100];
     [self.lineChart setHidden:NO];
     
-    
-   //self.lineChart.headerView = chartHeader;
-//    self.lineChart.footerView = nil;
-    
-
-   
-//    self.informationView = [[JBChartInformationView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, CGRectGetMaxY(self.lineChartView.frame), self.view.bounds.size.width, self.view.bounds.size.height - CGRectGetMaxY(self.lineChartView.frame) - CGRectGetMaxY(self.navigationController.navigationBar.frame))];
     self.informationView = [[JBChartInformationView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.lineChart.frame), self.view.bounds.size.width, self.view.frame.size.height - CGRectGetMaxY(self.lineChart.frame) - 50)];
     [self.informationView setValueAndUnitTextColor:[UIColor colorWithWhite:1.0 alpha:0.75]];
     [self.informationView setTitleTextColor:[UIColor vanilla]];
@@ -102,35 +97,26 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
     headerView.titleLabel.shadowOffset = CGSizeMake(0, 1);
     headerView.subtitleLabel.text = @"Single's Ranking";
     headerView.subtitleLabel.textColor = [UIColor vanilla];
-//    headerView.subtitleLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.25];
-//    headerView.subtitleLabel.shadowOffset = CGSizeMake(0, 1);
     headerView.separatorColor = [UIColor lunarGreen];
-//    headerView.separatorColor = kJBColorLineChartHeaderSeparatorColor;
-    self.lineChart.headerView = headerView;
 
-    
-    
+    self.lineChart.headerView = headerView;
     [self.lineChart reloadData];
     
-//    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-//    UIVisualEffectView *bluredEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-//    [bluredEffectView setFrame:self.view.bounds];
-//    
-//    [self.view addSubview:bluredEffectView];
-//    
-//     //Vibrancy Effect
-//    UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
-//    UIVisualEffectView *vibrancyEffectView = [[UIVisualEffectView alloc] initWithEffect:vibrancyEffect];
-//    [vibrancyEffectView setFrame:self.view.bounds];
-//    
-////     [vibrancyEffectView.contentView addSubview:chartHeader];
-//     [vibrancyEffectView.contentView addSubview:self.lineChart];
-//     [vibrancyEffectView.contentView addSubview:self.informationView];
-//    // Add Vibrancy View to Blur View
-//    [bluredEffectView.contentView addSubview:vibrancyEffectView];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 400) style:UITableViewStyleGrouped];
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    [self.view addSubview:self.lineChart];
-    [self.view addSubview:self.informationView];
+    if (self.segmentedControl.selectedSegmentIndex == 0 || self.segmentedControl.selectedSegmentIndex == 2) {
+        
+        [self.view addSubview:self.lineChart];
+        [self.view addSubview:self.informationView];
+    }else{
+        
+        [self.view addSubview:self.tableView];
+    }
+    
 
     //[self.view addSubview:self.tableView];
 
@@ -205,6 +191,31 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
 //    [self setTooltipVisible:NO animated:YES];
 }
 
+#pragma mark - tableview
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [self.singleStats.statArray count] - 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    StatisticsCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StatsCell" ];
+    if (!cell){
+        cell = [StatisticsCustomTableViewCell new];
+    }
+    
+    cell.textLabel.text = [[self.singleStats.statArray lastObject] objectAtIndex:indexPath.row];
+    
+   
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [self.singleStats.statArray objectAtIndex:indexPath.row]];
+    
+    
+    return cell;
+    
+    
+}
+
+
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -219,7 +230,17 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
 }
 
 - (void)segmentedControlChangedValue:(id)sender{
-    //[self.tableView reloadData];
+    if (self.segmentedControl.selectedSegmentIndex == 0 || self.segmentedControl.selectedSegmentIndex == 2) {
+        
+        [self.view addSubview:self.lineChart];
+        [self.view addSubview:self.informationView];
+        [self.tableView removeFromSuperview];
+    }else{
+        [self.view addSubview:self.tableView];
+        [self.lineChart removeFromSuperview];
+        [self.informationView removeFromSuperview];
+    }
+    
 }
 /*
 #pragma mark - Navigation

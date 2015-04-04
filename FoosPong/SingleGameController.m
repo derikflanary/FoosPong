@@ -117,10 +117,10 @@
 
 - (void)updateGamesForGroup:(PFObject*)group Callback:(void (^)(NSArray *))callback{
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Game"];
-    [query whereKey:@"group" equalTo:group];
+    PFQuery *query2 = [PFQuery queryWithClassName:@"Game"];
+    [query2 whereKey:@"group" equalTo:group];
     
-    PFQuery *query2 = [PFQuery orQueryWithSubqueries:@[query]];
+//    PFQuery *query2 = [PFQuery orQueryWithSubqueries:@[query]];
     [query2 includeKey:@"p1"];
     [query2 includeKey:@"p2"];
     [query2 orderByDescending:@"createdAt"];
@@ -134,6 +134,38 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
+    
+}
+
+- (void)updateGamesForUser:(PFUser *)user forGroup:(PFObject *)group callback:(void (^)(NSArray *))callback{
+    
+    PFQuery *query =  [PFQuery queryWithClassName:@"Game"];
+    [query whereKey:@"p2" equalTo:user];
+    
+    PFQuery *query1 = [PFQuery queryWithClassName:@"Game"];
+    [query1 whereKey:@"p1" equalTo:user];
+    
+    
+
+    
+    PFQuery *query2 = [PFQuery orQueryWithSubqueries:@[query, query1]];
+    [query2 whereKey:@"group" equalTo:group];
+    [query2 includeKey:@"p1"];
+    [query2 includeKey:@"p2"];
+    [query2 orderByDescending:@"createdAt"];
+    
+    [query2 findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            
+            callback(objects);
+            
+        } else {
+            
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+
+ 
     
 }
 

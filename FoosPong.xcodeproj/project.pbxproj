@@ -98,6 +98,7 @@
 		EEF716B31ABD18DF005DDB61 /* TeamMemberStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF716B21ABD18DF005DDB61 /* TeamMemberStatsViewController.m */; };
 		EEF716B61ABD57FA005DDB61 /* GameDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEF716B51ABD57FA005DDB61 /* GameDetailViewController.m */; };
 		EEFB90DC1AAA753100DEA099 /* StatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFB90DB1AAA753100DEA099 /* StatsViewController.m */; };
+		EEFD58491AD08D8400AF28FC /* StatisticsCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFD58481AD08D8400AF28FC /* StatisticsCustomTableViewCell.m */; };
 		EEFDF3CE1AA6AE7200A0E48F /* StatsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFDF3CD1AA6AE7200A0E48F /* StatsController.m */; };
 		EEFDF3D11AA7FEA600A0E48F /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFDF3D01AA7FEA600A0E48F /* Game.m */; };
 		EEFDF3D41AA809AF00A0E48F /* TeamGame.m in Sources */ = {isa = PBXBuildFile; fileRef = EEFDF3D31AA809AF00A0E48F /* TeamGame.m */; };
@@ -276,6 +277,8 @@
 		EEF716B51ABD57FA005DDB61 /* GameDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameDetailViewController.m; sourceTree = "<group>"; };
 		EEFB90DA1AAA753100DEA099 /* StatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsViewController.h; sourceTree = "<group>"; };
 		EEFB90DB1AAA753100DEA099 /* StatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsViewController.m; sourceTree = "<group>"; };
+		EEFD58471AD08D8400AF28FC /* StatisticsCustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsCustomTableViewCell.h; sourceTree = "<group>"; };
+		EEFD58481AD08D8400AF28FC /* StatisticsCustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsCustomTableViewCell.m; sourceTree = "<group>"; };
 		EEFDF3CC1AA6AE7200A0E48F /* StatsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsController.h; sourceTree = "<group>"; };
 		EEFDF3CD1AA6AE7200A0E48F /* StatsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsController.m; sourceTree = "<group>"; };
 		EEFDF3CF1AA7FEA600A0E48F /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
@@ -468,6 +471,8 @@
 				EE0938581AC9B8710009AD40 /* TeamMemberCustomTableViewCell.m */,
 				EE09385A1AC9E6820009AD40 /* TeamFeedTableViewCell.h */,
 				EE09385B1AC9E6820009AD40 /* TeamFeedTableViewCell.m */,
+				EEFD58471AD08D8400AF28FC /* StatisticsCustomTableViewCell.h */,
+				EEFD58481AD08D8400AF28FC /* StatisticsCustomTableViewCell.m */,
 			);
 			name = CustomCells;
 			sourceTree = "<group>";
@@ -833,6 +838,7 @@
 				EE76CC571AB9E3AF0038BD80 /* UIImage+BackGrounImage.m in Sources */,
 				EE1817081AB2732800E608B3 /* Group.m in Sources */,
 				EE3356EE1A895F0600B83EC0 /* ProfileViewController.m in Sources */,
+				EEFD58491AD08D8400AF28FC /* StatisticsCustomTableViewCell.m in Sources */,
 				EE664DB11AC9002C00440221 /* JBChartInformationView.m in Sources */,
 				EE1A557E1A9CFB3000E6981E /* GroupsViewController.m in Sources */,
 				EEF716B31ABD18DF005DDB61 /* TeamMemberStatsViewController.m in Sources */,

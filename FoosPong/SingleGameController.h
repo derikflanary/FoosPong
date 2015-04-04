@@ -22,7 +22,7 @@
 - (void)updateGamesForUser:(PFUser*)user withBool:(BOOL)getTeamGames callback:(void (^)(NSArray *))callback;
 - (void)addGameWithSingleGameStats:(SingleGameDetails*)gameStats callback:(void (^)(Game *))callback;
 - (void)updateGamesForGroup:(PFObject*)group Callback:(void (^)(NSArray *))callback;
-
+- (void)updateGamesForUser:(PFUser *)user forGroup:(PFObject *)group callback:(void (^)(NSArray *))callback;
 
 
 @end

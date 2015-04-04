@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PersonalSingleStats.h"
 
 @interface TeamMemberStatsViewController : UIViewController
 
 @property (nonatomic, strong) PFObject *ranking;
 @property (nonatomic, strong) PFUser *user;
+@property (nonatomic, strong) PersonalSingleStats *singleStats;
 
 @end

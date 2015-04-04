@@ -16,6 +16,8 @@
 #import "TeamMemberCustomTableViewCell.h"
 #import "GameDetailViewController.h"
 #import "UserController.h"
+#import "SingleGameController.h"
+#import "StatsController.h"
 
 @interface CurrentGroupViewController () <FindGroupViewControllerDelegate>
 @property (nonatomic, strong) FoosButton *joinGroupButton;
@@ -230,18 +232,27 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
     
     TeamMemberStatsViewController *gsvc = [TeamMemberStatsViewController new];
     gsvc.ranking = [self.memberRankings objectAtIndex:indexPath.row];
-    gsvc.user = [self.groupMembers objectAtIndex:indexPath.row];
+    gsvc.user = user;
     
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gsvc];
     
-//    navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    
-    [self presentViewController:navController animated:YES completion:^{
+    [[SingleGameController sharedInstance]updateGamesForUser:user forGroup:self.currentGroup callback:^(NSArray *singleGames) {
+       
+        [[StatsController sharedInstance]retrieveSingleStatsForUser:user andSingleGames:singleGames callback:^(PersonalSingleStats *singleStats) {
+            
+            gsvc.singleStats = singleStats;
+            [self presentViewController:navController animated:YES completion:^{
+            }];
+        }];
         
     }];
+    
+    
+    
 
     
     
