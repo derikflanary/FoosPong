@@ -19,6 +19,7 @@
 #import "SingleGameController.h"
 #import "StatsController.h"
 #import "TeamGameController.h"
+#import "GroupStatisticsViewController.h"
 
 @interface CurrentGroupViewController () <FindGroupViewControllerDelegate>
 @property (nonatomic, strong) FoosButton *joinGroupButton;
@@ -104,7 +105,7 @@
     self.groupStatsButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 51)];
     self.groupStatsButton.backgroundColor = [UIColor darkColor];
     self.groupStatsButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-    [self.groupStatsButton setTitle:@"GROUP STATISTICS" forState:UIControlStateNormal];
+    [self.groupStatsButton setTitle:@"TEAM STATISTICS" forState:UIControlStateNormal];
     [self.groupStatsButton setTitleColor:[UIColor mainWhite] forState:UIControlStateNormal];
     [self.groupStatsButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.groupStatsButton addTarget:self action:@selector(statsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -357,10 +358,7 @@
                         [[GroupController sharedInstance]setCurrentGroup:nil callback:^(BOOL *success) {
                             NSLog(@"current Group removed");
                         }];
-                        
-                        
                     }
-                    
                 }];
             }
         }
@@ -448,9 +446,10 @@
 
 - (void)statsButtonPressed:(id)sender{
     
-    GameDetailViewController *gameDetailViewController = [GameDetailViewController new];
+    GroupStatisticsViewController *gsvc = [GroupStatisticsViewController new];
+    gsvc.currentGroup = self.currentGroup;
     
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gameDetailViewController];
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gsvc];
     
     navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     
@@ -458,7 +457,6 @@
         
     }];
 
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated{

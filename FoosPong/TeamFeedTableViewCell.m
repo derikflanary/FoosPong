@@ -15,23 +15,27 @@
     
     self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"TeamFeedCell"];
     
-    self.playerOneLabel = [[UILabel alloc]initWithFrame:CGRectMake(11, 11, 70, 21)];
+    self.playerOneLabel = [[UILabel alloc]initWithFrame:CGRectMake(11, 11, 150, 21)];
     self.playerOneLabel.font = [UIFont fontWithName:[NSString boldFont] size:18];
     self.playerOneLabel.textColor = [UIColor darkColor];
+    self.playerOneLabel.textAlignment = NSTextAlignmentCenter;
     
-    self.playerTwoLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, 11, 70, 21)];
+    self.playerTwoLabel = [[UILabel alloc]initWithFrame:CGRectMake(170, 11, 150, 21)];
     self.playerTwoLabel.font = [UIFont fontWithName:[NSString boldFont] size:18];
     self.playerTwoLabel.textColor = [UIColor darkColor];
+    self.playerTwoLabel.textAlignment = NSTextAlignmentCenter;
     
-    self.playerOneScoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(11, 40, 70, 31)];
+    self.playerOneScoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(11, 40, 150, 31)];
     self.playerOneScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:26];
     self.playerOneScoreLabel.textColor = [UIColor marigoldBrown];
+    self.playerOneScoreLabel.textAlignment = NSTextAlignmentCenter;
     
-    self.playerTwoScoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, 40, 70, 31)];
+    self.playerTwoScoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(170, 40, 150, 31)];
     self.playerTwoScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:26];
     self.playerTwoScoreLabel.textColor = [UIColor marigoldBrown];
+    self.playerTwoScoreLabel.textAlignment = NSTextAlignmentCenter;
     
-    self.dateLabel = [[UILabel alloc]initWithFrame:CGRectMake(160, 40, 100, 21)];
+    self.dateLabel = [[UILabel alloc]initWithFrame:CGRectMake(130, 40, 100, 21)];
     self.dateLabel.font = [UIFont fontWithName:[NSString mainFont] size:10];
     self.dateLabel.textColor = [UIColor colorWithWhite:.4 alpha:1];
     //self.dateLabel.textAlignment = NSTextAlignmentRight;

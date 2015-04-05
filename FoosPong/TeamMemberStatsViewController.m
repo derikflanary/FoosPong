@@ -224,8 +224,6 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
 
 
 
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -247,6 +245,7 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
         [self.view addSubview:self.tableView];
         [self.lineChart removeFromSuperview];
         [self.informationView removeFromSuperview];
+        [self.tableView reloadData];
     }
     
 }
