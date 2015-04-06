@@ -20,7 +20,16 @@
 @property (nonatomic, assign) NSInteger teamGameWins;
 @property (nonatomic, assign) NSInteger teamGameLoses;
 @property (nonatomic, assign) NSInteger teamGamesPlayed;
-@property (nonatomic, strong)PFObject *group;
+@property (nonatomic, strong) PFObject *group;
 
+@property (nonatomic, strong) NSNumber *teamOneAttackerStartingRank;
+@property (nonatomic, strong) NSNumber *teamOneDefenderStartingRank;
+@property (nonatomic, strong) NSNumber *teamTwoAttackerStartingRank;
+@property (nonatomic, strong) NSNumber *teamTwoDefenderStartingRank;
+
+@property (nonatomic, strong) NSNumber *teamOneAttackerNewRank;
+@property (nonatomic, strong) NSNumber *teamOneDefenderNewRank;
+@property (nonatomic, strong) NSNumber *teamTwoAttackerNewRank;
+@property (nonatomic, strong) NSNumber *teamTwoDefenderNewRank;
 
 @end

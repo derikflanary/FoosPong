@@ -10,7 +10,11 @@
 
 @interface TeamGameViewController : UIViewController
 
-@property (nonatomic, strong)NSArray *teamOne;
-@property (nonatomic, strong)NSArray *teamTwo;
+@property (nonatomic, strong) NSArray *teamOne;
+@property (nonatomic, strong) NSArray *teamTwo;
+@property (nonatomic, strong) NSNumber *teamOneAttackerRank;
+@property (nonatomic, strong) NSNumber *teamOneDefenderRank;
+@property (nonatomic, strong) NSNumber *teamTwoAttackerRank;
+@property (nonatomic, strong) NSNumber *teamTwoDefenderRank;
 
 @end

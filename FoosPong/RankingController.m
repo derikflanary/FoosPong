@@ -263,28 +263,14 @@ static NSString * const rankHistoryKey = @"rankHistory";
         
     }];
     
-    
-    
-    
-//    winner[@"ranking"] = newWinnerRank;
-//    loser[@"ranking"] = newLoserRank;
-//    
-//    [winner saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        if (!error) {
-//            [loser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//                if (!error) {
-//                    callback(newWinnerRank, newLoserRank);
-//                }else{
-//                    NSLog(@"%@", error);
-//                }
-//            }];
-//        }else{
-//            NSLog(@"%@", error);
-//        }
-//    }];
-//    
-    
     //r'(1) = r(1) + K * (S(1) – E(1))
+}
+
+
+- (void)updateNewRankingsForTeamGame:(TeamGameDetails *)teamGameDetails callback:(void (^)(NSNumber *winnerNewRank, NSNumber *loserNewRank))callback{
+    
+    
+    
 }
 
 

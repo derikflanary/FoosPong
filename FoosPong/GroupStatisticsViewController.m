@@ -7,8 +7,11 @@
 //
 
 #import "GroupStatisticsViewController.h"
+#import "StatisticsCustomTableViewCell.h"
 
-@interface GroupStatisticsViewController ()
+@interface GroupStatisticsViewController ()<UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -37,6 +40,14 @@
     [self.navigationController.navigationBar setTintColor:[UIColor mainWhite]];
     self.title = self.currentGroup[@"name"];
     
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 400) style:UITableViewStyleGrouped];
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
+    [self.view addSubview:self.tableView];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -44,6 +55,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - tableview
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    StatisticsCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StatsCell" ];
+    if (!cell){
+        cell = [StatisticsCustomTableViewCell new];
+    }
+    cell.textLabel.text = @"stats";
+    cell.detailTextLabel.text = @"8";
+    
+    return cell;
+}
+
+
+
 
 - (void)cancelPressed:(id)sender{
     [self.navigationController dismissViewControllerAnimated:YES completion:^{

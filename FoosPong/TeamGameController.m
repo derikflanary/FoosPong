@@ -8,9 +8,9 @@
 
 #import "TeamGameController.h"
 #import "TeamGame.h"
+#import "RankingController.h"
 
 @interface TeamGameController()
-
 
 
 @end
@@ -42,6 +42,10 @@
     finishedGame.teamTwoScore = gameStats.teamTwoScore;
     finishedGame.teamOneWin = gameStats.teamOneWin;
     finishedGame.group = gameStats.group;
+    
+    [[RankingController sharedInstance]updateNewRankingsForTeamGame:gameStats callback:^(NSNumber *winnerNewRank, NSNumber *loserNewRank) {
+        
+    }];
     
     [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {

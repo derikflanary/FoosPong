@@ -48,6 +48,8 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 @property (nonatomic, strong) UILabel *messageLabel;
 @property (nonatomic, strong) NSMutableArray *currentPlayersRankings;
 @property (nonatomic, strong) NSMutableArray *availablePlayersRankings;
+@property (nonatomic, strong) NSMutableArray *teamOneRankings;
+@property (nonatomic, strong) NSMutableArray *teamTwoRankings;
 
 
 @end
@@ -211,6 +213,13 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     [self.currentPlayersRankings addObject:[PFObject objectWithClassName:@"ranking"]];
     [self.currentPlayersRankings addObject:[PFObject objectWithClassName:@"ranking"]];
     
+    self.teamOneRankings = [NSMutableArray array];
+    [self.teamOneRankings addObject:[PFObject objectWithClassName:@"ranking"]];
+    [self.teamOneRankings addObject:[PFObject objectWithClassName:@"ranking"]];
+    self.teamTwoRankings = [NSMutableArray array];
+    [self.teamTwoRankings addObject:[PFObject objectWithClassName:@"ranking"]];
+    [self.teamTwoRankings addObject:[PFObject objectWithClassName:@"ranking"]];
+    
     self.cellSelected = NO;
     
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -301,6 +310,10 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 
                 tgvc.teamOne = [NSArray arrayWithArray:self.currentPlayers];
                 tgvc.teamTwo = [NSArray arrayWithArray:self.teamTwoPlayers];
+                tgvc.teamOneAttackerRank = [self.teamOneRankings objectAtIndex:0];
+                tgvc.teamOneDefenderRank = [self.teamOneRankings objectAtIndex:1];
+                tgvc.teamTwoAttackerRank = [self.teamTwoRankings objectAtIndex:0];
+                tgvc.teamTwoDefenderRank = [self.teamTwoRankings objectAtIndex:1];
                 
                 [self.navigationController presentViewController:teamGameNavController animated:YES completion:^{
                     
@@ -531,6 +544,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                         userRank = ranking;
                     }
                 }
+                [self.teamOneRankings replaceObjectAtIndex:indexPath.row withObject:userRank];
 
                 if (!theUser.username) {
                     cell.nameLabel.text = @"Add Player";
@@ -572,6 +586,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                         userRank = ranking;
                     }
                 }
+                [self.teamTwoRankings replaceObjectAtIndex:indexPath.row withObject:userRank];
                 
                 if (!theUser.username) {
                     cell.nameLabel.text = @"Add Player";

@@ -48,7 +48,6 @@
     
     self.backgroundColor = [UIColor transparentCellWhite];
 
-    
     UIView *bgColorView = [[UIView alloc] init];
     bgColorView.backgroundColor = [UIColor darkColorTransparent];
     self.playerOneLabel.highlightedTextColor = [UIColor mainWhite];
