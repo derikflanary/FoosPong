@@ -50,6 +50,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 @property (nonatomic, strong) NSMutableArray *availablePlayersRankings;
 @property (nonatomic, strong) NSMutableArray *teamOneRankings;
 @property (nonatomic, strong) NSMutableArray *teamTwoRankings;
+@property (nonatomic, strong) NSMutableArray *doublesRankings;
 
 
 @end
@@ -180,21 +181,30 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                     }
                     self.availablePlayers = mutableGroupMembers;
                     self.availablePlayersRankings = rankings.mutableCopy;
-                    [self.availablePlayers removeObject:self.currentUser];
                     
-                    self.currentPlayers = [NSMutableArray array];
-                    [self.currentPlayers insertObject:self.currentUser atIndex:0];
-                    
-                    if ([self.currentPlayers count] <2) {
-                        [self.currentPlayers addObject:[PFUser new]];
-                        PFObject *emptyRanking = [PFObject objectWithClassName:@"Ranking"];
-                        [self.currentPlayersRankings addObject:emptyRanking];
-                    }
                     
                     self.title = [group[@"name"] uppercaseString];
                     self.searchAvailablePlayers = members;
-                    [self.activityView stopAnimating];
-                    [self.tableView reloadData];
+                    
+                    [[RankingController sharedInstance]retrieveDoublesRankingsForGroup:group forUsers:self.availablePlayers withCallBack:^(NSArray *doublesRankings) {
+                        self.doublesRankings = doublesRankings.mutableCopy;
+                        
+                        [self.availablePlayers removeObject:self.currentUser];
+                        
+                        self.currentPlayers = [NSMutableArray array];
+                        [self.currentPlayers insertObject:self.currentUser atIndex:0];
+                        
+                        if ([self.currentPlayers count] <2) {
+                            [self.currentPlayers addObject:[PFUser new]];
+                            PFObject *emptyRanking = [PFObject objectWithClassName:@"Ranking"];
+                            [self.currentPlayersRankings addObject:emptyRanking];
+                        }
+
+                        
+                        [self.activityView stopAnimating];
+                        [self.tableView reloadData];
+
+                    }];
                 }];
             }
         }];
@@ -536,9 +546,9 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 
                 PFUser *theUser = [self.currentPlayers objectAtIndex:indexPath.row];
                 
-                PFObject *userRank = [PFObject objectWithClassName:@"Ranking"];
+                PFObject *userRank = [PFObject objectWithClassName:@"DoublesRanking"];
                 
-                for (PFObject *ranking in self.availablePlayersRankings) {
+                for (PFObject *ranking in self.doublesRankings) {
                     PFUser *rankingUser = ranking[@"user"];
                     if ([rankingUser.objectId isEqualToString:theUser.objectId]) {
                         userRank = ranking;
@@ -578,9 +588,9 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
             case TableView2TeamSectionTeam2:{
                 
                 PFUser *theUser = [self.teamTwoPlayers objectAtIndex:indexPath.row];
-                PFObject *userRank = [PFObject objectWithClassName:@"Ranking"];
+                PFObject *userRank = [PFObject objectWithClassName:@"DoublesRanking"];
                 
-                for (PFObject *ranking in self.availablePlayersRankings) {
+                for (PFObject *ranking in self.doublesRankings) {
                     PFUser *rankingUser = ranking[@"user"];
                     if ([rankingUser.objectId isEqualToString:theUser.objectId]) {
                         userRank = ranking;
@@ -622,9 +632,9 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
             case TableView2TeamSectionAvailable:{
                 
                 PFUser *theUser = [self.availablePlayers objectAtIndex:indexPath.row];
-                PFObject *userRank = [PFObject objectWithClassName:@"Ranking"];
+                PFObject *userRank = [PFObject objectWithClassName:@"DoublesRanking"];
                 
-                for (PFObject *ranking in self.availablePlayersRankings) {
+                for (PFObject *ranking in self.doublesRankings) {
                     PFUser *rankingUser = ranking[@"user"];
                     if ([rankingUser.objectId isEqualToString:theUser.objectId]) {
                         userRank = ranking;
