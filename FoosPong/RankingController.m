@@ -263,12 +263,12 @@ static NSString * const rankHistoryKey = @"rankHistory";
                 double winPercentDbl = [winPercentNum doubleValue];
                 winnerPercentage = winPercentDbl / 100;
                 
-                NSNumber *losePercentNum = [RankingsTable higherRatedPlayerPercentageAtIndex:idx];
+                NSNumber *losePercentNum = [RankingsTable lowerRatedPlayerAtIndex:idx];
                 double losePercentDbl = [losePercentNum doubleValue];
                 loserPercentage = losePercentDbl / 100;
                 
             }else{
-                NSNumber *winPercentNum = [RankingsTable higherRatedPlayerPercentageAtIndex:idx];
+                NSNumber *winPercentNum = [RankingsTable lowerRatedPlayerAtIndex:idx];
                 double winPercentDbl = [winPercentNum doubleValue];
                 winnerPercentage = winPercentDbl / 100;
                 

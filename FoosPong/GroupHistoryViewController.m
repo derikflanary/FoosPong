@@ -275,12 +275,15 @@
         NSString *t2p2Name = t2p2.username;
         NSDate *date = teamGame.createdAt;
         
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ & %@: %.0f | %@ & %@: %.0f", t1p1Name, t1p2Name, teamGame.teamOneScore, t2p1Name, t2p2Name, teamGame.teamTwoScore];
-        cell.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
+        cell.playerOneLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
+        cell.playerTwoLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
 
-        cell.textLabel.numberOfLines = 0;
+        cell.playerOneLabel.text = [NSString stringWithFormat:@"%@ & %@",[t1p1Name uppercaseString], [t1p2Name uppercaseString]];
+        cell.playerTwoLabel.text = [NSString stringWithFormat:@"%@ & %@", [t2p1Name uppercaseString], [t2p2Name uppercaseString]];
+        cell.playerOneScoreLabel.text = [NSString stringWithFormat:@"%.f", teamGame.teamOneScore];
+        cell.playerTwoScoreLabel.text = [NSString stringWithFormat:@"%.f", teamGame.teamTwoScore];
+        cell.dateLabel.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
         
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
         return cell;
     }
 

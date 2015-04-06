@@ -118,13 +118,13 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.p1Label = [[UILabel alloc]initWithFrame:CGRectMake(30, 425, 100, 50)];
     self.p1Label.text = [self.playerOneName uppercaseString];
     self.p1Label.textAlignment = NSTextAlignmentCenter;
-    self.p1Label.font = [UIFont fontWithName:[NSString mainFont] size:22];
+    self.p1Label.font = [UIFont fontWithName:[NSString mainFont] size:16];
     self.p1Label.textColor = [UIColor mainWhite];
     
     self.p2Label = [[UILabel alloc]initWithFrame:CGRectMake(180, 425, 100, 50)];
     self.p2Label.text = [self.playerTwoName uppercaseString];
     self.p2Label.textAlignment = NSTextAlignmentCenter;
-    self.p2Label.font = [UIFont fontWithName:[NSString mainFont] size:22];
+    self.p2Label.font = [UIFont fontWithName:[NSString mainFont] size:16];
     self.p2Label.textColor = [UIColor mainWhite];
     
     self.p1MinusButton = [[MinusButton alloc]initWithFrame:CGRectMake(45, 350, 50, 50)];
