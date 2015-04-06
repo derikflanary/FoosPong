@@ -128,6 +128,23 @@ static NSString * const rankHistoryKey = @"rankHistory";
     
 }
 
+- (void)retrieveDoublesRankingsForGroup:(PFObject *)group forUsers:(NSArray *)members withCallBack:(void (^)(NSArray *))callback{
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"DoublesRanking"];
+    [query whereKey:@"group" equalTo:group];
+    [query whereKey:@"user" containedIn:members];
+    [query orderByDescending:@"rank"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            callback(objects);
+        }else{
+            NSLog(@"Getting rankings for group %@", error);
+        }
+    }];
+
+    
+}
+
 - (void)removeRankingForGroup:(PFObject*)group{
     
     PFUser *currentUser = [PFUser currentUser];

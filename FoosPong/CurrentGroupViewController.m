@@ -36,7 +36,9 @@
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 @property (nonatomic, strong) UIVisualEffectView *bluredEffectView;
 @property (nonatomic, strong) NSMutableArray *memberRankings;
+@property (nonatomic, strong) NSMutableArray *memberDoublesRankings;
 @property (nonatomic, strong) UILabel *messageLabel;
+@property (nonatomic, strong) NSMutableArray *mutableDoublesGroupMembers;
 
 @end
 
@@ -54,13 +56,12 @@
     [self.activityView startAnimating];
 
     self.tableView.allowsSelection = NO;
-//    PFUser *currentUser = [PFUser currentUser];
-//    if (!currentUser[@"currentGroup"]) {
-//        [self noGroup];
-//    }else{
+
+    self.mutableDoublesGroupMembers = [NSMutableArray array];
+    
         [self.addMembersButton removeFromSuperview];
         [self checkForGroup];
-//    }
+
 }
 
 - (void)viewDidLoad {
@@ -118,6 +119,8 @@
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
     [self.view addSubview:self.groupStatsButton];
     [self.view addSubview:self.addMembersButton];
+    
+    
     
     
 }
@@ -240,6 +243,8 @@
     TeamMemberStatsViewController *gsvc = [TeamMemberStatsViewController new];
     gsvc.ranking = [self.memberRankings objectAtIndex:indexPath.row];
     gsvc.user = user;
+    NSUInteger idx = [self.mutableDoublesGroupMembers indexOfObject:user];
+    gsvc.doublesRanking = [self.memberDoublesRankings objectAtIndex:idx];
     
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gsvc];
     
@@ -327,28 +332,47 @@
                             
                             self.groupMembers = mutableGroupMembers;
                             self.memberRankings = rankings.mutableCopy;
-
                             [self.tableView reloadData];
-                            [[GroupController sharedInstance]fetchAdminForGroup:self.currentGroup callback:^(PFObject *admin) {
-                                self.admin = admin;
-                                if ([[PFUser currentUser].objectId isEqualToString:admin.objectId]) {
-                                    [self.view addSubview:self.addMembersButton];
+                            
+                            [[RankingController sharedInstance]retrieveDoublesRankingsForGroup:group forUsers:self.groupMembers withCallBack:^(NSArray *doublesRankings) {
                                 
-                                    self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, 350);
-                                    self.tableView.allowsSelection = YES;
-                                    [self.tableView reloadData];
+                                NSMutableArray *doublesGroupMembers = [NSMutableArray array];
+                                
+                                for (PFObject *ranking in doublesRankings) {
+                                    PFUser *userForRanking = ranking[@"user"];
+                                    
+                                    for (PFUser *member in self.groupMembers) {
+                                        if ([userForRanking.objectId isEqualToString:member.objectId]) {
+                                            [doublesGroupMembers addObject:member];
+                                        }
+                                    }
                                 }
-                                else{
-                                    [self.addMembersButton removeFromSuperview];
+                                self.mutableDoublesGroupMembers = doublesGroupMembers;
+                                self.memberDoublesRankings = doublesRankings.mutableCopy;
+                                self.tableView.allowsSelection = YES;
+                                
+                                [[GroupController sharedInstance]fetchAdminForGroup:self.currentGroup callback:^(PFObject *admin) {
+                                    self.admin = admin;
+                                    if ([[PFUser currentUser].objectId isEqualToString:admin.objectId]) {
+                                        [self.view addSubview:self.addMembersButton];
+                                        
+                                        self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, 350);
+                                        
+                                        [self.tableView reloadData];
+                                    }
+                                    else{
+                                        [self.addMembersButton removeFromSuperview];
+                                    }
+                                }];
+                                
+                                if (self.noGroupView) {
+                                    [self.noGroupView removeFromSuperview];
                                 }
+                                
+                                self.messageLabel.text = @"";
+                                [self.tableView reloadData];
                             }];
                             
-                            if (self.noGroupView) {
-                                [self.noGroupView removeFromSuperview];
-                            }
-
-                            self.messageLabel.text = @"";
-                            [self.tableView reloadData];
                         }];
 
                     }else{

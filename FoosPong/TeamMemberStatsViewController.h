@@ -16,5 +16,6 @@
 @property (nonatomic, strong) PFUser *user;
 @property (nonatomic, strong) PersonalSingleStats *singleStats;
 @property (nonatomic, strong) PersonalTeamStats *teamStats;
+@property (nonatomic, strong) PFObject *doublesRanking;
 
 @end

@@ -30,7 +30,8 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
 @property (nonatomic, strong) JBChartInformationView *informationView;
 @property (nonatomic, strong) NSArray *rankingHistory;
 @property (nonatomic, strong) UITableView *tableView;
-
+@property (nonatomic, strong) NSArray *doublesRankingHistory;
+@property (nonatomic, strong) JBChartHeaderView *headerView;
 
 @end
 
@@ -42,6 +43,7 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
     [super viewDidLoad];
     
     self.rankingHistory = self.ranking[@"rankHistory"];
+    self.doublesRankingHistory = self.doublesRanking[@"rankHistory"];
     
     [self.navigationController.navigationBar setTitleTextAttributes:
      
@@ -90,16 +92,16 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
     [self.informationView setSeparatorColor:[UIColor lunarGreen]];
 
     
-    JBChartHeaderView *headerView = [[JBChartHeaderView alloc] initWithFrame:CGRectMake(kJBLineChartViewControllerChartPadding, ceil(self.view.bounds.size.height * 0.5) - ceil(kJBLineChartViewControllerChartHeaderHeight * 0.5), self.view.bounds.size.width - (kJBLineChartViewControllerChartPadding * 2), kJBLineChartViewControllerChartHeaderHeight)];
-    headerView.titleLabel.text = @"";
-    headerView.titleLabel.textColor = [UIColor vanilla];
-    headerView.titleLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.25];
-    headerView.titleLabel.shadowOffset = CGSizeMake(0, 1);
-    headerView.subtitleLabel.text = @"Single's Ranking";
-    headerView.subtitleLabel.textColor = [UIColor vanilla];
-    headerView.separatorColor = [UIColor lunarGreen];
+    self.headerView = [[JBChartHeaderView alloc] initWithFrame:CGRectMake(kJBLineChartViewControllerChartPadding, ceil(self.view.bounds.size.height * 0.5) - ceil(kJBLineChartViewControllerChartHeaderHeight * 0.5), self.view.bounds.size.width - (kJBLineChartViewControllerChartPadding * 2), kJBLineChartViewControllerChartHeaderHeight)];
+    self.headerView.titleLabel.text = @"";
+    self.headerView.titleLabel.textColor = [UIColor vanilla];
+    self.headerView.titleLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.25];
+    self.headerView.titleLabel.shadowOffset = CGSizeMake(0, 1);
+    self.headerView.subtitleLabel.text = @"Single's Ranking";
+    self.headerView.subtitleLabel.textColor = [UIColor vanilla];
+    self.headerView.separatorColor = [UIColor lunarGreen];
 
-    self.lineChart.headerView = headerView;
+    self.lineChart.headerView = self.headerView;
     [self.lineChart reloadData];
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 400) style:UITableViewStyleGrouped];
@@ -127,10 +129,18 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
 
 - (CGFloat)lineChartView:(JBLineChartView *)lineChartView verticalValueForHorizontalIndex:(NSUInteger)horizontalIndex atLineIndex:(NSUInteger)lineIndex
 {
-   
-  NSNumber *rank = [self.rankingHistory objectAtIndex:horizontalIndex];
-    CGFloat rankFloat = [rank floatValue];
-    return rankFloat;
+    
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        NSNumber *rank = [self.rankingHistory objectAtIndex:horizontalIndex];
+        CGFloat rankFloat = [rank floatValue];
+        return rankFloat;
+
+    }else{
+        NSNumber *rank = [self.doublesRankingHistory objectAtIndex:horizontalIndex];
+        CGFloat rankFloat = [rank floatValue];
+        return rankFloat;
+
+    }
 }
 
 
@@ -142,7 +152,12 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
 
 - (NSUInteger)lineChartView:(JBLineChartView *)lineChartView numberOfVerticalValuesAtLineIndex:(NSUInteger)lineIndex{
     //NSLog(@"%lu", [self.games count]);
-    return [self.rankingHistory count];
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+     return [self.rankingHistory count];
+    }else{
+        return [self.doublesRankingHistory count];
+    }
+    
 }
 
 
@@ -168,15 +183,30 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
 
 - (void)lineChartView:(JBLineChartView *)lineChartView didSelectLineAtIndex:(NSUInteger)lineIndex horizontalIndex:(NSUInteger)horizontalIndex touchPoint:(CGPoint)touchPoint
 {
-    NSNumber *valueNumber = [self.rankingHistory objectAtIndex:horizontalIndex];
-    CGFloat rankFloat = [valueNumber floatValue];
-    [self.informationView setValueText:[NSString stringWithFormat:@"%.f", rankFloat] unitText:@"Score"];
-    
-    NSNumber *lastNumber = [self.rankingHistory lastObject];
-    if ([valueNumber isEqualToNumber:lastNumber]) {
-        [self.informationView setTitleText:@"Current Score"];
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        NSNumber *valueNumber = [self.rankingHistory objectAtIndex:horizontalIndex];
+        CGFloat rankFloat = [valueNumber floatValue];
+        [self.informationView setValueText:[NSString stringWithFormat:@"%.f", rankFloat] unitText:@"Score"];
+        
+        NSNumber *lastNumber = [self.rankingHistory lastObject];
+        if ([valueNumber isEqualToNumber:lastNumber]) {
+            [self.informationView setTitleText:@"Current Score"];
+        }else{
+            [self.informationView setTitleText:@"Previous Score"];
+        }
+
     }else{
-        [self.informationView setTitleText:@"Previous Score"];
+        NSNumber *valueNumber = [self.doublesRankingHistory objectAtIndex:horizontalIndex];
+        CGFloat rankFloat = [valueNumber floatValue];
+        [self.informationView setValueText:[NSString stringWithFormat:@"%.f", rankFloat] unitText:@"Score"];
+        
+        NSNumber *lastNumber = [self.doublesRankingHistory lastObject];
+        if ([valueNumber isEqualToNumber:lastNumber]) {
+            [self.informationView setTitleText:@"Current Score"];
+        }else{
+            [self.informationView setTitleText:@"Previous Score"];
+        }
+
     }
     
     [self.informationView setHidden:NO animated:YES];
@@ -240,6 +270,14 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
         
         [self.view addSubview:self.lineChart];
         [self.view addSubview:self.informationView];
+        
+        if (self.segmentedControl.selectedSegmentIndex == 0) {
+            self.headerView.subtitleLabel.text = @"Single's Ranking";
+        }else{
+            self.headerView.subtitleLabel.text = @"Doubles's Ranking";
+        }
+        
+        [self.lineChart reloadData];
         [self.tableView removeFromSuperview];
     }else{
         [self.view addSubview:self.tableView];

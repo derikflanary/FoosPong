@@ -32,62 +32,75 @@
 - (void) retrieveSingleStatsForUser:(PFUser*)user andSingleGames:(NSArray*)singleGames callback:(void (^)(PersonalSingleStats *))callback{
     
     PersonalSingleStats *stats = [PersonalSingleStats new];
+    PFUser *mostCommon = nil;
     stats.singleGamesPlayed = [singleGames count];
     NSMutableArray *mutableOpponents = [NSMutableArray array];
-    
-    for (Game *singleGame in singleGames) {
+    if (stats.singleGamesPlayed > 0) {
         
         
-        if ([singleGame.p1.objectId isEqualToString:user.objectId] && [singleGame.playerOneWin boolValue]) {
-            stats.singleGameWins ++;
-            stats.pointsScored = stats.pointsScored + singleGame.playerOneScore;
-            stats.pointsAllowed = stats.pointsAllowed + singleGame.playerTwoScore;
-            [mutableOpponents addObject:singleGame.p2];
+        
+        for (Game *singleGame in singleGames) {
             
-        }else if ([singleGame.p1.objectId isEqualToString:user.objectId] && ![singleGame.playerOneWin boolValue]){
-            stats.singleGameLoses ++;
-            stats.pointsScored = stats.pointsScored + singleGame.playerOneScore;
-            stats.pointsAllowed = stats.pointsAllowed + singleGame.playerTwoScore;
-            [mutableOpponents addObject:singleGame.p2];
             
-        }else if ([singleGame.p2.objectId isEqualToString:user.objectId] && ![singleGame.playerOneWin boolValue]){
-            stats.singleGameWins ++;
-            stats.pointsScored = stats.pointsScored + singleGame.playerTwoScore;
-            stats.pointsAllowed = stats.pointsAllowed + singleGame.playerOneScore;
-            [mutableOpponents addObject:singleGame.p1];
-            
-        }else{
-            stats.singleGameLoses ++;
-            stats.pointsScored = stats.pointsScored + singleGame.playerTwoScore;
-            stats.pointsAllowed = stats.pointsAllowed + singleGame.playerOneScore;
-            [mutableOpponents addObject:singleGame.p1];
+            if ([singleGame.p1.objectId isEqualToString:user.objectId] && [singleGame.playerOneWin boolValue]) {
+                stats.singleGameWins ++;
+                stats.pointsScored = stats.pointsScored + singleGame.playerOneScore;
+                stats.pointsAllowed = stats.pointsAllowed + singleGame.playerTwoScore;
+                [mutableOpponents addObject:singleGame.p2];
+                
+            }else if ([singleGame.p1.objectId isEqualToString:user.objectId] && ![singleGame.playerOneWin boolValue]){
+                stats.singleGameLoses ++;
+                stats.pointsScored = stats.pointsScored + singleGame.playerOneScore;
+                stats.pointsAllowed = stats.pointsAllowed + singleGame.playerTwoScore;
+                [mutableOpponents addObject:singleGame.p2];
+                
+            }else if ([singleGame.p2.objectId isEqualToString:user.objectId] && ![singleGame.playerOneWin boolValue]){
+                stats.singleGameWins ++;
+                stats.pointsScored = stats.pointsScored + singleGame.playerTwoScore;
+                stats.pointsAllowed = stats.pointsAllowed + singleGame.playerOneScore;
+                [mutableOpponents addObject:singleGame.p1];
+                
+            }else{
+                stats.singleGameLoses ++;
+                stats.pointsScored = stats.pointsScored + singleGame.playerTwoScore;
+                stats.pointsAllowed = stats.pointsAllowed + singleGame.playerOneScore;
+                [mutableOpponents addObject:singleGame.p1];
+            }
         }
-    }
-    stats.opponents = mutableOpponents;
-    stats.pointsPerGame = (float)stats.pointsScored/(float)stats.singleGamesPlayed;
-    stats.pointsPerGame = floorf(stats.pointsPerGame * 100) / 100;
-    
-    stats.pointsAllowedPerGame = (float)stats.pointsAllowed/(float)stats.singleGamesPlayed;
-    stats.pointsAllowedPerGame = floorf(stats.pointsAllowedPerGame * 100) / 100;
-    
-    NSCountedSet* stringSet = [[NSCountedSet alloc] initWithArray:stats.opponents];
-    PFUser* mostCommon = nil;
-    NSUInteger highestCount = 0;
-    
-    for(PFUser* user in stringSet) {
-        NSUInteger count = [stringSet countForObject:user];
-        if(count > highestCount) {
-            highestCount = count;
-            mostCommon = user;
+        stats.opponents = mutableOpponents;
+        stats.pointsPerGame = (float)stats.pointsScored/(float)stats.singleGamesPlayed;
+        stats.pointsPerGame = floorf(stats.pointsPerGame * 100) / 100;
+        
+        stats.pointsAllowedPerGame = (float)stats.pointsAllowed/(float)stats.singleGamesPlayed;
+        stats.pointsAllowedPerGame = floorf(stats.pointsAllowedPerGame * 100) / 100;
+        
+        NSCountedSet* stringSet = [[NSCountedSet alloc] initWithArray:stats.opponents];
+        NSUInteger highestCount = 0;
+        
+        for(PFUser* user in stringSet) {
+            NSUInteger count = [stringSet countForObject:user];
+            if(count > highestCount) {
+                highestCount = count;
+                mostCommon = user;
+            }
         }
+    }else{
+        stats.singleGamesPlayed = 0;
+        stats.singleGameWins = 0;
+        stats.singleGameLoses = 0;
+        stats.pointsPerGame = 0;
+        stats.pointsAllowedPerGame = 0;
+        mostCommon = [PFUser user];
+        mostCommon.username = @"-";
     }
+    
     
     stats.statArray = @[[NSNumber numberWithLong:stats.singleGamesPlayed],
                         [NSNumber numberWithLong:stats.singleGameWins],
                         [NSNumber numberWithLong:stats.singleGameLoses],
                         [NSNumber numberWithFloat:stats.pointsPerGame],
                         [NSNumber numberWithFloat:stats.pointsAllowedPerGame],
-                        mostCommon[@"firstName"],
+                        mostCommon.username,
                         @[@"Games Played:",
                           @"Wins:",
                           @"Loses:",

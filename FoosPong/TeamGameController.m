@@ -40,7 +40,7 @@
     finishedGame.teamTwoDefender = gameStats.teamTwoDefender;
     finishedGame.teamOneScore = gameStats.teamOneScore;
     finishedGame.teamTwoScore = gameStats.teamTwoScore;
-    finishedGame.teamOneWin = gameStats.teamOneWin;
+    finishedGame.teamOneWin = [NSNumber numberWithBool:gameStats.teamOneWin];
     finishedGame.group = gameStats.group;
     
     [[RankingController sharedInstance]updateNewRankingsForTeamGame:gameStats callback:^(NSArray *teamOneNewRanks, NSArray *teamTwoNewRanks) {

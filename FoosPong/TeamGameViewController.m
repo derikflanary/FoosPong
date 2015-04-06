@@ -327,7 +327,7 @@
     self.gameStats.teamTwoDefender = [self.teamTwo objectAtIndex:1];
     self.gameStats.teamOneScore = self.teamOneScore;
     self.gameStats.teamTwoScore = self.teamTwoScore;
-    self.gameStats.teamOneWin = [NSNumber numberWithBool:self.teamOneWin];
+    self.gameStats.teamOneWin = self.teamOneWin;
     self.gameStats.group = [PFUser currentUser][@"currentGroup"];
     self.gameStats.teamOneAttackerStartingRank = self.teamOneAttackerRank;
     self.gameStats.teamOneDefenderStartingRank = self.teamOneDefenderRank;
