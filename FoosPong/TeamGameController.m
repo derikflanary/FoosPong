@@ -43,16 +43,16 @@
     finishedGame.teamOneWin = gameStats.teamOneWin;
     finishedGame.group = gameStats.group;
     
-    [[RankingController sharedInstance]updateNewRankingsForTeamGame:gameStats callback:^(NSNumber *winnerNewRank, NSNumber *loserNewRank) {
-        
+    [[RankingController sharedInstance]updateNewRankingsForTeamGame:gameStats callback:^(NSArray *teamOneNewRanks, NSArray *teamTwoNewRanks) {
+        [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                NSLog(@"Team Game Saved");
+            }else
+                NSLog(@"%@", error);
+        }];
     }];
     
-    [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"Team Game Saved");
-        }else
-            NSLog(@"%@", error);
-    }];
+    
 }
 
 -(void)updateGamesForUser:(PFUser*)user callback:(void (^)(NSArray *))callback{

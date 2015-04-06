@@ -19,6 +19,5 @@
 - (void)setNewRankingWithCallback:(void (^)(BOOL * succeeded))callback;
 - (void)retrieveRankingsForGroup:(PFObject *)group forUsers:(NSArray *)members withCallBack:(void (^)(NSArray *))callback;
 - (void)removeRankingForGroup:(PFObject*)group;
-- (void)updateNewRankingsForTeamGame:(TeamGameDetails *)teamGameDetails callback:(void (^)(NSNumber *winnerNewRank, NSNumber *loserNewRank))callback;
-
+- (void)updateNewRankingsForTeamGame:(TeamGameDetails *)teamGameDetails callback:(void (^)(NSArray *teamOneNewRanks, NSArray *teamTwoNewRanks))callback;
 @end

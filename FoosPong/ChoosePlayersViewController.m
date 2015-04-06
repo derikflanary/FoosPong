@@ -310,10 +310,10 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 
                 tgvc.teamOne = [NSArray arrayWithArray:self.currentPlayers];
                 tgvc.teamTwo = [NSArray arrayWithArray:self.teamTwoPlayers];
-                tgvc.teamOneAttackerRank = [self.teamOneRankings objectAtIndex:0];
-                tgvc.teamOneDefenderRank = [self.teamOneRankings objectAtIndex:1];
-                tgvc.teamTwoAttackerRank = [self.teamTwoRankings objectAtIndex:0];
-                tgvc.teamTwoDefenderRank = [self.teamTwoRankings objectAtIndex:1];
+                tgvc.teamOneAttackerRank = [self.teamOneRankings objectAtIndex:0][@"rank"];
+                tgvc.teamOneDefenderRank = [self.teamOneRankings objectAtIndex:1][@"rank"];
+                tgvc.teamTwoAttackerRank = [self.teamTwoRankings objectAtIndex:0][@"rank"];
+                tgvc.teamTwoDefenderRank = [self.teamTwoRankings objectAtIndex:1][@"rank"];
                 
                 [self.navigationController presentViewController:teamGameNavController animated:YES completion:^{
                     
