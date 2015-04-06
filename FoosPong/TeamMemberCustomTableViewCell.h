@@ -26,4 +26,6 @@
 
 @property (nonatomic, strong) UILabel *recordLabel;
 
+@property (nonatomic, strong) UILabel *doublesRankLabel;
+
 @end

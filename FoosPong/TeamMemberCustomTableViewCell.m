@@ -23,17 +23,22 @@
     self.nameLabel.font = [UIFont fontWithName:[NSString boldFont] size:18];
     self.nameLabel.textColor = [UIColor darkColor];
     
-    self.scoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(68, 32, 220, 21)];
+    self.scoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(68, 32, 100, 21)];
     self.scoreLabel.textColor = [UIColor marigoldBrown];
-    self.scoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:16];
+    self.scoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:13];
     
-    self.adminLabel = [[UILabel alloc]initWithFrame:CGRectMake(235, 53, 71, 21)];
+    self.doublesRankLabel = [[UILabel alloc]initWithFrame:CGRectMake(180, 32, 100, 21)];
+    self.doublesRankLabel.textColor = [UIColor marigoldBrown];
+    self.doublesRankLabel.font = [UIFont fontWithName:[NSString mainFont] size:13];
+    
+    
+    self.adminLabel = [[UILabel alloc]initWithFrame:CGRectMake(235, 11, 71, 21)];
     self.adminLabel.font = [UIFont fontWithName:[NSString mainFont] size:10];
     self.adminLabel.textColor = [UIColor colorWithWhite:.4 alpha:1];
     self.adminLabel.textAlignment = NSTextAlignmentRight;
     
     self.fullNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(68, 53, 150, 21)];
-    self.fullNameLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
+    self.fullNameLabel.font = [UIFont fontWithName:[NSString mainFont] size:10];
     self.fullNameLabel.textColor = [UIColor lunarGreen];
     
     
@@ -44,6 +49,7 @@
     [self.contentView addSubview:self.scoreLabel];
     [self.contentView addSubview:self.adminLabel];
     [self.contentView addSubview:self.fullNameLabel];
+    [self.contentView addSubview:self.doublesRankLabel];
     
     UIView *bgColorView = [[UIView alloc] init];
     bgColorView.backgroundColor = [UIColor darkColorTransparent];

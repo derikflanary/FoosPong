@@ -159,11 +159,11 @@
         
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
 
     if (self.groupMembers.count > 0) {
         
-        PFUser *user = [self.groupMembers objectAtIndex:indexPath.row];
-        PFUser *admin = self.currentGroup[@"admin"];
+                PFUser *admin = self.currentGroup[@"admin"];
         
         if ([user.objectId isEqualToString: admin.objectId]) {
             
@@ -171,8 +171,13 @@
                 
                 PFObject *rankingObject = [self.memberRankings objectAtIndex:indexPath.row];
                 NSNumber *ranking = rankingObject[@"rank"];
-                cell.scoreLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
+                cell.scoreLabel.text = [NSString stringWithFormat:@"1v1 Rank:%@", ranking];
                 
+                NSUInteger idx = [self.mutableDoublesGroupMembers indexOfObject:user];
+                PFObject *doublesRankObj = [self.memberDoublesRankings objectAtIndex:idx];
+                NSNumber *theRanking = doublesRankObj[@"rank"];
+                cell.doublesRankLabel.text = [NSString stringWithFormat:@"2v2 Rank:%@", theRanking];
+
             }
             
             cell.adminLabel.text = @"Admin";
@@ -182,8 +187,12 @@
             if ([self.memberRankings count] > 0) {
                 PFObject *rankingObject = [self.memberRankings objectAtIndex:indexPath.row];
                 NSNumber *ranking = rankingObject[@"rank"];
-                cell.scoreLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
-            
+                cell.scoreLabel.text = [NSString stringWithFormat:@"1v1 Rank:%@", ranking];
+                
+                NSUInteger idx = [self.mutableDoublesGroupMembers indexOfObject:user];
+                PFObject *doublesRankObj = [self.memberDoublesRankings objectAtIndex:idx];
+                NSNumber *theRanking = doublesRankObj[@"rank"];
+                cell.doublesRankLabel.text = [NSString stringWithFormat:@"2v2 Rank:%@", theRanking];
             }
         }
         
@@ -332,7 +341,7 @@
                             
                             self.groupMembers = mutableGroupMembers;
                             self.memberRankings = rankings.mutableCopy;
-                            [self.tableView reloadData];
+                          
                             
                             [[RankingController sharedInstance]retrieveDoublesRankingsForGroup:group forUsers:self.groupMembers withCallBack:^(NSArray *doublesRankings) {
                                 

@@ -142,6 +142,10 @@
     if (!cell){
         cell = [TeamFeedTableViewCell new];
     }
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMM d, h:mm a"];
+    
     if (self.segmentedControl.selectedSegmentIndex == 0) {
         
         Game *game = [self.singleGames objectAtIndex:indexPath.row];
@@ -155,11 +159,8 @@
         cell.playerTwoLabel.text = [p2Name uppercaseString];
         cell.playerOneScoreLabel.text = [NSString stringWithFormat:@"%.f", game.playerOneScore];
         cell.playerTwoScoreLabel.text = [NSString stringWithFormat:@"%.f", game.playerTwoScore];
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"MMM d, h:mm a"];
         cell.dateLabel.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
-                //cell.backgroundColor = [UIColor mainColor];
+
         return cell;
 
     }else{
@@ -173,10 +174,16 @@
         NSString *t2p1Name = t2p1.username;
         PFUser *t2p2 = teamGame.teamTwoDefender;
         NSString *t2p2Name = t2p2.username;
+        NSDate *date = teamGame.createdAt;
         
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ & %@: %.0f | %@ & %@: %.0f", t1p1Name, t1p2Name, teamGame.teamOneScore, t2p1Name, t2p2Name, teamGame.teamTwoScore];
-        cell.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
-        cell.textLabel.numberOfLines = 0;
+        cell.playerOneLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
+        cell.playerTwoLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
+        
+        cell.playerOneLabel.text = [NSString stringWithFormat:@"%@ & %@",[t1p1Name uppercaseString], [t1p2Name uppercaseString]];
+        cell.playerTwoLabel.text = [NSString stringWithFormat:@"%@ & %@", [t2p1Name uppercaseString], [t2p2Name uppercaseString]];
+        cell.playerOneScoreLabel.text = [NSString stringWithFormat:@"%.f", teamGame.teamOneScore];
+        cell.playerTwoScoreLabel.text = [NSString stringWithFormat:@"%.f", teamGame.teamTwoScore];
+        cell.dateLabel.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
         return cell;
     }
    
