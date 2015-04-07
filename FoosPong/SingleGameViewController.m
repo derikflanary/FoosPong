@@ -267,6 +267,11 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         
         UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", [self.playerOneName uppercaseString]] message:@"End Game?" preferredStyle:UIAlertControllerStyleAlert];
         
+        [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            
+            [self p1MinusButtonPressed:self];
+        }]];
+        
         [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
             [[SingleGameController sharedInstance] addGameWithSingleGameStats:self.gameStats callback:^(Game *singleGame) {
@@ -284,12 +289,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
             
         }]];
         
-        [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-            
-            [self p1MinusButtonPressed:self];
-        }]];
-
-        [self presentViewController:setTitleAlert animated:YES completion:nil];
+                [self presentViewController:setTitleAlert animated:YES completion:nil];
     }
 }
 
@@ -308,6 +308,11 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         
         UIAlertController *setTitleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ Wins!", [self.playerTwoName uppercaseString]] message:@"End Game?" preferredStyle:UIAlertControllerStyleAlert];
         
+        [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            
+            [self p2MinusButtonPressed:self];
+        }]];
+        
         [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
             [[SingleGameController sharedInstance] addGameWithSingleGameStats:self.gameStats callback:^(Game *singleGame) {
@@ -322,15 +327,9 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
                     
                 }];
             }];
-
-            
         }]];
         
-        [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-            
-            [self p2MinusButtonPressed:self];
-        }]];
-        [self presentViewController:setTitleAlert animated:YES completion:nil];
+                [self presentViewController:setTitleAlert animated:YES completion:nil];
     }
 }
 

@@ -11,6 +11,7 @@
 #import "SingleGameController.h"
 #import "TeamGameDetails.h"
 #import "TeamGameController.h"
+#import "GameDetailViewController.h"
 
 #import <OpenEars/OELanguageModelGenerator.h>
 #import <OpenEars/OEPocketsphinxController.h>
@@ -250,20 +251,28 @@
         
         UIAlertController *winnerAlert = [UIAlertController alertControllerWithTitle:@"Team One Wins!" message:@"End Game?" preferredStyle:UIAlertControllerStyleAlert];
         
-        [winnerAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            
-            [[TeamGameController sharedInstance] addGameWithTeamGameStats:self.gameStats];
-            
-            [self.navigationController dismissViewControllerAnimated:YES completion:^{
-                
-            }];
-           
-        }]];
-        
         [winnerAlert addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
             
             [self team1MinusButtonPressed:self];
         }]];
+        
+        [winnerAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+            [[TeamGameController sharedInstance] addGameWithTeamGameStats:self.gameStats callback:^(TeamGameDetails *theGameStats) {
+                GameDetailViewController *gdvc = [GameDetailViewController new];
+                gdvc.teamGame = self.gameStats;
+                UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gdvc];
+                
+                navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+                
+                [self.navigationController presentViewController:navController animated:YES completion:^{
+                    
+                }];
+                
+            }];
+        }]];
+        
+        
         [self presentViewController:winnerAlert animated:YES completion:nil];
     }
 }
@@ -291,11 +300,19 @@
         
         [winnerAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
-            [[TeamGameController sharedInstance] addGameWithTeamGameStats:self.gameStats];
-            
-            [self.navigationController dismissViewControllerAnimated:YES completion:^{
+            [[TeamGameController sharedInstance] addGameWithTeamGameStats:self.gameStats callback:^(TeamGameDetails *theGameStats) {
+                GameDetailViewController *gdvc = [GameDetailViewController new];
+                gdvc.teamGame = self.gameStats;
+                UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gdvc];
                 
+                navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+                
+                [self.navigationController presentViewController:navController animated:YES completion:^{
+                    
+                }];
+
             }];
+            
             
         }]];
         [self presentViewController:winnerAlert animated:YES completion:nil];

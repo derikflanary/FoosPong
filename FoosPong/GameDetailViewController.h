@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Game.h"
 #import "TeamGame.h"
+#import "TeamGameDetails.h"
 
 @interface GameDetailViewController : UIViewController
 
 @property (nonatomic, strong) Game *singleGame;
-@property (nonatomic, strong) TeamGame *teamGame;
+@property (nonatomic, strong) TeamGameDetails *teamGame;
 
 @end

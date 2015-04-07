@@ -12,7 +12,7 @@
 @interface TeamGameController : NSObject
 
 + (TeamGameController *)sharedInstance;
-- (void)addGameWithTeamGameStats:(TeamGameDetails*)gameStats;
+- (void)addGameWithTeamGameStats:(TeamGameDetails*)gameStats callback:(void (^)(TeamGameDetails *))callback;
 - (void)updateGamesForUser:(PFUser*)user callback:(void (^)(NSArray *))callback;
 - (void)updateGamesForGroup:(PFObject*)group Callback:(void (^)(NSArray *))callback;
 - (void)updateGamesForUser:(PFUser *)user forGroup:(PFObject *)group callback:(void (^)(NSArray *))callback;

@@ -57,25 +57,21 @@
     self.p1NameLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 50, 100, 30)];
     self.p1NameLabel.font = [UIFont fontWithName:[NSString mainFont] size:24];
     self.p1NameLabel.textColor = [UIColor mint];
-    self.p1NameLabel.text = [self.singleGame.p1.username uppercaseString];
     self.p1NameLabel.textAlignment = NSTextAlignmentCenter;
     
     self.p2NameLabel = [[UILabel alloc]initWithFrame:CGRectMake(200, 50, 100, 30)];
     self.p2NameLabel.font = [UIFont fontWithName:[NSString mainFont] size:24];
     self.p2NameLabel.textColor = [UIColor mint];
-    self.p2NameLabel.text = [self.singleGame.p2.username uppercaseString];
     self.p2NameLabel.textAlignment = NSTextAlignmentCenter;
     
     self.p1ScoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 100, 50, 50)];
     self.p1ScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:40];
     self.p1ScoreLabel.textColor = [UIColor indianYellow];
-    self.p1ScoreLabel.text = [NSString stringWithFormat:@"%.f", self.singleGame.playerOneScore];
     self.p1ScoreLabel.textAlignment = NSTextAlignmentCenter;
     
     self.p2ScoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(200, 100, 50, 50)];
     self.p2ScoreLabel.font = [UIFont fontWithName:[NSString mainFont] size:40];
     self.p2ScoreLabel.textColor = [UIColor indianYellow];
-    self.p2ScoreLabel.text = [NSString stringWithFormat:@"%.f", self.singleGame.playerTwoScore];
     self.p2ScoreLabel.textAlignment = NSTextAlignmentCenter;
     
     self.p1RankNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 200, 100, 30)];
@@ -93,24 +89,43 @@
     self.p1Rank = [[JTNumberScrollAnimatedView alloc]initWithFrame:CGRectMake(20, 250, 100, 50)];
     self.p1Rank.textColor = [UIColor lightTextColor];
     self.p1Rank.font = [UIFont fontWithName:@"GillSans-Bold" size:28];
-    [self.p1Rank setValue:self.singleGame.playerOneNewRank];
     
     self.p2Rank = [[JTNumberScrollAnimatedView alloc]initWithFrame:CGRectMake(180, 250, 100, 50)];
     self.p2Rank.textColor = [UIColor lightTextColor];
     self.p2Rank.font = [UIFont fontWithName:@"GillSans-Bold" size:28];
-    [self.p2Rank setValue:self.singleGame.playerTwoNewRank];
-    
+   
     self.p1RankChangeLabel = [[UILabel alloc]initWithFrame:CGRectMake(120, 240, 50, 21)];
     self.p1RankChangeLabel.textColor = [UIColor lunarGreen];
     self.p1RankChangeLabel.font = [UIFont fontWithName:[NSString mainFont] size:16];
-    NSInteger diff1 = [self.singleGame.playerOneNewRank integerValue] - [self.singleGame.playerOneStartingRank integerValue];
-    self.p1RankChangeLabel.text = [NSString stringWithFormat:@"%+ld", (long)diff1];
     
     self.p2RankChangeLabel = [[UILabel alloc]initWithFrame:CGRectMake(280, 240, 50, 21)];
     self.p2RankChangeLabel.textColor = [UIColor lunarGreen];
     self.p2RankChangeLabel.font = [UIFont fontWithName:[NSString mainFont] size:16];
-    NSInteger diff2 = [self.singleGame.playerTwoNewRank integerValue] - [self.singleGame.playerTwoStartingRank integerValue];
-    self.p2RankChangeLabel.text = [NSString stringWithFormat:@"%+ld", (long)diff2];
+    
+    if (self.singleGame) {
+        self.p1NameLabel.text = [self.singleGame.p1.username uppercaseString];
+        self.p2NameLabel.text = [self.singleGame.p2.username uppercaseString];
+        self.p1ScoreLabel.text = [NSString stringWithFormat:@"%.f", self.singleGame.playerOneScore];
+        self.p2ScoreLabel.text = [NSString stringWithFormat:@"%.f", self.singleGame.playerTwoScore];
+        [self.p1Rank setValue:self.singleGame.playerOneNewRank];
+        [self.p2Rank setValue:self.singleGame.playerTwoNewRank];
+        
+        NSInteger diff1 = [self.singleGame.playerOneNewRank integerValue] - [self.singleGame.playerOneStartingRank integerValue];
+        self.p1RankChangeLabel.text = [NSString stringWithFormat:@"%+ld", (long)diff1];
+        
+        NSInteger diff2 = [self.singleGame.playerTwoNewRank integerValue] - [self.singleGame.playerTwoStartingRank integerValue];
+        self.p2RankChangeLabel.text = [NSString stringWithFormat:@"%+ld", (long)diff2];
+    }else{
+        self.p1NameLabel.text = [NSString stringWithFormat:@"%@ & %@", [self.teamGame.teamOneAttacker.username uppercaseString], [self.teamGame.teamOneDefender.username uppercaseString]];
+        self.p2NameLabel.text = [NSString stringWithFormat:@"%@ & %@", [self.teamGame.teamTwoAttacker.username uppercaseString], [self.teamGame.teamTwoDefender.username uppercaseString]];
+        self.p1ScoreLabel.text = [NSString stringWithFormat:@"%.f", self.teamGame.teamOneScore];
+        self.p2ScoreLabel.text = [NSString stringWithFormat:@"%.f", self.teamGame.teamTwoScore];
+        [self.p1Rank setValue:self.teamGame.teamOneAttackerNewRank];
+        [self.p2Rank setValue:self.teamGame.teamTwoAttackerNewRank];
+    }
+    
+    
+    
     
     [vibrancyEffectView addSubview:self.p1NameLabel];
     [vibrancyEffectView addSubview:self.p2NameLabel];

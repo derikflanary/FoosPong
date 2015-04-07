@@ -30,7 +30,7 @@
 }
 
 
--(void)addGameWithTeamGameStats:(TeamGameDetails*)gameStats{
+- (void)addGameWithTeamGameStats:(TeamGameDetails*)gameStats callback:(void (^)(TeamGameDetails *))callback{
 
     TeamGame *finishedGame = [TeamGame object];
     
@@ -47,6 +47,7 @@
         [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
                 NSLog(@"Team Game Saved");
+                callback(gameStats);
             }else
                 NSLog(@"%@", error);
         }];
