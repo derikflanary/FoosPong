@@ -1036,6 +1036,10 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
         textField.placeholder = NSLocalizedString(@"Guest's Name", @"Guest");
         
     }];
+    
+    [addGuestAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        return ;
+    }]];
     [addGuestAlert addAction:[UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         UITextField *theguestName = addGuestAlert.textFields.firstObject;
         NSString *guestName = [NSString string];
@@ -1043,12 +1047,12 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
         if ([guestName isEqualToString:@""]) {
             [guestName isEqualToString:@"Guest"];
         }
-        if ([self.currentPlayers count] < 2) {
-            PFUser *guest = [PFUser new];
-            guest.username = guestName;
-            [self.currentPlayers addObject:guest];
-            [self.tableView reloadData];
-        }else if ([self.currentPlayers count] == 2){
+//        if ([self.currentPlayers count] < 2) {
+//            PFUser *guest = [PFUser new];
+//            guest.username = guestName;
+//            [self.currentPlayers addObject:guest];
+//            [self.tableView reloadData];
+//        }else if ([self.currentPlayers count] == 2){
             PFUser *guest = [PFUser new];
             guest.username = guestName;
             [self.availablePlayers insertObject:guest atIndex:0];
@@ -1057,9 +1061,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
         
     }]];
     
-    [addGuestAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-        return ;
-    }]];
+    
     [self presentViewController:addGuestAlert animated:YES completion:nil];
     
 }

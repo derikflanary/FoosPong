@@ -85,6 +85,8 @@
 		EE9DAEF01A9EB91D00589897 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEEF1A9EB91D00589897 /* MasterViewController.m */; };
 		EE9DAEF31A9ECEC600589897 /* AddGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEF21A9ECEC600589897 /* AddGroupViewController.m */; };
 		EE9DAEF61A9ECED800589897 /* FindGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEF51A9ECED800589897 /* FindGroupViewController.m */; };
+		EEA7F68B1AD3737500044FC9 /* SubscribeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA7F68A1AD3737500044FC9 /* SubscribeViewController.m */; };
+		EEA7F68E1AD3780D00044FC9 /* DetailSubscriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA7F68D1AD3780D00044FC9 /* DetailSubscriptionViewController.m */; };
 		EEB88E811AC36543008FFF87 /* CustomAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB88E801AC36543008FFF87 /* CustomAccessoryView.m */; };
 		EEB88E881AC5C20F008FFF87 /* GroupHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB88E871AC5C20F008FFF87 /* GroupHistoryViewController.m */; };
 		EEB88E8B1AC5F713008FFF87 /* RankingController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB88E8A1AC5F713008FFF87 /* RankingController.m */; };
@@ -252,6 +254,10 @@
 		EE9DAEF21A9ECEC600589897 /* AddGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGroupViewController.m; sourceTree = "<group>"; };
 		EE9DAEF41A9ECED800589897 /* FindGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindGroupViewController.h; sourceTree = "<group>"; };
 		EE9DAEF51A9ECED800589897 /* FindGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindGroupViewController.m; sourceTree = "<group>"; };
+		EEA7F6891AD3737500044FC9 /* SubscribeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeViewController.h; sourceTree = "<group>"; };
+		EEA7F68A1AD3737500044FC9 /* SubscribeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeViewController.m; sourceTree = "<group>"; };
+		EEA7F68C1AD3780D00044FC9 /* DetailSubscriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailSubscriptionViewController.h; sourceTree = "<group>"; };
+		EEA7F68D1AD3780D00044FC9 /* DetailSubscriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailSubscriptionViewController.m; sourceTree = "<group>"; };
 		EEB88E7F1AC36543008FFF87 /* CustomAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAccessoryView.h; sourceTree = "<group>"; };
 		EEB88E801AC36543008FFF87 /* CustomAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAccessoryView.m; sourceTree = "<group>"; };
 		EEB88E861AC5C20F008FFF87 /* GroupHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupHistoryViewController.h; sourceTree = "<group>"; };
@@ -421,6 +427,7 @@
 				EEC4E4791ABA6BC50060DDF5 /* CreateMemberViewController.m */,
 				EEFD584D1AD1DD1C00AF28FC /* GroupStatisticsViewController.h */,
 				EEFD584E1AD1DD1C00AF28FC /* GroupStatisticsViewController.m */,
+				EEA7F6881AD3732000044FC9 /* Subscription Setup */,
 			);
 			name = Groups;
 			sourceTree = "<group>";
@@ -659,6 +666,17 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
+		EEA7F6881AD3732000044FC9 /* Subscription Setup */ = {
+			isa = PBXGroup;
+			children = (
+				EEA7F6891AD3737500044FC9 /* SubscribeViewController.h */,
+				EEA7F68A1AD3737500044FC9 /* SubscribeViewController.m */,
+				EEA7F68C1AD3780D00044FC9 /* DetailSubscriptionViewController.h */,
+				EEA7F68D1AD3780D00044FC9 /* DetailSubscriptionViewController.m */,
+			);
+			name = "Subscription Setup";
+			sourceTree = "<group>";
+		};
 		EEB88E8C1AC60302008FFF87 /* ODRefreshControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -826,6 +844,7 @@
 				EEC4E47A1ABA6BC50060DDF5 /* CreateMemberViewController.m in Sources */,
 				EE18170B1AB27BDC00E608B3 /* EditGroupViewController.m in Sources */,
 				EE58A3091AB0BDEF00832380 /* JBBarChartView.m in Sources */,
+				EEA7F68E1AD3780D00044FC9 /* DetailSubscriptionViewController.m in Sources */,
 				EEB88E881AC5C20F008FFF87 /* GroupHistoryViewController.m in Sources */,
 				EE0938591AC9B8710009AD40 /* TeamMemberCustomTableViewCell.m in Sources */,
 				EE9DAEEB1A9D582200589897 /* RNFrostedSidebar.m in Sources */,
@@ -861,6 +880,7 @@
 				EEFB90DC1AAA753100DEA099 /* StatsViewController.m in Sources */,
 				EE48886A1A9FDD9B00FCCA47 /* HMSegmentedControl.m in Sources */,
 				EE2EF8161AA4F88900DE09E7 /* TeamGameController.m in Sources */,
+				EEA7F68B1AD3737500044FC9 /* SubscribeViewController.m in Sources */,
 				EE0976B31AC24EE8006CC328 /* SettingsTableViewCell.m in Sources */,
 				EE2EF8191AA6422000DE09E7 /* PersonalSingleStats.m in Sources */,
 				EE7A6CDC1A868402000447D2 /* main.m in Sources */,
