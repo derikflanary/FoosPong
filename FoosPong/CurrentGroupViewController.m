@@ -118,7 +118,7 @@
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
     [self.view addSubview:self.groupStatsButton];
-    [self.view addSubview:self.addMembersButton];
+//    [self.view addSubview:self.addMembersButton];
     
     
     
