@@ -225,12 +225,29 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
+   
     if (self.segmentedControl.selectedSegmentIndex == 1) {
-        return [self.singleStats.statArray count] - 1;
+        if (section == 0) {
+            return [self.singleStats.statArray count] - 1;
+
+        }else{
+            return 1;
+        }
     }else{
-        return [self.teamStats.teamStatsArray count] - 1;
+        
+        if (section == 0) {
+            return [self.teamStats.teamStatsArray count] - 1;
+        }else{
+            return 1;
+        }
+        
     }
     
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -240,13 +257,24 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
     }
     
     if (self.segmentedControl.selectedSegmentIndex == 1) {
-        cell.textLabel.text = [[self.singleStats.statArray lastObject] objectAtIndex:indexPath.row];
+        if (indexPath.section == 0) {
+            cell.textLabel.text = [[self.singleStats.statArray lastObject] objectAtIndex:indexPath.row];
+            
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [self.singleStats.statArray objectAtIndex:indexPath.row]];
+        }else{
+            
+        }
         
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [self.singleStats.statArray objectAtIndex:indexPath.row]];
     }else{
-        cell.textLabel.text = [[self.teamStats.teamStatsArray lastObject] objectAtIndex:indexPath.row];
+        if (indexPath.section == 1) {
+            cell.textLabel.text = @"Advanced Statistics Coming Soon";
+            cell.textLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:16];
+        }else{
+            cell.textLabel.text = [[self.teamStats.teamStatsArray lastObject] objectAtIndex:indexPath.row];
+            
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [self.teamStats.teamStatsArray objectAtIndex:indexPath.row]];
+        }
         
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [self.teamStats.teamStatsArray objectAtIndex:indexPath.row]];
     }
         return cell;
     

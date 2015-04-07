@@ -75,6 +75,7 @@
     [theQuery includeKey:@"teamOneDefender"];
     [theQuery includeKey:@"teamTwoAttacker"];
     [theQuery includeKey:@"teamTwoDefender"];
+    [theQuery orderByDescending:@"createdAt"];
     [theQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             
@@ -98,7 +99,7 @@
     [query2 includeKey:@"teamOneDefender"];
     [query2 includeKey:@"teamTwoDefender"];
     [query2 includeKey:@"teamTwoAttacker"];
-    [query2 orderByAscending:@"createdAt"];
+    [query2 orderByDescending:@"createdAt"];
     [query2 findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             

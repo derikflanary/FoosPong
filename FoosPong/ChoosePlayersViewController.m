@@ -81,8 +81,8 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     self.view.backgroundColor = [UIColor whiteColor];
     
     //self.navigationController.toolbarHidden = NO;
-//    UIBarButtonItem *addGuestButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Player" style:UIBarButtonItemStylePlain target:self action:@selector(addGuestPressed:)];
-//
+    UIBarButtonItem *addGuestButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Player" style:UIBarButtonItemStylePlain target:self action:@selector(addGuestPressed:)];
+    self.navigationItem.rightBarButtonItem = addGuestButton;
 //    UIBarButtonItem * startGameButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Game" style:UIBarButtonItemStylePlain target:self action:@selector(startGame:)];
     
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
@@ -559,6 +559,9 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 if (!theUser.username) {
                     cell.nameLabel.text = @"Add Player";
                     cell.nameLabel.textColor = [UIColor colorWithWhite:.5 alpha:.7];
+                    cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
+                }else if (!theUser[@"firstName"]){
+                    cell.nameLabel.text = [theUser.username uppercaseString];
                     cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
                 }else{
                     cell.nameLabel.text = [theUser.username uppercaseString];
@@ -1040,6 +1043,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     [addGuestAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         return ;
     }]];
+    
     [addGuestAlert addAction:[UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         UITextField *theguestName = addGuestAlert.textFields.firstObject;
         NSString *guestName = [NSString string];
@@ -1057,10 +1061,8 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
             guest.username = guestName;
             [self.availablePlayers insertObject:guest atIndex:0];
             [self.tableView reloadData];
-        }
         
     }]];
-    
     
     [self presentViewController:addGuestAlert animated:YES completion:nil];
     
