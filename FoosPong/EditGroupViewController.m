@@ -112,6 +112,18 @@
     
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.deleteGroupButton];
+    
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.deleteGroupButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_tableView, _deleteGroupButton);
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_tableView]-(==0)-[_deleteGroupButton(==51)]-(==44)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_tableView]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_deleteGroupButton]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
 
 
     //[self populateTableView];
