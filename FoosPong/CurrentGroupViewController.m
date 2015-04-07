@@ -39,6 +39,7 @@
 @property (nonatomic, strong) NSMutableArray *memberDoublesRankings;
 @property (nonatomic, strong) UILabel *messageLabel;
 @property (nonatomic, strong) NSMutableArray *mutableDoublesGroupMembers;
+@property (nonatomic, strong) NSDictionary *viewsDictionary;
 
 @end
 
@@ -59,7 +60,7 @@
 
     self.mutableDoublesGroupMembers = [NSMutableArray array];
     
-        [self.addMembersButton removeFromSuperview];
+//        [self.addMembersButton removeFromSuperview];
         [self checkForGroup];
 
 }
@@ -110,18 +111,49 @@
     [self.groupStatsButton setTitleColor:[UIColor mainWhite] forState:UIControlStateNormal];
     [self.groupStatsButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.groupStatsButton addTarget:self action:@selector(statsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.createGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 350, self.view.frame.size.width, 62)];
+    self.createGroupButton.backgroundColor = [UIColor darkColor];
+    self.createGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+    [self.createGroupButton setTitle:@"CREATE A TEAM" forState:UIControlStateNormal];
+    [self.createGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.createGroupButton addTarget:self action:@selector(createPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.joinGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 62)];
+    self.joinGroupButton.backgroundColor = [UIColor darkColor];
+    self.joinGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+    [self.joinGroupButton setTitle:@"JOIN A TEAM" forState:UIControlStateNormal];
+    [self.joinGroupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.joinGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.joinGroupButton addTarget:self action:@selector(joinPressed:) forControlEvents:UIControlEventTouchUpInside];
 
-    self.groupStatsButton.layer.shadowColor = [UIColor grayColor].CGColor;
-    self.groupStatsButton.layer.shadowOffset = CGSizeMake(0, 1.0);
-    self.groupStatsButton.layer.shadowOpacity = 1.0;
-    self.groupStatsButton.layer.shadowRadius = 0.0;
+   
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:3];
-    [self.view addSubview:self.groupStatsButton];
+    //[self.view addSubview:self.groupStatsButton];
 //    [self.view addSubview:self.addMembersButton];
     
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.joinGroupButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.createGroupButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.addMembersButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.groupStatsButton.translatesAutoresizingMaskIntoConstraints = NO;
     
+    self.viewsDictionary = NSDictionaryOfVariableBindings(_tableView, _createGroupButton, _joinGroupButton, _groupStatsButton, _addMembersButton);
     
+   
+//    [self.view addSubview:self.createGroupButton];
+//    [self.view addSubview:self.joinGroupButton];
+    
+
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_tableView]-(==0)-[_groupStatsButton(==52)]-(==44)-|" options:0 metrics:nil views:self.viewsDictionary]];
+//
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_tableView]-(==0)-[_addMembersButton(==_groupStatsButton)]-(==44)-|" options:0 metrics:nil views:self.viewsDictionary]];
+//
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_tableView]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:self.viewsDictionary]];
+//    
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_groupStatsButton]-(==1)-[_addMembersButton(==_groupStatsButton)]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:self.viewsDictionary]];
+//    
     
 }
 
@@ -323,7 +355,7 @@
                         
                         self.groupMembers = members.mutableCopy;
                         self.tabBarController.title = [group[@"name"] uppercaseString];
-                        [self.view addSubview:self.groupStatsButton];
+//                        [self.view addSubview:self.groupStatsButton];
                         
                         [[RankingController sharedInstance]retrieveRankingsForGroup:group forUsers:self.groupMembers withCallBack:^(NSArray *rankings) {
                             
@@ -363,14 +395,32 @@
                                 [[GroupController sharedInstance]fetchAdminForGroup:self.currentGroup callback:^(PFObject *admin) {
                                     self.admin = admin;
                                     if ([[PFUser currentUser].objectId isEqualToString:admin.objectId]) {
+
+                                        [self.view addSubview:self.groupStatsButton];
                                         [self.view addSubview:self.addMembersButton];
+
+                                        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_tableView]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:self.viewsDictionary]];
                                         
-                                        self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, 350);
+                                        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_tableView]-(==0)-[_groupStatsButton(==52)]-(==44)-|" options:0 metrics:nil views:self.viewsDictionary]];
+                                        
+                                        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_tableView]-(==0)-[_addMembersButton(==_groupStatsButton)]-(==44)-|" options:0 metrics:nil views:self.viewsDictionary]];
+                                        
+                                        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_groupStatsButton]-(==1)-[_addMembersButton(==_groupStatsButton)]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:self.viewsDictionary]];
+
                                         
                                         [self.tableView reloadData];
                                     }
                                     else{
-                                        [self.addMembersButton removeFromSuperview];
+                                        
+                                        [self.view addSubview:self.groupStatsButton];
+                                        
+                                        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_tableView]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:self.viewsDictionary]];
+                                        
+                                        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_tableView]-(==0)-[_groupStatsButton(==52)]-(==44)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:self.viewsDictionary]];
+                                        
+                                        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_groupStatsButton]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:self.viewsDictionary]];
+
+//                                        [self.addMembersButton removeFromSuperview];
                                     }
                                 }];
                                 
@@ -403,33 +453,46 @@
 
     [self.activityView stopAnimating];
 
-    self.noGroupView = [[UIView alloc]initWithFrame:self.view.frame];
-    self.noGroupView.backgroundColor = [UIColor clearColor];
+//    self.noGroupView = [[UIView alloc]initWithFrame:self.view.frame];
+//    self.noGroupView.backgroundColor = [UIColor clearColor];
     
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, self.view.frame.size.width, 60)];
-    titleLabel.text = @"No Team Yet? Create or join a team today.";
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.numberOfLines = 0;
+//    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, self.view.frame.size.width, 60)];
+//    titleLabel.text = @"No Team Yet? Create or join a team today.";
+//    titleLabel.textAlignment = NSTextAlignmentCenter;
+//    titleLabel.numberOfLines = 0;
     
-    self.createGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 350, self.view.frame.size.width, 62)];
-    self.createGroupButton.backgroundColor = [UIColor darkColor];
-    self.createGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-    [self.createGroupButton setTitle:@"CREATE A TEAM" forState:UIControlStateNormal];
-    [self.createGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
-    [self.createGroupButton addTarget:self action:@selector(createPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.joinGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 62)];
-    self.joinGroupButton.backgroundColor = [UIColor darkColor];
-    self.joinGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-    [self.joinGroupButton setTitle:@"JOIN AN EXISTING TEAM" forState:UIControlStateNormal];
-    [self.joinGroupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.joinGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
-    [self.joinGroupButton addTarget:self action:@selector(joinPressed:) forControlEvents:UIControlEventTouchUpInside];
+//    self.createGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 350, self.view.frame.size.width, 62)];
+//    self.createGroupButton.backgroundColor = [UIColor darkColor];
+//    self.createGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+//    [self.createGroupButton setTitle:@"CREATE A TEAM" forState:UIControlStateNormal];
+//    [self.createGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+//    [self.createGroupButton addTarget:self action:@selector(createPressed:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    self.joinGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 62)];
+//    self.joinGroupButton.backgroundColor = [UIColor darkColor];
+//    self.joinGroupButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+//    [self.joinGroupButton setTitle:@"JOIN AN EXISTING TEAM" forState:UIControlStateNormal];
+//    [self.joinGroupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [self.joinGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+//    [self.joinGroupButton addTarget:self action:@selector(joinPressed:) forControlEvents:UIControlEventTouchUpInside];
 
-    //[self.noGroupView addSubview:titleLabel];
-    [self.noGroupView addSubview:self.createGroupButton];
-    [self.noGroupView addSubview:self.joinGroupButton];
-    [self.view addSubview:self.noGroupView];
+//    [self.noGroupView addSubview:titleLabel];
+//    [self.noGroupView addSubview:self.createGroupButton];
+//    [self.noGroupView addSubview:self.joinGroupButton];
+//    [self.view addSubview:self.noGroupView];
+    
+    [self.view addSubview:self.createGroupButton];
+    [self.view addSubview:self.joinGroupButton];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_tableView]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:self.viewsDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_tableView]-(==0)-[_joinGroupButton(==52)]-(==44)-|" options:0 metrics:nil views:self.viewsDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_tableView]-(==0)-[_createGroupButton(==_joinGroupButton)]-(==44)-|" options:0 metrics:nil views:self.viewsDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_joinGroupButton]-(==1)-[_createGroupButton(==_joinGroupButton)]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:self.viewsDictionary]];
+    
+
 
     self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     

@@ -51,6 +51,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 @property (nonatomic, strong) NSMutableArray *teamOneRankings;
 @property (nonatomic, strong) NSMutableArray *teamTwoRankings;
 @property (nonatomic, strong) NSMutableArray *doublesRankings;
+@property (nonatomic, strong) UIBarButtonItem *addGuestButton;
 
 
 @end
@@ -81,8 +82,9 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     self.view.backgroundColor = [UIColor whiteColor];
     
     //self.navigationController.toolbarHidden = NO;
-    UIBarButtonItem *addGuestButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Player" style:UIBarButtonItemStylePlain target:self action:@selector(addGuestPressed:)];
-    self.navigationItem.rightBarButtonItem = addGuestButton;
+    self.addGuestButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Player" style:UIBarButtonItemStylePlain target:self action:@selector(addGuestPressed:)];
+    self.navigationItem.rightBarButtonItem = self.addGuestButton;
+    self.addGuestButton.enabled = YES;
 //    UIBarButtonItem * startGameButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Game" style:UIBarButtonItemStylePlain target:self action:@selector(startGame:)];
     
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
@@ -356,7 +358,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if (!self.currentUser[@"currentGroup"]) {
-        
+        self.addGuestButton.enabled = NO;
         [self.activityView stopAnimating];
         self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
         
