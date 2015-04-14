@@ -142,18 +142,6 @@
     self.viewsDictionary = NSDictionaryOfVariableBindings(_tableView, _createGroupButton, _joinGroupButton, _groupStatsButton, _addMembersButton);
     
    
-//    [self.view addSubview:self.createGroupButton];
-//    [self.view addSubview:self.joinGroupButton];
-    
-
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_tableView]-(==0)-[_groupStatsButton(==52)]-(==44)-|" options:0 metrics:nil views:self.viewsDictionary]];
-//
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_tableView]-(==0)-[_addMembersButton(==_groupStatsButton)]-(==44)-|" options:0 metrics:nil views:self.viewsDictionary]];
-//
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_tableView]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:self.viewsDictionary]];
-//    
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_groupStatsButton]-(==1)-[_addMembersButton(==_groupStatsButton)]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:self.viewsDictionary]];
-//    
     
 }
 
@@ -162,17 +150,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     if ([self.groupMembers count] < 1) {
-//        
-//        self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-//        
-//        self.messageLabel.text = @"Not apart of any teams? Join or create a team below.";
-//        self.messageLabel.textColor = [UIColor darkColor];
-//        self.messageLabel.numberOfLines = 0;
-//        self.messageLabel.textAlignment = NSTextAlignmentCenter;
-//        self.messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
-//        [self.messageLabel sizeToFit];
-//        
-//        self.tableView.backgroundView = self.messageLabel;
         
         return 0;
     }else{
