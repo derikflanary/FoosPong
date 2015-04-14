@@ -8,7 +8,8 @@
 
 #import "SettingViewController.h"
 #import "RulesViewController.h"
-#import "SettingsTableViewCell.h"
+#import "SettingsSegmentedTableViewCell.h"
+#import "SettingsVoiceTableViewCell.h"
 
 @interface SettingViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) UILabel *pointLabel;
 @property (nonatomic, strong) UILabel *cellLabel;
 @property (nonatomic, assign) BOOL microphoneOff;
+@property (nonatomic, strong) UISegmentedControl *segmentedControl;
 
 @end
 
@@ -70,56 +72,42 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
+    
+    if (indexPath.section == 0) {
+        return 100;
+    }else{
+        return 150;
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        return @"Disable Voice Scoring";
-    }else if (section == 1){
-        return @"Other";
-    }else{
         return @"Points Per Game";
+    }else if (section == 1){
+        return @"Voice Command Scoring";
+    }else{
+        return @"Other";
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    SettingsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingsCell" ];
+    SettingsSegmentedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingsSegmentedCell" ];
     if (!cell){
-        cell = [SettingsTableViewCell new];
+        cell = [SettingsSegmentedTableViewCell new];
         
     }
-    if (indexPath.section == 0) {
-        self.mySwitch = [[UISwitch alloc]initWithFrame:CGRectMake(250, 50, 50, 50)];
-        self.mySwitch.onTintColor = [UIColor darkColor];
-        [self.mySwitch addTarget:self action:@selector(switchSwitched:) forControlEvents:UIControlEventValueChanged];
+    SettingsVoiceTableViewCell *cell2 = [tableView dequeueReusableCellWithIdentifier:@"SettingsVoiceCell" ];
+    if (!cell2){
+        cell2 = [SettingsVoiceTableViewCell new];
         
-        NSNumber *micOff = [[NSUserDefaults standardUserDefaults]objectForKey:@"micOff"];
-        BOOL microphoneOff = micOff.boolValue;
-        if (!microphoneOff) {
-            self.mySwitch.on = NO;
-        }else{
-            self.mySwitch.on = YES;
-        }
-        self.cellLabel = [[UILabel alloc]initWithFrame:CGRectMake(8, 0, 240, 100)];
-        self.cellLabel.text = @"Voice Scoreing: To use the voice scoring commands during a 1v1 game you can say 'Player One Goal', or 'Player Two Goal' to add a point for either player. During a 2v2 game you can say 'Team One Goal' or 'Team Two Goal'.";
-        self.cellLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
-        self.cellLabel.numberOfLines = 0;
-        
-        [cell.contentView addSubview:self.mySwitch];
-        [cell.contentView addSubview:self.cellLabel];
+    }
+    
+    if (indexPath.section == 1) {
+        return cell2;
 
-    }else if(indexPath.section == 2){
-        self.stepper = [[UIStepper alloc]initWithFrame:CGRectMake(220, 10, 50, 50)];
-        [self.stepper addTarget:self action:@selector(stepperChanged:) forControlEvents:UIControlEventValueChanged];
-        self.stepper.tintColor = [UIColor darkColor];
+    }else if (indexPath.section == 0){
+        return cell;
         
-        self.pointLabel = [[UILabel alloc]initWithFrame:CGRectMake(180, 5, 40, 50)];
-        self.pointLabel.font = [UIFont fontWithName:[NSString mainFont] size:20];
-
-        self.pointLabel.text = [NSString stringWithFormat:@"%.f", self.stepper.value];
-        [cell.contentView addSubview:self.pointLabel];
-        [cell.contentView addSubview:self.stepper];
     }
     
         return cell;
@@ -137,6 +125,8 @@
     header.textLabel.textAlignment = NSTextAlignmentCenter;
     header.contentView.backgroundColor = [UIColor transparentWhite];
 }
+
+
 
 - (void)stepperChanged:(id)sender{
     self.pointLabel.text = [NSString stringWithFormat:@"%.f", self.stepper.value];

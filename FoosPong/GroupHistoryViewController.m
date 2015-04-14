@@ -109,7 +109,7 @@
     if (!currentUser[@"currentGroup"]) {
         self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
         
-        self.messageLabel.text = @"Not apart of any teams? Join or create a team on the 'Teams' tab.";
+        self.messageLabel.text = @"Not a part of any teams? Join or create a team on the 'Teams' tab.";
         self.messageLabel.textColor = [UIColor darkColor];
         self.messageLabel.numberOfLines = 0;
         self.messageLabel.textAlignment = NSTextAlignmentCenter;

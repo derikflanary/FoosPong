@@ -14,7 +14,7 @@
 		EE09385C1AC9E6820009AD40 /* TeamFeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE09385B1AC9E6820009AD40 /* TeamFeedTableViewCell.m */; };
 		EE0976AD1ABE1991006CC328 /* PlayerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0976AC1ABE1991006CC328 /* PlayerTableViewCell.m */; };
 		EE0976B01ABE19B2006CC328 /* HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0976AF1ABE19B2006CC328 /* HistoryTableViewCell.m */; };
-		EE0976B31AC24EE8006CC328 /* SettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0976B21AC24EE8006CC328 /* SettingsTableViewCell.m */; };
+		EE0976B31AC24EE8006CC328 /* SettingsSegmentedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0976B21AC24EE8006CC328 /* SettingsSegmentedTableViewCell.m */; };
 		EE0976F71AC3AE73006CC328 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE0976F51AC3AE73006CC328 /* Crashlytics.framework */; };
 		EE0976F81AC3AE73006CC328 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE0976F61AC3AE73006CC328 /* Fabric.framework */; };
 		EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE0DC00E1A8D9456000235B3 /* UserController.m */; };
@@ -85,6 +85,7 @@
 		EE9DAEF01A9EB91D00589897 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEEF1A9EB91D00589897 /* MasterViewController.m */; };
 		EE9DAEF31A9ECEC600589897 /* AddGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEF21A9ECEC600589897 /* AddGroupViewController.m */; };
 		EE9DAEF61A9ECED800589897 /* FindGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEF51A9ECED800589897 /* FindGroupViewController.m */; };
+		EEA375661ADD8EF600A106E2 /* SettingsVoiceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA375651ADD8EF600A106E2 /* SettingsVoiceTableViewCell.m */; };
 		EEA7F68B1AD3737500044FC9 /* SubscribeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA7F68A1AD3737500044FC9 /* SubscribeViewController.m */; };
 		EEA7F68E1AD3780D00044FC9 /* DetailSubscriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEA7F68D1AD3780D00044FC9 /* DetailSubscriptionViewController.m */; };
 		EEB88E811AC36543008FFF87 /* CustomAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB88E801AC36543008FFF87 /* CustomAccessoryView.m */; };
@@ -133,8 +134,8 @@
 		EE0976AC1ABE1991006CC328 /* PlayerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTableViewCell.m; sourceTree = "<group>"; };
 		EE0976AE1ABE19B2006CC328 /* HistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewCell.h; sourceTree = "<group>"; };
 		EE0976AF1ABE19B2006CC328 /* HistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewCell.m; sourceTree = "<group>"; };
-		EE0976B11AC24EE8006CC328 /* SettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewCell.h; sourceTree = "<group>"; };
-		EE0976B21AC24EE8006CC328 /* SettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewCell.m; sourceTree = "<group>"; };
+		EE0976B11AC24EE8006CC328 /* SettingsSegmentedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsSegmentedTableViewCell.h; sourceTree = "<group>"; };
+		EE0976B21AC24EE8006CC328 /* SettingsSegmentedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsSegmentedTableViewCell.m; sourceTree = "<group>"; };
 		EE0976F51AC3AE73006CC328 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		EE0976F61AC3AE73006CC328 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		EE0DC00A1A8C4604000235B3 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
@@ -254,6 +255,8 @@
 		EE9DAEF21A9ECEC600589897 /* AddGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGroupViewController.m; sourceTree = "<group>"; };
 		EE9DAEF41A9ECED800589897 /* FindGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindGroupViewController.h; sourceTree = "<group>"; };
 		EE9DAEF51A9ECED800589897 /* FindGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindGroupViewController.m; sourceTree = "<group>"; };
+		EEA375641ADD8EF600A106E2 /* SettingsVoiceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVoiceTableViewCell.h; sourceTree = "<group>"; };
+		EEA375651ADD8EF600A106E2 /* SettingsVoiceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsVoiceTableViewCell.m; sourceTree = "<group>"; };
 		EEA7F6891AD3737500044FC9 /* SubscribeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeViewController.h; sourceTree = "<group>"; };
 		EEA7F68A1AD3737500044FC9 /* SubscribeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeViewController.m; sourceTree = "<group>"; };
 		EEA7F68C1AD3780D00044FC9 /* DetailSubscriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailSubscriptionViewController.h; sourceTree = "<group>"; };
@@ -473,8 +476,6 @@
 				EE7A6D061A869970000447D2 /* NewGameCustomTableViewCell.m */,
 				EE0976AE1ABE19B2006CC328 /* HistoryTableViewCell.h */,
 				EE0976AF1ABE19B2006CC328 /* HistoryTableViewCell.m */,
-				EE0976B11AC24EE8006CC328 /* SettingsTableViewCell.h */,
-				EE0976B21AC24EE8006CC328 /* SettingsTableViewCell.m */,
 				EE0976AB1ABE1991006CC328 /* PlayerTableViewCell.h */,
 				EE0976AC1ABE1991006CC328 /* PlayerTableViewCell.m */,
 				EEC4E4751AB91BF30060DDF5 /* GroupTableViewCell.h */,
@@ -662,6 +663,10 @@
 				EE808DAF1A9FC3E30000F833 /* SettingViewController.m */,
 				EE76CC4F1AB240870038BD80 /* RulesViewController.h */,
 				EE76CC501AB240870038BD80 /* RulesViewController.m */,
+				EE0976B11AC24EE8006CC328 /* SettingsSegmentedTableViewCell.h */,
+				EE0976B21AC24EE8006CC328 /* SettingsSegmentedTableViewCell.m */,
+				EEA375641ADD8EF600A106E2 /* SettingsVoiceTableViewCell.h */,
+				EEA375651ADD8EF600A106E2 /* SettingsVoiceTableViewCell.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -857,6 +862,7 @@
 				EE2EF8131AA4EF3400DE09E7 /* TeamGameDetails.m in Sources */,
 				302E41C41A86958E005F1184 /* HomeViewController.m in Sources */,
 				EE7C85C81AC0CE48008467AD /* FoosButton.m in Sources */,
+				EEA375661ADD8EF600A106E2 /* SettingsVoiceTableViewCell.m in Sources */,
 				EE0DC00F1A8D9456000235B3 /* UserController.m in Sources */,
 				EE2EF8101AA4EF2200DE09E7 /* SingleGameDetails.m in Sources */,
 				EE76CC571AB9E3AF0038BD80 /* UIImage+BackGrounImage.m in Sources */,
@@ -881,7 +887,7 @@
 				EE48886A1A9FDD9B00FCCA47 /* HMSegmentedControl.m in Sources */,
 				EE2EF8161AA4F88900DE09E7 /* TeamGameController.m in Sources */,
 				EEA7F68B1AD3737500044FC9 /* SubscribeViewController.m in Sources */,
-				EE0976B31AC24EE8006CC328 /* SettingsTableViewCell.m in Sources */,
+				EE0976B31AC24EE8006CC328 /* SettingsSegmentedTableViewCell.m in Sources */,
 				EE2EF8191AA6422000DE09E7 /* PersonalSingleStats.m in Sources */,
 				EE7A6CDC1A868402000447D2 /* main.m in Sources */,
 				EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */,
