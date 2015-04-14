@@ -42,6 +42,7 @@
     finishedGame.teamTwoScore = gameStats.teamTwoScore;
     finishedGame.teamOneWin = [NSNumber numberWithBool:gameStats.teamOneWin];
     finishedGame.group = gameStats.group;
+    finishedGame.tenPointGame = [NSNumber numberWithBool:gameStats.tenPointGame];
     
     [[RankingController sharedInstance]updateNewRankingsForTeamGame:gameStats callback:^(NSArray *teamOneNewRanks, NSArray *teamTwoNewRanks) {
         [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

@@ -22,6 +22,7 @@
 @property NSNumber *playerTwoStartingRank;
 @property NSNumber *playerOneNewRank;
 @property NSNumber *playerTwoNewRank;
+@property NSNumber *tenPointGame;
 
 
 

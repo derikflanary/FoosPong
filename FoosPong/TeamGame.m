@@ -18,6 +18,7 @@
 @dynamic teamTwoScore;
 @dynamic teamOneWin;
 @dynamic group;
+@dynamic tenPointGame;
 
 + (void)load {
     [self registerSubclass];

@@ -20,5 +20,6 @@
 @property double teamTwoScore;
 @property NSNumber *teamOneWin;
 @property PFObject *group;
+@property NSNumber *tenPointGame;
 
 @end

@@ -20,6 +20,7 @@
 @dynamic playerOneNewRank;
 @dynamic playerTwoStartingRank;
 @dynamic playerTwoNewRank;
+@dynamic tenPointGame;
 
 + (void)load {
     [self registerSubclass];

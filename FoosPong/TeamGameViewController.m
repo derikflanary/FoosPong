@@ -41,6 +41,7 @@
 @property (strong, nonatomic) UILabel *team2p2Label;
 @property (strong, nonatomic) FoosButton *team1MinusButton;
 @property (strong, nonatomic) FoosButton *team2MinusButton;
+@property (nonatomic, assign) BOOL tenPointGameOn;
 
 @end
 
@@ -161,8 +162,16 @@
     [self.view addSubview:self.team2PlusButton];
     [self.view addSubview:self.team1MinusButton];
     [self.view addSubview:self.team2MinusButton];
+    
+    NSNumber *tenPointGame = [[NSUserDefaults standardUserDefaults]objectForKey:@"tenPointGamesOn"];
+    self.tenPointGameOn = tenPointGame.boolValue;
+    
+    if (self.tenPointGameOn) {
+        self.scoreToWin = 10;
+    }else{
+        self.scoreToWin = 5;
+    }
 
-    self.scoreToWin = 10;
     self.teamOneScore = 0;
     self.teamTwoScore = 0;
     self.team1ScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.teamOneScore];
@@ -350,6 +359,12 @@
     self.gameStats.teamOneDefenderStartingRank = self.teamOneDefenderRank;
     self.gameStats.teamTwoAttackerStartingRank = self.teamTwoAttackerRank;
     self.gameStats.teamTwoDefenderStartingRank = self.teamTwoDefenderRank;
+    
+    if (self.tenPointGameOn) {
+        self.gameStats.tenPointGame = YES;
+    }else{
+        self.gameStats.tenPointGame = NO;
+    }
 }
 
 

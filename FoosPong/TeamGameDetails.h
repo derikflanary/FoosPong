@@ -32,4 +32,6 @@
 @property (nonatomic, strong) NSNumber *teamTwoAttackerNewRank;
 @property (nonatomic, strong) NSNumber *teamTwoDefenderNewRank;
 
+@property (nonatomic, assign) BOOL tenPointGame;
+
 @end

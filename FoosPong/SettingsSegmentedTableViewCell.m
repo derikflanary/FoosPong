@@ -55,7 +55,13 @@
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_descriptionLabel(>=250)]-(==16)-[_segmentedControl(==50)]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
     
 
-    
+    NSNumber *tenPointGame = [[NSUserDefaults standardUserDefaults]objectForKey:@"tenPointGamesOn"];
+    self.tenPointGames = tenPointGame.boolValue;
+    if (self.tenPointGames) {
+        self.segmentedControl.selectedSegmentIndex = 1;
+    }else{
+        self.segmentedControl.selectedSegmentIndex = 0;
+    }
     
     return self;
 }

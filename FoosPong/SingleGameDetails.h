@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSNumber *playerTwoStartingRank;
 @property (nonatomic, strong) NSNumber *playerOneNewRank;
 @property (nonatomic, strong) NSNumber *playerTwoNewRank;
+@property (nonatomic, assign) BOOL tenPointGame;
 
 
 @end

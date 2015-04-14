@@ -43,6 +43,7 @@
     finishedGame.group = gameStats.group;
     finishedGame.playerOneStartingRank = gameStats.playerOneStartingRank;
     finishedGame.playerTwoStartingRank = gameStats.playerTwoStartingRank;
+    finishedGame.tenPointGame = [NSNumber numberWithBool:gameStats.tenPointGame];
     
     
     if (gameStats.playerOneWin) {

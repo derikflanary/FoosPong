@@ -43,8 +43,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 @property (strong, nonatomic) UILabel *p2Label;
 @property (strong, nonatomic) MinusButton *p1MinusButton;
 @property (strong, nonatomic) MinusButton *p2MinusButton;
-
-
+@property (nonatomic, assign) BOOL tenPointGameOn;
 
 @end
 
@@ -71,7 +70,15 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     view.backgroundColor = [UIColor darkColor];
     [self.view addSubview:view];
     
-    self.scoreToWin = 10;
+    NSNumber *tenPointGame = [[NSUserDefaults standardUserDefaults]objectForKey:@"tenPointGamesOn"];
+    self.tenPointGameOn = tenPointGame.boolValue;
+    
+    if (self.tenPointGameOn) {
+        self.scoreToWin = 10;
+    }else{
+        self.scoreToWin = 5;
+    }
+   
     self.playerOneWin = NO;
     self.playerTwoWin = NO;
     self.playerOneName = self.playerOne.username;
@@ -362,6 +369,13 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.gameStats.group = [PFUser currentUser][@"currentGroup"];
     self.gameStats.playerOneStartingRank = self.playerOneRanking[@"rank"];
     self.gameStats.playerTwoStartingRank = self.playerTwoRanking[@"rank"];
+    
+    if (self.tenPointGameOn) {
+        self.gameStats.tenPointGame = YES;
+    }else{
+        self.gameStats.tenPointGame = NO;
+    }
+    
 }
 
 
