@@ -125,13 +125,13 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.p1Label = [[UILabel alloc]initWithFrame:CGRectMake(30, 425, 100, 50)];
     self.p1Label.text = [self.playerOneName uppercaseString];
     self.p1Label.textAlignment = NSTextAlignmentCenter;
-    self.p1Label.font = [UIFont fontWithName:[NSString mainFont] size:16];
+    self.p1Label.font = [UIFont fontWithName:[NSString mainFont] size:20];
     self.p1Label.textColor = [UIColor mainWhite];
     
     self.p2Label = [[UILabel alloc]initWithFrame:CGRectMake(180, 425, 100, 50)];
     self.p2Label.text = [self.playerTwoName uppercaseString];
     self.p2Label.textAlignment = NSTextAlignmentCenter;
-    self.p2Label.font = [UIFont fontWithName:[NSString mainFont] size:16];
+    self.p2Label.font = [UIFont fontWithName:[NSString mainFont] size:20];
     self.p2Label.textColor = [UIColor mainWhite];
     
     self.p1MinusButton = [[MinusButton alloc]initWithFrame:CGRectMake(45, 350, 50, 50)];
@@ -227,7 +227,8 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     [self.view addConstraints:constraints];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=8)-[_p1MinusButton(==50)]-(>=8)-[_p2MinusButton(==50)]-(>=8)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
-    [self.view addConstraints:constraints];
+    
+     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=8)-[_p1Label(==100)]-(>=8)-[_p2Label(==100)]-(>=8)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==100)-[_p1ScoreLabel(>=100)]-[_p1PlusButton]-(==50)-[_p1MinusButton(==50)]-(==50)-[_p1Label]-(==50)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
     

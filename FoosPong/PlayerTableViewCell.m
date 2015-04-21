@@ -60,6 +60,24 @@
     [self.contentView addSubview:self.fullNameLabel];
     [self.contentView addSubview:self.rankLabel];
     [self.contentView addSubview:self.positionLabel];
+    
+    
+//    self.profileImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.nameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.rankLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.adminLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.positionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.fullNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_profileImageView, _nameLabel, _rankLabel, _adminLabel, _positionLabel, _fullNameLabel);
+    
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==68)-[_nameLabel(>=120)]-[_rankLabel(>=80)]-(==21)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
+    
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==68)-[_fullNameLabel(>=100)]-[_positionLabel(>=100)]-[_adminLabel(>=50)]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
+    
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==11)-[_nameLabel(==21)]-(==0)-[_fullNameLabel]-(<=8)-|" options:NSLayoutFormatAlignAllLeft metrics:nil views:viewsDictionary]];
+    
+    
     return self;
 }
 

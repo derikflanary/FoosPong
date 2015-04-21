@@ -112,25 +112,25 @@
     self.team1Label = [[UILabel alloc]initWithFrame:CGRectMake(30, 425, 100, 50)];
     self.team1Label.text = [NSString stringWithFormat:@"Attacker:%@", [self.t1p1 uppercaseString] ];
     self.team1Label.textAlignment = NSTextAlignmentCenter;
-    self.team1Label.font = [UIFont fontWithName:[NSString mainFont] size:14];
+    self.team1Label.font = [UIFont fontWithName:[NSString mainFont] size:18];
     self.team1Label.textColor = [UIColor mainWhite];
     
     self.team1p2Label = [[UILabel alloc]initWithFrame:CGRectMake(30, 475, 100, 50)];
     self.team1p2Label.text = [NSString stringWithFormat:@"Defender:%@", [self.t1p2 uppercaseString]];
     self.team1p2Label.textAlignment = NSTextAlignmentCenter;
-    self.team1p2Label.font = [UIFont fontWithName:[NSString mainFont] size:14];
+    self.team1p2Label.font = [UIFont fontWithName:[NSString mainFont] size:18];
     self.team1p2Label.textColor = [UIColor mainWhite];
     
     self.team2Label = [[UILabel alloc]initWithFrame:CGRectMake(180, 425, 100, 50)];
     self.team2Label.text = [NSString stringWithFormat:@"Attacker:%@", [self.t2p1 uppercaseString]];
     self.team2Label.textAlignment = NSTextAlignmentCenter;
-    self.team2Label.font = [UIFont fontWithName:[NSString mainFont] size:14];
+    self.team2Label.font = [UIFont fontWithName:[NSString mainFont] size:18];
     self.team2Label.textColor = [UIColor mainWhite];
     
     self.team2p2Label = [[UILabel alloc]initWithFrame:CGRectMake(180, 475, 100, 50)];
     self.team2p2Label.text = [NSString stringWithFormat:@"Defender:%@", [self.t2p2 uppercaseString]];
     self.team2p2Label.textAlignment = NSTextAlignmentCenter;
-    self.team2p2Label.font = [UIFont fontWithName:[NSString mainFont] size:14];
+    self.team2p2Label.font = [UIFont fontWithName:[NSString mainFont] size:18];
     self.team2p2Label.textColor = [UIColor mainWhite];
     
     self.team1MinusButton = [[FoosButton alloc]initWithFrame:CGRectMake(45, 350, 50, 50)];
@@ -236,7 +236,9 @@
     [self.view addConstraints:constraints];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=8)-[_team1MinusButton(==50)]-(>=8)-[_team2MinusButton(==50)]-(>=8)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
-    [self.view addConstraints:constraints];
+    
+     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=8)-[_team1Label(>=100)]-(>=8)-[_team2Label(>=100)]-(>=8)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=8)-[_team1p2Label(>=100)]-(>=8)-[_team2p2Label(>=100)]-(>=8)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==100)-[_team1ScoreLabel(>=100)]-[_team1PlusButton]-(==50)-[_team1MinusButton(==50)]-(==50)-[_team1Label]-(==10)-[_team1p2Label]-(>=30)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
     
