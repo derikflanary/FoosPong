@@ -176,11 +176,10 @@
     NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==10)-[_p1NameLabel(>=130)]-(>=8)-[_p2NameLabel(>=130)]-(==10)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary];
     [self.view addConstraints:constraints];
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==10)-[_p1Rank(==130)]-(>=8)-[_p2Rank(==130)]-(==10)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==40)-[_p1Rank(==100)]-(>=8)-[_p2Rank(==100)]-(==40)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
     [self.view addConstraints:constraints];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==100)-[_team1Label(==31)]-[_p1NameLabel(==31)]-[_p1ScoreLabel(>=50)]-(==50)-[_p1RankNameLabel(==31)]-[_p1Rank(==50)]-[_p1RankChangeLabel(==21)]-(>=75)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
-    
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==100)-[_team2Label(==31)]-[_p2NameLabel(==31)]-[_p2ScoreLabel(>=50)]-(==50)-[_p2RankNameLabel(==31)]-[_p2Rank(==50)]-[_p2RankChangeLabel(==21)]-(>=75)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
     
