@@ -488,12 +488,18 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                     cell.nameLabel.text = @"Add Player";
                     cell.nameLabel.textColor = [UIColor colorWithWhite:.5 alpha:.7];
                     cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
+                
                 }else{
                     
                     cell.nameLabel.text = [theUser.username uppercaseString];
                     cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
                     NSNumber *ranking = userRank[@"rank"];
-                    cell.rankLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
+                    if (!ranking) {
+                        
+                    }else{
+                        cell.rankLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
+                    }
+                    
                     
                     if (!theUser[@"profileImage"]) {
                         cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
@@ -522,11 +528,17 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                     }
                 }
                 
+                NSNumber *ranking = userRank[@"rank"];
+                
+                if (!ranking) {
+                    
+                }else{
+                    cell.rankLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
+                }
+
                 cell.nameLabel.text = [theUser.username uppercaseString];
                 cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
 //                PFObject *userRank = [self.availablePlayersRankings objectAtIndex:indexPath.row];
-                NSNumber *ranking = userRank[@"rank"];
-                cell.rankLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
 
                 if (!theUser[@"profileImage"]) {
                     cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
@@ -569,7 +581,10 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                     cell.nameLabel.text = [theUser.username uppercaseString];
                     cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
                     NSNumber *ranking = userRank[@"rank"];
-                    cell.rankLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
+                    if (!ranking) {
+                    }else{
+                        cell.rankLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
+                    }
                     
                     if (!theUser[@"profileImage"]) {
                         cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
@@ -611,7 +626,10 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                     cell.nameLabel.text = [theUser.username uppercaseString];
                     cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
                     NSNumber *ranking = userRank[@"rank"];
-                    cell.rankLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
+                    if (!ranking) {
+                    }else{
+                        cell.rankLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
+                    }
 
                     if (!theUser[@"profileImage"]) {
                         cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
@@ -650,7 +668,10 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 cell.fullNameLabel.text = [NSString combineNames:theUser[@"firstName"] and:theUser[@"lastName"]];
                 cell.detailTextLabel.text = @"";
                 NSNumber *ranking = userRank[@"rank"];
-                cell.rankLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
+                if (!ranking) {
+                }else{
+                    cell.rankLabel.text = [NSString stringWithFormat:@"Score: %@", ranking];
+                }
                 
                 if (!theUser[@"profileImage"]) {
                     cell.profileImageView.image = [UIImage imageNamed:@"singleguy"];
@@ -1051,7 +1072,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
         NSString *guestName = [NSString string];
         guestName = theguestName.text;
         if ([guestName isEqualToString:@""]) {
-            [guestName isEqualToString:@"Guest"];
+            guestName = @"Guest";
         }
 //        if ([self.currentPlayers count] < 2) {
 //            PFUser *guest = [PFUser new];
@@ -1061,6 +1082,8 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 //        }else if ([self.currentPlayers count] == 2){
             PFUser *guest = [PFUser new];
             guest.username = guestName;
+            guest[@"firstName"] = @"";
+            guest[@"lastName"] = @"";
             [self.availablePlayers insertObject:guest atIndex:0];
             [self.tableView reloadData];
         
