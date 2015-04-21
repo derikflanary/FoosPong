@@ -36,7 +36,7 @@
     [self.contentView addSubview:self.segmentedControl];
 
     self.descriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(8, 0, 240, 100)];
-    self.descriptionLabel.text = @"How many points per game to win. Changing this will affect all previous stats";
+    self.descriptionLabel.text = @"How many points per game to win. Changing this will affect all previous stats.";
     self.descriptionLabel.font = [UIFont fontWithName:[NSString mainFont] size:15];
     self.descriptionLabel.numberOfLines = 0;
 

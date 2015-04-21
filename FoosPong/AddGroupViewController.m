@@ -31,9 +31,9 @@
       NSFontAttributeName, nil]];
     [self.navigationController.navigationBar setTintColor:[UIColor mainWhite]];
     [self.navigationController.navigationBar setBarTintColor:[UIColor darkColor]];
-
-    self.view.backgroundColor = [UIColor transparentWhite];
     
+    self.navigationController.navigationBar.translucent = NO;
+
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
     background.frame = self.view.frame;
     background.contentMode = UIViewContentModeScaleAspectFill;
@@ -42,6 +42,7 @@
     UIView *whiteWall = [[UIView alloc]initWithFrame:self.view.bounds];
     whiteWall.backgroundColor = [UIColor transparentWhite];
     [self.view addSubview:whiteWall];
+    
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
@@ -54,37 +55,37 @@
     NSString* fontName = [NSString mainFont];
 //    NSString* boldFontName = [NSString boldFont];
     
-    self.groupNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 41)];
+    self.groupNameField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 61)];
     self.groupNameField.backgroundColor = [UIColor whiteColor];
     self.groupNameField.placeholder = @"Team Name";
-    self.groupNameField.font = [UIFont fontWithName:fontName size:16.0f];
+    self.groupNameField.font = [UIFont fontWithName:fontName size:18.0f];
     self.groupNameField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.groupNameField.layer.borderWidth = 1.0f;
-    UIView* leftView2= [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 20)];
+    UIView* leftView2= [[UIView alloc] initWithFrame:CGRectMake(0, 0, 61, 20)];
     self.groupNameField.leftViewMode = UITextFieldViewModeAlways;
     self.groupNameField.leftView = leftView2;
     self.groupNameField.autocorrectionType = UITextAutocorrectionTypeNo;
 
 
-    self.groupOrganiztionField = [[UITextField alloc]initWithFrame:CGRectMake(0, 140, self.view.frame.size.width, 41)];
+    self.groupOrganiztionField = [[UITextField alloc]initWithFrame:CGRectMake(0, 60, self.view.frame.size.width, 61)];
     self.groupOrganiztionField.backgroundColor = [UIColor whiteColor];
     self.groupOrganiztionField.placeholder = @"Organization Name";
-    self.groupOrganiztionField.font = [UIFont fontWithName:fontName size:16.0f];
+    self.groupOrganiztionField.font = [UIFont fontWithName:fontName size:18.0f];
     self.groupOrganiztionField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.groupOrganiztionField.layer.borderWidth = 1.0f;
-    UIView* leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 20)];
+    UIView* leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 61, 20)];
     self.groupOrganiztionField.leftViewMode = UITextFieldViewModeAlways;
     self.groupOrganiztionField.leftView = leftView;
     self.groupNameField.autocorrectionType = UITextAutocorrectionTypeNo;
 
     
-    self.passwordField = [[UITextField alloc]initWithFrame:CGRectMake(0, 181, self.view.frame.size.width, 41)];
+    self.passwordField = [[UITextField alloc]initWithFrame:CGRectMake(0, 121, self.view.frame.size.width, 61)];
     self.passwordField.backgroundColor = [UIColor whiteColor];
     self.passwordField.placeholder = @"Team Password";
-    self.passwordField.font = [UIFont fontWithName:fontName size:16.0f];
+    self.passwordField.font = [UIFont fontWithName:fontName size:18.0f];
     self.passwordField.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:0.7].CGColor;
     self.passwordField.layer.borderWidth = 1.0f;
-    UIView* leftView3 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 20)];
+    UIView* leftView3 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 61, 20)];
     self.passwordField.leftViewMode = UITextFieldViewModeAlways;
     self.passwordField.leftView = leftView3;
     self.passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -103,6 +104,17 @@
     [self.view addSubview:self.groupNameField];
     [self.view addSubview:self.groupOrganiztionField];
     [self.view addSubview:self.passwordField];
+    
+    self.addGroupButton.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.joinGroupButton.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.createGroupButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_addGroupButton);
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=100)-[_addGroupButton(==52)]-(==44)-|" options:0 metrics:nil views:viewsDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_addGroupButton]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
+
     // Do any additional setup after loading the view.
 }
 

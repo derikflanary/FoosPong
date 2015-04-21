@@ -176,7 +176,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 
         OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
         
-        NSArray *words = @[@"PLAYER ONE GOAL", @"PLAYER TWO GOAL"];
+        NSArray *words = @[@"ONE GOAL", @"TWO GOAL"];
         NSString *name = @"LanguageFiles";
         NSError *err = [lmGenerator generateLanguageModelFromArray:words withFilesNamed:name forAcousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"]];
         NSString *lmPath = nil;

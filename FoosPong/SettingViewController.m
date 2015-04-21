@@ -76,7 +76,7 @@
     if (indexPath.section == 0) {
         return 100;
     }else{
-        return 150;
+        return 100;
     }
 }
 
@@ -84,7 +84,7 @@
     if (section == 0) {
         return @"Points Per Game";
     }else if (section == 1){
-        return @"Voice Command Scoring";
+        return @"Voice Command Scoring Disabled";
     }else{
         return @"Other";
     }

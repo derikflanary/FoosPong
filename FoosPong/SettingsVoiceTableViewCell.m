@@ -32,7 +32,7 @@
         self.mySwitch.on = YES;
     }
     self.descriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(8, 0, 240, 150)];
-    self.descriptionLabel.text = @"To use voice scoring commands during a 1v1 game you can say 'Player One Goal', or 'Player Two Goal' to add a point for either player. During a 2v2 game you can say 'Team One Goal' or 'Team Two Goal'.";
+    self.descriptionLabel.text = @"To use voice scoring say 'One Goal', or 'Two Goal' to add a point for either player or team.";
     self.descriptionLabel.font = [UIFont fontWithName:[NSString mainFont] size:15];
     self.descriptionLabel.numberOfLines = 0;
     

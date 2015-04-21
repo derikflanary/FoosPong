@@ -46,6 +46,9 @@
     whiteWall.backgroundColor = [UIColor transparentWhite];
     [self.view addSubview:whiteWall];
 
+    UIView *secondWhiteWall = [[UIView alloc]initWithFrame:self.view.bounds];
+    secondWhiteWall.backgroundColor = [UIColor transparentWhite];
+    [self.view addSubview:secondWhiteWall];
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
@@ -126,7 +129,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
+    return 80;
 }
 
 

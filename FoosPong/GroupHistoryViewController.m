@@ -275,8 +275,8 @@
         NSString *t2p2Name = t2p2.username;
         NSDate *date = teamGame.createdAt;
         
-        cell.playerOneLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
-        cell.playerTwoLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
+        cell.playerOneLabel.font = [UIFont fontWithName:[NSString mainFont] size:14];
+        cell.playerTwoLabel.font = [UIFont fontWithName:[NSString mainFont] size:14];
 
         cell.playerOneLabel.text = [NSString stringWithFormat:@"%@ & %@",[t1p1Name uppercaseString], [t1p2Name uppercaseString]];
         cell.playerTwoLabel.text = [NSString stringWithFormat:@"%@ & %@", [t2p1Name uppercaseString], [t2p2Name uppercaseString]];

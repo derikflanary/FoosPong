@@ -185,7 +185,7 @@
         
         OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
         
-        NSArray *words = @[@"TEAM ONE GOAL", @"TEAM TWO GOAL"];
+        NSArray *words = @[@"ONE GOAL", @"TWO GOAL"];
         NSString *name = @"LanguageFiles";
         NSError *err = [lmGenerator generateLanguageModelFromArray:words withFilesNamed:name forAcousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"]];
         NSString *lmPath = nil;
