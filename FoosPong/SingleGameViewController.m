@@ -230,9 +230,9 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     
      [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=8)-[_p1Label(==100)]-(>=8)-[_p2Label(==100)]-(>=8)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==100)-[_p1ScoreLabel(>=100)]-[_p1PlusButton]-(==50)-[_p1MinusButton(==50)]-(==50)-[_p1Label]-(==50)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==100)-[_p1ScoreLabel(>=100)]-[_p1PlusButton]-(==50)-[_p1MinusButton(==50)]-(==50)-[_p1Label]-(>=50)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==100)-[_p2ScoreLabel(>=100)]-[_p2PlusButton]-(==50)-[_p2MinusButton(==50)]-(==50)-[_p2Label]-(==50)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==100)-[_p2ScoreLabel(>=100)]-[_p2PlusButton]-(==50)-[_p2MinusButton(==50)]-(==50)-[_p2Label]-(>=50)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
     
 //    NSLayoutConstraint *centerConstraint =
 //    [NSLayoutConstraint constraintWithItem:self.scoreField
