@@ -7,11 +7,13 @@
 //
 
 #import "SubscribeViewController.h"
+#import "SubscriptionController.h"
+#import "BrownButton.h"
 
 @interface SubscribeViewController ()
 
-@property (nonatomic, strong) UIButton *perMonthButton;
-@property (nonatomic, strong) UIButton *yearButton;
+@property (nonatomic, strong) BrownButton *perMonthButton;
+@property (nonatomic, strong) BrownButton *yearButton;
 
 @end
 
@@ -20,21 +22,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIFont fontWithName:@"Thonburi-Light" size:18],
+      NSFontAttributeName, nil]];
+    [self.navigationController.navigationBar setTintColor:[UIColor mainWhite]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor darkColor]];
+    
+    self.navigationController.navigationBar.translucent = NO;
+
     self.view.backgroundColor = [UIColor darkColor];
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
-    self.perMonthButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 51)];
+    self.perMonthButton = [[BrownButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 51)];
     self.perMonthButton.backgroundColor = [UIColor marigoldBrown];
     self.perMonthButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-    [self.perMonthButton setTitle:@"$5 Per Month" forState:UIControlStateNormal];
+    [self.perMonthButton setTitle:@"$4.99/Month" forState:UIControlStateNormal];
     [self.perMonthButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.perMonthButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.perMonthButton addTarget:self action:@selector(perMonthButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.perMonthButton];
     
-    self.yearButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 350, self.view.frame.size.width, 51)];
+    self.yearButton = [[BrownButton alloc]initWithFrame:CGRectMake(0, 350, self.view.frame.size.width, 51)];
     self.yearButton.backgroundColor = [UIColor marigoldBrown];
     self.yearButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
     [self.yearButton setTitle:@"$50 For 12 Months" forState:UIControlStateNormal];
@@ -58,6 +70,15 @@
     
 
     // Do any additional setup after loading the view.
+}
+
+- (void)perMonthButtonPressed:(id)sender{
+    [[SubscriptionController sharedInstance]requestPurchase];
+    
+}
+
+- (void)yearButtonPressed:(id)sender{
+    
 }
 
 - (void)didReceiveMemoryWarning {

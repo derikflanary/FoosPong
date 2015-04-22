@@ -35,5 +35,7 @@
 + (UIColor *)transparentCellWhite;
 
 + (UIColor *)transparentButtonColor;
+
++ (UIColor *)transparentMarigoldBrown;
     
 @end

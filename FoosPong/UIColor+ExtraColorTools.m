@@ -38,6 +38,11 @@
     return darkColor;
 }
 
++ (UIColor *)transparentMarigoldBrown{
+    UIColor* darkColor = [UIColor colorWithRed:.73 green:.53 blue:.25 alpha:.7f];
+    return darkColor;
+}
+
 + (UIColor *)golderBrown{
     UIColor* darkColor = [UIColor colorWithRed:.62 green:.39 blue:.05 alpha:1.0f];
     return darkColor;

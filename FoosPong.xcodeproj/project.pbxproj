@@ -95,6 +95,8 @@
 		EEB88E921AC608BE008FFF87 /* RankingsTable.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB88E911AC608BE008FFF87 /* RankingsTable.m */; };
 		EEC4E4771AB91BF30060DDF5 /* GroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC4E4761AB91BF30060DDF5 /* GroupTableViewCell.m */; };
 		EEC4E47A1ABA6BC50060DDF5 /* CreateMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC4E4791ABA6BC50060DDF5 /* CreateMemberViewController.m */; };
+		EED035131AE84C02002807BC /* SubscriptionController.m in Sources */ = {isa = PBXBuildFile; fileRef = EED035121AE84C02002807BC /* SubscriptionController.m */; };
+		EED035161AE85337002807BC /* BrownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EED035151AE85337002807BC /* BrownButton.m */; };
 		EED6AE521ACDF4F300EB37B3 /* JTNumberScrollAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = EED6AE511ACDF4F300EB37B3 /* JTNumberScrollAnimatedView.m */; };
 		EEE7DDD41AAE8E490089A488 /* PersonalTeamStats.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE7DDD31AAE8E490089A488 /* PersonalTeamStats.m */; };
 		EEE7DDD71AAE8E670089A488 /* PersonalOverallStats.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE7DDD61AAE8E670089A488 /* PersonalOverallStats.m */; };
@@ -275,6 +277,10 @@
 		EEC4E4761AB91BF30060DDF5 /* GroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupTableViewCell.m; sourceTree = "<group>"; };
 		EEC4E4781ABA6BC50060DDF5 /* CreateMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateMemberViewController.h; sourceTree = "<group>"; };
 		EEC4E4791ABA6BC50060DDF5 /* CreateMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateMemberViewController.m; sourceTree = "<group>"; };
+		EED035111AE84C02002807BC /* SubscriptionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionController.h; sourceTree = "<group>"; };
+		EED035121AE84C02002807BC /* SubscriptionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionController.m; sourceTree = "<group>"; };
+		EED035141AE85336002807BC /* BrownButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrownButton.h; sourceTree = "<group>"; };
+		EED035151AE85337002807BC /* BrownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrownButton.m; sourceTree = "<group>"; };
 		EED6AE501ACDF4F300EB37B3 /* JTNumberScrollAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTNumberScrollAnimatedView.h; sourceTree = "<group>"; };
 		EED6AE511ACDF4F300EB37B3 /* JTNumberScrollAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTNumberScrollAnimatedView.m; sourceTree = "<group>"; };
 		EEE7DDD21AAE8E490089A488 /* PersonalTeamStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalTeamStats.h; sourceTree = "<group>"; };
@@ -539,6 +545,8 @@
 				EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */,
 				EE7C85C61AC0CE48008467AD /* FoosButton.h */,
 				EE7C85C71AC0CE48008467AD /* FoosButton.m */,
+				EED035141AE85336002807BC /* BrownButton.h */,
+				EED035151AE85337002807BC /* BrownButton.m */,
 				EE1CBBB21ACA86930099D98A /* MinusButton.h */,
 				EE1CBBB31ACA86930099D98A /* MinusButton.m */,
 				EEB88E7F1AC36543008FFF87 /* CustomAccessoryView.h */,
@@ -676,6 +684,8 @@
 			children = (
 				EEA7F6891AD3737500044FC9 /* SubscribeViewController.h */,
 				EEA7F68A1AD3737500044FC9 /* SubscribeViewController.m */,
+				EED035111AE84C02002807BC /* SubscriptionController.h */,
+				EED035121AE84C02002807BC /* SubscriptionController.m */,
 				EEA7F68C1AD3780D00044FC9 /* DetailSubscriptionViewController.h */,
 				EEA7F68D1AD3780D00044FC9 /* DetailSubscriptionViewController.m */,
 			);
@@ -887,6 +897,7 @@
 				EE48886A1A9FDD9B00FCCA47 /* HMSegmentedControl.m in Sources */,
 				EE2EF8161AA4F88900DE09E7 /* TeamGameController.m in Sources */,
 				EEA7F68B1AD3737500044FC9 /* SubscribeViewController.m in Sources */,
+				EED035131AE84C02002807BC /* SubscriptionController.m in Sources */,
 				EE0976B31AC24EE8006CC328 /* SettingsSegmentedTableViewCell.m in Sources */,
 				EE2EF8191AA6422000DE09E7 /* PersonalSingleStats.m in Sources */,
 				EE7A6CDC1A868402000447D2 /* main.m in Sources */,
@@ -914,6 +925,7 @@
 				EEFD584F1AD1DD1C00AF28FC /* GroupStatisticsViewController.m in Sources */,
 				EEB88E8B1AC5F713008FFF87 /* RankingController.m in Sources */,
 				EE5027C21A9654A30079DFFC /* LogViewController.m in Sources */,
+				EED035161AE85337002807BC /* BrownButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
