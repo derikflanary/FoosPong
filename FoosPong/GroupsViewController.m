@@ -11,6 +11,7 @@
 #import "GroupController.h"
 #import "AddGroupViewController.h"
 #import "FindGroupViewController.h"
+#import "SubscribeViewController.h"
 
 
 @interface GroupsViewController ()<UITableViewDataSource, UITableViewDelegate, FindGroupViewControllerDelegate>
@@ -183,11 +184,24 @@
 
 - (void)createPressed:(id)sender{
     
-    self.addGroupViewController = [AddGroupViewController new];
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:self.addGroupViewController];
-    [self presentViewController:navController animated:YES completion:^{
-        
-    }];
+    BOOL subscribed = [[NSUserDefaults standardUserDefaults]boolForKey:@"subscribed"];
+    
+    if (subscribed) {
+        self.addGroupViewController = [AddGroupViewController new];
+        UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:self.addGroupViewController];
+        [self presentViewController:navController animated:YES completion:^{
+            
+        }];
+    }else{
+        UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:[SubscribeViewController new]];
+        [self presentViewController:navController animated:YES completion:^{
+            
+        }];
+    }
+    
+    
+    
+    
 }
 
 - (void)joinPressed:(id)sender{

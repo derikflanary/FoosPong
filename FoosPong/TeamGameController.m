@@ -129,7 +129,7 @@
     PFQuery *query4 = [PFQuery queryWithClassName:@"TeamGame"];
     [query2 whereKey:@"teamTwoDefender" equalTo:user];
     
-    NSNumber *tenPointGame = [[NSUserDefaults standardUserDefaults]objectForKey:@"tenPointGamesOn"];
+    NSNumber *tenPointGame = [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults]objectForKey:@"tenPointGamesOn"]];
     BOOL tenPointGames = tenPointGame.boolValue;
     
     PFQuery *theQuery = [PFQuery orQueryWithSubqueries:@[query, query2, query3, query4]];
