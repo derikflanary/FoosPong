@@ -73,7 +73,11 @@
 }
 
 - (void)perMonthButtonPressed:(id)sender{
-    [[SubscriptionController sharedInstance]requestPurchase];
+    [[SubscriptionController sharedInstance]requestPurchaseCallback:^(BOOL *success, NSError *error) {
+        if (!error) {
+            NSLog(@"Purchased");
+        }
+    }];
     
 }
 
@@ -88,7 +92,6 @@
 
 - (void)cancelPressed:(id)sender{
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        
     }];
 }
 

@@ -11,6 +11,6 @@
 @interface SubscriptionController : NSObject
 
 + (SubscriptionController *)sharedInstance;
-- (void)requestPurchase;
+- (void)requestPurchaseCallback:(void (^)(BOOL *, NSError * error))callback;
 
 @end
