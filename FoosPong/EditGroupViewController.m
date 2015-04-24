@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) NSMutableArray *nonMembers;
 @property (nonatomic, strong) FoosButton *deleteGroupButton;
+@property (nonatomic, strong) FoosButton *manageSubscriptionButton;
 @property (nonatomic, strong) UITableView *contactsTableView;
 @property (nonatomic, assign) BOOL searchUsers;
 @property (nonatomic, strong) UISearchController *searchController;
@@ -71,6 +72,14 @@
     [self.deleteGroupButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.deleteGroupButton addTarget:self action:@selector(deleteGroupButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
+    self.manageSubscriptionButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 51)];
+    self.manageSubscriptionButton.backgroundColor = [UIColor darkColor];
+    self.manageSubscriptionButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
+    [self.manageSubscriptionButton setTitle:@"SUBSCRIPTION" forState:UIControlStateNormal];
+    [self.manageSubscriptionButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.manageSubscriptionButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.manageSubscriptionButton addTarget:self action:@selector(manageSubscriptionButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
     self.membersDataSource = [MembersTableViewDataSource new];
     self.membersDataSource.groupMembers = self.groupMembers;
 
@@ -112,18 +121,22 @@
     
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.deleteGroupButton];
+    [self.view addSubview:self.manageSubscriptionButton];
     
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     self.deleteGroupButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.manageSubscriptionButton.translatesAutoresizingMaskIntoConstraints = NO;
     
     
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_tableView, _deleteGroupButton);
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_tableView, _deleteGroupButton, _manageSubscriptionButton);
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_tableView]-(==0)-[_deleteGroupButton(==51)]-(==44)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_tableView]-(==0)-[_deleteGroupButton(==51)]-(==44)-|" options:0 metrics:nil views:viewsDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_tableView]-(==0)-[_manageSubscriptionButton(==51)]-(==44)-|" options:0 metrics:nil views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_tableView]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_deleteGroupButton]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_deleteGroupButton]-(==1)-[_manageSubscriptionButton(==_deleteGroupButton)]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
 
 
     //[self populateTableView];
@@ -301,6 +314,10 @@
         return;
     }]];
     [self presentViewController:deleteGroupAlert animated:YES completion:nil];
+}
+
+- (void)manageSubscriptionButtonPressed:(id)sender{
+    
 }
 
 /*
