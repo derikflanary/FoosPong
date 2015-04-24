@@ -30,17 +30,21 @@ NSString *const kSubscriptionNameKey = @"com.derikflanary.Foos.teamSubscription"
 - (void)requestPurchaseCallback:(void (^)(BOOL *, NSError * error))callback{
     
     [PFPurchase buyProduct:kSubscriptionNameKey block:^(NSError *error) {
+        
+        [self purchaseSubscriptionsWithMonths:6];
+        
+        [self savePurchaseCallback:^(BOOL *success, NSError *error) {
+            if (!error) {
+                callback(success, nil);
+            }
+        }];
         if (!error) {
             
-            [self purchaseSubscriptionsWithMonths:6];
             
-            [self savePurchaseCallback:^(BOOL *success, NSError *error) {
-                if (!error) {
-                    callback(success, nil);
-                }
-            }];
             
             // Run UI logic that informs user the product has been purchased, such as displaying an alert view.
+        }else{
+            NSLog(@"%@", error);
         }
     }];
 }
@@ -117,8 +121,8 @@ NSString *const kSubscriptionNameKey = @"com.derikflanary.Foos.teamSubscription"
         
         NSDate *expirationDate = [self getExpirationDateForMonths:months];
         
-        [object addObject:expirationDate forKey:kSubscriptionExpirationDateKey];
-        [object saveInBackground];
+        [[PFUser currentUser] addObject:expirationDate forKey:kSubscriptionExpirationDateKey];
+        [[PFUser currentUser] saveInBackground];
         
         [[NSUserDefaults standardUserDefaults]setObject:expirationDate forKey:kSubscriptionExpirationDateKey];
         [[NSUserDefaults standardUserDefaults]synchronize];

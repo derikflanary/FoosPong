@@ -40,7 +40,7 @@
     self.perMonthButton = [[BrownButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 51)];
     self.perMonthButton.backgroundColor = [UIColor marigoldBrown];
     self.perMonthButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-    [self.perMonthButton setTitle:@"$4.99/Month For 6 Months" forState:UIControlStateNormal];
+    [self.perMonthButton setTitle:@"Subscribe Now" forState:UIControlStateNormal];
     [self.perMonthButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.perMonthButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.perMonthButton addTarget:self action:@selector(perMonthButtonPressed:) forControlEvents:UIControlEventTouchUpInside];

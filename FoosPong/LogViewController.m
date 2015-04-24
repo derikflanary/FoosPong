@@ -124,7 +124,7 @@
     self.infoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.headerImageView.frame), self.view.frame.size.width, 55)];
     self.infoLabel.textColor =  [UIColor darkColor];
     self.infoLabel.font =  [UIFont fontWithName:[NSString mainFont] size:18.0f];
-    self.infoLabel.text = @"Welcome back, please login below";
+    self.infoLabel.text = @"Welcome, please login below";
     self.infoLabel.textAlignment = NSTextAlignmentCenter;
     self.infoLabel.backgroundColor = [UIColor mainWhite];
     

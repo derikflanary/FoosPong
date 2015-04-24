@@ -50,11 +50,15 @@ static NSString * const passwordKey = @"password";
         [group saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error) {
                 [self setCurrentGroup:group callback:^(BOOL *success) {
-                    
-                    [[RankingController sharedInstance]createRankingforUser:[PFUser currentUser] forGroup:group withCallback:^(BOOL *itSucceeded) {
-                        
-                        callback(itSucceeded);
-                        
+                    newGroup.admin[@"hasCreatedTeam"] =[NSNumber numberWithBool:YES];
+                    [newGroup.admin saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error){
+                        if (!error) {
+                            [[RankingController sharedInstance]createRankingforUser:[PFUser currentUser] forGroup:group withCallback:^(BOOL *itSucceeded) {
+                                
+                                callback(itSucceeded);
+                                
+                            }];
+                        }
                     }];
                     
                 }];

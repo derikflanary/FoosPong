@@ -184,7 +184,9 @@
 
 - (void)createPressed:(id)sender{
     
-    BOOL subscribed = [[NSUserDefaults standardUserDefaults]boolForKey:@"subscribed"];
+    BOOL subscribed = [PFUser currentUser][@"subscribed"];
+    
+    BOOL hasCreatedTeam = [PFUser currentUser][@"hasCreatedTeam"];
     
     if (subscribed) {
         self.addGroupViewController = [AddGroupViewController new];
@@ -192,15 +194,18 @@
         [self presentViewController:navController animated:YES completion:^{
             
         }];
+    }else if (hasCreatedTeam){
+        UIAlertController *hasTeamAlert = [UIAlertController alertControllerWithTitle:@"Only One Team Per Subscriber" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        [hasTeamAlert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            return;
+        }]];
+    
     }else{
         UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:[SubscribeViewController new]];
         [self presentViewController:navController animated:YES completion:^{
             
         }];
     }
-    
-    
-    
     
 }
 
