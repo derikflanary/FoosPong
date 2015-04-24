@@ -9,6 +9,7 @@
 #import "SubscribeViewController.h"
 #import "SubscriptionController.h"
 #import "BrownButton.h"
+#import "AddGroupViewController.h"
 
 @interface SubscribeViewController ()
 
@@ -76,6 +77,16 @@
     [[SubscriptionController sharedInstance]requestPurchaseCallback:^(BOOL *success, NSError *error) {
         if (!error) {
             NSLog(@"Purchased");
+            
+            UIAlertController *subscribedAlert = [UIAlertController alertControllerWithTitle:@"You Have Successfully Subscribed!" message:@"You can now create a team." preferredStyle:UIAlertControllerStyleAlert];
+            [subscribedAlert addAction:[UIAlertAction actionWithTitle:@"Let's Go!" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:[AddGroupViewController new]];
+                [self presentViewController:navController animated:YES completion:^{
+                    
+                }];
+            }]];
+            
+
         }
     }];
     

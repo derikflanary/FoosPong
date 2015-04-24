@@ -154,6 +154,10 @@
 }
 
 - (void)cancelPressed:(id)sender{
+    
+    [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         
     }];
