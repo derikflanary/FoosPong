@@ -146,18 +146,15 @@
     PFQuery *query1 = [PFQuery queryWithClassName:@"Game"];
     [query1 whereKey:@"p1" equalTo:user];
     
-    NSNumber *tenPointGame = [NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults]objectForKey:@"tenPointGamesOn"]];
-    BOOL tenPointGames = tenPointGame.boolValue;
-    
-//    NSInteger tenGame = [[NSUserDefaults standardUserDefaults]objectForKey:@"tenPointGamesOn"];
-    
+    bool tenPointGames = [[NSUserDefaults standardUserDefaults]boolForKey:@"tenPointGamesOn"];
+    //    BOOL tenPointGames = tenPointGame.boolValue;
     
     PFQuery *query2 = [PFQuery orQueryWithSubqueries:@[query, query1]];
     if (tenPointGames) {
-        [query2 whereKey:@"tenPointGame" equalTo:tenPointGame];
+        [query2 whereKey:@"tenPointGame" equalTo:[NSNumber numberWithBool:tenPointGames]];
         
     }else{
-        [query2 whereKey:@"tenPointGame" equalTo:tenPointGame];
+        [query2 whereKey:@"tenPointGame" equalTo:[NSNumber numberWithBool:tenPointGames]];
     }
     [query2 whereKey:@"group" equalTo:group];
     [query2 includeKey:@"p1"];

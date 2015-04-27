@@ -30,15 +30,20 @@
         PFObject *guestGame = [PFObject objectWithClassName:@"GuestSingleGame"];
         if (!gameStats.playerOne.objectId) {
             guestGame[@"p1"] = gameStats.playerTwo;
+            guestGame[@"playerOneScore"] = [NSNumber numberWithDouble:gameStats.playerTwoScore];
+            guestGame[@"guestPlayerScore"] = [NSNumber numberWithDouble:gameStats.playerOneScore];
         }else{
             guestGame[@"p1"] = gameStats.playerOne;
+            guestGame[@"playerOneScore"] = [NSNumber numberWithDouble:gameStats.playerOneScore];
+            guestGame[@"guestPlayerScore"] = [NSNumber numberWithDouble:gameStats.playerTwoScore];
         }
         guestGame[@"guestPlayer"] = guestPlayer;
         //    guestGame[@"p2Guest"];
         guestGame[@"playerOneScore"] = [NSNumber numberWithDouble:gameStats.playerOneScore];
-        guestGame[@"playerTwoScore"] = [NSNumber numberWithDouble:gameStats.playerTwoScore];
+        guestGame[@"guestPlayerScore"] = [NSNumber numberWithDouble:gameStats.playerTwoScore];
         guestGame[@"playerOneWin"] = [NSNumber numberWithBool: gameStats.playerOneWin];
         guestGame[@"tenPointGame"] = [NSNumber numberWithBool:gameStats.tenPointGame];
+        
         
         [guestGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             
@@ -49,6 +54,35 @@
     
 }
 
+- (void)updateGuestGamesForUser:(PFUser*)user callback:(void (^)(NSArray *))callback{
+    
+    PFQuery *theQuery = [PFQuery queryWithClassName:@"GuestSingleGame"];
+    [theQuery whereKey:@"p1" equalTo:user];
+    
+    bool tenPointGames = [[NSUserDefaults standardUserDefaults]boolForKey:@"tenPointGamesOn"];
+//    BOOL tenPointGames = tenPointGame.boolValue;
+    
+    if (tenPointGames) {
+        [theQuery whereKey:@"tenPointGame" equalTo:[NSNumber numberWithBool:tenPointGames]];
+        
+    }else{
+        [theQuery whereKey:@"tenPointGame" equalTo:[NSNumber numberWithBool:tenPointGames]];
+    }
+
+    [theQuery includeKey:@"p1"];
+    [theQuery includeKey:@"guestPlayer"];
+    [theQuery orderByDescending:@"createdAt"];
+    [theQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            
+            callback(objects);
+            
+        } else {
+            
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+}
 
 - (void)addGameWithTeamGameStats:(TeamGameDetails*)gameStats callback:(void (^)(bool))callback{
     

@@ -15,12 +15,14 @@
 #import "GameDetailViewController.h"
 #import "HistoryTableViewCell.h"
 #import "TeamFeedTableViewCell.h"
+#import "GuestGameController.h"
 
 @interface HistoryViewController () <UITableViewDataSource, UITableViewDelegate, UIToolbarDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *singleGames;
 @property (nonatomic, strong) NSArray *teamGames;
+@property (nonatomic, strong) NSArray *guestGames;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 @property (nonatomic, strong) UISegmentedControl *segmentedControl;
@@ -65,13 +67,18 @@
             }];
             
         }];
+    
+    [[GuestGameController sharedInstance]updateGuestGamesForUser:[PFUser currentUser] callback:^(NSArray *guestGames) {
+        self.guestGames = guestGames;
+        [self.tableView reloadData];
+    }];
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:2];
     
-    self.segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"1 V 1", @"2 V 2"]];
+    self.segmentedControl = [[UISegmentedControl alloc]initWithItems:@[@"1 V 1", @"2 V 2", @"Guest Games"]];
     [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     self.segmentedControl.tintColor = [UIColor darkColor];
-    self.segmentedControl.selectedSegmentIndex = 0;
-    UIFont *font = [UIFont boldSystemFontOfSize:18.0f];
+    self.segmentedControl.selectedSegmentIndex = 2;
+    UIFont *font = [UIFont boldSystemFontOfSize:14.0f];
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
                                                            forKey:NSFontAttributeName];
     [self.segmentedControl setTitleTextAttributes:attributes
@@ -116,8 +123,10 @@
     
     if (self.segmentedControl.selectedSegmentIndex == 0) {
         return [self.singleGames count];
-    }else{
+    }else if (self.segmentedControl.selectedSegmentIndex == 1){
         return [self.teamGames count];
+    }else{
+        return [self.guestGames count];
     }
     
 }
@@ -126,8 +135,10 @@
  
     if (self.segmentedControl.selectedSegmentIndex == 0) {
         return @"Single Games";
-    }else{
+    }else if (self.segmentedControl.selectedSegmentIndex == 1){
         return @"Team Games";
+    }else{
+        return @"Guest Games";
     }
 }
 
@@ -163,7 +174,7 @@
 
         return cell;
 
-    }else{
+    }else if (self.segmentedControl.selectedSegmentIndex == 1){
         
         TeamGame *teamGame = [self.teamGames objectAtIndex:indexPath.row];
         PFUser *t1p1 = teamGame.teamOneAttacker;
@@ -185,6 +196,21 @@
         cell.playerTwoScoreLabel.text = [NSString stringWithFormat:@"%.f", teamGame.teamTwoScore];
         cell.dateLabel.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
         return cell;
+    }else{
+        PFObject *guestGame = [self.guestGames objectAtIndex:indexPath.row];
+        PFUser *p1 = guestGame[@"p1"];
+        PFObject *guest = guestGame[@"guestPlayer"];
+        NSDate *date =  guestGame.createdAt;
+        
+        NSString *p1Name = p1.username;
+        NSString *p2Name = guest[@"username"];
+        cell.playerOneLabel.text = [p1Name uppercaseString];
+        cell.playerTwoLabel.text = [p2Name uppercaseString];
+        cell.playerOneScoreLabel.text = [NSString stringWithFormat:@"%@", guestGame[@"playerOneScore"]];
+        cell.playerTwoScoreLabel.text = [NSString stringWithFormat:@"%@", guestGame[@"guestPlayerScore"]];
+        cell.dateLabel.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
+        return cell;
+        
     }
    
 }

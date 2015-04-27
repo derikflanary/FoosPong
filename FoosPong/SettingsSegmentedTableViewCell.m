@@ -84,7 +84,8 @@
         self.tenPointGames = NO;
     }
     NSNumber *tenPointGamesOn = [NSNumber numberWithBool:self.tenPointGames];
-    [[NSUserDefaults standardUserDefaults] setObject:tenPointGamesOn forKey:@"tenPointGamesOn"];
+    [[NSUserDefaults standardUserDefaults] setBool:self.tenPointGames forKey:@"tenPointGamesOn"];
+//    [[NSUserDefaults standardUserDefaults] setObject:tenPointGamesOn forKey:@"tenPointGamesOn"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
