@@ -286,7 +286,11 @@ static NSString * const passwordKey = @"password";
     [group deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         
         [currentUser removeObjectForKey:currentGroupKey];
-        callback(&succeeded);
+        currentUser[@"hasCreatedTeam"] = [NSNumber numberWithBool:NO];
+        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            callback(&succeeded);
+        }];
+       
         
     }];
 }

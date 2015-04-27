@@ -361,6 +361,7 @@
     self.gameStats.teamOneDefenderStartingRank = self.teamOneDefenderRank;
     self.gameStats.teamTwoAttackerStartingRank = self.teamTwoAttackerRank;
     self.gameStats.teamTwoDefenderStartingRank = self.teamTwoDefenderRank;
+    self.gameStats.isGuestGame = self.isGuestGame;
     
     if (self.tenPointGameOn) {
         self.gameStats.tenPointGame = YES;

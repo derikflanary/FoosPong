@@ -34,4 +34,6 @@
 
 @property (nonatomic, assign) BOOL tenPointGame;
 
+@property (nonatomic, assign) BOOL isGuestGame;
+
 @end

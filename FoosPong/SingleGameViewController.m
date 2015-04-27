@@ -12,6 +12,8 @@
 #import "SingleGameDetails.h"
 #import "MinusButton.h"
 #import "GameDetailViewController.h"
+#import "GuestPlayerController.h"
+#import "GuestGameController.h"
 
 #import <OpenEars/OELanguageModelGenerator.h>
 #import <OpenEars/OEPocketsphinxController.h>
@@ -282,8 +284,9 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         
         [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
-            [[SingleGameController sharedInstance] addGameWithSingleGameStats:self.gameStats callback:^(Game *singleGame) {
-                
+            if (!self.isGuestGame) {
+                [[SingleGameController sharedInstance] addGameWithSingleGameStats:self.gameStats callback:^(Game *singleGame) {
+                    
                     GameDetailViewController *gdvc = [GameDetailViewController new];
                     gdvc.singleGame = singleGame;
                     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gdvc];
@@ -291,9 +294,30 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
                     navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
                     
                     [self.navigationController presentViewController:navController animated:YES completion:^{
-                    
+                        
+                    }];
                 }];
-            }];
+            }else{
+                if (!self.playerOne.objectId) {
+                    [[GuestPlayerController sharedInstance]createGuestPlayerFromUser:self.playerOne callback:^(PFObject *guestPlayer) {
+                        
+                        [[GuestGameController sharedInstance]addGameWithSingleGameStats:self.gameStats andGuestPlayer:guestPlayer callback:^(bool succeeded) {
+                            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                        }];
+                    }];
+                    
+                }else{
+                    [[GuestPlayerController sharedInstance]createGuestPlayerFromUser:self.playerTwo callback:^(PFObject *guestPlayer) {
+                        
+                        [[GuestGameController sharedInstance]addGameWithSingleGameStats:self.gameStats andGuestPlayer:guestPlayer callback:^(bool succeeded) {
+                            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                        }];
+                    }];
+                }
+                
+            }
+            
+            
             
         }]];
         
@@ -323,18 +347,41 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         
         [setTitleAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
-            [[SingleGameController sharedInstance] addGameWithSingleGameStats:self.gameStats callback:^(Game *singleGame) {
-                
-                GameDetailViewController *gdvc = [GameDetailViewController new];
-                gdvc.singleGame = singleGame;
-                UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gdvc];
-                
-                navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-                
-                [self.navigationController presentViewController:navController animated:YES completion:^{
+            if (!self.isGuestGame) {
+                [[SingleGameController sharedInstance] addGameWithSingleGameStats:self.gameStats callback:^(Game *singleGame) {
                     
+                    GameDetailViewController *gdvc = [GameDetailViewController new];
+                    gdvc.singleGame = singleGame;
+                    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gdvc];
+                    
+                    navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+                    
+                    [self.navigationController presentViewController:navController animated:YES completion:^{
+                        
+                    }];
                 }];
-            }];
+            }else{
+                if (!self.playerOne.objectId) {
+                    [[GuestPlayerController sharedInstance]createGuestPlayerFromUser:self.playerOne callback:^(PFObject *guestPlayer) {
+                        
+                        [[GuestGameController sharedInstance]addGameWithSingleGameStats:self.gameStats andGuestPlayer:guestPlayer callback:^(bool succeeded) {
+                            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                        }];
+                    }];
+                    
+                }else{
+                    [[GuestPlayerController sharedInstance]createGuestPlayerFromUser:self.playerTwo callback:^(PFObject *guestPlayer) {
+                        
+                        [[GuestGameController sharedInstance]addGameWithSingleGameStats:self.gameStats andGuestPlayer:guestPlayer callback:^(bool succeeded) {
+                            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                        }];
+                    }];
+                }
+                
+            }
+            
+            
+            
         }]];
         
                 [self presentViewController:setTitleAlert animated:YES completion:nil];
@@ -371,6 +418,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
     self.gameStats.group = [PFUser currentUser][@"currentGroup"];
     self.gameStats.playerOneStartingRank = self.playerOneRanking[@"rank"];
     self.gameStats.playerTwoStartingRank = self.playerTwoRanking[@"rank"];
+    self.gameStats.isGuestGame = self.isGuestGame;
     
     if (self.tenPointGameOn) {
         self.gameStats.tenPointGame = YES;

@@ -138,80 +138,86 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     self.searchController.dimsBackgroundDuringPresentation = NO;
     self.searchController.hidesNavigationBarDuringPresentation = NO;
     
-    
+    if (!self.currentUser[@"currentGroup"]) {
+        self.currentPlayers = [NSMutableArray array];
+        [self.currentPlayers insertObject:self.currentUser atIndex:0];
+        [self.currentPlayers addObject:[PFUser new]];
+        self.availablePlayers = [NSMutableArray array];
+        [self.activityView stopAnimating];
+        
+    }else{
     
     //self.availablePlayers = [UserController sharedInstance].usersWithoutCurrentUser.mutableCopy;
-    [[GroupController sharedInstance]retrieveCurrentGroupWithCallback:^(PFObject *group, NSError *error) {
-        self.tableView.tableHeaderView = self.searchController.searchBar;
+        [[GroupController sharedInstance]retrieveCurrentGroupWithCallback:^(PFObject *group, NSError *error) {
+            self.tableView.tableHeaderView = self.searchController.searchBar;
 
-        [[GroupController sharedInstance]fetchMembersOfGroup:group Callback:^(NSArray *members) {
-            self.availablePlayers = members.mutableCopy;
-            self.currentUser = [PFUser currentUser];
-            for (PFUser *user in self.availablePlayers) {
-                if ([user.objectId isEqualToString:self.currentUser.objectId]) {
-                    self.currentUser = user;
-                    
-                }
-            }
-            BOOL isInGroup = false;
-            for (PFUser *member in members) {
-                if ([member.objectId isEqualToString:self.currentUser.objectId]) {
-                    isInGroup = YES;
-                    break;
-                }
-            }
-            
-            if (!isInGroup) {
-                [[GroupController sharedInstance]setCurrentGroup:nil callback:^(BOOL *success) {
-                    NSLog(@"current Group removed");
-                    [self.tableView reloadData];
-                }];
-
-            }else{
-                [[RankingController sharedInstance]retrieveRankingsForGroup:group forUsers:self.availablePlayers withCallBack:^(NSArray *rankings) {
-                    
-                    NSMutableArray *mutableGroupMembers = [NSMutableArray array];
-                    
-                    for (PFObject *ranking in rankings) {
-                        PFUser *userForRanking = ranking[@"user"];
+            [[GroupController sharedInstance]fetchMembersOfGroup:group Callback:^(NSArray *members) {
+                self.availablePlayers = members.mutableCopy;
+                for (PFUser *user in self.availablePlayers) {
+                    if ([user.objectId isEqualToString:self.currentUser.objectId]) {
+                        self.currentUser = user;
                         
-                        for (PFUser *member in self.availablePlayers) {
-                            if ([userForRanking.objectId isEqualToString:member.objectId]) {
-                                [mutableGroupMembers addObject:member];
+                    }
+                }
+                BOOL isInGroup = false;
+                for (PFUser *member in members) {
+                    if ([member.objectId isEqualToString:self.currentUser.objectId]) {
+                        isInGroup = YES;
+                        break;
+                    }
+                }
+                
+                if (!isInGroup) {
+                    [[GroupController sharedInstance]setCurrentGroup:nil callback:^(BOOL *success) {
+                        NSLog(@"current Group removed");
+                        [self.tableView reloadData];
+                    }];
+
+                }else{
+                    [[RankingController sharedInstance]retrieveRankingsForGroup:group forUsers:self.availablePlayers withCallBack:^(NSArray *rankings) {
+                        
+                        NSMutableArray *mutableGroupMembers = [NSMutableArray array];
+                        
+                        for (PFObject *ranking in rankings) {
+                            PFUser *userForRanking = ranking[@"user"];
+                            
+                            for (PFUser *member in self.availablePlayers) {
+                                if ([userForRanking.objectId isEqualToString:member.objectId]) {
+                                    [mutableGroupMembers addObject:member];
+                                }
                             }
                         }
-                    }
-                    self.availablePlayers = mutableGroupMembers;
-                    self.availablePlayersRankings = rankings.mutableCopy;
-                    
-                    
-                    self.title = [group[@"name"] uppercaseString];
-                    self.searchAvailablePlayers = members;
-                    
-                    [[RankingController sharedInstance]retrieveDoublesRankingsForGroup:group forUsers:self.availablePlayers withCallBack:^(NSArray *doublesRankings) {
-                        self.doublesRankings = doublesRankings.mutableCopy;
+                        self.availablePlayers = mutableGroupMembers;
+                        self.availablePlayersRankings = rankings.mutableCopy;
                         
-                        [self.availablePlayers removeObject:self.currentUser];
                         
-                        self.currentPlayers = [NSMutableArray array];
-                        [self.currentPlayers insertObject:self.currentUser atIndex:0];
+                        self.title = [group[@"name"] uppercaseString];
+                        self.searchAvailablePlayers = members;
                         
-                        if ([self.currentPlayers count] <2) {
-                            [self.currentPlayers addObject:[PFUser new]];
-                            PFObject *emptyRanking = [PFObject objectWithClassName:@"Ranking"];
-                            [self.currentPlayersRankings addObject:emptyRanking];
-                        }
+                        [[RankingController sharedInstance]retrieveDoublesRankingsForGroup:group forUsers:self.availablePlayers withCallBack:^(NSArray *doublesRankings) {
+                            self.doublesRankings = doublesRankings.mutableCopy;
+                            
+                            [self.availablePlayers removeObject:self.currentUser];
+                            
+                            self.currentPlayers = [NSMutableArray array];
+                            [self.currentPlayers insertObject:self.currentUser atIndex:0];
+                            
+                            if ([self.currentPlayers count] <2) {
+                                [self.currentPlayers addObject:[PFUser new]];
+                                PFObject *emptyRanking = [PFObject objectWithClassName:@"Ranking"];
+                                [self.currentPlayersRankings addObject:emptyRanking];
+                            }
 
-                        
-                        [self.activityView stopAnimating];
-                        [self.tableView reloadData];
+                            
+                            [self.activityView stopAnimating];
+                            [self.tableView reloadData];
 
+                        }];
                     }];
-                }];
-            }
+                }
+            }];
         }];
-    }];
-   
+    }
     self.teamTwoPlayers = [NSMutableArray array];
     [self.teamTwoPlayers addObject:[PFUser new]];
     [self.teamTwoPlayers addObject:[PFUser new]];
@@ -289,6 +295,9 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 gvc.playerOneRanking = [self.currentPlayersRankings objectAtIndex:0];
                 gvc.playerTwoRanking = [self.currentPlayersRankings objectAtIndex:1];
                 
+                if (!player1.objectId || !player2.objectId) {
+                    gvc.isGuestGame = YES;
+                }
                 [self.navigationController presentViewController:singleGameNavController animated:YES completion:^{
                     
                 }];
@@ -327,8 +336,11 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 tgvc.teamTwoAttackerRank = [self.teamTwoRankings objectAtIndex:0][@"rank"];
                 tgvc.teamTwoDefenderRank = [self.teamTwoRankings objectAtIndex:1][@"rank"];
                 
+                if (!p1.objectId || !p2.objectId || p3.objectId || p4.objectId) {
+                    tgvc.isGuestGame = YES;
+                }
+                
                 [self.navigationController presentViewController:teamGameNavController animated:YES completion:^{
-                    
                 }];
 
             }else{
@@ -357,23 +369,23 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 #define NUMBER_OF_STATIC_CELLS  2
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (!self.currentUser[@"currentGroup"]) {
-        self.addGuestButton.enabled = NO;
-        [self.activityView stopAnimating];
-        self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-        
-        self.messageLabel.text = @"No current players to play with. Please join a team to play.";
-        self.messageLabel.textColor = [UIColor blackColor];
-        self.messageLabel.numberOfLines = 0;
-        self.messageLabel.textAlignment = NSTextAlignmentCenter;
-        self.messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
-        [self.messageLabel sizeToFit];
-        
-        self.tableView.backgroundView = self.messageLabel;
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        return 0;
-   
-    }else{
+//    if (!self.currentUser[@"currentGroup"]) {
+//        self.addGuestButton.enabled = NO;
+//        [self.activityView stopAnimating];
+//        self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+//        
+//        self.messageLabel.text = @"No current players to play with. Please join a team to play.";
+//        self.messageLabel.textColor = [UIColor blackColor];
+//        self.messageLabel.numberOfLines = 0;
+//        self.messageLabel.textAlignment = NSTextAlignmentCenter;
+//        self.messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
+//        [self.messageLabel sizeToFit];
+//        
+//        self.tableView.backgroundView = self.messageLabel;
+//        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        return 0;
+//   
+//    }else{
         self.messageLabel.text = @"";
         if (self.segmentedControl.selectedSegmentIndex == 0) {
             return TableViewSectionAvailable + 1;
@@ -381,7 +393,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
         
         return TableView2TeamSectionAvailable + 1;
         }
-    }
+//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -1060,7 +1072,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     UIAlertController *addGuestAlert = [UIAlertController alertControllerWithTitle:@"Add A Guest Player" message:@"Please give the guest player a name" preferredStyle:UIAlertControllerStyleAlert];
     [addGuestAlert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = NSLocalizedString(@"Guest's Name", @"Guest");
-        
+
     }];
     
     [addGuestAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
@@ -1073,6 +1085,8 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
         guestName = theguestName.text;
         if ([guestName isEqualToString:@""]) {
             guestName = @"Guest";
+            
+            
         }
 //        if ([self.currentPlayers count] < 2) {
 //            PFUser *guest = [PFUser new];
@@ -1080,6 +1094,8 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
 //            [self.currentPlayers addObject:guest];
 //            [self.tableView reloadData];
 //        }else if ([self.currentPlayers count] == 2){
+            
+        
             PFUser *guest = [PFUser new];
             guest.username = guestName;
             guest[@"firstName"] = @"";

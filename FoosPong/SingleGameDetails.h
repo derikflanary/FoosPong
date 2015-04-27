@@ -22,5 +22,7 @@
 @property (nonatomic, strong) NSNumber *playerTwoNewRank;
 @property (nonatomic, assign) BOOL tenPointGame;
 
+@property (nonatomic, assign) BOOL isGuestGame;
+
 
 @end

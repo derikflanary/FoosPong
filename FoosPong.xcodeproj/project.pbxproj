@@ -80,6 +80,8 @@
 		EE7C85D31AC1DEE4008467AD /* Slt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE7C85CF1AC1DEE4008467AD /* Slt.framework */; };
 		EE808DB01A9FC3E30000F833 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE808DAF1A9FC3E30000F833 /* SettingViewController.m */; };
 		EE808DB71A9FCCB10000F833 /* NSString+Fonts.m in Sources */ = {isa = PBXBuildFile; fileRef = EE808DB61A9FCCB10000F833 /* NSString+Fonts.m */; };
+		EE893BF71AEEC95D0041F4A6 /* GuestPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE893BF61AEEC95D0041F4A6 /* GuestPlayerController.m */; };
+		EE893BFA1AEECF240041F4A6 /* GuestGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE893BF91AEECF240041F4A6 /* GuestGameController.m */; };
 		EE9DAEEB1A9D582200589897 /* RNFrostedSidebar.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */; };
 		EE9DAEED1A9D583500589897 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE9DAEEC1A9D583500589897 /* Accelerate.framework */; };
 		EE9DAEF01A9EB91D00589897 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9DAEEF1A9EB91D00589897 /* MasterViewController.m */; };
@@ -248,6 +250,10 @@
 		EE808DAF1A9FC3E30000F833 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		EE808DB51A9FCCB10000F833 /* NSString+Fonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Fonts.h"; sourceTree = "<group>"; };
 		EE808DB61A9FCCB10000F833 /* NSString+Fonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Fonts.m"; sourceTree = "<group>"; };
+		EE893BF51AEEC95D0041F4A6 /* GuestPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuestPlayerController.h; sourceTree = "<group>"; };
+		EE893BF61AEEC95D0041F4A6 /* GuestPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuestPlayerController.m; sourceTree = "<group>"; };
+		EE893BF81AEECF240041F4A6 /* GuestGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuestGameController.h; sourceTree = "<group>"; };
+		EE893BF91AEECF240041F4A6 /* GuestGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuestGameController.m; sourceTree = "<group>"; };
 		EE9DAEE91A9D582200589897 /* RNFrostedSidebar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNFrostedSidebar.h; sourceTree = "<group>"; };
 		EE9DAEEA1A9D582200589897 /* RNFrostedSidebar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNFrostedSidebar.m; sourceTree = "<group>"; };
 		EE9DAEEC1A9D583500589897 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -471,6 +477,10 @@
 				EEFDF3CD1AA6AE7200A0E48F /* StatsController.m */,
 				EEB88E891AC5F713008FFF87 /* RankingController.h */,
 				EEB88E8A1AC5F713008FFF87 /* RankingController.m */,
+				EE893BF51AEEC95D0041F4A6 /* GuestPlayerController.h */,
+				EE893BF61AEEC95D0041F4A6 /* GuestPlayerController.m */,
+				EE893BF81AEECF240041F4A6 /* GuestGameController.h */,
+				EE893BF91AEECF240041F4A6 /* GuestGameController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -890,6 +900,7 @@
 				EE808DB71A9FCCB10000F833 /* NSString+Fonts.m in Sources */,
 				EE7A6D041A869169000447D2 /* InitialViewController.m in Sources */,
 				EE9DAEF61A9ECED800589897 /* FindGroupViewController.m in Sources */,
+				EE893BF71AEEC95D0041F4A6 /* GuestPlayerController.m in Sources */,
 				EE9DAEF01A9EB91D00589897 /* MasterViewController.m in Sources */,
 				EED6AE521ACDF4F300EB37B3 /* JTNumberScrollAnimatedView.m in Sources */,
 				EE808DB01A9FC3E30000F833 /* SettingViewController.m in Sources */,
@@ -901,6 +912,7 @@
 				EE0976B31AC24EE8006CC328 /* SettingsSegmentedTableViewCell.m in Sources */,
 				EE2EF8191AA6422000DE09E7 /* PersonalSingleStats.m in Sources */,
 				EE7A6CDC1A868402000447D2 /* main.m in Sources */,
+				EE893BFA1AEECF240041F4A6 /* GuestGameController.m in Sources */,
 				EE2C57DF1A93ECD200DA9835 /* BaseLoginController.m in Sources */,
 				EE7C85C41ABC87D1008467AD /* MembersTableViewDataSource.m in Sources */,
 				EE0976AD1ABE1991006CC328 /* PlayerTableViewCell.m in Sources */,

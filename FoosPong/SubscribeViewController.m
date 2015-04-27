@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) BrownButton *perMonthButton;
 @property (nonatomic, strong) BrownButton *yearButton;
+@property (nonatomic, strong) UILabel *detailLabel;
 
 @end
 
@@ -47,6 +48,12 @@
     [self.perMonthButton addTarget:self action:@selector(perMonthButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.perMonthButton];
     
+    self.detailLabel = [[UILabel alloc]initWithFrame:self.view.frame];
+    self.detailLabel.textColor = [UIColor mainWhite];
+    self.detailLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
+    self.detailLabel.text = @"Subscribe to gain access the team feature of Foos. Creating a team includes the following features:";
+    self.detailLabel.numberOfLines = 0;
+    [self.view addSubview:self.detailLabel];
 //    self.yearButton = [[BrownButton alloc]initWithFrame:CGRectMake(0, 350, self.view.frame.size.width, 51)];
 //    self.yearButton.backgroundColor = [UIColor marigoldBrown];
 //    self.yearButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
@@ -85,8 +92,6 @@
                     
                 }];
             }]];
-            
-
         }
     }];
     

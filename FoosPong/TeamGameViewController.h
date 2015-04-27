@@ -16,5 +16,6 @@
 @property (nonatomic, strong) NSNumber *teamOneDefenderRank;
 @property (nonatomic, strong) NSNumber *teamTwoAttackerRank;
 @property (nonatomic, strong) NSNumber *teamTwoDefenderRank;
+@property (nonatomic, assign) BOOL isGuestGame;
 
 @end

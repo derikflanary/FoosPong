@@ -16,5 +16,6 @@
 @property (nonatomic, strong) PFUser *playerTwo;
 @property (nonatomic, strong) PFObject *playerOneRanking;
 @property (nonatomic, strong) PFObject *playerTwoRanking;
+@property (nonatomic, assign) BOOL isGuestGame;
 
 @end
