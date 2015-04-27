@@ -23,24 +23,30 @@
 
 - (void)addGameWithSingleGameStats:(SingleGameDetails*)gameStats andGuestPlayer:(PFObject *)guestPlayer callback:(void (^)(bool))callback{
     
-    PFObject *guestGame = [PFObject objectWithClassName:@"GuestSingleGame"];
-    if (!gameStats.playerOne.objectId) {
-        guestGame[@"p1"] = gameStats.playerTwo;
-    }else{
-        guestGame[@"p1"] = gameStats.playerOne;
-    }
-    guestGame[@"guestPlayer"] = guestPlayer;
-//    guestGame[@"p2Guest"];
-    guestGame[@"playerOneScore"] = [NSNumber numberWithDouble:gameStats.playerOneScore];
-    guestGame[@"playerTwoScore"] = [NSNumber numberWithDouble:gameStats.playerTwoScore];
-    guestGame[@"playerOneWin"] = [NSNumber numberWithBool: gameStats.playerOneWin];
-    guestGame[@"tenPointGame"] = [NSNumber numberWithBool:gameStats.tenPointGame];
-    
-    [guestGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-       
+    if (!gameStats.playerOne.objectId && !gameStats.playerTwo.objectId) {
+        BOOL succeeded = NO;
         callback(succeeded);
+    }else{
+        PFObject *guestGame = [PFObject objectWithClassName:@"GuestSingleGame"];
+        if (!gameStats.playerOne.objectId) {
+            guestGame[@"p1"] = gameStats.playerTwo;
+        }else{
+            guestGame[@"p1"] = gameStats.playerOne;
+        }
+        guestGame[@"guestPlayer"] = guestPlayer;
+        //    guestGame[@"p2Guest"];
+        guestGame[@"playerOneScore"] = [NSNumber numberWithDouble:gameStats.playerOneScore];
+        guestGame[@"playerTwoScore"] = [NSNumber numberWithDouble:gameStats.playerTwoScore];
+        guestGame[@"playerOneWin"] = [NSNumber numberWithBool: gameStats.playerOneWin];
+        guestGame[@"tenPointGame"] = [NSNumber numberWithBool:gameStats.tenPointGame];
         
-    }];
+        [guestGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            
+            callback(succeeded);
+            
+        }];
+    }
+    
 }
 
 
