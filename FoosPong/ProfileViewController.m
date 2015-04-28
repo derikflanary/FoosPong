@@ -17,6 +17,7 @@
 #import "NewGameCustomTableViewCell.h"
 #import "StatsViewController.h"
 #import "UserController.h"
+#import "GuestGameController.h"
 
 @interface ProfileViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate,  UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) UIImageView *profileImageView;
@@ -32,9 +33,6 @@
 @property (nonatomic, strong) UILabel *doubleLabel;
 @property (nonatomic, strong) UILabel *doubleAmountLabel;
 
-
-
-
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 @property (nonatomic, strong) NSArray *singleGames;
 @property (nonatomic, strong) NSArray *teamGames;
@@ -44,6 +42,7 @@
 @property (nonatomic, strong) PFUser *currentUser;
 @property (nonatomic, strong) FoosButton *statsButton;
 @property (nonatomic, strong) UINavigationController *navController;
+@property (nonatomic, strong) NSMutableArray *guestGames;
 
 
 @end
@@ -179,16 +178,34 @@
         
         [[StatsController sharedInstance] retrieveOverallStatsForUser:self.currentUser andSingleGames:self.singleGames andTeamGames:self.teamGames callback:^(PersonalOverallStats *stats) {
             
-            StatsViewController *svc = [StatsViewController new];
-            self.navController = [[UINavigationController alloc]initWithRootViewController:svc];
             self.recordLabel.text = [NSString stringWithFormat:@"%ld-%ld", (long)stats.wins, (long)stats.loses];
             
             self.singleAmountLabel.text = [NSString stringWithFormat:@"%ld", (long)stats.singleGamesPlayed];
             self.doubleAmountLabel.text = [NSString stringWithFormat:@"%ld", (long)stats.teamGamesPlayed];
             
-            self.navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-            svc.overallStats = stats;
-            svc.buttonSelected = 3;
+            [[GuestGameController sharedInstance]updateGuestGamesForUser:[PFUser currentUser] callback:^(NSArray *guestGames) {
+                self.guestGames = guestGames.mutableCopy;
+                [[GuestGameController sharedInstance]updateGuestTeamGamesForUser:[PFUser currentUser] callback:^(NSArray *guestTeamGames) {
+                    [self.guestGames addObjectsFromArray:guestTeamGames];
+                    [[StatsController sharedInstance]retrieveGuestGameStatsWithGuestGames:self.guestGames callback:^(PersonalOverallStats *guestStats) {
+                        
+                        stats.wins = stats.wins + guestStats.wins;
+                        stats.loses = stats.loses + guestStats.loses;
+                        stats.singleGamesPlayed = stats.singleGamesPlayed + guestStats.singleGamesPlayed;
+                        stats.teamGamesPlayed = stats.teamGamesPlayed + guestStats.teamGamesPlayed;
+                        
+                        self.recordLabel.text = [NSString stringWithFormat:@"%ld-%ld", (long)stats.wins, (long)stats.loses];
+                        
+                        self.singleAmountLabel.text = [NSString stringWithFormat:@"%ld", (long)stats.singleGamesPlayed];
+                        self.doubleAmountLabel.text = [NSString stringWithFormat:@"%ld", (long)stats.teamGamesPlayed];
+                        
+                    }];
+                }];
+                
+            }];
+    
+            
+            
             
         }];
     }];

@@ -249,6 +249,38 @@
     
 }
 
+- (void)retrieveGuestGameStatsWithGuestGames:(NSArray *)guestGames callback:(void (^)(PersonalOverallStats *))callback{
+    PersonalOverallStats *guestStats = [PersonalOverallStats new];
+    guestStats.totalGamesPlayed = guestGames.count;
+    
+    for (PFObject *guestGame in guestGames) {
+        NSNumber *isTeamGameNumber = guestGame[@"isTeamGame"];
+        BOOL isTeamGame = isTeamGameNumber.boolValue;
+        
+        NSNumber *playerOneWinNumb = guestGame[@"playerOneWin"];
+        BOOL playerOneWin = playerOneWinNumb.boolValue;
+
+        if (!isTeamGame) {
+            guestStats.singleGamesPlayed ++;
+            if (playerOneWin) {
+                guestStats.wins ++;
+                
+            }else{
+                guestStats.loses ++;
+            }
+        }else{
+            guestStats.teamGamesPlayed ++;
+            if (playerOneWin) {
+                guestStats.wins ++;
+            }else{
+                guestStats.loses ++;
+            }
+        }
+    }
+    
+    callback(guestStats);
+}
+
 
 
 @end

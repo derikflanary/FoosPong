@@ -33,10 +33,12 @@
             guestGame[@"p1"] = gameStats.playerTwo;
             guestGame[@"playerOneScore"] = [NSNumber numberWithDouble:gameStats.playerTwoScore];
             guestGame[@"guestPlayerScore"] = [NSNumber numberWithDouble:gameStats.playerOneScore];
+            guestGame[@"playerOneWin"] = [NSNumber numberWithBool: gameStats.playerOneWin];
         }else{
             guestGame[@"p1"] = gameStats.playerOne;
             guestGame[@"playerOneScore"] = [NSNumber numberWithDouble:gameStats.playerOneScore];
             guestGame[@"guestPlayerScore"] = [NSNumber numberWithDouble:gameStats.playerTwoScore];
+            guestGame[@"playerOneWin"] = [NSNumber numberWithBool: !gameStats.playerOneWin];
         }
         guestGame[@"guestPlayer"] = guestPlayer;
         guestGame[@"playerOneScore"] = [NSNumber numberWithDouble:gameStats.playerOneScore];
@@ -96,8 +98,13 @@
     guestGame[@"teamTwoDefender"] = gameStats.teamTwoDefender.username;
     guestGame[@"teamOneScore"] = [NSNumber numberWithDouble:gameStats.teamOneScore];
     guestGame[@"teamTwoScore"] = [NSNumber numberWithDouble:gameStats.teamTwoScore];
-    guestGame[@"teamOneWin"] = [NSNumber numberWithBool:gameStats.teamOneWin];
     guestGame[@"isTeamGame"] = [NSNumber numberWithBool:YES];
+    
+    if ([gameStats.teamOneAttacker.objectId isEqualToString:[PFUser currentUser].objectId] || [gameStats.teamOneDefender.objectId isEqualToString:[PFUser currentUser].objectId]) {
+        guestGame[@"playerOneWin"] = [NSNumber numberWithBool:gameStats.teamOneWin];
+    }else{
+        guestGame[@"playerOneWin"] = [NSNumber numberWithBool:!gameStats.teamOneWin];
+    }
 
     
     [guestGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
