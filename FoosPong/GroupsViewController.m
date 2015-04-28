@@ -184,9 +184,11 @@
 
 - (void)createPressed:(id)sender{
     
-    BOOL subscribed = [PFUser currentUser][@"subscribed"];
+    NSNumber *subscribedNumb = [PFUser currentUser][@"subscribed"];
+    BOOL subscribed = subscribedNumb.boolValue;
     
-    BOOL hasCreatedTeam = [PFUser currentUser][@"hasCreatedTeam"];
+    NSNumber *hasCreatedTeamNumb = [PFUser currentUser][@"hasCreatedTeam"];
+    BOOL hasCreatedTeam = hasCreatedTeamNumb.boolValue;
     
     if (subscribed) {
         self.addGroupViewController = [AddGroupViewController new];

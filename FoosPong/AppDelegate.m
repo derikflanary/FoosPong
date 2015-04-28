@@ -75,7 +75,7 @@
     // Use the product identifier from iTunes to register a handler.
     [PFPurchase addObserverForProduct:@"teamSubscriptions" block:^(SKPaymentTransaction *transaction) {
         // Write business logic that should run once this product is purchased.
-       BOOL isSubscribed = YES;
+//       BOOL isSubscribed = YES;
     }];
     
     [Fabric with:@[CrashlyticsKit]];
