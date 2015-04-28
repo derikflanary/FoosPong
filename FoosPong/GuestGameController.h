@@ -15,5 +15,7 @@
 + (GuestGameController *)sharedInstance;
 - (void)addGameWithSingleGameStats:(SingleGameDetails*)gameStats andGuestPlayer:(PFObject *)guestPlayer callback:(void (^)(bool))callback;
 - (void)updateGuestGamesForUser:(PFUser*)user callback:(void (^)(NSArray *))callback;
+- (void)addGameWithTeamGameStats:(TeamGameDetails*)gameStats callback:(void (^)(bool))callback;
+- (void)updateGuestTeamGamesForUser:(PFUser*)user callback:(void (^)(NSArray *))callback;
 
 @end

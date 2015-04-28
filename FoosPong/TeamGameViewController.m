@@ -12,6 +12,7 @@
 #import "TeamGameDetails.h"
 #import "TeamGameController.h"
 #import "GameDetailViewController.h"
+#import "GuestGameController.h"
 
 #import <OpenEars/OELanguageModelGenerator.h>
 #import <OpenEars/OEPocketsphinxController.h>
@@ -268,19 +269,26 @@
         }]];
         
         [winnerAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            
-            [[TeamGameController sharedInstance] addGameWithTeamGameStats:self.gameStats callback:^(TeamGameDetails *theGameStats) {
-                GameDetailViewController *gdvc = [GameDetailViewController new];
-                gdvc.teamGame = self.gameStats;
-                UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gdvc];
-                
-                navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-                
-                [self.navigationController presentViewController:navController animated:YES completion:^{
+            if (!self.isGuestGame) {
+                [[TeamGameController sharedInstance] addGameWithTeamGameStats:self.gameStats callback:^(TeamGameDetails *theGameStats) {
+                    GameDetailViewController *gdvc = [GameDetailViewController new];
+                    gdvc.teamGame = self.gameStats;
+                    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gdvc];
+                    
+                    navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+                    
+                    [self.navigationController presentViewController:navController animated:YES completion:^{
+                        
+                    }];
                     
                 }];
-                
-            }];
+
+            }else{
+                [[GuestGameController sharedInstance]addGameWithTeamGameStats:self.gameStats callback:^(bool succeeded) {
+                    
+                    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                }];
+            }
         }]];
         
         
@@ -311,20 +319,26 @@
         
         [winnerAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
-            [[TeamGameController sharedInstance] addGameWithTeamGameStats:self.gameStats callback:^(TeamGameDetails *theGameStats) {
-                GameDetailViewController *gdvc = [GameDetailViewController new];
-                gdvc.teamGame = self.gameStats;
-                UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gdvc];
-                
-                navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-                
-                [self.navigationController presentViewController:navController animated:YES completion:^{
+            if (!self.isGuestGame) {
+                [[TeamGameController sharedInstance] addGameWithTeamGameStats:self.gameStats callback:^(TeamGameDetails *theGameStats) {
+                    GameDetailViewController *gdvc = [GameDetailViewController new];
+                    gdvc.teamGame = self.gameStats;
+                    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gdvc];
+                    
+                    navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+                    
+                    [self.navigationController presentViewController:navController animated:YES completion:^{
+                        
+                    }];
                     
                 }];
-
-            }];
-            
-            
+                
+            }else{
+                [[GuestGameController sharedInstance]addGameWithTeamGameStats:self.gameStats callback:^(bool succeeded) {
+                    
+                    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                }];
+            }
         }]];
         [self presentViewController:winnerAlert animated:YES completion:nil];
     }

@@ -34,4 +34,22 @@
     
 }
 
+- (void)createGuestPlayersFromTeamUsers:(NSArray *)guests callback:(void (^)(PFObject *))callback{
+
+    for (PFUser *guest in guests) {
+        
+        PFObject *guestPlayer = [PFObject objectWithClassName:@"GuestPlayer"];
+        guestPlayer[@"username"] = guest.username;
+        [guestPlayer saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            
+            if (!error) {
+                callback(guestPlayer);
+            }
+        }];
+        
+    }
+    
+    
+}
+
 @end

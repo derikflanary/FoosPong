@@ -7,6 +7,7 @@
 //
 
 #import "GuestGameController.h"
+#import "GuestPlayerController.h"
 
 @implementation GuestGameController
 
@@ -38,11 +39,11 @@
             guestGame[@"guestPlayerScore"] = [NSNumber numberWithDouble:gameStats.playerTwoScore];
         }
         guestGame[@"guestPlayer"] = guestPlayer;
-        //    guestGame[@"p2Guest"];
         guestGame[@"playerOneScore"] = [NSNumber numberWithDouble:gameStats.playerOneScore];
         guestGame[@"guestPlayerScore"] = [NSNumber numberWithDouble:gameStats.playerTwoScore];
         guestGame[@"playerOneWin"] = [NSNumber numberWithBool: gameStats.playerOneWin];
         guestGame[@"tenPointGame"] = [NSNumber numberWithBool:gameStats.tenPointGame];
+        guestGame[@"isTeamGame"] = [NSNumber numberWithBool:NO];
         
         
         [guestGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -60,7 +61,6 @@
     [theQuery whereKey:@"p1" equalTo:user];
     
     bool tenPointGames = [[NSUserDefaults standardUserDefaults]boolForKey:@"tenPointGamesOn"];
-//    BOOL tenPointGames = tenPointGame.boolValue;
     
     if (tenPointGames) {
         [theQuery whereKey:@"tenPointGame" equalTo:[NSNumber numberWithBool:tenPointGames]];
@@ -86,16 +86,18 @@
 
 - (void)addGameWithTeamGameStats:(TeamGameDetails*)gameStats callback:(void (^)(bool))callback{
     
-    PFObject *guestGame = [PFObject objectWithClassName:@"GuestSingleGame"];
-    guestGame[@"teamOneAttacker"] = gameStats.teamOneAttacker;
+    PFObject *guestGame = [PFObject objectWithClassName:@"GuestTeamGame"];
+
     guestGame[@"tenPointGame"] = [NSNumber numberWithBool:gameStats.tenPointGame];
-    
-    guestGame[@"teamOneDefender"] = gameStats.teamOneDefender;
-    guestGame[@"teamTwoAttacker"] = gameStats.teamTwoAttacker;
-    guestGame[@"teamTwoDefender"] = gameStats.teamTwoDefender;
+    guestGame[@"p1"] = [PFUser currentUser];
+    guestGame[@"teamOneAttacker"] = gameStats.teamOneAttacker.username;
+    guestGame[@"teamOneDefender"] = gameStats.teamOneDefender.username;
+    guestGame[@"teamTwoAttacker"] = gameStats.teamTwoAttacker.username;
+    guestGame[@"teamTwoDefender"] = gameStats.teamTwoDefender.username;
     guestGame[@"teamOneScore"] = [NSNumber numberWithDouble:gameStats.teamOneScore];
     guestGame[@"teamTwoScore"] = [NSNumber numberWithDouble:gameStats.teamTwoScore];
     guestGame[@"teamOneWin"] = [NSNumber numberWithBool:gameStats.teamOneWin];
+    guestGame[@"isTeamGame"] = [NSNumber numberWithBool:YES];
 
     
     [guestGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -104,5 +106,34 @@
         
     }];
 }
+
+- (void)updateGuestTeamGamesForUser:(PFUser*)user callback:(void (^)(NSArray *))callback{
+    
+    PFQuery *theQuery = [PFQuery queryWithClassName:@"GuestTeamGame"];
+    [theQuery whereKey:@"p1" equalTo:user];
+    
+    bool tenPointGames = [[NSUserDefaults standardUserDefaults]boolForKey:@"tenPointGamesOn"];
+    
+    if (tenPointGames) {
+        [theQuery whereKey:@"tenPointGame" equalTo:[NSNumber numberWithBool:tenPointGames]];
+        
+    }else{
+        [theQuery whereKey:@"tenPointGame" equalTo:[NSNumber numberWithBool:tenPointGames]];
+    }
+    
+    [theQuery includeKey:@"p1"];
+    [theQuery orderByDescending:@"createdAt"];
+    [theQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            
+            callback(objects);
+            
+        } else {
+            
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+}
+
 
 @end

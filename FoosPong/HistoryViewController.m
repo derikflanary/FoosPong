@@ -22,7 +22,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *singleGames;
 @property (nonatomic, strong) NSArray *teamGames;
-@property (nonatomic, strong) NSArray *guestGames;
+@property (nonatomic, strong) NSMutableArray *guestGames;
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 @property (nonatomic, strong) UISegmentedControl *segmentedControl;
@@ -67,10 +67,15 @@
             }];
             
         }];
+    self.guestGames = [NSMutableArray array];
     
     [[GuestGameController sharedInstance]updateGuestGamesForUser:[PFUser currentUser] callback:^(NSArray *guestGames) {
-        self.guestGames = guestGames;
-        [self.tableView reloadData];
+        self.guestGames = guestGames.mutableCopy;
+        [[GuestGameController sharedInstance]updateGuestTeamGamesForUser:[PFUser currentUser] callback:^(NSArray *guestTeamGames) {
+            [self.guestGames addObjectsFromArray:guestTeamGames];
+            [self.tableView reloadData];
+        }];
+        
     }];
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:2];
     
@@ -197,19 +202,42 @@
         cell.dateLabel.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
         return cell;
     }else{
-        PFObject *guestGame = [self.guestGames objectAtIndex:indexPath.row];
-        PFUser *p1 = guestGame[@"p1"];
-        PFObject *guest = guestGame[@"guestPlayer"];
-        NSDate *date =  guestGame.createdAt;
         
-        NSString *p1Name = p1.username;
-        NSString *p2Name = guest[@"username"];
-        cell.playerOneLabel.text = [p1Name uppercaseString];
-        cell.playerTwoLabel.text = [p2Name uppercaseString];
-        cell.playerOneScoreLabel.text = [NSString stringWithFormat:@"%@", guestGame[@"playerOneScore"]];
-        cell.playerTwoScoreLabel.text = [NSString stringWithFormat:@"%@", guestGame[@"guestPlayerScore"]];
-        cell.dateLabel.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
-        return cell;
+        PFObject *guestGame = [self.guestGames objectAtIndex:indexPath.row];
+        NSNumber *isTeamGameNumber = guestGame[@"isTeamGame"];
+        BOOL isTeamGame = isTeamGameNumber.boolValue;
+        if (!isTeamGame) {
+            PFUser *p1 = guestGame[@"p1"];
+            PFObject *guest = guestGame[@"guestPlayer"];
+            NSDate *date =  guestGame.createdAt;
+            
+            NSString *p1Name = p1.username;
+            NSString *p2Name = guest[@"username"];
+            cell.playerOneLabel.text = [p1Name uppercaseString];
+            cell.playerTwoLabel.text = [p2Name uppercaseString];
+            cell.playerOneScoreLabel.text = [NSString stringWithFormat:@"%@", guestGame[@"playerOneScore"]];
+            cell.playerTwoScoreLabel.text = [NSString stringWithFormat:@"%@", guestGame[@"guestPlayerScore"]];
+            cell.dateLabel.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
+            return cell;
+        }else{
+//            PFUser *p1 = guestGame[@"p1"];
+            NSDate *date = guestGame.createdAt;
+            NSString *t1p1Name = guestGame[@"teamOneAttacker"];
+            NSString *t1p2Name = guestGame[@"teamOneDefender"];
+            NSString *t2p1Name = guestGame[@"teamTwoAttacker"];
+            NSString *t2p2Name = guestGame[@"teamTwoDefender"];
+            
+            cell.playerOneLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
+            cell.playerTwoLabel.font = [UIFont fontWithName:[NSString mainFont] size:12];
+            
+            cell.playerOneLabel.text = [NSString stringWithFormat:@"%@ & %@",[t1p1Name uppercaseString], [t1p2Name uppercaseString]];
+            cell.playerTwoLabel.text = [NSString stringWithFormat:@"%@ & %@", [t2p1Name uppercaseString], [t2p2Name uppercaseString]];
+            cell.playerOneScoreLabel.text = [NSString stringWithFormat:@"%@", guestGame[@"teamOneScore"]];
+            cell.playerTwoScoreLabel.text = [NSString stringWithFormat:@"%@", guestGame[@"teamTwoScore"]];
+            cell.dateLabel.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
+            return cell;
+        }
+        
         
     }
    
