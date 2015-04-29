@@ -52,7 +52,7 @@
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_descriptionLabel]-|" options:0 metrics:nil views:viewsDictionary]];
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_descriptionLabel(>=250)]-(==16)-[_segmentedControl(==50)]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_descriptionLabel(>=230)]-(==16)-[_segmentedControl(==50)]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
     
 
     NSNumber *tenPointGame = [[NSUserDefaults standardUserDefaults]objectForKey:@"tenPointGamesOn"];

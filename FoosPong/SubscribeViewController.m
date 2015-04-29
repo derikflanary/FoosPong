@@ -11,11 +11,12 @@
 #import "BrownButton.h"
 #import "AddGroupViewController.h"
 
-@interface SubscribeViewController ()
+@interface SubscribeViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) BrownButton *perMonthButton;
 @property (nonatomic, strong) BrownButton *yearButton;
 @property (nonatomic, strong) UILabel *detailLabel;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -48,12 +49,22 @@
     [self.perMonthButton addTarget:self action:@selector(perMonthButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.perMonthButton];
     
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 44)];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.toolbar.translucent = NO;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.bounces = YES;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    [self.view addSubview:self.tableView];
+    
     self.detailLabel = [[UILabel alloc]initWithFrame:self.view.frame];
     self.detailLabel.textColor = [UIColor mainWhite];
     self.detailLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
-    self.detailLabel.text = @"Subscribe to gain access the team feature of Foos. Creating a team includes the following features:";
+    self.detailLabel.text = @"Subscribe to gain access to the Team feature of Foos. Creating a team includes the following features:";
     self.detailLabel.numberOfLines = 0;
-    [self.view addSubview:self.detailLabel];
+//    [self.view addSubview:self.detailLabel];
 //    self.yearButton = [[BrownButton alloc]initWithFrame:CGRectMake(0, 350, self.view.frame.size.width, 51)];
 //    self.yearButton.backgroundColor = [UIColor marigoldBrown];
 //    self.yearButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
@@ -79,6 +90,33 @@
 
     // Do any additional setup after loading the view.
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 3;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 75;
+}
+
+// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" ];
+    if (!cell){
+        cell = [UITableViewCell new];
+        
+    }
+    cell.backgroundColor = [UIColor clearColor];
+    cell.textLabel.textColor = [UIColor lightTextColor];
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.text = @"Subscribe to gain access to the Team feature of Foos. Creating a team includes the following features: Detailed Statistics, Ranking System, team feed.";
+    return cell;
+}
+
 
 - (void)perMonthButtonPressed:(id)sender{
     [[SubscriptionController sharedInstance]requestPurchaseCallback:^(BOOL *success, NSError *error) {

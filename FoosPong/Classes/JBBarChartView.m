@@ -20,6 +20,8 @@ static UIColor *kJBBarChartViewDefaultBarColor = nil;
 
 @interface JBChartView (Private)
 
+
+
 - (BOOL)hasMaximumValue;
 - (BOOL)hasMinimumValue;
 

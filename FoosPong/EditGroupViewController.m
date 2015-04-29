@@ -13,6 +13,8 @@
 #import "CreateMemberViewController.h"
 #import "CurrentGroupViewController.h"
 #import "MembersTableViewDataSource.h"
+#import "SubscriptionController.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface EditGroupViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchControllerDelegate>
 
@@ -318,6 +320,21 @@
 
 - (void)manageSubscriptionButtonPressed:(id)sender{
     
+    NSString *subscriptionString = [[SubscriptionController sharedInstance]getExpirationDateString];
+    
+    UIAlertController *subscriptionAlert = [UIAlertController alertControllerWithTitle:subscriptionString message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [subscriptionAlert addAction:[UIAlertAction actionWithTitle:@"Manage Subscription" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSString *iTunesLink = @"https://buy.itunes.apple.com/WebObjects/MZFinance.woa/wa/manageSubscriptions";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+        
+        return;
+    }]];
+    
+    [subscriptionAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        return;
+    }]];
+    [self presentViewController:subscriptionAlert animated:YES completion:nil];
 }
 
 /*

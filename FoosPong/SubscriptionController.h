@@ -12,5 +12,5 @@
 
 + (SubscriptionController *)sharedInstance;
 - (void)requestPurchaseCallback:(void (^)(BOOL *, NSError * error))callback;
-
+- (NSString *)getExpirationDateString;
 @end

@@ -44,7 +44,7 @@
     self.activityView.center = CGPointMake(160, 240);
     self.activityView.color = [UIColor darkColor];
     self.activityView.hidesWhenStopped = YES;
-    [self.view addSubview:self.activityView];
+    
     [self.activityView startAnimating];
 
 
@@ -71,6 +71,7 @@
     self.tableView.backgroundColor = [UIColor transparentWhite];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
+    [self.view addSubview:self.activityView];
     
     self.joinGroupButton = [[FoosButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 51)];
     self.joinGroupButton.backgroundColor = [UIColor darkColor];
@@ -97,8 +98,11 @@
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     self.joinGroupButton.translatesAutoresizingMaskIntoConstraints = NO;
     self.createGroupButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.activityView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_tableView, _createGroupButton, _joinGroupButton);
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_tableView, _createGroupButton, _joinGroupButton, _activityView);
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=20)-[_activityView]-(>=20)-|" options:0 metrics:nil views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_tableView]-(==0)-[_joinGroupButton(==52)]-(==44)-|" options:0 metrics:nil views:viewsDictionary]];
     
@@ -107,6 +111,15 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_tableView]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_joinGroupButton]-(==1)-[_createGroupButton(==_joinGroupButton)]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
+    
+    
+    [NSLayoutConstraint constraintWithItem:self.activityView
+                                 attribute:NSLayoutAttributeCenterX
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeCenterX
+                                multiplier:1.f constant:0.f];
+
     
 //    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_createGroupButton]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
 

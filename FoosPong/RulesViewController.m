@@ -35,6 +35,26 @@
     
     [self.activityView startAnimating];
 
+    self.activityView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_activityView);
+    
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=20)-[_activityView]-(>=20)-|" options:0 metrics:nil views:viewsDictionary]];
+    
+    [NSLayoutConstraint constraintWithItem:self.activityView
+                                 attribute:NSLayoutAttributeCenterX
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeCenterX
+                                multiplier:1.f constant:0.f];
+    
+    [NSLayoutConstraint constraintWithItem:self.activityView
+                                 attribute:NSLayoutAttributeCenterY
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeCenterY
+                                multiplier:1.f constant:0.f];
+
    
 }
 

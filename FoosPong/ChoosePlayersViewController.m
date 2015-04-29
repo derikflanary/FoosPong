@@ -76,7 +76,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     self.activityView.center = CGPointMake(160, 240);
     self.activityView.color = [UIColor darkColor];
     self.activityView.hidesWhenStopped = YES;
-    
+    [self.view addSubview:self.activityView];
     [self.activityView startAnimating];
 
     self.view.backgroundColor = [UIColor whiteColor];
@@ -242,9 +242,19 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
     
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     self.startButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.activityView.translatesAutoresizingMaskIntoConstraints = NO;
     
     
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_tableView, _startButton);
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_tableView, _startButton, _activityView);
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=20)-[_activityView]-(>=20)-|" options:0 metrics:nil views:viewsDictionary]];
+    
+    [NSLayoutConstraint constraintWithItem:self.activityView
+                                 attribute:NSLayoutAttributeCenterX
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeCenterX
+                                multiplier:1.f constant:0.f];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_tableView]-(==0)-[_startButton(==51)]-(==44)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
 

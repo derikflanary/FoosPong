@@ -68,6 +68,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.activityView = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.activityView.center = CGPointMake(160, 240);
+    self.activityView.color = [UIColor darkColor];
+    self.activityView.hidesWhenStopped = YES;
+    [self.view addSubview:self.activityView];
+    [self.activityView startAnimating];
+
     self.view.backgroundColor = [UIColor whiteColor];
     
     UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage mainBackgroundImage]];
@@ -139,10 +147,19 @@
     self.createGroupButton.translatesAutoresizingMaskIntoConstraints = NO;
     self.addMembersButton.translatesAutoresizingMaskIntoConstraints = NO;
     self.groupStatsButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.activityView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    self.viewsDictionary = NSDictionaryOfVariableBindings(_tableView, _createGroupButton, _joinGroupButton, _groupStatsButton, _addMembersButton);
+    self.viewsDictionary = NSDictionaryOfVariableBindings(_tableView, _createGroupButton, _joinGroupButton, _groupStatsButton, _addMembersButton, _activityView);
     
-   
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=20)-[_activityView]-(>=20)-|" options:0 metrics:nil views:self.viewsDictionary]];
+    
+    [NSLayoutConstraint constraintWithItem:self.activityView
+                                 attribute:NSLayoutAttributeCenterX
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:self.view
+                                 attribute:NSLayoutAttributeCenterX
+                                multiplier:1.f constant:0.f];
+
     
 }
 

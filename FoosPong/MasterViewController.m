@@ -138,9 +138,10 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
         
         switch (section) {
             case SideBarSectionLogin:{
-                [PFUser logOut];
+                
                 [sidebar dismissAnimated:YES completion:^(BOOL finished) {
                     if (finished){
+                    [PFUser logOut];
                     self.navigationController.viewControllers = @[lvc];
                     }
                 }];

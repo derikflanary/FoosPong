@@ -63,7 +63,7 @@ NSString *const kSubscriptionNameKey = @"com.derikflanary.Foos.teamSubscription"
 }
 
 - (int)daysRemainingOnSubscription{
-    NSDate *expirationDate = [[NSUserDefaults standardUserDefaults]objectForKey:kSubscriptionExpirationDateKey];
+    NSDate *expirationDate = [[PFUser currentUser][kSubscriptionExpirationDateKey] lastObject];;
     
     NSTimeInterval timeInt = [expirationDate timeIntervalSinceDate:[NSDate date]];
     
@@ -78,10 +78,11 @@ NSString *const kSubscriptionNameKey = @"com.derikflanary.Foos.teamSubscription"
 
 - (NSString *)getExpirationDateString{
     if ([self daysRemainingOnSubscription] > 0) {
-        NSDate *today = [[NSUserDefaults standardUserDefaults]objectForKey:kSubscriptionExpirationDateKey];
+        
+        NSDate *experationDate = [[PFUser currentUser][kSubscriptionExpirationDateKey] lastObject];   //[[NSUserDefaults standardUserDefaults]objectForKey:kSubscriptionExpirationDateKey];
         NSDateFormatter *dateFormat = [NSDateFormatter new];
-        [dateFormat setDateFormat:@"dd/MM/yyyy"];
-        return [NSString stringWithFormat:@"Subscribed! Expires: %@ (%i Days)", [dateFormat stringFromDate:today], [self daysRemainingOnSubscription]];
+        [dateFormat setDateFormat:@"MM/dd/yyyy"];
+        return [NSString stringWithFormat:@"Expires: %@ (%i Days)", [dateFormat stringFromDate:experationDate], [self daysRemainingOnSubscription]];
     }else{
         return @"Not Subscribed";
     }
