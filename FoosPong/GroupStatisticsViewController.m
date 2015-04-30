@@ -68,8 +68,8 @@
     if (!cell){
         cell = [StatisticsCustomTableViewCell new];
     }
-    cell.textLabel.text = @"stats";
-    cell.detailTextLabel.text = @"8";
+    cell.textLabel.text = @"Group Stats Coming Soon";
+    cell.detailTextLabel.text = @"";
     
     return cell;
 }

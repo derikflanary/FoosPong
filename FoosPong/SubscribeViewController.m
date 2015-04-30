@@ -10,6 +10,7 @@
 #import "SubscriptionController.h"
 #import "BrownButton.h"
 #import "AddGroupViewController.h"
+#import "SubscriptionTableViewCell.h"
 
 @interface SubscribeViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -40,6 +41,19 @@
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"60"] style:UIBarButtonItemStylePlain target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
+    
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 44) style:UITableViewStyleGrouped];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.toolbar.translucent = NO;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.bounces = YES;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.allowsSelection = NO;
+    
+    [self.view addSubview:self.tableView];
+    
     self.perMonthButton = [[BrownButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 51)];
     self.perMonthButton.backgroundColor = [UIColor marigoldBrown];
     self.perMonthButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
@@ -48,73 +62,100 @@
     [self.perMonthButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.perMonthButton addTarget:self action:@selector(perMonthButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.perMonthButton];
-    
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 44)];
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.toolbar.translucent = NO;
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.bounces = YES;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    [self.view addSubview:self.tableView];
-    
-    self.detailLabel = [[UILabel alloc]initWithFrame:self.view.frame];
-    self.detailLabel.textColor = [UIColor mainWhite];
-    self.detailLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
-    self.detailLabel.text = @"Subscribe to gain access to the Team feature of Foos. Creating a team includes the following features:";
-    self.detailLabel.numberOfLines = 0;
-//    [self.view addSubview:self.detailLabel];
-//    self.yearButton = [[BrownButton alloc]initWithFrame:CGRectMake(0, 350, self.view.frame.size.width, 51)];
-//    self.yearButton.backgroundColor = [UIColor marigoldBrown];
-//    self.yearButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-//    [self.yearButton setTitle:@"$50 For 12 Months" forState:UIControlStateNormal];
-//    [self.yearButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
-//    [self.yearButton addTarget:self action:@selector(yearButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:self.yearButton];
 
-    
-    
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     self.perMonthButton.translatesAutoresizingMaskIntoConstraints = NO;
-    self.yearButton.translatesAutoresizingMaskIntoConstraints = NO;
     
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_perMonthButton);
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_perMonthButton, _tableView);
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=200)-[_perMonthButton(==52)]-(==0)-|" options:0 metrics:nil views:viewsDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_tableView(>=100)]-(==0)-[_perMonthButton(==52)]-(==0)-|" options:0 metrics:nil views:viewsDictionary]];
     
 //    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=200)-[_yearButton(==52)]-(==0)-|" options:0 metrics:nil views:viewsDictionary]];
 
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_perMonthButton]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
     
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_tableView]-(==0)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
+    
 
     // Do any additional setup after loading the view.
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return 1;
 }
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 4;
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return 75;
+    if (indexPath.section == 0) {
+        return 80;
+    }
+    return 120;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return @"";
+    }else if (section == 1){
+        return @"Individual Statistics";
+    }else if (section == 2){
+        return @"Ranking System";
+    }else{
+        return @"Team Feed";
+    }
+
+}
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" ];
+    SubscriptionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" ];
     if (!cell){
-        cell = [UITableViewCell new];
+        cell = [SubscriptionTableViewCell new];
         
     }
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.textColor = [UIColor lightTextColor];
     cell.textLabel.numberOfLines = 0;
-    cell.textLabel.text = @"Subscribe to gain access to the Team feature of Foos. Creating a team includes the following features: Detailed Statistics, Ranking System, team feed.";
+    cell.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:20];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+
+    if (indexPath.section == 0) {
+        cell.textLabel.text = @"Subscribe to gain access to the best features of Foos!";
+        
+    }else if (indexPath.section == 1){
+        UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"stats"]];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        cell.backgroundView = imageView;
+        
+    }else if (indexPath.section == 2){
+        UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"ranking"]];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        cell.backgroundView = imageView;
+    }else if (indexPath.section == 3){
+        UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"feed"]];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        cell.backgroundView = imageView;
+    }
+    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    
+    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+    
+    header.textLabel.textColor = [UIColor lightTextColor];
+    header.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:20];
+    CGRect headerFrame = header.frame;
+    header.textLabel.frame = headerFrame;
+    header.textLabel.textAlignment = NSTextAlignmentCenter;
+//    header.contentView.backgroundColor = [UIColor transparentWhite];
 }
 
 

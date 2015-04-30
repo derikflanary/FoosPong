@@ -141,8 +141,9 @@ typedef NS_ENUM(NSInteger, SideBarSection) {
                 
                 [sidebar dismissAnimated:YES completion:^(BOOL finished) {
                     if (finished){
-                    [PFUser logOut];
+                    
                     self.navigationController.viewControllers = @[lvc];
+                        [PFUser logOut];
                     }
                 }];
                 break;

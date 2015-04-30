@@ -49,6 +49,7 @@
 		EE3357421A8C1D2D00B83EC0 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357411A8C1D2D00B83EC0 /* libsqlite3.dylib */; };
 		EE3357441A8C200F00B83EC0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357431A8C200F00B83EC0 /* Social.framework */; };
 		EE3357461A8C202600B83EC0 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE3357451A8C202600B83EC0 /* Accounts.framework */; };
+		EE3606221AF2DA2D00C17E15 /* SubscriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE3606211AF2DA2D00C17E15 /* SubscriptionTableViewCell.m */; };
 		EE48886A1A9FDD9B00FCCA47 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EE4888691A9FDD9B00FCCA47 /* HMSegmentedControl.m */; };
 		EE4888701AA0FC6D00FCCA47 /* TeamGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE48886F1AA0FC6D00FCCA47 /* TeamGameViewController.m */; };
 		EE5027C21A9654A30079DFFC /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE5027C11A9654A30079DFFC /* LogViewController.m */; };
@@ -195,6 +196,8 @@
 		EE3357411A8C1D2D00B83EC0 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		EE3357431A8C200F00B83EC0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		EE3357451A8C202600B83EC0 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		EE3606201AF2DA2D00C17E15 /* SubscriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionTableViewCell.h; sourceTree = "<group>"; };
+		EE3606211AF2DA2D00C17E15 /* SubscriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionTableViewCell.m; sourceTree = "<group>"; };
 		EE4888681A9FDD9B00FCCA47 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		EE4888691A9FDD9B00FCCA47 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		EE48886E1AA0FC6D00FCCA47 /* TeamGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamGameViewController.h; sourceTree = "<group>"; };
@@ -698,6 +701,8 @@
 				EED035121AE84C02002807BC /* SubscriptionController.m */,
 				EEA7F68C1AD3780D00044FC9 /* DetailSubscriptionViewController.h */,
 				EEA7F68D1AD3780D00044FC9 /* DetailSubscriptionViewController.m */,
+				EE3606201AF2DA2D00C17E15 /* SubscriptionTableViewCell.h */,
+				EE3606211AF2DA2D00C17E15 /* SubscriptionTableViewCell.m */,
 			);
 			name = "Subscription Setup";
 			sourceTree = "<group>";
@@ -893,6 +898,7 @@
 				EE1A557E1A9CFB3000E6981E /* GroupsViewController.m in Sources */,
 				EEF716B31ABD18DF005DDB61 /* TeamMemberStatsViewController.m in Sources */,
 				EE0DC0121A8D96D8000235B3 /* SingleGameController.m in Sources */,
+				EE3606221AF2DA2D00C17E15 /* SubscriptionTableViewCell.m in Sources */,
 				EE7A6CDF1A868402000447D2 /* AppDelegate.m in Sources */,
 				EE1CBBB41ACA86930099D98A /* MinusButton.m in Sources */,
 				EE3356F11A89610B00B83EC0 /* SingleGameViewController.m in Sources */,
