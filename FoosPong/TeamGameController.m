@@ -45,6 +45,16 @@
     finishedGame.tenPointGame = [NSNumber numberWithBool:gameStats.tenPointGame];
     
     [[RankingController sharedInstance]updateNewRankingsForTeamGame:gameStats callback:^(NSArray *teamOneNewRanks, NSArray *teamTwoNewRanks) {
+        PFObject *rank1 = [teamOneNewRanks firstObject];
+        gameStats.teamOneAttackerNewRank = rank1[@"rank"];
+        PFObject *rank2 = [teamOneNewRanks lastObject];
+        gameStats.teamOneDefenderNewRank = rank2[@"rank"];
+        PFObject *rank3 = [teamTwoNewRanks firstObject];
+        gameStats.teamTwoAttackerNewRank = rank3[@"rank"];
+        PFObject *rank4 = [teamTwoNewRanks lastObject];
+        gameStats.teamTwoDefenderNewRank = rank4[@"rank"];
+        
+        
         [finishedGame saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
                 NSLog(@"Team Game Saved");

@@ -346,7 +346,7 @@ typedef NS_ENUM(NSInteger, TableView2TeamSection) {
                 tgvc.teamTwoAttackerRank = [self.teamTwoRankings objectAtIndex:0][@"rank"];
                 tgvc.teamTwoDefenderRank = [self.teamTwoRankings objectAtIndex:1][@"rank"];
                 
-                if (!p1.objectId || !p2.objectId || p3.objectId || p4.objectId) {
+                if (!p1.objectId || !p2.objectId || !p3.objectId || !p4.objectId) {
                     tgvc.isGuestGame = YES;
                 }
                 
