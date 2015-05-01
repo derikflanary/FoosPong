@@ -10,4 +10,6 @@
 
 @interface SubscriptionTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) UILabel *label;
+
 @end

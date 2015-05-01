@@ -53,11 +53,12 @@
     self.tableView.allowsSelection = NO;
     
     [self.view addSubview:self.tableView];
+    NSString *buttonTitle = @"Subscribe Now";
     
     self.perMonthButton = [[BrownButton alloc]initWithFrame:CGRectMake(0, 400, self.view.frame.size.width, 51)];
     self.perMonthButton.backgroundColor = [UIColor marigoldBrown];
     self.perMonthButton.titleLabel.font = [UIFont fontWithName:[NSString boldFont] size:20.0f];
-    [self.perMonthButton setTitle:@"Subscribe Now" forState:UIControlStateNormal];
+    [self.perMonthButton setTitle:[buttonTitle uppercaseString] forState:UIControlStateNormal];
     [self.perMonthButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.perMonthButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.perMonthButton addTarget:self action:@selector(perMonthButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -86,12 +87,14 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    return 5;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
+        return 100;
+    }else if (indexPath.section == 4){
         return 80;
     }
     return 120;
@@ -104,8 +107,10 @@
         return @"Individual Statistics";
     }else if (section == 2){
         return @"Ranking System";
-    }else{
+    }else if (section == 3){
         return @"Team Feed";
+    }else{
+        return @"";
     }
 
 }
@@ -126,7 +131,8 @@
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
 
     if (indexPath.section == 0) {
-        cell.textLabel.text = @"Subscribe to gain access to the best features of Foos!";
+        NSString *string = @"Subscribe to gain access to the best features of Foos";
+        cell.label.text = [string uppercaseString];
         
     }else if (indexPath.section == 1){
         UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"stats"]];
@@ -141,6 +147,9 @@
         UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"feed"]];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         cell.backgroundView = imageView;
+    }else{
+        NSString *string = @"And More!";
+        cell.label.text = [string uppercaseString];
     }
     
     return cell;
@@ -150,8 +159,8 @@
     
     UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
     
-    header.textLabel.textColor = [UIColor lightTextColor];
-    header.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:20];
+    header.textLabel.textColor = [UIColor vanilla];
+    header.textLabel.font = [UIFont fontWithName:[NSString mainFont] size:18];
     CGRect headerFrame = header.frame;
     header.textLabel.frame = headerFrame;
     header.textLabel.textAlignment = NSTextAlignmentCenter;
