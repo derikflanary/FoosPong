@@ -14,7 +14,6 @@
 #import "CurrentGroupViewController.h"
 #import "MembersTableViewDataSource.h"
 #import "SubscriptionController.h"
-#import <AFNetworking/AFNetworking.h>
 
 @interface EditGroupViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchControllerDelegate>
 

@@ -46,6 +46,8 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 @property (strong, nonatomic) MinusButton *p1MinusButton;
 @property (strong, nonatomic) MinusButton *p2MinusButton;
 @property (nonatomic, assign) BOOL tenPointGameOn;
+@property (nonatomic, strong) NSString *oneGoalString;
+@property (nonatomic, strong) NSString *twoGoalString;
 
 @end
 
@@ -178,7 +180,10 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 
         OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
         
-        NSArray *words = @[@"ONE GOAL", @"TWO GOAL"];
+        self.oneGoalString = @"ONE GOAL";
+        self.twoGoalString = @"TWO GOAL";
+        
+        NSArray *words = @[self.oneGoalString, self.twoGoalString];
         NSString *name = @"LanguageFiles";
         NSError *err = [lmGenerator generateLanguageModelFromArray:words withFilesNamed:name forAcousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"]];
         NSString *lmPath = nil;
@@ -471,7 +476,7 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
         
         OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
         
-        NSArray *words = @[@"PLAYER ONE GOAL", @"PLAYER TWO GOAL"];
+        NSArray *words = @[self.oneGoalString, self.twoGoalString];
         NSString *name = @"LanguageFiles";
         NSError *err = [lmGenerator generateLanguageModelFromArray:words withFilesNamed:name forAcousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"]];
         NSString *lmPath = nil;
@@ -502,9 +507,9 @@ static NSString * const playerTwoWinKey = @"playerTwoWinKey";
 - (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
     NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
     
-    if ([hypothesis isEqualToString:@"PLAYER ONE GOAL"]) {
+    if ([hypothesis isEqualToString:self.oneGoalString]) {
         [self p1PlusButtonPressed:self];
-    }else if ([hypothesis isEqualToString:@"PLAYER TWO GOAL"]){
+    }else if ([hypothesis isEqualToString:self.twoGoalString]){
         [self p2PlusButtonPressed:self];
     }
 }

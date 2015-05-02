@@ -3,7 +3,7 @@
 
 target 'FoosPong' do
 
-pod 'AFNetworking'
+pod 'JBChartView'
 
 end 
 

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1F3CB800E39BF20B0F4EA75E"
-               BuildableName = "libPods-FoosPong.a"
-               BlueprintName = "Pods-FoosPong"
+               BlueprintIdentifier = "DD0526189957DC4635A6AF1B"
+               BuildableName = "libPods-FoosPong-JBChartView.a"
+               BlueprintName = "Pods-FoosPong-JBChartView"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

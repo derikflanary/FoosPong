@@ -11,7 +11,7 @@
 #import "SingleGameController.h"
 #import "TeamGameDetails.h"
 #import "TeamGameController.h"
-#import "GameDetailViewController.h"
+#import "TeamGameDetailViewController.h"
 #import "GuestGameController.h"
 
 #import <OpenEars/OELanguageModelGenerator.h>
@@ -43,6 +43,8 @@
 @property (strong, nonatomic) FoosButton *team1MinusButton;
 @property (strong, nonatomic) FoosButton *team2MinusButton;
 @property (nonatomic, assign) BOOL tenPointGameOn;
+@property (nonatomic, strong) NSString *oneGoalString;
+@property (nonatomic, strong) NSString *twoGoalString;
 
 @end
 
@@ -186,7 +188,10 @@
         
         OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
         
-        NSArray *words = @[@"ONE GOAL", @"TWO GOAL"];
+        self.oneGoalString = @"ONE GOAL";
+        self.twoGoalString = @"TWO GOAL";
+        
+        NSArray *words = @[self.oneGoalString, self.twoGoalString];
         NSString *name = @"LanguageFiles";
         NSError *err = [lmGenerator generateLanguageModelFromArray:words withFilesNamed:name forAcousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"]];
         NSString *lmPath = nil;
@@ -271,9 +276,9 @@
         [winnerAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             if (!self.isGuestGame) {
                 [[TeamGameController sharedInstance] addGameWithTeamGameStats:self.gameStats callback:^(TeamGameDetails *theGameStats) {
-                    GameDetailViewController *gdvc = [GameDetailViewController new];
-                    gdvc.teamGame = self.gameStats;
-                    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gdvc];
+                    TeamGameDetailViewController *tgdvc = [TeamGameDetailViewController new];
+                    tgdvc.teamGame = self.gameStats;
+                    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:tgdvc];
                     
                     navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
                     
@@ -321,9 +326,9 @@
             
             if (!self.isGuestGame) {
                 [[TeamGameController sharedInstance] addGameWithTeamGameStats:self.gameStats callback:^(TeamGameDetails *theGameStats) {
-                    GameDetailViewController *gdvc = [GameDetailViewController new];
-                    gdvc.teamGame = self.gameStats;
-                    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:gdvc];
+                    TeamGameDetailViewController *tgdvc = [TeamGameDetailViewController new];
+                    tgdvc.teamGame = self.gameStats;
+                    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:tgdvc];
                     
                     navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
                     
@@ -397,7 +402,7 @@
         
         OELanguageModelGenerator *lmGenerator = [[OELanguageModelGenerator alloc] init];
         
-        NSArray *words = @[@"TEAM ONE GOAL", @"TEAM TWO GOAL"];
+        NSArray *words = @[self.oneGoalString, self.twoGoalString];
         NSString *name = @"LanguageFiles";
         NSError *err = [lmGenerator generateLanguageModelFromArray:words withFilesNamed:name forAcousticModelAtPath:[OEAcousticModel pathToModel:@"AcousticModelEnglish"]];
         NSString *lmPath = nil;
@@ -426,9 +431,9 @@
 - (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
     NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
     
-    if ([hypothesis isEqualToString:@"PLAYER ONE GOAL"]) {
+    if ([hypothesis isEqualToString:self.oneGoalString]) {
         [self team1PlusButtonPressed:self];
-    }else if ([hypothesis isEqualToString:@"PLAYER TWO GOAL"]){
+    }else if ([hypothesis isEqualToString:self.twoGoalString]){
         [self team2PlusButtonPressed:self];
     }
 }

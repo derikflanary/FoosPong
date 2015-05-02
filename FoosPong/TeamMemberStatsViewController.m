@@ -7,7 +7,9 @@
 //
 
 #import "TeamMemberStatsViewController.h"
-#import "JBLineChartView.h"
+#import <JBChartView/JBLineChartView.h>
+#import <JBChartView/JBChartView.h>
+//#import "JBLineChartView.h"
 #import "JBChartInformationView.h"
 #import "JBChartHeaderView.h"
 #import "StatisticsCustomTableViewCell.h"
